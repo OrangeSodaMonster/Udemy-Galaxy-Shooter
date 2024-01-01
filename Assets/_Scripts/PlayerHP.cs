@@ -9,6 +9,8 @@ public class PlayerHP : MonoBehaviour
     public static float MaxHP;
     public static float CurrentHP;
     public static float LastFrameHP;
+    public static bool DamageTaken = false;
+    public static bool HealReceived = false;
 
     public bool isInvencible = false;
 
@@ -29,9 +31,22 @@ public class PlayerHP : MonoBehaviour
     void LateUpdate()
     {
         if (LastFrameHP > CurrentHP)
+        {
             Debug.Log($"<color=orange>Damage: {(LastFrameHP - CurrentHP)}</color>");
+            DamageTaken = true;
+            HealReceived = false;
+        }
         else if (LastFrameHP < CurrentHP)
+        {
             Debug.Log($"<color=green>Heal: {(CurrentHP - LastFrameHP)}</color>");
+            HealReceived = true;
+            DamageTaken = false;
+        }
+        else
+        {
+            HealReceived = false;
+            DamageTaken = false;
+        }
 
         LastFrameHP = CurrentHP;
         lastCollisionHash = 0;

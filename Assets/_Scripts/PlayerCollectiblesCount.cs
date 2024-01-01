@@ -17,15 +17,15 @@ public enum ResourceType
 public struct ResourceNumber
 {
     public ResourceType ResourceType;
-    public int Ammount;
+    public int Amount;
 }
 
 public class PlayerCollectiblesCount : MonoBehaviour
 {
 	static public int MetalCrumbsAmount = 0;   
-	static public int MetalAmount = 10;   
+	static public int MetalAmount =0;   
 	static public int RareMetalCrumbsAmount = 0;   
-	static public int AlloyAmount = 10;   
+	static public int AlloyAmount =0;   
 	static public int EnergyCristalAmount = 0;   
 	static public int CondensedEnergyCristalAmount = 0;
 
@@ -77,23 +77,23 @@ public class PlayerCollectiblesCount : MonoBehaviour
         else { return false; }
     }
 
-    static bool CheckResourcesAmmount(ResourceNumber[] costs)
+    static public bool CheckResourcesAmmount(ResourceNumber[] costs)
     {
         bool hasEnough = true;
 
         foreach (ResourceNumber resourceNumber in costs)
         {
-            if (resourceNumber.ResourceType == ResourceType.MetalCrumb & resourceNumber.Ammount > MetalCrumbsAmount)
+            if (resourceNumber.ResourceType == ResourceType.MetalCrumb & resourceNumber.Amount > MetalCrumbsAmount)
                 hasEnough = false;
-            else if (resourceNumber.ResourceType == ResourceType.Metal & resourceNumber.Ammount > MetalAmount)
+            else if (resourceNumber.ResourceType == ResourceType.Metal & resourceNumber.Amount > MetalAmount)
                 hasEnough = false;
-            else if (resourceNumber.ResourceType == ResourceType.RareMetalCrumb & resourceNumber.Ammount > RareMetalCrumbsAmount)
+            else if (resourceNumber.ResourceType == ResourceType.RareMetalCrumb & resourceNumber.Amount > RareMetalCrumbsAmount)
                 hasEnough = false;
-            else if (resourceNumber.ResourceType == ResourceType.Alloy & resourceNumber.Ammount > AlloyAmount)
+            else if (resourceNumber.ResourceType == ResourceType.Alloy & resourceNumber.Amount > AlloyAmount)
                 hasEnough = false;
-            else if (resourceNumber.ResourceType == ResourceType.EnergyCristal & resourceNumber.Ammount > EnergyCristalAmount)
+            else if (resourceNumber.ResourceType == ResourceType.EnergyCristal & resourceNumber.Amount > EnergyCristalAmount)
                 hasEnough = false;
-            else if (resourceNumber.ResourceType == ResourceType.CondensedEnergyCristal & resourceNumber.Ammount > CondensedEnergyCristalAmount)
+            else if (resourceNumber.ResourceType == ResourceType.CondensedEnergyCristal & resourceNumber.Amount > CondensedEnergyCristalAmount)
                 hasEnough = false;       
         }     
         
@@ -105,17 +105,17 @@ public class PlayerCollectiblesCount : MonoBehaviour
         foreach (ResourceNumber resourceNumber in costs)
         {
             if (resourceNumber.ResourceType == ResourceType.MetalCrumb)
-                MetalCrumbsAmount -= resourceNumber.Ammount;
+                MetalCrumbsAmount -= resourceNumber.Amount;
             else if (resourceNumber.ResourceType == ResourceType.Metal)
-                MetalAmount -= resourceNumber.Ammount;
+                MetalAmount -= resourceNumber.Amount;
             else if (resourceNumber.ResourceType == ResourceType.RareMetalCrumb)
-                RareMetalCrumbsAmount -= resourceNumber.Ammount;
+                RareMetalCrumbsAmount -= resourceNumber.Amount;
             else if (resourceNumber.ResourceType == ResourceType.Alloy)
-                AlloyAmount -= resourceNumber.Ammount;
+                AlloyAmount -= resourceNumber.Amount;
             else if (resourceNumber.ResourceType == ResourceType.EnergyCristal)
-                EnergyCristalAmount -= resourceNumber.Ammount;
+                EnergyCristalAmount -= resourceNumber.Amount;
             else if (resourceNumber.ResourceType == ResourceType.CondensedEnergyCristal)
-                CondensedEnergyCristalAmount -= resourceNumber.Ammount;
+                CondensedEnergyCristalAmount -= resourceNumber.Amount;
         }
     }
 }

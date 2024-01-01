@@ -26,6 +26,17 @@ public class EnemyHP : MonoBehaviour
         //    Debug.Log("HP Difference: " + (currentHP - lastFrameHP));
         //}
 
+        if (currentHP <= 0)
+        {
+            if (GetComponent<AsteroidSplit>() != null)
+                GetComponent<AsteroidSplit>().Split();
+
+            if (GetComponent<EnemyDropDealer>() != null)
+                GetComponent<EnemyDropDealer>().SpawnDrops();
+
+            Destroy(gameObject);
+        }
+
         lastFrameHP = currentHP;
         lastCollisionHash = 0;
     }
@@ -33,20 +44,10 @@ public class EnemyHP : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Enemy hit by player
-        if (collision.GetComponent<PlayerWeaponDamage>() != null & lastCollisionHash != collision.gameObject.GetHashCode())
+        if (collision.GetComponent<PlayerLaserDamage>() != null & lastCollisionHash != collision.gameObject.GetHashCode())
         {
-            currentHP -= collision.GetComponent<PlayerWeaponDamage>().Damage;
-            lastCollisionHash = collision.gameObject.GetHashCode();
-            if (currentHP <= 0)
-            {
-                if (GetComponent<AsteroidSplit>() != null)
-                    GetComponent<AsteroidSplit>().Split();
-
-                if (GetComponent<EnemyDropDealer>() != null)
-                    GetComponent<EnemyDropDealer>().SpawnDrops();
-
-                Destroy(gameObject);
-            }
+            ChangeHP (-Mathf.Abs(collision.GetComponent<PlayerLaserDamage>().Damage));
+            lastCollisionHash = collision.gameObject.GetHashCode();            
         }
      }
 
@@ -63,5 +64,12 @@ public class EnemyHP : MonoBehaviour
     public void ChangeHP(float value)
     {
         currentHP += value;
+        if (CurrentHP > maxHP) currentHP = maxHP;
+        else if (CurrentHP <= 0) currentHP = 0;
+    }
+
+    public void SetHP(float value)
+    {
+        currentHP = value;
     }
 }

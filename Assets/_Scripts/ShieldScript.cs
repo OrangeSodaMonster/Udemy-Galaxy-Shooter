@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 // Seguir Player e Rotacionar junto
 // Controlar "HP" de cada parte
@@ -8,58 +9,49 @@ using UnityEngine;
 // Regenerar escudos gradualmente
 // Modificar o alpha de cada parte com base no HP atual (full, > 70, > 35, < 35)
 public class ShieldScript : MonoBehaviour
-{
-    [Header("Which parts are unlocked")]
-    public bool IsNorthUnlocked;
-    public bool IsEastUnlocked;
-    public bool IsSouthUnlocked;
-    public bool IsWestUnlocked;
-
+{  
     [Header("Shield Objects")]
-    [SerializeField] GameObject northShield;
-    [SerializeField] GameObject eastShield;
-    [SerializeField] GameObject southShield;
-    [SerializeField] GameObject westShield;    
+    [SerializeField] ShieldStrenght frontShield;
+    [SerializeField] ShieldStrenght rightShield;
+    [SerializeField] ShieldStrenght backShield;
+    [SerializeField] ShieldStrenght leftShield;
 
-    [Header("Shield Alpha (full, > 70, > 35, < 35)")]
-    [SerializeField] Vector4 strAlphas;
+    [Header("Shield Alpha (1, 2, 3, 4, 5)")]
+    [SerializeField] float[] strAlphas;
 
+    PlayerUpgradesManager upgradesManager;
     Transform player;
-    ShieldStrenght northShieldStr;
-    ShieldStrenght eastShieldStr;
-    ShieldStrenght southShieldStr;
-    ShieldStrenght westShieldStr;
+    Color defaultColor;
 
     float powerUpExtraStrPerc = 0;
-    float overMaxPowerUpAlpha;
+    float PowerUpAddeAlpha = 0;
 
     void Start()
     {
         player = FindObjectOfType<PlayerMove>().transform;
-        northShieldStr = northShield.GetComponent<ShieldStrenght>();
-        eastShieldStr = eastShield.GetComponent<ShieldStrenght>();
-        southShieldStr = southShield.GetComponent<ShieldStrenght>();
-        westShieldStr = westShield.GetComponent<ShieldStrenght>();
+        upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
+        defaultColor = frontShield.GetComponent<SpriteRenderer>().color;
 
-        overMaxPowerUpAlpha = strAlphas[0];
+        frontShield = frontShield.GetComponent<ShieldStrenght>();
+        rightShield = rightShield.GetComponent<ShieldStrenght>();
+        backShield = backShield.GetComponent<ShieldStrenght>();
+        leftShield = leftShield.GetComponent<ShieldStrenght>();
 
-        StartCoroutine(ShieldRegen(northShieldStr));
-        StartCoroutine(ShieldRegen(eastShieldStr));
-        StartCoroutine(ShieldRegen(southShieldStr));
-        StartCoroutine(ShieldRegen(westShieldStr));
+        PowerUpAddeAlpha = 0;
+
+        StartCoroutine(ShieldRegen(frontShield));
+        StartCoroutine(ShieldRegen(rightShield));
+        StartCoroutine(ShieldRegen(backShield));
+        StartCoroutine(ShieldRegen(leftShield));
     }
 
     void Update()
     {
         FollowPlayer();
+        SetShieldsValues();
         SetPartsActivateStatus();
-
-        if (northShieldStr.HasStrChanged) ShieldAlphaSetter(northShieldStr);
-        if (eastShieldStr.HasStrChanged) ShieldAlphaSetter(eastShieldStr);
-        if (southShieldStr.HasStrChanged) ShieldAlphaSetter(southShieldStr);
-        if (westShieldStr.HasStrChanged) ShieldAlphaSetter(westShieldStr);
+        SetAlphas();
     }
-
     
     IEnumerator ShieldRegen(ShieldStrenght shieldStr)
     {
@@ -72,56 +64,62 @@ public class ShieldScript : MonoBehaviour
                 shieldStr.CurrentStr = shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100);
 
         } while (true);
-    }
-    
-    void ShieldAlphaSetter(ShieldStrenght shieldStr)
+    }    
+
+    public void ShieldAlphaSetter(ShieldStrenght shieldStr)
     {
-        float strPerc = shieldStr.CurrentStr / shieldStr.MaxStr * 100;
+        float str = shieldStr.CurrentStr;
         float alpha;
 
-        if (strPerc > 100)
-            alpha = overMaxPowerUpAlpha;
-        else if (strPerc >= 100)
+        if (str <= 0)
+            alpha = 0;
+        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[0].Strenght)
             alpha = strAlphas[0];
-        else if (strPerc >= 70)
+        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[1].Strenght)
             alpha = strAlphas[1];
-        else if (strPerc >= 35)
+        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[2].Strenght)
             alpha = strAlphas[2];
-        else
+        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[3].Strenght)
             alpha = strAlphas[3];
+        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[4].Strenght)
+            alpha = strAlphas[4];
+        else 
+            alpha = strAlphas[5];
+        
+        alpha += PowerUpAddeAlpha;
+        if (alpha > 1) alpha = 1;
 
-        shieldStr.GetComponent<SpriteRenderer>().color = new Color (1, 1, 1, alpha);
+        shieldStr.GetComponent<SpriteRenderer>().color = new Color (defaultColor.r, defaultColor.g, defaultColor.b, alpha);
+    }
+
+    void SetAlphas()
+    {
+        if (frontShield.HasStrChanged) ShieldAlphaSetter(frontShield);
+        if (rightShield.HasStrChanged) ShieldAlphaSetter(rightShield);
+        if (backShield.HasStrChanged) ShieldAlphaSetter(backShield);
+        if (leftShield.HasStrChanged) ShieldAlphaSetter(leftShield);
+    }
+
+
+    void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades)
+    {
+        shield.MaxStr = upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
+        shield.baseRegenTime = upgradesManager.shieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
+    }
+    void SetShieldsValues()
+    {
+        SetShieldValues(frontShield, upgradesManager.currentUpgrades.FrontShieldUpgrades);
+        SetShieldValues(rightShield, upgradesManager.currentUpgrades.RightShieldUpgrades);
+        SetShieldValues(backShield, upgradesManager.currentUpgrades.BackShieldUpgrades);
+        SetShieldValues(leftShield, upgradesManager.currentUpgrades.LeftShieldUpgrades);
     }
 
     private void SetPartsActivateStatus()
     {
-        if (IsNorthUnlocked & northShieldStr.CurrentStr > 0)
-        {
-            northShield.SetActive(true);
-        }
-        else if (northShieldStr.CurrentStr > 0)
-            northShield.SetActive(false);
-
-        if (IsEastUnlocked & eastShieldStr.CurrentStr > 0)
-        {
-            eastShield.SetActive(true);
-        }
-        else if (eastShieldStr.CurrentStr > 0)
-            eastShield.SetActive(false);
-
-        if (IsSouthUnlocked & southShieldStr.CurrentStr > 0)
-        {
-            southShield.SetActive(true);
-        }
-        else if (southShieldStr.CurrentStr > 0)
-            southShield.SetActive(false);
-
-        if (IsWestUnlocked & westShieldStr.CurrentStr > 0)
-        {
-            westShield.SetActive(true);
-        }
-        else if (westShieldStr.CurrentStr > 0)
-            westShield.SetActive(false);
+        frontShield.gameObject.SetActive(upgradesManager.currentUpgrades.FrontShieldUpgrades.Enabled);
+        rightShield.gameObject.SetActive(upgradesManager.currentUpgrades.RightShieldUpgrades.Enabled);
+        backShield.gameObject.SetActive(upgradesManager.currentUpgrades.BackShieldUpgrades.Enabled);
+        leftShield.gameObject.SetActive(upgradesManager.currentUpgrades.LeftShieldUpgrades.Enabled);
     }
 
     private void FollowPlayer()
@@ -130,38 +128,38 @@ public class ShieldScript : MonoBehaviour
         transform.rotation = player.rotation;
     }
 
-    public void PowerUpStart(float regenMod, float extraStrPerc, float overMaxAlpha)
+    public void PowerUpStart(float regenMod, float extraStrPerc, float addAlpha)
     {
-        overMaxPowerUpAlpha = overMaxAlpha;
+        PowerUpAddeAlpha = addAlpha;
         powerUpExtraStrPerc = extraStrPerc;    
         
-        northShieldStr.RegenMod = regenMod;
-        eastShieldStr.RegenMod = regenMod;
-        southShieldStr.RegenMod = regenMod;
-        westShieldStr.RegenMod = regenMod;
+        frontShield.RegenMod = regenMod;
+        rightShield.RegenMod = regenMod;
+        backShield.RegenMod = regenMod;
+        leftShield.RegenMod = regenMod;
 
-        northShieldStr.CurrentStr = northShieldStr.MaxStr + northShieldStr.MaxStr * (extraStrPerc/100);
-        eastShieldStr.CurrentStr = eastShieldStr.MaxStr + eastShieldStr.MaxStr * (extraStrPerc/100);
-        southShieldStr.CurrentStr = southShieldStr.MaxStr + southShieldStr.MaxStr * (extraStrPerc/100);
-        westShieldStr.CurrentStr = westShieldStr.MaxStr + westShieldStr.MaxStr * (extraStrPerc/100);
+        frontShield.CurrentStr = frontShield.MaxStr + frontShield.MaxStr * (extraStrPerc/100);
+        rightShield.CurrentStr = rightShield.MaxStr + rightShield.MaxStr * (extraStrPerc/100);
+        backShield.CurrentStr = backShield.MaxStr + backShield.MaxStr * (extraStrPerc/100);
+        leftShield.CurrentStr = leftShield.MaxStr + leftShield.MaxStr * (extraStrPerc/100);
     }
     public void PowerUpEnd()
     {
-        overMaxPowerUpAlpha = strAlphas[0];
+        PowerUpAddeAlpha = 0;
         powerUpExtraStrPerc = 0;
 
-        northShieldStr.RegenMod = 1;
-        eastShieldStr.RegenMod = 1;
-        southShieldStr.RegenMod = 1;
-        westShieldStr.RegenMod = 1;
+        frontShield.RegenMod = 1;
+        rightShield.RegenMod = 1;
+        backShield.RegenMod = 1;
+        leftShield.RegenMod = 1;
 
-        if(northShieldStr.CurrentStr > northShieldStr.MaxStr)
-            northShieldStr.CurrentStr = northShieldStr.MaxStr;
-        if(eastShieldStr.CurrentStr > eastShieldStr.MaxStr)
-            eastShieldStr.CurrentStr = eastShieldStr.MaxStr;
-        if(southShieldStr.CurrentStr > southShieldStr.MaxStr)
-            southShieldStr.CurrentStr = southShieldStr.MaxStr ;
-        if(westShieldStr.CurrentStr > westShieldStr.MaxStr)
-            westShieldStr.CurrentStr = westShieldStr.MaxStr;
+        if(frontShield.CurrentStr > frontShield.MaxStr)
+            frontShield.CurrentStr = frontShield.MaxStr;
+        if(rightShield.CurrentStr > rightShield.MaxStr)
+            rightShield.CurrentStr = rightShield.MaxStr;
+        if(backShield.CurrentStr > backShield.MaxStr)
+            backShield.CurrentStr = backShield.MaxStr ;
+        if(leftShield.CurrentStr > leftShield.MaxStr)
+            leftShield.CurrentStr = leftShield.MaxStr;
     }
 }

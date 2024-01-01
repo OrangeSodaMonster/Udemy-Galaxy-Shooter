@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerPowerUps : MonoBehaviour
 {
-    PlayerWeapons playerWeapons;
+    PlayerLasers playerWeapons;
     bool isFasterShooting = false;
     float fasterShootingRunTime = float.MaxValue;
     float fasterShootingTotalDuration;
@@ -26,7 +26,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     void Start()
     {
-        playerWeapons = GetComponent<PlayerWeapons>();
+        playerWeapons = GetComponent<PlayerLasers>();
         tractorBeam = GetComponentInChildren<PlayerTractorBeam>();
         shield = transform.parent.GetComponentInChildren<ShieldScript>();
         healing = GetComponent<PlayerHeal>();
@@ -55,6 +55,9 @@ public class PlayerPowerUps : MonoBehaviour
 
             if (collision.GetComponent<HealPowerUp>() != null)
                 StartHealingPU(collision);
+
+            if (collision.GetComponent<BombPowerUp>() != null)
+                GetBomb(collision);
         }
     }
 
@@ -62,7 +65,7 @@ public class PlayerPowerUps : MonoBehaviour
     private void StartFasterShooting(Collider2D collision)
     {
         if (!isFasterShooting) 
-            playerWeapons.currentLaserCDMod = collision.GetComponent<FasterShootingPowerUp>().ShootingMultiplier;
+            playerWeapons.PowerUpStart(collision.GetComponent<FasterShootingPowerUp>().ShootingMultiplier);
 
         fasterShootingRunTime = 0;
         isFasterShooting = true;
@@ -77,7 +80,7 @@ public class PlayerPowerUps : MonoBehaviour
             if (fasterShootingRunTime >= fasterShootingTotalDuration)
             {
                 isFasterShooting=false;
-                playerWeapons.currentLaserCDMod = 1;
+                playerWeapons.PowerUpEnd();
             }
         }
     }
@@ -115,7 +118,7 @@ public class PlayerPowerUps : MonoBehaviour
         if (!isShieldPU)
         {
             ShieldPowerUp shieldPU = collision.GetComponent<ShieldPowerUp>();
-            shield.PowerUpStart(shieldPU.RegenMod, shieldPU.ExtraStrPerc, shieldPU.OverMaxColorAlpha);
+            shield.PowerUpStart(shieldPU.RegenMod, shieldPU.ExtraStrPerc, shieldPU.PUAddAlpha);
         }
 
         shieldPURunTime = 0;
@@ -160,6 +163,17 @@ public class PlayerPowerUps : MonoBehaviour
                 isHealingPU = false;
                 healing.PowerUpEnd();
             }
+        }
+    }
+
+    private void GetBomb(Collider2D collision)
+    {
+        if (BombScript.BombAmount < BombScript.MaxBombs)
+        {
+            BombPowerUp bombPowerUp = collision.GetComponent<BombPowerUp>();
+            BombScript.BombAmount += bombPowerUp.NumberOfCharges;
+
+            Destroy(collision.gameObject);
         }
     }
 }

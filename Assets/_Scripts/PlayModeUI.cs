@@ -6,8 +6,9 @@ using TMPro;
 
 public class PlayModeUI : MonoBehaviour
 {
-    [SerializeField] Slider hpSlider;
+    [SerializeField] Slider[] hpSliders;
     [SerializeField] TMP_Text hpText;
+    [SerializeField] TMP_Text numberOfBombs;
     [SerializeField] TMP_Text metalText;
     [SerializeField] TMP_Text alloyText;
     [SerializeField] TMP_Text cristalText;
@@ -15,8 +16,11 @@ public class PlayModeUI : MonoBehaviour
 
     void Update()
     {
-        hpSlider.value = PlayerHP.CurrentHP / PlayerHP.MaxHP;
+        foreach (var slider in hpSliders) 
+            slider.value = PlayerHP.CurrentHP / PlayerHP.MaxHP;
+
         hpText.text = $"{Mathf.Ceil(PlayerHP.CurrentHP)} / {Mathf.Ceil(PlayerHP.MaxHP)}";
+        numberOfBombs.text = BombScript.BombAmount > 0 ?  $"{BombScript.BombAmount}" : "";
         metalText.text = $"Metal {PlayerCollectiblesCount.MetalAmount}";
         alloyText.text = $"Alloy {PlayerCollectiblesCount.AlloyAmount}";
         cristalText.text = $"E. Cristal {PlayerCollectiblesCount.EnergyCristalAmount}";

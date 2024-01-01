@@ -12,27 +12,27 @@ public class PlayerHeal : MonoBehaviour
 
     void Start()
     {
-        currentSecondsBetweenHeal = secondsBetweenHeal;
-        StartCoroutine(HealRotine());
+        currentSecondsBetweenHeal = secondsBetweenHeal;      
     }
 
     void Update()
     {
-        
+        if (PlayerHP.DamageTaken)
+        {
+            StartCoroutine(HealRotine());
+        }
     }
 
     IEnumerator HealRotine()
     {
-        while (true)
+        while (PlayerHP.CurrentHP < PlayerHP.MaxHP)
         {
-            if (PlayerHP.CurrentHP >= PlayerHP.MaxHP)
-                { }
-            else if (isFreeHeal)
+            yield return new WaitForSeconds(currentSecondsBetweenHeal);
+
+            if (isFreeHeal)
                 PlayerHP.ChangePlayerHP(+1);
             else if (PlayerCollectiblesCount.ExpendResources(HealCost))
                 PlayerHP.ChangePlayerHP(+1);
-
-            yield return new WaitForSeconds(currentSecondsBetweenHeal);
         }
     }
 

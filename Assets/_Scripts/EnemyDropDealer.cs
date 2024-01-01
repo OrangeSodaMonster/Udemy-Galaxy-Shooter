@@ -23,7 +23,7 @@ public class EnemyDropDealer : MonoBehaviour
 
     private void Awake()
     {
-        transformParent = FindObjectOfType<MetalCumbsParent>().transform;
+        transformParent = FindObjectOfType<MetalCrumbsParent>().transform;
     }
     
     public void SpawnDrops()

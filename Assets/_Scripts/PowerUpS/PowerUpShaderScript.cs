@@ -18,8 +18,12 @@ public class PowerUpShaderScript : MonoBehaviour
 
     void Start()
     {
-        Material material = bgBorder.GetComponent<SpriteRenderer>().material;
-        material.SetColor("_GlowColor", glowColor);
+        Material material;
+        if (bgBorder != null)
+        {
+            material = bgBorder.GetComponent<SpriteRenderer>().material;
+            material.SetColor("_GlowColor", glowColor);
+        }        
 
         material = iconFill.GetComponent<SpriteRenderer>().material;
         material.SetTexture("_MainTexture", iconFillTex);

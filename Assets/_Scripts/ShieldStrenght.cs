@@ -1,39 +1,80 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum ShieldSide
+{
+    Front, Back, Right, Left,
+}
 public class ShieldStrenght : MonoBehaviour
 {
-    [Header("Base Strenght")]
-    [SerializeField] float shieldBaseStr = 4;
+    [SerializeField] ShieldSide shieldSide;
 
-    [Header("Seconds to regenerate 1 str")]
-    [SerializeField] float baseRegenerateTime = 8;
-
+    public float baseRegenTime = 1;
     public float RegenMod = 1;
-
-    public float CurrentStr;
-    public float MaxStr;
     public float CurrentRegenTime;
+
+    public float MaxStr;
+    public float CurrentStr;
     public bool HasStrChanged;
 
     float lastFrameStr;
 
-    void Start()
+    Collider2D coll;
+    PlayerUpgradesManager upgradesManager;
+
+    private IEnumerator Start()
     {
-        CurrentStr = shieldBaseStr;
-        MaxStr = shieldBaseStr;
-        CurrentRegenTime = baseRegenerateTime;
+        coll = GetComponent<Collider2D>();
+        upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
+        SetShieldValues(this, shieldSide);
+        CurrentRegenTime = baseRegenTime;
+        CurrentStr = MaxStr;
+
+        yield return new WaitForEndOfFrame();       
+
+        FindObjectOfType<ShieldScript>().ShieldAlphaSetter(this);
     }
 
     void LateUpdate()
     {
-        CurrentRegenTime = baseRegenerateTime * RegenMod;
+        CurrentRegenTime = baseRegenTime * RegenMod;
 
         HasStrChanged = (CurrentStr != lastFrameStr) ? true : false;
 
+        if(HasStrChanged)
+        {
+            if(CurrentStr == 0 )
+            {
+                coll.enabled = false;
+            }
+            else
+            {
+                coll.enabled = true;
+            }
+        }
+
         lastFrameStr = CurrentStr;
+    }
+
+    void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades)
+    {
+        shield.MaxStr = upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
+        shield.baseRegenTime = upgradesManager.shieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
+    }
+    
+    public void SetShieldValues(ShieldStrenght shield, ShieldSide shieldSide)
+    {
+        if (shieldSide == ShieldSide.Front)
+            SetShieldValues(shield, upgradesManager.currentUpgrades.FrontShieldUpgrades);
+        else if (shieldSide == ShieldSide.Back)
+            SetShieldValues(shield, upgradesManager.currentUpgrades.BackShieldUpgrades);
+        else if (shieldSide == ShieldSide.Right)
+            SetShieldValues(shield, upgradesManager.currentUpgrades.RightShieldUpgrades);
+        else if (shieldSide == ShieldSide.Left)
+            SetShieldValues(shield, upgradesManager.currentUpgrades.LeftShieldUpgrades);
     }
 
     int lastCollisionHash = 0;
@@ -47,9 +88,8 @@ public class ShieldStrenght : MonoBehaviour
 
         if (CurrentStr <= 0)
         {
-            PlayerHP.ChangePlayerHP(CurrentStr);
+            PlayerHP.ChangePlayerHP(-Mathf.Abs(CurrentStr));
             CurrentStr = 0;
-            gameObject.SetActive(false);
         } 
     }
 
@@ -61,9 +101,8 @@ public class ShieldStrenght : MonoBehaviour
             lastCollisionHash = collision.gameObject.GetHashCode();
             if (CurrentStr <= 0)
             {
-                PlayerHP.ChangePlayerHP(CurrentStr);
+                PlayerHP.ChangePlayerHP(-Mathf.Abs(CurrentStr));
                 CurrentStr = 0;
-                gameObject.SetActive(false);
             }       
         } 
     }

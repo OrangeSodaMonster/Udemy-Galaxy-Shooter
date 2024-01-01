@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BombScript : MonoBehaviour
+{
+    public static int BombAmount = 1;
+    public static int MaxBombs = 3;
+
+    [SerializeField] InputSO Input;
+    [SerializeField] float radius;
+    [SerializeField] float visualDuration = .2f;
+    [SerializeField] LayerMask layersToHit;
+    [SerializeField] float damage = 10;
+    [SerializeField] float coolDown = 3;
+
+    float timeSinceUsedBomb = float.MaxValue;
+    RaycastHit2D[] hits;
+    EnemyHP enemyHP;
+
+    void Start()
+    {
+        TurnOffSpriteRenderer();
+    }
+
+    void Update()
+    {
+        if (Input.IsSpecialing & BombAmount > 0 & timeSinceUsedBomb >= coolDown)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            Invoke(nameof(BombScript.TurnOffSpriteRenderer), visualDuration);
+
+            hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0, layersToHit);
+
+            foreach (RaycastHit2D hit in hits)
+            {
+                enemyHP = hit.transform.GetComponent<EnemyHP>();
+                if (enemyHP != null)
+                {
+                    enemyHP.ChangeHP(-Mathf.Abs(damage));
+                    //Debug.Log(enemyHP.name + " " + damage + " damage");
+                }
+                else Debug.Log("null EnemyHp");
+            }
+
+            BombAmount--;
+            timeSinceUsedBomb = 0;
+        }
+
+        timeSinceUsedBomb += Time.deltaTime;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    void TurnOffSpriteRenderer()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+}
