@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     public Vector2 PlayerVelocity { get { return playerVelocity; } }
     public float MaxSpeed { get { return maxSpeed; } }
 
+    PlayerUpgradesManager upgradesManager;
     Rigidbody2D rb;
     float acceleration = 0;
     float deceleration = 0;
@@ -31,21 +32,20 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        acceleration = maxSpeed / timeToMaxSpeed;
-        AngularAccel = maxTurningSpeed / timeToMaxTurning;
-        deceleration = maxSpeed / timeUntilStop;
-        AngDeceleration = maxTurningSpeed / timeToStopRotation;
+        rb = GetComponent<Rigidbody2D>();        
     }
 
     void Start()
     {
+        upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
         transform.position = startPositionTransform.position;
+        UpdateValues();
     }
 
     float velocityFraction;
     void FixedUpdate()
     {
+        UpdateValues();
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);              
 
         //Acceleration
@@ -124,5 +124,17 @@ public class PlayerMove : MonoBehaviour
         rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -maxTurningSpeed, maxTurningSpeed);
     }
 
+    void UpdateValues()
+    {
+        maxSpeed = upgradesManager.ShipUpgradesInfo.SpeedUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.SpeedLevel - 1].Speed;
+        maxTurningSpeed = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TurningSpeed;
+        timeUntilStop = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStop;
+        timeToStopRotation = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStopRotating;
+
+        acceleration = maxSpeed / timeToMaxSpeed;
+        AngularAccel = maxTurningSpeed / timeToMaxTurning;
+        deceleration = maxSpeed / timeUntilStop;
+        AngDeceleration = maxTurningSpeed / timeToStopRotation;
+    }
 
 }

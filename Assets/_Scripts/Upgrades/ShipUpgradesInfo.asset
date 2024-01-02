@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdd9dbbd4431984c8e9e57779299f06, type: 3}
+  m_Name: ShipUpgradesInfo
+  m_EditorClassIdentifier: 
+  HP_Upgrade:
+  - Cost: []
+    HP: 5
+  - Cost: []
+    HP: 6
+  - Cost: []
+    HP: 7
+  - Cost: []
+    HP: 8
+  - Cost: []
+    HP: 9
+  - Cost: []
+    HP: 10
+  - Cost: []
+    HP: 12
+  - Cost: []
+    HP: 14
+  - Cost: []
+    HP: 17
+  - Cost: []
+    HP: 20
+  SpeedUpgrade:
+  - Cost: []
+    Speed: 3
+  - Cost: []
+    Speed: 3.36
+  - Cost: []
+    Speed: 3.72
+  - Cost: []
+    Speed: 4.08
+  - Cost: []
+    Speed: 4.44
+  - Cost: []
+    Speed: 4.8
+  ManobrabilityUpgrade:
+  - Cost: []
+    TurningSpeed: 180
+    TimeToStop: 4
+    TimeToStopRotating: 2
+  - Cost: []
+    TurningSpeed: 184
+    TimeToStop: 3.6
+    TimeToStopRotating: 1.8
+  - Cost: []
+    TurningSpeed: 188
+    TimeToStop: 3.2
+    TimeToStopRotating: 1.6
+  - Cost: []
+    TurningSpeed: 192
+    TimeToStop: 2.8
+    TimeToStopRotating: 1.4
+  - Cost: []
+    TurningSpeed: 196
+    TimeToStop: 2.4
+    TimeToStopRotating: 1.2
+  - Cost: []
+    TurningSpeed: 200
+    TimeToStop: 2
+    TimeToStopRotating: 1
+  TractorBeamUpgrade:
+  - Cost: []
+    RadiusMod: 1
+    MaxPullSpeed: 5
+    TimeToMaxPull: 2
+    Alpha: 0.025
+  - Cost: []
+    RadiusMod: 1.5
+    MaxPullSpeed: 5.5
+    TimeToMaxPull: 1.7
+    Alpha: 0.03
+  - Cost: []
+    RadiusMod: 2
+    MaxPullSpeed: 6.1
+    TimeToMaxPull: 1.4
+    Alpha: 0.035
+  - Cost: []
+    RadiusMod: 2.5
+    MaxPullSpeed: 6.8
+    TimeToMaxPull: 1
+    Alpha: 0.04
+  - Cost: []
+    RadiusMod: 3
+    MaxPullSpeed: 7.6
+    TimeToMaxPull: 0.5
+    Alpha: 0.045

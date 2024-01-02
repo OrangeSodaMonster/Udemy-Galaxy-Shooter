@@ -5,12 +5,15 @@ using UnityEngine;
 public class DroneAttackScript : MonoBehaviour
 {
     public LineRenderer AttackLineRenderer;
-    [SerializeField] float damage = 1f;
-    [SerializeField] float timeToDamage = 1f;
-    [SerializeField] float range = 2.5f;
+    public float Range = 2.5f;
+    public float DamagePerSecond = 2.5f;
+    public Gradient LineColor;
+
+    [SerializeField] float timeToDamage = .2f;
     [SerializeField] Transform fireOrigin;
     [SerializeField] LayerMask layersToHit;
 
+    float damage = 0f;
     bool isFiring;
     bool wasFiringLastFrame;
     float timeSinceDamage = float.MaxValue;
@@ -27,6 +30,8 @@ public class DroneAttackScript : MonoBehaviour
 
     void Update()
     {
+        damage = DamagePerSecond * timeToDamage;
+
         target = GetClosestTarget();
 
         if (target != null & AttackLineRenderer != null)
@@ -34,9 +39,11 @@ public class DroneAttackScript : MonoBehaviour
             transform.up = target.position - transform.position;
 
             AttackLineRenderer.gameObject.SetActive(true);
-            AttackLineRenderer.positionCount = 2;
+            AttackLineRenderer.colorGradient = LineColor;
+            AttackLineRenderer.positionCount = 3;
             AttackLineRenderer.SetPosition(0, fireOrigin.position);
-            AttackLineRenderer.SetPosition(1, target.position);
+            AttackLineRenderer.SetPosition(1, fireOrigin.position + (target.position - fireOrigin.position) / 2);
+            AttackLineRenderer.SetPosition(2, target.position);
 
             isFiring = true;
         }
@@ -50,7 +57,7 @@ public class DroneAttackScript : MonoBehaviour
 
         if(isFiring & !wasFiringLastFrame)
         {
-            Debug.Log(name + " started firing at " + target.name);
+            //Debug.Log(name + " started firing at " + target.name);
             timeSinceDamage = 0;
         }
 
@@ -74,7 +81,7 @@ public class DroneAttackScript : MonoBehaviour
 
     private Transform GetClosestTarget()
     {
-        hits = Physics2D.CircleCastAll(transform.position, range, Vector2.zero, 0, layersToHit);
+        hits = Physics2D.CircleCastAll(transform.position, Range, Vector2.zero, 0, layersToHit);
         Transform closestTarget = null;
         if (hits.Length > 0)
         {
@@ -96,6 +103,6 @@ public class DroneAttackScript : MonoBehaviour
     {
         Gizmos.color = Color.white;
 
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, Range);
     }
 }

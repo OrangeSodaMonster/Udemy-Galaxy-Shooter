@@ -23,9 +23,9 @@ public struct ShieldUpgrades
 public struct IonStreamUpgrades
 {
     public bool Enabled;
-    public int CadencyLevel;
     public int DamageLevel;
-    public int RadiusLevel;
+    public int CadencyLevel;
+    public int RangeLevel;
     public int NumberHitsLevel;
 }
 
@@ -34,7 +34,7 @@ public struct DronesUpgrades
 {
     public bool Enabled;
     public int DamageLevel;
-    public int RadiusLevel;
+    public int RangeLevel;
     public int HealingLevel;
 }
 

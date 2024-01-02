@@ -12,29 +12,56 @@ public class PlayerTractorBeam : MonoBehaviour
 
     Vector3 defaultScale;
     float defaultAlpha;
-    float defaultTexSpeed;
+    float defaultTextureSpeed;
+    SpriteRenderer spriteRenderer;
     Color defaultColor;
+    Collider2D coll;
 
     float puRadiusMod = 1;
     float maxAtractionSpeedMod = 1;
     float timeToMaxSpeedMod = 1;
 
-    private void Start()
+    PlayerUpgradesManager upgradesManager;
+
+    private void Awake()
     {
         defaultScale = transform.localScale;
-        defaultAlpha = GetComponent<SpriteRenderer>().color.a;
-        defaultTexSpeed = GetComponent<SpriteRenderer>().material.GetFloat("_Speed");
-        defaultColor = GetComponent<SpriteRenderer>().color;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultTextureSpeed = spriteRenderer.material.GetFloat("_Speed");
+        defaultColor = spriteRenderer.color;
+        coll = GetComponent<Collider2D>();
+    }
 
-        MaxPullSpeed = baseMaxPullSpeed;
-        TimeToMaxPullSpeed = baseTimeToMaxPullSpeed;
+    private void Start()
+    {
+        upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
+
+        SetEnabled();
+        UpdateValues();
     }
 
     private void Update()
     {
+        SetEnabled();
+        UpdateValues();
+
         transform.localScale = defaultScale * radiusMod * puRadiusMod;
         MaxPullSpeed = baseMaxPullSpeed * maxAtractionSpeedMod;
         TimeToMaxPullSpeed = baseTimeToMaxPullSpeed * timeToMaxSpeedMod;
+    }
+
+    void UpdateValues()
+    {
+        radiusMod = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].RadiusMod;
+        baseMaxPullSpeed = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].MaxPullSpeed;
+        baseTimeToMaxPullSpeed = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].TimeToMaxPull;
+        defaultAlpha = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].Alpha;
+    }
+
+    void SetEnabled()
+    {
+        spriteRenderer.enabled = upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled;
+        coll.enabled = upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled;
     }
 
     public void PowerUpStart(float newAlpha, float puRadiusMod, float atractionMod, float timeToMaxSpeedMod, float textureSpeedMod)
@@ -43,7 +70,7 @@ public class PlayerTractorBeam : MonoBehaviour
         maxAtractionSpeedMod = atractionMod;
         this.timeToMaxSpeedMod = timeToMaxSpeedMod;
 
-        GetComponent<SpriteRenderer>().material.SetFloat("_Speed", defaultTexSpeed * textureSpeedMod);
+        GetComponent<SpriteRenderer>().material.SetFloat("_Speed", defaultTextureSpeed * textureSpeedMod);
         GetComponent<SpriteRenderer>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, newAlpha);
     }
 
@@ -53,7 +80,7 @@ public class PlayerTractorBeam : MonoBehaviour
         maxAtractionSpeedMod = 1;
         timeToMaxSpeedMod = 1;
 
-        GetComponent<SpriteRenderer>().material.SetFloat("_Speed", defaultTexSpeed);
+        GetComponent<SpriteRenderer>().material.SetFloat("_Speed", defaultTextureSpeed);
         GetComponent<SpriteRenderer>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultAlpha);
     }
 }

@@ -4,38 +4,61 @@ using UnityEngine;
 
 public class IonStreamScript : MonoBehaviour
 {
-    public bool isIonStreamEnabled;
 
-    [SerializeField] float radiusFromPlayer = 2;
-    [SerializeField] float RadiusFromLastHit = 1.5f;
-    [SerializeField] float numberOfHits = 3;
-    [SerializeField] float timeBetweenActivations = 6;
-    [SerializeField] float damage = 1;
     [SerializeField] float visualDuration = .3f;
     [SerializeField] LayerMask layersToHit;
     [SerializeField] LineRenderer lineRenderer;
 
+    bool isIonStreamEnabled;
+    float damage;
+    float lineWidht;
+    Material material;
+    float timeBetweenActivations;
+    float numberOfHits;
+    float radiusFromPlayer;
+    float radiusFromLastHit;
+
     float timeSinceFired = float.MaxValue;
     Transform player;
+    PlayerUpgradesManager upgradesManager;
     RaycastHit2D[] hits;
-    float remainingJumps;
     List<Vector2> lineNodes = new List<Vector2>();
 
     void Start()
     {
         player = FindAnyObjectByType<PlayerMove>().transform;
+        upgradesManager = FindAnyObjectByType<PlayerUpgradesManager>();
+        UpdateValues();
+
+        lineRenderer.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if(isIonStreamEnabled & timeSinceFired > timeBetweenActivations & Physics2D.CircleCast(player.position, radiusFromPlayer, Vector2.zero, 0, layersToHit))
+        UpdateValues();
+
+        if (isIonStreamEnabled && timeSinceFired > timeBetweenActivations && Physics2D.CircleCast(player.position, radiusFromPlayer, Vector2.zero, 0, layersToHit))
         {
             FireIonStream();
             timeSinceFired = 0;
-            Debug.Log("Fire Ion Stream");
+            //Debug.Log("Fire Ion Stream");
         }
         timeSinceFired += Time.deltaTime;
     } 
+
+    void UpdateValues()
+    {
+        isIonStreamEnabled = upgradesManager.CurrentUpgrades.IonStreamUpgrades.Enabled;
+
+        IonStreamUpgrades ionStreamUpgrades = upgradesManager.CurrentUpgrades.IonStreamUpgrades;
+        damage = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Power;
+        lineWidht = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Widht;
+        material = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Material;
+        timeBetweenActivations = upgradesManager.IonStreamUpgradesInfo.CadencyUpgrades[ionStreamUpgrades.CadencyLevel - 1].TimeBetween;
+        numberOfHits = upgradesManager.IonStreamUpgradesInfo.HitNumUpgrades[ionStreamUpgrades.NumberHitsLevel - 1].NumberOfHits;
+        radiusFromPlayer = upgradesManager.IonStreamUpgradesInfo.RangeUpgrades[ionStreamUpgrades.RangeLevel - 1].RangeFromPlayer;
+        radiusFromLastHit = upgradesManager.IonStreamUpgradesInfo.RangeUpgrades[ionStreamUpgrades.RangeLevel - 1].RangeFromHit;
+    }
 
 
     Vector2 placeHolderVector = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
@@ -75,7 +98,7 @@ public class IonStreamScript : MonoBehaviour
                         lineNodes[i+1]= (Vector2)hit.transform.position;                        
                     }
                 }
-                castingRadius = RadiusFromLastHit;
+                castingRadius = radiusFromLastHit;
                 if (target != null)
                 {
                     if(target.GetComponent<EnemyHP>() != null)
@@ -90,13 +113,21 @@ public class IonStreamScript : MonoBehaviour
 
         if (lineNodes.Count >= 2)
         {
-            LineRenderer line = Instantiate(lineRenderer, transform.position, Quaternion.identity, transform);
-            line.positionCount = lineNodes.Count;
+            if (lineNodes.Count == 2)
+            {
+                lineNodes.Add(lineNodes[1]);
+                lineNodes[1] = lineNodes[0] + (lineNodes[1] - lineNodes[0]) / 2;
+            }
+            
+            lineRenderer.gameObject.SetActive(true);
+            lineRenderer.material = material;
+            lineRenderer.widthMultiplier = lineWidht;
+            lineRenderer.positionCount = lineNodes.Count;
             for (int i = 0; i < lineNodes.Count; i++)
             {
-                line.SetPosition(i, lineNodes[i]);
+                lineRenderer.SetPosition(i, lineNodes[i]);
             }
-            StartCoroutine(DestroyLine(line.gameObject, visualDuration));
+            StartCoroutine(DestroyLine(lineRenderer.gameObject, visualDuration));
         }
     }
 
@@ -104,7 +135,7 @@ public class IonStreamScript : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        Destroy(line);
+        line.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()
@@ -112,7 +143,7 @@ public class IonStreamScript : MonoBehaviour
         Gizmos.color = Color.blue;
 
         Gizmos.DrawWireSphere(transform.position, radiusFromPlayer);
-        Gizmos.DrawWireSphere(transform.position, RadiusFromLastHit);
+        Gizmos.DrawWireSphere(transform.position, radiusFromLastHit);
 
     }
 }

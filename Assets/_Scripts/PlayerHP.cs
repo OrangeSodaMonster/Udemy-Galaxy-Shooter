@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerHP : MonoBehaviour
 {
-    [SerializeField] float playerMaxHP;
-
     public static float MaxHP;
     public static float CurrentHP;
     public static float LastFrameHP;
@@ -14,16 +12,22 @@ public class PlayerHP : MonoBehaviour
 
     public bool isInvencible = false;
 
+    PlayerUpgradesManager upgradesManager;
 
     void Start()
     {
-        MaxHP = playerMaxHP;
+        upgradesManager =FindObjectOfType<PlayerUpgradesManager>();
+
+        MaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
+
         CurrentHP = MaxHP;
         LastFrameHP = CurrentHP;
     }
 
     private void Update()
     {
+        MaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
+
         if (CurrentHP == 0)
             PlayerDestructionSequence();       
     }

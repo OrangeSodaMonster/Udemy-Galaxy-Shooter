@@ -61,20 +61,20 @@ public class ShieldStrenght : MonoBehaviour
 
     void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades)
     {
-        shield.MaxStr = upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
-        shield.baseRegenTime = upgradesManager.shieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
+        shield.MaxStr = upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
+        shield.baseRegenTime = upgradesManager.ShieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
     }
     
     public void SetShieldValues(ShieldStrenght shield, ShieldSide shieldSide)
     {
         if (shieldSide == ShieldSide.Front)
-            SetShieldValues(shield, upgradesManager.currentUpgrades.FrontShieldUpgrades);
+            SetShieldValues(shield, upgradesManager.CurrentUpgrades.FrontShieldUpgrades);
         else if (shieldSide == ShieldSide.Back)
-            SetShieldValues(shield, upgradesManager.currentUpgrades.BackShieldUpgrades);
+            SetShieldValues(shield, upgradesManager.CurrentUpgrades.BackShieldUpgrades);
         else if (shieldSide == ShieldSide.Right)
-            SetShieldValues(shield, upgradesManager.currentUpgrades.RightShieldUpgrades);
+            SetShieldValues(shield, upgradesManager.CurrentUpgrades.RightShieldUpgrades);
         else if (shieldSide == ShieldSide.Left)
-            SetShieldValues(shield, upgradesManager.currentUpgrades.LeftShieldUpgrades);
+            SetShieldValues(shield, upgradesManager.CurrentUpgrades.LeftShieldUpgrades);
     }
 
     int lastCollisionHash = 0;

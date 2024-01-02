@@ -73,15 +73,15 @@ public class ShieldScript : MonoBehaviour
 
         if (str <= 0)
             alpha = 0;
-        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[0].Strenght)
+        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[0].Strenght)
             alpha = strAlphas[0];
-        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[1].Strenght)
+        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[1].Strenght)
             alpha = strAlphas[1];
-        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[2].Strenght)
+        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[2].Strenght)
             alpha = strAlphas[2];
-        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[3].Strenght)
+        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[3].Strenght)
             alpha = strAlphas[3];
-        else if (str <= upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[4].Strenght)
+        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[4].Strenght)
             alpha = strAlphas[4];
         else 
             alpha = strAlphas[5];
@@ -103,23 +103,23 @@ public class ShieldScript : MonoBehaviour
 
     void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades)
     {
-        shield.MaxStr = upgradesManager.shieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
-        shield.baseRegenTime = upgradesManager.shieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
+        shield.MaxStr = upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
+        shield.baseRegenTime = upgradesManager.ShieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
     }
     void SetShieldsValues()
     {
-        SetShieldValues(frontShield, upgradesManager.currentUpgrades.FrontShieldUpgrades);
-        SetShieldValues(rightShield, upgradesManager.currentUpgrades.RightShieldUpgrades);
-        SetShieldValues(backShield, upgradesManager.currentUpgrades.BackShieldUpgrades);
-        SetShieldValues(leftShield, upgradesManager.currentUpgrades.LeftShieldUpgrades);
+        SetShieldValues(frontShield, upgradesManager.CurrentUpgrades.FrontShieldUpgrades);
+        SetShieldValues(rightShield, upgradesManager.CurrentUpgrades.RightShieldUpgrades);
+        SetShieldValues(backShield, upgradesManager.CurrentUpgrades.BackShieldUpgrades);
+        SetShieldValues(leftShield, upgradesManager.CurrentUpgrades.LeftShieldUpgrades);
     }
 
     private void SetPartsActivateStatus()
     {
-        frontShield.gameObject.SetActive(upgradesManager.currentUpgrades.FrontShieldUpgrades.Enabled);
-        rightShield.gameObject.SetActive(upgradesManager.currentUpgrades.RightShieldUpgrades.Enabled);
-        backShield.gameObject.SetActive(upgradesManager.currentUpgrades.BackShieldUpgrades.Enabled);
-        leftShield.gameObject.SetActive(upgradesManager.currentUpgrades.LeftShieldUpgrades.Enabled);
+        frontShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.FrontShieldUpgrades.Enabled);
+        rightShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.RightShieldUpgrades.Enabled);
+        backShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.BackShieldUpgrades.Enabled);
+        leftShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.LeftShieldUpgrades.Enabled);
     }
 
     private void FollowPlayer()
