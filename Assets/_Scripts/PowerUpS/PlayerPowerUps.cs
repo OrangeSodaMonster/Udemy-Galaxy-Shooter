@@ -58,6 +58,8 @@ public class PlayerPowerUps : MonoBehaviour
 
             if (collision.GetComponent<BombPowerUp>() != null)
                 GetBomb(collision);
+
+            collision.GetComponent<Collider2D>().enabled = false;
         }
     }
 

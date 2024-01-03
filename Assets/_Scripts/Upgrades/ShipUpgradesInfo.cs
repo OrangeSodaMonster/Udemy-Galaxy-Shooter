@@ -7,7 +7,7 @@ using UnityEngine;
 public struct ShipHPUpgrade
 {
     public ResourceNumber[] Cost;
-    public float HP;
+    public int HP;
 }
 
 [Serializable]

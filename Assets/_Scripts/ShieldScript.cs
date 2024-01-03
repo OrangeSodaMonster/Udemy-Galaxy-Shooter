@@ -60,9 +60,8 @@ public class ShieldScript : MonoBehaviour
             yield return new WaitForSeconds(shieldStr.CurrentRegenTime);
 
             shieldStr.CurrentStr++;
-            if (shieldStr.CurrentStr > shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100))
-                shieldStr.CurrentStr = shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100);
-
+            if (shieldStr.CurrentStr > (int)Mathf.Ceil(shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100)))
+                shieldStr.CurrentStr = (int)Mathf.Ceil(shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100));
         } while (true);
     }    
 
@@ -138,10 +137,10 @@ public class ShieldScript : MonoBehaviour
         backShield.RegenMod = regenMod;
         leftShield.RegenMod = regenMod;
 
-        frontShield.CurrentStr = frontShield.MaxStr + frontShield.MaxStr * (extraStrPerc/100);
-        rightShield.CurrentStr = rightShield.MaxStr + rightShield.MaxStr * (extraStrPerc/100);
-        backShield.CurrentStr = backShield.MaxStr + backShield.MaxStr * (extraStrPerc/100);
-        leftShield.CurrentStr = leftShield.MaxStr + leftShield.MaxStr * (extraStrPerc/100);
+        frontShield.CurrentStr = (int)Mathf.Ceil(frontShield.MaxStr + frontShield.MaxStr * (extraStrPerc/100));
+        rightShield.CurrentStr = (int)Mathf.Ceil(rightShield.MaxStr + rightShield.MaxStr * (extraStrPerc/100));
+        backShield.CurrentStr = (int)Mathf.Ceil(backShield.MaxStr + backShield.MaxStr * (extraStrPerc/100));
+        leftShield.CurrentStr = (int)Mathf.Ceil(leftShield.MaxStr + leftShield.MaxStr * (extraStrPerc/100));
     }
     public void PowerUpEnd()
     {

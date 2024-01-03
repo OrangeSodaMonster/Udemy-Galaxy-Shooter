@@ -7,7 +7,7 @@ using UnityEngine;
 public struct IonStreamPowerUpgrade
 {
     public ResourceNumber[] Cost;
-    public float Power;
+    public int Damage;
     public float Widht;
     public Material Material;
 }

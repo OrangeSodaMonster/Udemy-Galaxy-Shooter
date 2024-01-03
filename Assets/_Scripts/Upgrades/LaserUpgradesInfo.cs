@@ -8,7 +8,7 @@ using UnityEngine;
 public struct LaserPowerUpgrade
 {
     public ResourceNumber[] Cost;
-    public float Damage;
+    public int Damage;
     public Material Material;
 }
 

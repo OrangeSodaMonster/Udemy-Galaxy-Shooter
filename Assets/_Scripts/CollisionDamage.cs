@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CollisionDamage : MonoBehaviour
 {
-	public float Damage = 1f;
+	[field:SerializeField] public int Damage { get; private set; } = 1;
 }

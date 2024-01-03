@@ -16,11 +16,11 @@ public class ShieldStrenght : MonoBehaviour
     public float RegenMod = 1;
     public float CurrentRegenTime;
 
-    public float MaxStr;
-    public float CurrentStr;
+    public int MaxStr;
+    public int CurrentStr;
     public bool HasStrChanged;
 
-    float lastFrameStr;
+    int lastFrameStr;
 
     Collider2D coll;
     PlayerUpgradesManager upgradesManager;

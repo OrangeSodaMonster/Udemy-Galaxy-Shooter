@@ -7,7 +7,7 @@ using UnityEngine;
 public struct ShieldStrenghtUpgrade
 {
     public ResourceNumber[] Cost;
-    public float Strenght;
+    public int Strenght;
 }
 [Serializable]
 public struct ShieldRecoveryUpgrade

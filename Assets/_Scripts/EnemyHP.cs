@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class EnemyHP : MonoBehaviour
 {
-    [SerializeField] float maxHP = 1.0f;
+    [SerializeField] int maxHP = 1;
 
-    float currentHP;
-    float lastFrameHP;
+    int currentHP;
+    int lastFrameHP;
+
     int lastCollisionHash = 0;
-
     public float CurrentHP { get { return currentHP; } }
 	
 
@@ -61,14 +61,14 @@ public class EnemyHP : MonoBehaviour
                
     }
 
-    public void ChangeHP(float value)
+    public void ChangeHP(int value)
     {
         currentHP += value;
         if (CurrentHP > maxHP) currentHP = maxHP;
         else if (CurrentHP <= 0) currentHP = 0;
     }
 
-    public void SetHP(float value)
+    public void SetHP(int value)
     {
         currentHP = value;
     }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerLaserDamage : MonoBehaviour
 {
-    public float Damage = 1;
+    public int Damage { get; set; } = 1;
 }

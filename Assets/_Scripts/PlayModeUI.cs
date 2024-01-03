@@ -17,7 +17,7 @@ public class PlayModeUI : MonoBehaviour
     void Update()
     {
         foreach (var slider in hpSliders) 
-            slider.value = PlayerHP.CurrentHP / PlayerHP.MaxHP;
+            slider.value = (float)PlayerHP.CurrentHP / PlayerHP.MaxHP;
 
         hpText.text = $"{Mathf.Ceil(PlayerHP.CurrentHP)} / {Mathf.Ceil(PlayerHP.MaxHP)}";
         numberOfBombs.text = BombScript.BombAmount > 0 ?  $"{BombScript.BombAmount}" : "";

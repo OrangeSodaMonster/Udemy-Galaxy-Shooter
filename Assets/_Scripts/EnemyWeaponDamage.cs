@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class EnemyWeaponDamage : MonoBehaviour
 {
-    [SerializeField] float damage = 1;
-    public float Damage {get { return damage; } }
+    [SerializeField] int damage = 1;
+    public int Damage {get { return damage; } }
 }

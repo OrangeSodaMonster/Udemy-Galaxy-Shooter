@@ -10,7 +10,7 @@ public class IonStreamScript : MonoBehaviour
     [SerializeField] LineRenderer lineRenderer;
 
     bool isIonStreamEnabled;
-    float damage;
+    int damage;
     float lineWidht;
     Material material;
     float timeBetweenActivations;
@@ -51,7 +51,7 @@ public class IonStreamScript : MonoBehaviour
         isIonStreamEnabled = upgradesManager.CurrentUpgrades.IonStreamUpgrades.Enabled;
 
         IonStreamUpgrades ionStreamUpgrades = upgradesManager.CurrentUpgrades.IonStreamUpgrades;
-        damage = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Power;
+        damage = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Damage;
         lineWidht = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Widht;
         material = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Material;
         timeBetweenActivations = upgradesManager.IonStreamUpgradesInfo.CadencyUpgrades[ionStreamUpgrades.CadencyLevel - 1].TimeBetween;

@@ -70,8 +70,8 @@ public class PlayerTractorBeam : MonoBehaviour
         maxAtractionSpeedMod = atractionMod;
         this.timeToMaxSpeedMod = timeToMaxSpeedMod;
 
-        GetComponent<SpriteRenderer>().material.SetFloat("_Speed", defaultTextureSpeed * textureSpeedMod);
-        GetComponent<SpriteRenderer>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, newAlpha);
+        spriteRenderer.material.SetFloat("_Speed", defaultTextureSpeed * textureSpeedMod);
+        spriteRenderer.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, newAlpha);
     }
 
     public void PowerUpEnd()
@@ -80,7 +80,7 @@ public class PlayerTractorBeam : MonoBehaviour
         maxAtractionSpeedMod = 1;
         timeToMaxSpeedMod = 1;
 
-        GetComponent<SpriteRenderer>().material.SetFloat("_Speed", defaultTextureSpeed);
-        GetComponent<SpriteRenderer>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultAlpha);
+        spriteRenderer.material.SetFloat("_Speed", defaultTextureSpeed);
+        spriteRenderer.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultAlpha);
     }
 }

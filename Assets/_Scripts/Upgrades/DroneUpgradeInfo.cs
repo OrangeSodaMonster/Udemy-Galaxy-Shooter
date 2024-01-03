@@ -7,7 +7,7 @@ using UnityEngine;
 public struct DronePowerUpgrade
 {
     public ResourceNumber[] Cost;
-    public float DamagePerSecond;
+    public int DamagePerSecond;
     public Gradient Color;
 }
 

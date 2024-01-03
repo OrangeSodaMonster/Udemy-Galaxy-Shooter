@@ -13,7 +13,7 @@ public class DroneAttackScript : MonoBehaviour
     [SerializeField] Transform fireOrigin;
     [SerializeField] LayerMask layersToHit;
 
-    float damage = 0f;
+    int damage = 0;
     bool isFiring;
     bool wasFiringLastFrame;
     float timeSinceDamage = float.MaxValue;
@@ -30,7 +30,7 @@ public class DroneAttackScript : MonoBehaviour
 
     void Update()
     {
-        damage = DamagePerSecond * timeToDamage;
+        damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
 
         target = GetClosestTarget();
 

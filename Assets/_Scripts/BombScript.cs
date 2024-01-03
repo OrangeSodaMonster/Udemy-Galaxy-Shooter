@@ -11,7 +11,7 @@ public class BombScript : MonoBehaviour
     [SerializeField] float radius;
     [SerializeField] float visualDuration = .2f;
     [SerializeField] LayerMask layersToHit;
-    [SerializeField] float damage = 10;
+    [SerializeField] int damage = 10;
     [SerializeField] float coolDown = 3;
 
     float timeSinceUsedBomb = float.MaxValue;

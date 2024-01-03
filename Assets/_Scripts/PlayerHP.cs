@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerHP : MonoBehaviour
 {
-    public static float MaxHP;
-    public static float CurrentHP;
-    public static float LastFrameHP;
+    public static int MaxHP;
+    public static int CurrentHP;
+    public static int LastFrameHP;
     public static bool DamageTaken = false;
     public static bool HealReceived = false;
 
@@ -86,7 +86,7 @@ public class PlayerHP : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.red;
     }
 
-    static public void ChangePlayerHP(float value)
+    static public void ChangePlayerHP(int value)
     {
         CurrentHP += value;
         if (CurrentHP > MaxHP) CurrentHP = MaxHP;
