@@ -11,8 +11,12 @@ public class LaserMove : MonoBehaviour
         transform.Translate(moveSpeed*Time.deltaTime*transform.up, Space.World);
     }
     private void OnTriggerEnter2D(Collider2D collision)
-    {   
-        //Debug.Log("colisão");
+    {
+        DestroySequence();
+    }
+
+    public void DestroySequence()
+    {
         Destroy(gameObject);
     }
 }

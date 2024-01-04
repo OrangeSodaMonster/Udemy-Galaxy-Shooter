@@ -25,7 +25,7 @@ public class BombScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.IsSpecialing & BombAmount > 0 & timeSinceUsedBomb >= coolDown)
+        if (Input.IsSpecialing && BombAmount > 0 && timeSinceUsedBomb >= coolDown)
         {
             GetComponent<SpriteRenderer>().enabled = true;
             Invoke(nameof(BombScript.TurnOffSpriteRenderer), visualDuration);
@@ -34,13 +34,15 @@ public class BombScript : MonoBehaviour
 
             foreach (RaycastHit2D hit in hits)
             {
-                enemyHP = hit.transform.GetComponent<EnemyHP>();
-                if (enemyHP != null)
+                if (hit.transform.TryGetComponent(out EnemyHP enemyHP))
                 {
                     enemyHP.ChangeHP(-Mathf.Abs(damage));
                     //Debug.Log(enemyHP.name + " " + damage + " damage");
                 }
-                else Debug.Log("null EnemyHp");
+                else if(hit.transform.TryGetComponent(out LaserMove enemyProjectile))
+                {
+                    enemyProjectile.DestroySequence();
+                }
             }
 
             BombAmount--;

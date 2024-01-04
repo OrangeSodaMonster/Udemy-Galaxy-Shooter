@@ -68,7 +68,7 @@ public class EnemyHP : MonoBehaviour
             dropDealer.SpawnDrops();
 
         if(destroyOnCollision)
-            ChangeHP(-MaxHP);
+            Destroy(gameObject);
                
     }
 

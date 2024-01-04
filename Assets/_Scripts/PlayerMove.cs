@@ -42,9 +42,12 @@ public class PlayerMove : MonoBehaviour
     }
 
     Tween angularAccelTween;
+    Tween changeDirDecelTween;
     Tween defaultAngDecelTween;
     Tween yVelocityAngDecelTween;
     float angVelocity;
+    float changeDirAngVelocity;
+    bool isChangingDir;
 
     float velocityFraction;
     void FixedUpdate()
@@ -98,8 +101,7 @@ public class PlayerMove : MonoBehaviour
 
         ///////////////////////////////////////////////////////////////////////////        
 
-        //Angular Accel
-        
+        //Angular Accel        
         if (Mathf.Abs(Input.Turning) >= float.Epsilon)
         {            
             defaultAngDecelTween?.Kill();
@@ -110,16 +112,35 @@ public class PlayerMove : MonoBehaviour
                 angVelocity = rb.angularVelocity;
                 angularAccelTween = DOTween.To(() => angVelocity, x => angVelocity = x, maxTurningSpeed * -Mathf.Sign(Input.Turning), maxTurningSpeed / timeToMaxTurning)
                     .SetEase(Ease.InSine).SetSpeedBased(true);
-            }                
+            }
+
+            // Aplica a desaceleração base à aceleração angular quando a direção de input é diferente da de rotação atual 
+            if (!isChangingDir && rb.angularVelocity != 0 && Mathf.Sign(Input.Turning) == Mathf.Sign(rb.angularVelocity))
+            {
+                Debug.Log("Virando na direção oposta");
+                changeDirDecelTween = DOTween.To(() => changeDirAngVelocity, x => changeDirAngVelocity = x, maxTurningSpeed, maxTurningSpeed / timeToStopRot)
+                    .SetEase(Ease.OutSine).SetSpeedBased(true);
+                isChangingDir = true;
+            }
+            else if (isChangingDir && (rb.angularVelocity == 0 || Mathf.Sign(Input.Turning) != Mathf.Sign(rb.angularVelocity)))
+            {
+                //Debug.Log("Virando na mesma direção");
+                changeDirAngVelocity = 0;
+                changeDirDecelTween?.Kill();
+                isChangingDir = false;
+            }
         }
 
         //Angular Deceleration, greater when accelerating
         else if (!(Mathf.Abs(Input.Turning) >= float.Epsilon) && Mathf.Abs(rb.angularVelocity) > 0)
         {            
-            angularAccelTween?.Kill();            
+            angularAccelTween?.Kill();
+            changeDirDecelTween?.Kill();
+            changeDirAngVelocity = 0;
 
             // Not Accelerating
-            if (!(Mathf.Abs(Input.Acceleration) >= float.Epsilon) && (!defaultAngDecelTween.IsActive() || defaultAngDecelTween.IsActive() && !defaultAngDecelTween.IsPlaying()))
+            if (!(Mathf.Abs(Input.Acceleration) >= float.Epsilon) && (!defaultAngDecelTween.IsActive()
+                || defaultAngDecelTween.IsActive() && !defaultAngDecelTween.IsPlaying()))
             {
                 yVelocityAngDecelTween?.Kill();
 
@@ -128,7 +149,8 @@ public class PlayerMove : MonoBehaviour
                     .SetEase(Ease.OutSine).SetSpeedBased(true);
             }
             // Accelerating
-            else if ((Mathf.Abs(Input.Acceleration) >= float.Epsilon) && (!yVelocityAngDecelTween.IsActive() || yVelocityAngDecelTween.IsActive() && !yVelocityAngDecelTween.IsPlaying()))
+            else if ((Mathf.Abs(Input.Acceleration) >= float.Epsilon) && (!yVelocityAngDecelTween.IsActive()
+                || yVelocityAngDecelTween.IsActive() && !yVelocityAngDecelTween.IsPlaying()))
             {
                 defaultAngDecelTween?.Kill();
 
@@ -141,9 +163,13 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        Debug.Log($"{angVelocity} / {changeDirAngVelocity * Mathf.Sign(angVelocity) * -1}");
+
+        angVelocity += changeDirAngVelocity * Mathf.Sign(angVelocity) * -1;
         angVelocity = Mathf.Clamp(angVelocity, -maxTurningSpeed, maxTurningSpeed);
         angVelocity = Mathf.Abs(angVelocity) < .5f ? 0 : angVelocity;
 
+        Debug.Log($"{angVelocity}");
         rb.angularVelocity = angVelocity;
     }
 
