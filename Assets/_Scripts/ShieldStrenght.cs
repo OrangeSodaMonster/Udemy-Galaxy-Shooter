@@ -80,9 +80,9 @@ public class ShieldStrenght : MonoBehaviour
     int lastCollisionHash = 0;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<CollisionDamage>() != null & lastCollisionHash != collision.gameObject.GetHashCode())
+        if (collision.gameObject.GetComponent<CollisionWithPlayer>() != null & lastCollisionHash != collision.gameObject.GetHashCode())
         {
-            CurrentStr -= collision.gameObject.GetComponent<CollisionDamage>().Damage;
+            CurrentStr -= collision.gameObject.GetComponent<CollisionWithPlayer>().Damage;
             lastCollisionHash = collision.gameObject.GetHashCode();
         }
 

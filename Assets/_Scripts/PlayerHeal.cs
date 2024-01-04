@@ -25,7 +25,7 @@ public class PlayerHeal : MonoBehaviour
         // && PlayerHP.LastFrameHP >= PlayerHP.MaxHP
         if (PlayerHP.LastFrameHP > PlayerHP.CurrentHP && !(PlayerHP.LastFrameHP < PlayerHP.MaxHP))
         {
-            Debug.Log("Started heal rotine");
+            //Debug.Log("Started heal rotine");
             StartCoroutine(HealRotine());
         }
     }
@@ -58,9 +58,9 @@ public class PlayerHeal : MonoBehaviour
             yield return new WaitForSeconds(currentSecondsBetweenHeal);
 
             if (isFreeHeal)
-                PlayerHP.ChangePlayerHP(+1);
+                PlayerHP.ChangePlayerHP(+10);
             else if (PlayerCollectiblesCount.ExpendResources(HealCost))
-                PlayerHP.ChangePlayerHP(+1);
+                PlayerHP.ChangePlayerHP(+10);
         }
     }
 

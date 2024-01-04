@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869daa2fe140f7d4e881294ec04897fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnCollision: 1
   <MaxHP>k__BackingField: 45
 --- !u!114 &1782867303863945757
 MonoBehaviour:
@@ -184,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 50
+  <ImpactVelocity>k__BackingField: 0.5
 --- !u!114 &3027592338860263638
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class PlayerHP : MonoBehaviour
     public static bool HealReceived = false;
 
     public bool isInvencible = false;
+    public static bool s_IsInvencible = false;
 
     PlayerUpgradesManager upgradesManager;
 
@@ -26,6 +27,8 @@ public class PlayerHP : MonoBehaviour
 
     private void Update()
     {
+        s_IsInvencible = isInvencible;
+
         MaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
 
         if (CurrentHP == 0)
@@ -70,15 +73,15 @@ public class PlayerHP : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 3) { return; } // Invisible walls filter
+        //if (collision.gameObject.layer == 3) { return; } // Invisible walls filter
 
-        if (collision.gameObject.GetComponent<CollisionDamage>() != null
-            & lastCollisionHash != collision.gameObject.GetHashCode()
-            & !isInvencible)
-        {
-            ChangePlayerHP(-Mathf.Abs(collision.gameObject.GetComponent<CollisionDamage>().Damage));
-            lastCollisionHash = collision.gameObject.GetHashCode();
-        }       
+        //if (collision.gameObject.GetComponent<CollisionWithPlayer>() != null
+        //    & lastCollisionHash != collision.gameObject.GetHashCode()
+        //    & !isInvencible)
+        //{
+        //    ChangePlayerHP(-Mathf.Abs(collision.gameObject.GetComponent<CollisionWithPlayer>().Damage));
+        //    lastCollisionHash = collision.gameObject.GetHashCode();
+        //}       
     }
 
     void PlayerDestructionSequence()
@@ -88,6 +91,8 @@ public class PlayerHP : MonoBehaviour
 
     static public void ChangePlayerHP(int value)
     {
+        if (s_IsInvencible && value < 0) return;
+
         CurrentHP += value;
         if (CurrentHP > MaxHP) CurrentHP = MaxHP;
         else if (CurrentHP <= 0) CurrentHP = 0;

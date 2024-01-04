@@ -15,11 +15,11 @@ public class AsteroidMove : MonoBehaviour
 
     Transform player;
 
-    void Awake()
+    void Start()
     {
         player = FindAnyObjectByType<PlayerMove>().transform;
 
-        if(MoveSpeed == 0)
+        if (MoveSpeed == 0)
             MoveSpeed = Mathf.Abs(Random.Range(baseSpeed - baseSpeed*(speedVariationPerc/100), baseSpeed + baseSpeed*(speedVariationPerc/100)));
         //print(baseSpeed);
 
@@ -33,29 +33,13 @@ public class AsteroidMove : MonoBehaviour
         }
         else if (MoveDirection == Vector3.zero)
             MoveDirection = new Vector3(Random.value, Random.value, 0).normalized;
-
-        StartCoroutine(DistanceCheckFrequency());
     }
 
     void Update()
     {
         transform.Translate(MoveDirection * MoveSpeed * Time.deltaTime,Space.World);       
     }
-
-    IEnumerator DistanceCheckFrequency()
-    {
-        yield return new WaitForSeconds(1);
-
-        while(true)
-        {
-            if (Vector2.Distance(transform.position, player.position) > EnemySpawn.SpawnZoneRadius * 1.5f)
-            {
-                Destroy(gameObject);
-            }
-
-            yield return new WaitForSeconds(1);
-        }        
-    }
+      
 
     private void OnDrawGizmos()
     {

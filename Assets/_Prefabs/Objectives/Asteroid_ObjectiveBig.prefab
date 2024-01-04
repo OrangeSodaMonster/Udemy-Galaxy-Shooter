@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4395393588352010333}
   - component: {fileID: 2428609117032758503}
   - component: {fileID: 434640270311845536}
-  - component: {fileID: 359440957118289101}
   - component: {fileID: 7857951331720398694}
   - component: {fileID: -5173364807266320180}
   - component: {fileID: -8246086450867371592}
@@ -168,24 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minMaxAbsAngularSpeed: {x: 5, y: 15}
---- !u!114 &359440957118289101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3596066275569553282}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c713e846a013543b07f2282fec8242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawGizmos: 0
-  MoveDirection: {x: 0, y: 0, z: 0}
-  MoveSpeed: 0
-  baseSpeed: 0
-  speedVariationPerc: 20
-  moveDirVariation: 0.09
 --- !u!114 &7857951331720398694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 100
+  <ImpactVelocity>k__BackingField: 1.5
 --- !u!114 &-2036024542243111843
 MonoBehaviour:
   m_ObjectHideFlags: 0

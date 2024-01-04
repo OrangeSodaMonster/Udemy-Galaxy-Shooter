@@ -83,8 +83,11 @@ public class EnemySpawn : MonoBehaviour
     public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed)
     {
         GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0,360), Vector3.forward), enemyParentStatic);
-        newAsteroid.GetComponent<AsteroidMove>().MoveDirection = moveDirection;
-        newAsteroid.GetComponent<AsteroidMove>().MoveSpeed = speed;
+        if(newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
+        {
+            asteroidMove.MoveDirection = moveDirection;
+            asteroidMove.MoveSpeed = speed;
+        }
     }
 
     private void OnDrawGizmosSelected()

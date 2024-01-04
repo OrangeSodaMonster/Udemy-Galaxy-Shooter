@@ -19,8 +19,17 @@ public class AsteroidSplit : MonoBehaviour
     float moveSpeed;
     private void Start()
     {
-        moveDirection = GetComponent<AsteroidMove>().MoveDirection;
-        moveSpeed = GetComponent<AsteroidMove>().MoveSpeed;
+        if (TryGetComponent(out AsteroidMove asteroidMove))
+        {
+            moveDirection = asteroidMove.MoveDirection;
+            moveSpeed = asteroidMove.MoveSpeed;
+        }
+        else
+        {
+            moveDirection = Random.insideUnitCircle.normalized;
+            moveSpeed = 0;
+            //Debug.Log(moveDirection);
+        }
 
         if (drawGizmos)
         {
