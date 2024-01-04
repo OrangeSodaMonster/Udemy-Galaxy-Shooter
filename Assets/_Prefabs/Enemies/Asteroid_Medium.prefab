@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -5173364807266320180}
   - component: {fileID: -2176886017670357978}
   - component: {fileID: 7575564427027688670}
+  - component: {fileID: 4801385826154356493}
   m_Layer: 7
   m_Name: Asteroid_Medium
   m_TagString: Untagged
@@ -215,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869daa2fe140f7d4e881294ec04897fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 30
+  <MaxHP>k__BackingField: 30
 --- !u!114 &-2176886017670357978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,3 +254,18 @@ MonoBehaviour:
   minDropsNum: 1
   maxDropsNum: 2
   radiusToSpawn: 0.65
+--- !u!114 &4801385826154356493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596066275569553282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c29e096e871bd429ac600f57768f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpPrefab: {fileID: 7192821498156279173, guid: 3935062b95a19034a98292a7656f791d, type: 3}
+  hpPositionOffset: {x: 0, y: 1.6, z: 0}
+  hpColor: {r: 0.67058825, g: 0.5176471, b: 0, a: 1}

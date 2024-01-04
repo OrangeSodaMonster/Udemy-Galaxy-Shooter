@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -14,7 +16,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float maxTurningSpeed = 180;
     [SerializeField] float timeToMaxTurning = 0.1f;
     [SerializeField] float timeUntilStop = 4;
-    [SerializeField] float timeToStopRotation = 2;
+    [SerializeField] float timeToStopRot = 2;
     [SerializeField] float acceleratingXDecelerationMod = 3;
     [SerializeField] float acceleratingRotationMod = 2;
 
@@ -41,6 +43,10 @@ public class PlayerMove : MonoBehaviour
         transform.position = startPositionTransform.position;
         UpdateValues();
     }
+
+    Tween angularAccelTween;
+    Tween angularDecelTween;
+    float angVelocity;
 
     float velocityFraction;
     void FixedUpdate()
@@ -90,38 +96,50 @@ public class PlayerMove : MonoBehaviour
 
         //Apply Velocity
         rb.velocity = transform.TransformDirection(velocity); 
-        playerVelocity = rb.velocity;    
+        playerVelocity = rb.velocity;
 
-        ///////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////        
 
-        //Angular Velocity
-        if (Input.Turning >= float.Epsilon)
+        //Angular Accel
+        
+        if (Mathf.Abs(Input.Turning) >= float.Epsilon)
         {
-            rb.angularVelocity -= AngularAccel * Time.fixedDeltaTime;
-        }
-        else if (Input.Turning <= -float.Epsilon)
-        {
-            rb.angularVelocity += AngularAccel * Time.fixedDeltaTime;
-        }
-        else //Angular Deceleration, greater when accelerating
-        {
-            if (rb.angularVelocity >= float.Epsilon)
+            if (angularDecelTween != null)
             {
-                if (Input.Acceleration != 0) {
-                    rb.angularVelocity = Mathf.Clamp(rb.angularVelocity - AngDeceleration * acceleratingRotationMod * Time.fixedDeltaTime, 0, maxTurningSpeed); }
-                else {
-                    rb.angularVelocity = Mathf.Clamp(rb.angularVelocity - AngDeceleration * Time.fixedDeltaTime, 0, maxTurningSpeed); }
+                angularDecelTween.Kill();
+                angularDecelTween = null;
             }
-            if (rb.angularVelocity <= float.Epsilon)
-            {
-                if (Input.Acceleration != 0) { 
-                    rb.angularVelocity = Mathf.Clamp(rb.angularVelocity + AngDeceleration * acceleratingRotationMod * Time.fixedDeltaTime, -maxTurningSpeed, 0); }
-                else { 
-                    rb.angularVelocity = Mathf.Clamp(rb.angularVelocity + AngDeceleration * Time.fixedDeltaTime, -maxTurningSpeed, 0); }
-            }
+
+            if (angularAccelTween == null || angularAccelTween.IsActive() && !angularAccelTween.IsPlaying())
+            {   
+                angVelocity = rb.angularVelocity;
+                angularAccelTween = DOTween.To(() => angVelocity, x => angVelocity = x, maxTurningSpeed * -Mathf.Sign(Input.Turning), maxTurningSpeed / timeToMaxTurning)
+                    .SetEase(Ease.InCirc).SetSpeedBased(true);
+            }                
         }
 
-        rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -maxTurningSpeed, maxTurningSpeed);
+        //Angular Deceleration, greater when accelerating
+        else if (!(Mathf.Abs(Input.Turning) >= float.Epsilon))
+        {
+            if (angularAccelTween != null)
+            {
+                angularAccelTween.Kill();
+                angularAccelTween = null;
+            }
+            if(angularDecelTween == null || angularDecelTween.IsActive() && !angularDecelTween.IsPlaying())
+            {
+                float l_AngularSpeedToStop = maxTurningSpeed / timeToStopRot;
+                if (Mathf.Abs(Input.Acceleration) >= float.Epsilon)
+                    l_AngularSpeedToStop *= acceleratingRotationMod;
+
+                angVelocity = rb.angularVelocity;
+                angularDecelTween = DOTween.To(() => angVelocity, x => angVelocity = x, 0, l_AngularSpeedToStop)
+                    .SetEase(Ease.OutSine).SetSpeedBased(true);
+            }            
+        }
+
+        angVelocity = Mathf.Clamp(angVelocity, -maxTurningSpeed, maxTurningSpeed);
+        rb.angularVelocity = angVelocity;
     }
 
     void UpdateValues()
@@ -129,12 +147,10 @@ public class PlayerMove : MonoBehaviour
         maxSpeed = upgradesManager.ShipUpgradesInfo.SpeedUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.SpeedLevel - 1].Speed;
         maxTurningSpeed = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TurningSpeed;
         timeUntilStop = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStop;
-        timeToStopRotation = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStopRotating;
+        timeToStopRot = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStopRotating;
 
         acceleration = maxSpeed / timeToMaxSpeed;
-        AngularAccel = maxTurningSpeed / timeToMaxTurning;
         deceleration = maxSpeed / timeUntilStop;
-        AngDeceleration = maxTurningSpeed / timeToStopRotation;
     }
 
 }

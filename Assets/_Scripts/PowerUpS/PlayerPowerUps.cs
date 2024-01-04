@@ -57,10 +57,14 @@ public class PlayerPowerUps : MonoBehaviour
                 StartHealingPU(collision);
 
             if (collision.GetComponent<BombPowerUp>() != null)
-                GetBomb(collision);
-
-            collision.GetComponent<Collider2D>().enabled = false;
+                GetBomb(collision);            
         }
+    }
+
+    void DestroyPowerUpPickUp( Collider2D collision)
+    {
+        collision.enabled = false;
+        Destroy(collision.gameObject);
     }
 
     // Faster Shooting
@@ -72,7 +76,8 @@ public class PlayerPowerUps : MonoBehaviour
         fasterShootingRunTime = 0;
         isFasterShooting = true;
         fasterShootingTotalDuration = collision.GetComponent<FasterShootingPowerUp>().Duration;
-        Destroy(collision.gameObject);
+
+        DestroyPowerUpPickUp(collision);
     }
     private void StopFasterShootingCD()
     {
@@ -99,7 +104,7 @@ public class PlayerPowerUps : MonoBehaviour
         tractorPURunTime = 0;
         isTractorPU = true;
         tractorPUTotalDuration = collision.GetComponent<TractorBeamPowerUp>().Duration;
-        Destroy(collision.gameObject);
+        DestroyPowerUpPickUp(collision);
     }
     private void StopTractorPUCD()
     {
@@ -126,7 +131,7 @@ public class PlayerPowerUps : MonoBehaviour
         shieldPURunTime = 0;
         isShieldPU = true;
         shieldPUTotalDuration = collision.GetComponent<ShieldPowerUp>().Duration;
-        Destroy(collision.gameObject);
+        DestroyPowerUpPickUp(collision);
     }
     private void StopShieldPUCD()
     {
@@ -153,7 +158,7 @@ public class PlayerPowerUps : MonoBehaviour
         healingPURunTime = 0;
         isHealingPU = true;
         healingPUTotalDuration = collision.GetComponent<HealPowerUp>().Duration;
-        Destroy(collision.gameObject);
+        DestroyPowerUpPickUp(collision);
     }
     private void StopHealingPUCD()
     {
@@ -175,7 +180,7 @@ public class PlayerPowerUps : MonoBehaviour
             BombPowerUp bombPowerUp = collision.GetComponent<BombPowerUp>();
             BombScript.BombAmount += bombPowerUp.NumberOfCharges;
 
-            Destroy(collision.gameObject);
+            DestroyPowerUpPickUp(collision);
         }
     }
 }

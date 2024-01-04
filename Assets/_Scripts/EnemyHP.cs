@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,11 @@ using UnityEngine;
 
 public class EnemyHP : MonoBehaviour
 {
-    [SerializeField] int maxHP = 1;
+    public event Action TookDamage;
+    public event Action Healed;
+
+    [SerializeField] bool destroyOnCollision = true;
+    [field:SerializeField] public int MaxHP { get; private set; } = 1;
 
     int currentHP;
     int lastFrameHP;
@@ -16,25 +21,29 @@ public class EnemyHP : MonoBehaviour
 
     void Start()
     {
-        currentHP = maxHP;
+        currentHP = MaxHP;
     }
 
-    void LateUpdate()
+    void Update()
     {
-        //if (lastFrameHP != currentHP & type == Type.Player)
-        //{
-        //    Debug.Log("HP Difference: " + (currentHP - lastFrameHP));
-        //}
-
-        if (currentHP <= 0)
+        if (lastFrameHP > currentHP)
         {
-            if (GetComponent<AsteroidSplit>() != null)
-                GetComponent<AsteroidSplit>().Split();
+            TookDamage?.Invoke();
+        }
+        else if (lastFrameHP > currentHP)
+        {
+            Healed?.Invoke();
+        }
 
-            if (GetComponent<EnemyDropDealer>() != null)
-                GetComponent<EnemyDropDealer>().SpawnDrops();
+            if (currentHP <= 0)
+        {
+                if (TryGetComponent(out AsteroidSplit split))
+                    split.Split();
 
-            Destroy(gameObject);
+                if (TryGetComponent(out EnemyDropDealer dropDealer))
+                    dropDealer.SpawnDrops();
+
+                Destroy(gameObject);
         }
 
         lastFrameHP = currentHP;
@@ -44,9 +53,9 @@ public class EnemyHP : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Enemy hit by player
-        if (collision.GetComponent<PlayerLaserDamage>() != null & lastCollisionHash != collision.gameObject.GetHashCode())
+        if (collision.TryGetComponent(out PlayerLaserDamage laserDamage) & lastCollisionHash != collision.gameObject.GetHashCode())
         {
-            ChangeHP (-Mathf.Abs(collision.GetComponent<PlayerLaserDamage>().Damage));
+            ChangeHP (-Mathf.Abs(laserDamage.Damage));
             lastCollisionHash = collision.gameObject.GetHashCode();            
         }
      }
@@ -55,16 +64,18 @@ public class EnemyHP : MonoBehaviour
     {
         //Deal with enemy collision
         
-        if(GetComponent<EnemyDropDealer>() != null)
-            GetComponent<EnemyDropDealer>().SpawnDrops();
-        Destroy(gameObject);
+        if(TryGetComponent(out EnemyDropDealer dropDealer))
+            dropDealer.SpawnDrops();
+
+        if(destroyOnCollision)
+            ChangeHP(-MaxHP);
                
     }
 
     public void ChangeHP(int value)
     {
         currentHP += value;
-        if (CurrentHP > maxHP) currentHP = maxHP;
+        if (CurrentHP > MaxHP) currentHP = MaxHP;
         else if (CurrentHP <= 0) currentHP = 0;
     }
 
