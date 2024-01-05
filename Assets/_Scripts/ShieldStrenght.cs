@@ -18,69 +18,67 @@ public class ShieldStrenght : MonoBehaviour
 
     public int MaxStr;
     public int CurrentStr;
-    public bool HasStrChanged;
 
     int lastFrameStr;
 
     Collider2D coll;
-    PlayerUpgradesManager upgradesManager;
+    ShieldScript shieldScript;
 
-    private IEnumerator Start()
+    private void Awake()
     {
         coll = GetComponent<Collider2D>();
-        upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
-        SetShieldValues(this, shieldSide);
-        CurrentRegenTime = baseRegenTime;
-        CurrentStr = MaxStr;
-
-        yield return new WaitForEndOfFrame();       
-
-        FindObjectOfType<ShieldScript>().ShieldAlphaSetter(this);
+        shieldScript = transform.parent.GetComponent<ShieldScript>();
     }
 
-    void LateUpdate()
+    private void OnEnable()
+    {
+        SetShieldStartingValues(shieldSide);
+        CurrentRegenTime = baseRegenTime;
+        CurrentStr = MaxStr;
+    }
+
+    void Update()
     {
         CurrentRegenTime = baseRegenTime * RegenMod;
 
-        HasStrChanged = (CurrentStr != lastFrameStr) ? true : false;
-
-        if(HasStrChanged)
+        if(CurrentStr != lastFrameStr)
         {
-            if(CurrentStr == 0 )
-            {
+            if (CurrentStr == 0)
                 coll.enabled = false;
-            }
             else
-            {
                 coll.enabled = true;
-            }
+
+            shieldScript.ShieldAlphaSetter(this);
         }
 
         lastFrameStr = CurrentStr;
     }
 
-    void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades)
+    void SetShieldStartingValues(ShieldUpgrades shieldUpgrades)
     {
-        shield.MaxStr = upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
-        shield.baseRegenTime = upgradesManager.ShieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
+        MaxStr = PlayerUpgradesManager.Instance.ShieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
+        baseRegenTime = PlayerUpgradesManager.Instance.ShieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
+        Color defaultColor = GetComponent<SpriteRenderer>().color;
+        float alpha = PlayerUpgradesManager.Instance.ShieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].AlphaAtThisStr;
+        GetComponent<SpriteRenderer>().color = new(defaultColor.r, defaultColor.g, defaultColor.b, alpha);
     }
     
-    public void SetShieldValues(ShieldStrenght shield, ShieldSide shieldSide)
+    void SetShieldStartingValues(ShieldSide shieldSide)
     {
         if (shieldSide == ShieldSide.Front)
-            SetShieldValues(shield, upgradesManager.CurrentUpgrades.FrontShieldUpgrades);
+            SetShieldStartingValues(PlayerUpgradesManager.Instance.CurrentUpgrades.FrontShieldUpgrades);
         else if (shieldSide == ShieldSide.Back)
-            SetShieldValues(shield, upgradesManager.CurrentUpgrades.BackShieldUpgrades);
+            SetShieldStartingValues(PlayerUpgradesManager.Instance.CurrentUpgrades.BackShieldUpgrades);
         else if (shieldSide == ShieldSide.Right)
-            SetShieldValues(shield, upgradesManager.CurrentUpgrades.RightShieldUpgrades);
+            SetShieldStartingValues(PlayerUpgradesManager.Instance.CurrentUpgrades.RightShieldUpgrades);
         else if (shieldSide == ShieldSide.Left)
-            SetShieldValues(shield, upgradesManager.CurrentUpgrades.LeftShieldUpgrades);
+            SetShieldStartingValues(PlayerUpgradesManager.Instance.CurrentUpgrades.LeftShieldUpgrades);
     }
 
     int lastCollisionHash = 0;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<CollisionWithPlayer>() != null & lastCollisionHash != collision.gameObject.GetHashCode())
+        if (collision.gameObject.GetComponent<CollisionWithPlayer>() != null && lastCollisionHash != collision.gameObject.GetHashCode())
         {
             CurrentStr -= collision.gameObject.GetComponent<CollisionWithPlayer>().Damage;
             lastCollisionHash = collision.gameObject.GetHashCode();

@@ -22,6 +22,8 @@ public class PlayerLasers : MonoBehaviour
 
     void Update()
     {
+        if (PauseScript.isPaused) return;
+
         FrontLasersShoot();
         SpreadLaserShoot();
         SideLasersShoot();
@@ -32,18 +34,17 @@ public class PlayerLasers : MonoBehaviour
     bool justFiredLeftFrontLaser = false;
     void FrontLasersShoot()
     {
-        Material laserMaterial = upgradesManager.LaserUpgradesInfo.PowerUpgrades[upgradesManager.CurrentUpgrades.FrontLaserUpgrades.CadencyLevel-1].Material;
         bool IsFrontShotActivated = upgradesManager.CurrentUpgrades.FrontLaserUpgrades.Enabled;
         float frontLaserCD = 
             upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.FrontLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
         
-        if (IsFrontShotActivated & !justFiredLeftFrontLaser & (Input.IsAutoFire | Input.IsFiring) & timeSinceFrontLaserShoot >= frontLaserCD)
+        if (IsFrontShotActivated && !justFiredLeftFrontLaser && (Input.IsAutoFire || Input.IsFiring) && timeSinceFrontLaserShoot >= frontLaserCD)
         {
             InstantiateLaser(frontLaserParents[0], upgradesManager.CurrentUpgrades.FrontLaserUpgrades);
             timeSinceFrontLaserShoot = 0;
             justFiredLeftFrontLaser = true;
         }
-        else if (IsFrontShotActivated & justFiredLeftFrontLaser & (Input.IsAutoFire | Input.IsFiring) & timeSinceFrontLaserShoot > frontLaserCD)
+        else if (IsFrontShotActivated && justFiredLeftFrontLaser && (Input.IsAutoFire || Input.IsFiring) && timeSinceFrontLaserShoot > frontLaserCD)
         {
             InstantiateLaser(frontLaserParents[1], upgradesManager.CurrentUpgrades.FrontLaserUpgrades);
 
@@ -61,14 +62,14 @@ public class PlayerLasers : MonoBehaviour
         float spreadLaserCD =
             upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.SpreadLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
 
-        if (IsSpreadShotActivated & !justFiredRightSpreadLaser & (Input.IsAutoFire | Input.IsFiring) & timeSinceSpreadLaserShoot >= spreadLaserCD)
+        if (IsSpreadShotActivated && !justFiredRightSpreadLaser && (Input.IsAutoFire || Input.IsFiring) && timeSinceSpreadLaserShoot >= spreadLaserCD)
         {
             InstantiateLaser(spreadLaserParents[1], upgradesManager.CurrentUpgrades.SpreadLaserUpgrades);
 
             timeSinceSpreadLaserShoot = 0;
             justFiredRightSpreadLaser = true;
         }
-        else if (IsSpreadShotActivated & justFiredRightSpreadLaser & (Input.IsAutoFire | Input.IsFiring) & timeSinceSpreadLaserShoot >= spreadLaserCD)
+        else if (IsSpreadShotActivated & justFiredRightSpreadLaser & (Input.IsAutoFire || Input.IsFiring) & timeSinceSpreadLaserShoot >= spreadLaserCD)
         {
 
             InstantiateLaser(spreadLaserParents[0], upgradesManager.CurrentUpgrades.SpreadLaserUpgrades);
@@ -87,14 +88,14 @@ public class PlayerLasers : MonoBehaviour
         float sideLaserCD =
             upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.SideLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
 
-        if (IsSideShotActivated & !justFiredLeftSideLaser & (Input.IsAutoFire | Input.IsFiring) & timeSinceSideLaserShoot >= sideLaserCD)
+        if (IsSideShotActivated && !justFiredLeftSideLaser && (Input.IsAutoFire || Input.IsFiring) && timeSinceSideLaserShoot >= sideLaserCD)
         {
             InstantiateLaser(sideLaserParents[0], upgradesManager.CurrentUpgrades.SideLaserUpgrades);
 
             timeSinceSideLaserShoot = 0;
             justFiredLeftSideLaser = true;
         }
-        else if (IsSideShotActivated & justFiredLeftSideLaser & (Input.IsAutoFire | Input.IsFiring) & timeSinceSideLaserShoot > sideLaserCD)
+        else if (IsSideShotActivated && justFiredLeftSideLaser && (Input.IsAutoFire || Input.IsFiring) && timeSinceSideLaserShoot > sideLaserCD)
         {
             InstantiateLaser(sideLaserParents[1], upgradesManager.CurrentUpgrades.SideLaserUpgrades);
 
@@ -112,14 +113,14 @@ public class PlayerLasers : MonoBehaviour
         float backLaserCD =
             upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.BackLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
 
-        if (IsBackShotActivated & !justFiredRightBackLaser & (Input.IsAutoFire | Input.IsFiring) & timeSinceBackLaserShoot >= backLaserCD)
+        if (IsBackShotActivated && !justFiredRightBackLaser && (Input.IsAutoFire || Input.IsFiring) && timeSinceBackLaserShoot >= backLaserCD)
         {
             InstantiateLaser(backLaserParents[1], upgradesManager.CurrentUpgrades.BackLaserUpgrades);
 
             timeSinceBackLaserShoot = 0;
             justFiredRightBackLaser = true;
         }
-        else if (IsBackShotActivated & justFiredRightBackLaser & (Input.IsAutoFire | Input.IsFiring) & timeSinceBackLaserShoot >= backLaserCD)
+        else if (IsBackShotActivated && justFiredRightBackLaser && (Input.IsAutoFire || Input.IsFiring) && timeSinceBackLaserShoot >= backLaserCD)
         {
             InstantiateLaser(backLaserParents[0], upgradesManager.CurrentUpgrades.BackLaserUpgrades);
 

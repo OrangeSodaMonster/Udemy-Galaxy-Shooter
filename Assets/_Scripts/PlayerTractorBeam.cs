@@ -20,6 +20,7 @@ public class PlayerTractorBeam : MonoBehaviour
     float puRadiusMod = 1;
     float maxAtractionSpeedMod = 1;
     float timeToMaxSpeedMod = 1;
+    float textureSpeedMod = 1;
 
     PlayerUpgradesManager upgradesManager;
 
@@ -27,7 +28,6 @@ public class PlayerTractorBeam : MonoBehaviour
     {
         defaultScale = transform.localScale;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        defaultTextureSpeed = spriteRenderer.material.GetFloat("_Speed");
         defaultColor = spriteRenderer.color;
         coll = GetComponent<Collider2D>();
     }
@@ -48,6 +48,7 @@ public class PlayerTractorBeam : MonoBehaviour
         transform.localScale = defaultScale * radiusMod * puRadiusMod;
         MaxPullSpeed = baseMaxPullSpeed * maxAtractionSpeedMod;
         TimeToMaxPullSpeed = baseTimeToMaxPullSpeed * timeToMaxSpeedMod;
+        spriteRenderer.material.SetFloat("_Speed", defaultTextureSpeed * textureSpeedMod);
     }
 
     void UpdateValues()
@@ -56,6 +57,7 @@ public class PlayerTractorBeam : MonoBehaviour
         baseMaxPullSpeed = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].MaxPullSpeed;
         baseTimeToMaxPullSpeed = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].TimeToMaxPull;
         defaultAlpha = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].Alpha;
+        defaultTextureSpeed = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].TextureSpeed;
     }
 
     void SetEnabled()
@@ -69,8 +71,8 @@ public class PlayerTractorBeam : MonoBehaviour
         this.puRadiusMod = puRadiusMod;
         maxAtractionSpeedMod = atractionMod;
         this.timeToMaxSpeedMod = timeToMaxSpeedMod;
+        this.textureSpeedMod = textureSpeedMod;
 
-        spriteRenderer.material.SetFloat("_Speed", defaultTextureSpeed * textureSpeedMod);
         spriteRenderer.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, newAlpha);
     }
 
@@ -79,8 +81,8 @@ public class PlayerTractorBeam : MonoBehaviour
         puRadiusMod = 1;
         maxAtractionSpeedMod = 1;
         timeToMaxSpeedMod = 1;
+        textureSpeedMod = 1;
 
-        spriteRenderer.material.SetFloat("_Speed", defaultTextureSpeed);
         spriteRenderer.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultAlpha);
     }
 }

@@ -16,9 +16,6 @@ public class ShieldScript : MonoBehaviour
     [SerializeField] ShieldStrenght backShield;
     [SerializeField] ShieldStrenght leftShield;
 
-    [Header("Shield Alpha (1, 2, 3, 4, 5)")]
-    [SerializeField] float[] strAlphas;
-
     PlayerUpgradesManager upgradesManager;
     Transform player;
     Color defaultColor;
@@ -29,7 +26,8 @@ public class ShieldScript : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<PlayerMove>().transform;
-        upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
+        //upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
+        upgradesManager = PlayerUpgradesManager.Instance;
         defaultColor = frontShield.GetComponent<SpriteRenderer>().color;
 
         frontShield = frontShield.GetComponent<ShieldStrenght>();
@@ -50,7 +48,6 @@ public class ShieldScript : MonoBehaviour
         FollowPlayer();
         SetShieldsValues();
         SetPartsActivateStatus();
-        SetAlphas();
     }
     
     IEnumerator ShieldRegen(ShieldStrenght shieldStr)
@@ -59,7 +56,7 @@ public class ShieldScript : MonoBehaviour
         {
             yield return new WaitForSeconds(shieldStr.CurrentRegenTime);
 
-            shieldStr.CurrentStr++;
+            shieldStr.CurrentStr += 5;
             if (shieldStr.CurrentStr > (int)Mathf.Ceil(shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100)))
                 shieldStr.CurrentStr = (int)Mathf.Ceil(shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100));
         } while (true);
@@ -68,22 +65,13 @@ public class ShieldScript : MonoBehaviour
     public void ShieldAlphaSetter(ShieldStrenght shieldStr)
     {
         float str = shieldStr.CurrentStr;
-        float alpha;
+        float alpha = 0;
 
-        if (str <= 0)
-            alpha = 0;
-        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[0].Strenght)
-            alpha = strAlphas[0];
-        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[1].Strenght)
-            alpha = strAlphas[1];
-        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[2].Strenght)
-            alpha = strAlphas[2];
-        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[3].Strenght)
-            alpha = strAlphas[3];
-        else if (str <= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[4].Strenght)
-            alpha = strAlphas[4];
-        else 
-            alpha = strAlphas[5];
+        for (int i = 0; i < upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades.Length; i++)
+        {
+            if (str >= upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[i].Strenght)
+                alpha = upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[i].AlphaAtThisStr;
+        }
         
         alpha += PowerUpAddeAlpha;
         if (alpha > 1) alpha = 1;
@@ -91,16 +79,7 @@ public class ShieldScript : MonoBehaviour
         shieldStr.GetComponent<SpriteRenderer>().color = new Color (defaultColor.r, defaultColor.g, defaultColor.b, alpha);
     }
 
-    void SetAlphas()
-    {
-        if (frontShield.HasStrChanged) ShieldAlphaSetter(frontShield);
-        if (rightShield.HasStrChanged) ShieldAlphaSetter(rightShield);
-        if (backShield.HasStrChanged) ShieldAlphaSetter(backShield);
-        if (leftShield.HasStrChanged) ShieldAlphaSetter(leftShield);
-    }
-
-
-    void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades)
+    public void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades)
     {
         shield.MaxStr = upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
         shield.baseRegenTime = upgradesManager.ShieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;

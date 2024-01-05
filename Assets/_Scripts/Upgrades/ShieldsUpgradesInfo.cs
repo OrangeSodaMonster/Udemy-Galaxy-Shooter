@@ -8,6 +8,7 @@ public struct ShieldStrenghtUpgrade
 {
     public ResourceNumber[] Cost;
     public int Strenght;
+    public float AlphaAtThisStr;
 }
 [Serializable]
 public struct ShieldRecoveryUpgrade

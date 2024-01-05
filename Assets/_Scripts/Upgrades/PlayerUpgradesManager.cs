@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerUpgradesManager : MonoBehaviour
@@ -12,9 +13,12 @@ public class PlayerUpgradesManager : MonoBehaviour
     [field: SerializeField] public DroneUpgradeInfo DroneUpgradesInfo  { get; private set; }
     [field: SerializeField] public ShipUpgradesInfo ShipUpgradesInfo { get; private set; }
 
+    public static PlayerUpgradesManager Instance;
+
 
     void Awake()
     {
+        Instance = this;
         ResedCurrentUpgrades();
     }
 

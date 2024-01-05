@@ -13,6 +13,7 @@ public class InputSO : ScriptableObject
     public bool IsFiringMissiles;
     public bool IsSpecialing;
     public bool IsAutoFire = false;
+    public bool IsPausing = false;
 
     public void GetAcceleration(InputAction.CallbackContext context)
     {
@@ -64,11 +65,23 @@ public class InputSO : ScriptableObject
         //if (IsSpecialing) { Debug.Log("Specialing"); }
     }
 
+    public void GetPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            IsPausing = true;
+        }
+        else if (context.canceled)
+        {
+            IsPausing = false;
+        }
+    }
+
     public void GetAutoFire(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             IsAutoFire = !IsAutoFire;
         }
-    }
+    }    
 }

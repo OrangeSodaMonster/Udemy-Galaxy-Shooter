@@ -80,6 +80,15 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""35b88c02-4cda-41ba-bbf4-d95158cf5a75"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -311,6 +320,28 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""SetAutoFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d12d9537-10e7-41b9-8ecf-f52efe11a51c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6918d480-ef67-479d-9325-e851b070815e"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -904,6 +935,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         m_Player_FireMissile = m_Player.FindAction("FireMissile", throwIfNotFound: true);
         m_Player_Special = m_Player.FindAction("Special", throwIfNotFound: true);
         m_Player_SetAutoFire = m_Player.FindAction("SetAutoFire", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -983,6 +1015,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_FireMissile;
     private readonly InputAction m_Player_Special;
     private readonly InputAction m_Player_SetAutoFire;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @UdemyGalaxyShooter m_Wrapper;
@@ -993,6 +1026,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         public InputAction @FireMissile => m_Wrapper.m_Player_FireMissile;
         public InputAction @Special => m_Wrapper.m_Player_Special;
         public InputAction @SetAutoFire => m_Wrapper.m_Player_SetAutoFire;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1020,6 +1054,9 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
             @SetAutoFire.started += instance.OnSetAutoFire;
             @SetAutoFire.performed += instance.OnSetAutoFire;
             @SetAutoFire.canceled += instance.OnSetAutoFire;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1042,6 +1079,9 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
             @SetAutoFire.started -= instance.OnSetAutoFire;
             @SetAutoFire.performed -= instance.OnSetAutoFire;
             @SetAutoFire.canceled -= instance.OnSetAutoFire;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1230,6 +1270,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         void OnFireMissile(InputAction.CallbackContext context);
         void OnSpecial(InputAction.CallbackContext context);
         void OnSetAutoFire(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
