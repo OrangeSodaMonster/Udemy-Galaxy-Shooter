@@ -98,7 +98,7 @@ public class PlayerPowerUps : MonoBehaviour
         if (!isTractorPU)
         {
            TractorBeamPowerUp tractorPU = collision.GetComponent<TractorBeamPowerUp>();
-           tractorBeam.PowerUpStart(tractorPU.NewColorAlpha, tractorPU.RadiusMod, tractorPU.MaxAtractionSpeedMod, tractorPU.TimeToMaxSpeedMod, tractorPU.TextureSpeedMod);
+           tractorBeam.PowerUpStart(tractorPU.NewColorAlpha, tractorPU.RadiusMod, tractorPU.PullForceMod, tractorPU.TextureSpeedMod);
         }
 
         tractorPURunTime = 0;

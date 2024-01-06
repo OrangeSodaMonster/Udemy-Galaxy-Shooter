@@ -31,8 +31,7 @@ public struct ShipTractorBeamUpgrade
 {
     public ResourceNumber[] Cost;
     public float RadiusMod;
-    public float MaxPullSpeed;
-    public float TimeToMaxPull;
+    public float PullForce;
     public float Alpha;
     public float TextureSpeed;
 }

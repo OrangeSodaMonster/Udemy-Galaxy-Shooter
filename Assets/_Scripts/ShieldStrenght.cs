@@ -95,8 +95,11 @@ public class ShieldStrenght : MonoBehaviour
     {
         if (lastCollisionHash != collision.gameObject.GetHashCode())
         {   
-            CurrentStr -= collision.GetComponent<EnemyWeaponDamage>().Damage;
-            lastCollisionHash = collision.gameObject.GetHashCode();
+            if(TryGetComponent(out EnemyWeaponDamage weaponDamage))
+            {
+                CurrentStr -= weaponDamage.Damage;
+                lastCollisionHash = collision.gameObject.GetHashCode();
+            }
             if (CurrentStr <= 0)
             {
                 PlayerHP.ChangePlayerHP(-Mathf.Abs(CurrentStr));

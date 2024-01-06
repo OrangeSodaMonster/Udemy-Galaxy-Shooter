@@ -14,6 +14,12 @@ public class AsteroidMove : MonoBehaviour
     [SerializeField] float moveDirVariation = 0.1f;
 
     Transform player;
+    Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
@@ -33,13 +39,9 @@ public class AsteroidMove : MonoBehaviour
         }
         else if (MoveDirection == Vector3.zero)
             MoveDirection = new Vector3(Random.value, Random.value, 0).normalized;
-    }
 
-    void Update()
-    {
-        transform.Translate(MoveDirection * MoveSpeed * Time.deltaTime,Space.World);       
+        rb.velocity = (MoveDirection) * MoveSpeed;
     }
-      
 
     private void OnDrawGizmos()
     {

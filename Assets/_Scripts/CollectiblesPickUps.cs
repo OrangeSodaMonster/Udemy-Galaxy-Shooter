@@ -19,15 +19,18 @@ public class CollectiblesPickUps : MonoBehaviour
     [SerializeField] float maxDriftMoveSpeed = 0.6f;
     [SerializeField] float timeDuration = 30f;
 
-    bool isDrifting = true;
     Vector3 driftDirection = Vector3.zero;
     float driftSpeed;
 
-    PlayerTractorBeam tractorBeam = null;
     Vector3 moveDir = Vector3.zero;
-    float maxAtractionSpeed = 2f;
-    float acceleration = 1f;
     float currentMoveSpeed = 0;
+
+    Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Start()
     {
@@ -36,36 +39,15 @@ public class CollectiblesPickUps : MonoBehaviour
         driftSpeed = Random.Range(minDriftMoveSpeed, maxDriftMoveSpeed);
         currentMoveSpeed = driftSpeed;
 
+        rb.velocity = currentMoveSpeed * moveDir;
+
         StartCoroutine(DestroyCD());
-    }
-
-    private void Update()
-    {
-        if (isDrifting)
-        {
-            currentMoveSpeed = Mathf.Clamp(currentMoveSpeed - acceleration * Time.deltaTime, driftSpeed, maxAtractionSpeed);
-        }
-        else
-        {
-            currentMoveSpeed = Mathf.Clamp(currentMoveSpeed + acceleration * Time.deltaTime, driftSpeed, maxAtractionSpeed);
-            moveDir = tractorBeam.transform.position - transform.position;
-        }
-
-        transform.Translate(moveDir * currentMoveSpeed * Time.deltaTime, Space.World);
 
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "TractorBeam")
-        {
-            isDrifting = false;
-            tractorBeam = collision.GetComponent<PlayerTractorBeam>();
-            maxAtractionSpeed = tractorBeam.MaxPullSpeed;
-            acceleration = tractorBeam.MaxPullSpeed/tractorBeam.TimeToMaxPullSpeed;
-        }
-        else
+        if(collision.GetComponent<PlayerMove>() != null)
         {
             switch (type)
             {
@@ -84,12 +66,7 @@ public class CollectiblesPickUps : MonoBehaviour
             }
 
             Destroy(gameObject);
-        }        
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        isDrifting = true;
+        }
     }
 
     IEnumerator DestroyCD()
