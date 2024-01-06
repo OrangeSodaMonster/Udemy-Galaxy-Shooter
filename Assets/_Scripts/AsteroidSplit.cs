@@ -74,4 +74,17 @@ public class AsteroidSplit : MonoBehaviour
             EnemySpawn.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed);
         } 
     }
+    public void Split(Transform parent)
+    {
+        for (int i = 0; i < spawnPos.Length; i++)
+        {
+            spawnPos[i] = transform.position + (Quaternion.AngleAxis((-120+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
+
+            float angleVariance = Mathf.Abs(Random.Range(-newDirectionVariance, newDirectionVariance) + baseNewDirectionAngle);
+            newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
+            float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed, moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
+
+            EnemySpawn.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, parent);
+        }
+    }
 }

@@ -10,6 +10,12 @@ public struct EnemiesToSpawn
     public GameObject enemy;
     public float spawnWeight;
 }
+[Serializable]
+public struct EnemiesToSpawnByTime
+{
+    public GameObject enemy;
+    public float timeSec;
+}
 
 public class EnemySpawn : MonoBehaviour
 {
@@ -19,6 +25,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] float baseSpawnCD = 1;
     [SerializeField] float spawnCDVariationPerc = 50f;
     [SerializeField] EnemiesToSpawn[] enemiesToSpawn;
+    [SerializeField] EnemiesToSpawnByTime[] enemiesToSpawnByTime;
 
     float totalSpawnWeight = 0;
     Vector2 nextSpawnDirection;
@@ -46,6 +53,11 @@ public class EnemySpawn : MonoBehaviour
         foreach (var enemy in enemiesToSpawn)
         {
             totalSpawnWeight += enemy.spawnWeight;
+        }
+
+        foreach (var spawn in enemiesToSpawnByTime)
+        {
+            StartCoroutine(SpawnByTime(spawn.enemy, spawn.timeSec));
         }
     }
 
@@ -80,10 +92,27 @@ public class EnemySpawn : MonoBehaviour
         timeSinceLastSpawn += Time.deltaTime;
     }
 
+    IEnumerator SpawnByTime(GameObject enemy, float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        nextSpawnPoint = nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius);
+        Instantiate(enemy, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
+    }
+
     public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed)
     {
         GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0,360), Vector3.forward), enemyParentStatic);
         if(newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
+        {
+            asteroidMove.MoveDirection = moveDirection;
+            asteroidMove.MoveSpeed = speed;
+        }
+    }
+    public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, Transform parent)
+    {
+        GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward), parent);
+        if (newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
         {
             asteroidMove.MoveDirection = moveDirection;
             asteroidMove.MoveSpeed = speed;

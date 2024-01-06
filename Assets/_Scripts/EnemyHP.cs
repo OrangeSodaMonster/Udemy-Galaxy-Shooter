@@ -35,15 +35,20 @@ public class EnemyHP : MonoBehaviour
             Healed?.Invoke();
         }
 
-            if (currentHP <= 0)
+        if (currentHP <= 0)
         {
-                if (TryGetComponent(out AsteroidSplit split))
+            if (TryGetComponent(out AsteroidSplit split))
+            {
+                if (transform.parent.GetComponent<ObjectiveSpawnArrow>() != null)
+                    split.Split(transform.parent);
+                else
                     split.Split();
+            }
 
-                if (TryGetComponent(out EnemyDropDealer dropDealer))
-                    dropDealer.SpawnDrops();
+            if (TryGetComponent(out EnemyDropDealer dropDealer))
+                dropDealer.SpawnDrops();
 
-                Destroy(gameObject);
+            Destroy(gameObject);
         }
 
         lastFrameHP = currentHP;

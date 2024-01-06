@@ -102,16 +102,21 @@ public class PlayerMove : MonoBehaviour
             turningTime += Time.fixedDeltaTime;
             float turningValue = turningTime / timeToMaxTurning;
             turningValue = Mathf.Clamp(turningValue, 0, 1);
-            //Debug.Log(turningSpeedCurve.Evaluate(turningValue));
 
-            rb.angularVelocity -= AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * Mathf.Sign(Input.Turning);            
-        }         
+            rb.angularVelocity -= AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * Mathf.Sign(Input.Turning);      
+            
+            // Apply deceleration when turning in the oposite direction, to turn faster and naturally
+            if(Mathf.Abs(rb.angularVelocity) > 0 && Mathf.Sign(rb.angularVelocity) == Mathf.Sign(Input.Turning))
+            {
+                rb.angularVelocity -= AngDeceleration * Time.fixedDeltaTime * Mathf.Sign(rb.angularVelocity);
+            }
+        }
 
         else //Angular Deceleration, greater when accelerating
         {
             turningTime = 0;
 
-            float l_decelFactor = AngDeceleration * acceleratingRotationMod * Time.fixedDeltaTime;
+            float l_decelFactor = AngDeceleration * Time.fixedDeltaTime;
             if (Input.Acceleration != 0)
                 l_decelFactor *= acceleratingRotationMod;
 

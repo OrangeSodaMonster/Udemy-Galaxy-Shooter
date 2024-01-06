@@ -8,7 +8,9 @@ public class EnemyHPBar : MonoBehaviour
 {
     [SerializeField] Transform hpPrefab;
     [SerializeField] Vector3 hpPositionOffset = new(0,1.6f,0);
+    public Vector3 PositionOffset => hpPositionOffset;
     [SerializeField] Color hpColor;
+    public Color Color => hpColor;
 
     Transform hpInstance;
     Slider hpBar;

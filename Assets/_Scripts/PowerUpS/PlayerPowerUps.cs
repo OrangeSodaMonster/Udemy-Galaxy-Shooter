@@ -38,12 +38,16 @@ public class PlayerPowerUps : MonoBehaviour
         StopTractorPUCD();
         StopShieldPUCD();
         StopHealingPUCD();
-    }    
+    }
 
+    int lastCollHash = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision != null & collision.gameObject.layer == 9)
+        if (collision != null && collision.gameObject.layer == 9 && collision.GetHashCode() != lastCollHash)
         {
+            lastCollHash = collision.GetHashCode();
+            StartCoroutine(CleanLastHash());
+
             if (collision.GetComponent<FasterShootingPowerUp>() != null)
                 StartFasterShooting(collision);
 
@@ -182,5 +186,12 @@ public class PlayerPowerUps : MonoBehaviour
 
             DestroyPowerUpPickUp(collision);
         }
+    }
+
+    IEnumerator CleanLastHash()
+    {
+        yield return new WaitForSeconds(1);
+
+        lastCollHash = 0;
     }
 }
