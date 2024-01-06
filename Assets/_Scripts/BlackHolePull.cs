@@ -24,7 +24,7 @@ public class BlackHolePull : MonoBehaviour
             {
                 objsToPull.Remove(rb);
                 return;
-            }
+            }            
 
             Vector2 direction = (transform.position - rb.transform.position).normalized;
 
@@ -40,10 +40,23 @@ public class BlackHolePull : MonoBehaviour
     {
        if (collision.TryGetComponent(out Rigidbody2D collRB))
             objsToPull.Add(collRB);
+
+       if (collision.TryGetComponent(out CollectiblesPickUps cp))
+        {
+            collRB.isKinematic = false;
+            collRB.interpolation = RigidbodyInterpolation2D.Extrapolate;
+            collRB.velocity = cp.CurrentMoveSpeed * cp.MoveDir;
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Rigidbody2D collRB) && objsToPull.Contains(collRB))      
             objsToPull.Remove(collRB);
+
+        if (collision.GetComponent<CollectiblesPickUps>() != null)
+        {
+            collRB.isKinematic = true;
+            collRB.interpolation = RigidbodyInterpolation2D.None;
+        }
     }
 }

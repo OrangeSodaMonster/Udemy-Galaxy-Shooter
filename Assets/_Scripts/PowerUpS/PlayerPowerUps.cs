@@ -9,7 +9,7 @@ public class PlayerPowerUps : MonoBehaviour
     float fasterShootingRunTime = float.MaxValue;
     float fasterShootingTotalDuration;
 
-    PlayerTractorBeam tractorBeam;
+    TractorBeamScript tractorBeam;
     bool isTractorPU = false;
     float tractorPURunTime = float.MaxValue;
     float tractorPUTotalDuration;
@@ -27,7 +27,7 @@ public class PlayerPowerUps : MonoBehaviour
     void Start()
     {
         playerWeapons = GetComponent<PlayerLasers>();
-        tractorBeam = GetComponentInChildren<PlayerTractorBeam>();
+        tractorBeam = GetComponentInChildren<TractorBeamScript>();
         shield = transform.parent.GetComponentInChildren<ShieldScript>();
         healing = GetComponent<PlayerHeal>();
     }

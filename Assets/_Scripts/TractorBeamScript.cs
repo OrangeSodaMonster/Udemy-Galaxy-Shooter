@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTractorBeam : MonoBehaviour
+public class TractorBeamScript : MonoBehaviour
 {
     [SerializeField] float radiusMod = 1f;  // Base radius = scale
     [SerializeField] float basePullForce = 3f;
     public float TotalPullForce;
-    public float TimeToMaxPullSpeed = .5f;
+    public float TimeToMaxPullSpeed = 2f;
 
     Vector3 defaultScale;
     float defaultAlpha;
@@ -16,7 +16,7 @@ public class PlayerTractorBeam : MonoBehaviour
     Color defaultColor;
     Collider2D coll;
     List<Rigidbody2D> collectiblesToPull = new List<Rigidbody2D>();
-
+    float radius;
     float puRadiusMod = 1;
     float pullForceMod = 1;
     float textureSpeedMod = 1;
@@ -33,6 +33,9 @@ public class PlayerTractorBeam : MonoBehaviour
 
     private void Start()
     {
+        radius = GetComponent<CircleCollider2D>().radius;
+        radius *= transform.lossyScale.x;
+
         upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
 
         SetEnabled();
@@ -46,40 +49,38 @@ public class PlayerTractorBeam : MonoBehaviour
 
         transform.localScale = defaultScale * radiusMod * puRadiusMod;        
         spriteRenderer.material.SetFloat("_Speed", defaultTextureSpeed * textureSpeedMod);
+        TotalPullForce = basePullForce * pullForceMod;
     }
 
-    void FixedUpdate()
-    {
-        foreach (var rb in collectiblesToPull)
-        {
-            if (rb == null)
-            {
-                collectiblesToPull.Remove(rb);
-                return;
-            }
+    // apenas quando os collectibles são dinâmicos (em um buraco negro por exemplo)
+    //void FixedUpdate()
+    //{
+    //    foreach (var rb in collectiblesToPull)
+    //    {
+    //        if (rb == null || !rb.isKinematic)
+    //        {
+    //            collectiblesToPull.Remove(rb);
+    //            return;
+    //        }
 
-            Vector2 direction = (transform.position - rb.transform.position).normalized;
+    //        Vector2 direction = (transform.position - rb.transform.position).normalized;
 
-            TotalPullForce = basePullForce * pullForceMod;
-            //Vector2 perpendicularVector = new Vector2(direction.y, -direction.x).normalized;
-            //float perpendicularPullForce = Vector2.Dot(rb.velocity, perpendicularVector);
-            rb.AddForce(TotalPullForce * direction, ForceMode2D.Force);
-            //rb.AddForce(-TotalPullForce * perpendicularVector * 0.9f * Mathf.Abs(perpendicularPullForce), ForceMode2D.Force);
+    //        TotalPullForce = basePullForce * pullForceMod;
+    //        rb.AddForce(TotalPullForce * direction, ForceMode2D.Force);
+    //    }
+    //}
 
-            //rb.velocity = (direction * TotalPullForce);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<CollectiblesPickUps>() != null && collision.TryGetComponent(out Rigidbody2D collRB))
-            collectiblesToPull.Add(collRB);
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Rigidbody2D collRB) && collectiblesToPull.Contains(collRB))
-            collectiblesToPull.Remove(collRB);
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.GetComponent<CollectiblesPickUps>() != null && collision.TryGetComponent(out Rigidbody2D collRB)
+    //        && !collRB.isKinematic)
+    //        collectiblesToPull.Add(collRB);
+    //}
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.TryGetComponent(out Rigidbody2D collRB) && collectiblesToPull.Contains(collRB))
+    //        collectiblesToPull.Remove(collRB);
+    //}
 
     void UpdateValues()
     {
