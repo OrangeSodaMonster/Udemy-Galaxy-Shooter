@@ -1,113 +1,120 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using static Cinemachine.CinemachineTargetGroup;
 
 public class EnemyShipMove : MonoBehaviour
 {
-    [SerializeField] float baseSpeed = 4;
-    [SerializeField] float baseRotationSpeed = 60;
-    [SerializeField] float rotationSpeedVarPerc = 30;
+    [SerializeField] float distanceToKeep;
+    [SerializeField] float distanceToleranceFraction = .1f;
+    [SerializeField] float timeToMaxSpeed = 1;
+    [SerializeField] float maxXSpeed;
+    [SerializeField] float maxYSpeed;
+
+    [SerializeField] bool isRotating;
+    [SerializeField] bool rotateClockWise = true;
     [SerializeField] float rotationChangeTime = 6f;
     [SerializeField] float rotationChangeTimeVar = 3f;
-    [SerializeField] float timeToMaxSpeed = 1;
-    [SerializeField] float distanceToKeep = 9;
-    [SerializeField] float distanceTolerance = 0.7f;
-    [SerializeField] float distanceCheckFreq = 0.5f;
 
+    int rotateDirection = 1;
+    float currentMaxXSpeed;
     Transform player;
-    float currentSpeed = 0;
-    float acceleration = 0;
-    Vector3 moveDir = Vector3.zero;
-    float maxRotationSpeed = 0;
-    float currentRotationSpeed = 0;
-    float rotationAcceleration = 0;
+    Rigidbody2D playerRB;
+    Rigidbody2D rb;
+    Vector2 newVelocity;
     float timeToChangeRotation;
-    int rotationMod = 0; // -1, 0 ou 1.
-    int lastRotationMod = 0; 
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
-    {       
-        player = FindAnyObjectByType<PlayerMove>().transform;
+    {
+        player = FindObjectOfType<PlayerMove>().transform;
+        playerRB = player.GetComponent<Rigidbody2D>();
+        distanceToKeep *= distanceToKeep;
+        distanceToleranceFraction *= distanceToKeep;
 
-        currentSpeed = baseSpeed;
-        acceleration = baseSpeed / timeToMaxSpeed;
-
-        if (maxRotationSpeed == 0)
-            maxRotationSpeed = Mathf.Abs(Random.Range(baseRotationSpeed - baseRotationSpeed*(rotationSpeedVarPerc/100), baseRotationSpeed + baseRotationSpeed*(rotationSpeedVarPerc/100)));
-
-        rotationAcceleration = baseRotationSpeed / timeToMaxSpeed;
-        currentRotationSpeed = 0;
-
-        StartCoroutine(DistanceCheckFrequency());
         StartCoroutine(RotationCheckFrequency());
-        rotationMod = 0;
     }
 
-  
-    void Update()
+    void FixedUpdate()
     {
-        transform.up = player.position - transform.position;
+        if (rotateClockWise) rotateDirection = -1;
+        else rotateDirection = 1;
 
+        newVelocity = transform.InverseTransformDirection(rb.velocity);
+        currentMaxXSpeed = maxXSpeed + Vector2.Dot(transform.right, playerRB.velocity) * 0.5f;
+        float xAccel = currentMaxXSpeed / timeToMaxSpeed;
+        float yAccel = maxYSpeed / timeToMaxSpeed;
 
-        if(moveDir == Vector3.zero)
-            currentSpeed = 0;
-        else
-            currentSpeed = Mathf.Clamp(currentSpeed + acceleration * Time.deltaTime, 0, baseSpeed);
+        Vector2 toPlayerVector = (Vector2)player.position - rb.position;
+        rb.rotation = Vector2.SignedAngle(Vector2.up, toPlayerVector);
 
-        transform.Translate(moveDir.normalized * currentSpeed * Time.deltaTime, Space.World);
+        if (toPlayerVector.sqrMagnitude > distanceToKeep + distanceToleranceFraction)
+        {
+            //Debug.Log("Distancia enorme");
+            newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * Time.fixedDeltaTime, -maxYSpeed, maxYSpeed);
+        }    
+        else if (toPlayerVector.sqrMagnitude > distanceToKeep)
+        {
+            //Debug.Log("Média-Grande");
+            if (newVelocity.y > 0)
+                newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * 1.5f * Time.fixedDeltaTime, 0, maxYSpeed);
+            else if (newVelocity.y < 0)
+                newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * 1.5f * Time.fixedDeltaTime, -maxYSpeed, 0);
+        }    
+        else if (toPlayerVector.sqrMagnitude > distanceToKeep - distanceToleranceFraction)
+        {
+            //Debug.Log("Pequena");
+            if (newVelocity.y > 0)
+                newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * 1.5f * Time.fixedDeltaTime, 0, maxYSpeed);
+            else if (newVelocity.y < 0)
+                newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * 1.5f * Time.fixedDeltaTime, -maxYSpeed, 0);
+        }   
+        else if (toPlayerVector.sqrMagnitude < distanceToKeep - distanceToleranceFraction)
+        {
+            //Debug.Log("Mínima");
+            newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * Time.fixedDeltaTime * 1.5f , -maxYSpeed, maxYSpeed);
+        }
 
-
-        if (rotationMod != lastRotationMod)
-            currentRotationSpeed = 0;
-        else
-            currentRotationSpeed = Mathf.Clamp(currentRotationSpeed + rotationAcceleration * Time.deltaTime, 0, maxRotationSpeed);
-
-        transform.RotateAround(player.position, Vector3.forward, maxRotationSpeed * rotationMod * Time.deltaTime);
-
-        lastRotationMod = rotationMod;
+        if (!isRotating)
+        {
+            if (newVelocity.x > 0)
+                newVelocity.x = Mathf.Clamp(newVelocity.x - xAccel * Time.fixedDeltaTime, 0, currentMaxXSpeed);
+            else if (newVelocity.x < 0)
+                newVelocity.x = Mathf.Clamp(newVelocity.x + xAccel * Time.fixedDeltaTime, -currentMaxXSpeed, 0);
+        }
+        else   
+            newVelocity.x = Mathf.Clamp(newVelocity.x + xAccel * Time.fixedDeltaTime * rotateDirection, -currentMaxXSpeed, currentMaxXSpeed);
+       
+        rb.velocity = transform.TransformDirection(newVelocity);
     }
-
-    IEnumerator DistanceCheckFrequency()
-    {
-        do
-        {          
-            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-            if (distanceToPlayer <= distanceToKeep - distanceTolerance)
-            {
-                moveDir = -(player.position - transform.position);
-            }
-            else if (distanceToPlayer >= distanceToKeep + distanceTolerance)
-            {
-                moveDir = (player.position - transform.position);
-            }
-            else
-                moveDir = Vector3.zero;
-
-            yield return new WaitForSeconds(distanceCheckFreq);
-
-        } while (true);
-    }
-
     IEnumerator RotationCheckFrequency()
     {
-        do
+        while (true)
         {
-            float randomRotationState = Random.Range(0, 10);
-            if (randomRotationState <= 4)
-                rotationMod = -1;
-            else if (randomRotationState <= 8)
-                rotationMod = 1;
-            else
-                rotationMod = 0;
-
-            timeToChangeRotation = Random.Range(-rotationChangeTimeVar, rotationChangeTimeVar) + rotationChangeTime;
-            if (rotationMod == 0)
-                timeToChangeRotation *= 0.5f;
             yield return new WaitForSeconds(timeToChangeRotation);
 
-        } while (true);
+            float randomRotationState = Random.Range(0, 10);
+            if (randomRotationState <= 4)
+            {
+                rotateClockWise = true;
+                isRotating = true;
+            }
+            else if (randomRotationState <= 8)
+            {
+                rotateClockWise = false;
+                isRotating = true;
+            }
+            else
+                isRotating = false;
+
+            timeToChangeRotation = Random.Range(-rotationChangeTimeVar, rotationChangeTimeVar) + rotationChangeTime;
+            if (!isRotating)
+                timeToChangeRotation *= 0.4f;            
+
+        } 
     }
 }

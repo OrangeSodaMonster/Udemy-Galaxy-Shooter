@@ -27,7 +27,7 @@ public class LaserMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<BlackHolePull>() != null) return;
+        if (collision.GetComponent<BlackHolePull>() != null || collision.GetComponent<BlackHoleHorizon>() != null) return;
 
         DestroySequence();
     }

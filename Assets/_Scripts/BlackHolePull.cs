@@ -7,6 +7,9 @@ public class BlackHolePull : MonoBehaviour
 {
     [SerializeField] float pullMaxForce;
     [SerializeField] AnimationCurve pullCurve;
+    [field: SerializeField] public float CollectiblePullForce = 7;
+    [field: SerializeField] public float TimeToMaxPullCollec = 3;
+
 	List<Rigidbody2D> objsToPull = new List<Rigidbody2D>();
     float radius;
 
@@ -38,25 +41,12 @@ public class BlackHolePull : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       if (collision.TryGetComponent(out Rigidbody2D collRB))
+       if (collision.TryGetComponent(out Rigidbody2D collRB) && !collRB.isKinematic)
             objsToPull.Add(collRB);
-
-       if (collision.TryGetComponent(out CollectiblesPickUps cp))
-        {
-            collRB.isKinematic = false;
-            collRB.interpolation = RigidbodyInterpolation2D.Extrapolate;
-            collRB.velocity = cp.CurrentMoveSpeed * cp.MoveDir;
-        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Rigidbody2D collRB) && objsToPull.Contains(collRB))      
             objsToPull.Remove(collRB);
-
-        if (collision.GetComponent<CollectiblesPickUps>() != null)
-        {
-            collRB.isKinematic = true;
-            collRB.interpolation = RigidbodyInterpolation2D.None;
-        }
     }
 }

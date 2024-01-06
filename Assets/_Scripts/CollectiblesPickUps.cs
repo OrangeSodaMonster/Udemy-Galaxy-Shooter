@@ -18,16 +18,28 @@ public class CollectiblesPickUps : MonoBehaviour
     [SerializeField] float maxDriftMoveSpeed = 0.6f;
     [SerializeField] float timeDuration = 30f;
 
+    Rigidbody2D rb;
+
     bool isDrifting = true;
-    Vector3 driftDirection = Vector3.zero;
+    Vector2 driftDirection = Vector2.zero;
+    float currentDriftSpeed;
     float driftSpeed;
 
-    Rigidbody2D rb;
     TractorBeamScript tractorBeam = null;
-    public Vector3 MoveDir { get; private set; } = Vector3.zero;
-    float maxAtractionSpeed = 2f;
-    float acceleration = 1f;
-    public float CurrentMoveSpeed { get; private set; } = 0;
+    float maxAtractionSpeed;
+    float acceleration = 1;
+    bool isTractor;
+    float tractorCurrentPull;
+    Vector2 tractorVelocity = Vector2.zero;
+
+    BlackHolePull blackHole = null;
+    float bhMaxPullSpeed = 0;
+    float bhAccel = 0;
+    bool isBlackHole;
+    float bhCurrentPull;
+    Vector2 bhVelocity = Vector2.zero;
+
+    Vector2 moveVelocity = new();
 
     private void Awake()
     {
@@ -37,42 +49,63 @@ public class CollectiblesPickUps : MonoBehaviour
     private void OnEnable()
     {
         driftDirection = Random.insideUnitCircle.normalized;
-        MoveDir = driftDirection;
         driftSpeed = Random.Range(minDriftMoveSpeed, maxDriftMoveSpeed);
-        CurrentMoveSpeed = driftSpeed;
-        rb.isKinematic = true;
+        currentDriftSpeed = driftSpeed;
 
         StartCoroutine(DestroyCD());
     }
 
     private void Update()
     {
-        if (!(rb.isKinematic)) return;
+        if (!isBlackHole && !isTractor)
+            isDrifting = true;
 
         if (isDrifting)
         {
-            CurrentMoveSpeed = Mathf.Clamp(CurrentMoveSpeed - acceleration * Time.smoothDeltaTime, driftSpeed, maxAtractionSpeed);
+            currentDriftSpeed = Mathf.Clamp(currentDriftSpeed - acceleration * 0.35f * Time.smoothDeltaTime, driftSpeed, currentDriftSpeed);
+            moveVelocity = driftDirection * currentDriftSpeed;
         }
         else
         {
-            CurrentMoveSpeed = Mathf.Clamp(CurrentMoveSpeed + acceleration * Time.smoothDeltaTime, driftSpeed, maxAtractionSpeed);
-            MoveDir = tractorBeam.transform.position - transform.position;
+            if (isTractor)
+            {
+                tractorCurrentPull = Mathf.Clamp(tractorCurrentPull + acceleration * Time.smoothDeltaTime, driftSpeed, maxAtractionSpeed);                
+                tractorVelocity = tractorCurrentPull * (tractorBeam.transform.position - transform.position).normalized;
+            }
+            if(isBlackHole)
+            {
+                bhCurrentPull = Mathf.Clamp(bhCurrentPull + bhAccel * Time.smoothDeltaTime, driftSpeed, bhMaxPullSpeed);
+                bhVelocity = bhCurrentPull * (blackHole.transform.position - transform.position).normalized;
+            }
+
+            moveVelocity = tractorVelocity + bhVelocity;
+            driftDirection = (moveVelocity).normalized;
+            currentDriftSpeed = moveVelocity.magnitude;
         }
-
-        transform.Translate(CurrentMoveSpeed*Time.smoothDeltaTime*MoveDir, Space.World);
+      
+        //rb.MovePosition(rb.position + moveVelocity * Time.smoothDeltaTime);
+        transform.Translate(moveVelocity * Time.smoothDeltaTime, Space.World);
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<TractorBeamScript>() != null)
+        if(collision.GetComponent<BlackHolePull>() != null)
         {
+            blackHole = collision.GetComponent<BlackHolePull>();
             isDrifting = false;
+            bhMaxPullSpeed = blackHole.CollectiblePullForce;
+            bhAccel = bhMaxPullSpeed / blackHole.TimeToMaxPullCollec;
+            isBlackHole = true;
+        }
+        else if (collision.GetComponent<TractorBeamScript>() != null)
+        {
             tractorBeam = collision.GetComponent<TractorBeamScript>();
+            isDrifting = false;
             maxAtractionSpeed = tractorBeam.TotalPullForce;
             acceleration = tractorBeam.TotalPullForce/tractorBeam.TimeToMaxPullSpeed;
+            isTractor = true;
         }
-        else if (collision.GetComponent<PlayerMove>())
+        else if (collision.GetComponent<PlayerMove>() != null)
         {
             switch (type)
             {
@@ -96,7 +129,16 @@ public class CollectiblesPickUps : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isDrifting = true;
+        if(collision.GetComponent<BlackHolePull>()  != null)
+        {
+            isBlackHole = false;
+            bhCurrentPull = 0;
+        }
+        else if(collision.GetComponent<TractorBeamScript>() != null)
+        {
+            tractorCurrentPull = 0;
+            isTractor = false;
+        }
     }
 
     IEnumerator DestroyCD()
