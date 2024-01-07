@@ -61,8 +61,10 @@ public class AsteroidSplit : MonoBehaviour
 
     Vector3[] spawnPos = new Vector3[3];
     Vector3[] newMoveDir = new Vector3[3];
-    public void Split()
+    public void Split(int extraDamage)
     {
+        int[] damageToApply = CalculateDamageToApply(ref extraDamage);
+
         for (int i = 0; i < spawnPos.Length; i++)
         {
             spawnPos[i] = transform.position + (Quaternion.AngleAxis((-120+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
@@ -71,20 +73,43 @@ public class AsteroidSplit : MonoBehaviour
             newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
             float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed, moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
 
-            EnemySpawn.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed);
-        } 
-    }
-    public void Split(Transform parent)
-    {
-        for (int i = 0; i < spawnPos.Length; i++)
-        {
-            spawnPos[i] = transform.position + (Quaternion.AngleAxis((-120+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
-
-            float angleVariance = Mathf.Abs(Random.Range(-newDirectionVariance, newDirectionVariance) + baseNewDirectionAngle);
-            newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
-            float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed, moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
-
-            EnemySpawn.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, parent);
+            EnemySpawn.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, damageToApply[i]);
         }
+    }    
+
+    public void Split(int extraDamage, Transform parent)
+    {
+        int[] damageToApply = CalculateDamageToApply(ref extraDamage);
+
+        for (int i = 0; i < spawnPos.Length; i++)
+        {
+            spawnPos[i] = transform.position + (Quaternion.AngleAxis((-120+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
+
+            float angleVariance = Mathf.Abs(Random.Range(-newDirectionVariance, newDirectionVariance) + baseNewDirectionAngle);
+            newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
+            float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed, moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
+
+            EnemySpawn.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, damageToApply[i], parent);
+        }
+    }
+
+    private int[] CalculateDamageToApply(ref int extraDamage)
+    {
+        extraDamage = Mathf.Abs(extraDamage);
+        Debug.Log(extraDamage);
+        int[] damageToApply = new int[spawnPos.Length];
+
+        int i = Random.Range(0, spawnPos.Length);        
+        while (extraDamage >= 5)
+        {
+            damageToApply[i] += 5;
+            extraDamage -= 5;
+
+            i++;
+            if(i >= spawnPos.Length)
+                i = 0;
+        }
+        Debug.Log(damageToApply[0] + " " + damageToApply[1] + " " + damageToApply[2]);
+        return damageToApply;
     }
 }

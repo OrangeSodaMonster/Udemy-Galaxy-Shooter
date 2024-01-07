@@ -100,7 +100,7 @@ public class EnemySpawn : MonoBehaviour
         Instantiate(enemy, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
     }
 
-    public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed)
+    public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply)
     {
         GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0,360), Vector3.forward), enemyParentStatic);
         if(newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
@@ -108,14 +108,22 @@ public class EnemySpawn : MonoBehaviour
             asteroidMove.MoveDirection = moveDirection;
             asteroidMove.MoveSpeed = speed;
         }
+        if(damageToApply > 0 && newAsteroid.TryGetComponent(out EnemyHP asteroidHP))
+        {
+            asteroidHP.OnBirthDamage = damageToApply;
+        }
     }
-    public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, Transform parent)
+    public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply, Transform parent)
     {
         GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward), parent);
         if (newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
         {
             asteroidMove.MoveDirection = moveDirection;
             asteroidMove.MoveSpeed = speed;
+        }
+        if (damageToApply > 0 && newAsteroid.TryGetComponent(out EnemyHP asteroidHP))
+        {
+            asteroidHP.OnBirthDamage = damageToApply;
         }
     }
 

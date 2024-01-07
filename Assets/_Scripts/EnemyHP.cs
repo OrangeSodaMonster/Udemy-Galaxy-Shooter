@@ -8,6 +8,7 @@ public class EnemyHP : MonoBehaviour
 {
     public event Action TookDamage;
     public event Action Healed;
+    public int OnBirthDamage;
 
     [SerializeField] bool destroyOnCollision = true;
     [field:SerializeField] public int MaxHP { get; private set; } = 1;
@@ -21,7 +22,9 @@ public class EnemyHP : MonoBehaviour
 
     void Start()
     {
-        currentHP = MaxHP;
+        currentHP = MaxHP - OnBirthDamage;
+        Debug.Log("Birth Damage= " + OnBirthDamage);
+        lastFrameHP = MaxHP;
     }
 
     void Update()
@@ -39,10 +42,10 @@ public class EnemyHP : MonoBehaviour
         {
             if (TryGetComponent(out AsteroidSplit split))
             {
-                if (transform.parent.GetComponent<ObjectiveSpawnArrow>() != null)
-                    split.Split(transform.parent);
+                if (transform.parent != null && transform.parent.GetComponent<ObjectiveSpawnArrow>() != null)
+                    split.Split(currentHP, transform.parent);
                 else
-                    split.Split();
+                    split.Split(currentHP);
             }
 
             if (TryGetComponent(out EnemyDropDealer dropDealer))
@@ -81,7 +84,7 @@ public class EnemyHP : MonoBehaviour
     {
         currentHP += value;
         if (CurrentHP > MaxHP) currentHP = MaxHP;
-        else if (CurrentHP <= 0) currentHP = 0;
+        //else if (CurrentHP <= 0) currentHP = 0;
     }
 
     public void SetHP(int value)
