@@ -23,7 +23,7 @@ public class EnemyHP : MonoBehaviour
     void Start()
     {
         currentHP = MaxHP - OnBirthDamage;
-        Debug.Log("Birth Damage= " + OnBirthDamage);
+        //Debug.Log("Birth Damage= " + OnBirthDamage);
         lastFrameHP = MaxHP;
     }
 

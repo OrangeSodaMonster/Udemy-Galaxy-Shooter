@@ -15,7 +15,11 @@ MonoBehaviour:
   HP_Upgrade:
   - Cost: []
     HP: 50
-  - Cost: []
+  - Cost:
+    - ResourceType: 1
+      Amount: 4
+    - ResourceType: 3
+      Amount: 3
     HP: 60
   - Cost: []
     HP: 70
@@ -36,7 +40,11 @@ MonoBehaviour:
   SpeedUpgrade:
   - Cost: []
     Speed: 3
-  - Cost: []
+  - Cost:
+    - ResourceType: 1
+      Amount: 4
+    - ResourceType: 4
+      Amount: 2
     Speed: 3.36
   - Cost: []
     Speed: 3.72
@@ -51,7 +59,11 @@ MonoBehaviour:
     TurningSpeed: 180
     TimeToStop: 4
     TimeToStopRotating: 2
-  - Cost: []
+  - Cost:
+    - ResourceType: 1
+      Amount: 4
+    - ResourceType: 3
+      Amount: 1
     TurningSpeed: 184
     TimeToStop: 3.6
     TimeToStopRotating: 1.8
@@ -77,7 +89,11 @@ MonoBehaviour:
     PullForce: 3.5
     Alpha: 0.025
     TextureSpeed: 4
-  - Cost: []
+  - Cost:
+    - ResourceType: 1
+      Amount: 3
+    - ResourceType: 4
+      Amount: 1
     RadiusMod: 1.5
     PullForce: 4.2
     Alpha: 0.03
