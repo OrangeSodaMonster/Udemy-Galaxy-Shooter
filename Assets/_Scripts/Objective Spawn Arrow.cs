@@ -45,6 +45,8 @@ public class ObjectiveSpawnArrow : MonoBehaviour
 
     private void OnDisable()
     {
-        Destroy(arrow.gameObject);
+        fadeArrowTween.Kill();
+        if (arrow != null)
+            Destroy(arrow.gameObject);
     }
 }

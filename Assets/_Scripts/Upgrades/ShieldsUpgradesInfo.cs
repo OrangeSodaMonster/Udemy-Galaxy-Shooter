@@ -20,6 +20,7 @@ public struct ShieldRecoveryUpgrade
 [CreateAssetMenu(fileName = "ShieldUpgradesInfo", menuName = "MySOs/ShieldUpgradesInfo")]
 public class ShieldsUpgradesInfo : ScriptableObject
 {
+    public ResourceNumber UnlockCost;
     public ShieldStrenghtUpgrade[] StrenghtUpgrades;
     public ShieldRecoveryUpgrade[] RecoveryUpgrades;
 }

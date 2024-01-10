@@ -11,6 +11,7 @@ public class PlayerHeal : MonoBehaviour
     public bool isFreeHeal = false;
 
     PlayerUpgradesManager upgradesManager;
+    bool isHealing;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class PlayerHeal : MonoBehaviour
             currentSecondsBetweenHeal = baseSecondsBetweenHeal - GetHealIntervalReduction();
 
         // && PlayerHP.LastFrameHP >= PlayerHP.MaxHP
-        if (PlayerHP.LastFrameHP > PlayerHP.CurrentHP && !(PlayerHP.LastFrameHP < PlayerHP.MaxHP))
+        if (PlayerHP.CurrentHP <= PlayerHP.MaxHP - 5 && !isHealing)
         {
             //Debug.Log("Started heal rotine");
             StartCoroutine(HealRotine());
@@ -53,15 +54,18 @@ public class PlayerHeal : MonoBehaviour
 
     IEnumerator HealRotine()
     {
-        while (PlayerHP.CurrentHP < PlayerHP.MaxHP)
-        {            
+        while (PlayerHP.CurrentHP <= PlayerHP.MaxHP - 5)
+        {
+            isHealing = true;
+
             yield return new WaitForSeconds(currentSecondsBetweenHeal);
 
             if (isFreeHeal)
-                PlayerHP.ChangePlayerHP(+10);
+                PlayerHP.ChangePlayerHP(+5);
             else if (PlayerCollectiblesCount.ExpendResources(HealCost))
-                PlayerHP.ChangePlayerHP(+10);
+                PlayerHP.ChangePlayerHP(+5);
         }
+        isHealing = false;
     }
 
     public void PowerUpStart(float healCD)

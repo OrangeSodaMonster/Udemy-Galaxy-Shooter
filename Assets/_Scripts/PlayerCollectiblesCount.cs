@@ -39,9 +39,20 @@ public class PlayerCollectiblesCount : MonoBehaviour
     public int CristalView = 0;
     public int RareCristalView = 0;
 
+    private void Awake()
+    {
+        // REMOVER
+        MetalCrumbsAmount = MetalCrumbsView;
+        MetalAmount = MetalView;
+        RareMetalCrumbsAmount = RareMetalCrumbsView;
+        AlloyAmount = AlloyView;
+        EnergyCristalAmount = CristalView;
+        CondensedEnergyCristalAmount = RareCristalView;
+    }
+
     private void Start()
     {
-        StartCoroutine(TransmuteResourcesRotine());
+        StartCoroutine(TransmuteResourcesRotine());        
     }
 
     private void Update()

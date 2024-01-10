@@ -96,7 +96,7 @@ public class AsteroidSplit : MonoBehaviour
     private int[] CalculateDamageToApply(ref int extraDamage)
     {
         extraDamage = Mathf.Abs(extraDamage);
-        Debug.Log(extraDamage);
+        //Debug.Log(extraDamage);
         int[] damageToApply = new int[spawnPos.Length];
 
         int i = Random.Range(0, spawnPos.Length);        
@@ -109,7 +109,7 @@ public class AsteroidSplit : MonoBehaviour
             if(i >= spawnPos.Length)
                 i = 0;
         }
-        Debug.Log(damageToApply[0] + " " + damageToApply[1] + " " + damageToApply[2]);
+        //Debug.Log(damageToApply[0] + " " + damageToApply[1] + " " + damageToApply[2]);
         return damageToApply;
     }
 }

@@ -22,6 +22,7 @@ public struct LaserCadencyUpgrade
 [CreateAssetMenu(fileName = "LaserUpgradesInfo", menuName = "MySOs/LaserUpgradesInfo")]
 public class LaserUpgradesInfo : ScriptableObject
 {
+    public ResourceNumber[] UnlockCost;
     public LaserPowerUpgrade[] PowerUpgrades;
     public LaserCadencyUpgrade[] CadencyUpgrades;
 }

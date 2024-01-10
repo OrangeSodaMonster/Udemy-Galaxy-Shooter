@@ -10,6 +10,10 @@ public class PauseScript : MonoBehaviour
     [SerializeField] GraphicRaycaster raycaster;
     [SerializeField] InputSO input;
 
+    [Header("Upgrade Canvas")]
+    [SerializeField] RectTransform shipUpgradePage;
+    [SerializeField] RectTransform laserUpgradePage;
+
     public static bool isPaused;
     bool hasReleasedPause;
 
@@ -24,24 +28,51 @@ public class PauseScript : MonoBehaviour
     {
         if (hasReleasedPause && input.IsPausing && !isPaused)
         {
-            canvas.enabled = true;
-            scaler.enabled = true;
-            raycaster.enabled = true;
-            isPaused = true;
-            Time.timeScale = 0;
-            hasReleasedPause = false;
+            StartPause();
         }
         else if (hasReleasedPause && input.IsPausing && isPaused)
         {
-            canvas.enabled = false;
-            scaler.enabled = false;
-            raycaster.enabled = false;
-            isPaused = false;
-            Time.timeScale = 1;
-            hasReleasedPause = false;
+            LeavePause();
         }
 
         if (!input.IsPausing)
             hasReleasedPause = true;
     }
+
+    public void StartPause()
+    {
+        canvas.enabled = true;
+        scaler.enabled = true;
+        raycaster.enabled = true;
+        isPaused = true;
+        Time.timeScale = 0;
+        hasReleasedPause = false;
+    }
+
+    public void LeavePause()
+    {
+        canvas.enabled = false;
+        scaler.enabled = false;
+        raycaster.enabled = false;
+        isPaused = false;
+        Time.timeScale = 1;
+        hasReleasedPause = false;
+    }
+
+    public void EnableShipUpgradePage()
+    {
+        shipUpgradePage.gameObject.SetActive(true);
+        laserUpgradePage.gameObject.SetActive(false);
+    }
+    public void EnableLaserUpgradePage()
+    {
+        laserUpgradePage.gameObject.SetActive(true);
+        shipUpgradePage.gameObject.SetActive(false);
+    }
+    public void DisableUpgradePage()
+    {
+        shipUpgradePage.gameObject.SetActive(false);
+        laserUpgradePage.gameObject.SetActive(false);
+    }
+    
 }

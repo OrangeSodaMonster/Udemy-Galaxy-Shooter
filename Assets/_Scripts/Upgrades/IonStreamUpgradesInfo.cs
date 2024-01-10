@@ -37,6 +37,7 @@ public struct IonStreamHitNumUpgrade
 [CreateAssetMenu(fileName = "IonStreamUpgradesInfo", menuName = "MySOs/IonStreamUpgradesInfo")]
 public class IonStreamUpgradesInfo : ScriptableObject
 {    
+    public ResourceNumber UnlockCost;
     public IonStreamPowerUpgrade[] PowerUpgrades;
     public IonStreamCadencyUpgrade[] CadencyUpgrades;
     public IonStreamRangeUpgrade[] RangeUpgrades;

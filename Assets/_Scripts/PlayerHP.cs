@@ -91,6 +91,8 @@ public class PlayerHP : MonoBehaviour
 
     static public void ChangePlayerHP(int value)
     {
+        MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
+
         if (s_IsInvencible && value < 0) return;
 
         CurrentHP += value;

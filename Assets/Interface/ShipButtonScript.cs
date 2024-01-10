@@ -5,8 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-//[Serializable]
-enum UpgradeType
+enum ShipUpgradeType
 {
     Speed, Manobrability, HP, TractorBeam,
 }
@@ -15,95 +14,139 @@ public class ShipButtonScript : MonoBehaviour
 {
     [SerializeField] InterfaceDataHolder interfaceData;
     [Header("")]
-    [SerializeField] UpgradeType upgradeType;
+    [SerializeField] ShipUpgradeType upgradeType;
     [SerializeField] Image border;
+    [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI upgradeLevelTxt;
-    [SerializeField] Image costOne;
-    [SerializeField] TextMeshProUGUI costOneTxt;
-    [SerializeField] Image costTwo;
-    [SerializeField] TextMeshProUGUI costTwoTxt;
+    [SerializeField] GameObject[] costs;
 
-    ShipUpgrades currentUpgrades;
     ShipUpgradesInfo shipUpgradeInfo;
 
-    void Start()
-    {
-        currentUpgrades = PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades;
-        shipUpgradeInfo = PlayerUpgradesManager.Instance.ShipUpgradesInfo;
+    public static event Action UpgradedShip;
 
+    void Awake()
+    {
+        shipUpgradeInfo = PlayerUpgradesManager.Instance.ShipUpgradesInfo;        
+    }
+
+    private void OnEnable()
+    {
         UpgradeShipButtons();
+        UpgradedShip += UpgradeShipButtons;
+    }
+    private void OnDisable()
+    {
+        UpgradedShip -= UpgradeShipButtons;
     }
 
-    void Update()
+    void UpgradeShipButtons()
     {
-        
-    }
+        ResourceNumber[] costToSend;
 
-    public void UpgradeShipButtons()
-    {
-        if(upgradeType == UpgradeType.Speed)
-            UpdateNonBoolButton(currentUpgrades.SpeedLevel, shipUpgradeInfo.SpeedUpgrade.Length,
-            shipUpgradeInfo.SpeedUpgrade[currentUpgrades.SpeedLevel].Cost);
-        else if (upgradeType == UpgradeType.Manobrability)
-            UpdateNonBoolButton(currentUpgrades.ManobrabilityLevel, shipUpgradeInfo.ManobrabilityUpgrade.Length,
-            shipUpgradeInfo.ManobrabilityUpgrade[currentUpgrades.ManobrabilityLevel].Cost);
-        else if (upgradeType == UpgradeType.HP)
-            UpdateNonBoolButton(currentUpgrades.HPLevel, shipUpgradeInfo.HP_Upgrade.Length,
-            shipUpgradeInfo.HP_Upgrade[currentUpgrades.HPLevel].Cost);
-        else if (upgradeType == UpgradeType.TractorBeam)
-            UpdateNonBoolButton(currentUpgrades.TractorBeamLevel, shipUpgradeInfo.TractorBeamUpgrade.Length,
-            shipUpgradeInfo.TractorBeamUpgrade[currentUpgrades.TractorBeamLevel].Cost);
-    }
-
-    public void UpdateNonBoolButton(int upgradeLevel, int upgradeInfoLenght, ResourceNumber[] resourceNumber1)
-    {
-        upgradeLevelTxt.text = $"{upgradeLevel}/{upgradeInfoLenght}";
-
-        if (upgradeLevel == upgradeInfoLenght)
+        if (upgradeType == ShipUpgradeType.Speed)
         {
-            border.color = interfaceData.maxedColor;
-            upgradeLevelTxt.color = interfaceData.maxedColor;
-            costOne.enabled = false;
-            costOneTxt.enabled = false;
-            costTwo.enabled = false;
-            costTwoTxt.enabled = false;
+            // Previne que se passe do limite do array no ultimo upgrade
+            if(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel == shipUpgradeInfo.SpeedUpgrade.Length)
+                costToSend = shipUpgradeInfo.SpeedUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel - 1].Cost;
+            else
+                costToSend = shipUpgradeInfo.SpeedUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel].Cost;
+
+            interfaceData.UpdateButtonVisual(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel, shipUpgradeInfo.SpeedUpgrade.Length, icon, border, upgradeLevelTxt, costs,
+            costToSend);
         }
+        else if (upgradeType == ShipUpgradeType.Manobrability)
+        {
+            if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel == shipUpgradeInfo.ManobrabilityUpgrade.Length)
+                costToSend = shipUpgradeInfo.ManobrabilityUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].Cost;
+            else
+                costToSend = shipUpgradeInfo.ManobrabilityUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel].Cost;
+
+            interfaceData.UpdateButtonVisual(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel, shipUpgradeInfo.ManobrabilityUpgrade.Length, icon, border, upgradeLevelTxt, costs,
+            costToSend);
+        }
+        else if (upgradeType == ShipUpgradeType.HP)
+        {
+            if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel == shipUpgradeInfo.HP_Upgrade.Length)
+                costToSend = shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].Cost;
+            else
+                costToSend = shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel].Cost;
+
+            interfaceData.UpdateButtonVisual(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel, shipUpgradeInfo.HP_Upgrade.Length, icon, border, upgradeLevelTxt, costs,
+            costToSend);
+        }
+        else if (upgradeType == ShipUpgradeType.TractorBeam)
+        {
+            // O custo está no index 0 nesse caso, não no 1
+            if (!PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled)
+                interfaceData.SetUnlockedCostVisual(shipUpgradeInfo.TractorBeamUpgrade[0].Cost, costs);
+
+            if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel == shipUpgradeInfo.TractorBeamUpgrade.Length)
+                costToSend = shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].Cost;
+            else
+                costToSend = shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel].Cost;
+                        
+            interfaceData.UpdateButtonVisual(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel, shipUpgradeInfo.TractorBeamUpgrade.Length, icon, border, upgradeLevelTxt, costs,
+            costToSend, PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled);            
+        }
+    }
+
+    public void BuySpeed()
+    {
+        if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel == shipUpgradeInfo.SpeedUpgrade.Length) return;
+
+        BuyUpgrade(shipUpgradeInfo.SpeedUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel].Cost, ShipUpgradeType.Speed);
+    }
+    public void BuyManobrability()
+    {
+        if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel == shipUpgradeInfo.ManobrabilityUpgrade.Length) return;
+
+        BuyUpgrade(shipUpgradeInfo.ManobrabilityUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel].Cost, ShipUpgradeType.Manobrability);
+    }
+    public void BuyHP()
+    {
+        if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel == shipUpgradeInfo.HP_Upgrade.Length) return;
+
+        BuyUpgrade(shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel].Cost, ShipUpgradeType.HP);
+
+        // Aplica o HP adicional como cura
+        if(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel <= shipUpgradeInfo.HP_Upgrade.Length - 1)
+            PlayerHP.ChangePlayerHP(+(shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel].HP
+                - shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP));       
+    }
+    public void BuyTractor()
+    {
+        if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel == shipUpgradeInfo.TractorBeamUpgrade.Length) return;
+
+        if (!PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled)
+        {
+            if (PlayerCollectiblesCount.ExpendResources(shipUpgradeInfo.TractorBeamUpgrade[0].Cost))
+            {
+                PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled = true;
+                PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel = 1;
+                UpgradedShip.Invoke();
+            }
+        }            
         else
-        {
-            border.color = interfaceData.boughtColor;
-            upgradeLevelTxt.color = interfaceData.boughtColor;
-
-            SetCost(resourceNumber1[0], costOne, costOneTxt);
-            SetCost(resourceNumber1[1], costTwo, costTwoTxt);
-        }        
+            BuyUpgrade(shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel].Cost, ShipUpgradeType.TractorBeam);
     }
 
-    private void SetCost(ResourceNumber resourceNumber, Image costImage, TextMeshProUGUI costText)
+    void BuyUpgrade(ResourceNumber[] cost, ShipUpgradeType upgradeType)
     {
-        if (resourceNumber.ResourceType == ResourceType.Metal)
+        if (PlayerCollectiblesCount.ExpendResources(cost))
         {
-            costImage.sprite = interfaceData.metalSprite;
-            costText.text = resourceNumber.Amount.ToString();
-            //costOneTxt.color = interfaceData.metalColor;
+            if (upgradeType == ShipUpgradeType.Speed)
+                PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel++;
+            else if (upgradeType == ShipUpgradeType.Manobrability)
+                PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel++;
+            else if (upgradeType == ShipUpgradeType.HP)
+                PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel++;
+            else if (upgradeType == ShipUpgradeType.TractorBeam)
+                PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel++;
+
+            UpgradedShip.Invoke();
         }
-        else if (resourceNumber.ResourceType == ResourceType.Alloy)
-        {
-            costImage.sprite = interfaceData.alloySprite;
-            costText.text = resourceNumber.Amount.ToString();
-            //costOneTxt.color = interfaceData.alloyColor;
-        }
-        else if (resourceNumber.ResourceType == ResourceType.EnergyCristal)
-        {
-            costImage.sprite = interfaceData.energyCristalSprite;
-            costText.text = resourceNumber.Amount.ToString();
-            //costOneTxt.color = interfaceData.energyCristalColor;
-        }
-        else if (resourceNumber.ResourceType == ResourceType.CondensedEnergyCristal)
-        {
-            costImage.sprite = interfaceData.condensedCristalSprite;
-            costText.text = resourceNumber.Amount.ToString();
-            //costOneTxt.color = interfaceData.condensedCristalColor;
-        }
-    }
+    }  
+
+
 
 }
