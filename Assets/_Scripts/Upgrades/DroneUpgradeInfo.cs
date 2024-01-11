@@ -28,7 +28,7 @@ public struct DroneHealUpgrade
 [CreateAssetMenu(fileName = "DroneUpgradesInfo", menuName = "MySOs/DroneUpgradesInfo")]
 public class DroneUpgradeInfo : ScriptableObject
 {
-    public ResourceNumber UnlockCost; 
+    public ResourceNumber[] UnlockCost; 
     public DronePowerUpgrade[] PowerUpgrades;
     public DroneRangeUpgrade[] RangeUpgrades;
     public DroneHealUpgrade[] HealUpgrade;

@@ -14,6 +14,8 @@ public class PauseScript : MonoBehaviour
     [SerializeField] RectTransform shipUpgradePage;
     [SerializeField] RectTransform laserUpgradePage;
     [SerializeField] RectTransform shieldUpgradePage;
+    [SerializeField] RectTransform ionStreamUpgradePage;
+    [SerializeField] RectTransform dronesUpgradePage;
 
     public static bool isPaused;
     bool hasReleasedPause;
@@ -62,30 +64,36 @@ public class PauseScript : MonoBehaviour
 
     public void EnableShipUpgradePage()
     {
+        DisableUpgradePage();
         shipUpgradePage.gameObject.SetActive(true);
-        laserUpgradePage.gameObject.SetActive(false);
-        shieldUpgradePage.gameObject.SetActive(false);
-
     }
     public void EnableLaserUpgradePage()
     {
+        DisableUpgradePage();
         laserUpgradePage.gameObject.SetActive(true);
-        shipUpgradePage.gameObject.SetActive(false);
-        shieldUpgradePage.gameObject.SetActive(false);
-
     }
     public void EnableShieldUpgradePage()
     {
+        DisableUpgradePage();
         shieldUpgradePage.gameObject.SetActive(true);
-        laserUpgradePage.gameObject.SetActive(false);
-        shipUpgradePage.gameObject.SetActive(false);
-
+    }  
+    public void EnableIonStreamUpgradePage()
+    {
+        DisableUpgradePage();
+        ionStreamUpgradePage.gameObject.SetActive(true);
+    }
+    public void EnableDronesUpgradePage()
+    {
+        DisableUpgradePage();
+        dronesUpgradePage.gameObject.SetActive(true);
     }
     public void DisableUpgradePage()
     {
         shipUpgradePage.gameObject.SetActive(false);
         laserUpgradePage.gameObject.SetActive(false);
         shieldUpgradePage.gameObject.SetActive(false) ;
+        ionStreamUpgradePage.gameObject.SetActive(false);
+        dronesUpgradePage.gameObject.SetActive(false);
     }
     
 }
