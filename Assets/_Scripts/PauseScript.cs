@@ -13,6 +13,7 @@ public class PauseScript : MonoBehaviour
     [Header("Upgrade Canvas")]
     [SerializeField] RectTransform shipUpgradePage;
     [SerializeField] RectTransform laserUpgradePage;
+    [SerializeField] RectTransform shieldUpgradePage;
 
     public static bool isPaused;
     bool hasReleasedPause;
@@ -63,16 +64,28 @@ public class PauseScript : MonoBehaviour
     {
         shipUpgradePage.gameObject.SetActive(true);
         laserUpgradePage.gameObject.SetActive(false);
+        shieldUpgradePage.gameObject.SetActive(false);
+
     }
     public void EnableLaserUpgradePage()
     {
         laserUpgradePage.gameObject.SetActive(true);
         shipUpgradePage.gameObject.SetActive(false);
+        shieldUpgradePage.gameObject.SetActive(false);
+
+    }
+    public void EnableShieldUpgradePage()
+    {
+        shieldUpgradePage.gameObject.SetActive(true);
+        laserUpgradePage.gameObject.SetActive(false);
+        shipUpgradePage.gameObject.SetActive(false);
+
     }
     public void DisableUpgradePage()
     {
         shipUpgradePage.gameObject.SetActive(false);
         laserUpgradePage.gameObject.SetActive(false);
+        shieldUpgradePage.gameObject.SetActive(false) ;
     }
     
 }

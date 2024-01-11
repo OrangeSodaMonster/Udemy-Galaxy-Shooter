@@ -107,4 +107,9 @@ public class ShieldStrenght : MonoBehaviour
             }       
         } 
     }
+
+    public void SetMaxStr()
+    {
+        CurrentStr = MaxStr;
+    }
 }

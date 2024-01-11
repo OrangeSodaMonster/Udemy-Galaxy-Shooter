@@ -10,6 +10,7 @@ public class InterfaceDataHolder : ScriptableObject
 	[Header("Upgrade Box Colors")]
 	public Color unavaliableColor = Color.grey;
     public Color avaliableColor = Color.white;
+    public Color unlockedColor = Color.white;
 	public Color maxedColor = Color.yellow;
 
     [Header("Upgrade Costs")]
@@ -24,7 +25,7 @@ public class InterfaceDataHolder : ScriptableObject
 
 
     public void UpdateButtonVisual(int upgradeLevel, int upgradeInfoLenght, Image icon, Image border, TextMeshProUGUI upgradeLevelTxt, GameObject[] costs,
-        ResourceNumber[] resourceNumber, bool isAvaliable = true)
+        ResourceNumber[] resourceNumber, bool isAvaliable = true, bool disableIfUnavaliable = true)
     {
         Image costOne = costs[0].GetComponent<Image>();
         Image costTwo = costs[1].GetComponent<Image>();
@@ -40,29 +41,31 @@ public class InterfaceDataHolder : ScriptableObject
             SetCost(resourceNumber[0], costOne, costOneTxt);
             SetCost(resourceNumber[1], costTwo, costTwoTxt);
 
+            if (disableIfUnavaliable)
+                icon.GetComponent<Button>().enabled = false;
+
             return;
         }
 
-        upgradeLevelTxt.text = $"{upgradeLevel}/{upgradeInfoLenght}";
+        upgradeLevelTxt.text = $"{upgradeLevel}/{upgradeInfoLenght}";        
+        icon.color = Color.white;
+        upgradeLevelTxt.enabled = true;
 
         if (upgradeLevel == upgradeInfoLenght)
         {
-            icon.color = Color.white;
-            border.color = maxedColor;
-            upgradeLevelTxt.enabled = true;
+            border.color = maxedColor;            
             upgradeLevelTxt.color = maxedColor;
             costOne.enabled = false;
             costOneTxt.enabled = false;
             costTwo.enabled = false;
             costTwoTxt.enabled = false;
+            icon.GetComponent<Button>().enabled = false;
         }
         else
         {
-            icon.color = Color.white;
-            border.color = avaliableColor;
-            upgradeLevelTxt.enabled = true;
+            icon.GetComponent<Button>().enabled = true;
+            border.color = avaliableColor;            
             upgradeLevelTxt.color = avaliableColor;
-
             SetCost(resourceNumber[0], costOne, costOneTxt);
             SetCost(resourceNumber[1], costTwo, costTwoTxt);
         }
@@ -136,7 +139,7 @@ public class InterfaceDataHolder : ScriptableObject
         }
         else if (!isMaxed)
         {
-            border.color = avaliableColor;
+            border.color = unlockedColor;
             icon.color = Color.white;
             costs[0].SetActive(false);
             costs[1].SetActive(false);
