@@ -33,6 +33,7 @@ public class EnemySpawn : MonoBehaviour
     float timeSinceLastSpawn = float.MaxValue;
     float currentSpawnCD;
     static Transform enemyParentStatic;
+    public static Vector3 PlayerLastPos = new();
 
     static float noSpawnZoneRadiusStatic;
     public static float NoSpawnZoneRadius { get { return noSpawnZoneRadiusStatic; } }
@@ -70,7 +71,6 @@ public class EnemySpawn : MonoBehaviour
 
             //Get Enemy to Spawn
             float randomSpawnValue = UnityEngine.Random.Range(0, totalSpawnWeight);
-            //Debug.Log(randomSpawnValue);
             GameObject nextEnemytoSpawn = null;
             
             int i = 0;
@@ -83,13 +83,19 @@ public class EnemySpawn : MonoBehaviour
                     randomSpawnValue -= enemiesToSpawn[i].spawnWeight;
                     i++;
                 }
+                if (player == null && nextEnemytoSpawn?.GetComponent<DroneMove>() != null || nextEnemytoSpawn?.GetComponent<EnemyShipMove>() != null)
+                    nextEnemytoSpawn = null;
             }
+            Vector3 playerPos = player != null ? player.position : PlayerLastPos;
 
-            Instantiate(nextEnemytoSpawn, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
+
+            Instantiate(nextEnemytoSpawn, nextSpawnPoint + playerPos, Quaternion.identity, this.transform);
             timeSinceLastSpawn = 0;
             currentSpawnCD =Mathf.Abs(UnityEngine.Random.Range(baseSpawnCD - baseSpawnCD*(spawnCDVariationPerc/100), baseSpawnCD + baseSpawnCD*(spawnCDVariationPerc/100)));
         }
         timeSinceLastSpawn += Time.deltaTime;
+
+        PlayerLastPos = player != null ? player.position : PlayerLastPos;
     }
 
     IEnumerator SpawnByTime(GameObject enemy, float time)

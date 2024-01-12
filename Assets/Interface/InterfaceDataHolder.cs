@@ -59,7 +59,7 @@ public class InterfaceDataHolder : ScriptableObject
             costOneTxt.enabled = false;
             costTwo.enabled = false;
             costTwoTxt.enabled = false;
-            icon.GetComponent<Button>().enabled = false;
+            //icon.GetComponent<Button>().enabled = false;
         }
         else
         {

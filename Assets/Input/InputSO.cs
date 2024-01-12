@@ -14,16 +14,24 @@ public class InputSO : ScriptableObject
     public bool IsSpecialing;
     public bool IsAutoFire = false;
     public bool IsPausing = false;
+    public bool IsCancelUI = false;
 
     public void GetAcceleration(InputAction.CallbackContext context)
     {
         Acceleration = context.ReadValue<float>();
+
+        if(Mathf.Abs(Acceleration) > 0.85f)
+            Acceleration = 1 * Mathf.Sign(Acceleration);
+
         //Debug.Log("Acceleration: " + Acceleration);
     }
 
     public void GetTurning(InputAction.CallbackContext context)
     {
         Turning = context.ReadValue<float>();
+
+        if (Mathf.Abs(Turning) > 0.85f)
+            Turning = 1 * Mathf.Sign(Turning);
         //Debug.Log("Turn: " + Turning);
     }
 
@@ -83,5 +91,9 @@ public class InputSO : ScriptableObject
         {
             IsAutoFire = !IsAutoFire;
         }
-    }    
+    }
+    public void GetCancelUI(InputAction.CallbackContext context)
+    {
+        IsCancelUI = context.performed;
+    }
 }

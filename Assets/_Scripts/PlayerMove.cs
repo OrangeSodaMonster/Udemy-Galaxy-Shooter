@@ -50,12 +50,13 @@ public class PlayerMove : MonoBehaviour
         UpdateValues();
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
 
+        //Debug.Log(Input.Acceleration);
         //Acceleration
         if (Input.Acceleration >= float.Epsilon)
-            velocity.y = Mathf.Clamp(velocity.y + acceleration * Time.fixedDeltaTime, -maxSpeed, maxSpeed);
+            velocity.y = Mathf.Clamp(velocity.y + acceleration * Time.fixedDeltaTime * Input.Acceleration, -maxSpeed, maxSpeed);
         else if (Input.Acceleration <= -float.Epsilon)
-            velocity.y = Mathf.Clamp(velocity.y + acceleration * -0.5f * Time.fixedDeltaTime, -maxSpeed, maxSpeed);
-       
+            velocity.y = Mathf.Clamp(velocity.y + acceleration * 0.5f * Time.fixedDeltaTime * Input.Acceleration, -maxSpeed, maxSpeed);
+        
         //Deceleration
         else
         {
@@ -97,18 +98,19 @@ public class PlayerMove : MonoBehaviour
 
         //Angular Velocity
 
+        //Debug.Log("Turning: " + Input.Turning);
         if (Mathf.Abs(Input.Turning) >= float.Epsilon)
         {
             turningTime += Time.fixedDeltaTime;
             float turningValue = turningTime / timeToMaxTurning;
             turningValue = Mathf.Clamp(turningValue, 0, 1);
 
-            rb.angularVelocity -= AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * Mathf.Sign(Input.Turning);      
+            rb.angularVelocity -= AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * Input.Turning;      
             
             // Apply deceleration when turning in the oposite direction, to turn faster and naturally
             if(Mathf.Abs(rb.angularVelocity) > 0 && Mathf.Sign(rb.angularVelocity) == Mathf.Sign(Input.Turning))
             {
-                rb.angularVelocity -= AngDeceleration * Time.fixedDeltaTime * Mathf.Sign(rb.angularVelocity);
+                rb.angularVelocity -= AngDeceleration * Time.fixedDeltaTime * Input.Turning;
             }
         }
 

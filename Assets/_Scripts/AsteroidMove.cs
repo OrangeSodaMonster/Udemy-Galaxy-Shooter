@@ -23,7 +23,7 @@ public class AsteroidMove : MonoBehaviour
 
     void Start()
     {
-        player = FindAnyObjectByType<PlayerMove>().transform;
+        player = FindAnyObjectByType<PlayerMove>()?.transform;
 
         if (MoveSpeed == 0)
             MoveSpeed = Mathf.Abs(Random.Range(baseSpeed - baseSpeed*(speedVariationPerc/100), baseSpeed + baseSpeed*(speedVariationPerc/100)));
@@ -38,7 +38,7 @@ public class AsteroidMove : MonoBehaviour
             MoveDirection = MoveDirection.normalized;
         }
         else if (MoveDirection == Vector3.zero)
-            MoveDirection = new Vector3(Random.value, Random.value, 0).normalized;
+            MoveDirection = (EnemySpawn.PlayerLastPos - transform.position).normalized;
 
         rb.velocity = (MoveDirection) * MoveSpeed;
     }

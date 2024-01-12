@@ -24,9 +24,21 @@ public class UIManager : MonoBehaviour
     bool hasReleasedPause;
     bool isOnUpgrade;
 
+    //scripts to disable if is pausing
+    PlayerMove playerMove;
+    PlayerLasers playerLasers;
+    BombScript bombScript;
+
     private void Awake()
     {
         s_gameoverCanvas = gameoverCanvas;
+    }
+
+    private void Start()
+    {
+        playerMove = FindObjectOfType<PlayerMove>();
+        playerLasers = FindObjectOfType<PlayerLasers>();
+        bombScript = FindObjectOfType<BombScript>();
     }
 
     void Update()
@@ -54,6 +66,11 @@ public class UIManager : MonoBehaviour
         pauseCanvas.gameObject.SetActive(true);
         isPaused = true;
         Time.timeScale = 0;
+
+        playerMove.enabled = false;
+        playerLasers.enabled = false;
+        bombScript.enabled = false;
+
         hasReleasedPause = false;
     }
 
@@ -62,51 +79,56 @@ public class UIManager : MonoBehaviour
         pauseCanvas.gameObject.SetActive(false);
         isPaused = false;
         Time.timeScale = 1;
+
+        playerMove.enabled = true;
+        playerLasers.enabled = true;
+        bombScript.enabled = true;
+
         hasReleasedPause = false;
     }
 
     public void EnableShipUpgradePage()
     {
         if (!isPaused) return;
-        pauseCanvas.gameObject.SetActive(false);
 
         DisableUpgradePage();
+        pauseCanvas.gameObject.SetActive(false);
         shipUpgradePage.gameObject.SetActive(true);
         isOnUpgrade = true;
     }
     public void EnableLaserUpgradePage()
     {
         if (!isPaused) return;
-        pauseCanvas.gameObject.SetActive(false);
 
         DisableUpgradePage();
+        pauseCanvas.gameObject.SetActive(false);
         laserUpgradePage.gameObject.SetActive(true);
         isOnUpgrade = true;
     }
     public void EnableShieldUpgradePage()
     {
         if (!isPaused) return;
-        pauseCanvas.gameObject.SetActive(false);
 
         DisableUpgradePage();
+        pauseCanvas.gameObject.SetActive(false);
         shieldUpgradePage.gameObject.SetActive(true);
         isOnUpgrade = true;
     }
     public void EnableIonStreamUpgradePage()
     {
         if (!isPaused) return;
-        pauseCanvas.gameObject.SetActive(false);
 
         DisableUpgradePage();
+        pauseCanvas.gameObject.SetActive(false);
         ionStreamUpgradePage.gameObject.SetActive(true);
         isOnUpgrade = true;
     }
     public void EnableDronesUpgradePage()
     {
         if (!isPaused) return;
-        pauseCanvas.gameObject.SetActive(false);
 
         DisableUpgradePage();
+        pauseCanvas.gameObject.SetActive(false);
         dronesUpgradePage.gameObject.SetActive(true);
         isOnUpgrade = true;
     }
@@ -128,6 +150,8 @@ public class UIManager : MonoBehaviour
     }
     public void RestartScene()
     {
+        Time.timeScale = 1;
+        isPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
