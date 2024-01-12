@@ -22,7 +22,7 @@ public class PlayerLasers : MonoBehaviour
 
     void Update()
     {
-        if (PauseScript.isPaused) return;
+        if (UIManager.isPaused) return;
 
         FrontLasersShoot();
         SpreadLaserShoot();

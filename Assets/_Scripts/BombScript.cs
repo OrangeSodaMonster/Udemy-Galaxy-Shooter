@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BombScript : MonoBehaviour
 {
+    [SerializeField] int startingBombs = 1;
     public static int BombAmount = 1;
     public static int MaxBombs = 3;
 
@@ -20,6 +21,7 @@ public class BombScript : MonoBehaviour
 
     void Start()
     {
+        BombAmount = startingBombs;
         TurnOffSpriteRenderer();
     }
 

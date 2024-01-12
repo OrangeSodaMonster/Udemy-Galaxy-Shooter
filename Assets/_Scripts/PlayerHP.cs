@@ -13,6 +13,12 @@ public class PlayerHP : MonoBehaviour
     public bool isInvencible = false;
     public static bool s_IsInvencible = false;
 
+    [SerializeField] ShieldScript shields;
+    [SerializeField] IonStreamScript ionStream;
+    [SerializeField] GameObject drones;
+    [SerializeField] TractorBeamScript tractorBeam;
+    [SerializeField] BombScript bomb;
+
     PlayerUpgradesManager upgradesManager;
 
     void Start()
@@ -84,9 +90,16 @@ public class PlayerHP : MonoBehaviour
         //}       
     }
 
-    void PlayerDestructionSequence()
+    public void PlayerDestructionSequence()
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
+        shields.gameObject.SetActive(false);
+        ionStream.gameObject.SetActive(false);
+        drones.SetActive(false);
+        tractorBeam.gameObject.SetActive(false);
+        bomb.gameObject.SetActive(false);
+
+        UIManager.EnableGameoverCanvas();
+        Destroy(gameObject);
     }
 
     static public void ChangePlayerHP(int value)

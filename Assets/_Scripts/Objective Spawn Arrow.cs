@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectiveSpawnArrow : MonoBehaviour
@@ -29,6 +30,8 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     Tween fadeArrowTween = null;
     void Update()
     {
+        if(player.IsDestroyed()) return;
+
         direction = (transform.position - player.position).normalized;
         arrow.SetPositionAndRotation((Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
 

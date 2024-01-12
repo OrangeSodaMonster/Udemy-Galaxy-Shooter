@@ -31,6 +31,15 @@ public class BlackHoleHorizon : MonoBehaviour
         shrinkSeq.Append(collision.transform.DOMove(transform.position, timeToPull).SetEase(Ease.OutQuad));
         shrinkSeq.Join(collision.transform.DOScale(0, timeToPull).SetEase(Ease.OutQuad));
 
-        shrinkSeq.Play().OnComplete(() => Destroy(collision.gameObject));
+        shrinkSeq.Play().OnComplete(() => DestroySucked(collision));
+    }
+
+    void DestroySucked(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out PlayerHP playerHP))
+            playerHP.PlayerDestructionSequence();
+        else
+            Destroy(collision.gameObject);
     }
 }
+
