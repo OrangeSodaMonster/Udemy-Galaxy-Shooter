@@ -8,10 +8,10 @@ public class EnemyDestroyByDistance : MonoBehaviour
     Transform player;
     float deSpawnZoneRadius;
 
-    void Start()
+    void OnEnable()
     {
         player = FindAnyObjectByType<PlayerMove>()?.transform;
-        deSpawnZoneRadius = EnemySpawn.SpawnZoneRadius * 1.5f;
+        deSpawnZoneRadius = EnemySpawner.SpawnZoneRadius * 1.5f;
         deSpawnZoneRadius *= deSpawnZoneRadius;
 
         StartCoroutine(DistanceCheckFrequency());
@@ -24,10 +24,10 @@ public class EnemyDestroyByDistance : MonoBehaviour
             yield return new WaitForSeconds(.5f);
 
 
-            Vector3 playerPos = player != null ? player.position : EnemySpawn.PlayerLastPos;
+            Vector3 playerPos = player != null ? player.position : EnemySpawner.PlayerLastPos;
             if (Vector2.SqrMagnitude(transform.position - playerPos) > deSpawnZoneRadius)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }

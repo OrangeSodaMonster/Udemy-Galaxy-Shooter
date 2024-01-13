@@ -1,12 +1,14 @@
+using MoreMountains.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [Serializable]
 public struct DropsToSpawn
 {
-    public GameObject drop;
+    public ResourceType drop;
     public float spawnWeight;
 }
 
@@ -17,15 +19,9 @@ public class EnemyDropDealer : MonoBehaviour
     [SerializeField] int maxDropsNum = 5;
 
     [SerializeField] float radiusToSpawn = 1;
-
-    Transform transformParent;
+    
     float totalSpawnWeight;
 
-    private void Awake()
-    {
-        transformParent = FindObjectOfType<MetalCrumbsParent>().transform;
-    }
-    
     public void SpawnDrops()
     {
         float dropsNumber = UnityEngine.Random.Range(minDropsNum, maxDropsNum);
@@ -41,23 +37,31 @@ public class EnemyDropDealer : MonoBehaviour
             spawnPoint += transform.position;
 
             //Get Drop to Spawn
-            float randomSpawnValue = UnityEngine.Random.Range(0, totalSpawnWeight);
-            GameObject dropToSpawn = null;
+            float randomSpawnValue = UnityEngine.Random.Range(0+float.Epsilon, totalSpawnWeight-float.Epsilon);
+            MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[GetNextDrop(randomSpawnValue)];;            
 
-            int j = 0;
-            while (dropToSpawn == null & j < dropsToSpawn.Length)
+            if (dropPooler != null)
             {
-                if (randomSpawnValue <= dropsToSpawn[j].spawnWeight)
-                { dropToSpawn = dropsToSpawn[j].drop; }
-                else
-                {
-                    randomSpawnValue -= dropsToSpawn[j].spawnWeight;
-                    j++;
-                }
+                GameObject drop = dropPooler.GetPooledGameObject();
+                drop.transform.SetLocalPositionAndRotation(spawnPoint, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
+                drop.SetActive(true);
             }
 
-            if (dropToSpawn != null)
-                Instantiate(dropToSpawn, spawnPoint, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward), transformParent);
         }
+    }
+    ResourceType GetNextDrop(float spawnValue)
+    {
+        ResourceType nextDrop = ResourceType.MetalCrumb;
+        foreach (DropsToSpawn drop in dropsToSpawn)
+        {
+            if (spawnValue <= drop.spawnWeight)
+            {
+                nextDrop = drop.drop;
+                break;
+            }
+            else
+                spawnValue -= drop.spawnWeight;
+        }
+        return nextDrop;
     }
 }

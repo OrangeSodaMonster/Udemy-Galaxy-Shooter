@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class PlayerLasers : MonoBehaviour
     [SerializeField] Transform[] spreadLaserParents;
     [SerializeField] Transform[] sideLaserParents;
     [SerializeField] Transform[] backLaserParents;
+    [SerializeField] MMSimpleObjectPooler objPool;
 
     float currentLaserCDMod = 1;
 
@@ -132,11 +134,14 @@ public class PlayerLasers : MonoBehaviour
 
     void InstantiateLaser(Transform laserParent, LaserUpgrades laserUpgrades)
     {
-        GameObject laser = Instantiate(basicLaser, transform.position + transform.TransformDirection(laserParent.position),
-            transform.rotation * laserParent.rotation, laserParent);
+        //GameObject laser = Instantiate(basicLaser, transform.position + transform.TransformDirection(laserParent.position),
+        //    transform.rotation * laserParent.rotation, laserParent);
 
+        GameObject laser = objPool.GetPooledGameObject();
+        laser.transform.SetPositionAndRotation(transform.position + transform.TransformDirection(laserParent.position), transform.rotation * laserParent.rotation);
         laser.GetComponent<SpriteRenderer>().material = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Material;
         laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
+        laser.SetActive(true);
     }
 
     public void PowerUpStart(float value)

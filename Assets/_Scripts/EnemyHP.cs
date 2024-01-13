@@ -8,7 +8,7 @@ public class EnemyHP : MonoBehaviour
 {
     public event Action TookDamage;
     public event Action Healed;
-    public int OnBirthDamage;
+    //public int OnBirthDamage;
 
     [SerializeField] bool destroyOnCollision = true;
     [field:SerializeField] public int MaxHP { get; private set; } = 1;
@@ -18,13 +18,20 @@ public class EnemyHP : MonoBehaviour
 
     int lastCollisionHash = 0;
     public float CurrentHP { get { return currentHP; } }
-	
+    Vector3 defaultScale = new();
 
-    void Start()
+    private void Awake()
     {
-        currentHP = MaxHP - OnBirthDamage;
+        defaultScale = transform.localScale;
+    }
+
+    void OnEnable()
+    {
+        //currentHP = MaxHP - OnBirthDamage;
+        currentHP = MaxHP;
         //Debug.Log("Birth Damage= " + OnBirthDamage);
         lastFrameHP = MaxHP;
+        transform.localScale = defaultScale;
     }
 
     void Update()
@@ -43,7 +50,7 @@ public class EnemyHP : MonoBehaviour
             if (TryGetComponent(out AsteroidSplit split))
             {
                 if (transform.parent != null && transform.parent.GetComponent<ObjectiveSpawnArrow>() != null)
-                    split.Split(currentHP, transform.parent);
+                    split.SplitParented(currentHP, transform.parent);
                 else
                     split.Split(currentHP);
             }
@@ -51,7 +58,7 @@ public class EnemyHP : MonoBehaviour
             if (TryGetComponent(out EnemyDropDealer dropDealer))
                 dropDealer.SpawnDrops();
 
-            Destroy(gameObject);
+            DestroySequence();
         }
 
         lastFrameHP = currentHP;
@@ -76,8 +83,13 @@ public class EnemyHP : MonoBehaviour
             dropDealer.SpawnDrops();
 
         if(destroyOnCollision)
-            Destroy(gameObject);
+            DestroySequence();
                
+    }
+
+    public void DestroySequence()
+    {
+        gameObject.SetActive(false);
     }
 
     public void ChangeHP(int value)

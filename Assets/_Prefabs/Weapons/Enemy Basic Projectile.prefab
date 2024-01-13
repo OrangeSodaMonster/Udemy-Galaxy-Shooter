@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1406321224783330647}
   - component: {fileID: 5104625270355284371}
   m_Layer: 7
-  m_Name: Enemy Basic Laser
+  m_Name: Enemy Basic Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 5760
+    m_Bits: 5768
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
+  life: 7
 --- !u!114 &5104625270355284371
 MonoBehaviour:
   m_ObjectHideFlags: 0

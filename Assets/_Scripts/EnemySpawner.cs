@@ -17,7 +17,7 @@ public struct EnemiesToSpawnByTime
     public float timeSec;
 }
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] float noSpawnZoneRadius;   
     [SerializeField] float spawnZoneRadius;
@@ -25,14 +25,15 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] float baseSpawnCD = 1;
     [SerializeField] float spawnCDVariationPerc = 50f;
     [SerializeField] EnemiesToSpawn[] enemiesToSpawn;
+    public EnemiesToSpawn[] EnemiesToSpawn => enemiesToSpawn;
     [SerializeField] EnemiesToSpawnByTime[] enemiesToSpawnByTime;
+    public EnemiesToSpawnByTime[] EnemiesToSpawnByTime => enemiesToSpawnByTime;
 
     float totalSpawnWeight = 0;
     Vector2 nextSpawnDirection;
     Vector3 nextSpawnPoint;
     float timeSinceLastSpawn = float.MaxValue;
     float currentSpawnCD;
-    static Transform enemyParentStatic;
     public static Vector3 PlayerLastPos = new();
 
     static float noSpawnZoneRadiusStatic;
@@ -40,17 +41,21 @@ public class EnemySpawn : MonoBehaviour
     static float spawnZoneRadiusStatic;
     public static float SpawnZoneRadius { get { return spawnZoneRadiusStatic; } }
 
+    EnemyPoolRef poolRef;
+    static EnemyPoolRef s_poolRef;
+
     private void Awake()
-    {
+    {      
+        poolRef = GetComponent<EnemyPoolRef>();
         noSpawnZoneRadiusStatic = noSpawnZoneRadius;
         spawnZoneRadiusStatic = spawnZoneRadius;
-        enemyParentStatic = this.transform;
 
         currentSpawnCD = baseSpawnCD;
+        s_poolRef = poolRef;
     }
 
     private void Start()
-    {
+    {      
         foreach (var enemy in enemiesToSpawn)
         {
             totalSpawnWeight += enemy.spawnWeight;
@@ -70,26 +75,16 @@ public class EnemySpawn : MonoBehaviour
             nextSpawnPoint = nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius);
 
             //Get Enemy to Spawn
-            float randomSpawnValue = UnityEngine.Random.Range(0, totalSpawnWeight);
-            GameObject nextEnemytoSpawn = null;
+            float randomSpawnValue = UnityEngine.Random.Range(0 + float.Epsilon, totalSpawnWeight - float.Epsilon);
+            GameObject nextEnemytoSpawn = GetNextSpawn(randomSpawnValue);
             
-            int i = 0;
-            while (nextEnemytoSpawn == null) 
-            {
-                if (randomSpawnValue <= enemiesToSpawn[i].spawnWeight)
-                    { nextEnemytoSpawn = enemiesToSpawn[i].enemy; }
-                else
-                {
-                    randomSpawnValue -= enemiesToSpawn[i].spawnWeight;
-                    i++;
-                }
-                if (player == null && nextEnemytoSpawn?.GetComponent<DroneMove>() != null || nextEnemytoSpawn?.GetComponent<EnemyShipMove>() != null)
-                    nextEnemytoSpawn = null;
-            }
+          
             Vector3 playerPos = player != null ? player.position : PlayerLastPos;
 
+            GameObject enemy = poolRef.enemyPoolers[nextEnemytoSpawn].GetPooledGameObject();
+            enemy.transform.position = nextSpawnPoint + playerPos;
+            enemy.SetActive(true);
 
-            Instantiate(nextEnemytoSpawn, nextSpawnPoint + playerPos, Quaternion.identity, this.transform);
             timeSinceLastSpawn = 0;
             currentSpawnCD =Mathf.Abs(UnityEngine.Random.Range(baseSpawnCD - baseSpawnCD*(spawnCDVariationPerc/100), baseSpawnCD + baseSpawnCD*(spawnCDVariationPerc/100)));
         }
@@ -98,43 +93,68 @@ public class EnemySpawn : MonoBehaviour
         PlayerLastPos = player != null ? player.position : PlayerLastPos;
     }
 
-    IEnumerator SpawnByTime(GameObject enemy, float time)
+    IEnumerator SpawnByTime(GameObject enemyToSpawn, float time)
     {
         yield return new WaitForSeconds(time);
 
         nextSpawnPoint = nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius);
-        Instantiate(enemy, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
+        Vector3 playerPos = player != null ? player.position : PlayerLastPos;
+        //Instantiate(enemy, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
+        GameObject enemy = poolRef.enemyPoolers[enemyToSpawn].GetPooledGameObject();
+        enemy.transform.position = nextSpawnPoint + playerPos;
+        enemy.SetActive(true);
+    }
+
+    GameObject GetNextSpawn(float spawnValue)
+    {
+        GameObject nextSpawn = null;
+        foreach(EnemiesToSpawn enemy in EnemiesToSpawn)
+        {
+            if (spawnValue <= enemy.spawnWeight)
+            {
+                nextSpawn = enemy.enemy;
+                break;                
+            }
+            else
+                spawnValue -= enemy.spawnWeight;
+        }
+        return nextSpawn;
     }
 
     public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply)
     {
-        GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0,360), Vector3.forward), enemyParentStatic);
-        if(newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
+        //GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0,360), Vector3.forward), enemyParentStatic);
+        GameObject newAsteroid = s_poolRef.enemyPoolers[asteroidObject].GetPooledGameObject();
+        newAsteroid.transform.SetPositionAndRotation(position, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
+        newAsteroid.SetActive(true);
+
+        if (newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
         {
-            asteroidMove.MoveDirection = moveDirection;
-            asteroidMove.MoveSpeed = speed;
+            asteroidMove.SetVelocity(speed, moveDirection);
         }
         if(damageToApply > 0 && newAsteroid.TryGetComponent(out EnemyHP asteroidHP))
         {
-            asteroidHP.OnBirthDamage = damageToApply;
+            asteroidHP.ChangeHP(-Mathf.Abs(damageToApply));
         }
     }
-    public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply, Transform parent)
+
+    public static void SpawnAsteroidParented(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply, Transform parent)
     {
         GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward), parent);
         if (newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
         {
-            asteroidMove.MoveDirection = moveDirection;
-            asteroidMove.MoveSpeed = speed;
+            asteroidMove.SetVelocity(speed, moveDirection);
         }
         if (damageToApply > 0 && newAsteroid.TryGetComponent(out EnemyHP asteroidHP))
         {
-            asteroidHP.OnBirthDamage = damageToApply;
+            asteroidHP.ChangeHP(-Mathf.Abs(damageToApply));
         }
     }
 
     private void OnDrawGizmosSelected()
     {
+        if(player == null) return;
+
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(player.position, noSpawnZoneRadius);
         Gizmos.color = Color.red;

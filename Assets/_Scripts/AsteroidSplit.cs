@@ -17,19 +17,9 @@ public class AsteroidSplit : MonoBehaviour
 
     Vector3 moveDirection;
     float moveSpeed;
-    private void Start()
+    private void OnEnable()
     {
-        if (TryGetComponent(out AsteroidMove asteroidMove))
-        {
-            moveDirection = asteroidMove.MoveDirection;
-            moveSpeed = asteroidMove.MoveSpeed;
-        }
-        else
-        {
-            moveDirection = Random.insideUnitCircle.normalized;
-            moveSpeed = 0;
-            //Debug.Log(moveDirection);
-        }
+        StartCoroutine(GetVelocity());
 
         if (drawGizmos)
         {
@@ -44,6 +34,23 @@ public class AsteroidSplit : MonoBehaviour
                 float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed - moveSpeed*(newSpeedVarPerc/100), moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
             }
             
+        }
+    }
+
+    IEnumerator GetVelocity()
+    {
+        yield return null;
+
+        if (TryGetComponent(out AsteroidMove asteroidMove))
+        {
+            moveDirection = asteroidMove.MoveDirection;
+            moveSpeed = asteroidMove.MoveSpeed;
+        }
+        else
+        {
+            moveDirection = Random.insideUnitCircle.normalized;
+            moveSpeed = 0;
+            //Debug.Log(moveDirection);
         }
     }
 
@@ -73,11 +80,11 @@ public class AsteroidSplit : MonoBehaviour
             newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
             float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed, moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
 
-            EnemySpawn.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, damageToApply[i]);
+            EnemySpawner.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, damageToApply[i]);
         }
     }    
 
-    public void Split(int extraDamage, Transform parent)
+    public void SplitParented(int extraDamage, Transform parent)
     {
         int[] damageToApply = CalculateDamageToApply(ref extraDamage);
 
@@ -89,7 +96,7 @@ public class AsteroidSplit : MonoBehaviour
             newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
             float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed, moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
 
-            EnemySpawn.SpawnAsteroid(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, damageToApply[i], parent);
+            EnemySpawner.SpawnAsteroidParented(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, damageToApply[i], parent);
         }
     }
 

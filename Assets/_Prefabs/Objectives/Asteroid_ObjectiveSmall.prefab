@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8340fada8b02f4199f8a23b0820ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 30
+  <Damage>k__BackingField: 20
   <ImpactVelocity>k__BackingField: 1
 --- !u!114 &-2036024542243111843
 MonoBehaviour:
@@ -198,13 +198,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropsToSpawn:
-  - drop: {fileID: 7181768199481728834, guid: a515bad026dc9a14c82407d72822ab62, type: 3}
+  - drop: 0
     spawnWeight: 2
-  - drop: {fileID: 7181768199481728834, guid: 78f5a511c8c43c047a8be64eba5c027e, type: 3}
+  - drop: 2
     spawnWeight: 10
-  - drop: {fileID: 7181768199481728834, guid: cb4b707e3f908f14080928189d9f0263, type: 3}
+  - drop: 4
     spawnWeight: 3
-  - drop: {fileID: 7181768199481728834, guid: 665e7035d7b5daf45b099e010eb25287, type: 3}
+  - drop: 5
     spawnWeight: 0
   minDropsNum: 3
   maxDropsNum: 4

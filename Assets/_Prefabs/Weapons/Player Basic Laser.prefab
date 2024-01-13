@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7316886018289580919}
   - component: {fileID: 7127877973188316235}
   - component: {fileID: 4132542858675348067}
-  - component: {fileID: -1406321224783330647}
   - component: {fileID: -176973899492380119}
+  - component: {fileID: -1406321224783330647}
   - component: {fileID: -7524811716181194084}
   m_Layer: 6
   m_Name: Player Basic Laser
@@ -103,7 +103,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 5632
+    m_Bits: 5640
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -123,19 +123,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.08, y: 0.52}
   m_Direction: 0
---- !u!114 &-1406321224783330647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1250797867374824522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d868f484ac9922a458c92085a3bb3f6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 17
 --- !u!50 &-176973899492380119
 Rigidbody2D:
   serializedVersion: 4
@@ -163,6 +150,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-1406321224783330647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250797867374824522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d868f484ac9922a458c92085a3bb3f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 17
+  life: 7
 --- !u!114 &-7524811716181194084
 MonoBehaviour:
   m_ObjectHideFlags: 0

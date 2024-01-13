@@ -16,16 +16,16 @@ public class BlackHoleHorizon : MonoBehaviour
             rb.angularVelocity = 0;
         }
 
-        if (TryGetComponent(out PlayerMove pMove))
-            pMove.enabled = false;
-        else if (TryGetComponent(out LaserMove lMove))
-            lMove.enabled = false;
-        else if (TryGetComponent(out AsteroidMove aMove))
-            aMove.enabled = false;
-        else if (TryGetComponent(out DroneMove dMove))
-            dMove.enabled = false;
-        else if (TryGetComponent(out EnemyShipMove eMove))
-            eMove.enabled = false;
+        //if (TryGetComponent(out PlayerMove pMove))
+        //    pMove.enabled = false;
+        //else if (TryGetComponent(out LaserMove lMove))
+        //    lMove.enabled = false;
+        //else if (TryGetComponent(out AsteroidMove aMove))
+        //    aMove.enabled = false;
+        //else if (TryGetComponent(out DroneMove dMove))
+        //    dMove.enabled = false;
+        //else if (TryGetComponent(out EnemyShipMove eMove))
+        //    eMove.enabled = false;
 
         Sequence shrinkSeq = DOTween.Sequence();
         shrinkSeq.Append(collision.transform.DOMove(transform.position, timeToPull).SetEase(Ease.OutQuad));
@@ -38,8 +38,14 @@ public class BlackHoleHorizon : MonoBehaviour
     {
         if (collision.TryGetComponent(out PlayerHP playerHP))
             playerHP.PlayerDestructionSequence();
+        else if(collision.TryGetComponent(out LaserMove lMove))
+            lMove.DestroySequence();
+        else if (collision.TryGetComponent(out CollectiblesPickUps drop))
+            drop.DestroySequence();
+        else if (collision.TryGetComponent(out EnemyHP enemyHP))
+            enemyHP.DestroySequence();
         else
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
     }
 }
 

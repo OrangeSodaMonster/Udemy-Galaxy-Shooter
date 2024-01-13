@@ -16,9 +16,7 @@ public class CollectiblesPickUps : MonoBehaviour
 
     [SerializeField] float minDriftMoveSpeed = 0.1f;
     [SerializeField] float maxDriftMoveSpeed = 0.6f;
-    [SerializeField] float timeDuration = 30f;
-
-    Rigidbody2D rb;
+    [SerializeField] float timeDuration = 30f;    
 
     bool isDrifting = true;
     Vector2 driftDirection = Vector2.zero;
@@ -40,10 +38,11 @@ public class CollectiblesPickUps : MonoBehaviour
     Vector2 bhVelocity = Vector2.zero;
 
     Vector2 moveVelocity = new();
+    Vector3 defaultScale = new();
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        defaultScale = transform.localScale;
     }
 
     private void OnEnable()
@@ -51,6 +50,7 @@ public class CollectiblesPickUps : MonoBehaviour
         driftDirection = Random.insideUnitCircle.normalized;
         driftSpeed = Random.Range(minDriftMoveSpeed, maxDriftMoveSpeed);
         currentDriftSpeed = driftSpeed;
+        transform.localScale = defaultScale;
 
         StartCoroutine(DestroyCD());
     }
@@ -123,7 +123,7 @@ public class CollectiblesPickUps : MonoBehaviour
                     break;
             }
 
-            Destroy(gameObject);
+            DestroySequence();
         }
     }
 
@@ -145,6 +145,11 @@ public class CollectiblesPickUps : MonoBehaviour
     {
         yield return new WaitForSeconds(timeDuration);
 
-        Destroy(gameObject);
+        DestroySequence();
+    }
+
+    public void DestroySequence()
+    {
+        gameObject.SetActive(false);
     }
 }

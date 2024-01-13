@@ -29,10 +29,10 @@ public class EnemyShipMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    void OnEnable()
     {
-        player = FindObjectOfType<PlayerMove>().transform;
-        playerRB = player.GetComponent<Rigidbody2D>();
+        player = FindObjectOfType<PlayerMove>()?.transform;
+        playerRB = player?.GetComponent<Rigidbody2D>();
         distanceToKeep *= distanceToKeep;
         distanceToleranceFraction *= distanceToKeep;
 
@@ -45,11 +45,13 @@ public class EnemyShipMove : MonoBehaviour
         else rotateDirection = 1;
 
         newVelocity = transform.InverseTransformDirection(rb.velocity);
-        currentMaxXSpeed = maxXSpeed + Vector2.Dot(transform.right, playerRB.velocity) * 0.5f;
+        Vector2 playerVelocity = playerRB != null ? playerRB.velocity : Vector2.zero;
+        currentMaxXSpeed = maxXSpeed + Vector2.Dot(transform.right, playerVelocity) * 0.5f;
         float xAccel = currentMaxXSpeed / timeToMaxSpeed;
         float yAccel = maxYSpeed / timeToMaxSpeed;
 
-        Vector2 toPlayerVector = (Vector2)player.position - rb.position;
+        Vector3 playerPos = player != null ? player.position : EnemySpawner.PlayerLastPos;
+        Vector2 toPlayerVector = (Vector2)playerPos - rb.position;
         rb.rotation = Vector2.SignedAngle(Vector2.up, toPlayerVector);
 
         if (toPlayerVector.sqrMagnitude > distanceToKeep + distanceToleranceFraction)
@@ -90,6 +92,11 @@ public class EnemyShipMove : MonoBehaviour
             newVelocity.x = Mathf.Clamp(newVelocity.x + xAccel * Time.fixedDeltaTime * rotateDirection, -currentMaxXSpeed, currentMaxXSpeed);
        
         rb.velocity = transform.TransformDirection(newVelocity);
+
+        if (player == null)
+        {
+            GetComponent<EnemyProjectileShoot>().enabled = false;
+        }
     }
     IEnumerator RotationCheckFrequency()
     {

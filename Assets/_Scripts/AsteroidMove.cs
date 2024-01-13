@@ -21,15 +21,16 @@ public class AsteroidMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    private void Start()
     {
         player = FindAnyObjectByType<PlayerMove>()?.transform;
+    }
 
-        if (MoveSpeed == 0)
-            MoveSpeed = Mathf.Abs(Random.Range(baseSpeed - baseSpeed*(speedVariationPerc/100), baseSpeed + baseSpeed*(speedVariationPerc/100)));
-        //print(baseSpeed);
+    void OnEnable()
+    {
+        MoveSpeed = Mathf.Abs(Random.Range(baseSpeed - baseSpeed*(speedVariationPerc/100), baseSpeed + baseSpeed*(speedVariationPerc/100)));
 
-        if (player != null & MoveDirection == Vector3.zero)
+        if (player != null)
         {
             MoveDirection = player.position - transform.position;
             MoveDirection = MoveDirection.normalized;
@@ -37,10 +38,17 @@ public class AsteroidMove : MonoBehaviour
             MoveDirection += new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * moveDirVariation;
             MoveDirection = MoveDirection.normalized;
         }
-        else if (MoveDirection == Vector3.zero)
-            MoveDirection = (EnemySpawn.PlayerLastPos - transform.position).normalized;
+        else 
+            MoveDirection = (EnemySpawner.PlayerLastPos - transform.position).normalized;
 
         rb.velocity = (MoveDirection) * MoveSpeed;
+    }
+
+    public void SetVelocity(float speed, Vector2 direction)
+    {
+        MoveSpeed = speed;
+        MoveDirection = direction;
+        rb.velocity = direction * speed;
     }
 
     private void OnDrawGizmos()

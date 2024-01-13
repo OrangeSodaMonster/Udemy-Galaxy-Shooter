@@ -16,17 +16,19 @@ public class DroneMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    void OnEnable()
     {
         if (MoveSpeed == 0)
             MoveSpeed = Mathf.Abs(Random.Range(baseSpeed - baseSpeed*(speedVariationPerc/100), baseSpeed + baseSpeed*(speedVariationPerc/100)));
 
-        player = FindAnyObjectByType<PlayerMove>().transform;
+        player = FindAnyObjectByType<PlayerMove>()?.transform;
     }
 
     private void FixedUpdate()
     {
-        transform.up = player.position - transform.position;
+        //Vector3 playerPos = player != null ? player.position : EnemySpawn.PlayerLastPos;
+        if(player != null)
+            rb.rotation = Vector2.SignedAngle(Vector2.up, player.position - transform.position);
 
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
         velocity.y = MoveSpeed;
@@ -37,7 +39,10 @@ public class DroneMove : MonoBehaviour
             velocity.x = Mathf.Clamp(velocity.x + baseSpeed * 0.2f * Time.fixedDeltaTime, -baseSpeed * 0.5f, 0);
 
         rb.velocity = transform.TransformDirection(velocity);
-        //rb.velocity = transform.up * MoveSpeed;
-        //transform.position = Vector3.MoveTowards(transform.position, player.position, MoveSpeed * Time.deltaTime);
+
+        if (player == null)
+        {
+            GetComponent<EnemyProjectileShoot>().enabled = false;
+        }
     }
 }

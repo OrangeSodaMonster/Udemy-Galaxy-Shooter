@@ -8,7 +8,7 @@ public class DriftRotare : MonoBehaviour
 
     float angularSpeed;
 
-    private void Start()
+    private void OnEnable()
     {
         angularSpeed = Random.Range(minMaxAbsAngularSpeed.x, minMaxAbsAngularSpeed.y);
         angularSpeed *= Mathf.Sign(Random.Range(-1,1));

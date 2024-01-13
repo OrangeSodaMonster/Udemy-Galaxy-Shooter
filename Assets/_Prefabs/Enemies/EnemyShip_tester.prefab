@@ -334,7 +334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseShootCD: 4
   shootCDVariation: 0.5
-  projectile: {fileID: 1250797867374824522, guid: 645435d149b3671469a35e59c34343cb, type: 3}
   projectileOrigin: {fileID: 8833679456953152818}
 --- !u!114 &-7816810953003846886
 MonoBehaviour:
@@ -349,13 +348,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropsToSpawn:
-  - drop: {fileID: 7181768199481728834, guid: a515bad026dc9a14c82407d72822ab62, type: 3}
+  - drop: 0
     spawnWeight: 5
-  - drop: {fileID: 7181768199481728834, guid: 78f5a511c8c43c047a8be64eba5c027e, type: 3}
+  - drop: 2
     spawnWeight: 5
-  - drop: {fileID: 7181768199481728834, guid: cb4b707e3f908f14080928189d9f0263, type: 3}
+  - drop: 4
     spawnWeight: 1
-  - drop: {fileID: 7181768199481728834, guid: 665e7035d7b5daf45b099e010eb25287, type: 3}
+  - drop: 5
     spawnWeight: 0.5
   minDropsNum: 3
   maxDropsNum: 6
