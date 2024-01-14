@@ -16,7 +16,6 @@ public class CollectiblesPickUps : MonoBehaviour
 
     [SerializeField] float minDriftMoveSpeed = 0.1f;
     [SerializeField] float maxDriftMoveSpeed = 0.6f;
-    [SerializeField] float timeDuration = 30f;    
 
     bool isDrifting = true;
     Vector2 driftDirection = Vector2.zero;
@@ -51,8 +50,6 @@ public class CollectiblesPickUps : MonoBehaviour
         driftSpeed = Random.Range(minDriftMoveSpeed, maxDriftMoveSpeed);
         currentDriftSpeed = driftSpeed;
         transform.localScale = defaultScale;
-
-        StartCoroutine(DestroyCD());
     }
 
     private void Update()
@@ -139,13 +136,6 @@ public class CollectiblesPickUps : MonoBehaviour
             tractorCurrentPull = 0;
             isTractor = false;
         }
-    }
-
-    IEnumerator DestroyCD()
-    {
-        yield return new WaitForSeconds(timeDuration);
-
-        DestroySequence();
     }
 
     public void DestroySequence()

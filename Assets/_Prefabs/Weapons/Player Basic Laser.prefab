@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -176973899492380119}
   - component: {fileID: -1406321224783330647}
   - component: {fileID: -7524811716181194084}
+  - component: {fileID: -5301446706552992743}
   m_Layer: 6
   m_Name: Player Basic Laser
   m_TagString: Untagged
@@ -163,7 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 17
-  life: 7
 --- !u!114 &-7524811716181194084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +176,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961e7f527878abd4bb54463b052a9fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5301446706552992743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250797867374824522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbac3434ff8dccc4f80f0395027a20fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 4
+  disableOnDeath: 1
+  blinkNearDeath: 0
+  blinkSeconds: 5
+  blinksPerSec: 2
+  fastBlinkSeconds: 2
+  fastBlinkPerSec: 3
+  ease: 4

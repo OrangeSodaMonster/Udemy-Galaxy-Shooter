@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 1333530762342924166}
   - component: {fileID: -7816810953003846886}
   - component: {fileID: -4416344171559439961}
+  - component: {fileID: -5495169815155117129}
   m_Layer: 7
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -92,7 +93,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 44e7abdda24f5614ea37709213c8cac8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -289,3 +290,24 @@ MonoBehaviour:
   hpPrefab: {fileID: 7192821498156279173, guid: 3935062b95a19034a98292a7656f791d, type: 3}
   hpPositionOffset: {x: 0, y: 1.6, z: 0}
   hpColor: {r: 0.14901961, g: 1, b: 0, a: 1}
+--- !u!114 &-5495169815155117129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974661654251716083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e14075b4f30bc498722e4a686a76d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDuration: 0.1
+  damageMaxValue: 0.2
+  damageEase: 18
+  hazardFrequency: 2
+  hazardMinMaxValues: {x: 0.12, y: 0.25}
+  hazardEase: 4
+  healDuration: 0.5
+  healMaxValue: 0.3
+  healEase: 4

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5268871528433323750}
   - component: {fileID: -5012487739013579960}
   - component: {fileID: -388155790707487009}
+  - component: {fileID: 3130292867142213746}
   m_Layer: 7
   m_Name: EnemyDrone
   m_TagString: Untagged
@@ -61,7 +62,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 44e7abdda24f5614ea37709213c8cac8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116,7 +117,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -274,6 +275,27 @@ MonoBehaviour:
   hpPrefab: {fileID: 7192821498156279173, guid: 3935062b95a19034a98292a7656f791d, type: 3}
   hpPositionOffset: {x: 0, y: 1.6, z: 0}
   hpColor: {r: 0.14901961, g: 1, b: 0, a: 1}
+--- !u!114 &3130292867142213746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168744362905818312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e14075b4f30bc498722e4a686a76d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDuration: 0.1
+  damageMaxValue: 0.2
+  damageEase: 18
+  hazardFrequency: 2
+  hazardMinMaxValues: {x: 0.12, y: 0.25}
+  hazardEase: 4
+  healDuration: 0.5
+  healMaxValue: 0.3
+  healEase: 4
 --- !u!1 &8362586221873957059
 GameObject:
   m_ObjectHideFlags: 0

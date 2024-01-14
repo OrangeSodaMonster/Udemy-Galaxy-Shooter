@@ -10,9 +10,14 @@ public class ShaderStarsMoving : MonoBehaviour
 
     PlayerMove playerMove;
 
+    private void Awake()
+    {
+
+        material = GetComponent<SpriteRenderer>().material;
+    }
+
     void Start()
     {
-        material = GetComponent<SpriteRenderer>().material;
         playerMove = FindObjectOfType<PlayerMove>();
         material.SetFloat("_ScrollSpeed", maxStarsSpeed);
         material.SetFloat("_ScrollSpeedLayerMod", scrollSpeedLayerMod);

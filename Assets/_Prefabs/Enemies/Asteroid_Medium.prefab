@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 7575564427027688670}
   - component: {fileID: 4801385826154356493}
   - component: {fileID: -21839113218640710}
+  - component: {fileID: 1522175524750202655}
   m_Layer: 7
   m_Name: Asteroid_Medium
   m_TagString: Untagged
@@ -62,7 +63,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 44e7abdda24f5614ea37709213c8cac8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -284,3 +285,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4edad9e8ffebd439562e057f512030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1522175524750202655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596066275569553282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e14075b4f30bc498722e4a686a76d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDuration: 0.1
+  damageMaxValue: 0.2
+  damageEase: 18
+  hazardFrequency: 2
+  hazardMinMaxValues: {x: 0.12, y: 0.25}
+  hazardEase: 4
+  healDuration: 0.5
+  healMaxValue: 0.3
+  healEase: 4

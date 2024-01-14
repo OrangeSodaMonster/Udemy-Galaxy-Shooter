@@ -28,6 +28,11 @@ public class AreaDamage : MonoBehaviour
             Coroutine enemyRoutine = StartCoroutine(DamageRoutine(enemyHP, null));
             enemyRoroutines[enemyHP] = enemyRoutine;
         }
+
+        if(collision.TryGetComponent(out SpriteOverlayScript overlay))
+        {
+            overlay.StartHazardOverlay();
+        }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
@@ -42,6 +47,11 @@ public class AreaDamage : MonoBehaviour
             //Debug.Log($"{collision.name} safe");
             StopCoroutine(enemyRoroutines[enemyHP]);
             enemyRoroutines.Remove(enemyHP);
+        }
+
+        if (collision.TryGetComponent(out SpriteOverlayScript overlay))
+        {
+            overlay.StopHazardOverlay();
         }
     }
 

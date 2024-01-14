@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -176973899492380119}
   - component: {fileID: -1406321224783330647}
   - component: {fileID: 5104625270355284371}
+  - component: {fileID: 3213372276408707717}
   m_Layer: 7
   m_Name: Enemy Basic Projectile
   m_TagString: Untagged
@@ -163,7 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
-  life: 7
 --- !u!114 &5104625270355284371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,3 +177,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+--- !u!114 &3213372276408707717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250797867374824522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbac3434ff8dccc4f80f0395027a20fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 6
+  disableOnDeath: 1
+  blinkNearDeath: 0
+  blinkSeconds: 5
+  blinksPerSec: 2
+  fastBlinkSeconds: 2
+  fastBlinkPerSec: 3
+  ease: 4

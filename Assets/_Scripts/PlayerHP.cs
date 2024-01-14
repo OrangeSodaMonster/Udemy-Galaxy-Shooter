@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHP : MonoBehaviour
 {
     public static int MaxHP;
     public static int CurrentHP;
     public static int LastFrameHP;
-    public static bool DamageTaken = false;
-    public static bool HealReceived = false;
 
     public bool isInvencible = false;
     public static bool s_IsInvencible = false;
@@ -19,6 +18,8 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] TractorBeamScript tractorBeam;
     [SerializeField] BombScript bomb;
 
+    [SerializeField] UnityEvent tookDamage;
+    [SerializeField] UnityEvent wasHealed;
     PlayerUpgradesManager upgradesManager;
 
     void Start()
@@ -38,7 +39,7 @@ public class PlayerHP : MonoBehaviour
         MaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
 
         if (CurrentHP == 0)
-            PlayerDestructionSequence();       
+            PlayerDestructionSequence();         
     }
 
     void LateUpdate()
@@ -46,19 +47,12 @@ public class PlayerHP : MonoBehaviour
         if (LastFrameHP > CurrentHP)
         {
             Debug.Log($"<color=orange>Damage: {(LastFrameHP - CurrentHP)}</color>");
-            DamageTaken = true;
-            HealReceived = false;
+            tookDamage.Invoke();
         }
         else if (LastFrameHP < CurrentHP)
         {
             Debug.Log($"<color=green>Heal: {(CurrentHP - LastFrameHP)}</color>");
-            HealReceived = true;
-            DamageTaken = false;
-        }
-        else
-        {
-            HealReceived = false;
-            DamageTaken = false;
+            wasHealed.Invoke();
         }
 
         LastFrameHP = CurrentHP;
@@ -75,19 +69,6 @@ public class PlayerHP : MonoBehaviour
             ChangePlayerHP(-Mathf.Abs(collision.GetComponent<EnemyWeaponDamage>().Damage));
             lastCollisionHash = collision.gameObject.GetHashCode();            
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (collision.gameObject.layer == 3) { return; } // Invisible walls filter
-
-        //if (collision.gameObject.GetComponent<CollisionWithPlayer>() != null
-        //    & lastCollisionHash != collision.gameObject.GetHashCode()
-        //    & !isInvencible)
-        //{
-        //    ChangePlayerHP(-Mathf.Abs(collision.gameObject.GetComponent<CollisionWithPlayer>().Damage));
-        //    lastCollisionHash = collision.gameObject.GetHashCode();
-        //}       
     }
 
     public void PlayerDestructionSequence()

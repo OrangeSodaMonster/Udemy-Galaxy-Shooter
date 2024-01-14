@@ -5,7 +5,6 @@ using UnityEngine;
 public class LaserMove : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
-    [SerializeField] float life = 7f;
 
     Rigidbody2D rb;
     Vector3 defaultScale = new();
@@ -20,8 +19,6 @@ public class LaserMove : MonoBehaviour
     {
         rb.velocity = (transform.up) * moveSpeed;
         transform.localScale = defaultScale;
-
-        StartCoroutine(LaserLifeTime());
     }
 
 
@@ -43,10 +40,4 @@ public class LaserMove : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    IEnumerator LaserLifeTime()
-    {
-        yield return new WaitForSeconds(life);
-
-        DestroySequence();
-    }
 }
