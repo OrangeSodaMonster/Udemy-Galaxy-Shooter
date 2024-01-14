@@ -11,10 +11,17 @@ public struct DropsToSpawn
     public ResourceType drop;
     public float spawnWeight;
 }
+[Serializable]
+public struct DropsGuaranteed
+{
+    public ResourceType drop;
+    public int Amount;
+}
 
 public class EnemyDropDealer : MonoBehaviour
 {
     [SerializeField] DropsToSpawn[] dropsToSpawn;
+    [SerializeField] DropsGuaranteed[] dropsGuaranteed;
     [SerializeField] int minDropsNum = 2;
     [SerializeField] int maxDropsNum = 5;
 
@@ -24,6 +31,8 @@ public class EnemyDropDealer : MonoBehaviour
 
     public void SpawnDrops()
     {
+        SpawnGuaranteedDrops();
+
         float dropsNumber = UnityEngine.Random.Range(minDropsNum, maxDropsNum);
 
         foreach (var drop in dropsToSpawn)
@@ -46,7 +55,27 @@ public class EnemyDropDealer : MonoBehaviour
                 drop.transform.SetLocalPositionAndRotation(spawnPoint, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
                 drop.SetActive(true);
             }
+        }
+    }
 
+    void SpawnGuaranteedDrops()
+    {
+        foreach (var drops in dropsGuaranteed) 
+        {
+            for(int i = 0; i < drops.Amount; i++)
+            {
+                MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[drops.drop];
+
+                if (dropPooler != null)
+                {
+                    Vector3 spawnPoint = UnityEngine.Random.insideUnitCircle * radiusToSpawn;
+                    spawnPoint += transform.position;
+
+                    GameObject drop = dropPooler.GetPooledGameObject();
+                    drop.transform.SetLocalPositionAndRotation(spawnPoint, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
+                    drop.SetActive(true);
+                }
+            }
         }
     }
     ResourceType GetNextDrop(float spawnValue)

@@ -897,6 +897,11 @@ namespace MoreMountains.Tools
 			OnBumpIntensity?.Invoke(ApplyBumpIntensityMultiplier ? intensityMultiplier : 1f);
 		}
 
+		public void ForceBump()
+		{
+            StartCoroutine(BumpCoroutine(1));
+        }
+
 		/// <summary>
 		/// A coroutine that (usually quickly) changes the scale of the bar 
 		/// </summary>

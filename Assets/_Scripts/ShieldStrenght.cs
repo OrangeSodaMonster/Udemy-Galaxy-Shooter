@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,12 @@ public enum ShieldSide
 public class ShieldStrenght : MonoBehaviour
 {
     [SerializeField] ShieldSide shieldSide;
+    [Header("On Damage")]
+    [SerializeField] float hitDuration = .3f;
+    [SerializeField] float hitOverlayMaxValue = 1f;
+    [SerializeField] float hitGlowMaxValue = 3f;
+    [SerializeField] Ease hitEase = Ease.OutExpo;
+    float defaultGlow;
 
     public float baseRegenTime = 1;
     public float RegenMod = 1;
@@ -23,11 +30,14 @@ public class ShieldStrenght : MonoBehaviour
 
     Collider2D coll;
     ShieldScript shieldScript;
+    Material mat;
 
     private void Awake()
     {
         coll = GetComponent<Collider2D>();
+        mat = GetComponent<SpriteRenderer>().material;
         shieldScript = transform.parent.GetComponent<ShieldScript>();
+        defaultGlow = mat.GetFloat("_Glow");
     }
 
     private void OnEnable()
@@ -82,6 +92,8 @@ public class ShieldStrenght : MonoBehaviour
         {
             CurrentStr -= collision.gameObject.GetComponent<CollisionWithPlayer>().Damage;
             lastCollisionHash = collision.gameObject.GetHashCode();
+            StartCoroutine(CleanLastHit());
+            HitFX();
         }
 
         if (CurrentStr <= 0)
@@ -93,12 +105,15 @@ public class ShieldStrenght : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+       
         if (lastCollisionHash != collision.gameObject.GetHashCode())
-        {   
-            if(TryGetComponent(out EnemyWeaponDamage weaponDamage))
+        {            
+            if (collision.gameObject.TryGetComponent(out EnemyWeaponDamage weaponDamage))
             {
                 CurrentStr -= weaponDamage.Damage;
                 lastCollisionHash = collision.gameObject.GetHashCode();
+                StartCoroutine(CleanLastHit());                
+                HitFX();
             }
             if (CurrentStr <= 0)
             {
@@ -106,6 +121,22 @@ public class ShieldStrenght : MonoBehaviour
                 CurrentStr = 0;
             }       
         } 
+    }
+
+    IEnumerator CleanLastHit()
+    {
+        yield return new WaitForSeconds(.15f);
+        lastCollisionHash = 0;
+    }
+
+    void HitFX()
+    {
+        mat.SetFloat("_ShieldHitColor", 0);
+        mat.DOFloat(hitOverlayMaxValue, "_ShieldHitColor", hitDuration * 0.5f).SetEase(hitEase).SetLoops(2, LoopType.Yoyo)
+             .OnKill(() => mat.SetFloat("_ShieldHitColor", 0));
+        mat.SetFloat("_Glow", defaultGlow);
+        mat.DOFloat(hitGlowMaxValue, "_Glow", hitDuration * 0.5f).SetEase(hitEase).SetLoops(2, LoopType.Yoyo)
+             .OnKill(() => mat.SetFloat("_Glow", defaultGlow));
     }
 
     public void SetMaxStr()

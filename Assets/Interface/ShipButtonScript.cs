@@ -19,6 +19,7 @@ public class ShipButtonScript : MonoBehaviour
     [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI upgradeLevelTxt;
     [SerializeField] GameObject[] costs;
+    [SerializeField] float clickInterval = 0.2f;
 
     ShipUpgradesInfo shipUpgradeInfo;
 
@@ -92,29 +93,33 @@ public class ShipButtonScript : MonoBehaviour
 
     public void BuySpeed()
     {
+        if (!canClick) return;
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel == shipUpgradeInfo.SpeedUpgrade.Length) return;
 
         BuyUpgrade(shipUpgradeInfo.SpeedUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.SpeedLevel].Cost, ShipUpgradeType.Speed);
+        StartCoroutine(ClickIntervalRoutine());
     }
     public void BuyManobrability()
     {
+        if(!canClick) return;
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel == shipUpgradeInfo.ManobrabilityUpgrade.Length) return;
 
         BuyUpgrade(shipUpgradeInfo.ManobrabilityUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel].Cost, ShipUpgradeType.Manobrability);
+        StartCoroutine(ClickIntervalRoutine());
     }
     public void BuyHP()
     {
+        if(!canClick) return;
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel == shipUpgradeInfo.HP_Upgrade.Length) return;
 
         BuyUpgrade(shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel].Cost, ShipUpgradeType.HP);
 
-        // Aplica o HP adicional como cura
-        if(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel <= shipUpgradeInfo.HP_Upgrade.Length - 1)
-            PlayerHP.ChangePlayerHP(+(shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel].HP
-                - shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP));       
+        PlayerHP.ApplyHPUpgrade();
+        StartCoroutine(ClickIntervalRoutine());
     }
     public void BuyTractor()
     {
+        if(!canClick) return;
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel == shipUpgradeInfo.TractorBeamUpgrade.Length) return;
 
         if (!PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled)
@@ -128,6 +133,16 @@ public class ShipButtonScript : MonoBehaviour
         }            
         else
             BuyUpgrade(shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel].Cost, ShipUpgradeType.TractorBeam);
+        StartCoroutine(ClickIntervalRoutine());
+    }
+
+    bool canClick = true;
+    IEnumerator ClickIntervalRoutine()
+    {
+        canClick = false;
+        yield return new WaitForSecondsRealtime(clickInterval);
+
+        canClick = true;
     }
 
     void BuyUpgrade(ResourceNumber[] cost, ShipUpgradeType upgradeType)

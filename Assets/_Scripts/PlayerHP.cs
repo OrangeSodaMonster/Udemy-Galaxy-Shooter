@@ -83,6 +83,13 @@ public class PlayerHP : MonoBehaviour
         Destroy(gameObject);
     }
 
+    static public void ApplyHPUpgrade()
+    {
+        int missingHP = MaxHP - CurrentHP;
+        MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
+        CurrentHP = MaxHP - missingHP;
+    }
+
     static public void ChangePlayerHP(int value)
     {
         MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;

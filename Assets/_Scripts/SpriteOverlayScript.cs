@@ -56,19 +56,22 @@ public class SpriteOverlayScript : MonoBehaviour
     public void DamageOverlay()
     {
         material.SetFloat(damageValueID, 0);
-        material.DOFloat(damageMaxValue, damageValueID, damageDuration * 0.5f).SetEase(damageEase).SetLoops(2, LoopType.Yoyo);
+        material.DOFloat(damageMaxValue, damageValueID, damageDuration * 0.5f).SetEase(damageEase).SetLoops(2, LoopType.Yoyo)
+             .OnKill(() => material.SetFloat(damageValueID, 0));
     }
 
     public void HealOverlay()
     {
         material.SetFloat(healValueID, 0);
-        material.DOFloat(healMaxValue, healValueID, healDuration * 0.5f).SetEase(healEase).SetLoops(2, LoopType.Yoyo);
+        material.DOFloat(healMaxValue, healValueID, healDuration * 0.5f).SetEase(healEase).SetLoops(2, LoopType.Yoyo)
+            .OnKill(() => material.SetFloat(healValueID, 0));
     }
 
     public void StartHazardOverlay()
     {
         material.SetFloat(hazardValueID, hazardMinMaxValues[0]);
-        material.DOFloat(hazardMinMaxValues[1], hazardValueID, hazardFrequency * 0.5f).SetEase(hazardEase).SetLoops(-1, LoopType.Yoyo);
+        material.DOFloat(hazardMinMaxValues[1], hazardValueID, hazardFrequency * 0.5f).SetEase(hazardEase).SetLoops(-1, LoopType.Yoyo)
+            .OnKill(() => material.SetFloat(hazardValueID, 0)); ;
     }
 
     public void StopHazardOverlay()
