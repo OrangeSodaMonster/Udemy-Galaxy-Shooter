@@ -141,6 +141,7 @@ public class PlayerLasers : MonoBehaviour
         laser.transform.SetPositionAndRotation(transform.position + transform.TransformDirection(laserParent.position), transform.rotation * laserParent.rotation);
         laser.GetComponent<SpriteRenderer>().material = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Material;
         laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
+        laser.GetComponent<LaserMove>().VFXGradient = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].VFXGradient;
         laser.SetActive(true);
     }
 

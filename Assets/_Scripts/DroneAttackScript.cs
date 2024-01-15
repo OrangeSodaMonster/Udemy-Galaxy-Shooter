@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class DroneAttackScript : MonoBehaviour
 {
@@ -57,7 +58,6 @@ public class DroneAttackScript : MonoBehaviour
 
         if(isFiring & !wasFiringLastFrame)
         {
-            //Debug.Log(name + " started firing at " + target.name);
             timeSinceDamage = 0;
         }
 
@@ -67,6 +67,11 @@ public class DroneAttackScript : MonoBehaviour
             {
                 target.GetComponent<EnemyHP>().ChangeHP(-Mathf.Abs(damage));
                 timeSinceDamage = 0;
+
+                GameObject vfx = VFXPoolerScript.Instance.DroneAttackVFXPooler.GetPooledGameObject();
+                vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);
+                vfx.transform.position = target.position;
+                vfx.SetActive(true);
             }
         }
 

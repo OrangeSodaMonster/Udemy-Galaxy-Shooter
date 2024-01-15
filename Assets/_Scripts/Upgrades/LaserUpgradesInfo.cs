@@ -10,6 +10,7 @@ public struct LaserPowerUpgrade
     public ResourceNumber[] Cost;
     public int Damage;
     public Material Material;
+    public Gradient VFXGradient;
 }
 
 [Serializable]

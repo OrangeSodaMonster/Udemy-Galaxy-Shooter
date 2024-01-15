@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.VFX;
 
 public class IonStreamScript : MonoBehaviour
 {
@@ -103,6 +105,11 @@ public class IonStreamScript : MonoBehaviour
                 {
                     if(target.GetComponent<EnemyHP>() != null)
                         target.GetComponent<EnemyHP>().ChangeHP(-Mathf.Abs(damage));
+
+                    GameObject vfx = VFXPoolerScript.Instance.IonStreamVFXPooler.GetPooledGameObject();
+                    //vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);
+                    vfx.transform.position = target.position;
+                    vfx.SetActive(true);
 
                     castingOrigin = (Vector2)target.transform.position;
                     hitHashs[i]= target.GetHashCode();
