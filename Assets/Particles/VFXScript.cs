@@ -21,7 +21,7 @@ public class VFXScript : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSeconds(.1f);
 
             if (!effect.HasAnySystemAwake())
                 gameObject.SetActive(false);

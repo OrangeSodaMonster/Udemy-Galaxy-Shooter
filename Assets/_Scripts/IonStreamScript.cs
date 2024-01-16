@@ -109,6 +109,9 @@ public class IonStreamScript : MonoBehaviour
                     GameObject vfx = VFXPoolerScript.Instance.IonStreamVFXPooler.GetPooledGameObject();
                     //vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);
                     vfx.transform.position = target.position;
+                    vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife",
+                        upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[upgradesManager.CurrentUpgrades.IonStreamUpgrades.DamageLevel-1].VFXGradient);
+                    vfx.transform.localScale = (0.95f+0.05f*upgradesManager.CurrentUpgrades.IonStreamUpgrades.DamageLevel) * Vector3.one;
                     vfx.SetActive(true);
 
                     castingOrigin = (Vector2)target.transform.position;

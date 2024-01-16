@@ -139,8 +139,18 @@ public class ShieldStrenght : MonoBehaviour
              .OnKill(() => mat.SetFloat("_Glow", defaultGlow));
     }
 
-    public void SetMaxStr()
+    public void UpgradeStr()
     {
-        CurrentStr = MaxStr;
+        StartCoroutine(UpgradeDelay());
+
+        IEnumerator UpgradeDelay()
+        {
+            yield return new WaitForSecondsRealtime(.1f);
+
+            Debug.Log(name + " Upgrade STR");
+
+            CurrentStr = MaxStr;
+        }
     }
+    
 }

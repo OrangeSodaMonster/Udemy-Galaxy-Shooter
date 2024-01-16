@@ -21,14 +21,17 @@ public class LifeTimeScript : MonoBehaviour
     SpriteRenderer spriteRenderer;
     float blinkTime;
     float fastBlinkTime;
+    Color defaultColor;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultColor = spriteRenderer.color;
     }
 
     void OnEnable()
     {
+        spriteRenderer.color = defaultColor;
         blinkTime = 1/(blinksPerSec * 2);
         fastBlinkTime = 1/(fastBlinkPerSec * 2);
 

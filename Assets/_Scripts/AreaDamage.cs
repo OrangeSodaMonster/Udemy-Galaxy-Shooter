@@ -29,10 +29,11 @@ public class AreaDamage : MonoBehaviour
             enemyRoroutines[enemyHP] = enemyRoutine;
         }
 
-        if(collision.TryGetComponent(out SpriteOverlayScript overlay))
+        if (collision.TryGetComponent(out SpriteOverlayScript overlay))
         {
             overlay.StartHazardOverlay();
         }
+
     }
     void OnTriggerExit2D(Collider2D collision)
     {

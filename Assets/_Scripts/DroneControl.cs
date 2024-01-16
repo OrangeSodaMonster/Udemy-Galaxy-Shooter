@@ -37,5 +37,6 @@ public class DroneControl : MonoBehaviour
         drone.DamagePerSecond = upgradesManager.DroneUpgradesInfo.PowerUpgrades[droneUpgrades.DamageLevel - 1].DamagePerSecond;
         drone.LineColor = upgradesManager.DroneUpgradesInfo.PowerUpgrades[droneUpgrades.DamageLevel - 1].Color;
         drone.Range = upgradesManager.DroneUpgradesInfo.RangeUpgrades[droneUpgrades.RangeLevel - 1].Range;
+        drone.VFXScaleMultiplier = 0.95f + .05f * droneUpgrades.DamageLevel;
     }
 }

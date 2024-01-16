@@ -10,6 +10,7 @@ public struct IonStreamPowerUpgrade
     public int Damage;
     public float Widht;
     public Material Material;
+    public Gradient VFXGradient;
 }
 
 [Serializable]

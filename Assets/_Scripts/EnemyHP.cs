@@ -8,6 +8,7 @@ public class EnemyHP : MonoBehaviour
 {
     public event Action TookDamage;
     public event Action Healed;
+    public event Action Died;
     //public int OnBirthDamage;
 
     [SerializeField] bool destroyOnCollision = true;
@@ -58,6 +59,7 @@ public class EnemyHP : MonoBehaviour
             if (TryGetComponent(out EnemyDropDealer dropDealer))
                 dropDealer.SpawnDrops();
 
+            Died?.Invoke();
             DestroySequence();
         }
 
@@ -82,8 +84,11 @@ public class EnemyHP : MonoBehaviour
         if(TryGetComponent(out EnemyDropDealer dropDealer))
             dropDealer.SpawnDrops();
 
-        if(destroyOnCollision)
+        if (destroyOnCollision)
+        {
+            Died?.Invoke();
             DestroySequence();
+        }
                
     }
 

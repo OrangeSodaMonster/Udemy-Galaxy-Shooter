@@ -9,6 +9,7 @@ public class DroneAttackScript : MonoBehaviour
     public float Range = 2.5f;
     public float DamagePerSecond = 2.5f;
     public Gradient LineColor;
+    public float VFXScaleMultiplier = 1;
 
     [SerializeField] float timeToDamage = .2f;
     [SerializeField] Transform fireOrigin;
@@ -71,6 +72,7 @@ public class DroneAttackScript : MonoBehaviour
                 GameObject vfx = VFXPoolerScript.Instance.DroneAttackVFXPooler.GetPooledGameObject();
                 vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);
                 vfx.transform.position = target.position;
+                vfx.transform.localScale = (VFXScaleMultiplier) * Vector3.one;
                 vfx.SetActive(true);
             }
         }
