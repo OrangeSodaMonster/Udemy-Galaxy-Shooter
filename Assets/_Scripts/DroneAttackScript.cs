@@ -10,6 +10,7 @@ public class DroneAttackScript : MonoBehaviour
     public float DamagePerSecond = 2.5f;
     public Gradient LineColor;
     public float VFXScaleMultiplier = 1;
+    [SerializeField] VisualEffect beamVFX;
 
     [SerializeField] float timeToDamage = .2f;
     [SerializeField] Transform fireOrigin;
@@ -28,6 +29,7 @@ public class DroneAttackScript : MonoBehaviour
         player = FindObjectOfType<PlayerMove>().transform;
 
         AttackLineRenderer.gameObject.SetActive(false);
+        beamVFX.gameObject.SetActive(false);
     }
 
     void Update()
@@ -47,11 +49,15 @@ public class DroneAttackScript : MonoBehaviour
             AttackLineRenderer.SetPosition(1, fireOrigin.position + (target.position - fireOrigin.position) / 2);
             AttackLineRenderer.SetPosition(2, target.position);
 
+            beamVFX.gameObject.SetActive(true);
+
             isFiring = true;
         }
         else
         {
             AttackLineRenderer.gameObject.SetActive(false);
+            beamVFX.gameObject.SetActive(false);
+
             isFiring = false;
 
             transform.up = transform.position - player.position;
@@ -60,6 +66,7 @@ public class DroneAttackScript : MonoBehaviour
         if(isFiring & !wasFiringLastFrame)
         {
             timeSinceDamage = 0;
+            beamVFX.SetGradient("Color", LineColor);
         }
 
         if (target != null & timeSinceDamage > timeToDamage)
