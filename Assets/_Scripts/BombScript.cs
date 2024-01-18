@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class BombScript : MonoBehaviour
 {
@@ -10,27 +11,26 @@ public class BombScript : MonoBehaviour
 
     [SerializeField] InputSO Input;
     [SerializeField] float radius;
-    [SerializeField] float visualDuration = .2f;
     [SerializeField] LayerMask layersToHit;
     [SerializeField] int damage = 100;
     [SerializeField] float coolDown = 3;
+    [SerializeField] VisualEffect vfx;
+    [SerializeField] float damageDelay = .2f;
 
     float timeSinceUsedBomb = float.MaxValue;
     RaycastHit2D[] hits;
-    EnemyHP enemyHP;
 
     void Start()
     {
         BombAmount = startingBombs;
-        TurnOffSpriteRenderer();
+        vfx.gameObject.SetActive(false);
     }
 
     void Update()
     {
         if (Input.IsSpecialing && BombAmount > 0 && timeSinceUsedBomb >= coolDown)
         {
-            GetComponent<SpriteRenderer>().enabled = true;
-            Invoke(nameof(BombScript.TurnOffSpriteRenderer), visualDuration);
+            vfx.gameObject.SetActive(true);
 
             hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0, layersToHit);
 
@@ -38,12 +38,12 @@ public class BombScript : MonoBehaviour
             {
                 if (hit.transform.TryGetComponent(out EnemyHP enemyHP))
                 {
-                    enemyHP.ChangeHP(-Mathf.Abs(damage));
-                    //Debug.Log(enemyHP.name + " " + damage + " damage");
+                    StartCoroutine(ApplyDamage(hit, enemyHP));
                 }
                 else if(hit.transform.TryGetComponent(out LaserMove enemyProjectile))
                 {
-                    enemyProjectile.DestroySequence();
+                    if(!enemyProjectile.IsPlayer)
+                        enemyProjectile.DestroySequence();
                 }
             }
 
@@ -54,15 +54,20 @@ public class BombScript : MonoBehaviour
         timeSinceUsedBomb += Time.deltaTime;
     }
 
+    private IEnumerator ApplyDamage(RaycastHit2D hit, EnemyHP enemyHP)
+    {
+        yield return new WaitForSeconds(damageDelay);
+
+        enemyHP.ChangeHP(-Mathf.Abs(damage));
+        GameObject hitVFX = VFXPoolerScript.Instance.BombHitVFXPooler.GetPooledGameObject();
+        hitVFX.transform.position = hit.transform.position;
+        hitVFX.gameObject.SetActive(true);
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
 
         Gizmos.DrawWireSphere(transform.position, radius);
-    }
-
-    void TurnOffSpriteRenderer()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
     }
 }

@@ -7,6 +7,7 @@ public class LaserMove : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] bool isPlayer;
+    public bool IsPlayer { get { return isPlayer; } }
 
     Rigidbody2D rb;
     Vector3 defaultScale = new();
