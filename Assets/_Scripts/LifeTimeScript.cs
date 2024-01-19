@@ -8,6 +8,7 @@ public class LifeTimeScript : MonoBehaviour
 {
     [SerializeField] float lifeTime;
     [SerializeField] bool disableOnDeath = true;
+    [SerializeField] bool vfxOnDeath = false;
 
     [Header("Blinking")]
     [SerializeField] bool blinkNearDeath;
@@ -43,6 +44,13 @@ public class LifeTimeScript : MonoBehaviour
 
     void OnDisable()
     {
+        if (vfxOnDeath)
+        {
+            GameObject vfx = VFXPoolerScript.Instance.DesapearVFXPooler.GetPooledGameObject();
+            vfx.transform.position = transform.position;
+            vfx.SetActive(true);
+        }
+
         StopAllCoroutines();
         blinkingTween.Kill();
     }

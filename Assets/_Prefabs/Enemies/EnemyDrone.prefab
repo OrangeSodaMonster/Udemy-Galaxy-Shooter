@@ -446,6 +446,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 169507771051642903}
     m_Modifications:
+    - target: {fileID: 783791973390039672, guid: a84decd450745aa499439980b43920fe, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4375363668544649030, guid: a84decd450745aa499439980b43920fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -489,6 +493,10 @@ PrefabInstance:
     - target: {fileID: 7346825972395319167, guid: a84decd450745aa499439980b43920fe, type: 3}
       propertyPath: m_Name
       value: EnemyPreAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346825972395319167, guid: a84decd450745aa499439980b43920fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

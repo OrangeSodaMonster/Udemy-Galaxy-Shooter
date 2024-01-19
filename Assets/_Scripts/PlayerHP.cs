@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerHP : MonoBehaviour
 
     [SerializeField] UnityEvent tookDamage;
     [SerializeField] UnityEvent wasHealed;
+    [SerializeField] VisualEffect deathVFX;
     PlayerUpgradesManager upgradesManager;
 
     void Start()
@@ -39,7 +41,7 @@ public class PlayerHP : MonoBehaviour
         MaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
 
         if (CurrentHP == 0)
-            PlayerDestructionSequence();         
+            StartCoroutine(PlayerDestructionSequence());
     }
 
     void LateUpdate()
@@ -71,13 +73,23 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
-    public void PlayerDestructionSequence()
+ 
+
+    public IEnumerator PlayerDestructionSequence()
     {
+        yield return null;
+
         shields.gameObject.SetActive(false);
         ionStream.gameObject.SetActive(false);
         drones.SetActive(false);
         tractorBeam.gameObject.SetActive(false);
         bomb.gameObject.SetActive(false);
+
+        if(CurrentHP <= 0)
+        {
+            deathVFX.transform.position = transform.position;
+            deathVFX.gameObject.SetActive(true);
+        }
 
         UIManager.EnableGameoverCanvas();
         Destroy(gameObject);

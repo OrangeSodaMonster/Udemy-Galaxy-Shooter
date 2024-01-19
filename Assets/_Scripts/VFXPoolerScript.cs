@@ -13,6 +13,7 @@ public class VFXPoolerScript : MonoBehaviour
     [field: SerializeField] public MMSimpleObjectPooler AsteroidDustVFXPooler { get; private set; }
     [field: SerializeField] public MMSimpleObjectPooler EnemyExplosionVFXPooler { get; private set; }
     [field: SerializeField] public MMSimpleObjectPooler BombHitVFXPooler { get; private set; }
+    [field: SerializeField] public MMSimpleObjectPooler DesapearVFXPooler { get; private set; }
 
     public static VFXPoolerScript Instance;
     void Awake()

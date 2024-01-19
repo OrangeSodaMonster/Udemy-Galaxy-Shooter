@@ -37,7 +37,7 @@ public class BlackHoleHorizon : MonoBehaviour
     void DestroySucked(Collider2D collision)
     {
         if (collision.TryGetComponent(out PlayerHP playerHP))
-            playerHP.PlayerDestructionSequence();
+            StartCoroutine(playerHP.PlayerDestructionSequence());
         else if(collision.TryGetComponent(out LaserMove lMove))
             lMove.DestroySequence();
         else if (collision.TryGetComponent(out CollectiblesPickUps drop))
