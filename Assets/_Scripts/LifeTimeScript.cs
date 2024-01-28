@@ -43,14 +43,7 @@ public class LifeTimeScript : MonoBehaviour
     }
 
     void OnDisable()
-    {
-        if (vfxOnDeath)
-        {
-            GameObject vfx = VFXPoolerScript.Instance.DesapearVFXPooler.GetPooledGameObject();
-            vfx.transform.position = transform.position;
-            vfx.SetActive(true);
-        }
-
+    {       
         StopAllCoroutines();
         blinkingTween.Kill();
     }
@@ -69,7 +62,14 @@ public class LifeTimeScript : MonoBehaviour
     {
         yield return new WaitForSeconds(lifeTime);
 
-        if(disableOnDeath)
+        if (vfxOnDeath)
+        {
+            GameObject vfx = VFXPoolerScript.Instance.DesapearVFXPooler.GetPooledGameObject();
+            vfx.transform.position = transform.position;
+            vfx.SetActive(true);
+        }
+
+        if (disableOnDeath)
             gameObject.SetActive(false);
         else
             Destroy(gameObject);

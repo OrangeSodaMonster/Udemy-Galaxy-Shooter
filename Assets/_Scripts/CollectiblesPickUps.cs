@@ -108,14 +108,18 @@ public class CollectiblesPickUps : MonoBehaviour
             {
                 case CollectibleType.MetalCrumb:
                     PlayerCollectiblesCount.MetalCrumbsAmount += 1;
+                    AudioManager.Instance.MetalCrumbSound.PlayFeedbacks();
                     break;
                 case CollectibleType.RareMetalCrumb:
+                    AudioManager.Instance.RareMetalCrumbSound.PlayFeedbacks();
                     PlayerCollectiblesCount.RareMetalCrumbsAmount += 1;
                     break;
                 case CollectibleType.EnergyCristal:
+                    AudioManager.Instance.EnergyCrystalSound.PlayFeedbacks();
                     PlayerCollectiblesCount.EnergyCristalAmount += 1;
                     break;
                 case CollectibleType.RareEnergyCristal:
+                    AudioManager.Instance.CondensedEnergyCrystalSound.PlayFeedbacks();
                     PlayerCollectiblesCount.CondensedEnergyCristalAmount += 1;
                     break;
             }

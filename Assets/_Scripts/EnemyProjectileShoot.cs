@@ -29,6 +29,7 @@ public class EnemyProjectileShoot : MonoBehaviour
             yield return new WaitForSeconds(shootCD - preShootVFXTimePrior);
 
             preShootVFX.gameObject.SetActive(true);
+            AudioManager.Instance.EnemyChargeSound.PlayFeedbacks();
 
             yield return new WaitForSeconds(preShootVFXTimePrior);
 
@@ -39,6 +40,7 @@ public class EnemyProjectileShoot : MonoBehaviour
             preShootVFX.gameObject.SetActive(false);
             shootCD = Random.Range(-shootCDVariation, shootCDVariation) + baseShootCD;
 
+            AudioManager.Instance.EnemyFireSound.PlayFeedbacks();
         } 
     }
 }

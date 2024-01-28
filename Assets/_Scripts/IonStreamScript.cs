@@ -114,6 +114,8 @@ public class IonStreamScript : MonoBehaviour
                     vfx.transform.localScale = (0.95f+0.05f*upgradesManager.CurrentUpgrades.IonStreamUpgrades.DamageLevel) * Vector3.one;
                     vfx.SetActive(true);
 
+                    AudioManager.Instance.IonStreamSound.PlayFeedbacks();
+
                     castingOrigin = (Vector2)target.transform.position;
                     hitHashs[i]= target.GetHashCode();
                 }

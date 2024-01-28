@@ -143,6 +143,8 @@ public class PlayerLasers : MonoBehaviour
         laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
         laser.GetComponent<LaserMove>().VFXGradient = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].VFXGradient;
         laser.SetActive(true);
+
+        AudioManager.Instance.LaserSound.PlayFeedbacks();
     }
 
     public void PowerUpStart(float value)

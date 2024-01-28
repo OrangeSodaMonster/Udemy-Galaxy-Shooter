@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class EnemyHP : MonoBehaviour
 {
     public event Action TookDamage;
@@ -11,6 +10,7 @@ public class EnemyHP : MonoBehaviour
     public event Action Died;
     //public int OnBirthDamage;
 
+    [field:SerializeField] public bool IsAsteroid { get; private set; } = false;
     [SerializeField] bool destroyOnCollision = true;
     [field:SerializeField] public int MaxHP { get; private set; } = 1;
 
@@ -94,6 +94,11 @@ public class EnemyHP : MonoBehaviour
 
     public void DestroySequence()
     {
+        if(!IsAsteroid && CurrentHP <= 0)
+            AudioManager.Instance.EnemyDestructionSound.PlayFeedbacks();
+        else if (IsAsteroid && CurrentHP <= 0)
+            AudioManager.Instance.AsteroidDestructionSound.PlayFeedbacks();
+
         gameObject.SetActive(false);
     }
 

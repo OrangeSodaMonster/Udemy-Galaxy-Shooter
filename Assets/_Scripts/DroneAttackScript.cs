@@ -52,6 +52,9 @@ public class DroneAttackScript : MonoBehaviour
             beamVFX.gameObject.SetActive(true);
 
             isFiring = true;
+
+            if (!AudioManager.Instance.DronesActive.Contains(gameObject.GetHashCode()))
+                AudioManager.Instance.DronesActive.Add(gameObject.GetHashCode());
         }
         else
         {
@@ -61,12 +64,15 @@ public class DroneAttackScript : MonoBehaviour
             isFiring = false;
 
             transform.up = transform.position - player.position;
+
+            if (AudioManager.Instance.DronesActive.Contains(gameObject.GetHashCode()))
+                AudioManager.Instance.DronesActive.Remove(gameObject.GetHashCode());
         }
 
         if(isFiring & !wasFiringLastFrame)
         {
             timeSinceDamage = 0;
-            beamVFX.SetGradient("Color", LineColor);
+            beamVFX.SetGradient("Color", LineColor);            
         }
 
         if (target != null & timeSinceDamage > timeToDamage)

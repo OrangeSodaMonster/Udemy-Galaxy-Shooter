@@ -49,6 +49,8 @@ public class BombScript : MonoBehaviour
 
             BombAmount--;
             timeSinceUsedBomb = 0;
+
+            AudioManager.Instance.BombSound.PlayFeedbacks();
         }
 
         timeSinceUsedBomb += Time.deltaTime;

@@ -42,12 +42,20 @@ public class LaserMove : MonoBehaviour
             vfx.transform.position = collision.ClosestPoint(transform.position);
             vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", VFXGradient);
             vfx.SetActive(true);
+
+            if(collision.TryGetComponent(out EnemyHP enemyHP))
+            {
+                if(enemyHP.IsAsteroid)
+                    AudioManager.Instance.AsteroidHitSound.PlayFeedbacks();
+            }
         }
         else
         {
             GameObject vfx = VFXPoolerScript.Instance.ProjectileVFXPooler.GetPooledGameObject();
             vfx.transform.position = collision.ClosestPoint(transform.position);
             vfx.SetActive(true);
+
+            AudioManager.Instance.EnemyProjectileDestructionSound.PlayFeedbacks();
         }
 
         DestroySequence();
