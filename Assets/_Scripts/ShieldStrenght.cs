@@ -59,6 +59,9 @@ public class ShieldStrenght : MonoBehaviour
                 coll.enabled = true;
 
             shieldScript.ShieldAlphaSetter(this);
+
+            if(CurrentStr > lastFrameStr)
+                AudioManager.Instance.ShieldUpSound.PlayFeedbacks();
         }
 
         lastFrameStr = CurrentStr;
@@ -90,10 +93,10 @@ public class ShieldStrenght : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<CollisionWithPlayer>() != null && lastCollisionHash != collision.gameObject.GetHashCode())
         {
+            HitFX();
             CurrentStr -= collision.gameObject.GetComponent<CollisionWithPlayer>().Damage;
             lastCollisionHash = collision.gameObject.GetHashCode();
             StartCoroutine(CleanLastHit());
-            HitFX();
         }
 
         if (CurrentStr <= 0)
@@ -110,10 +113,10 @@ public class ShieldStrenght : MonoBehaviour
         {            
             if (collision.gameObject.TryGetComponent(out EnemyWeaponDamage weaponDamage))
             {
+                HitFX();                
                 CurrentStr -= weaponDamage.Damage;
                 lastCollisionHash = collision.gameObject.GetHashCode();
                 StartCoroutine(CleanLastHit());                
-                HitFX();
             }
             if (CurrentStr <= 0)
             {
@@ -137,6 +140,8 @@ public class ShieldStrenght : MonoBehaviour
         mat.SetFloat("_Glow", defaultGlow);
         mat.DOFloat(hitGlowMaxValue, "_Glow", hitDuration * 0.5f).SetEase(hitEase).SetLoops(2, LoopType.Yoyo)
              .OnKill(() => mat.SetFloat("_Glow", defaultGlow));
+
+        AudioManager.Instance.ShieldHitSound.PlayFeedbacks();
     }
 
     public void UpgradeStr()
@@ -146,8 +151,6 @@ public class ShieldStrenght : MonoBehaviour
         IEnumerator UpgradeDelay()
         {
             yield return new WaitForSecondsRealtime(.1f);
-
-            Debug.Log(name + " Upgrade STR");
 
             CurrentStr = MaxStr;
         }

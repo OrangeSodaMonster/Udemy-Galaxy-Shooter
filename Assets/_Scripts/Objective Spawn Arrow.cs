@@ -42,8 +42,19 @@ public class ObjectiveSpawnArrow : MonoBehaviour
         else if (!fadeArrowTween.IsActive())
             fadeArrowTween = arrowSR.DOFade(defaultAlpha, 0.35f);
 
-        if (transform.childCount == 0)
-            Destroy(gameObject);
+        if (!HasChildActive())
+            gameObject.SetActive(false);
+    }
+
+    bool HasChildActive()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.activeInHierarchy)
+
+            return true;
+        }
+        return false;
     }
 
     private void OnDisable()

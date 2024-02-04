@@ -39,7 +39,7 @@ public class EnemyHP : MonoBehaviour
     {
         if (lastFrameHP > currentHP)
         {
-            TookDamage?.Invoke();
+            TookDamage?.Invoke();            
         }
         else if (lastFrameHP > currentHP)
         {
@@ -70,10 +70,17 @@ public class EnemyHP : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Enemy hit by player
-        if (collision.TryGetComponent(out PlayerLaserDamage laserDamage) & lastCollisionHash != collision.gameObject.GetHashCode())
+        if (collision.TryGetComponent(out PlayerLaserDamage laserDamage) && lastCollisionHash != collision.gameObject.GetHashCode())
         {
             ChangeHP (-Mathf.Abs(laserDamage.Damage));
             lastCollisionHash = collision.gameObject.GetHashCode();            
+        }
+        //Enemy hit by enemy
+        else if (IsAsteroid && collision.TryGetComponent(out EnemyWeaponDamage projectileDamage) && collision.GetComponent<LaserMove>().SourceHash != gameObject.GetHashCode() &&
+            lastCollisionHash != collision.gameObject.GetHashCode())
+        {
+            ChangeHP(-Mathf.Abs(projectileDamage.Damage));
+            lastCollisionHash = collision.gameObject.GetHashCode();
         }
      }
 

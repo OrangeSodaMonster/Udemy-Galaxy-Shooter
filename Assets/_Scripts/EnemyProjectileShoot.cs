@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,18 +30,24 @@ public class EnemyProjectileShoot : MonoBehaviour
             yield return new WaitForSeconds(shootCD - preShootVFXTimePrior);
 
             preShootVFX.gameObject.SetActive(true);
-            AudioManager.Instance.EnemyChargeSound.PlayFeedbacks();
+            AudioManager.Instance.PlayEnemyCharge(gameObject.GetHashCode());
 
             yield return new WaitForSeconds(preShootVFXTimePrior);
 
             //Instantiate(projectile, projectileOrigin.position, transform.rotation, transform.parent);
             GameObject projectile = EnemyPoolRef.s_projectilePool.GetPooledGameObject();
             projectile.transform.SetLocalPositionAndRotation(projectileOrigin.position, transform.rotation);
+            projectile.GetComponent<LaserMove>().SourceHash = gameObject.GetHashCode();
             projectile.SetActive(true);
             preShootVFX.gameObject.SetActive(false);
             shootCD = Random.Range(-shootCDVariation, shootCDVariation) + baseShootCD;
 
             AudioManager.Instance.EnemyFireSound.PlayFeedbacks();
         } 
+    }
+
+    private void OnDisable()
+    {
+        AudioManager.Instance.StopEnemyCharge(gameObject.GetHashCode());
     }
 }

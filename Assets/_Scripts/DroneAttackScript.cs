@@ -46,8 +46,9 @@ public class DroneAttackScript : MonoBehaviour
             AttackLineRenderer.colorGradient = LineColor;
             AttackLineRenderer.positionCount = 3;
             AttackLineRenderer.SetPosition(0, fireOrigin.position);
-            AttackLineRenderer.SetPosition(1, fireOrigin.position + (target.position - fireOrigin.position) / 2);
-            AttackLineRenderer.SetPosition(2, target.position);
+            Vector3 hitPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
+            AttackLineRenderer.SetPosition(1, fireOrigin.position + (hitPos - fireOrigin.position) / 2);
+            AttackLineRenderer.SetPosition(2, hitPos);
 
             beamVFX.gameObject.SetActive(true);
 
@@ -84,7 +85,7 @@ public class DroneAttackScript : MonoBehaviour
 
                 GameObject vfx = VFXPoolerScript.Instance.DroneAttackVFXPooler.GetPooledGameObject();
                 vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);
-                vfx.transform.position = target.position;
+                vfx.transform.position = AttackLineRenderer.GetPosition(2);
                 vfx.transform.localScale = (VFXScaleMultiplier) * Vector3.one;
                 vfx.SetActive(true);
             }

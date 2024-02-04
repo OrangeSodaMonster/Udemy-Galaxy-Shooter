@@ -81,6 +81,8 @@ public class PlayerPowerUps : MonoBehaviour
         isFasterShooting = true;
         fasterShootingTotalDuration = collision.GetComponent<FasterShootingPowerUp>().Duration;
 
+        AudioManager.Instance.FasterShootingPUSound.PlayFeedbacks();
+
         DestroyPowerUpPickUp(collision);
     }
     private void StopFasterShootingCD()
@@ -92,6 +94,8 @@ public class PlayerPowerUps : MonoBehaviour
             {
                 isFasterShooting=false;
                 playerWeapons.PowerUpEnd();
+
+                AudioManager.Instance.EndPUSound.PlayFeedbacks();
             }
         }
     }
@@ -108,6 +112,10 @@ public class PlayerPowerUps : MonoBehaviour
         tractorPURunTime = 0;
         isTractorPU = true;
         tractorPUTotalDuration = collision.GetComponent<TractorBeamPowerUp>().Duration;
+
+        AudioManager.Instance.TractorBeamPUSound.PlayFeedbacks();
+
+
         DestroyPowerUpPickUp(collision);
     }
     private void StopTractorPUCD()
@@ -119,6 +127,8 @@ public class PlayerPowerUps : MonoBehaviour
             {
                 isTractorPU = false;
                 tractorBeam.PowerUpEnd();
+
+                AudioManager.Instance.EndPUSound.PlayFeedbacks();
             }
         }
     }
@@ -135,6 +145,9 @@ public class PlayerPowerUps : MonoBehaviour
         shieldPURunTime = 0;
         isShieldPU = true;
         shieldPUTotalDuration = collision.GetComponent<ShieldPowerUp>().Duration;
+
+        AudioManager.Instance.ShieldPUSound.PlayFeedbacks();
+
         DestroyPowerUpPickUp(collision);
     }
     private void StopShieldPUCD()
@@ -146,6 +159,8 @@ public class PlayerPowerUps : MonoBehaviour
             {
                 isShieldPU = false;
                 shield.PowerUpEnd();
+
+                AudioManager.Instance.EndPUSound.PlayFeedbacks();
             }
         }
     }
@@ -162,6 +177,9 @@ public class PlayerPowerUps : MonoBehaviour
         healingPURunTime = 0;
         isHealingPU = true;
         healingPUTotalDuration = collision.GetComponent<HealPowerUp>().Duration;
+
+        AudioManager.Instance.HealPUSound.PlayFeedbacks();
+
         DestroyPowerUpPickUp(collision);
     }
     private void StopHealingPUCD()
@@ -173,6 +191,8 @@ public class PlayerPowerUps : MonoBehaviour
             {
                 isHealingPU = false;
                 healing.PowerUpEnd();
+
+                AudioManager.Instance.EndPUSound.PlayFeedbacks();
             }
         }
     }
@@ -183,6 +203,8 @@ public class PlayerPowerUps : MonoBehaviour
         {
             BombPowerUp bombPowerUp = collision.GetComponent<BombPowerUp>();
             BombScript.BombAmount += bombPowerUp.NumberOfCharges;
+
+            AudioManager.Instance.BombPickSound.PlayFeedbacks();
 
             DestroyPowerUpPickUp(collision);
         }

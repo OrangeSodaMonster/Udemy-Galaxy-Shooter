@@ -7,7 +7,9 @@ public class EnemyDeathVFX : MonoBehaviour
 {
     [SerializeField] bool isAsteroid;
     [SerializeField] float vfxScale = 1f;
+    [GradientUsage(true)]
     [SerializeField] Gradient vfxColor;
+    [GradientUsage(true)]
     [SerializeField] Gradient vfxRingsColor;
 
     private void OnEnable()
@@ -27,6 +29,7 @@ public class EnemyDeathVFX : MonoBehaviour
             vfx.transform.position = transform.position;
             vfx.transform.localScale = vfxScale * Vector3.one;
             vfx.GetComponent<VisualEffect>().SetGradient("ColorVariation", vfxColor);
+            vfx.GetComponent<VisualEffect>().SetGradient("ShockParticlesColor", vfxRingsColor);
             vfx.SetActive(true);
         }
         else

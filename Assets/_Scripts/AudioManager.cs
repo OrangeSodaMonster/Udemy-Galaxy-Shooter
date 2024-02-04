@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     [field:SerializeField] public MMFeedbacks IonStreamSound { get; private set; }
     [field:SerializeField] public AudioSource DronesSound { get; private set; }
     [field:SerializeField] public MMFeedbacks BombSound { get; private set; }
+    [field:SerializeField] public MMFeedbacks ShieldUpSound { get; private set; }
 
     [field: Header("Collectibles")]
     [field:SerializeField] public MMFeedbacks MetalCrumbSound { get; private set; }
@@ -19,36 +20,61 @@ public class AudioManager : MonoBehaviour
     [field:SerializeField] public MMFeedbacks EnergyCrystalSound { get; private set; }
     [field:SerializeField] public MMFeedbacks CondensedEnergyCrystalSound { get; private set; }
 
+    [field: Header("PowerUps")]
+    [field: SerializeField] public MMFeedbacks HealPUSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks FasterShootingPUSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks ShieldPUSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks TractorBeamPUSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks BombPickSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks EndPUSound { get; private set; }
+
     [field: Header("Impact")]
     [field: SerializeField] public MMFeedbacks AsteroidHitSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks EnemyHitSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks PlayerHitSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks ShieldHitSound { get; private set; }
 
     [field: Header("Destruction")]
     [field: SerializeField] public MMFeedbacks EnemyDestructionSound { get; private set; }
     [field: SerializeField] public MMFeedbacks EnemyProjectileDestructionSound { get; private set; }
     [field: SerializeField] public MMFeedbacks AsteroidDestructionSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks PlayerDestructionSound { get; private set; }
 
     [field: Header("Enemy Fire")]
     [field: SerializeField] public MMFeedbacks EnemyChargeSound { get; private set; }
     [field: SerializeField] public MMFeedbacks EnemyFireSound { get; private set; }
 
-    public List<int> DronesActive = new();
+    [field: Header("Interface")]
+    [field: SerializeField] public MMFeedbacks ClickSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks HoverSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks BackSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks UnlockUpgradeSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks UpgradeSound { get; private set; }
+
+    [field: Header("Other")]
+    [field: SerializeField] public AudioSource AlarmSound { get; private set; }
+
+    [HideInInspector] public List<int> DronesActive = new();
     int dronesActiveLastFrame;
     float dronesDefaultVolume;
-    MMFeedbackAudioSource droneAudioFeedback;
+    float alarmDefaultVolume;
+    MMFeedbackMMSoundManagerSound enemyChargeFB;
 
     public static AudioManager Instance;
     void Awake()
     {
         if(Instance == null)
             Instance = this;
-
     }
 
     private void Start()
     {
         PauseDrone();
-
         dronesDefaultVolume = DronesSound.volume;
+        PauseAlarm();
+        alarmDefaultVolume = AlarmSound.volume;
+
+        enemyChargeFB = EnemyChargeSound.gameObject.GetComponent<MMFeedbackMMSoundManagerSound>();
     }
 
     private void LateUpdate()
@@ -81,7 +107,25 @@ public class AudioManager : MonoBehaviour
         DronesSound.Play();
         DronesSound.DOFade(dronesDefaultVolume, .1f);
     }
+    public void PauseAlarm()
+    {
+        DronesSound.DOFade(0, 1f).OnComplete(() => AlarmSound.Pause());
 
-
+    }
+    public void PlayAlarm()
+    {
+        AlarmSound.volume = 0;
+        AlarmSound.Play();
+        AlarmSound.DOFade(alarmDefaultVolume, 1f);
+    }
+    public void PlayEnemyCharge(int enemyHash)
+    {
+        enemyChargeFB.ID = enemyHash;
+        EnemyChargeSound.PlayFeedbacks();
+    }
+    public void StopEnemyCharge(int enemyHash)
+    {
+        MMSoundManagerSoundControlEvent.Trigger(MMSoundManagerSoundControlEventTypes.Free, enemyHash);
+    }
 
 }

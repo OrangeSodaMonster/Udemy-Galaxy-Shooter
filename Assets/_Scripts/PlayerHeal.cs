@@ -58,7 +58,7 @@ public class PlayerHeal : MonoBehaviour
         {
             isHealing = true;
 
-            Debug.Log(currentSecondsBetweenHeal);
+            //Debug.Log(currentSecondsBetweenHeal);
             yield return new WaitForSeconds(currentSecondsBetweenHeal);
 
             if (isFreeHeal)

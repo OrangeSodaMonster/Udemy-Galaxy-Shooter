@@ -89,6 +89,8 @@ public class PlayerHP : MonoBehaviour
         {
             deathVFX.transform.position = transform.position;
             deathVFX.gameObject.SetActive(true);
+
+            AudioManager.Instance.PlayerDestructionSound.PlayFeedbacks();
         }
 
         UIManager.EnableGameoverCanvas();

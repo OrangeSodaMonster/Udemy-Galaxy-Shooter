@@ -12,6 +12,7 @@ public class LaserMove : MonoBehaviour
     Rigidbody2D rb;
     Vector3 defaultScale = new();
     public Gradient VFXGradient;
+    [HideInInspector] public int SourceHash = 0;
 
     private void Awake()
     {
@@ -34,8 +35,15 @@ public class LaserMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<BlackHolePull>() != null || collision.GetComponent<BlackHoleHorizon>() != null) return;
+        if (collision.GetComponent<BlackHolePull>() != null || collision.GetComponent<BlackHoleHorizon>() != null ||
+            (!isPlayer && (collision.gameObject.GetHashCode() == SourceHash || collision.TryGetComponent(out EnemyHP enemyHP) && !enemyHP.IsAsteroid)))
+            return;
+       
+        DestroySequence(collision);
+    }
 
+    public void DestroySequence(Collider2D collision)
+    {
         if (isPlayer)
         {
             GameObject vfx = VFXPoolerScript.Instance.LaserVFXPooler.GetPooledGameObject();
@@ -43,10 +51,12 @@ public class LaserMove : MonoBehaviour
             vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", VFXGradient);
             vfx.SetActive(true);
 
-            if(collision.TryGetComponent(out EnemyHP enemyHP))
+            if (collision.TryGetComponent(out EnemyHP enemyHP))
             {
-                if(enemyHP.IsAsteroid)
+                if (enemyHP.IsAsteroid)
                     AudioManager.Instance.AsteroidHitSound.PlayFeedbacks();
+                else
+                    AudioManager.Instance.EnemyHitSound.PlayFeedbacks();
             }
         }
         else
@@ -56,12 +66,38 @@ public class LaserMove : MonoBehaviour
             vfx.SetActive(true);
 
             AudioManager.Instance.EnemyProjectileDestructionSound.PlayFeedbacks();
+
+            if (collision.TryGetComponent(out PlayerHP playerHP))
+            {
+                AudioManager.Instance.PlayerHitSound.PlayFeedbacks();
+            }
         }
 
-        DestroySequence();
+        gameObject.SetActive(false);
     }
 
     public void DestroySequence()
+    {
+        if (isPlayer)
+        {
+            GameObject vfx = VFXPoolerScript.Instance.LaserVFXPooler.GetPooledGameObject();
+            vfx.transform.position = transform.position;
+            vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", VFXGradient);
+            vfx.SetActive(true);            
+        }
+        else
+        {
+            GameObject vfx = VFXPoolerScript.Instance.ProjectileVFXPooler.GetPooledGameObject();
+            vfx.transform.position = transform.position;
+            vfx.SetActive(true);
+
+            AudioManager.Instance.EnemyProjectileDestructionSound.PlayFeedbacks();            
+        }
+
+        gameObject.SetActive(false);
+    }
+
+    public void DestroySilently()
     {
         gameObject.SetActive(false);
     }
