@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: -4416344171559439961}
   - component: {fileID: -5495169815155117129}
   - component: {fileID: 9179801134552238898}
+  - component: {fileID: -2991940992318775636}
   m_Layer: 7
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -115,7 +116,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: 4ff3dd2b6ebf4f940a417c2b05647575, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -391,6 +392,21 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+--- !u!114 &-2991940992318775636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974661654251716083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0957de4e9cfcad143acddd9e1c67329f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpawnCD: 9
+  spawnCDVariation: 1
+  droneToSpawn: {fileID: 1168744362905818312, guid: ed3520d8c629bb145abdfe23fb2281db, type: 3}
 --- !u!1 &7730610816321907873
 GameObject:
   m_ObjectHideFlags: 0

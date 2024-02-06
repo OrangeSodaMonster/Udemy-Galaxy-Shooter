@@ -43,6 +43,7 @@ public class AudioManager : MonoBehaviour
     [field: Header("Enemy Fire")]
     [field: SerializeField] public MMFeedbacks EnemyChargeSound { get; private set; }
     [field: SerializeField] public MMFeedbacks EnemyFireSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks DroneSpawnSound { get; private set; }
 
     [field: Header("Interface")]
     [field: SerializeField] public MMFeedbacks ClickSound { get; private set; }
@@ -109,7 +110,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PauseAlarm()
     {
-        DronesSound.DOFade(0, 1f).OnComplete(() => AlarmSound.Pause());
+        DronesSound.DOFade(0, .3f).OnComplete(() => AlarmSound.Pause());
 
     }
     public void PlayAlarm()

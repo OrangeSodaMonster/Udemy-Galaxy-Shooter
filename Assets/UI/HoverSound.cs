@@ -10,7 +10,7 @@ public class HoverSound : MonoBehaviour//, IPointerEnterHandler, IPointerExitHan
 	{
         AudioManager.Instance.HoverSound.PlayFeedbacks();
 
-        Debug.Log("Hover");
+        //Debug.Log("Hover");
 	}
 
     private void Start()

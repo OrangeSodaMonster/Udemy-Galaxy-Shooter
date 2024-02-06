@@ -51,10 +51,11 @@ public class UIManager : MonoBehaviour
         else if (hasReleasedPause && input.IsPausing && isPaused && !isOnUpgrade)
         {
             LeavePause();
+            Debug.Log("Despausar");
         }
         else if (hasReleasedPause && input.IsPausing && isOnUpgrade)
         {
-            DisableAllCanvas();
+            //DisableAllCanvas();
             hasReleasedPause = false;
         }
 
@@ -96,35 +97,35 @@ public class UIManager : MonoBehaviour
     {
         if (!isPaused) return;
 
-        StartCoroutine(DisableEnableCanvasDelay(shipUpgradePage));
+        StartCoroutine(DisableEnableUpgradeDelay(shipUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableLaserUpgradePage()
     {
         if (!isPaused) return;
 
-        StartCoroutine(DisableEnableCanvasDelay(laserUpgradePage));
+        StartCoroutine(DisableEnableUpgradeDelay(laserUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableShieldUpgradePage()
     {
         if (!isPaused) return;
 
-        StartCoroutine(DisableEnableCanvasDelay(shieldUpgradePage));
+        StartCoroutine(DisableEnableUpgradeDelay(shieldUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableIonStreamUpgradePage()
     {
         if (!isPaused) return;
 
-        StartCoroutine(DisableEnableCanvasDelay(ionStreamUpgradePage));
+        StartCoroutine(DisableEnableUpgradeDelay(ionStreamUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableDronesUpgradePage()
     {
         if (!isPaused) return;
 
-        StartCoroutine(DisableEnableCanvasDelay(dronesUpgradePage));
+        StartCoroutine(DisableEnableUpgradeDelay(dronesUpgradePage));
         isOnUpgrade = true;
     }
     public void DisableAllCanvas()
@@ -134,23 +135,32 @@ public class UIManager : MonoBehaviour
         shieldUpgradePage.gameObject.SetActive(false);
         ionStreamUpgradePage.gameObject.SetActive(false);
         dronesUpgradePage.gameObject.SetActive(false);
-        pauseCanvas.gameObject.SetActive(false);
-
-        isOnUpgrade = false;        
+        pauseCanvas.gameObject.SetActive(false);         
     }
 
-    IEnumerator DisableEnableCanvasDelay(RectTransform canvasToEnable)
+    IEnumerator DisableEnableUpgradeDelay(RectTransform canvasToEnable)
     {
         yield return null;
 
         DisableAllCanvas();
 
         canvasToEnable.gameObject.SetActive(true);
+        isOnUpgrade = true;
+    }
+
+    IEnumerator DisableEnablePauseDelay()
+    {
+        yield return null;
+
+        DisableAllCanvas();
+
+        pauseCanvas.gameObject.SetActive(true);
+        isOnUpgrade = false;
     }
 
     public void ReturnToPauseCanvas()
     {
-        StartCoroutine(DisableEnableCanvasDelay(pauseCanvas));
+        StartCoroutine(DisableEnablePauseDelay());
     }
 
     public static void EnableGameoverCanvas()

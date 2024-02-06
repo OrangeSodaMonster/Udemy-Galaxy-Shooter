@@ -39,7 +39,7 @@ public class AsteroidMove : MonoBehaviour
             MoveDirection = MoveDirection.normalized;
         }
         else 
-            MoveDirection = (EnemySpawner.PlayerLastPos - transform.position).normalized;
+            MoveDirection = (EnemySpawner.Instance.PlayerLastPos - transform.position).normalized;
 
         rb.velocity = (MoveDirection) * MoveSpeed;
     }

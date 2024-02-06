@@ -3124,8 +3124,8 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_DeadZoneWidth: 0.001
+  m_DeadZoneHeight: 0.001
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
@@ -6606,7 +6606,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.000000317581, y: 0.00000017881393, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7808,7 +7808,7 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Sfx: {fileID: 8300000, guid: 4a77a85528033064b8073fe2a5e717ff, type: 3}
+  Sfx: {fileID: 8300000, guid: bd839767246c87f4ab8eb525df40e644, type: 3}
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
@@ -8396,14 +8396,14 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Sfx: {fileID: 8300000, guid: bd839767246c87f4ab8eb525df40e644, type: 3}
+  Sfx: {fileID: 8300000, guid: d0baf8207456d9e40b46a3a0616f570c, type: 3}
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.35
-  MaxVolume: 0.4
-  MinPitch: 0.95
-  MaxPitch: 1.05
+  MinVolume: 0.25
+  MaxVolume: 0.3
+  MinPitch: 0.98
+  MaxPitch: 1.02
   MmSoundManagerTrack: 0
   ID: 0
   AudioGroup: {fileID: 0}
@@ -9610,7 +9610,7 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Sfx: {fileID: 8300000, guid: 338a360f6f1e5494d830791a89de8e96, type: 3}
+  Sfx: {fileID: 8300000, guid: 2d86a445fdda38a40bb144e042e4ddd5, type: 3}
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
@@ -10671,6 +10671,7 @@ MonoBehaviour:
     timeSec: 120
   - enemy: {fileID: 6307899594429889583, guid: ac03f69ed6b6e5d45b73019e92af8520, type: 3}
     timeSec: 150
+  PlayerLastPos: {x: 0, y: 0, z: 0}
 --- !u!4 &739795235
 Transform:
   m_ObjectHideFlags: 0
@@ -12694,6 +12695,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyDrone
       objectReference: {fileID: 0}
+    - target: {fileID: 1168744362905818312, guid: ed3520d8c629bb145abdfe23fb2281db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3374683274740031062, guid: ed3520d8c629bb145abdfe23fb2281db, type: 3}
       propertyPath: baseSpeed
       value: 0
@@ -12805,6 +12810,227 @@ MonoBehaviour:
   drone2: {fileID: 1660189607}
   drone3: {fileID: 1432726497}
   rotationSpeed: 72
+--- !u!1 &953110001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 953110004}
+  - component: {fileID: 953110002}
+  - component: {fileID: 953110003}
+  m_Layer: 0
+  m_Name: DroneSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &953110002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953110001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Feedbacks:
+  - {fileID: 953110003}
+  InitializationMode: 2
+  AutoInitialization: 1
+  SafeMode: 3
+  Direction: 0
+  AutoChangeDirectionOnEnd: 0
+  AutoPlayOnStart: 0
+  AutoPlayOnEnable: 0
+  ForceTimescaleMode: 0
+  ForcedTimescaleMode: 1
+  DurationMultiplier: 1
+  RandomizeDuration: 0
+  RandomDurationMultiplier: {x: 0.5, y: 1.5}
+  DisplayFullDurationDetails: 0
+  PlayerTimescaleMode: 1
+  OnlyPlayIfWithinRange: 0
+  RangeCenter: {fileID: 0}
+  RangeDistance: 5
+  UseRangeFalloff: 0
+  RangeFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RemapRangeFalloff: {x: 0, y: 1}
+  IgnoreRangeEvents: 0
+  CooldownDuration: 0
+  InitialDelay: 0
+  CanPlay: 1
+  CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
+  FeedbacksIntensity: 1
+  Events:
+    TriggerMMFeedbacksEvents: 0
+    TriggerUnityEvents: 1
+    OnPlay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPause:
+      m_PersistentCalls:
+        m_Calls: []
+    OnResume:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRevert:
+      m_PersistentCalls:
+        m_Calls: []
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRestoreInitialValues:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSkipToTheEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  DebugActive: 0
+--- !u!114 &953110003
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953110001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c8acfc07fee664da6ad222b6541a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: DroneSpawn
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Sfx: {fileID: 8300000, guid: b2625b3018d5716429e570278efa4aa2, type: 3}
+  RandomSfx: []
+  TestButton: 0
+  TestStopButton: 0
+  MinVolume: 0.35
+  MaxVolume: 0.4
+  MinPitch: 0.95
+  MaxPitch: 1.05
+  MmSoundManagerTrack: 0
+  ID: 0
+  AudioGroup: {fileID: 0}
+  RecycleAudioSource: {fileID: 0}
+  Loop: 0
+  Persistent: 0
+  DoNotPlayIfClipAlreadyPlaying: 0
+  StopSoundOnFeedbackStop: 0
+  DoNotAutoRecycleIfNotDonePlaying: 0
+  Fade: 1
+  FadeInitialVolume: 0
+  FadeDuration: 0.1
+  FadeTween:
+    MMTweenDefinitionType: 0
+    MMTweenCurve: 9
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Initialized: 0
+  SoloSingleTrack: 0
+  SoloAllTracks: 0
+  AutoUnSoloOnEnd: 0
+  PanStereo: 0
+  SpatialBlend: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  Priority: 128
+  ReverbZoneMix: 1
+  DopplerLevel: 1
+  Spread: 0
+  RolloffMode: 0
+  MinDistance: 1
+  MaxDistance: 500
+--- !u!4 &953110004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953110001}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1295544511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &967572991 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 978557442021024179, guid: cd66d53eeeb57f640ba7a3e57054aefd, type: 3}
@@ -13434,7 +13660,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeUntilStop: 40
+  timeUntilStop: 4
   timeToStopRotation: 2
   acceleratingXDecelerationMod: 8
   acceleratingRotationMod: 2
@@ -17214,14 +17440,14 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Sfx: {fileID: 8300000, guid: 738a61a1bd7bc5f429a05d19948033d9, type: 3}
+  Sfx: {fileID: 8300000, guid: 8cc8ea592cef6824988c8cfc9e8607de, type: 3}
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.4
-  MaxVolume: 0.45
-  MinPitch: 0.95
-  MaxPitch: 1.05
+  MinVolume: 0.35
+  MaxVolume: 0.4
+  MinPitch: 0.98
+  MaxPitch: 1.02
   MmSoundManagerTrack: 0
   ID: 0
   AudioGroup: {fileID: 0}
@@ -17877,6 +18103,7 @@ Transform:
   m_Children:
   - {fileID: 1954850506}
   - {fileID: 1596980244}
+  - {fileID: 953110004}
   m_Father: {fileID: 2035580815}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1307860853
@@ -18110,7 +18337,7 @@ Transform:
   m_GameObject: {fileID: 1320868356}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.000000317581, y: 0.00000017881393, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20066,6 +20293,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 35b88c02-4cda-41ba-bbf4-d95158cf5a75
     m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
+        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
+        m_MethodName: GetDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f136c917-3a85-4d55-84d8-a29432b1f024
+    m_ActionName: Player/SetDirection[/SwitchProControllerHID/leftStick/up,/XInputControllerWindows/leftStick/up,/SwitchProControllerHID/leftStick/down,/XInputControllerWindows/leftStick/down,/SwitchProControllerHID/leftStick/left,/XInputControllerWindows/leftStick/left,/SwitchProControllerHID/leftStick/right,/XInputControllerWindows/leftStick/right]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -28128,6 +28371,7 @@ MonoBehaviour:
   <PlayerDestructionSound>k__BackingField: {fileID: 1020845650}
   <EnemyChargeSound>k__BackingField: {fileID: 1954850504}
   <EnemyFireSound>k__BackingField: {fileID: 1596980242}
+  <DroneSpawnSound>k__BackingField: {fileID: 953110002}
   <ClickSound>k__BackingField: {fileID: 732657167}
   <HoverSound>k__BackingField: {fileID: 999737556}
   <BackSound>k__BackingField: {fileID: 777346406}
@@ -29889,6 +30133,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2991940992318775636, guid: 9218c2946237e934d86dbaf0ef37e259, type: 3}
+      propertyPath: baseSpawnCD
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3923200483083425928, guid: 9218c2946237e934d86dbaf0ef37e259, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.78
@@ -30592,6 +30840,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 490881109}
   - {fileID: 1320868358}
   - {fileID: 619394802}
   - {fileID: 556792643}
@@ -30601,7 +30850,6 @@ SceneRoots:
   - {fileID: 1759845610}
   - {fileID: 1307860854}
   - {fileID: 99296598}
-  - {fileID: 490881109}
   - {fileID: 2093724933}
   - {fileID: 1106254389}
   - {fileID: 754931834}

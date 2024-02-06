@@ -27,7 +27,7 @@ public class ShipButtonScript : MonoBehaviour
 
     void Awake()
     {
-        shipUpgradeInfo = PlayerUpgradesManager.Instance.ShipUpgradesInfo;        
+        shipUpgradeInfo = PlayerUpgradesManager.Instance.ShipUpgradesInfo;
     }
 
     private void OnEnable()

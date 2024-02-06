@@ -15,6 +15,7 @@ public class InputSO : ScriptableObject
     public bool IsAutoFire = false;
     public bool IsPausing = false;
     public bool IsCancelUI = false;
+    public Vector2 Direction;
 
     public void GetAcceleration(InputAction.CallbackContext context)
     {
@@ -33,6 +34,11 @@ public class InputSO : ScriptableObject
         if (Mathf.Abs(Turning) > 0.85f)
             Turning = 1 * Mathf.Sign(Turning);
         //Debug.Log("Turn: " + Turning);
+    }
+
+    public void GetDirection(InputAction.CallbackContext context)
+    {
+        Direction = context.ReadValue<Vector2>();
     }
 
     public void GetFiring(InputAction.CallbackContext context)

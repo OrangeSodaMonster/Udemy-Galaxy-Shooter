@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -107,7 +108,7 @@ public class PlayerMove : MonoBehaviour
 
             rb.angularVelocity -= AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * Input.Turning;      
             
-            // Apply deceleration when turning in the oposite direction, to turn faster and naturally
+            // Apply deceleration when turning in the oposite direction, to turn faster
             if(Mathf.Abs(rb.angularVelocity) > 0 && Mathf.Sign(rb.angularVelocity) == Mathf.Sign(Input.Turning))
             {
                 rb.angularVelocity -= AngDeceleration * Time.fixedDeltaTime * Input.Turning;
@@ -128,7 +129,67 @@ public class PlayerMove : MonoBehaviour
                 rb.angularVelocity = Mathf.Clamp(rb.angularVelocity + l_decelFactor, -maxTurningSpeed, 0);
         }
 
-        rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -maxTurningSpeed, maxTurningSpeed);
+        DrawDirectionLine();
+        TurnToDirection();
+        ClampDirection();
+
+        rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -maxTurningSpeed, maxTurningSpeed);           
+    }
+
+
+    float directionTime = 0;
+    Vector2 currentDirection = new();
+    float directionDifference = 0;
+    float analogAngleToRotateMin = 0;
+    void TurnToDirection()
+    {
+        analogAngleToRotateMin = maxTurningSpeed * 0.75f * Time.fixedDeltaTime;
+        currentDirection = new Vector2(Mathf.Sin(-rb.rotation * Mathf.Deg2Rad), Mathf.Cos(-rb.rotation * Mathf.Deg2Rad));
+        directionDifference = Vector2.SignedAngle(currentDirection, Input.Direction);
+
+        if (Mathf.Abs(directionDifference) < analogAngleToRotateMin || Input.Direction == Vector2.zero)
+        {
+            directionTime = 0;
+            return;
+        };
+
+        float angleToStartDecel = Mathf.Abs(maxTurningSpeed * timeToMaxSpeed);        
+
+        if (Mathf.Abs(directionDifference) > angleToStartDecel)
+        {
+            directionTime += Time.fixedDeltaTime;
+            float turningValue = directionTime / timeToMaxTurning;
+            turningValue = Mathf.Clamp(turningValue, 0, 1);
+
+            rb.angularVelocity += AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * Mathf.Sign(directionDifference);
+        }
+        else if(Mathf.Abs(directionDifference) <= angleToStartDecel)
+        {
+            float turningValue = 2 * Mathf.Abs(directionDifference) / angleToStartDecel;
+            turningValue = Mathf.Clamp(turningValue, 0.2f, 1);
+            rb.angularVelocity = maxTurningSpeed * turningSpeedCurve.Evaluate(turningValue) * Mathf.Sign(directionDifference);
+        }
+    }
+
+    void ClampDirection()
+    {
+        float futureRotation = rb.rotation + rb.angularVelocity * Time.fixedDeltaTime;
+        Vector2 futureDirection = new Vector2(Mathf.Sin(-futureRotation * Mathf.Deg2Rad), Mathf.Cos(-futureRotation * Mathf.Deg2Rad));
+        if (Mathf.Sign(directionDifference) < Mathf.Sign(analogAngleToRotateMin) && 
+            Mathf.Sign(directionDifference) != Mathf.Sign(Vector2.SignedAngle(futureDirection, Input.Direction)))
+        {
+            rb.MoveRotation(Vector2.SignedAngle(Input.Direction, Vector2.up) * -1);
+            rb.angularVelocity = 0;
+            directionTime = 0;
+            //Debug.Log($"Set rotation: {Vector2.SignedAngle(Input.Direction, Vector2.up)* -1}");
+        }
+    }
+
+    void DrawDirectionLine()
+    {
+        Debug.DrawLine(transform.position, transform.position + 5 * (Vector3)Input.Direction);
+
+        Debug.DrawLine(transform.position, (Vector2)transform.position + 3 * new Vector2(Mathf.Sin(-rb.rotation * Mathf.Deg2Rad), Mathf.Cos(-rb.rotation * Mathf.Deg2Rad)));
     }
 
     void UpdateValues()

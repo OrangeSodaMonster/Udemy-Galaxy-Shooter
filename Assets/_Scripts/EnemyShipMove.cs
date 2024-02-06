@@ -50,7 +50,7 @@ public class EnemyShipMove : MonoBehaviour
         float xAccel = currentMaxXSpeed / timeToMaxSpeed;
         float yAccel = maxYSpeed / timeToMaxSpeed;
 
-        Vector3 playerPos = player != null ? player.position : EnemySpawner.PlayerLastPos;
+        Vector3 playerPos = player != null ? player.position : EnemySpawner.Instance.PlayerLastPos;
         Vector2 toPlayerVector = (Vector2)playerPos - rb.position;
         rb.rotation = Vector2.SignedAngle(Vector2.up, toPlayerVector);
 

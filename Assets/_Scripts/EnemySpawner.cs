@@ -28,30 +28,34 @@ public class EnemySpawner : MonoBehaviour
     public EnemiesToSpawn[] EnemiesToSpawn => enemiesToSpawn;
     [SerializeField] EnemiesToSpawnByTime[] enemiesToSpawnByTime;
     public EnemiesToSpawnByTime[] EnemiesToSpawnByTime => enemiesToSpawnByTime;
+    public Vector3 PlayerLastPos = new();
+    float noSpawnZoneRadiusStatic;
+    public float NoSpawnZoneRadius { get { return noSpawnZoneRadiusStatic; } }
+    float spawnZoneRadiusStatic;
+    public float SpawnZoneRadius { get { return spawnZoneRadiusStatic; } }
 
     float totalSpawnWeight = 0;
     Vector2 nextSpawnDirection;
     Vector3 nextSpawnPoint;
     float timeSinceLastSpawn = float.MaxValue;
     float currentSpawnCD;
-    public static Vector3 PlayerLastPos = new();
-
-    static float noSpawnZoneRadiusStatic;
-    public static float NoSpawnZoneRadius { get { return noSpawnZoneRadiusStatic; } }
-    static float spawnZoneRadiusStatic;
-    public static float SpawnZoneRadius { get { return spawnZoneRadiusStatic; } }
-
     EnemyPoolRef poolRef;
-    static EnemyPoolRef s_poolRef;
+
+    public static EnemySpawner Instance;
+
 
     private void Awake()
     {      
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+
         poolRef = GetComponent<EnemyPoolRef>();
         noSpawnZoneRadiusStatic = noSpawnZoneRadius;
         spawnZoneRadiusStatic = spawnZoneRadius;
 
         currentSpawnCD = baseSpawnCD;
-        s_poolRef = poolRef;
     }
 
     private void Start()
@@ -121,10 +125,10 @@ public class EnemySpawner : MonoBehaviour
         return nextSpawn;
     }
 
-    public static void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply)
+    public void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply)
     {
         //GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0,360), Vector3.forward), enemyParentStatic);
-        GameObject newAsteroid = s_poolRef.enemyPoolers[asteroidObject].GetPooledGameObject();
+        GameObject newAsteroid = poolRef.enemyPoolers[asteroidObject].GetPooledGameObject();
         newAsteroid.transform.SetPositionAndRotation(position, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
         newAsteroid.SetActive(true);
 
@@ -138,7 +142,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public static void SpawnAsteroidParented(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply, Transform parent)
+    public void SpawnAsteroidParented(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply, Transform parent)
     {
         GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward), parent);
         if (newAsteroid.TryGetComponent(out AsteroidMove asteroidMove))
@@ -148,6 +152,20 @@ public class EnemySpawner : MonoBehaviour
         if (damageToApply > 0 && newAsteroid.TryGetComponent(out EnemyHP asteroidHP))
         {
             asteroidHP.ChangeHP(-Mathf.Abs(damageToApply));
+        }
+    }
+
+    public void SpawnDrone(Vector3 position, GameObject drone)
+    {
+        if (poolRef.enemyPoolers.ContainsKey(drone))
+        {
+            GameObject spawn = poolRef.enemyPoolers[drone].GetPooledGameObject();
+            spawn.transform.position = position;
+            spawn.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Não há pool para esse drone");
         }
     }
 
