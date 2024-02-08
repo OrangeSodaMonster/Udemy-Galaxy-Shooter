@@ -10,17 +10,19 @@ GameObject:
   m_Component:
   - component: {fileID: 5609953065812211394}
   - component: {fileID: 2407189615707401283}
+  - component: {fileID: 4395393588352010333}
   - component: {fileID: 2428609117032758503}
   - component: {fileID: 434640270311845536}
-  - component: {fileID: 7857951331720398694}
+  - component: {fileID: 359440957118289101}
   - component: {fileID: -5173364807266320180}
-  - component: {fileID: -8246086450867371592}
-  - component: {fileID: -2036024542243111843}
-  - component: {fileID: 5286106063799904959}
-  - component: {fileID: -5414150833024474004}
-  - component: {fileID: 7190944310592286326}
+  - component: {fileID: 7886957100084571416}
+  - component: {fileID: 126391463542218849}
+  - component: {fileID: -8298461727921619386}
+  - component: {fileID: -1841996972640486753}
+  - component: {fileID: 5414839444989441893}
+  - component: {fileID: -9167611994569619000}
   m_Layer: 7
-  m_Name: Asteroid_ObjectiveSmall
+  m_Name: Asteroid_S_Rare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +38,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 6691643d9d08ede40bc93504dc8acb2e, type: 3}
-  m_Color: {r: 0, g: 0.8450122, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.8, b: 0.47276744, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,6 +95,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &4395393588352010333
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596066275569553282}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.25
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &2428609117032758503
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -140,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7029f0090064ee4ca6ec13bb1f3a284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minMaxAbsAngularSpeed: {x: 5, y: 15}
---- !u!114 &7857951331720398694
+  minMaxAbsAngularSpeed: {x: 20, y: 80}
+--- !u!114 &359440957118289101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,15 +179,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3596066275569553282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c98f4a455e1358b4bb3c804e27f7526a, type: 3}
+  m_Script: {fileID: 11500000, guid: 84c713e846a013543b07f2282fec8242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drawGizmos: 0
-  asteroidToSplitInto: {fileID: 3596066275569553282, guid: 5daba4c80eb61c449ba18d9248edb70e, type: 3}
-  spawnDistance: 0.52
-  baseNewDirectionAngle: 35
-  newDirectionVariance: 10
-  newSpeedVarPerc: 15
+  MoveDirection: {x: 0, y: 0, z: 0}
+  MoveSpeed: 0
+  baseSpeed: 4
+  speedVariationPerc: 20
+  moveDirVariation: 0.09
 --- !u!114 &-5173364807266320180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,10 +201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsAsteroid>k__BackingField: 1
-  asteroidVolumeMultiplier: 0.75
-  destroyOnCollision: 0
-  <MaxHP>k__BackingField: 70
---- !u!114 &-8246086450867371592
+  asteroidVolumeMultiplier: 0.4
+  destroyOnCollision: 1
+  <MaxHP>k__BackingField: 30
+--- !u!114 &7886957100084571416
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,8 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 20
-  <ImpactVelocity>k__BackingField: 1
---- !u!114 &-2036024542243111843
+  <ImpactVelocity>k__BackingField: 0.5
+--- !u!114 &126391463542218849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,20 +230,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83dd08c0ff53e984bb2e8f73453ce3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusToSpawn: 1
+  radiusToSpawn: 0.4
   dropsToSpawn:
   - drop: 0
     spawnWeight: 2
   - drop: 2
-    spawnWeight: 10
-  - drop: 4
     spawnWeight: 3
+  - drop: 4
+    spawnWeight: 1
   - drop: 5
     spawnWeight: 0
-  minDropsNum: 3
-  maxDropsNum: 4
-  dropsGuaranteed: []
---- !u!114 &5286106063799904959
+  minDropsNum: 2
+  maxDropsNum: 5
+  dropsGuaranteed:
+  - drop: 2
+    Amount: 1
+--- !u!114 &-8298461727921619386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,8 +259,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpPrefab: {fileID: 7192821498156279173, guid: 3935062b95a19034a98292a7656f791d, type: 3}
   hpPositionOffset: {x: 0, y: 1.6, z: 0}
-  hpColor: {r: 0.08235294, g: 0.40784314, b: 0.5294118, a: 1}
---- !u!114 &-5414150833024474004
+  hpColor: {r: 0, g: 0.4528302, b: 0.26334757, a: 1}
+--- !u!114 &-1841996972640486753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596066275569553282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4edad9e8ffebd439562e057f512030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5414839444989441893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageDuration: 0.1
-  damageMaxValue: 0.15
+  damageMaxValue: 0.2
   damageEase: 18
   hazardFrequency: 2
   hazardMinMaxValues: {x: 0.12, y: 0.25}
@@ -250,7 +293,7 @@ MonoBehaviour:
   healDuration: 0.5
   healMaxValue: 0.3
   healEase: 4
---- !u!114 &7190944310592286326
+--- !u!114 &-9167611994569619000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,12 +306,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAsteroid: 1
-  vfxScale: 1
+  vfxScale: 0.6
   vfxColor:
     serializedVersion: 2
-    key0: {r: 0.48313457, g: 0.6162986, b: 0.7264151, a: 1}
+    key0: {r: 0.49056602, g: 0.39697796, b: 0.34015664, a: 1}
     key1: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
-    key2: {r: 0.0039215684, g: 0.2, b: 0.19346547, a: 0}
+    key2: {r: 0.2830189, g: 0.1376176, b: 0.030704886, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -296,8 +339,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   vfxRingsColor:
     serializedVersion: 2
-    key0: {r: 0.95394003, g: 1.4980392, b: 1.4980392, a: 1}
-    key1: {r: 0.6854237, g: 1.4980392, b: 1.2606801, a: 1}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}

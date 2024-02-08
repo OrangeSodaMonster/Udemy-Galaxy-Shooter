@@ -65,6 +65,8 @@ public class PlayerHeal : MonoBehaviour
                 PlayerHP.ChangePlayerHP(+5);
             else if (PlayerCollectiblesCount.ExpendResources(HealCost))
                 PlayerHP.ChangePlayerHP(+5);
+
+            AudioManager.Instance.ShipFix.PlayFeedbacks();
         }
         isHealing = false;
     }

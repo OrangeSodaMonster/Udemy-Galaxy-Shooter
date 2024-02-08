@@ -35,7 +35,6 @@ public class EnemySpawner : MonoBehaviour
     public float SpawnZoneRadius { get { return spawnZoneRadiusStatic; } }
 
     float totalSpawnWeight = 0;
-    Vector2 nextSpawnDirection;
     Vector3 nextSpawnPoint;
     float timeSinceLastSpawn = float.MaxValue;
     float currentSpawnCD;
@@ -74,13 +73,12 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         if (timeSinceLastSpawn > currentSpawnCD) 
-        {
-            nextSpawnDirection = new Vector2(UnityEngine.Random.Range(-1f,1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
-            nextSpawnPoint = nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius);
+        {            
+            nextSpawnPoint = GetSpawnPoint();
 
             //Get Enemy to Spawn
             float randomSpawnValue = UnityEngine.Random.Range(0 + float.Epsilon, totalSpawnWeight - float.Epsilon);
-            GameObject nextEnemytoSpawn = GetNextSpawn(randomSpawnValue);
+            GameObject nextEnemytoSpawn = GetNextSpawn();
             
           
             Vector3 playerPos = player != null ? player.position : PlayerLastPos;
@@ -97,11 +95,17 @@ public class EnemySpawner : MonoBehaviour
         PlayerLastPos = player != null ? player.position : PlayerLastPos;
     }
 
+    public Vector3 GetSpawnPoint()
+    {
+        Vector2 nextSpawnDirection = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
+        return nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius);
+    }
+
     IEnumerator SpawnByTime(GameObject enemyToSpawn, float time)
     {
         yield return new WaitForSeconds(time);
 
-        nextSpawnPoint = nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius);
+        nextSpawnPoint = GetSpawnPoint();
         Vector3 playerPos = player != null ? player.position : PlayerLastPos;
         //Instantiate(enemy, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
         GameObject enemy = poolRef.enemyPoolers[enemyToSpawn].GetPooledGameObject();
@@ -109,8 +113,10 @@ public class EnemySpawner : MonoBehaviour
         enemy.SetActive(true);
     }
 
-    GameObject GetNextSpawn(float spawnValue)
+    GameObject GetNextSpawn()
     {
+        float spawnValue = UnityEngine.Random.Range(0 + float.Epsilon, totalSpawnWeight - float.Epsilon);
+
         GameObject nextSpawn = null;
         foreach(EnemiesToSpawn enemy in EnemiesToSpawn)
         {

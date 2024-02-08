@@ -11,6 +11,7 @@ public class EnemyHP : MonoBehaviour
     //public int OnBirthDamage;
 
     [field:SerializeField] public bool IsAsteroid { get; private set; } = false;
+    [SerializeField] float asteroidVolumeMultiplier = 1;
     [SerializeField] bool destroyOnCollision = true;
     [field:SerializeField] public int MaxHP { get; private set; } = 1;
 
@@ -101,10 +102,10 @@ public class EnemyHP : MonoBehaviour
 
     public void DestroySequence()
     {
-        if(!IsAsteroid && CurrentHP <= 0)
+        if (!IsAsteroid && CurrentHP <= 0)
             AudioManager.Instance.EnemyDestructionSound.PlayFeedbacks();
         else if (IsAsteroid && CurrentHP <= 0)
-            AudioManager.Instance.AsteroidDestructionSound.PlayFeedbacks();
+            AudioManager.Instance.PlayAsteroidSound(asteroidVolumeMultiplier);
 
         gameObject.SetActive(false);
     }

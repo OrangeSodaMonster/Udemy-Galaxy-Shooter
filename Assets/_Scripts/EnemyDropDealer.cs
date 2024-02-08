@@ -20,12 +20,13 @@ public struct DropsGuaranteed
 
 public class EnemyDropDealer : MonoBehaviour
 {
+    [SerializeField] float radiusToSpawn = 1;
+    [Space]
     [SerializeField] DropsToSpawn[] dropsToSpawn;
-    [SerializeField] DropsGuaranteed[] dropsGuaranteed;
     [SerializeField] int minDropsNum = 2;
     [SerializeField] int maxDropsNum = 5;
-
-    [SerializeField] float radiusToSpawn = 1;
+    [Space]
+    [SerializeField] DropsGuaranteed[] dropsGuaranteed;
     
     float totalSpawnWeight;
 

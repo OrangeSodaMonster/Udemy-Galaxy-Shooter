@@ -34,6 +34,8 @@ public class DroneAttackScript : MonoBehaviour
 
     void Update()
     {
+        if (UIManager.isPaused) return;
+
         damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
 
         target = GetClosestTarget();

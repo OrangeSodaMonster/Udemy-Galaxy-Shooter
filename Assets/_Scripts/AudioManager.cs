@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     [field:SerializeField] public AudioSource DronesSound { get; private set; }
     [field:SerializeField] public MMFeedbacks BombSound { get; private set; }
     [field:SerializeField] public MMFeedbacks ShieldUpSound { get; private set; }
+    [field:SerializeField] public MMFeedbacks ShipFix { get; private set; }
 
     [field: Header("Collectibles")]
     [field:SerializeField] public MMFeedbacks MetalCrumbSound { get; private set; }
@@ -54,12 +55,15 @@ public class AudioManager : MonoBehaviour
 
     [field: Header("Other")]
     [field: SerializeField] public AudioSource AlarmSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks RareSpawnSound { get; private set; }
 
     [HideInInspector] public List<int> DronesActive = new();
     int dronesActiveLastFrame;
     float dronesDefaultVolume;
     float alarmDefaultVolume;
     MMFeedbackMMSoundManagerSound enemyChargeFB;
+    MMFeedbackMMSoundManagerSound asteroidDestructionFB;
+    float asteroidDestructionDefaultVolume;
 
     public static AudioManager Instance;
     void Awake()
@@ -75,7 +79,9 @@ public class AudioManager : MonoBehaviour
         PauseAlarm();
         alarmDefaultVolume = AlarmSound.volume;
 
-        enemyChargeFB = EnemyChargeSound.gameObject.GetComponent<MMFeedbackMMSoundManagerSound>();
+        enemyChargeFB = EnemyChargeSound.GetComponent<MMFeedbackMMSoundManagerSound>();
+        asteroidDestructionFB = AsteroidDestructionSound.GetComponent<MMFeedbackMMSoundManagerSound>();
+        asteroidDestructionDefaultVolume = asteroidDestructionFB.MinVolume;
     }
 
     private void LateUpdate()
@@ -127,6 +133,15 @@ public class AudioManager : MonoBehaviour
     public void StopEnemyCharge(int enemyHash)
     {
         MMSoundManagerSoundControlEvent.Trigger(MMSoundManagerSoundControlEventTypes.Free, enemyHash);
+    }
+
+    public void PlayAsteroidSound (float volumeMultiplier = 1)
+    {
+        asteroidDestructionFB.MinVolume = asteroidDestructionDefaultVolume * volumeMultiplier;
+        float maxVolume = asteroidDestructionDefaultVolume * volumeMultiplier + Random.Range(0f, 0.05f);
+        asteroidDestructionFB.MaxVolume = maxVolume;
+
+        AsteroidDestructionSound.PlayFeedbacks();
     }
 
 }

@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float timeToStopRotation = 2;
     [SerializeField] float acceleratingXDecelerationMod = 3;
     [SerializeField] float acceleratingRotationMod = 2;
+    [SerializeField] AnimationCurve stoppingDirInputCurve;
 
     public Vector2 PlayerVelocity { get { return playerVelocity; } }
     public float MaxSpeed { get { return maxSpeed; } }
@@ -167,7 +168,7 @@ public class PlayerMove : MonoBehaviour
         {
             float turningValue = 2 * Mathf.Abs(directionDifference) / angleToStartDecel;
             turningValue = Mathf.Clamp(turningValue, 0.2f, 1);
-            rb.angularVelocity = maxTurningSpeed * turningSpeedCurve.Evaluate(turningValue) * Mathf.Sign(directionDifference);
+            rb.angularVelocity = maxTurningSpeed * stoppingDirInputCurve.Evaluate(turningValue) * Mathf.Sign(directionDifference);
         }
     }
 

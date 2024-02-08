@@ -37,6 +37,8 @@ public class IonStreamScript : MonoBehaviour
 
     void Update()
     {
+        if (UIManager.isPaused) return;
+
         UpdateValues();
 
         if (isIonStreamEnabled && timeSinceFired > timeBetweenActivations && Physics2D.CircleCast(player.position, radiusFromPlayer, Vector2.zero, 0, layersToHit))
