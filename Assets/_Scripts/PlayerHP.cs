@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.VFX;
 
+[SelectionBase]
 public class PlayerHP : MonoBehaviour
 {
     public static int MaxHP;

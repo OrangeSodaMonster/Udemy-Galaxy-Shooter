@@ -39,7 +39,7 @@ public class DroneButtonScript : MonoBehaviour
     private void OnEnable()
     {
         UpgradeDroneButtons();
-        UpgradedDrone += UpgradeDroneButtons;
+        UpgradedDrone += UpgradeDroneButtons;        
     }
     private void OnDisable()
     {
@@ -47,7 +47,7 @@ public class DroneButtonScript : MonoBehaviour
     }
 
     void UpgradeDroneButtons()
-    {
+    {        
         DronesUpgrades droneUpgrades;
         if (droneNumber == DroneNumber.One)
             droneUpgrades = PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades;
@@ -72,7 +72,7 @@ public class DroneButtonScript : MonoBehaviour
                 costToSend = droneUpgradeInfo.PowerUpgrades[droneUpgrades.DamageLevel].Cost;
 
             interfaceData.UpdateButtonVisual(droneUpgrades.DamageLevel, droneUpgradeInfo.PowerUpgrades.Length,
-                icon, border, upgradeLevelTxt, costs, costToSend, droneUpgrades.Enabled);
+                icon, border, upgradeLevelTxt, costs, costToSend, droneUpgrades.Enabled);            
         }
         else if (upgradeType == DroneUpgradeType.Range)
         {

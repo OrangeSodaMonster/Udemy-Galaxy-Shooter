@@ -47,7 +47,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public MMFeedbacks DroneSpawnSound { get; private set; }
 
     [field: Header("Interface")]
-    [field: SerializeField] public MMFeedbacks ClickSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks SelectionClickSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks ConfirmationClickSound { get; private set; }
     [field: SerializeField] public MMFeedbacks HoverSound { get; private set; }
     [field: SerializeField] public MMFeedbacks BackSound { get; private set; }
     [field: SerializeField] public MMFeedbacks UnlockUpgradeSound { get; private set; }

@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6132968193724759123}
+  - component: {fileID: 2859961595171118557}
   - component: {fileID: 213236880049249782}
-  - component: {fileID: 8141786915814021577}
+  - component: {fileID: 4097343795781769304}
   m_Layer: 5
   m_Name: Upgrade - Box
   m_TagString: Untagged
@@ -42,6 +43,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2859961595171118557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345505305588743555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee0cf9bd65bcf2499dacc558725a1be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playConfirmationSound: 0
+  playBackSound: 0
 --- !u!114 &213236880049249782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +81,7 @@ MonoBehaviour:
   - {fileID: 6694799698657732963}
   - {fileID: 5677639231281103726}
   clickInterval: 0.2
---- !u!114 &8141786915814021577
+--- !u!114 &4097343795781769304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,96 +90,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 345505305588743555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89c8acfc07fee664da6ad222b6541a44, type: 3}
+  m_Script: {fileID: 11500000, guid: 20b41b4145ce7fb4488aff328af73d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Active: 1
-  Label: EnemyFire
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
-    InitialDelay: 0
-    CooldownDuration: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Sfx: {fileID: 8300000, guid: 6a4030ffdaa9e664694e2f4049e40fc2, type: 3}
-  RandomSfx: []
-  TestButton: 0
-  TestStopButton: 0
-  MinVolume: 0.4
-  MaxVolume: 0.4
-  MinPitch: 1
-  MaxPitch: 1
-  MmSoundManagerTrack: 2
-  ID: 0
-  AudioGroup: {fileID: 0}
-  RecycleAudioSource: {fileID: 0}
-  Loop: 0
-  Persistent: 0
-  DoNotPlayIfClipAlreadyPlaying: 0
-  StopSoundOnFeedbackStop: 0
-  DoNotAutoRecycleIfNotDonePlaying: 0
-  Fade: 0
-  FadeInitialVolume: 0
-  FadeDuration: 0.1
-  FadeTween:
-    MMTweenDefinitionType: 0
-    MMTweenCurve: 9
-    Curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    Initialized: 0
-  SoloSingleTrack: 0
-  SoloAllTracks: 0
-  AutoUnSoloOnEnd: 0
-  PanStereo: 0
-  SpatialBlend: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  Priority: 128
-  ReverbZoneMix: 1
-  DopplerLevel: 1
-  Spread: 0
-  RolloffMode: 0
-  MinDistance: 1
-  MaxDistance: 500
 --- !u!1 &5677639231281103726
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,7 +734,6 @@ GameObject:
   - component: {fileID: 3735716772256313117}
   - component: {fileID: 978557442021024179}
   - component: {fileID: 2257937695530023982}
-  - component: {fileID: 1479381002420493848}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -912,18 +842,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1479381002420493848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8946433792712581713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b41b4145ce7fb4488aff328af73d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9116467273700363138
 GameObject:
   m_ObjectHideFlags: 0

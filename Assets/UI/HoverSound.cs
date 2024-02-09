@@ -6,38 +6,28 @@ using UnityEngine.UI;
 
 public class HoverSound : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler, ISelectHandler
 {
-    public void PlayHoverSound(BaseEventData eventData)
-	{
-        AudioManager.Instance.HoverSound.PlayFeedbacks();
+    Button button;
 
-        //Debug.Log("Hover");
-	}
+    private void Awake()
+    {
+        button = GetComponentInChildren<Button>();
+    }
 
     private void Start()
     {
-        EventTrigger trigger = gameObject.AddComponent<EventTrigger>();
+        EventTrigger trigger = button.gameObject.GetComponent<EventTrigger>()??button.gameObject.AddComponent<EventTrigger>();
 
         EventTrigger.Entry hoverEvent = new() { eventID = EventTriggerType.PointerEnter };
         hoverEvent.callback.AddListener(PlayHoverSound);
         trigger.triggers.Add(hoverEvent);
 
-        EventTrigger.Entry selectEvent = new() { eventID = EventTriggerType.Select };
-        selectEvent.callback.AddListener(PlayHoverSound);
-        trigger.triggers.Add(selectEvent);
+        //EventTrigger.Entry selectEvent = new() { eventID = EventTriggerType.Select };
+        //selectEvent.callback.AddListener(PlayHoverSound);
+        //trigger.triggers.Add(selectEvent);
     }
 
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    PlayHoverSound();
-    //}
-
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-        
-    //}
-
-    //public void OnSelect(BaseEventData eventData)
-    //{
-    //    PlayHoverSound();
-    //}
+    public void PlayHoverSound(BaseEventData eventData)
+	{
+        AudioManager.Instance.HoverSound.PlayFeedbacks();
+	}
 }

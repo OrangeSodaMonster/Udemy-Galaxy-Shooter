@@ -51,31 +51,39 @@ public class PlayerMove : MonoBehaviour
     {
         UpdateValues();
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
-
-        //Debug.Log(Input.Acceleration);
+      
         //Acceleration
         if (Input.Acceleration >= float.Epsilon)
             velocity.y = Mathf.Clamp(velocity.y + acceleration * Time.fixedDeltaTime * Input.Acceleration, -maxSpeed, maxSpeed);
         else if (Input.Acceleration <= -float.Epsilon)
-            velocity.y = Mathf.Clamp(velocity.y + acceleration * 0.5f * Time.fixedDeltaTime * Input.Acceleration, -maxSpeed, maxSpeed);
-        
+            velocity.y = Mathf.Clamp(velocity.y + acceleration * 0.5f * Time.fixedDeltaTime * Input.Acceleration, -maxSpeed , maxSpeed);        
+
         //Deceleration
-        else
+        // Em X acelerando
+        if(Input.Acceleration != 0 && rb.GetContacts(contacts) == 0)
+        {
+            if (velocity.x >= float.Epsilon)
+            {
+                velocity.x = Mathf.Clamp(velocity.x - deceleration * acceleratingXDecelerationMod * Time.fixedDeltaTime, 0, maxSpeed);
+                //Debug.Log(Input.Acceleration);
+            }
+            else if(velocity.x <= float.Epsilon)
+            {
+                velocity.x = Mathf.Clamp(velocity.x + deceleration * acceleratingXDecelerationMod * Time.fixedDeltaTime, -maxSpeed, 0);
+                //Debug.Log(Input.Acceleration);
+            }
+        }
+
+        else // Não acelerando
         {
             //Em X
             if (velocity.x >= float.Epsilon)
-            {
-                if (Input.Acceleration != 0  && rb.GetContacts(contacts) == 0)                
-                    velocity.x = Mathf.Clamp(velocity.x - deceleration * acceleratingXDecelerationMod * Time.fixedDeltaTime, 0, maxSpeed);                
-                else 
-                    velocity.x = Mathf.Clamp(velocity.x - deceleration * Time.fixedDeltaTime, 0, maxSpeed);
+            {               
+                velocity.x = Mathf.Clamp(velocity.x - deceleration * Time.fixedDeltaTime, 0, maxSpeed);
             }
             else if (velocity.x <= float.Epsilon)
             {
-                if (Input.Acceleration != 0  && rb.GetContacts(contacts) == 0)
-                    velocity.x = Mathf.Clamp(velocity.x + deceleration * acceleratingXDecelerationMod * Time.fixedDeltaTime, -maxSpeed, 0);
-                else 
-                    velocity.x = Mathf.Clamp(velocity.x + deceleration * Time.fixedDeltaTime, -maxSpeed, 0);
+                velocity.x = Mathf.Clamp(velocity.x + deceleration * Time.fixedDeltaTime, -maxSpeed, 0);
             }
 
             //Em Y
@@ -94,6 +102,7 @@ public class PlayerMove : MonoBehaviour
 
         //Apply Velocity
         rb.velocity = transform.TransformDirection(velocity);
+
         playerVelocity = rb.velocity;
 
         ///////////////////////////////////////////////////////////////////////////

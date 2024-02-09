@@ -24,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] float baseSpawnCD = 1;
     [SerializeField] float spawnCDVariationPerc = 50f;
+    [SerializeField] float timeToStartSpawning = 3f;
     [SerializeField] EnemiesToSpawn[] enemiesToSpawn;
     public EnemiesToSpawn[] EnemiesToSpawn => enemiesToSpawn;
     [SerializeField] EnemiesToSpawnByTime[] enemiesToSpawnByTime;
@@ -36,7 +37,6 @@ public class EnemySpawner : MonoBehaviour
 
     float totalSpawnWeight = 0;
     Vector3 nextSpawnPoint;
-    float timeSinceLastSpawn = float.MaxValue;
     float currentSpawnCD;
     EnemyPoolRef poolRef;
 
@@ -63,6 +63,8 @@ public class EnemySpawner : MonoBehaviour
         {
             totalSpawnWeight += enemy.spawnWeight;
         }
+        
+        StartCoroutine(RandomSpawnRoutine());
 
         foreach (var spawn in enemiesToSpawnByTime)
         {
@@ -72,26 +74,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (timeSinceLastSpawn > currentSpawnCD) 
-        {            
-            nextSpawnPoint = GetSpawnPoint();
-
-            //Get Enemy to Spawn
-            float randomSpawnValue = UnityEngine.Random.Range(0 + float.Epsilon, totalSpawnWeight - float.Epsilon);
-            GameObject nextEnemytoSpawn = GetNextSpawn();
-            
-          
-            Vector3 playerPos = player != null ? player.position : PlayerLastPos;
-
-            GameObject enemy = poolRef.enemyPoolers[nextEnemytoSpawn].GetPooledGameObject();
-            enemy.transform.position = nextSpawnPoint + playerPos;
-            enemy.SetActive(true);
-
-            timeSinceLastSpawn = 0;
-            currentSpawnCD =Mathf.Abs(UnityEngine.Random.Range(baseSpawnCD - baseSpawnCD*(spawnCDVariationPerc/100), baseSpawnCD + baseSpawnCD*(spawnCDVariationPerc/100)));
-        }
-        timeSinceLastSpawn += Time.deltaTime;
-
         PlayerLastPos = player != null ? player.position : PlayerLastPos;
     }
 
@@ -99,6 +81,26 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector2 nextSpawnDirection = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
         return nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius);
+    }
+
+    IEnumerator RandomSpawnRoutine()
+    {
+        yield return new WaitForSeconds(timeToStartSpawning);
+
+        while (true)
+        {
+            nextSpawnPoint = GetSpawnPoint();
+            GameObject nextEnemytoSpawn = GetNextSpawn();
+
+            Vector3 playerPos = player != null ? player.position : PlayerLastPos;
+
+            GameObject enemy = poolRef.enemyPoolers[nextEnemytoSpawn].GetPooledGameObject();
+            enemy.transform.position = nextSpawnPoint + playerPos;
+            enemy.SetActive(true);
+
+            currentSpawnCD =Mathf.Abs(UnityEngine.Random.Range(baseSpawnCD - baseSpawnCD*(spawnCDVariationPerc/100), baseSpawnCD + baseSpawnCD*(spawnCDVariationPerc/100)));
+            yield return new WaitForSeconds(currentSpawnCD);
+        }
     }
 
     IEnumerator SpawnByTime(GameObject enemyToSpawn, float time)

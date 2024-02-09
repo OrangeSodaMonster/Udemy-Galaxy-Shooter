@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4865941081699094697}
   - component: {fileID: 1862339362211217975}
   - component: {fileID: 2229368903172531867}
-  - component: {fileID: -5036765014230444659}
+  - component: {fileID: 4382559939410141119}
   - component: {fileID: 8502200719738277232}
   m_Layer: 5
   m_Name: Button
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-5036765014230444659
+--- !u!114 &4382559939410141119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,9 +132,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7877548555213844563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdeb4bd71aa6b434c8675074703c7e74, type: 3}
+  m_Script: {fileID: 11500000, guid: bee0cf9bd65bcf2499dacc558725a1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  secondClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playConfirmationSound: 1
+  playBackSound: 0
 --- !u!114 &8502200719738277232
 MonoBehaviour:
   m_ObjectHideFlags: 0

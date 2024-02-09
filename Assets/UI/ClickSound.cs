@@ -7,7 +7,7 @@ public class ClickSound : MonoBehaviour
 {
     Button button;
 
-    void Awake()
+    void Start()
     {
         button = GetComponent<Button>();
 
@@ -16,6 +16,6 @@ public class ClickSound : MonoBehaviour
 
     public void PlayClickSound()
     {
-        AudioManager.Instance.ClickSound.PlayFeedbacks();
+        //AudioManager.Instance.ClickSound.PlayFeedbacks();
     }
 }

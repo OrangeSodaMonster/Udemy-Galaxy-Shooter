@@ -14,6 +14,7 @@ public class InputSO : ScriptableObject
     public bool IsSpecialing;
     public bool IsAutoFire = false;
     public bool IsPausing = false;
+    public bool IsClickUI = false;
     public bool IsCancelUI = false;
     public Vector2 Direction;
 
@@ -98,8 +99,14 @@ public class InputSO : ScriptableObject
             IsAutoFire = !IsAutoFire;
         }
     }
+
     public void GetCancelUI(InputAction.CallbackContext context)
     {
         IsCancelUI = context.performed;
+    }
+
+    public void GetClickUI(InputAction.CallbackContext context)
+    {
+        IsClickUI = context.performed;
     }
 }

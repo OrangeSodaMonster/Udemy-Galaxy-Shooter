@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
-public class MenuNavegationScript : MonoBehaviour
+public class MenuNavigationScript : MonoBehaviour
 {
 	[SerializeField] GameObject firstSelected;
 	[SerializeField] GameObject selectOnCancel;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class EnemyHP : MonoBehaviour
 {
     public event Action TookDamage;
