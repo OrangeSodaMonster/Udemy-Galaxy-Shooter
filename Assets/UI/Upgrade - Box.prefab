@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6132968193724759123}
   - component: {fileID: 2859961595171118557}
   - component: {fileID: 213236880049249782}
-  - component: {fileID: 4097343795781769304}
   m_Layer: 5
   m_Name: Upgrade - Box
   m_TagString: Untagged
@@ -55,9 +54,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee0cf9bd65bcf2499dacc558725a1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondClickEvent:
+  firstClickSelect: 1
+  clickEvents:
     m_PersistentCalls:
       m_Calls: []
+  playHoverSound: 1
   playConfirmationSound: 0
   playBackSound: 0
 --- !u!114 &213236880049249782
@@ -81,18 +82,6 @@ MonoBehaviour:
   - {fileID: 6694799698657732963}
   - {fileID: 5677639231281103726}
   clickInterval: 0.2
---- !u!114 &4097343795781769304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345505305588743555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b41b4145ce7fb4488aff328af73d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5677639231281103726
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class ClickBackSound : MonoBehaviour
 {
     Button button;
 
-    void Awake()
+    void Start()
     {
         button = GetComponent<Button>();
 

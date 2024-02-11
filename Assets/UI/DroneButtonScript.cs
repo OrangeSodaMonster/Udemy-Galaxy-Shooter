@@ -24,10 +24,8 @@ public class DroneButtonScript : MonoBehaviour
     [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI upgradeLevelTxt;
     [SerializeField] GameObject[] costs;
-    [SerializeField] float clickInterval = .3f;
 
     DroneUpgradeInfo droneUpgradeInfo;
-    bool canClick = true;
 
     public static event Action UpgradedDrone;
 
@@ -97,7 +95,6 @@ public class DroneButtonScript : MonoBehaviour
     }
     public void UnlockDroneOne()
     {
-        if (!canClick) return;
 
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.Enabled) return;
 
@@ -109,44 +106,29 @@ public class DroneButtonScript : MonoBehaviour
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.HealingLevel = 1;
             UpgradedDrone.Invoke();
         }
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
         AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
     }
     public void BuyOnePower()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.DamageLevel == droneUpgradeInfo.PowerUpgrades.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.PowerUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.DamageLevel].Cost, DroneUpgradeType.Power);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
     }
+
     public void BuyOneRange()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.RangeLevel == droneUpgradeInfo.RangeUpgrades.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.RangeUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.RangeLevel].Cost, DroneUpgradeType.Range);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
     }
     public void BuyOneHeal()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.HealUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
     }
     public void UnlockDroneTwo()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.Enabled) return;
 
         if (PlayerCollectiblesCount.ExpendResources(droneUpgradeInfo.UnlockCost))
@@ -157,44 +139,28 @@ public class DroneButtonScript : MonoBehaviour
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.HealingLevel = 1;
             UpgradedDrone.Invoke();
         }
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
         AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
     }
     public void BuyTwoPower()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.DamageLevel == droneUpgradeInfo.PowerUpgrades.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.PowerUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.DamageLevel].Cost, DroneUpgradeType.Power);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
     }
     public void BuyTwoRange()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.RangeLevel == droneUpgradeInfo.RangeUpgrades.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.RangeUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.RangeLevel].Cost, DroneUpgradeType.Range);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
     }
     public void BuyTwoHeal()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.HealUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
     }
     public void UnlockDroneThree()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.Enabled) return;
 
         if (PlayerCollectiblesCount.ExpendResources(droneUpgradeInfo.UnlockCost))
@@ -205,48 +171,26 @@ public class DroneButtonScript : MonoBehaviour
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.HealingLevel = 1;
             UpgradedDrone.Invoke();
         }
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
         AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
     }
     public void BuyThreePower()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.DamageLevel == droneUpgradeInfo.PowerUpgrades.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.PowerUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.DamageLevel].Cost, DroneUpgradeType.Power);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
     }
     public void BuyThreeRange()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.RangeLevel == droneUpgradeInfo.RangeUpgrades.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.RangeUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.RangeLevel].Cost, DroneUpgradeType.Range);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
     }
     public void BuyThreeHeal()
     {
-        if(!canClick) return;
-
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length) return;
 
         BuyUpgrade(droneUpgradeInfo.HealUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
-        canClick = false;
-        StartCoroutine(ClickIntervalRoutine());
-    }
-
-    IEnumerator ClickIntervalRoutine()
-    {
-        yield return new WaitForSecondsRealtime(clickInterval);
-
-        canClick = true;
-    }
-
+    }   
 
     void BuyUpgrade(ResourceNumber[] cost, DroneUpgradeType upgradeType)
     {

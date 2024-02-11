@@ -29,12 +29,16 @@ public class EnemyShipMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        distanceToKeep *= distanceToKeep;
+        distanceToleranceFraction *= distanceToKeep;
+    }
+
     void OnEnable()
     {
         player = FindObjectOfType<PlayerMove>()?.transform;
-        playerRB = player?.GetComponent<Rigidbody2D>();
-        distanceToKeep *= distanceToKeep;
-        distanceToleranceFraction *= distanceToKeep;
+        playerRB = player?.GetComponent<Rigidbody2D>();        
 
         StartCoroutine(RotationCheckFrequency());
     }

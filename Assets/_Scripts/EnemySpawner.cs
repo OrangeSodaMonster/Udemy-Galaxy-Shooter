@@ -62,14 +62,22 @@ public class EnemySpawner : MonoBehaviour
         foreach (var enemy in enemiesToSpawn)
         {
             totalSpawnWeight += enemy.spawnWeight;
-        }
-        
-        StartCoroutine(RandomSpawnRoutine());
+        }  
 
         foreach (var spawn in enemiesToSpawnByTime)
         {
             StartCoroutine(SpawnByTime(spawn.enemy, spawn.timeSec));
         }
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(RandomSpawnRoutine());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     void Update()
@@ -135,7 +143,6 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply)
     {
-        //GameObject newAsteroid = Instantiate(asteroidObject, position, Quaternion.AngleAxis(UnityEngine.Random.Range(0,360), Vector3.forward), enemyParentStatic);
         GameObject newAsteroid = poolRef.enemyPoolers[asteroidObject].GetPooledGameObject();
         newAsteroid.transform.SetPositionAndRotation(position, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
         newAsteroid.SetActive(true);

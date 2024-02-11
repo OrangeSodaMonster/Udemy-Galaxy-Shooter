@@ -18,6 +18,7 @@ public class RareSpawnScript : MonoBehaviour
     [SerializeField] RareSpawnsChances[] RareSpawns;
     [SerializeField] float intervalToEnableAtBegining = 10f;
     [SerializeField] float intervalBetweenSpawns = 5f;
+    [SerializeField] bool playSound = true;
 
     Dictionary<GameObject, GameObject> rareDict = new();
 
@@ -79,6 +80,7 @@ public class RareSpawnScript : MonoBehaviour
             Instantiate(rare, EnemySpawner.Instance.GetSpawnPoint(), Quaternion.identity, transform);
         }
 
-        AudioManager.Instance.RareSpawnSound.PlayFeedbacks();
+        if(playSound)
+            AudioManager.Instance.RareSpawnSound.PlayFeedbacks();
     }
 }

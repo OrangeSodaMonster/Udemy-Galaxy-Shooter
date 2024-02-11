@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] RectTransform ionStreamUpgradePage;
     [SerializeField] RectTransform dronesUpgradePage;
 
-    public static bool isPaused;
+    public bool IsPaused;
     bool hasReleasedPause;
     bool isOnUpgrade;
 
@@ -30,8 +30,15 @@ public class UIManager : MonoBehaviour
     PlayerLasers playerLasers;
     BombScript bombScript;
 
+    public static UIManager Instance;
+
     private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+
         s_gameoverCanvas = gameoverCanvas;
     }
 
@@ -44,14 +51,13 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (hasReleasedPause && input.IsPausing && !isPaused && !isOnUpgrade)
+        if (hasReleasedPause && input.IsPausing && !IsPaused && !isOnUpgrade && MySceneManager.IsFeedbackEnabled)
         {
             StartPause();
         }
-        else if (hasReleasedPause && input.IsPausing && isPaused && !isOnUpgrade)
+        else if (hasReleasedPause && input.IsPausing && IsPaused && !isOnUpgrade)
         {
             LeavePause();
-            Debug.Log("Despausar");
         }
         else if (hasReleasedPause && input.IsPausing && isOnUpgrade)
         {
@@ -66,7 +72,7 @@ public class UIManager : MonoBehaviour
     public void StartPause()
     {
         pauseCanvas.gameObject.SetActive(true);
-        isPaused = true;
+        IsPaused = true;
         Time.timeScale = 0;
 
         playerMove.enabled = false;
@@ -81,7 +87,7 @@ public class UIManager : MonoBehaviour
     public void LeavePause()
     {
         pauseCanvas.gameObject.SetActive(false);
-        isPaused = false;
+        IsPaused = false;
         Time.timeScale = 1;
 
         playerMove.enabled = true;
@@ -95,35 +101,35 @@ public class UIManager : MonoBehaviour
 
     public void EnableShipUpgradePage()
     {
-        if (!isPaused) return;
+        if (!IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(shipUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableLaserUpgradePage()
     {
-        if (!isPaused) return;
+        if (!IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(laserUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableShieldUpgradePage()
     {
-        if (!isPaused) return;
+        if (!IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(shieldUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableIonStreamUpgradePage()
     {
-        if (!isPaused) return;
+        if (!IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(ionStreamUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableDronesUpgradePage()
     {
-        if (!isPaused) return;
+        if (!IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(dronesUpgradePage));
         isOnUpgrade = true;
@@ -169,11 +175,13 @@ public class UIManager : MonoBehaviour
     }
     public void RestartScene()
     {
-        Time.timeScale = 1;
-        isPaused = false;
-        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
+    private void OnDisable()
+    {
+        Time.timeScale = 1;
+        IsPaused = false;
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
+    }
+
 }

@@ -153,7 +153,7 @@ public class PlayerMove : MonoBehaviour
     float analogAngleToRotateMin = 0;
     void TurnToDirection()
     {
-        analogAngleToRotateMin = maxTurningSpeed * 0.75f * Time.fixedDeltaTime;
+        analogAngleToRotateMin = (maxTurningSpeed * Time.fixedDeltaTime) + float.Epsilon;
         currentDirection = new Vector2(Mathf.Sin(-rb.rotation * Mathf.Deg2Rad), Mathf.Cos(-rb.rotation * Mathf.Deg2Rad));
         directionDifference = Vector2.SignedAngle(currentDirection, Input.Direction);
 

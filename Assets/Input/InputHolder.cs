@@ -6,7 +6,7 @@ public class InputHolder : MonoBehaviour
 {
 	[field: SerializeField] public InputSO Input { get; private set; }
 
-    InputHolder Instance;
+    public static InputHolder Instance;
 
     private void Awake()
     {

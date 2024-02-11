@@ -22,6 +22,8 @@ public class EnemyHPBar : MonoBehaviour
 
         enemyHP.TookDamage += DealWithBar;
         enemyHP.Healed += DealWithBar;
+
+        hpPositionOffset.Scale(transform.lossyScale);
     }
 
     private void OnDestroy()
@@ -61,11 +63,9 @@ public class EnemyHPBar : MonoBehaviour
         else
         {
             if (hpInstance == null)
-            {
-                hpPositionOffset.Scale(transform.lossyScale);
-
-                //hpInstance = Instantiate(hpPrefab, transform.position + hpPositionOffset, Quaternion.identity);
+            {         
                 hpInstance = EnemyPoolRef.s_hpBarPool.GetPooledGameObject().transform;
+                hpInstance.position = Vector3.zero;
                 hpBar = hpInstance.GetComponentInChildren<Slider>();
                 hpBar.fillRect.gameObject.GetComponent<Image>().color = hpColor;
                 hpInstance.gameObject.SetActive(true);

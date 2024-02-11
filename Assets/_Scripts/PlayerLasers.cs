@@ -24,7 +24,7 @@ public class PlayerLasers : MonoBehaviour
 
     void Update()
     {
-        if (UIManager.isPaused) return;
+        if (UIManager.Instance.IsPaused) return;
 
         FrontLasersShoot();
         SpreadLaserShoot();

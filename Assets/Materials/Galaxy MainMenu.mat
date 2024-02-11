@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Galaxy_shader
+  m_Name: Galaxy MainMenu
   m_Shader: {fileID: -6465566751694194690, guid: 439e06bbaf6b2cb428e7b6f814cb1408, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -73,24 +73,24 @@ Material:
     - _BG_ImagePower: 0.417
     - _DustOclusionPower: 0.3
     - _DustPower: 0.15
-    - _DustScale: 15
-    - _DustSpeedMod: 0.3
+    - _DustScale: 4.6
+    - _DustSpeedMod: 0.9
     - _MyTime: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScrollSpeed: 1
+    - _ScrollSpeed: 0.015
     - _ScrollSpeedLayerMod: 1.5
-    - _TwinkleNoiseScale: 200
+    - _TwinkleNoiseScale: 500
     - _TwinklePower: 0.6
-    - _TwinkleSpeed: 0.01
+    - _TwinkleSpeed: 0.005
     m_Colors:
     - _BGColor: {r: 0, g: 0, b: 0.047169805, a: 1}
     - _DustColor: {r: 0.18303551, g: 0, b: 0.3301887, a: 1}
-    - _ScrollOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _ScrollOffset: {r: 0, g: 2171.8223, b: 0, a: 0}
     - _ScrollSpeed: {r: 0, g: 0.15, b: 0, a: 0}
     - _ScrollSpeedLayerMod: {r: 1, g: 2, b: 0, a: 0}
-    - _StarsBGTilling: {r: 10, g: 10, b: 0, a: 0}
+    - _StarsBGTilling: {r: 2.5, g: 2.5, b: 0, a: 0}
     - _StarsColor: {r: 2.8630054, g: 2.4470112, b: 3.7321322, a: 1}
-    - _StarsFGTilling: {r: 14, g: 14, b: 0, a: 0}
-    - _StarsMGTilling: {r: 12, g: 12, b: 0, a: 0}
+    - _StarsFGTilling: {r: 3.5, g: 3.5, b: 0, a: 0}
+    - _StarsMGTilling: {r: 3, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []

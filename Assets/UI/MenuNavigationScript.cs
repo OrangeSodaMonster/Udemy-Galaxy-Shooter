@@ -8,19 +8,32 @@ using UnityEngine.UI;
 public class MenuNavigationScript : MonoBehaviour
 {
 	[SerializeField] GameObject firstSelected;
+	[SerializeField] bool shouldSelectOnCancel = true;
 	[SerializeField] GameObject selectOnCancel;
+    [Space, Tooltip("will 'click' the button if backUI input is called")]
+    [SerializeField] bool submitOnBackInput = false;
     [SerializeField] InputSO input;
 
     bool hasReleasedCancel = true;
 
     private void Update()
     {
-        if (input.IsCancelUI && hasReleasedCancel)
+        if (input.IsCancelUI && hasReleasedCancel && shouldSelectOnCancel &&
+            EventSystem.current.currentSelectedGameObject != selectOnCancel.GetComponentInChildren<Button>().gameObject)
         {
             EventSystem.current.SetSelectedGameObject(selectOnCancel.GetComponentInChildren<Button>().gameObject);
             hasReleasedCancel = false;
+            Debug.Log("Select");
         }
-        else if (!input.IsCancelUI)
+
+        if (input.IsCancelUI && hasReleasedCancel && submitOnBackInput)
+        {
+            selectOnCancel.GetComponent<Button>().onClick.Invoke();
+            hasReleasedCancel = false;
+            Debug.Log("Submit");
+        }
+
+        if (!input.IsCancelUI)
             hasReleasedCancel = true;
     }
 

@@ -37,7 +37,7 @@ public class IonStreamScript : MonoBehaviour
 
     void Update()
     {
-        if (UIManager.isPaused) return;
+        if (UIManager.Instance.IsPaused) return;
 
         UpdateValues();
 

@@ -7,6 +7,7 @@ public class SpawnDroneFromShip : MonoBehaviour
     [SerializeField] float baseSpawnCD = 9;
     [SerializeField] float spawnCDVariation = 1f;
     [SerializeField] GameObject droneToSpawn;
+    public GameObject DroneToSpawn => droneToSpawn;
 
     float spawnCD;
 
