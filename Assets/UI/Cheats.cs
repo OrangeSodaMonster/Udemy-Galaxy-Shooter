@@ -53,7 +53,7 @@ public class Cheats : MonoBehaviour
     {
         UIManager.Instance.DisableAllCanvas();
         Time.timeScale = 1;
-        UIManager.Instance.IsPaused = false;
+        GameStatus.IsPaused = false;
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
 
         playerHP.isInvencible = false;

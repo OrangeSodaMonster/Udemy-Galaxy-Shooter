@@ -25,7 +25,7 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] VisualEffect deathVFX;
     PlayerUpgradesManager upgradesManager;
 
-    void Start()
+    void OnEnable()
     {
         upgradesManager =FindObjectOfType<PlayerUpgradesManager>();
 
@@ -74,8 +74,6 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
- 
-
     public IEnumerator PlayerDestructionSequence()
     {
         yield return null;
@@ -95,6 +93,7 @@ public class PlayerHP : MonoBehaviour
         }
 
         UIManager.EnableGameoverCanvas();
+        GameStatus.IsGameover = true;
         Destroy(gameObject);
     }
 

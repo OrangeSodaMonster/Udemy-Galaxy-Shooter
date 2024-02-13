@@ -18,6 +18,12 @@ public class SpawnDroneFromShip : MonoBehaviour
         StartCoroutine(SpawnDroneRoutine());
     }
 
+    void Update()
+    {
+        if (GameStatus.IsGameover)
+            StopAllCoroutines();
+    }
+
 
     IEnumerator SpawnDroneRoutine()
     {

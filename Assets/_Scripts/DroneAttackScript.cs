@@ -34,7 +34,7 @@ public class DroneAttackScript : MonoBehaviour
 
     void Update()
     {
-        if (UIManager.Instance.IsPaused) return;
+        if (GameStatus.IsPaused) return;
 
         damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
 

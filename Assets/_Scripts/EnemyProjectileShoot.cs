@@ -1,6 +1,7 @@
 using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -20,6 +21,12 @@ public class EnemyProjectileShoot : MonoBehaviour
         preShootVFX.gameObject.SetActive(false);
 
         StartCoroutine(Shoot());
+    }
+
+    void Update()
+    {
+        if(GameStatus.IsGameover)
+            StopAllCoroutines();
     }
 
 
@@ -49,5 +56,6 @@ public class EnemyProjectileShoot : MonoBehaviour
     private void OnDisable()
     {
         AudioManager.Instance.StopEnemyCharge(gameObject.GetHashCode());
+        StopAllCoroutines();
     }
 }

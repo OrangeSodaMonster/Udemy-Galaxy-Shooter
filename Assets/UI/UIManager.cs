@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] RectTransform ionStreamUpgradePage;
     [SerializeField] RectTransform dronesUpgradePage;
 
-    public bool IsPaused;
+    //public bool IsPaused;
     bool hasReleasedPause;
     bool isOnUpgrade;
 
@@ -51,11 +51,11 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (hasReleasedPause && input.IsPausing && !IsPaused && !isOnUpgrade && MySceneManager.IsFeedbackEnabled)
+        if (hasReleasedPause && input.IsPausing && !GameStatus.IsPaused && !isOnUpgrade && MySceneManager.IsFeedbackEnabled)
         {
             StartPause();
         }
-        else if (hasReleasedPause && input.IsPausing && IsPaused && !isOnUpgrade)
+        else if (hasReleasedPause && input.IsPausing && GameStatus.IsPaused && !isOnUpgrade)
         {
             LeavePause();
         }
@@ -72,12 +72,12 @@ public class UIManager : MonoBehaviour
     public void StartPause()
     {
         pauseCanvas.gameObject.SetActive(true);
-        IsPaused = true;
+        GameStatus.IsPaused = true;
         Time.timeScale = 0;
 
-        playerMove.enabled = false;
-        playerLasers.enabled = false;
-        bombScript.enabled = false;
+        if(playerMove != null) playerMove.enabled = false;
+        if (playerLasers != null) playerLasers.enabled = false;
+        if (bombScript != null) bombScript.enabled = false;
 
         hasReleasedPause = false;
 
@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
     public void LeavePause()
     {
         pauseCanvas.gameObject.SetActive(false);
-        IsPaused = false;
+        GameStatus.IsPaused = false;
         Time.timeScale = 1;
 
         playerMove.enabled = true;
@@ -101,35 +101,35 @@ public class UIManager : MonoBehaviour
 
     public void EnableShipUpgradePage()
     {
-        if (!IsPaused) return;
+        if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(shipUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableLaserUpgradePage()
     {
-        if (!IsPaused) return;
+        if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(laserUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableShieldUpgradePage()
     {
-        if (!IsPaused) return;
+        if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(shieldUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableIonStreamUpgradePage()
     {
-        if (!IsPaused) return;
+        if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(ionStreamUpgradePage));
         isOnUpgrade = true;
     }
     public void EnableDronesUpgradePage()
     {
-        if (!IsPaused) return;
+        if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(dronesUpgradePage));
         isOnUpgrade = true;
@@ -180,7 +180,7 @@ public class UIManager : MonoBehaviour
     private void OnDisable()
     {
         Time.timeScale = 1;
-        IsPaused = false;
+        GameStatus.IsPaused = false;
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
     }
 

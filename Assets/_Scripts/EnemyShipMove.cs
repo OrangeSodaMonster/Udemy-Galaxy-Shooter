@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Cinemachine.CinemachineTargetGroup;
+using DG.Tweening;
 
 public class EnemyShipMove : MonoBehaviour
 {
@@ -46,8 +46,51 @@ public class EnemyShipMove : MonoBehaviour
     void FixedUpdate()
     {
         if (rotateClockWise) rotateDirection = -1;
-        else rotateDirection = 1;
+        else rotateDirection = 1;        
 
+        if(player != null && !GameStatus.IsGameover)
+        {
+            RotateAroundPlayer();
+            Debug.Log("RoundRound");
+        }
+        else
+        {
+            FowardMovement();
+        }
+
+        rb.velocity = transform.TransformDirection(newVelocity);
+    }
+
+    bool shouldMoveFoward = false;
+    bool shouldStop = true;
+    void FowardMovement()
+    {
+        if (shouldStop)
+        {
+            DOTween.To(() => newVelocity.x, x => newVelocity.x = x, 0, 1);
+            DOTween.To(() => newVelocity.y, y => newVelocity.y = y, 0, 1).OnComplete(() => StartCoroutine(Delay())); 
+            shouldStop = false;
+        }
+
+        if (shouldMoveFoward)
+        {
+            DOTween.To(() => newVelocity.y, y => newVelocity.y = y, maxYSpeed, 1.5f);
+            shouldMoveFoward = false;
+            Debug.Log("Move foward");
+        }
+
+        IEnumerator Delay()
+        {
+
+            Debug.Log("Player Dead");
+            yield return new WaitForSeconds(1);            
+
+            shouldMoveFoward = true;
+        }
+    }
+
+    private void RotateAroundPlayer()
+    {
         newVelocity = transform.InverseTransformDirection(rb.velocity);
         Vector2 playerVelocity = playerRB != null ? playerRB.velocity : Vector2.zero;
         currentMaxXSpeed = maxXSpeed + Vector2.Dot(transform.right, playerVelocity) * 0.5f;
@@ -62,7 +105,7 @@ public class EnemyShipMove : MonoBehaviour
         {
             //Debug.Log("Distancia enorme");
             newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * Time.fixedDeltaTime, -maxYSpeed, maxYSpeed);
-        }    
+        }
         else if (toPlayerVector.sqrMagnitude > distanceToKeep)
         {
             //Debug.Log("Média-Grande");
@@ -70,7 +113,7 @@ public class EnemyShipMove : MonoBehaviour
                 newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * 1.5f * Time.fixedDeltaTime, 0, maxYSpeed);
             else if (newVelocity.y < 0)
                 newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * 1.5f * Time.fixedDeltaTime, -maxYSpeed, 0);
-        }    
+        }
         else if (toPlayerVector.sqrMagnitude > distanceToKeep - distanceToleranceFraction)
         {
             //Debug.Log("Pequena");
@@ -78,11 +121,11 @@ public class EnemyShipMove : MonoBehaviour
                 newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * 1.5f * Time.fixedDeltaTime, 0, maxYSpeed);
             else if (newVelocity.y < 0)
                 newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * 1.5f * Time.fixedDeltaTime, -maxYSpeed, 0);
-        }   
+        }
         else if (toPlayerVector.sqrMagnitude < distanceToKeep - distanceToleranceFraction)
         {
             //Debug.Log("Mínima");
-            newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * Time.fixedDeltaTime * 1.5f , -maxYSpeed, maxYSpeed);
+            newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * Time.fixedDeltaTime * 1.5f, -maxYSpeed, maxYSpeed);
         }
 
         if (!isRotating)
@@ -92,16 +135,10 @@ public class EnemyShipMove : MonoBehaviour
             else if (newVelocity.x < 0)
                 newVelocity.x = Mathf.Clamp(newVelocity.x + xAccel * Time.fixedDeltaTime, -currentMaxXSpeed, 0);
         }
-        else   
+        else
             newVelocity.x = Mathf.Clamp(newVelocity.x + xAccel * Time.fixedDeltaTime * rotateDirection, -currentMaxXSpeed, currentMaxXSpeed);
-       
-        rb.velocity = transform.TransformDirection(newVelocity);
-
-        if (player == null)
-        {
-            GetComponent<EnemyProjectileShoot>().enabled = false;
-        }
     }
+
     IEnumerator RotationCheckFrequency()
     {
         while (true)

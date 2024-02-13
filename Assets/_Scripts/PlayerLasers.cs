@@ -24,7 +24,7 @@ public class PlayerLasers : MonoBehaviour
 
     void Update()
     {
-        if (UIManager.Instance.IsPaused) return;
+        if (GameStatus.IsPaused) return;
 
         FrontLasersShoot();
         SpreadLaserShoot();
@@ -134,9 +134,6 @@ public class PlayerLasers : MonoBehaviour
 
     void InstantiateLaser(Transform laserParent, LaserUpgrades laserUpgrades)
     {
-        //GameObject laser = Instantiate(basicLaser, transform.position + transform.TransformDirection(laserParent.position),
-        //    transform.rotation * laserParent.rotation, laserParent);
-
         GameObject laser = objPool.GetPooledGameObject();
         laser.transform.SetPositionAndRotation(transform.position + transform.TransformDirection(laserParent.position), transform.rotation * laserParent.rotation);
         laser.GetComponent<SpriteRenderer>().material = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Material;

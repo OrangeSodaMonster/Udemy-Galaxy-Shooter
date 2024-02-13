@@ -27,7 +27,7 @@ public class DroneMove : MonoBehaviour
     private void FixedUpdate()
     {
         //Vector3 playerPos = player != null ? player.position : EnemySpawn.PlayerLastPos;
-        if(player != null)
+        if(!GameStatus.IsGameover && player != null)
             rb.rotation = Vector2.SignedAngle(Vector2.up, player.position - transform.position);
 
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
@@ -39,10 +39,5 @@ public class DroneMove : MonoBehaviour
             velocity.x = Mathf.Clamp(velocity.x + baseSpeed * 0.2f * Time.fixedDeltaTime, -baseSpeed * 0.5f, 0);
 
         rb.velocity = transform.TransformDirection(velocity);
-
-        if (player == null)
-        {
-            GetComponent<EnemyProjectileShoot>().enabled = false;
-        }
     }
 }

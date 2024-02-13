@@ -30,7 +30,7 @@ public class AsteroidMove : MonoBehaviour
     {
         MoveSpeed = Mathf.Abs(Random.Range(baseSpeed - baseSpeed*(speedVariationPerc/100), baseSpeed + baseSpeed*(speedVariationPerc/100)));
 
-        if (player != null)
+        if (!GameStatus.IsGameover && player != null)
         {
             MoveDirection = player.position - transform.position;
             MoveDirection = MoveDirection.normalized;
