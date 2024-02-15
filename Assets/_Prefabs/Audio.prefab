@@ -1369,8 +1369,8 @@ MonoBehaviour:
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.35
-  MaxVolume: 0.4
+  MinVolume: 0.3
+  MaxVolume: 0.35
   MinPitch: 1
   MaxPitch: 1
   MmSoundManagerTrack: 0
@@ -3172,8 +3172,8 @@ MonoBehaviour:
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.3
-  MaxVolume: 0.35
+  MinVolume: 0.25
+  MaxVolume: 0.3
   MinPitch: 0.95
   MaxPitch: 1.05
   MmSoundManagerTrack: 0
@@ -3905,6 +3905,7 @@ GameObject:
   - component: {fileID: 7751605708047285603}
   - component: {fileID: 9140962237428350888}
   - component: {fileID: 3003594409195437568}
+  - component: {fileID: 3641965396401460980}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -3999,6 +4000,22 @@ MonoBehaviour:
   <AlarmSound>k__BackingField: {fileID: 8448877585097711742}
   <RareSpawnSound>k__BackingField: {fileID: 4157459883253722708}
   DronesActive: 
+--- !u!114 &3641965396401460980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590077020702987025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33996a71a0a07b4082818f86953f341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: {fileID: 0}
+  musicVolume: {fileID: 0}
+  sfxVolume: {fileID: 0}
+  uiVolume: {fileID: 0}
 --- !u!1 &3612203968102736912
 GameObject:
   m_ObjectHideFlags: 0
@@ -4677,8 +4694,8 @@ MonoBehaviour:
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.3
-  MaxVolume: 0.35
+  MinVolume: 0.35
+  MaxVolume: 0.4
   MinPitch: 0.95
   MaxPitch: 1.05
   MmSoundManagerTrack: 0
@@ -4935,8 +4952,8 @@ MonoBehaviour:
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.35
-  MaxVolume: 0.4
+  MinVolume: 0.4
+  MaxVolume: 0.45
   MinPitch: 0.95
   MaxPitch: 1.05
   MmSoundManagerTrack: 0
@@ -6261,8 +6278,8 @@ MonoBehaviour:
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.2
-  MaxVolume: 0.25
+  MinVolume: 0.07
+  MaxVolume: 0.12
   MinPitch: 0.95
   MaxPitch: 1.05
   MmSoundManagerTrack: 0
@@ -6482,8 +6499,8 @@ MonoBehaviour:
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.05
-  MaxVolume: 0.1
+  MinVolume: 0.04
+  MaxVolume: 0.05
   MinPitch: 0.95
   MaxPitch: 1.05
   MmSoundManagerTrack: 0
@@ -6550,8 +6567,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 238635707658673206}
-  - component: {fileID: 733498879645807186}
-  - component: {fileID: 4121602571318209807}
   - component: {fileID: 8448877585097711742}
   m_Layer: 0
   m_Name: AlarmWarning
@@ -6575,149 +6590,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4800734079512911098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &733498879645807186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7115747709314551369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89c8acfc07fee664da6ad222b6541a44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 0
-  Label: Drones
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
-    InitialDelay: 0
-    CooldownDuration: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Sfx: {fileID: 8300000, guid: 3c0efd0af54f1c342b0f31ea4f141ed4, type: 3}
-  RandomSfx: []
-  TestButton: 0
-  TestStopButton: 0
-  MinVolume: 0.2
-  MaxVolume: 0.2
-  MinPitch: 1
-  MaxPitch: 1
-  MmSoundManagerTrack: 0
-  ID: 333
-  AudioGroup: {fileID: 0}
-  RecycleAudioSource: {fileID: 0}
-  Loop: 1
-  Persistent: 0
-  DoNotPlayIfClipAlreadyPlaying: 1
-  StopSoundOnFeedbackStop: 1
-  DoNotAutoRecycleIfNotDonePlaying: 0
-  Fade: 1
-  FadeInitialVolume: 0
-  FadeDuration: 0.1
-  FadeTween:
-    MMTweenDefinitionType: 0
-    MMTweenCurve: 9
-    Curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    Initialized: 0
-  SoloSingleTrack: 0
-  SoloAllTracks: 0
-  AutoUnSoloOnEnd: 0
-  PanStereo: 0
-  SpatialBlend: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  Priority: 128
-  ReverbZoneMix: 1
-  DopplerLevel: 1
-  Spread: 0
-  RolloffMode: 0
-  MinDistance: 1
-  MaxDistance: 500
---- !u!114 &4121602571318209807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7115747709314551369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbeb74f1ccfa52540b6fd5784df42533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: AudioSource
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
-    InitialDelay: 0
-    CooldownDuration: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  TargetAudioSource: {fileID: 0}
-  Mode: 1
-  RandomSfx: []
-  MinVolume: 0.2
-  MaxVolume: 0.2
-  MinPitch: 1
-  MaxPitch: 1
-  SfxAudioMixerGroup: {fileID: -3165942800488051908, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
 --- !u!82 &8448877585097711742
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6730,7 +6602,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -3165942800488051908, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
   m_audioClip: {fileID: 8300000, guid: 96a3c9a37c09e114a993aafa6af09a10, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.03
+  m_Volume: 0.02
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7453,8 +7325,8 @@ MonoBehaviour:
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.15
-  MaxVolume: 0.2
+  MinVolume: 0.11
+  MaxVolume: 0.15
   MinPitch: 0.95
   MaxPitch: 1.05
   MmSoundManagerTrack: 0
@@ -7521,8 +7393,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5245554836761783555}
-  - component: {fileID: 679990776651215579}
-  - component: {fileID: 2533355335823295634}
   - component: {fileID: 472496851267444674}
   m_Layer: 0
   m_Name: Drones
@@ -7546,149 +7416,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6490740046223137170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &679990776651215579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8097980754140507971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89c8acfc07fee664da6ad222b6541a44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 0
-  Label: Drones
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
-    InitialDelay: 0
-    CooldownDuration: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Sfx: {fileID: 8300000, guid: 3c0efd0af54f1c342b0f31ea4f141ed4, type: 3}
-  RandomSfx: []
-  TestButton: 0
-  TestStopButton: 0
-  MinVolume: 0.2
-  MaxVolume: 0.2
-  MinPitch: 1
-  MaxPitch: 1
-  MmSoundManagerTrack: 0
-  ID: 333
-  AudioGroup: {fileID: 0}
-  RecycleAudioSource: {fileID: 0}
-  Loop: 1
-  Persistent: 0
-  DoNotPlayIfClipAlreadyPlaying: 1
-  StopSoundOnFeedbackStop: 1
-  DoNotAutoRecycleIfNotDonePlaying: 0
-  Fade: 1
-  FadeInitialVolume: 0
-  FadeDuration: 0.1
-  FadeTween:
-    MMTweenDefinitionType: 0
-    MMTweenCurve: 9
-    Curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    Initialized: 0
-  SoloSingleTrack: 0
-  SoloAllTracks: 0
-  AutoUnSoloOnEnd: 0
-  PanStereo: 0
-  SpatialBlend: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  Priority: 128
-  ReverbZoneMix: 1
-  DopplerLevel: 1
-  Spread: 0
-  RolloffMode: 0
-  MinDistance: 1
-  MaxDistance: 500
---- !u!114 &2533355335823295634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8097980754140507971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbeb74f1ccfa52540b6fd5784df42533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: AudioSource
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
-    InitialDelay: 0
-    CooldownDuration: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  TargetAudioSource: {fileID: 0}
-  Mode: 1
-  RandomSfx: []
-  MinVolume: 0.2
-  MaxVolume: 0.2
-  MinPitch: 1
-  MaxPitch: 1
-  SfxAudioMixerGroup: {fileID: -3165942800488051908, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
 --- !u!82 &472496851267444674
 AudioSource:
   m_ObjectHideFlags: 0

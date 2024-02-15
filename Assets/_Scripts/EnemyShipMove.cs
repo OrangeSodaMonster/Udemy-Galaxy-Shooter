@@ -51,7 +51,6 @@ public class EnemyShipMove : MonoBehaviour
         if(player != null && !GameStatus.IsGameover)
         {
             RotateAroundPlayer();
-            Debug.Log("RoundRound");
         }
         else
         {
@@ -76,13 +75,10 @@ public class EnemyShipMove : MonoBehaviour
         {
             DOTween.To(() => newVelocity.y, y => newVelocity.y = y, maxYSpeed, 1.5f);
             shouldMoveFoward = false;
-            Debug.Log("Move foward");
         }
 
         IEnumerator Delay()
         {
-
-            Debug.Log("Player Dead");
             yield return new WaitForSeconds(1);            
 
             shouldMoveFoward = true;

@@ -179,8 +179,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5badf65b4de41c244b512eee971d0ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldBaseStr: 4
-  baseRegenerateTime: 8
-  currentStr: 0
-  maxStr: 0
-  currentRegenTime: 0
+  shieldSide: 0
+  hitDuration: 0.3
+  hitOverlayMaxValue: 1
+  hitGlowMaxValue: 3
+  hitEase: 18
+  baseRegenTime: 1
+  RegenMod: 1
+  CurrentRegenTime: 0
+  MaxStr: 0
+  CurrentStr: 0

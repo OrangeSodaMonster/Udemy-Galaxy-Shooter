@@ -23,14 +23,12 @@ public class MenuNavigationScript : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(selectOnCancel.GetComponentInChildren<Button>().gameObject);
             hasReleasedCancel = false;
-            Debug.Log("Select");
         }
 
         if (input.IsCancelUI && hasReleasedCancel && submitOnBackInput)
         {
             selectOnCancel.GetComponent<Button>().onClick.Invoke();
             hasReleasedCancel = false;
-            Debug.Log("Submit");
         }
 
         if (!input.IsCancelUI)

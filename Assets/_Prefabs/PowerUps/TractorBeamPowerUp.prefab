@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: cbb88b8180565e74a8c99e2e2f2ee3d8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 784ba22a6ecb4664da8d54b90c0fc3fd, type: 3}
   m_Color: {r: 0, g: 0.09925557, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -396,7 +396,7 @@ MonoBehaviour:
   bgFill: {fileID: 635480460294503087}
   iconBorder: {fileID: 4695654340602013379}
   iconFill: {fileID: 7126807369763460543}
-  iconFillTex: {fileID: 2800000, guid: a4900fbdde4cfe5478adbfa004e25ab0, type: 3}
+  iconFillTex: {fileID: 2800000, guid: c62d5a3d13634c74a88dfc77a748c615, type: 3}
 --- !u!114 &6488090966001003076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,8 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Duration: 20
   RadiusMod: 1.5
-  MaxAtractionSpeedMod: 2.5
-  TimeToMaxSpeedMod: 0.5
+  PullForceMod: 2
   NewColorAlpha: 0.09
   TextureSpeedMod: 1.3
 --- !u!1 &7126807369763460543
@@ -488,7 +487,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: a4900fbdde4cfe5478adbfa004e25ab0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c62d5a3d13634c74a88dfc77a748c615, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

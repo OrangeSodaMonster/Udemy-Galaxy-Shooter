@@ -71,6 +71,13 @@ public class AudioManager : MonoBehaviour
     {
         if(Instance == null)
             Instance = this;
+
+    }
+
+    private void OnEnable()
+    {
+        transform.parent = null;
+        DontDestroyOnLoad(this);
     }
 
     private void Start()
@@ -84,7 +91,7 @@ public class AudioManager : MonoBehaviour
         asteroidDestructionFB = AsteroidDestructionSound.GetComponent<MMFeedbackMMSoundManagerSound>();
         asteroidDestructionDefaultVolume = asteroidDestructionFB.MinVolume;
     }
-
+    
     private void LateUpdate()
     {
         if (DronesActive.Count > 0)
@@ -94,37 +101,71 @@ public class AudioManager : MonoBehaviour
 
         if (DronesActive.Count > 0 && dronesActiveLastFrame == 0)
         {
-            PlayDrone();
+            PlayDrone();            
         }
         else if (DronesActive.Count == 0 && dronesActiveLastFrame > 0)
         {
-            PauseDrone();
+            PauseDrone();            
         }
 
         dronesActiveLastFrame = DronesActive.Count;
     }
 
+    //private void OnEnable()
+    //{
+    //    GameStatus.PausedGame += PauseDrone;
+    //    GameStatus.GameOver += PauseDrone;
+    //    GameStatus.UnPausedGame += PlayDrone;
+
+    //    GameStatus.PausedGame += PauseAlarm;
+    //    GameStatus.GameOver += PauseAlarm;
+    //    GameStatus.UnPausedGame += PlayAlarm;
+    //}
+    //private void OnDisable()
+    //{
+    //    GameStatus.PausedGame -= PauseDrone;
+    //    GameStatus.GameOver -= PauseDrone;
+    //    GameStatus.UnPausedGame -= PlayDrone;
+
+    //    GameStatus.PausedGame -= PauseAlarm;
+    //    GameStatus.GameOver -= PauseAlarm;
+    //    GameStatus.UnPausedGame -= PlayAlarm;
+    //}
+
+    bool playedDrones;
     void PauseDrone()
     {
+        if (!playedDrones) return;
+
         DronesSound.DOFade(0, .1f).OnComplete(() => DronesSound.Pause());
-        
+        playedDrones = false;
     }
     void PlayDrone()
     {
+        if (playedDrones) return;
+
         DronesSound.volume = 0;
         DronesSound.Play();
-        DronesSound.DOFade(dronesDefaultVolume, .1f);
+        DronesSound.DOFade(dronesDefaultVolume, .3f);
+        playedDrones = true;
     }
+
+    bool playedAlarm;
     public void PauseAlarm()
     {
-        DronesSound.DOFade(0, .3f).OnComplete(() => AlarmSound.Pause());
+        if (!playedAlarm) return;
 
+        AlarmSound.DOFade(0, .3f).OnComplete(() => AlarmSound.Pause());
+        playedAlarm = false;
     }
     public void PlayAlarm()
     {
+        if (playedAlarm) return;
+
         AlarmSound.volume = 0;
         AlarmSound.Play();
         AlarmSound.DOFade(alarmDefaultVolume, 1f);
+        playedAlarm = true;
     }
     public void PlayEnemyCharge(int enemyHash)
     {
@@ -145,4 +186,19 @@ public class AudioManager : MonoBehaviour
         AsteroidDestructionSound.PlayFeedbacks();
     }
 
+    bool canPlayLaser = true;
+    public void PlayLaserSound(float laserSoundInterval)
+    {
+        if (!canPlayLaser) return;
+
+        LaserSound.PlayFeedbacks();
+        canPlayLaser = false;
+        StartCoroutine(EnableLaser());
+
+        IEnumerator EnableLaser()
+        {
+            yield return new WaitForSeconds(laserSoundInterval);
+            canPlayLaser = true;
+        }
+    }
 }

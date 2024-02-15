@@ -20,10 +20,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] RectTransform shieldUpgradePage;
     [SerializeField] RectTransform ionStreamUpgradePage;
     [SerializeField] RectTransform dronesUpgradePage;
+    [SerializeField] RectTransform configPage;
 
     //public bool IsPaused;
     bool hasReleasedPause;
-    bool isOnUpgrade;
+    bool isOnPage;
 
     //scripts to disable if is pausing
     PlayerMove playerMove;
@@ -51,15 +52,15 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (hasReleasedPause && input.IsPausing && !GameStatus.IsPaused && !isOnUpgrade && MySceneManager.IsFeedbackEnabled)
+        if (hasReleasedPause && input.IsPausing && !GameStatus.IsPaused && !isOnPage && MySceneManager.IsFeedbackEnabled)
         {
             StartPause();
         }
-        else if (hasReleasedPause && input.IsPausing && GameStatus.IsPaused && !isOnUpgrade)
+        else if (hasReleasedPause && input.IsPausing && GameStatus.IsPaused && !isOnPage)
         {
             LeavePause();
         }
-        else if (hasReleasedPause && input.IsPausing && isOnUpgrade)
+        else if (hasReleasedPause && input.IsPausing && isOnPage)
         {
             //DisableAllCanvas();
             hasReleasedPause = false;
@@ -81,7 +82,7 @@ public class UIManager : MonoBehaviour
 
         hasReleasedPause = false;
 
-        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.MuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
+        AudioTrackConfig.Instance.MuteVFX();
     }
 
     public void LeavePause()
@@ -96,7 +97,7 @@ public class UIManager : MonoBehaviour
 
         hasReleasedPause = false;
 
-        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
+        AudioTrackConfig.Instance.UnmuteVFX();
     }
 
     public void EnableShipUpgradePage()
@@ -104,35 +105,42 @@ public class UIManager : MonoBehaviour
         if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(shipUpgradePage));
-        isOnUpgrade = true;
+        isOnPage = true;
     }
     public void EnableLaserUpgradePage()
     {
         if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(laserUpgradePage));
-        isOnUpgrade = true;
+        isOnPage = true;
     }
     public void EnableShieldUpgradePage()
     {
         if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(shieldUpgradePage));
-        isOnUpgrade = true;
+        isOnPage = true;
     }
     public void EnableIonStreamUpgradePage()
     {
         if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(ionStreamUpgradePage));
-        isOnUpgrade = true;
+        isOnPage = true;
     }
     public void EnableDronesUpgradePage()
     {
         if (!GameStatus.IsPaused) return;
 
         StartCoroutine(DisableEnableUpgradeDelay(dronesUpgradePage));
-        isOnUpgrade = true;
+        isOnPage = true;
+    }
+    public void EnableConfigPage()
+    {
+        if (!GameStatus.IsPaused) return;
+
+        StartCoroutine(DisableEnableUpgradeDelay(configPage));
+        isOnPage = true;
     }
     public void DisableAllCanvas()
     {
@@ -141,6 +149,7 @@ public class UIManager : MonoBehaviour
         shieldUpgradePage.gameObject.SetActive(false);
         ionStreamUpgradePage.gameObject.SetActive(false);
         dronesUpgradePage.gameObject.SetActive(false);
+        configPage.gameObject.SetActive(false);
         pauseCanvas.gameObject.SetActive(false);         
     }
 
@@ -151,7 +160,7 @@ public class UIManager : MonoBehaviour
         DisableAllCanvas();
 
         canvasToEnable.gameObject.SetActive(true);
-        isOnUpgrade = true;
+        isOnPage = true;
     }
 
     IEnumerator DisableEnablePauseDelay()
@@ -161,7 +170,7 @@ public class UIManager : MonoBehaviour
         DisableAllCanvas();
 
         pauseCanvas.gameObject.SetActive(true);
-        isOnUpgrade = false;
+        isOnPage = false;
     }
 
     public void ReturnToPauseCanvas()

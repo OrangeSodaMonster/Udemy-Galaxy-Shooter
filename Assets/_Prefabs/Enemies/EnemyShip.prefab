@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: -5495169815155117129}
   - component: {fileID: 9179801134552238898}
   - component: {fileID: -2991940992318775636}
+  - component: {fileID: 7131813867187918778}
   m_Layer: 7
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -408,6 +409,30 @@ MonoBehaviour:
   baseSpawnCD: 9
   spawnCDVariation: 1
   droneToSpawn: {fileID: 7680741029915228922, guid: 42f547fbbf454d243b875bfb08275d0f, type: 3}
+--- !u!114 &7131813867187918778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974661654251716083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69333f3c3ca8a547aa84d68cc8d568f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chanceToDrop: 4
+  PuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 7
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 6
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
 --- !u!1 &7730610816321907873
 GameObject:
   m_ObjectHideFlags: 0

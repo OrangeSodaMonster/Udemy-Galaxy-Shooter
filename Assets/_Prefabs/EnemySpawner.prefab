@@ -159,6 +159,7 @@ MonoBehaviour:
     ChancePerSecond: 0
   intervalToEnableAtBegining: 7
   intervalBetweenSpawns: 5
+  playSound: 1
 --- !u!1 &8059279360510778739
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,5 +208,5 @@ MonoBehaviour:
   NestWaitingPool: 1
   NestUnderThis: 1
   GameObjectToPool: {fileID: 4673865754226211464, guid: 3935062b95a19034a98292a7656f791d, type: 3}
-  PoolSize: 20
+  PoolSize: 10
   PoolCanExpand: 1

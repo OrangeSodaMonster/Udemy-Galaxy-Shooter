@@ -1037,7 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8e990f8e95e0247a47615e0fb2c12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInvencible: 1
+  isInvencible: 0
   shields: {fileID: 4764702324475954330}
   ionStream: {fileID: 2552571539545851839}
   drones: {fileID: 7658393024544727698}
@@ -1169,6 +1169,7 @@ MonoBehaviour:
   - {fileID: 4380685728367938366}
   - {fileID: 8143379745918671582}
   objPool: {fileID: 379391349323491824}
+  laserSoundInterval: 0.05
 --- !u!114 &3358335261240799932
 MonoBehaviour:
   m_ObjectHideFlags: 0
