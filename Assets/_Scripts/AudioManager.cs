@@ -82,9 +82,9 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PauseDrone();
+        DronesSound.Pause();
         dronesDefaultVolume = DronesSound.volume;
-        PauseAlarm();
+        AlarmSound.Pause();
         alarmDefaultVolume = AlarmSound.volume;
 
         enemyChargeFB = EnemyChargeSound.GetComponent<MMFeedbackMMSoundManagerSound>();
@@ -110,27 +110,6 @@ public class AudioManager : MonoBehaviour
 
         dronesActiveLastFrame = DronesActive.Count;
     }
-
-    //private void OnEnable()
-    //{
-    //    GameStatus.PausedGame += PauseDrone;
-    //    GameStatus.GameOver += PauseDrone;
-    //    GameStatus.UnPausedGame += PlayDrone;
-
-    //    GameStatus.PausedGame += PauseAlarm;
-    //    GameStatus.GameOver += PauseAlarm;
-    //    GameStatus.UnPausedGame += PlayAlarm;
-    //}
-    //private void OnDisable()
-    //{
-    //    GameStatus.PausedGame -= PauseDrone;
-    //    GameStatus.GameOver -= PauseDrone;
-    //    GameStatus.UnPausedGame -= PlayDrone;
-
-    //    GameStatus.PausedGame -= PauseAlarm;
-    //    GameStatus.GameOver -= PauseAlarm;
-    //    GameStatus.UnPausedGame -= PlayAlarm;
-    //}
 
     bool playedDrones;
     void PauseDrone()
