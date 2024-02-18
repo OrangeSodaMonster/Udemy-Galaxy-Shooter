@@ -8,7 +8,7 @@ public class ObjectiveSpawnArrow : MonoBehaviour
 {
     [SerializeField] Transform arrowPrefab;
     [SerializeField] float arrowDistanceFromPlayer;
-    [SerializeField] EnemyHPBar hpBar;
+    [SerializeField] EnemyHPBar target;
 
     Transform arrow;
     Transform player;
@@ -24,7 +24,7 @@ public class ObjectiveSpawnArrow : MonoBehaviour
         arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
         arrowSR = arrow.GetComponent<SpriteRenderer>();
         defaultAlpha = arrowSR.color.a;
-        arrowSR.color = new(hpBar.Color.r, hpBar.Color.g, hpBar.Color.b, defaultAlpha);
+        arrowSR.color = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
     }
 
     Tween fadeArrowTween = null;

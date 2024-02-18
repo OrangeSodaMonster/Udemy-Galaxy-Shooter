@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3333527706381361716
+--- !u!1001 &6921804980121663558
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,75 +10,71 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8246086450867371592, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: <Damage>k__BackingField
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: -8246086450867371592, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: <ImpactVelocity>k__BackingField
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: -5173364807266320180, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: <MaxHP>k__BackingField
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: -5173364807266320180, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: asteroidVolumeMultiplier
-      value: 0.4
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: maxDropsNum
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
-      propertyPath: minDropsNum
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: radiusToSpawn
-      value: 0.4
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: -1135126244599827535, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: vfxScale
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 359440957118289101, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: baseSpeed
-      value: 3.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 434640270311845536, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: minMaxAbsAngularSpeed.x
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 434640270311845536, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: minMaxAbsAngularSpeed.y
-      value: 80
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 3596066275569553282, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_Name
-      value: Asteroid_Small_Mine
+      value: Ast_Medium
       objectReference: {fileID: 0}
     - target: {fileID: 5286106063799904959, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: hpPositionOffset.y
-      value: 3.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.18
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.18
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.18
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3830686
+      value: -3.5427425
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3765478
+      value: -0.9448986
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -113,11 +109,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7857951331720398694, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: spawnDistance
+      value: 0.45
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7857951331720398694, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+    - target: {fileID: 7857951331720398694, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: asteroidToSplitInto
+      value: 
+      objectReference: {fileID: 2280188036016598454, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
