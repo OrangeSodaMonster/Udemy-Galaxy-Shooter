@@ -26,6 +26,11 @@ public class CollisionWithPlayer : MonoBehaviour
             playerMove.GetComponent<PlayerKnockBackDealer>().GetKnockedBack(ImpactVelocity * (Vector2)(l_forceDirection).normalized); 
             hasCollidedWithPlayer = true;
         }
+
+        if (collision.gameObject.GetComponent<PlayerHP>() != null)
+        {
+            AudioManager.Instance.PlayerHitSound.PlayFeedbacks();
+        }
     }
 
     private void LateUpdate()

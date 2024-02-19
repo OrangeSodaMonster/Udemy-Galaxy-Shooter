@@ -7,13 +7,15 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [field:Header("PlayerWeapons")]
+    [field:Header("PlayerSkills")]
     [field:SerializeField] public MMFeedbacks LaserSound { get; private set; }
     [field:SerializeField] public MMFeedbacks IonStreamSound { get; private set; }
     [field:SerializeField] public AudioSource DronesSound { get; private set; }
     [field:SerializeField] public MMFeedbacks BombSound { get; private set; }
     [field:SerializeField] public MMFeedbacks ShieldUpSound { get; private set; }
     [field:SerializeField] public MMFeedbacks ShipFix { get; private set; }
+    [field:SerializeField] public AudioSource ThrusterSound { get; private set; }
+    [field:SerializeField] public AudioSource ReverseSound { get; private set; }
 
     [field: Header("Collectibles")]
     [field:SerializeField] public MMFeedbacks MetalCrumbSound { get; private set; }
@@ -62,6 +64,8 @@ public class AudioManager : MonoBehaviour
     int dronesActiveLastFrame;
     float dronesDefaultVolume;
     float alarmDefaultVolume;
+    float thrusterDefaultVolume;
+    float reverseDefaultVolume;
     MMFeedbackMMSoundManagerSound enemyChargeFB;
     MMFeedbackMMSoundManagerSound asteroidDestructionFB;
     float asteroidDestructionDefaultVolume;
@@ -71,13 +75,24 @@ public class AudioManager : MonoBehaviour
     {
         if(Instance == null)
             Instance = this;
-
     }
 
     private void OnEnable()
     {
         transform.parent = null;
         DontDestroyOnLoad(this);
+
+        GameStatus.GameOver += PauseAlarm;
+        GameStatus.GameOver += PauseDrone;
+        GameStatus.GameOver += PauseThruster;
+        GameStatus.GameOver += PauseReverse;
+    }
+    private void OnDisable()
+    {
+        GameStatus.GameOver -= PauseAlarm;
+        GameStatus.GameOver -= PauseDrone;
+        GameStatus.GameOver -= PauseThruster;
+        GameStatus.GameOver -= PauseReverse;
     }
 
     private void Start()
@@ -86,6 +101,10 @@ public class AudioManager : MonoBehaviour
         dronesDefaultVolume = DronesSound.volume;
         AlarmSound.Pause();
         alarmDefaultVolume = AlarmSound.volume;
+        //ThrusterSound.Pause();
+        thrusterDefaultVolume = ThrusterSound.volume;
+        //ReverseSound.Pause();
+        reverseDefaultVolume = ReverseSound.volume;
 
         enemyChargeFB = EnemyChargeSound.GetComponent<MMFeedbackMMSoundManagerSound>();
         asteroidDestructionFB = AsteroidDestructionSound.GetComponent<MMFeedbackMMSoundManagerSound>();
@@ -127,6 +146,54 @@ public class AudioManager : MonoBehaviour
         DronesSound.Play();
         DronesSound.DOFade(dronesDefaultVolume, .3f);
         playedDrones = true;
+    }
+
+    bool playedThruster;
+    public void PauseThruster()
+    {
+        if (!playedThruster) return;
+
+        ThrusterSound.DOFade(0, .2f).OnComplete(() => ThrusterSound.Pause());
+        playedThruster = false;
+    }
+    public void PlayThruster()
+    {
+        if (playedThruster) return;
+
+        ThrusterSound.Play();
+        playedThruster = true;
+    }
+
+    public float ThrusterAccelMod = 0;
+    public float ThrusterLeftTurningMod = 0;
+    public float ThrusterRightTurningMod = 0;
+    public void SetThrusterVolume()
+    {
+        float turningWeight = 0.5f;
+        float volumeMod = Mathf.Clamp((ThrusterAccelMod + ThrusterLeftTurningMod * turningWeight + ThrusterRightTurningMod * turningWeight), 0, 1.25f);
+
+        ThrusterSound.volume = thrusterDefaultVolume * volumeMod;
+    }
+
+    bool playedReverse;
+    public void PauseReverse()
+    {
+        if (!playedReverse) return;
+
+        ReverseSound.DOFade(0, .1f).OnComplete(() => DronesSound.Pause());
+        playedReverse = false;
+    }
+    public void PlayReverse()
+    {
+        if (playedReverse) return;
+
+        ReverseSound.Play();
+        playedReverse = true;
+    }
+
+    public void SetReverseVolume(float volumeMod)
+    {
+        ReverseSound.volume = reverseDefaultVolume * volumeMod;
     }
 
     bool playedAlarm;
