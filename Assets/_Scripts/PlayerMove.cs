@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
 {
     Vector2 playerVelocity = Vector2.zero;
 
-    [SerializeField] InputSO Input;
+    //[SerializeField] InputSO Input;
     [SerializeField] Transform startPositionTransform;
     [SerializeField] float maxSpeed = 4;
     [SerializeField] float timeToMaxSpeed = 0.3f;
@@ -53,14 +53,14 @@ public class PlayerMove : MonoBehaviour
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
       
         //Acceleration
-        if (Input.Acceleration >= float.Epsilon)
-            velocity.y = Mathf.Clamp(velocity.y + acceleration * Time.fixedDeltaTime * Input.Acceleration, -maxSpeed, maxSpeed);
-        else if (Input.Acceleration <= -float.Epsilon)
-            velocity.y = Mathf.Clamp(velocity.y + acceleration * 0.5f * Time.fixedDeltaTime * Input.Acceleration, -maxSpeed , maxSpeed);        
+        if (InputHolder.Instance.Acceleration >= float.Epsilon)
+            velocity.y = Mathf.Clamp(velocity.y + acceleration * Time.fixedDeltaTime * InputHolder.Instance.Acceleration, -maxSpeed, maxSpeed);
+        else if (InputHolder.Instance.Acceleration <= -float.Epsilon)
+            velocity.y = Mathf.Clamp(velocity.y + acceleration * 0.5f * Time.fixedDeltaTime * InputHolder.Instance.Acceleration, -maxSpeed , maxSpeed);        
 
         //Deceleration
         // Em X acelerando
-        if(Input.Acceleration != 0 && rb.GetContacts(contacts) == 0)
+        if(InputHolder.Instance.Acceleration != 0 && rb.GetContacts(contacts) == 0)
         {
             if (velocity.x >= float.Epsilon)
             {
@@ -110,18 +110,18 @@ public class PlayerMove : MonoBehaviour
         //Angular Velocity
 
         //Debug.Log("Turning: " + Input.Turning);
-        if (Mathf.Abs(Input.Turning) >= float.Epsilon)
+        if (Mathf.Abs(InputHolder.Instance.Turning) >= float.Epsilon)
         {
             turningTime += Time.fixedDeltaTime;
             float turningValue = turningTime / timeToMaxTurning;
             turningValue = Mathf.Clamp(turningValue, 0, 1);
 
-            rb.angularVelocity -= AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * Input.Turning;      
+            rb.angularVelocity -= AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * InputHolder.Instance.Turning;      
             
             // Apply deceleration when turning in the oposite direction, to turn faster
-            if(Mathf.Abs(rb.angularVelocity) > 0 && Mathf.Sign(rb.angularVelocity) == Mathf.Sign(Input.Turning))
+            if(Mathf.Abs(rb.angularVelocity) > 0 && Mathf.Sign(rb.angularVelocity) == Mathf.Sign(InputHolder.Instance.Turning))
             {
-                rb.angularVelocity -= AngDeceleration * Time.fixedDeltaTime * Input.Turning;
+                rb.angularVelocity -= AngDeceleration * Time.fixedDeltaTime * InputHolder.Instance.Turning;
             }
         }
 
@@ -130,7 +130,7 @@ public class PlayerMove : MonoBehaviour
             turningTime = 0;
 
             float l_decelFactor = AngDeceleration * Time.fixedDeltaTime;
-            if (Input.Acceleration != 0)
+            if (InputHolder.Instance.Acceleration != 0)
                 l_decelFactor *= acceleratingRotationMod;
 
             if (rb.angularVelocity >= float.Epsilon)
@@ -155,9 +155,9 @@ public class PlayerMove : MonoBehaviour
     {
         analogAngleToRotateMin = (maxTurningSpeed * Time.fixedDeltaTime) + float.Epsilon;
         currentDirection = new Vector2(Mathf.Sin(-rb.rotation * Mathf.Deg2Rad), Mathf.Cos(-rb.rotation * Mathf.Deg2Rad));
-        directionDifference = Vector2.SignedAngle(currentDirection, Input.Direction);
+        directionDifference = Vector2.SignedAngle(currentDirection, InputHolder.Instance.Direction);
 
-        if (Mathf.Abs(directionDifference) < analogAngleToRotateMin || Input.Direction == Vector2.zero)
+        if (Mathf.Abs(directionDifference) < analogAngleToRotateMin || InputHolder.Instance.Direction == Vector2.zero)
         {
             directionTime = 0;
             return;
@@ -186,9 +186,9 @@ public class PlayerMove : MonoBehaviour
         float futureRotation = rb.rotation + rb.angularVelocity * Time.fixedDeltaTime;
         Vector2 futureDirection = new Vector2(Mathf.Sin(-futureRotation * Mathf.Deg2Rad), Mathf.Cos(-futureRotation * Mathf.Deg2Rad));
         if (Mathf.Sign(directionDifference) < Mathf.Sign(analogAngleToRotateMin) && 
-            Mathf.Sign(directionDifference) != Mathf.Sign(Vector2.SignedAngle(futureDirection, Input.Direction)))
+            Mathf.Sign(directionDifference) != Mathf.Sign(Vector2.SignedAngle(futureDirection, InputHolder.Instance.Direction)))
         {
-            rb.MoveRotation(Vector2.SignedAngle(Input.Direction, Vector2.up) * -1);
+            rb.MoveRotation(Vector2.SignedAngle(InputHolder.Instance.Direction, Vector2.up) * -1);
             rb.angularVelocity = 0;
             directionTime = 0;
             //Debug.Log($"Set rotation: {Vector2.SignedAngle(Input.Direction, Vector2.up)* -1}");
@@ -197,7 +197,7 @@ public class PlayerMove : MonoBehaviour
 
     void DrawDirectionLine()
     {
-        Debug.DrawLine(transform.position, transform.position + 5 * (Vector3)Input.Direction);
+        Debug.DrawLine(transform.position, transform.position + 5 * (Vector3)InputHolder.Instance.Direction);
 
         Debug.DrawLine(transform.position, (Vector2)transform.position + 3 * new Vector2(Mathf.Sin(-rb.rotation * Mathf.Deg2Rad), Mathf.Cos(-rb.rotation * Mathf.Deg2Rad)));
     }

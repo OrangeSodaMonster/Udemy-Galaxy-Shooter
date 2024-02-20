@@ -33,10 +33,12 @@ public class IonStreamButtomScripts : MonoBehaviour
     {
         UpgradeIonStreamButtons();
         UpgradedIonStream += UpgradeIonStreamButtons;
+        UpgradeDisableOverwrite.OnUpdateIonStream += UpgradeIonStreamButtons;
     }
     private void OnDisable()
     {
         UpgradedIonStream -= UpgradeIonStreamButtons;
+        UpgradeDisableOverwrite.OnUpdateIonStream -= UpgradeIonStreamButtons;
     }
 
     void UpgradeIonStreamButtons()
@@ -49,7 +51,8 @@ public class IonStreamButtomScripts : MonoBehaviour
         {
             interfaceData.SetBoolButtonVisual(icon, border, upgradeLevelTxt, ionStreamUpgradeInfo.UnlockCost, costs, ionStreamUpgrades.Enabled,
                 ionStreamUpgrades.DamageLevel == ionStreamUpgradeInfo.PowerUpgrades.Length && ionStreamUpgrades.CadencyLevel == ionStreamUpgradeInfo.CadencyUpgrades.Length
-                && ionStreamUpgrades.RangeLevel == ionStreamUpgradeInfo.RangeUpgrades.Length && ionStreamUpgrades.NumberHitsLevel == ionStreamUpgradeInfo.HitNumUpgrades.Length);
+                && ionStreamUpgrades.RangeLevel == ionStreamUpgradeInfo.RangeUpgrades.Length && ionStreamUpgrades.NumberHitsLevel == ionStreamUpgradeInfo.HitNumUpgrades.Length,
+                isDisableOverwrite: ionStreamUpgrades.DisableOverwrite);
         }
         else if (upgradeType == IonStreamUpgradeType.Power)
         {

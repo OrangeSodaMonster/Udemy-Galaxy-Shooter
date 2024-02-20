@@ -571,6 +571,24 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""d63ff03c-8077-4372-88b8-cc9eefb79b33"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PauseUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab3e0829-0cfc-49be-85fe-cb5d588645eb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -808,7 +826,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""82627dcc-3b13-4ba9-841d-e4b746d6553e"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/backspace"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -834,28 +852,6 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d5a51db8-aecc-45fd-a350-9395509a10c5"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""23f69140-bf42-447a-a7b5-3fca25f283c2"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -901,6 +897,39 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Touch"",
                     ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23c6d805-2e2b-4310-bdd7-f371b8a75a7b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PauseUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""687387d4-c524-4d7b-94d6-f2b2f0bf76c5"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""PauseUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4833322d-5db1-45e3-bb36-60c09c37eb55"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -986,6 +1015,8 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
+        m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
+        m_UI_PauseUI = m_UI.FindAction("PauseUI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1146,6 +1177,8 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Cancel;
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_Click;
+    private readonly InputAction m_UI_RightClick;
+    private readonly InputAction m_UI_PauseUI;
     public struct UIActions
     {
         private @UdemyGalaxyShooter m_Wrapper;
@@ -1155,6 +1188,8 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @Click => m_Wrapper.m_UI_Click;
+        public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
+        public InputAction @PauseUI => m_Wrapper.m_UI_PauseUI;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1179,6 +1214,12 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
             @Click.started += instance.OnClick;
             @Click.performed += instance.OnClick;
             @Click.canceled += instance.OnClick;
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
+            @PauseUI.started += instance.OnPauseUI;
+            @PauseUI.performed += instance.OnPauseUI;
+            @PauseUI.canceled += instance.OnPauseUI;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1198,6 +1239,12 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
             @Click.started -= instance.OnClick;
             @Click.performed -= instance.OnClick;
             @Click.canceled -= instance.OnClick;
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
+            @PauseUI.started -= instance.OnPauseUI;
+            @PauseUI.performed -= instance.OnPauseUI;
+            @PauseUI.canceled -= instance.OnPauseUI;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1277,5 +1324,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         void OnCancel(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
+        void OnPauseUI(InputAction.CallbackContext context);
     }
 }

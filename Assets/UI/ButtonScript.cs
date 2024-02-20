@@ -35,14 +35,11 @@ public class ButtonScript : MonoBehaviour
 
     private void OnDisable()
     {
-        //ButtonScript.ClickedOnInterface -= SelectOnClick;
         ClickedOnInterface -= SelectOnClick;
     }
      
     private void Start()
     {
-        //ButtonScript.ClickedOnInterface += SelectOnClick;       
-
         button = GetComponentInChildren<Button>();
         button.onClick.AddListener(CallClickEvent);
 
@@ -102,8 +99,6 @@ public class ButtonScript : MonoBehaviour
             AudioManager.Instance.ConfirmationClickSound.PlayFeedbacks();
         if (playBackSound)
             AudioManager.Instance.BackSound.PlayFeedbacks();
-        //if (disableOnClick)
-            //button.enabled = false;
 
         clickEvents.Invoke();
     }

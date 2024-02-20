@@ -39,10 +39,12 @@ public class ShieldButtonScript : MonoBehaviour
     {
         UpgradeShieldButtons();
         UpgradedShield += UpgradeShieldButtons;
+        UpgradeDisableOverwrite.OnUpdateShield += UpgradeShieldButtons;
     }
     private void OnDisable()
     {
         UpgradedShield -= UpgradeShieldButtons;
+        UpgradeDisableOverwrite.OnUpdateShield -= UpgradeShieldButtons;
     }
 
     void UpgradeShieldButtons()
@@ -62,7 +64,8 @@ public class ShieldButtonScript : MonoBehaviour
         if (upgradeType == ShieldUpgradeType.Main)
         {
             interfaceData.SetBoolButtonVisual(icon, border, upgradeLevelTxt, shieldUpgradeInfo.UnlockCost, costs, shieldUpgrades.Enabled,
-                shieldUpgrades.ResistenceLevel == shieldUpgradeInfo.StrenghtUpgrades.Length && shieldUpgrades.RecoveryLevel == shieldUpgradeInfo.RecoveryUpgrades.Length);
+                shieldUpgrades.ResistenceLevel == shieldUpgradeInfo.StrenghtUpgrades.Length && shieldUpgrades.RecoveryLevel == shieldUpgradeInfo.RecoveryUpgrades.Length,
+                isDisableOverwrite: shieldUpgrades.DisableOverwrite);
         }
         else if (upgradeType == ShieldUpgradeType.Strenght)
         {

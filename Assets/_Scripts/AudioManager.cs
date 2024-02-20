@@ -60,8 +60,6 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public AudioSource AlarmSound { get; private set; }
     [field: SerializeField] public MMFeedbacks RareSpawnSound { get; private set; }
 
-    [HideInInspector] public List<int> DronesActive = new();
-    int dronesActiveLastFrame;
     float dronesDefaultVolume;
     float alarmDefaultVolume;
     float thrusterDefaultVolume;
@@ -110,35 +108,16 @@ public class AudioManager : MonoBehaviour
         asteroidDestructionFB = AsteroidDestructionSound.GetComponent<MMFeedbackMMSoundManagerSound>();
         asteroidDestructionDefaultVolume = asteroidDestructionFB.MinVolume;
     }
-    
-    private void LateUpdate()
-    {
-        if (DronesActive.Count > 0)
-        {
-            DronesSound.volume = dronesDefaultVolume * DronesActive.Count - dronesDefaultVolume * 0.5f * (DronesActive.Count - 1);
-        }
-
-        if (DronesActive.Count > 0 && dronesActiveLastFrame == 0)
-        {
-            PlayDrone();            
-        }
-        else if (DronesActive.Count == 0 && dronesActiveLastFrame > 0)
-        {
-            PauseDrone();            
-        }
-
-        dronesActiveLastFrame = DronesActive.Count;
-    }
 
     bool playedDrones;
-    void PauseDrone()
+    public void PauseDrone()
     {
         if (!playedDrones) return;
 
         DronesSound.DOFade(0, .1f).OnComplete(() => DronesSound.Pause());
         playedDrones = false;
     }
-    void PlayDrone()
+    public void PlayDrone()
     {
         if (playedDrones) return;
 
@@ -146,6 +125,10 @@ public class AudioManager : MonoBehaviour
         DronesSound.Play();
         DronesSound.DOFade(dronesDefaultVolume, .3f);
         playedDrones = true;
+    }
+    public void SetDroneVolume(int activeNum)
+    {
+        DronesSound.volume = dronesDefaultVolume * activeNum - dronesDefaultVolume * 0.5f * (activeNum - 1);
     }
 
     bool playedThruster;

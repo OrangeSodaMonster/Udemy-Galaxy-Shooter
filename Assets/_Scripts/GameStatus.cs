@@ -22,7 +22,9 @@ public class GameStatus : MonoBehaviour
     private void Update()
     {
         if(IsPaused && !pausedLastFrame)
+        {
             PausedGame?.Invoke();
+        }
         else if (!IsPaused && pausedLastFrame)
             UnPausedGame?.Invoke();
 

@@ -12,31 +12,29 @@ public class MenuNavigationScript : MonoBehaviour
 	[SerializeField] GameObject selectOnCancel;
     [Space, Tooltip("will 'click' the button if backUI input is called")]
     [SerializeField] bool submitOnBackInput = false;
-    [SerializeField] InputSO input;
-
-    bool hasReleasedCancel = true;
-
-    private void Update()
-    {
-        if (input.IsCancelUI && hasReleasedCancel && shouldSelectOnCancel &&
-            EventSystem.current.currentSelectedGameObject != selectOnCancel.GetComponentInChildren<Button>().gameObject)
-        {
-            EventSystem.current.SetSelectedGameObject(selectOnCancel.GetComponentInChildren<Button>().gameObject);
-            hasReleasedCancel = false;
-        }
-
-        if (input.IsCancelUI && hasReleasedCancel && submitOnBackInput)
-        {
-            selectOnCancel.GetComponent<Button>().onClick.Invoke();
-            hasReleasedCancel = false;
-        }
-
-        if (!input.IsCancelUI)
-            hasReleasedCancel = true;
-    }
 
     private void OnEnable()
     {
-        EventSystem.current.SetSelectedGameObject(firstSelected.GetComponentInChildren<Button>().gameObject);   
+        EventSystem.current.SetSelectedGameObject(firstSelected.GetComponentInChildren<Button>().gameObject);
+
+        InputHolder.Instance.CancelUI += OnCancel;
+    }
+
+    private void OnDisable()
+    {
+        InputHolder.Instance.CancelUI -= OnCancel;        
+    }
+
+    private void OnCancel()
+    {
+        if (shouldSelectOnCancel && EventSystem.current.currentSelectedGameObject != selectOnCancel.GetComponentInChildren<Button>().gameObject)
+        {
+            EventSystem.current.SetSelectedGameObject(selectOnCancel.GetComponentInChildren<Button>().gameObject);
+        }
+
+        if (submitOnBackInput)
+        {
+            selectOnCancel.GetComponent<Button>().onClick.Invoke();
+        }
     }
 }

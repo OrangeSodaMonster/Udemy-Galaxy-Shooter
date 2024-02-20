@@ -52,36 +52,6 @@ public class TractorBeamScript : MonoBehaviour
         TotalPullForce = basePullForce * pullForceMod;
     }
 
-    // apenas quando os collectibles são dinâmicos (em um buraco negro por exemplo)
-    //void FixedUpdate()
-    //{
-    //    foreach (var rb in collectiblesToPull)
-    //    {
-    //        if (rb == null || !rb.isKinematic)
-    //        {
-    //            collectiblesToPull.Remove(rb);
-    //            return;
-    //        }
-
-    //        Vector2 direction = (transform.position - rb.transform.position).normalized;
-
-    //        TotalPullForce = basePullForce * pullForceMod;
-    //        rb.AddForce(TotalPullForce * direction, ForceMode2D.Force);
-    //    }
-    //}
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.GetComponent<CollectiblesPickUps>() != null && collision.TryGetComponent(out Rigidbody2D collRB)
-    //        && !collRB.isKinematic)
-    //        collectiblesToPull.Add(collRB);
-    //}
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.TryGetComponent(out Rigidbody2D collRB) && collectiblesToPull.Contains(collRB))
-    //        collectiblesToPull.Remove(collRB);
-    //}
-
     void UpdateValues()
     {
         radiusMod = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].RadiusMod;
@@ -92,8 +62,10 @@ public class TractorBeamScript : MonoBehaviour
 
     void SetEnabled()
     {
-        spriteRenderer.enabled = upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled;
-        coll.enabled = upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled;
+        bool isEnable = upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled && !upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite;
+
+        spriteRenderer.enabled = isEnable;
+        coll.enabled = isEnable;
     }
 
     public void PowerUpStart(float newAlpha, float puRadiusMod, float pullMod, float textureSpeedMod)

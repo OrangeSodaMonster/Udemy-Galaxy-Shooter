@@ -12,6 +12,7 @@ public class InterfaceDataHolder : ScriptableObject
     public Color avaliableColor = Color.white;
     public Color unlockedColor = Color.white;
 	public Color maxedColor = Color.yellow;
+	public Color disabledColor = Color.red;
 
     [Header("Upgrade Costs")]
 	public Sprite metalSprite = null;
@@ -25,7 +26,7 @@ public class InterfaceDataHolder : ScriptableObject
 
 
     public void UpdateButtonVisual(int upgradeLevel, int upgradeInfoLenght, Image icon, Image border, TextMeshProUGUI upgradeLevelTxt, GameObject[] costs,
-        ResourceNumber[] resourceNumber, bool isAvaliable = true, bool disableIfUnavaliable = true)
+        ResourceNumber[] resourceNumber, bool isAvaliable = true, bool disableIfUnavaliable = true, bool isDisableOverwrite = false)
     {
         Image costOne = costs[0].GetComponent<Image>();
         Image costTwo = costs[1].GetComponent<Image>();
@@ -45,7 +46,7 @@ public class InterfaceDataHolder : ScriptableObject
                 icon.GetComponent<Button>().enabled = false;
 
             return;
-        }
+        }       
 
         upgradeLevelTxt.text = $"{upgradeLevel}/{upgradeInfoLenght}";        
         icon.color = Color.white;
@@ -67,6 +68,12 @@ public class InterfaceDataHolder : ScriptableObject
             upgradeLevelTxt.color = avaliableColor;
             SetCost(resourceNumber[0], costOne, costOneTxt);
             SetCost(resourceNumber[1], costTwo, costTwoTxt);
+        }
+
+        if (isDisableOverwrite)
+        {
+            border.color = disabledColor;
+            icon.color = Color.gray;
         }
     }
 
@@ -123,7 +130,8 @@ public class InterfaceDataHolder : ScriptableObject
         SetCost(resourceNumber[1], costTwo, costTwoTxt);
     }
 
-    public void SetBoolButtonVisual(Image icon, Image border, TextMeshProUGUI upgradeLevelTxt, ResourceNumber[] resourceNumber, GameObject[] costs, bool isAvaliable = true, bool isMaxed = false)
+    public void SetBoolButtonVisual(Image icon, Image border, TextMeshProUGUI upgradeLevelTxt, ResourceNumber[] resourceNumber, GameObject[] costs,
+        bool isAvaliable = true, bool isMaxed = false, bool isDisableOverwrite = false)
     {
         upgradeLevelTxt.enabled = false;
 
@@ -135,6 +143,11 @@ public class InterfaceDataHolder : ScriptableObject
             costs[0].SetActive(true);
             costs[1].SetActive(true);
             SetUnlockedCostVisual(resourceNumber, costs);
+        }
+        else if (isDisableOverwrite)
+        {
+            border.color = disabledColor;
+            icon.color = Color.gray;
         }
         else if (!isMaxed)
         {

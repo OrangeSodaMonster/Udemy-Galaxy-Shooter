@@ -9,7 +9,7 @@ public class BombScript : MonoBehaviour
     public static int BombAmount = 1;
     public static int MaxBombs = 3;
 
-    [SerializeField] InputSO Input;
+    //[SerializeField] InputSO Input;
     [SerializeField] float radius;
     [SerializeField] LayerMask layersToHit;
     [SerializeField] int damage = 100;
@@ -26,9 +26,24 @@ public class BombScript : MonoBehaviour
         vfx.gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        InputHolder.Instance.Special += UseBomb;
+    }
+
+    private void OnDisable()
+    {
+        InputHolder.Instance.Special -= UseBomb;        
+    }
+
     void Update()
     {
-        if (Input.IsSpecialing && BombAmount > 0 && timeSinceUsedBomb >= coolDown)
+        timeSinceUsedBomb += Time.deltaTime;
+    }
+
+    void UseBomb()
+    {
+        if (BombAmount > 0 && timeSinceUsedBomb >= coolDown)
         {
             vfx.gameObject.SetActive(true);
 
@@ -40,9 +55,9 @@ public class BombScript : MonoBehaviour
                 {
                     StartCoroutine(ApplyDamage(hit, enemyHP));
                 }
-                else if(hit.transform.TryGetComponent(out LaserMove enemyProjectile))
+                else if (hit.transform.TryGetComponent(out LaserMove enemyProjectile))
                 {
-                    if(!enemyProjectile.IsPlayer)
+                    if (!enemyProjectile.IsPlayer)
                         enemyProjectile.DestroySequence();
                 }
             }
@@ -52,8 +67,6 @@ public class BombScript : MonoBehaviour
 
             AudioManager.Instance.BombSound.PlayFeedbacks();
         }
-
-        timeSinceUsedBomb += Time.deltaTime;
     }
 
     private IEnumerator ApplyDamage(RaycastHit2D hit, EnemyHP enemyHP)

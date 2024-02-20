@@ -52,7 +52,7 @@ public class IonStreamScript : MonoBehaviour
 
     void UpdateValues()
     {
-        isIonStreamEnabled = upgradesManager.CurrentUpgrades.IonStreamUpgrades.Enabled;
+        isIonStreamEnabled = upgradesManager.CurrentUpgrades.IonStreamUpgrades.Enabled && !upgradesManager.CurrentUpgrades.IonStreamUpgrades.DisableOverwrite;
 
         IonStreamUpgrades ionStreamUpgrades = upgradesManager.CurrentUpgrades.IonStreamUpgrades;
         damage = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Damage;

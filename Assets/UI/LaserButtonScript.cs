@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 enum LaserUpgradeType
@@ -26,22 +27,26 @@ public class LaserButtonScript : MonoBehaviour
     [SerializeField] GameObject[] costs;
 
     LaserUpgradesInfo laserUpgradeInfo;
+    Button button;
 
     public static event Action UpgradedLaser;
 
     void Awake()
     {
         laserUpgradeInfo = PlayerUpgradesManager.Instance.LaserUpgradesInfo;
+        button = GetComponentInChildren<Button>();
     }
 
     private void OnEnable()
     {
         UpgradeLaserButtons();
         UpgradedLaser += UpgradeLaserButtons;
+        UpgradeDisableOverwrite.OnUpdateLasers += UpgradeLaserButtons;
     }
     private void OnDisable()
     {
         UpgradedLaser -= UpgradeLaserButtons;
+        UpgradeDisableOverwrite.OnUpdateLasers -= UpgradeLaserButtons;
     }
 
     void UpgradeLaserButtons()
@@ -61,7 +66,8 @@ public class LaserButtonScript : MonoBehaviour
         if (upgradeType == LaserUpgradeType.Main)
         {            
             interfaceData.SetBoolButtonVisual(icon, border, upgradeLevelTxt, laserUpgradeInfo.UnlockCost, costs, laserUpgrades.Enabled,
-                laserUpgrades.DamageLevel == laserUpgradeInfo.PowerUpgrades.Length && laserUpgrades.CadencyLevel == laserUpgradeInfo.CadencyUpgrades.Length);
+                laserUpgrades.DamageLevel == laserUpgradeInfo.PowerUpgrades.Length && laserUpgrades.CadencyLevel == laserUpgradeInfo.CadencyUpgrades.Length,
+                isDisableOverwrite: laserUpgrades.DisableOverwrite);
         }
         else if (upgradeType == LaserUpgradeType.Power)
         {

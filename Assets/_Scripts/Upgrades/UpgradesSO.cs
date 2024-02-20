@@ -7,6 +7,7 @@ using UnityEngine;
 public struct LaserUpgrades
 {
     public bool Enabled;
+    public bool DisableOverwrite;
     public int DamageLevel;
     public int CadencyLevel;
 }
@@ -15,6 +16,7 @@ public struct LaserUpgrades
 public struct ShieldUpgrades
 {
     public bool Enabled;
+    public bool DisableOverwrite;
     public int ResistenceLevel;
     public int RecoveryLevel;
 }
@@ -23,6 +25,7 @@ public struct ShieldUpgrades
 public struct IonStreamUpgrades
 {
     public bool Enabled;
+    public bool DisableOverwrite;
     public int DamageLevel;
     public int CadencyLevel;
     public int RangeLevel;
@@ -33,6 +36,7 @@ public struct IonStreamUpgrades
 public struct DronesUpgrades
 {
     public bool Enabled;
+    public bool DisableOverwrite;
     public int DamageLevel;
     public int RangeLevel;
     public int HealingLevel;
@@ -45,6 +49,7 @@ public struct ShipUpgrades
     public int SpeedLevel;
     public int ManobrabilityLevel;
     public bool TractorBeamEnabled;
+    public bool TractorBeamDisableOverwrite;
     public int TractorBeamLevel;
 }
 

@@ -1,14 +1,13 @@
 using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {   
-    [SerializeField] InputSO input;
-
     [Header("")]
     [SerializeField] RectTransform pauseCanvas;
     [Header("")]
@@ -22,11 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] RectTransform dronesUpgradePage;
     [SerializeField] RectTransform configPage;
 
-    //public bool IsPaused;
-    bool hasReleasedPause;
     bool isOnPage;
-
-    //scripts to disable if is pausing
     PlayerMove playerMove;
     PlayerLasers playerLasers;
     BombScript bombScript;
@@ -50,24 +45,29 @@ public class UIManager : MonoBehaviour
         bombScript = FindObjectOfType<BombScript>();
     }
 
-    void Update()
+    private void OnEnable()
     {
-        if (hasReleasedPause && input.IsPausing && !GameStatus.IsPaused && !isOnPage && MySceneManager.IsFeedbackEnabled)
+        InputHolder.Instance.Pause += SetPause;
+    }
+    private void OnDisable()
+    {
+        InputHolder.Instance.Pause -= SetPause;
+
+        Time.timeScale = 1;
+        GameStatus.IsPaused = false;
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
+    }
+
+    private void SetPause()
+    {
+        if (!GameStatus.IsPaused && !isOnPage && MySceneManager.IsFeedbackEnabled)
         {
             StartPause();
         }
-        else if (hasReleasedPause && input.IsPausing && GameStatus.IsPaused && !isOnPage)
+        else if (GameStatus.IsPaused && !isOnPage)
         {
             LeavePause();
         }
-        else if (hasReleasedPause && input.IsPausing && isOnPage)
-        {
-            //DisableAllCanvas();
-            hasReleasedPause = false;
-        }
-
-            if (!input.IsPausing)
-            hasReleasedPause = true;
     }
 
     public void StartPause()
@@ -79,8 +79,6 @@ public class UIManager : MonoBehaviour
         if(playerMove != null) playerMove.enabled = false;
         if (playerLasers != null) playerLasers.enabled = false;
         if (bombScript != null) bombScript.enabled = false;
-
-        hasReleasedPause = false;
 
         AudioTrackConfig.Instance.MuteVFX();
     }
@@ -94,8 +92,6 @@ public class UIManager : MonoBehaviour
         playerMove.enabled = true;
         playerLasers.enabled = true;
         bombScript.enabled = true;
-
-        hasReleasedPause = false;
 
         AudioTrackConfig.Instance.UnmuteVFX();
     }
@@ -185,12 +181,5 @@ public class UIManager : MonoBehaviour
     public void RestartScene()
     {
          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-    private void OnDisable()
-    {
-        Time.timeScale = 1;
-        GameStatus.IsPaused = false;
-        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
-    }
-
+    }    
 }

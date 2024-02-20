@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "MyInputSO", menuName = "MySOs/InputSO")]
-public class InputSO : ScriptableObject
+public class InputSO_ : ScriptableObject
 {
     public float Acceleration;
     public float Turning;
@@ -24,8 +24,6 @@ public class InputSO : ScriptableObject
 
         if(Mathf.Abs(Acceleration) > 0.85f)
             Acceleration = 1 * Mathf.Sign(Acceleration);
-
-        //Debug.Log("Acceleration: " + Acceleration);
     }
 
     public void GetTurning(InputAction.CallbackContext context)

@@ -33,10 +33,12 @@ public class ShipButtonScript : MonoBehaviour
     {
         UpgradeShipButtons();
         UpgradedShip += UpgradeShipButtons;
+        UpgradeDisableOverwrite.OnUpdateShip += UpgradeShipButtons;
     }
     private void OnDisable()
     {
         UpgradedShip -= UpgradeShipButtons;
+        UpgradeDisableOverwrite.OnUpdateShip -= UpgradeShipButtons;
     }
 
     void UpgradeShipButtons()
@@ -86,7 +88,7 @@ public class ShipButtonScript : MonoBehaviour
                 costToSend = shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel].Cost;
                         
             interfaceData.UpdateButtonVisual(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel, shipUpgradeInfo.TractorBeamUpgrade.Length, icon, border, upgradeLevelTxt, costs,
-            costToSend, PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled, false);            
+            costToSend, PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled, false, isDisableOverwrite: PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite);            
         }
     }
 

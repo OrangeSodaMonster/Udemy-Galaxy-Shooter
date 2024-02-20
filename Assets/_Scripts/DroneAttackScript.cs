@@ -55,9 +55,6 @@ public class DroneAttackScript : MonoBehaviour
             beamVFX.gameObject.SetActive(true);
 
             isFiring = true;
-
-            if (!AudioManager.Instance.DronesActive.Contains(gameObject.GetHashCode()))
-                AudioManager.Instance.DronesActive.Add(gameObject.GetHashCode());
         }
         else
         {
@@ -67,9 +64,6 @@ public class DroneAttackScript : MonoBehaviour
             isFiring = false;
 
             transform.up = transform.position - player.position;
-
-            if (AudioManager.Instance.DronesActive.Contains(gameObject.GetHashCode()))
-                AudioManager.Instance.DronesActive.Remove(gameObject.GetHashCode());
         }
 
         if(isFiring & !wasFiringLastFrame)

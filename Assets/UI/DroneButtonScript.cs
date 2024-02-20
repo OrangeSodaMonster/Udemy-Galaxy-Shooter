@@ -37,11 +37,13 @@ public class DroneButtonScript : MonoBehaviour
     private void OnEnable()
     {
         UpgradeDroneButtons();
-        UpgradedDrone += UpgradeDroneButtons;        
+        UpgradedDrone += UpgradeDroneButtons;
+        UpgradeDisableOverwrite.OnUpdateDrones += UpgradeDroneButtons;
     }
     private void OnDisable()
     {
         UpgradedDrone -= UpgradeDroneButtons;
+        UpgradeDisableOverwrite.OnUpdateDrones -= UpgradeDroneButtons;
     }
 
     void UpgradeDroneButtons()
@@ -60,7 +62,7 @@ public class DroneButtonScript : MonoBehaviour
         {
             interfaceData.SetBoolButtonVisual(icon, border, upgradeLevelTxt, droneUpgradeInfo.UnlockCost, costs, droneUpgrades.Enabled,
                 droneUpgrades.DamageLevel == droneUpgradeInfo.PowerUpgrades.Length && droneUpgrades.RangeLevel == droneUpgradeInfo.RangeUpgrades.Length
-                && droneUpgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length);
+                && droneUpgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length, isDisableOverwrite: droneUpgrades.DisableOverwrite);
         }
         else if (upgradeType == DroneUpgradeType.Power)
         {

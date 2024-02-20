@@ -1022,9 +1022,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 63266619}
+  shouldSelectOnCancel: 1
   selectOnCancel: {fileID: 63266619}
   submitOnBackInput: 1
-  input: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
 --- !u!1001 &1464013609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1033,6 +1033,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2227258190703054702, guid: 5bc3249923c96ba4c9de3272fd29dd12, type: 3}
+      propertyPath: defaulActionMap
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4695114727842440147, guid: 5bc3249923c96ba4c9de3272fd29dd12, type: 3}
       propertyPath: m_Name
       value: EventSystem
@@ -1364,7 +1368,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3641965396401460980, guid: 7f0f5e0b3a4c80e44ad0d249784abdc6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

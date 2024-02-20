@@ -10,6 +10,7 @@ public struct LaserPowerUpgrade
     public ResourceNumber[] Cost;
     public int Damage;
     public Material Material;
+    [GradientUsage(true)]
     public Gradient VFXGradient;
 }
 

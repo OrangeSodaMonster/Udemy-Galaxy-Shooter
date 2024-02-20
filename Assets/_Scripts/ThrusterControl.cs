@@ -25,7 +25,6 @@ public class ThrusterControl : MonoBehaviour
 
     float runTime = 0;
     Vector3 defaultScale = Vector3.one;
-    InputSO input;
     bool isAccel;
     bool isReverse;
     int turnDir;
@@ -46,8 +45,6 @@ public class ThrusterControl : MonoBehaviour
 
     private void Start()
     {
-        input = InputHolder.Instance.Input;
-
         if (thrusterType != ThrusterType.Reverse)
             AudioManager.Instance.PlayThruster();
         else
@@ -56,10 +53,10 @@ public class ThrusterControl : MonoBehaviour
 
     void Update()
     {
-        isAccel = input.Acceleration > 0;
-        isReverse = input.Acceleration < 0;
-        turnDir = (int)Mathf.Sign(input.Turning);
-        if (input.Turning == 0) turnDir = 0;
+        isAccel = InputHolder.Instance.Acceleration > 0;
+        isReverse = InputHolder.Instance.Acceleration < 0;
+        turnDir = (int)Mathf.Sign(InputHolder.Instance.Turning);
+        if (InputHolder.Instance.Turning == 0) turnDir = 0;
 
         InputSizeDealer();
         SetTrailVFX();

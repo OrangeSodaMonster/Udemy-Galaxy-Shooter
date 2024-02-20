@@ -73,7 +73,7 @@ MonoBehaviour:
   m_CancelAction: {fileID: 1263492513534177961, guid: 04022398d23cc5f449bbc49626f8a129, type: 3}
   m_LeftClickAction: {fileID: -7173296444682302868, guid: 04022398d23cc5f449bbc49626f8a129, type: 3}
   m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: -4580003046437871910, guid: 04022398d23cc5f449bbc49626f8a129, type: 3}
   m_ScrollWheelAction: {fileID: 0}
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 2926346687166456937}
   - component: {fileID: 8735500120609382555}
   - component: {fileID: 8312700796112357050}
+  - component: {fileID: 2227258190703054702}
   m_Layer: 0
   m_Name: Global_Input
   m_TagString: Untagged
@@ -119,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 7067339685510810189}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9247141, y: 0.12675698, z: 0.0035533905}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152,8 +153,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
         m_MethodName: GetAcceleration
         m_Mode: 0
         m_Arguments:
@@ -168,8 +169,8 @@ MonoBehaviour:
     m_ActionName: Player/Acceleration[/Keyboard/s,/Keyboard/w,/Keyboard/leftArrow,/Keyboard/upArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
         m_MethodName: GetTurning
         m_Mode: 0
         m_Arguments:
@@ -184,8 +185,8 @@ MonoBehaviour:
     m_ActionName: Player/Turn[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
         m_MethodName: GetFiring
         m_Mode: 0
         m_Arguments:
@@ -200,9 +201,9 @@ MonoBehaviour:
     m_ActionName: Player/Fire[/Mouse/leftButton,/Keyboard/space,/Touchscreen/primaryTouch/tap]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
-        m_MethodName: GetSpecialing
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
+        m_MethodName: SetSpecial
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -224,9 +225,9 @@ MonoBehaviour:
     m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
-        m_MethodName: GetCancelUI
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
+        m_MethodName: SetCancelUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -243,26 +244,14 @@ MonoBehaviour:
     m_ActionId: a2b5e6e8-eede-4525-91c6-77db0735efeb
     m_ActionName: UI/Point[/Mouse/position,/Pen/position,/Touchscreen/touch0/position,/Touchscreen/touch1/position,/Touchscreen/touch2/position,/Touchscreen/touch3/position,/Touchscreen/touch4/position,/Touchscreen/touch5/position,/Touchscreen/touch6/position,/Touchscreen/touch7/position,/Touchscreen/touch8/position,/Touchscreen/touch9/position]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
-        m_MethodName: GetClickUI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 875b9171-83ba-4f01-a207-253a5e6bfd4c
     m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip,/Touchscreen/touch0/press,/Touchscreen/touch1/press,/Touchscreen/touch2/press,/Touchscreen/touch3/press,/Touchscreen/touch4/press,/Touchscreen/touch5/press,/Touchscreen/touch6/press,/Touchscreen/touch7/press,/Touchscreen/touch8/press,/Touchscreen/touch9/press]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
-        m_MethodName: GetAutoFire
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
+        m_MethodName: SetAutoFire
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -276,9 +265,9 @@ MonoBehaviour:
     m_ActionName: Player/SetAutoFire[/Keyboard/c]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
-        m_MethodName: GetPause
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
+        m_MethodName: SetPause
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -292,8 +281,8 @@ MonoBehaviour:
     m_ActionName: Player/Pause[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
-        m_TargetAssemblyTypeName: InputSO, Assembly-CSharp
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
         m_MethodName: GetDirection
         m_Mode: 0
         m_Arguments:
@@ -306,6 +295,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f136c917-3a85-4d55-84d8-a29432b1f024
     m_ActionName: Player/SetDirection[/SwitchProControllerHID/leftStick/up,/XInputControllerWindows/leftStick/up,/SwitchProControllerHID/leftStick/down,/XInputControllerWindows/leftStick/down,/SwitchProControllerHID/leftStick/left,/XInputControllerWindows/leftStick/left,/SwitchProControllerHID/leftStick/right,/XInputControllerWindows/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8312700796112357050}
+        m_TargetAssemblyTypeName: InputHolder, Assembly-CSharp
+        m_MethodName: SetPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ab3e0829-0cfc-49be-85fe-cb5d588645eb
+    m_ActionName: UI/PauseUI[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -323,4 +328,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bcf105049ec7247ac2797a7c8320b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Input>k__BackingField: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
+  Acceleration: 0
+  Turning: 0
+  Direction: {x: 0, y: 0}
+  IsAutoFire: 0
+  IsFiring: 0
+  IsAutoFiring: 0
+--- !u!114 &2227258190703054702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7067339685510810189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465d70715460d994ab2c5f0ab28fc938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaulActionMap: 1

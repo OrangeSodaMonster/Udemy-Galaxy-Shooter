@@ -50,6 +50,19 @@ public class CollectiblesPickUps : MonoBehaviour
         driftSpeed = Random.Range(minDriftMoveSpeed, maxDriftMoveSpeed);
         currentDriftSpeed = driftSpeed;
         transform.localScale = defaultScale;
+
+        GameStatus.GameOver += DriftOnGameover;
+    }
+
+    private void OnDisable()
+    {
+        GameStatus.GameOver -= DriftOnGameover;        
+    }
+
+    void DriftOnGameover()
+    {
+        isTractor = false;
+        isDrifting = true;
     }
 
     private void Update()
@@ -59,19 +72,19 @@ public class CollectiblesPickUps : MonoBehaviour
 
         if (isDrifting)
         {
-            currentDriftSpeed = Mathf.Clamp(currentDriftSpeed - acceleration * 0.35f * Time.smoothDeltaTime, driftSpeed, currentDriftSpeed);
+            currentDriftSpeed = Mathf.Clamp(currentDriftSpeed - acceleration * 0.35f * Time.deltaTime, driftSpeed, currentDriftSpeed);
             moveVelocity = driftDirection * currentDriftSpeed;
         }
         else
         {
             if (isTractor)
             {
-                tractorCurrentPull = Mathf.Clamp(tractorCurrentPull + acceleration * Time.smoothDeltaTime, driftSpeed, maxAtractionSpeed);                
+                tractorCurrentPull = Mathf.Clamp(tractorCurrentPull + acceleration * Time.deltaTime, driftSpeed, maxAtractionSpeed);                
                 tractorVelocity = tractorCurrentPull * (tractorBeam.transform.position - transform.position).normalized;
             }
             if(isBlackHole)
             {
-                bhCurrentPull = Mathf.Clamp(bhCurrentPull + bhAccel * Time.smoothDeltaTime, driftSpeed, bhMaxPullSpeed);
+                bhCurrentPull = Mathf.Clamp(bhCurrentPull + bhAccel * Time.deltaTime, driftSpeed, bhMaxPullSpeed);
                 bhVelocity = bhCurrentPull * (blackHole.transform.position - transform.position).normalized;
             }
 
@@ -81,7 +94,7 @@ public class CollectiblesPickUps : MonoBehaviour
         }
       
         //rb.MovePosition(rb.position + moveVelocity * Time.smoothDeltaTime);
-        transform.Translate(moveVelocity * Time.smoothDeltaTime, Space.World);
+        transform.Translate(moveVelocity * Time.deltaTime, Space.World);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
