@@ -589,6 +589,15 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DisableButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1526fc2-f244-4318-b535-16e49be68086"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -932,6 +941,28 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19ed205f-9692-4c14-81a3-34aff9b024ae"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DisableButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a3a1f7b-e032-4100-a9ac-1c9a8f5afa93"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DisableButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1017,6 +1048,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_PauseUI = m_UI.FindAction("PauseUI", throwIfNotFound: true);
+        m_UI_DisableButton = m_UI.FindAction("DisableButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1179,6 +1211,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_PauseUI;
+    private readonly InputAction m_UI_DisableButton;
     public struct UIActions
     {
         private @UdemyGalaxyShooter m_Wrapper;
@@ -1190,6 +1223,7 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         public InputAction @Click => m_Wrapper.m_UI_Click;
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputAction @PauseUI => m_Wrapper.m_UI_PauseUI;
+        public InputAction @DisableButton => m_Wrapper.m_UI_DisableButton;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1220,6 +1254,9 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
             @PauseUI.started += instance.OnPauseUI;
             @PauseUI.performed += instance.OnPauseUI;
             @PauseUI.canceled += instance.OnPauseUI;
+            @DisableButton.started += instance.OnDisableButton;
+            @DisableButton.performed += instance.OnDisableButton;
+            @DisableButton.canceled += instance.OnDisableButton;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1245,6 +1282,9 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
             @PauseUI.started -= instance.OnPauseUI;
             @PauseUI.performed -= instance.OnPauseUI;
             @PauseUI.canceled -= instance.OnPauseUI;
+            @DisableButton.started -= instance.OnDisableButton;
+            @DisableButton.performed -= instance.OnDisableButton;
+            @DisableButton.canceled -= instance.OnDisableButton;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1326,5 +1366,6 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnPauseUI(InputAction.CallbackContext context);
+        void OnDisableButton(InputAction.CallbackContext context);
     }
 }

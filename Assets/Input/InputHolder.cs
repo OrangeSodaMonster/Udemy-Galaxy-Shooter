@@ -20,6 +20,7 @@ public class InputHolder : MonoBehaviour
     public event Action Special;
     public event Action Pause;
     public event Action CancelUI;
+    public event Action DisableUI;
 
     private void Awake()
     {
@@ -76,6 +77,14 @@ public class InputHolder : MonoBehaviour
         if (context.started)
         {
             CancelUI?.Invoke();
+        }
+    }
+
+    public void SetDisableUI(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            DisableUI?.Invoke();
         }
     }
 }

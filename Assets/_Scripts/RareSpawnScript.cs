@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -31,8 +32,16 @@ public class RareSpawnScript : MonoBehaviour
 
             RareSpawns[i].ChancePerSecond = RareSpawns[i].ChancePerMinute / 60;
         }
+    }
 
+    void OnEnable()
+    {
         StartCoroutine(rareSpawnerRoutine());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     IEnumerator rareSpawnerRoutine()

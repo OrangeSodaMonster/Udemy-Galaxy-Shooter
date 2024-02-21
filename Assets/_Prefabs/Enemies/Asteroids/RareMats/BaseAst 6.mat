@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VeryRare
+  m_Name: BaseAst 6
   m_Shader: {fileID: -6465566751694194690, guid: 6f88afdc747ccd34d921c5b61cedd77e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,19 +37,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ContourTex:
-        m_Texture: {fileID: 2800000, guid: b29b5a9025a3be946bf8e07925f93ac3, type: 3}
+        m_Texture: {fileID: 2800000, guid: f1f046063e6bbfe4082caf2fdfe9f199, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FillTex:
-        m_Texture: {fileID: 2800000, guid: c32df49ab90f4db4588154b9fbe09cd4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 96efbb50d246d694dbb761ef70afa31f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FillText2:
-        m_Texture: {fileID: 2800000, guid: 75a8d1395605545478adb09b601f2fb5, type: 3}
+        m_Texture: {fileID: 2800000, guid: bf2011cfbf87fd645805b6dcc36657ce, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GlowTex:
-        m_Texture: {fileID: 2800000, guid: 59d954e6d34375d48883a3a8650e7460, type: 3}
+        m_Texture: {fileID: 2800000, guid: 86689b63671938d4a9adcf9d43779835, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -70,16 +70,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _GlowMin: 0.6
+    - _GlowMin: 0.5
     - _GlowSpeed: 1
     - _HealedValue: 0
     - _InHazardValue: 0
     - _WasHitValue: 0
     m_Colors:
     - _ContourColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Fill2Color: {r: 0.06799573, g: 0.0754717, b: 0.0686966, a: 1}
-    - _FillColor: {r: 0.14965291, g: 0.1792453, b: 0.15211894, a: 1}
-    - _GlowColor: {r: 0, g: 0.6250853, b: 2.6082375, a: 1}
+    - _Fill2Color: {r: 0.015686275, g: 0.14117648, b: 0.02745098, a: 1}
+    - _FillColor: {r: 0.13333334, g: 0.23529412, b: 0.14509805, a: 1}
+    - _GlowColor: {r: 0, g: 3.1029463, b: 11.181762, a: 0}
     - _HealedColor: {r: 0.4292453, g: 1, b: 0.4292453, a: 1}
     - _InHazardColor: {r: 1, g: 0, b: 0, a: 1}
     - _WasHitColor: {r: 1, g: 1, b: 1, a: 1}

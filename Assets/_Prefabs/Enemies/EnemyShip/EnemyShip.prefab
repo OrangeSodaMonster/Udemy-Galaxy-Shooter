@@ -292,6 +292,9 @@ MonoBehaviour:
   projectileOrigin: {fileID: 6232597142013545533}
   preShootVFX: {fileID: 3828722212198539157}
   preShootVFXTimePrior: 2
+  raycastLayers:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &1103471141016602533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,11 +582,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1386778559485595695, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
       propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[1].m_Value.x
-      value: 0.04
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 1386778559485595695, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
       propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[1].m_Value.y
-      value: 0.12
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2906950799882901858, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
       propertyPath: m_LocalScale.x

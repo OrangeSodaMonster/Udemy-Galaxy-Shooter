@@ -53,7 +53,7 @@ public class EnemyDropDealer : MonoBehaviour
             if (dropPooler != null)
             {
                 GameObject drop = dropPooler.GetPooledGameObject();
-                drop.transform.SetLocalPositionAndRotation(spawnPoint, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
+                drop.transform.position = spawnPoint;
                 drop.SetActive(true);
             }
         }
@@ -73,7 +73,7 @@ public class EnemyDropDealer : MonoBehaviour
                     spawnPoint += transform.position;
 
                     GameObject drop = dropPooler.GetPooledGameObject();
-                    drop.transform.SetLocalPositionAndRotation(spawnPoint, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
+                    drop.transform.position = spawnPoint;
                     drop.SetActive(true);
                 }
             }

@@ -221,6 +221,9 @@ MonoBehaviour:
   projectileOrigin: {fileID: 7501308407415674733}
   preShootVFX: {fileID: 8271918894049419804}
   preShootVFXTimePrior: 2
+  raycastLayers:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &8810601949308987788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,6 +542,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2003824453320199944}
     m_Modifications:
+    - target: {fileID: 1386778559485595695, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386778559485595695, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[1].m_Value.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386778559485595695, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[1].m_Value.y
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2906950799882901858, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.2
@@ -601,6 +616,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2003824453320199944}
     m_Modifications:
+    - target: {fileID: 1386778559485595695, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386778559485595695, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[1].m_Value.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386778559485595695, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[1].m_Value.y
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2906950799882901858, guid: cb75538ffd235d243b2a4d0d1cece1b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.2

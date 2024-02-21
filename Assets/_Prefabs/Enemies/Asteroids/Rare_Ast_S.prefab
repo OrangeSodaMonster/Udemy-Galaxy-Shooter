@@ -9,16 +9,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1093002493655715447, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1093002493655715447, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a523b59be77a12246b81606080c47b36, type: 2}
+      objectReference: {fileID: 2100000, guid: 0aa35c012e2848c4eb755c83e365c9a0, type: 2}
     - target: {fileID: 1618927344174162680, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: <MaxHP>k__BackingField
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2280188036016598454, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: m_Name
       value: Rare_Ast_S
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080440622588081913, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: baseSpeed
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: dropsGuaranteed.Array.size
@@ -128,8 +136,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7297665780186230093, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+    - target: {fileID: 7297665780186230093, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: mats
+      value: 
+      objectReference: {fileID: 11400000, guid: 25b6cec9b3aeaf2479f800dcac699d1c, type: 2}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2067532036358401765}
   - component: {fileID: 5917871036840663613}
   - component: {fileID: -8976095933014187644}
+  - component: {fileID: 705847696746289915}
   m_Layer: 10
   m_Name: CondensedEnergyCristal
   m_TagString: Untagged
@@ -56,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: b4a471d757af2ce47ad556261d2690f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: ecc24da6a135cc7439b0d7701b9dc34d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b30707661ffba3e4d959791a36bc5654, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7b4d3e2b878fa4a982a22b3be95433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 0
   minDriftMoveSpeed: 0.05
   maxDriftMoveSpeed: 0.3
 --- !u!114 &-8976095933014187644
@@ -172,3 +173,21 @@ MonoBehaviour:
   fastBlinkSeconds: 2
   fastBlinkPerSec: 3
   ease: 19
+--- !u!114 &705847696746289915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181768199481728834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d3657f68e8c76428b1a23f3fff3827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: b30707661ffba3e4d959791a36bc5654, type: 3}
+  - {fileID: 21300000, guid: 13ae966ffb749274a916589026ef544c, type: 3}
+  - {fileID: 21300000, guid: 7c66e830deee85d47b9ba8ab701c2e1c, type: 3}
+  sizeVariation: 1
+  sizeVariationPerc: 5

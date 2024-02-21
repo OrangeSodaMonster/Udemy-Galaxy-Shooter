@@ -12,6 +12,7 @@ public class EnemyProjectileShoot : MonoBehaviour
     [SerializeField] Transform projectileOrigin;
     [SerializeField] VisualEffect preShootVFX;
     [SerializeField] float preShootVFXTimePrior = 3;
+    [SerializeField] LayerMask raycastLayers;
 
     float shootCD;
 	
@@ -23,12 +24,17 @@ public class EnemyProjectileShoot : MonoBehaviour
         StartCoroutine(Shoot());
     }
 
+    private void OnDisable()
+    {
+        AudioManager.Instance.StopEnemyCharge(gameObject.GetHashCode());
+        StopAllCoroutines();
+    }
+
     void Update()
     {
         if(GameStatus.IsGameover)
             StopAllCoroutines();
     }
-
 
     IEnumerator Shoot()
     {
@@ -44,8 +50,13 @@ public class EnemyProjectileShoot : MonoBehaviour
             //Instantiate(projectile, projectileOrigin.position, transform.rotation, transform.parent);
             GameObject projectile = EnemyPoolRef.s_projectilePool.GetPooledGameObject();
             projectile.transform.SetLocalPositionAndRotation(projectileOrigin.position, transform.rotation);
-            projectile.GetComponent<LaserMove>().SourceHash = gameObject.GetHashCode();
+            projectile.GetComponent<LaserMove>().SourceHash = gameObject.GetHashCode();            
             projectile.SetActive(true);
+            if(InsideCheck(out Collider2D inside))
+            {
+                projectile.GetComponent<LaserMove>().IgnoreCollision(inside, true);
+            }
+
             preShootVFX.gameObject.SetActive(false);
             shootCD = Random.Range(-shootCDVariation, shootCDVariation) + baseShootCD;
 
@@ -53,9 +64,24 @@ public class EnemyProjectileShoot : MonoBehaviour
         } 
     }
 
-    private void OnDisable()
+    bool InsideCheck(out Collider2D inside)
     {
-        AudioManager.Instance.StopEnemyCharge(gameObject.GetHashCode());
-        StopAllCoroutines();
+        RaycastHit2D hit = Physics2D.Raycast(projectileOrigin.position, projectileOrigin.rotation * Vector2.up, 20f, raycastLayers);
+        int hitHash = 0;
+        if (hit.collider)
+        {
+            //Debug.Log($"Hit1: {hit.collider.name}");
+            hitHash = hit.collider.GetHashCode();
+            RaycastHit2D newHit = Physics2D.Raycast(hit.point, projectileOrigin.rotation * Vector2.up, 20f);
+            //Debug.Log($"Hit2: {newHit.collider.name}");
+
+            if (newHit.collider.GetHashCode() != hitHash || !newHit)
+            {
+                inside = hit.collider;
+                return true;
+            }
+        }
+        inside = null;
+        return false;
     }
 }

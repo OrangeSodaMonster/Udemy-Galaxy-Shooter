@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -100,6 +102,19 @@ public class LaserMove : MonoBehaviour
     public void DestroySilently()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        if(collIgnored != null)
+            IgnoreCollision(collIgnored, false);
+    }
+
+    Collider2D collIgnored = null;
+    public void IgnoreCollision(Collider2D coll, bool ignore)
+    {
+        collIgnored = coll;
+        Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), coll, ignore);
     }
 
 }
