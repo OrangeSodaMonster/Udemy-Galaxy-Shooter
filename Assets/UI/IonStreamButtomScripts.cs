@@ -110,6 +110,7 @@ public class IonStreamButtomScripts : MonoBehaviour
 
             AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyPower()
     {
@@ -151,6 +152,7 @@ public class IonStreamButtomScripts : MonoBehaviour
 
             AudioManager.Instance.UpgradeSound.PlayFeedbacks();
             UpgradedIonStream.Invoke();
-        }        
+        }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
 }

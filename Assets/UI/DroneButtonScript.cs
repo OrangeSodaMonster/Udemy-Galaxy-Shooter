@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 enum DroneUpgradeType
 {
-    Main, Power, Range, Heal
+    Main = 1, Power = 2, Range = 3, Heal = 4
 }
 enum DroneNumber
 {
-    One, Two, Three,
+    One = 1, Two = 2, Three = 3,
 }
 
 public class DroneButtonScript : MonoBehaviour
@@ -107,8 +107,9 @@ public class DroneButtonScript : MonoBehaviour
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.RangeLevel = 1;
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.HealingLevel = 1;
             UpgradedDrone.Invoke();
+            AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
         }
-        AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyOnePower()
     {
@@ -140,8 +141,9 @@ public class DroneButtonScript : MonoBehaviour
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.RangeLevel = 1;
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.HealingLevel = 1;
             UpgradedDrone.Invoke();
+            AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
         }
-        AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyTwoPower()
     {
@@ -172,8 +174,9 @@ public class DroneButtonScript : MonoBehaviour
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.RangeLevel = 1;
             PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.HealingLevel = 1;
             UpgradedDrone.Invoke();
+            AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
         }
-        AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyThreePower()
     {
@@ -232,5 +235,7 @@ public class DroneButtonScript : MonoBehaviour
             AudioManager.Instance.UpgradeSound.PlayFeedbacks();
             UpgradedDrone.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
+
     }
 }

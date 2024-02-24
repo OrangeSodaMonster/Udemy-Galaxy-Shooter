@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6210535940536228052}
   - component: {fileID: 3807373218925943934}
   - component: {fileID: 7314593300485500998}
+  - component: {fileID: 4655602513479495522}
   m_Layer: 5
   m_Name: ConfigUI
   m_TagString: Untagged
@@ -123,7 +124,33 @@ MonoBehaviour:
   shouldSelectOnCancel: 1
   selectOnCancel: {fileID: 1747777320340582729}
   submitOnBackInput: 1
-  input: {fileID: 11400000, guid: 04d49b29b4255be49bfd828a32f3f5ec, type: 2}
+--- !u!114 &4655602513479495522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3064668288723579858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21127a378ee9e3a429f0298403490800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioTrackConfig, Assembly-CSharp
+        m_MethodName: SetSliders
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3240859800921860900
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Configurations
+  m_text: Audio
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

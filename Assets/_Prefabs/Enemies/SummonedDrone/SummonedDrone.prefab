@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8584270917510965869}
   - component: {fileID: 2795752892552234176}
   - component: {fileID: 4902343389109490960}
+  - component: {fileID: 3208759362009200607}
   m_Layer: 7
   m_Name: SummonedDrone
   m_TagString: Untagged
@@ -215,13 +216,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radiusToSpawn: 0.4
   dropsToSpawn:
-  - drop: 0
+  - drop: 1
     spawnWeight: 5
   - drop: 2
     spawnWeight: 0.5
-  - drop: 4
+  - drop: 3
     spawnWeight: 0
-  - drop: 5
+  - drop: 4
     spawnWeight: 0
   minDropsNum: 1
   maxDropsNum: 1
@@ -336,6 +337,18 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+--- !u!114 &3208759362009200607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127313623198363770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4edad9e8ffebd439562e057f512030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1543172658060316507
 PrefabInstance:
   m_ObjectHideFlags: 0

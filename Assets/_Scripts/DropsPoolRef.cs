@@ -16,8 +16,8 @@ public class DropsPoolRef : MonoBehaviour
 
     private void Awake()
     {
-        ResourcePoolers.Add(ResourceType.MetalCrumb, MetalCrumbsPooler);
-        ResourcePoolers.Add(ResourceType.RareMetalCrumb, RareMetalCrumbsPooler);
+        ResourcePoolers.Add(ResourceType.Metal, MetalCrumbsPooler);
+        ResourcePoolers.Add(ResourceType.RareMetal, RareMetalCrumbsPooler);
         ResourcePoolers.Add(ResourceType.EnergyCristal, EnergyCristalPooler);
         ResourcePoolers.Add(ResourceType.CondensedEnergyCristal, CondensedEnergyCristalPooler);
 

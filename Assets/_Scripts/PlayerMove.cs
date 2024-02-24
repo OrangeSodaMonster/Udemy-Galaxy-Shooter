@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     Vector2 playerVelocity = Vector2.zero;
 
     //[SerializeField] InputSO Input;
-    [SerializeField] Transform startPositionTransform;
+    public Vector3 StartPosition = Vector3.zero;
     [SerializeField] float maxSpeed = 4;
     [SerializeField] float timeToMaxSpeed = 0.3f;
     [SerializeField] float maxTurningSpeed = 180;
@@ -42,7 +42,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
-        transform.position = startPositionTransform.position;
+        transform.position = StartPosition;
         UpdateValues();
     }
 

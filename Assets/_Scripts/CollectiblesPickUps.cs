@@ -4,10 +4,10 @@ using UnityEngine;
 
 enum CollectibleType
 {
-    MetalCrumb,
-    RareMetalCrumb,
-    EnergyCristal,
-    RareEnergyCristal,
+    MetalCrumb = 1,
+    RareMetalCrumb = 2,
+    EnergyCristal = 3,
+    RareEnergyCristal = 4,
 }
 
 public class CollectiblesPickUps : MonoBehaviour
@@ -56,7 +56,10 @@ public class CollectiblesPickUps : MonoBehaviour
 
     private void OnDisable()
     {
-        GameStatus.GameOver -= DriftOnGameover;        
+        GameStatus.GameOver -= DriftOnGameover;
+        isBlackHole = false;
+        isTractor = false;
+
     }
 
     void DriftOnGameover()
@@ -79,14 +82,19 @@ public class CollectiblesPickUps : MonoBehaviour
         {
             if (isTractor)
             {
-                tractorCurrentPull = Mathf.Clamp(tractorCurrentPull + acceleration * Time.deltaTime, driftSpeed, maxAtractionSpeed);                
+                tractorCurrentPull = Mathf.Clamp(tractorCurrentPull + acceleration * Time.deltaTime, Mathf.Abs(driftSpeed), Mathf.Abs(maxAtractionSpeed));
                 tractorVelocity = tractorCurrentPull * (tractorBeam.transform.position - transform.position).normalized;
             }
+            else
+                tractorVelocity = Vector2.zero;
+
             if(isBlackHole)
             {
-                bhCurrentPull = Mathf.Clamp(bhCurrentPull + bhAccel * Time.deltaTime, driftSpeed, bhMaxPullSpeed);
+                bhCurrentPull = Mathf.Clamp(bhCurrentPull + bhAccel * Time.deltaTime, Mathf.Abs(driftSpeed), Mathf.Abs(bhMaxPullSpeed));
                 bhVelocity = bhCurrentPull * (blackHole.transform.position - transform.position).normalized;
             }
+            else
+                bhVelocity = Vector2.zero;
 
             moveVelocity = tractorVelocity + bhVelocity;
             driftDirection = (moveVelocity).normalized;
@@ -120,12 +128,12 @@ public class CollectiblesPickUps : MonoBehaviour
             switch (type)
             {
                 case CollectibleType.MetalCrumb:
-                    PlayerCollectiblesCount.MetalCrumbsAmount += 1;
+                    PlayerCollectiblesCount.MetalAmount += 1;
                     AudioManager.Instance.MetalCrumbSound.PlayFeedbacks();
                     break;
                 case CollectibleType.RareMetalCrumb:
                     AudioManager.Instance.RareMetalCrumbSound.PlayFeedbacks();
-                    PlayerCollectiblesCount.RareMetalCrumbsAmount += 1;
+                    PlayerCollectiblesCount.RareMetalAmount += 1;
                     break;
                 case CollectibleType.EnergyCristal:
                     AudioManager.Instance.EnergyCrystalSound.PlayFeedbacks();

@@ -11,10 +11,19 @@ public class GameStatus : MonoBehaviour
 	public static bool IsGameover = false;
     public static event Action GameOver;
 
+    [SerializeField] bool saveConfigOnGameOver = true;
+
     private void OnEnable()
     {
         IsPaused = false;
         IsGameover = false;
+
+        GameOver += SaveConfigOnGameOver;
+    }
+
+    private void OnDisable()
+    {
+        GameOver -= SaveConfigOnGameOver;        
     }
 
     bool pausedLastFrame = false;
@@ -33,5 +42,11 @@ public class GameStatus : MonoBehaviour
 
         pausedLastFrame = IsPaused;
         gameoverLastFrame = IsGameover;
+    }
+
+    void SaveConfigOnGameOver()
+    {
+        if(saveConfigOnGameOver)
+            SaveLoad.instance.SaveConfig();
     }
 }

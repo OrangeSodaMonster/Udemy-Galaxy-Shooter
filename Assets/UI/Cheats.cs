@@ -18,6 +18,7 @@ public class Cheats : MonoBehaviour
     TextMeshProUGUI spawnerText;
     [SerializeField] Button selfDestructButton;
     [SerializeField] Button fillHPButton;
+    [SerializeField] Button addResourcesButton;
 
     Color defaultTextColor;
 
@@ -39,6 +40,7 @@ public class Cheats : MonoBehaviour
         spawnerButton.onClick.AddListener(SetSpawner);
         selfDestructButton.onClick.AddListener(SelfDestruct);
         fillHPButton.onClick.AddListener(FillHP);
+        addResourcesButton.onClick.AddListener(AddResources);
 
         UpdateTextColor(invencibilityText, playerHP.isInvencible);
         UpdateTextColor(spawnerText, !spawner.enabled);
@@ -73,6 +75,14 @@ public class Cheats : MonoBehaviour
         rareSpawner.enabled = spawner.enabled;
 
         UpdateTextColor(spawnerText, !spawner.enabled);
+    }
+
+    public void AddResources()
+    {
+        PlayerCollectiblesCount.MetalAmount += 50;
+        PlayerCollectiblesCount.RareMetalAmount += 50;
+        PlayerCollectiblesCount.EnergyCristalAmount += 50;
+        PlayerCollectiblesCount.CondensedEnergyCristalAmount += 50;
     }
 
     void UpdateTextColor(TextMeshProUGUI text, bool enabled)

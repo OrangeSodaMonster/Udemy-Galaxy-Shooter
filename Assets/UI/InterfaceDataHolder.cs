@@ -85,7 +85,7 @@ public class InterfaceDataHolder : ScriptableObject
             costText.text = resourceNumber.Amount.ToString();
             SetCostImageTextVisual(resourceNumber, costImage, costText);
         }
-        else if (resourceNumber.ResourceType == ResourceType.Alloy)
+        else if (resourceNumber.ResourceType == ResourceType.RareMetal)
         {
             costImage.sprite = alloySprite;
             costText.text = resourceNumber.Amount.ToString();

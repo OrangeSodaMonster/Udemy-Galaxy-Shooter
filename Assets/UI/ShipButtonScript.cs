@@ -126,6 +126,7 @@ public class ShipButtonScript : MonoBehaviour
                 AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
                 UpgradedShip.Invoke();
             }
+            else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
         }            
         else
             BuyUpgrade(shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel].Cost, ShipUpgradeType.TractorBeam);        
@@ -147,6 +148,7 @@ public class ShipButtonScript : MonoBehaviour
             AudioManager.Instance.UpgradeSound.PlayFeedbacks();
             UpgradedShip.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }  
 
 

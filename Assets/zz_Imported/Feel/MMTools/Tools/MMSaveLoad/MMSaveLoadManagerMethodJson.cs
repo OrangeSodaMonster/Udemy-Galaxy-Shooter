@@ -18,7 +18,7 @@ namespace MoreMountains.Tools
 		{
 			string json = JsonUtility.ToJson(objectToSave);
 			// if you prefer using NewtonSoft's JSON lib uncomment the line below and commment the line above
-			//string json = Newtonsoft.Json.JsonConvert.SerializeObject(objectToSave);
+			//string json = Unity.Plastic.Newtonsoft.Json.JsonConvert.SerializeObject(objectToSave);
 			StreamWriter streamWriter = new StreamWriter(saveFile);
 			streamWriter.Write(json);
 			streamWriter.Close();
@@ -38,7 +38,7 @@ namespace MoreMountains.Tools
 			string json = streamReader.ReadToEnd();
 			savedObject = JsonUtility.FromJson(json, objectType);
 			// if you prefer using NewtonSoft's JSON lib uncomment the line below and commment the line above
-			//savedObject = Newtonsoft.Json.JsonConvert.DeserializeObject(json,objectType);
+			//savedObject = Unity.Plastic.Newtonsoft.Json.JsonConvert.DeserializeObject(json,objectType);
 			streamReader.Close();
 			saveFile.Close();
 			return savedObject;

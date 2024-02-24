@@ -55,6 +55,7 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public MMFeedbacks BackSound { get; private set; }
     [field: SerializeField] public MMFeedbacks UnlockUpgradeSound { get; private set; }
     [field: SerializeField] public MMFeedbacks UpgradeSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks UpgradeFailSound { get; private set; }
 
     [field: Header("Other")]
     [field: SerializeField] public AudioSource AlarmSound { get; private set; }

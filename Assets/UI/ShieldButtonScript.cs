@@ -101,6 +101,7 @@ public class ShieldButtonScript : MonoBehaviour
             AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
             UpgradedShield.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyFrontStrenght()
     {
@@ -127,6 +128,7 @@ public class ShieldButtonScript : MonoBehaviour
             AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
             UpgradedShield.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyRightStrenght()
     {
@@ -153,6 +155,7 @@ public class ShieldButtonScript : MonoBehaviour
             AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
             UpgradedShield.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyLeftStrenght()
     {
@@ -179,6 +182,7 @@ public class ShieldButtonScript : MonoBehaviour
             AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
             UpgradedShield.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyBackStrenght()
     {
@@ -235,6 +239,7 @@ public class ShieldButtonScript : MonoBehaviour
             AudioManager.Instance.UpgradeSound.PlayFeedbacks();
             UpgradedShield.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
 
 }

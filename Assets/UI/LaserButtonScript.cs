@@ -115,7 +115,8 @@ public class LaserButtonScript : MonoBehaviour
 
             AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
             UpgradedLaser.Invoke();
-        }       
+        }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuySpreadPower()
     {
@@ -142,6 +143,7 @@ public class LaserButtonScript : MonoBehaviour
             AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
             UpgradedLaser.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuySidePower()
     {
@@ -168,6 +170,7 @@ public class LaserButtonScript : MonoBehaviour
             AudioManager.Instance.UnlockUpgradeSound.PlayFeedbacks();
             UpgradedLaser.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
     public void BuyBackPower()
     {
@@ -224,5 +227,6 @@ public class LaserButtonScript : MonoBehaviour
             AudioManager.Instance.UpgradeSound.PlayFeedbacks();
             UpgradedLaser.Invoke();
         }
+        else AudioManager.Instance.UpgradeFailSound.PlayFeedbacks();
     }
 }

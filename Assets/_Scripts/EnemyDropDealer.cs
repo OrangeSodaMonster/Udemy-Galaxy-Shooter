@@ -81,7 +81,7 @@ public class EnemyDropDealer : MonoBehaviour
     }
     ResourceType GetNextDrop(float spawnValue)
     {
-        ResourceType nextDrop = ResourceType.MetalCrumb;
+        ResourceType nextDrop = ResourceType.Metal;
         foreach (DropsToSpawn drop in dropsToSpawn)
         {
             if (spawnValue <= drop.spawnWeight)

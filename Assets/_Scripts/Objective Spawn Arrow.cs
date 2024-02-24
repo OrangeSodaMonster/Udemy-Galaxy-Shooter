@@ -16,7 +16,7 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     SpriteRenderer arrowSR;
     float defaultAlpha;
 
-    void Start()
+    void OnEnable()
     {
         player = FindObjectOfType<PlayerMove>().transform;
         direction = (transform.position - player.position).normalized;

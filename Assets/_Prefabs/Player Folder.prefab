@@ -380,7 +380,7 @@ MonoBehaviour:
   visualDuration: 0.15
   layersToHit:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8320
   lineRenderer: {fileID: 7206182785807064109}
 --- !u!1 &3977190315341278422
 GameObject:
@@ -749,7 +749,7 @@ MonoBehaviour:
   radius: 5.5
   layersToHit:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8320
   damage: 50
   coolDown: 1
   vfx: {fileID: 6124186654892125096}
@@ -1439,7 +1439,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 3071
+    m_Bits: 15359
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -2365,6 +2365,10 @@ PrefabInstance:
       propertyPath: AttackLineRenderer
       value: 
       objectReference: {fileID: 5935374772813286203}
+    - target: {fileID: 3418209756625254602, guid: 9c11c3de3619ef842b8e2d5bdb90b0fe, type: 3}
+      propertyPath: layersToHit.m_Bits
+      value: 8320
+      objectReference: {fileID: 0}
     - target: {fileID: 4034410302626686179, guid: 9c11c3de3619ef842b8e2d5bdb90b0fe, type: 3}
       propertyPath: m_SortingOrder
       value: 10
@@ -2771,6 +2775,10 @@ PrefabInstance:
       propertyPath: AttackLineRenderer
       value: 
       objectReference: {fileID: 2871980777423094078}
+    - target: {fileID: 3418209756625254602, guid: 9c11c3de3619ef842b8e2d5bdb90b0fe, type: 3}
+      propertyPath: layersToHit.m_Bits
+      value: 8320
+      objectReference: {fileID: 0}
     - target: {fileID: 4034410302626686179, guid: 9c11c3de3619ef842b8e2d5bdb90b0fe, type: 3}
       propertyPath: m_SortingOrder
       value: 10
@@ -3171,6 +3179,10 @@ PrefabInstance:
       propertyPath: AttackLineRenderer
       value: 
       objectReference: {fileID: 5941277224688939670}
+    - target: {fileID: 3418209756625254602, guid: 9c11c3de3619ef842b8e2d5bdb90b0fe, type: 3}
+      propertyPath: layersToHit.m_Bits
+      value: 8320
+      objectReference: {fileID: 0}
     - target: {fileID: 4034410302626686179, guid: 9c11c3de3619ef842b8e2d5bdb90b0fe, type: 3}
       propertyPath: m_SortingOrder
       value: 10

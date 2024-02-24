@@ -50,8 +50,6 @@ public class PlayerHeal : MonoBehaviour
         return healIntervalReduction;
     }
 
-
-
     IEnumerator HealRotine()
     {
         while (PlayerHP.CurrentHP <= PlayerHP.MaxHP - 5)
@@ -62,13 +60,17 @@ public class PlayerHeal : MonoBehaviour
             yield return new WaitForSeconds(currentSecondsBetweenHeal);
 
             if (isFreeHeal)
-                PlayerHP.ChangePlayerHP(+5);
+                Heal();
             else if (PlayerCollectiblesCount.ExpendResources(HealCost))
-                PlayerHP.ChangePlayerHP(+5);
-
-            AudioManager.Instance.ShipFix.PlayFeedbacks();
+                Heal();
         }
         isHealing = false;
+    }
+
+    void Heal()
+    {
+        PlayerHP.ChangePlayerHP(+5);
+        AudioManager.Instance.ShipFix.PlayFeedbacks();
     }
 
     public void PowerUpStart(float healCD)

@@ -2,6 +2,7 @@ using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class MySceneManager : MonoBehaviour
@@ -19,7 +20,7 @@ public class MySceneManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        SceneManager.sceneLoaded += SetRestartSceneName;
+        SceneManager.sceneLoaded -= SetRestartSceneName;
     }
     
     private void SetRestartSceneName(Scene s1, LoadSceneMode s2)

@@ -24,7 +24,7 @@ public class PlayModeUI : MonoBehaviour
     {        
         numberOfBombs.text = BombScript.BombAmount > 0 ?  $"{BombScript.BombAmount}" : "";
         metalText.text = $"Metal {PlayerCollectiblesCount.MetalAmount}";
-        alloyText.text = $"Alloy {PlayerCollectiblesCount.AlloyAmount}";
+        alloyText.text = $"Alloy {PlayerCollectiblesCount.RareMetalAmount}";
         cristalText.text = $"E. Cristal {PlayerCollectiblesCount.EnergyCristalAmount}";
         condCristalText.text = $"C. E. Cristal {PlayerCollectiblesCount.CondensedEnergyCristalAmount}";
     }

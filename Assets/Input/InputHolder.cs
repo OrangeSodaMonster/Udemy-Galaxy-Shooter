@@ -16,10 +16,13 @@ public class InputHolder : MonoBehaviour
     public bool IsAutoFire = false;
     public bool IsFiring;
     public bool IsAutoFiring;
-
+    public bool IsSpecial;
     public event Action Special;
+    public bool IsPause;
     public event Action Pause;
+    public bool IsCancelUI;
     public event Action CancelUI;
+    public bool IsDisableUI;
     public event Action DisableUI;
 
     private void Awake()
@@ -54,6 +57,8 @@ public class InputHolder : MonoBehaviour
         {
             Special?.Invoke();
         }
+
+        IsSpecial = context.performed;
     }
 
     public void SetPause(InputAction.CallbackContext context)
@@ -62,11 +67,13 @@ public class InputHolder : MonoBehaviour
         {
             Pause?.Invoke();
         }
+
+        IsPause = context.performed;
     }
 
     public void SetAutoFire(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
         {
             IsAutoFire = !IsAutoFire;
         }
@@ -78,6 +85,8 @@ public class InputHolder : MonoBehaviour
         {
             CancelUI?.Invoke();
         }
+
+        IsCancelUI = context.performed;
     }
 
     public void SetDisableUI(InputAction.CallbackContext context)
@@ -86,5 +95,7 @@ public class InputHolder : MonoBehaviour
         {
             DisableUI?.Invoke();
         }
+
+        IsDisableUI = context.performed;
     }
 }
