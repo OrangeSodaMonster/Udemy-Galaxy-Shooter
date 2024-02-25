@@ -26,11 +26,9 @@ public class PlayerHP : MonoBehaviour
 
     PlayerUpgradesManager upgradesManager;
 
-    int lastFrameMaxHP;
-
-    HpBarSize hpBarSize;
-
     public static PlayerHP Instance;
+
+    int lastFrameMaxHP;
 
     private void Awake()
     {
@@ -41,7 +39,6 @@ public class PlayerHP : MonoBehaviour
     void OnEnable()
     {
         upgradesManager =FindObjectOfType<PlayerUpgradesManager>();
-        hpBarSize = FindObjectOfType<HpBarSize>();
 
         MaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
         CurrentHP = MaxHP;
@@ -58,11 +55,6 @@ public class PlayerHP : MonoBehaviour
 
         if (CurrentHP == 0)
             StartCoroutine(PlayerDestructionSequence());
-
-        if(MaxHP != lastFrameMaxHP)
-        {
-            //hpBarSize.SetHpBarSize();
-        }
     }
 
     void LateUpdate()

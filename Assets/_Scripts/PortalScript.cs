@@ -48,6 +48,7 @@ public class PortalScript : MonoBehaviour
     SpriteRenderer arrowSR;
     float defaultAlpha;
     Tween fadeArrowTween = null;
+    PlayModeUI playModeUI;
 
     private void Awake()
     {
@@ -68,6 +69,7 @@ public class PortalScript : MonoBehaviour
         col.enabled = false;
 
         Objectives = FindObjectsOfType<ObjectivePointer>();
+        playModeUI = FindObjectOfType<PlayModeUI>();
 
         // Player Animation
         StartCoroutine(PlayerArrivalAnimation());
@@ -98,6 +100,7 @@ public class PortalScript : MonoBehaviour
     {
         DisablePlayerCommands.Instance.SetCommands(true);
         arrivalVFX.gameObject.SetActive(true);
+        playModeUI.EnableUI();
     }
 
     void PlayArrivalSound()

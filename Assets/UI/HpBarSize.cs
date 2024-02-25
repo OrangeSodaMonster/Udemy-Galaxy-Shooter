@@ -15,7 +15,6 @@ public class HpBarSize : MonoBehaviour
 
     int minUpgradeHP;
     int maxUpgradeHP;
-    int currentMaxHP;
 
     private void Awake()
     {
@@ -24,37 +23,19 @@ public class HpBarSize : MonoBehaviour
         defaultBorderWidth = border.rect.width;
     }
 
-    private void Start()
+    public void SetHpBarSize(int currentMax)
     {
         minUpgradeHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[0].HP;
         maxUpgradeHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade.Length - 1].HP;
-        GetCurrentMaxHP();
-        SetHpBarSize();
-    }
 
-    public void SetHpBarSize()
-    {
-        StartCoroutine(Routine());
+        float value = Remap(currentMax, minUpgradeHP, maxUpgradeHP, 0, 1);
+        float newXScale = Mathf.Lerp(defaultScaleInX, maxScaleInX, value);
+        hpTransform.localScale = new Vector3(newXScale, hpTransform.localScale.y, hpTransform.localScale.z);
 
-        IEnumerator Routine()
-        {
-            yield return null;
+        border.sizeDelta = new Vector2(Mathf.Lerp(defaultBorderWidth, borderWidthAtMaxScale, value), border.sizeDelta.y);
 
-            float value = Remap(currentMaxHP, minUpgradeHP, maxUpgradeHP, 0, 1);
-            float newXScale = Mathf.Lerp(defaultScaleInX, maxScaleInX, value);
-            hpTransform.localScale = new Vector3(newXScale, hpTransform.localScale.y, hpTransform.localScale.z);
-
-            Rect borderRect = border.rect;
-            borderRect.width = Mathf.Lerp(defaultBorderWidth, borderWidthAtMaxScale, value);
-
-            Debug.Log("Set HP Size: " + newXScale);
-            Debug.Log("Set HP Size: " + newXScale);
-        }
-    }
-
-    void GetCurrentMaxHP()
-    {
-        currentMaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
+        Debug.Log("Set HP Size: " + newXScale);
+        Debug.Log($"{currentMax}, {minUpgradeHP}, {maxUpgradeHP}");
     }
 
     float Remap(float source, float sourceFrom, float sourceTo, float targetFrom, float targetTo)
