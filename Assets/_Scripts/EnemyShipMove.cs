@@ -48,7 +48,7 @@ public class EnemyShipMove : MonoBehaviour
         if (rotateClockWise) rotateDirection = -1;
         else rotateDirection = 1;        
 
-        if(player != null && !GameStatus.IsGameover)
+        if(!GameStatus.IsGameover && !GameStatus.IsStageClear && player != null)
         {
             RotateAroundPlayer();
         }

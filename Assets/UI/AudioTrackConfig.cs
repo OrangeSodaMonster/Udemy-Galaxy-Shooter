@@ -39,6 +39,8 @@ public class AudioTrackConfig : MonoBehaviour
         musicVolume.SetValueWithoutNotify(currentMusic);
         sfxVolume.SetValueWithoutNotify(currentSFX);
         uiVolume.SetValueWithoutNotify(currentUI);
+
+        Debug.Log($"SET SLIDERS: {currentMaster}, {currentMusic}, {currentSFX}, {currentUI}");
     }
     public void LoadVolume(int master, int music, int sfx, int ui)
     {
@@ -85,14 +87,16 @@ public class AudioTrackConfig : MonoBehaviour
         currentMusic = (int)musicVolume.value;
     }       
 
-    float vfxVolume;
+    float sfxTrackVolume;
     public void SetSFX()
     {
-        vfxVolume = 0.2f * sfxVolume.value;
+        sfxTrackVolume = 0.2f * sfxVolume.value;
 
         if(!MMSoundManager.Instance.IsMuted(MMSoundManager.MMSoundManagerTracks.Sfx))
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, vfxVolume);
+            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, sfxTrackVolume);
         currentSFX = (int)sfxVolume.value;
+
+        Debug.Log(sfxTrackVolume);
     }
     public void SetUI()
     {
@@ -103,16 +107,16 @@ public class AudioTrackConfig : MonoBehaviour
 
     public void MuteVFX()
     {
-        vfxVolume = MMSoundManager.Instance.GetTrackVolume(MMSoundManager.MMSoundManagerTracks.Sfx, false);
+        sfxTrackVolume = MMSoundManager.Instance.GetTrackVolume(MMSoundManager.MMSoundManagerTracks.Sfx, false);
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.MuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
 
-        Debug.Log($"Mute SFX {vfxVolume}");
+        Debug.Log($"Mute SFX {sfxTrackVolume}");
     }
     public void UnmuteVFX()
     {
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
-        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, vfxVolume);
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, sfxTrackVolume);
 
-        Debug.Log($"Unmute SFX {vfxVolume}");
+        Debug.Log($"Unmute SFX {sfxTrackVolume}");
     }
 }

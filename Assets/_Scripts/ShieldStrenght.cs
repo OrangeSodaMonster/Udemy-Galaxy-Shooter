@@ -101,7 +101,7 @@ public class ShieldStrenght : MonoBehaviour
 
         if (CurrentStr <= 0)
         {
-            PlayerHP.ChangePlayerHP(-Mathf.Abs(CurrentStr));
+            PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr));
             CurrentStr = 0;
         } 
     }
@@ -120,7 +120,7 @@ public class ShieldStrenght : MonoBehaviour
             }
             if (CurrentStr <= 0)
             {
-                PlayerHP.ChangePlayerHP(-Mathf.Abs(CurrentStr));
+                PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr));
                 CurrentStr = 0;
             }       
         } 

@@ -7,9 +7,9 @@ using UnityEngine.VFX;
 [SelectionBase]
 public class PlayerHP : MonoBehaviour
 {
-    public static int MaxHP;
-    public static int CurrentHP;
-    public static int LastFrameHP;
+    public int MaxHP;
+    public int CurrentHP;
+    public int LastFrameHP;
 
     public bool isInvencible = false;
     public static bool s_IsInvencible = false;
@@ -23,16 +23,31 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] UnityEvent tookDamage;
     [SerializeField] UnityEvent wasHealed;
     [SerializeField] VisualEffect deathVFX;
+
     PlayerUpgradesManager upgradesManager;
+
+    int lastFrameMaxHP;
+
+    HpBarSize hpBarSize;
+
+    public static PlayerHP Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
 
     void OnEnable()
     {
         upgradesManager =FindObjectOfType<PlayerUpgradesManager>();
+        hpBarSize = FindObjectOfType<HpBarSize>();
 
         MaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
-
         CurrentHP = MaxHP;
         LastFrameHP = CurrentHP;
+        lastFrameMaxHP = MaxHP;
+
     }
 
     private void Update()
@@ -43,6 +58,11 @@ public class PlayerHP : MonoBehaviour
 
         if (CurrentHP == 0)
             StartCoroutine(PlayerDestructionSequence());
+
+        if(MaxHP != lastFrameMaxHP)
+        {
+            //hpBarSize.SetHpBarSize();
+        }
     }
 
     void LateUpdate()
@@ -60,6 +80,7 @@ public class PlayerHP : MonoBehaviour
 
         LastFrameHP = CurrentHP;
         lastCollisionHash = 0;
+        lastFrameMaxHP = MaxHP;
     }
 
     int lastCollisionHash;
@@ -97,14 +118,14 @@ public class PlayerHP : MonoBehaviour
         Destroy(gameObject);
     }
 
-    static public void ApplyHPUpgrade()
+    public void ApplyHPUpgrade()
     {
         int missingHP = MaxHP - CurrentHP;
         MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
         CurrentHP = MaxHP - missingHP;
     }
 
-    static public void ChangePlayerHP(int value, bool ignoreInvencibility = false)
+    public void ChangePlayerHP(int value, bool ignoreInvencibility = false)
     {
         MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
 

@@ -32,7 +32,7 @@ public class EnemyProjectileShoot : MonoBehaviour
 
     void Update()
     {
-        if(GameStatus.IsGameover)
+        if(GameStatus.IsGameover || GameStatus.IsStageClear)
             StopAllCoroutines();
     }
 

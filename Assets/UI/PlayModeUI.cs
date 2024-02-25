@@ -27,13 +27,13 @@ public class PlayModeUI : MonoBehaviour
         alloyText.text = $"Alloy {PlayerCollectiblesCount.RareMetalAmount}";
         cristalText.text = $"E. Cristal {PlayerCollectiblesCount.EnergyCristalAmount}";
         condCristalText.text = $"C. E. Cristal {PlayerCollectiblesCount.CondensedEnergyCristalAmount}";
+
+        hpText.text = $"{Mathf.Ceil(PlayerHP.Instance.CurrentHP)} / {Mathf.Ceil(PlayerHP.Instance.MaxHP)}";
     }
 
     public void OnHPChange()
     {
-        hpBar.UpdateBar01((float)PlayerHP.CurrentHP / PlayerHP.MaxHP);
-
-        hpText.text = $"{Mathf.Ceil(PlayerHP.CurrentHP)} / {Mathf.Ceil(PlayerHP.MaxHP)}";
+        hpBar.UpdateBar01((float)PlayerHP.Instance.CurrentHP / PlayerHP.Instance.MaxHP);        
     }
     public void BumpHPBar()
     {

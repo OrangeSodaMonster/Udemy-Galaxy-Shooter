@@ -76,7 +76,7 @@ public class AreaDamage : MonoBehaviour
             yield return new WaitForSeconds(interval);
 
             if (playerHP != null)
-                PlayerHP.ChangePlayerHP(-Mathf.Abs(damage));
+                PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(damage));
             else if (enemyHP != null)
                 enemyHP.ChangeHP(-Mathf.Abs(damage));
         }

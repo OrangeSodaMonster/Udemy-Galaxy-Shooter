@@ -20,7 +20,7 @@ public class SpawnDroneFromShip : MonoBehaviour
 
     void Update()
     {
-        if (GameStatus.IsGameover)
+        if (GameStatus.IsGameover || GameStatus.IsStageClear)
             StopAllCoroutines();
     }
 

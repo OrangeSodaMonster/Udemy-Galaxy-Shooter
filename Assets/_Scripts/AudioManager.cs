@@ -60,6 +60,8 @@ public class AudioManager : MonoBehaviour
     [field: Header("Other")]
     [field: SerializeField] public AudioSource AlarmSound { get; private set; }
     [field: SerializeField] public MMFeedbacks RareSpawnSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks PortalArrivalSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks PortalExitSound { get; private set; }
 
     float dronesDefaultVolume;
     float alarmDefaultVolume;
@@ -81,17 +83,13 @@ public class AudioManager : MonoBehaviour
         transform.parent = null;
         DontDestroyOnLoad(this);
 
-        GameStatus.GameOver += PauseAlarm;
-        GameStatus.GameOver += PauseDrone;
-        GameStatus.GameOver += PauseThruster;
-        GameStatus.GameOver += PauseReverse;
+        GameStatus.GameOver += PauseAllLoops;
+        GameStatus.StageCleared += PauseAllLoops;
     }
     private void OnDisable()
     {
-        GameStatus.GameOver -= PauseAlarm;
-        GameStatus.GameOver -= PauseDrone;
-        GameStatus.GameOver -= PauseThruster;
-        GameStatus.GameOver -= PauseReverse;
+        GameStatus.GameOver -= PauseAllLoops;
+        GameStatus.StageCleared -= PauseAllLoops;
     }
 
     private void Start()
@@ -148,9 +146,9 @@ public class AudioManager : MonoBehaviour
         playedThruster = true;
     }
 
-    public float ThrusterAccelMod = 0;
-    public float ThrusterLeftTurningMod = 0;
-    public float ThrusterRightTurningMod = 0;
+    [HideInInspector] public float ThrusterAccelMod = 0;
+    [HideInInspector] public float ThrusterLeftTurningMod = 0;
+    [HideInInspector] public float ThrusterRightTurningMod = 0;
     public void SetThrusterVolume()
     {
         float turningWeight = 0.5f;
@@ -197,6 +195,17 @@ public class AudioManager : MonoBehaviour
         AlarmSound.DOFade(alarmDefaultVolume, 1f);
         playedAlarm = true;
     }
+
+    public void PauseAllLoops()
+    {
+        PauseAlarm();
+        PauseDrone();
+        PauseReverse();
+        PauseThruster();
+
+        Debug.Log("Pause All");
+    }
+
     public void PlayEnemyCharge(int enemyHash)
     {
         enemyChargeFB.ID = enemyHash;

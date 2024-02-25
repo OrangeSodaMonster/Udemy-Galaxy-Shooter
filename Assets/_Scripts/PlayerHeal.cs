@@ -24,7 +24,7 @@ public class PlayerHeal : MonoBehaviour
             currentSecondsBetweenHeal = baseSecondsBetweenHeal - GetHealIntervalReduction();
 
         // && PlayerHP.LastFrameHP >= PlayerHP.MaxHP
-        if (PlayerHP.CurrentHP <= PlayerHP.MaxHP - 5 && !isHealing)
+        if (PlayerHP.Instance.CurrentHP <= PlayerHP.Instance.MaxHP - 5 && !isHealing)
         {
             //Debug.Log("Started heal rotine");
             StartCoroutine(HealRotine());
@@ -52,7 +52,7 @@ public class PlayerHeal : MonoBehaviour
 
     IEnumerator HealRotine()
     {
-        while (PlayerHP.CurrentHP <= PlayerHP.MaxHP - 5)
+        while (PlayerHP.Instance.CurrentHP <= PlayerHP.Instance.MaxHP - 5)
         {
             isHealing = true;
 
@@ -69,7 +69,7 @@ public class PlayerHeal : MonoBehaviour
 
     void Heal()
     {
-        PlayerHP.ChangePlayerHP(+5);
+        PlayerHP.Instance.ChangePlayerHP(+5);
         AudioManager.Instance.ShipFix.PlayFeedbacks();
     }
 

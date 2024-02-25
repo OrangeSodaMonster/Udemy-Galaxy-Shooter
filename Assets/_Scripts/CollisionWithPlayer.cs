@@ -22,7 +22,7 @@ public class CollisionWithPlayer : MonoBehaviour
             else
                 l_forceDirection = playerMove.transform.position - transform.position;
 
-            PlayerHP.ChangePlayerHP(-Mathf.Abs(Damage));
+            PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(Damage));
             playerMove.GetComponent<PlayerKnockBackDealer>().GetKnockedBack(ImpactVelocity * (Vector2)(l_forceDirection).normalized); 
             hasCollidedWithPlayer = true;
         }

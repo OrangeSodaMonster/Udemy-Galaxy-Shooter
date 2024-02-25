@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7314593300485500998}
   - component: {fileID: 4655602513479495522}
   m_Layer: 5
-  m_Name: ConfigUI
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,21 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21127a378ee9e3a429f0298403490800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnable:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioTrackConfig, Assembly-CSharp
-        m_MethodName: SetSliders
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  masterVolume: {fileID: 2232046490646670114}
+  musicVolume: {fileID: 5926261709163931577}
+  sfxVolume: {fileID: 8898234096992933610}
+  uiVolume: {fileID: 1160396057326441693}
 --- !u!1 &3240859800921860900
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,6 +734,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
+--- !u!114 &1160396057326441693 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3905061158646192485, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
+  m_PrefabInstance: {fileID: 2750325532426816952}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5443886961740486949 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7901438169287021725, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
@@ -947,6 +947,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4560217429001581548}
   m_SourcePrefab: {fileID: 100100000, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
+--- !u!114 &2232046490646670114 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3905061158646192485, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
+  m_PrefabInstance: {fileID: 2938671436403765831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105982625962707400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4105982625962707400 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1167315673639041935, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
@@ -1159,6 +1170,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7901438169287021725, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
   m_PrefabInstance: {fileID: 5570232194888126351}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8898234096992933610 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3905061158646192485, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
+  m_PrefabInstance: {fileID: 5570232194888126351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7039256421296586444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1468,3 +1490,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7901438169287021725, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
   m_PrefabInstance: {fileID: 7210227609265716956}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5926261709163931577 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3905061158646192485, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
+  m_PrefabInstance: {fileID: 7210227609265716956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

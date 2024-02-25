@@ -15,7 +15,7 @@ MonoBehaviour:
   UnlockCost:
   - ResourceType: 1
     Amount: 1
-  - ResourceType: 4
+  - ResourceType: 3
     Amount: 1
   PowerUpgrades:
   - Cost: []
@@ -55,7 +55,7 @@ MonoBehaviour:
   - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 4
+    - ResourceType: 3
       Amount: 1
     Damage: 15
     Widht: 0.12
@@ -93,7 +93,7 @@ MonoBehaviour:
   - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 4
+    - ResourceType: 3
       Amount: 1
     Damage: 20
     Widht: 0.15
@@ -210,25 +210,25 @@ MonoBehaviour:
   - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 3
+    - ResourceType: 2
       Amount: 1
     TimeBetween: 2.5
   - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 3
+    - ResourceType: 2
       Amount: 1
     TimeBetween: 2
   - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 3
+    - ResourceType: 2
       Amount: 1
     TimeBetween: 1.5
   - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 3
+    - ResourceType: 2
       Amount: 1
     TimeBetween: 1
   RangeUpgrades:
@@ -236,28 +236,28 @@ MonoBehaviour:
     RangeFromPlayer: 3.5
     RangeFromHit: 2.5
   - Cost:
-    - ResourceType: 3
+    - ResourceType: 2
       Amount: 1
-    - ResourceType: 4
+    - ResourceType: 3
       Amount: 1
     RangeFromPlayer: 4.1
     RangeFromHit: 3
   - Cost:
-    - ResourceType: 3
+    - ResourceType: 2
       Amount: 1
-    - ResourceType: 4
+    - ResourceType: 3
       Amount: 1
     RangeFromPlayer: 4.7
     RangeFromHit: 3.5
   - Cost:
-    - ResourceType: 3
+    - ResourceType: 2
       Amount: 1
-    - ResourceType: 4
+    - ResourceType: 3
       Amount: 1
     RangeFromPlayer: 5.3
     RangeFromHit: 4
   - Cost:
-    - ResourceType: 3
+    - ResourceType: 2
       Amount: 1
     - ResourceType: 4
       Amount: 1
@@ -269,23 +269,23 @@ MonoBehaviour:
   - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 4
+    - ResourceType: 3
       Amount: 1
     NumberOfHits: 4
   - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 4
+    - ResourceType: 3
       Amount: 1
     NumberOfHits: 5
   - Cost:
-    - ResourceType: 1
+    - ResourceType: 2
       Amount: 1
-    - ResourceType: 4
+    - ResourceType: 3
       Amount: 1
     NumberOfHits: 7
   - Cost:
-    - ResourceType: 1
+    - ResourceType: 2
       Amount: 1
     - ResourceType: 4
       Amount: 1

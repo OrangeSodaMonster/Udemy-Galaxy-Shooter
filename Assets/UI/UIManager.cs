@@ -76,9 +76,7 @@ public class UIManager : MonoBehaviour
         GameStatus.IsPaused = true;
         Time.timeScale = 0;
 
-        if(playerMove != null) playerMove.enabled = false;
-        if (playerLasers != null) playerLasers.enabled = false;
-        if (bombScript != null) bombScript.enabled = false;
+        DisablePlayerCommands.Instance.SetCommands(false);
 
         AudioTrackConfig.Instance.MuteVFX();
     }
@@ -89,9 +87,7 @@ public class UIManager : MonoBehaviour
         GameStatus.IsPaused = false;
         Time.timeScale = 1;
 
-        playerMove.enabled = true;
-        playerLasers.enabled = true;
-        bombScript.enabled = true;
+        DisablePlayerCommands.Instance.SetCommands(true);        
 
         AudioTrackConfig.Instance.UnmuteVFX();
     }

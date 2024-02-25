@@ -10,6 +10,8 @@ public class GameStatus : MonoBehaviour
     public static event Action UnPausedGame;
 	public static bool IsGameover = false;
     public static event Action GameOver;
+	public static bool IsStageClear = false;
+    public static event Action StageCleared;
 
     [SerializeField] bool saveConfigOnGameOver = true;
 
@@ -17,6 +19,7 @@ public class GameStatus : MonoBehaviour
     {
         IsPaused = false;
         IsGameover = false;
+        IsStageClear = false;
 
         GameOver += SaveConfigOnGameOver;
     }
@@ -48,5 +51,11 @@ public class GameStatus : MonoBehaviour
     {
         if(saveConfigOnGameOver)
             SaveLoad.instance.SaveConfig();
+    }
+
+    static public void ClearStage()
+    {
+        IsStageClear = true;
+        StageCleared?.Invoke();
     }
 }

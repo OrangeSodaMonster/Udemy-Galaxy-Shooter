@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneMove : MonoBehaviour
+public class EnemyDroneMove : MonoBehaviour
 {
     [SerializeField] float baseSpeed = 4;
     [SerializeField] float speedVariationPerc = 10;
@@ -27,7 +27,7 @@ public class DroneMove : MonoBehaviour
     private void FixedUpdate()
     {
         //Vector3 playerPos = player != null ? player.position : EnemySpawn.PlayerLastPos;
-        if(!GameStatus.IsGameover && player != null)
+        if(!GameStatus.IsGameover && !GameStatus.IsStageClear && player != null)
             rb.rotation = Vector2.SignedAngle(Vector2.up, player.position - transform.position);
 
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
