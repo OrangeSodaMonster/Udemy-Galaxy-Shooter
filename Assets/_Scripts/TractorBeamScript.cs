@@ -62,7 +62,9 @@ public class TractorBeamScript : MonoBehaviour
 
     void SetEnabled()
     {
-        bool isEnable = upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled && !upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite;
+        bool isEnable = upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled && 
+            !upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite &&
+            !GameStatus.IsPortal;
 
         spriteRenderer.enabled = isEnable;
         coll.enabled = isEnable;

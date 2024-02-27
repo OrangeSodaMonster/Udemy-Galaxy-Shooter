@@ -33,9 +33,6 @@ public class HpBarSize : MonoBehaviour
         hpTransform.localScale = new Vector3(newXScale, hpTransform.localScale.y, hpTransform.localScale.z);
 
         border.sizeDelta = new Vector2(Mathf.Lerp(defaultBorderWidth, borderWidthAtMaxScale, value), border.sizeDelta.y);
-
-        Debug.Log("Set HP Size: " + newXScale);
-        Debug.Log($"{currentMax}, {minUpgradeHP}, {maxUpgradeHP}");
     }
 
     float Remap(float source, float sourceFrom, float sourceTo, float targetFrom, float targetTo)

@@ -70,6 +70,7 @@ public class PortalScript : MonoBehaviour
 
         Objectives = FindObjectsOfType<ObjectivePointer>();
         playModeUI = FindObjectOfType<PlayModeUI>();
+        GameStatus.IsPortal = true;
 
         // Player Animation
         StartCoroutine(PlayerArrivalAnimation());
@@ -101,6 +102,7 @@ public class PortalScript : MonoBehaviour
         DisablePlayerCommands.Instance.SetCommands(true);
         arrivalVFX.gameObject.SetActive(true);
         playModeUI.EnableUI();
+        GameStatus.IsPortal = false;
     }
 
     void PlayArrivalSound()
@@ -119,6 +121,7 @@ public class PortalScript : MonoBehaviour
         player.DOMove(transform.position, exitDuration).SetEase(Ease.OutSine);
         player.DORotate(360 * exitRotationNum * Vector3.back, exitDuration, RotateMode.FastBeyond360).SetEase(exitEase);
         player.DOScale(Vector3.zero, exitDuration).SetEase(exitEase).OnComplete(() => OnCompleteExit());
+        GameStatus.IsPortal = true;
     }
 
     void OnCompleteExit()
@@ -184,8 +187,6 @@ public class PortalScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("PORTAL");
-
         PlayerExitDealer();
     }
 }

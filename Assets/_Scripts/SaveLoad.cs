@@ -102,6 +102,8 @@ public class SaveLoad : MonoBehaviour
         saveConfig.CreationDate = System.DateTime.Now.ToString("yyyy/MM/dd");
 
         MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Save" + CurrentSaveSlot);
+
+        Debug.Log($"<color=red>Damage: CONFIG CREATED</color>");
     }
 
     public string GetCreationDate(int slot)
@@ -126,7 +128,7 @@ public class SaveLoad : MonoBehaviour
             return true;
         else 
             return false;
-    }
+    } 
 
     // GameState
     [ContextMenu("SaveState")]
@@ -226,15 +228,42 @@ public class SaveLoad : MonoBehaviour
         }
     }
 
+    public void SaveDisables()
+    {
+        SaveUpgradesObj upgrades = (SaveUpgradesObj)MMSaveLoadManager.Load(typeof(SaveUpgradesObj), "Upgrades.saveFile", "Save" + CurrentSaveSlot);
+
+        upgrades.FL_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.FrontLaserUpgrades.DisableOverwrite;
+        upgrades.SL_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.SpreadLaserUpgrades.DisableOverwrite;
+        upgrades.LL_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.SideLaserUpgrades.DisableOverwrite;
+        upgrades.BL_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.BackLaserUpgrades.DisableOverwrite;
+
+        upgrades.FS_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.FrontShieldUpgrades.DisableOverwrite;
+        upgrades.RS_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.RightShieldUpgrades.DisableOverwrite;
+        upgrades.LS_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.LeftShieldUpgrades.DisableOverwrite;
+        upgrades.BS_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.BackShieldUpgrades.DisableOverwrite;
+
+        upgrades.D1_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.DisableOverwrite;
+        upgrades.D2_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.DisableOverwrite;
+        upgrades.D3_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.DisableOverwrite;
+
+        upgrades.IS_DisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.IonStreamUpgrades.DisableOverwrite;
+
+        upgrades.SH_TractorBeamDisableOverwrite = PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite;
+
+        MMSaveLoadManager.Save(upgrades, "Upgrades.saveFile", "Save" + CurrentSaveSlot);
+
+        Debug.Log("SAVED DISABLES");
+    }
+
     // Save Objects
     class SaveConfigObj
     {
         public bool IsAutoFire = false;
 
-        public int MasterVolume = 1;
-        public int EffectsVolume = 1;
-        public int MusicVolume = 1;
-        public int UiVolume = 1;
+        public int MasterVolume = 5;
+        public int EffectsVolume = 5;
+        public int MusicVolume = 5;
+        public int UiVolume = 5;
 
         public string CreationDate;
     }     

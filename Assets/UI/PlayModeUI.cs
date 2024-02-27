@@ -11,10 +11,8 @@ public class PlayModeUI : MonoBehaviour
     [SerializeField] MMProgressBar hpBar;
     [SerializeField] TMP_Text hpText;
     [SerializeField] TMP_Text numberOfBombs;
-    [SerializeField] TMP_Text metalText;
-    [SerializeField] TMP_Text alloyText;
-    [SerializeField] TMP_Text cristalText;
-    [SerializeField] TMP_Text condCristalText;
+    [SerializeField] Image bombIcon;
+    
 
     HpBarSize hpBarSize;
 
@@ -30,11 +28,17 @@ public class PlayModeUI : MonoBehaviour
 
     void Update()
     {        
-        numberOfBombs.text = BombScript.BombAmount > 0 ?  $"{BombScript.BombAmount}" : "";
-        metalText.text = $"Metal {PlayerCollectiblesCount.MetalAmount}";
-        alloyText.text = $"Alloy {PlayerCollectiblesCount.RareMetalAmount}";
-        cristalText.text = $"E. Cristal {PlayerCollectiblesCount.EnergyCristalAmount}";
-        condCristalText.text = $"C. E. Cristal {PlayerCollectiblesCount.CondensedEnergyCristalAmount}";        
+        numberOfBombs.text = $"{BombScript.BombAmount}";
+        if(BombScript.BombAmount <= 0)
+        {
+            bombIcon.gameObject.SetActive(false);
+            numberOfBombs.gameObject.SetActive(false);
+        }
+        else
+        {
+            bombIcon.gameObject.SetActive(true);
+            numberOfBombs.gameObject.SetActive(true);
+        }
     }
 
     public void OnHPChange()

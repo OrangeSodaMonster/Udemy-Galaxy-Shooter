@@ -94,10 +94,10 @@ public class ShieldScript : MonoBehaviour
 
     private void SetPartsActivateStatus()
     {
-        frontShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.FrontShieldUpgrades.Enabled && !upgradesManager.CurrentUpgrades.FrontShieldUpgrades.DisableOverwrite);
-        rightShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.RightShieldUpgrades.Enabled && !upgradesManager.CurrentUpgrades.RightShieldUpgrades.DisableOverwrite);
-        backShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.BackShieldUpgrades.Enabled && !upgradesManager.CurrentUpgrades.BackShieldUpgrades.DisableOverwrite);
-        leftShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.LeftShieldUpgrades.Enabled && !upgradesManager.CurrentUpgrades.LeftShieldUpgrades.DisableOverwrite);
+        frontShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.FrontShieldUpgrades.Enabled && !upgradesManager.CurrentUpgrades.FrontShieldUpgrades.DisableOverwrite && !GameStatus.IsPortal);
+        rightShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.RightShieldUpgrades.Enabled && !upgradesManager.CurrentUpgrades.RightShieldUpgrades.DisableOverwrite && !GameStatus.IsPortal);
+        backShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.BackShieldUpgrades.Enabled && !upgradesManager.CurrentUpgrades.BackShieldUpgrades.DisableOverwrite && !GameStatus.IsPortal);
+        leftShield.gameObject.SetActive(upgradesManager.CurrentUpgrades.LeftShieldUpgrades.Enabled && !upgradesManager.CurrentUpgrades.LeftShieldUpgrades.DisableOverwrite && !GameStatus.IsPortal);
     }
 
     private void FollowPlayer()

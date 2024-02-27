@@ -27,9 +27,9 @@ public class DroneControl : MonoBehaviour
         UpdateDroneValue(drone2, upgradesManager.CurrentUpgrades.Drone_2_Upgrades);
         UpdateDroneValue(drone3, upgradesManager.CurrentUpgrades.Drone_3_Upgrades);
 
-        drone1.gameObject.SetActive(upgradesManager.CurrentUpgrades.Drone_1_Upgrades.Enabled && !upgradesManager.CurrentUpgrades.Drone_1_Upgrades.DisableOverwrite);
-        drone2.gameObject.SetActive(upgradesManager.CurrentUpgrades.Drone_2_Upgrades.Enabled && !upgradesManager.CurrentUpgrades.Drone_2_Upgrades.DisableOverwrite);
-        drone3.gameObject.SetActive(upgradesManager.CurrentUpgrades.Drone_3_Upgrades.Enabled && !upgradesManager.CurrentUpgrades.Drone_3_Upgrades.DisableOverwrite);
+        drone1.gameObject.SetActive(upgradesManager.CurrentUpgrades.Drone_1_Upgrades.Enabled && !upgradesManager.CurrentUpgrades.Drone_1_Upgrades.DisableOverwrite && !GameStatus.IsPortal);
+        drone2.gameObject.SetActive(upgradesManager.CurrentUpgrades.Drone_2_Upgrades.Enabled && !upgradesManager.CurrentUpgrades.Drone_2_Upgrades.DisableOverwrite && !GameStatus.IsPortal);
+        drone3.gameObject.SetActive(upgradesManager.CurrentUpgrades.Drone_3_Upgrades.Enabled && !upgradesManager.CurrentUpgrades.Drone_3_Upgrades.DisableOverwrite && !GameStatus.IsPortal);
     }
 
     void UpdateDroneValue(DroneAttackScript drone, DronesUpgrades droneUpgrades)

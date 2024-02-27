@@ -24,8 +24,6 @@ public class PlayerUpgradesManager : MonoBehaviour
         int minUpgradeHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[0].HP;
         int maxUpgradeHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade.Length - 1].HP;
 
-        Debug.Log($"UpgradeManager: {minUpgradeHP} - {maxUpgradeHP}");
-
         //ResedCurrentUpgrades();
         //SaveLoad.LoadUpgrades();
     }

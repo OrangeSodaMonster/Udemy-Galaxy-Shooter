@@ -83,38 +83,59 @@ public class InterfaceDataHolder : ScriptableObject
         {
             costImage.sprite = metalSprite;
             costText.text = resourceNumber.Amount.ToString();
-            SetCostImageTextVisual(resourceNumber, costImage, costText);
+            costText.color = metalColor;
+            SetCostImageTextVisual(resourceNumber, costImage, ResourceType.Metal, costText);
         }
         else if (resourceNumber.ResourceType == ResourceType.RareMetal)
         {
             costImage.sprite = alloySprite;
             costText.text = resourceNumber.Amount.ToString();
-            SetCostImageTextVisual(resourceNumber, costImage, costText);
+            costText.color = alloyColor;
+            SetCostImageTextVisual(resourceNumber, costImage, ResourceType.RareMetal, costText);
         }
         else if (resourceNumber.ResourceType == ResourceType.EnergyCristal)
         {
             costImage.sprite = energyCristalSprite;
             costText.text = resourceNumber.Amount.ToString();
-            SetCostImageTextVisual(resourceNumber, costImage, costText);
+            costText.color = energyCristalColor;
+            SetCostImageTextVisual(resourceNumber, costImage, ResourceType.EnergyCristal, costText);
         }
         else if (resourceNumber.ResourceType == ResourceType.CondensedEnergyCristal)
         {
             costImage.sprite = condensedCristalSprite;
             costText.text = resourceNumber.Amount.ToString();
-            SetCostImageTextVisual(resourceNumber, costImage, costText);
+            costText.color = condensedCristalColor;
+            SetCostImageTextVisual(resourceNumber, costImage, ResourceType.CondensedEnergyCristal, costText);
         }
     }
 
-    private void SetCostImageTextVisual(ResourceNumber resourceNumber, Image costImage, TextMeshProUGUI costText)
+    private void SetCostImageTextVisual(ResourceNumber resourceNumber, Image costImage, ResourceType type, TextMeshProUGUI costText)
     {
-        if (resourceNumber.Amount > PlayerCollectiblesCount.MetalAmount)
+        int bank = 0;
+        switch (type)
+        {
+            case ResourceType.Metal:
+                bank = PlayerCollectiblesCount.MetalAmount;
+                break;
+            case ResourceType.RareMetal:
+                bank = PlayerCollectiblesCount.RareMetalAmount;
+                break;
+            case ResourceType.EnergyCristal:
+                bank = PlayerCollectiblesCount.EnergyCristalAmount;
+                break;
+            case ResourceType.CondensedEnergyCristal:
+                bank = PlayerCollectiblesCount.CondensedEnergyCristalAmount;
+                break;
+        }
+
+        if (resourceNumber.Amount > bank)
         {
             costText.color = unavaliableColor;
             costImage.color = Color.gray;
         }
         else
         {
-            costText.color = Color.white;
+            //costText.color = Color.white;
             costImage.color = Color.white;
         }
     }
@@ -148,6 +169,9 @@ public class InterfaceDataHolder : ScriptableObject
         {
             border.color = disabledColor;
             icon.color = Color.gray;
+
+            costs[0].SetActive(false);
+            costs[1].SetActive(false);
         }
         else if (!isMaxed)
         {
