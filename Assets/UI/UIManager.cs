@@ -20,11 +20,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] RectTransform ionStreamUpgradePage;
     [SerializeField] RectTransform dronesUpgradePage;
     [SerializeField] RectTransform configPage;
+    [SerializeField] RectTransform[] disableOnPause;
 
     bool isOnPage;
-    PlayerMove playerMove;
-    PlayerLasers playerLasers;
-    BombScript bombScript;
 
     public static UIManager Instance;
 
@@ -36,13 +34,6 @@ public class UIManager : MonoBehaviour
         }
 
         s_gameoverCanvas = gameoverCanvas;
-    }
-
-    private void Start()
-    {
-        playerMove = FindObjectOfType<PlayerMove>();
-        playerLasers = FindObjectOfType<PlayerLasers>();
-        bombScript = FindObjectOfType<BombScript>();
     }
 
     private void OnEnable()
@@ -78,6 +69,10 @@ public class UIManager : MonoBehaviour
 
         DisablePlayerCommands.Instance.SetCommands(false);
 
+        foreach(RectTransform rect in disableOnPause)
+        {
+            rect.gameObject.SetActive(false);
+        }
         AudioTrackConfig.Instance.MuteVFX();
     }
 
@@ -87,8 +82,12 @@ public class UIManager : MonoBehaviour
         GameStatus.IsPaused = false;
         Time.timeScale = 1;
 
-        DisablePlayerCommands.Instance.SetCommands(true);        
+        DisablePlayerCommands.Instance.SetCommands(true);
 
+        foreach (RectTransform rect in disableOnPause)
+        {
+            rect.gameObject.SetActive(true);
+        }
         AudioTrackConfig.Instance.UnmuteVFX();
     }
 

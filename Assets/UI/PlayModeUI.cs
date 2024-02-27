@@ -34,7 +34,7 @@ public class PlayModeUI : MonoBehaviour
             bombIcon.gameObject.SetActive(false);
             numberOfBombs.gameObject.SetActive(false);
         }
-        else
+        else if (!GameStatus.IsPaused)
         {
             bombIcon.gameObject.SetActive(true);
             numberOfBombs.gameObject.SetActive(true);

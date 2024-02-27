@@ -68,18 +68,27 @@ public class SaveLoad : MonoBehaviour
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
         SaveConfigObj saveConfig = new SaveConfigObj();
-        saveConfig.IsAutoFire = InputHolder.Instance.IsAutoFire;
-
-        saveConfig.MasterVolume = (int)AudioTrackConfig.Instance.masterVolume.value;
-        saveConfig.MusicVolume = (int)AudioTrackConfig.Instance.musicVolume.value;
-        saveConfig.EffectsVolume = (int)AudioTrackConfig.Instance.sfxVolume.value;
-        saveConfig.UiVolume = (int)AudioTrackConfig.Instance.uiVolume.value;        
+        saveConfig.IsAutoFire = InputHolder.Instance.IsAutoFire;        
         
         saveConfig.CreationDate = GetCreationDate(CurrentSaveSlot);
 
         MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Save" + CurrentSaveSlot);
 
         Debug.Log("Saved Config");
+    }
+
+    public void SaveVolumes()
+    {
+        MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
+        SaveConfigObj data = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
+
+        data.MasterVolume = (int)AudioTrackConfig.Instance.masterVolume.value;
+        data.MusicVolume = (int)AudioTrackConfig.Instance.musicVolume.value;
+        data.EffectsVolume = (int)AudioTrackConfig.Instance.sfxVolume.value;
+        data.UiVolume = (int)AudioTrackConfig.Instance.uiVolume.value;
+
+        MMSaveLoadManager.Save(data, "Config.saveFile", "Save" + CurrentSaveSlot);
+
     }
 
     [ContextMenu("LoadConfig")]
@@ -258,7 +267,7 @@ public class SaveLoad : MonoBehaviour
     // Save Objects
     class SaveConfigObj
     {
-        public bool IsAutoFire = false;
+        public bool IsAutoFire = true;
 
         public int MasterVolume = 5;
         public int EffectsVolume = 5;

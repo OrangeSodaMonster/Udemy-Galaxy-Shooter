@@ -19,6 +19,8 @@ public class HoldToEraseSave : MonoBehaviour
     string defaultSliderText;
     int saveSlot;
 
+    bool hasErased = false;
+
     private void Awake()
     {
         button = GetComponent<Button>();
@@ -37,9 +39,14 @@ public class HoldToEraseSave : MonoBehaviour
             isHolding = false;
 
         if (isHolding)
+        {
             currentHoldTime += Time.deltaTime;
+        }
         else
+        {
             currentHoldTime = 0;
+            hasErased = false;
+        }
 
         slider.value = currentHoldTime / necessaryHoldTime;
 
@@ -51,10 +58,11 @@ public class HoldToEraseSave : MonoBehaviour
             slider.gameObject.SetActive(true);
         }
 
-        if(currentHoldTime >= necessaryHoldTime)
+        if(currentHoldTime >= necessaryHoldTime && !hasErased)
         {
             SaveLoad.instance.EraseSave(saveSlot);
             slider.gameObject.SetActive(false);
+            hasErased = true;
         }
     }
 }
