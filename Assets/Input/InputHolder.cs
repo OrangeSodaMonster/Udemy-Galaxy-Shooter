@@ -31,26 +31,85 @@ public class InputHolder : MonoBehaviour
             Instance = this;
     }
 
+
+    #region Accel
     public void GetAcceleration(InputAction.CallbackContext context)
     {
         Acceleration = context.ReadValue<float>();
     }
+    public void SetAccelTouch()
+    {
+        Acceleration = 1;
+    }
+    public void StopAccelTouch()
+    {
+        Acceleration = 0;
+    }
+    public void SetReverseTouch()
+    {
+        Acceleration = -1;
+    }
+    #endregion
 
+    #region turning
+    bool touchTurning = false;
+    bool touchDirection = false;
     public void GetTurning(InputAction.CallbackContext context)
     {
+        if (touchTurning) return;
         Turning = context.ReadValue<float>();
     }
-
     public void GetDirection(InputAction.CallbackContext context)
     {
+        if (touchDirection) return;
         Direction = context.ReadValue<Vector2>();
     }
+    public void GetDirectionTouch(Vector2 direction)
+    {
+        Direction = direction;
+    }
+    public void SetTrueTouchDirection()
+    {
+        touchDirection = true;
+    }
+    public void SetFalseTouchDirection()
+    {
+        touchDirection = false;
+    }
+    public void SetTurnRightTouch()
+    {
+        touchTurning = true;
+        Turning = 1;
+    }    
+    public void SetTurnLeftTouch()
+    {
+        touchTurning = true;
+        Turning = -1;
+    }
+    public void StopTurningTouch()
+    {
+        touchTurning = false;
+        Turning = 0;
+    }
 
+    #endregion
+
+    #region Firing
     public void GetFiring(InputAction.CallbackContext context)
     {
         IsFiring = context.performed;
     }
+    public void SetFiringTouch()
+    {
+        IsFiring = true;
+    }
+    public void StopFiringTouch()
+    {
+        IsFiring = false;
+    }
+    #endregion
 
+    #region Special
     public void SetSpecial(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -60,6 +119,13 @@ public class InputHolder : MonoBehaviour
 
         IsSpecial = context.performed;
     }
+    public void SetSpecialTouch()
+    {
+        Special?.Invoke();
+    }
+    #endregion
+
+    #region Pause
 
     public void SetPause(InputAction.CallbackContext context)
     {
@@ -70,6 +136,14 @@ public class InputHolder : MonoBehaviour
 
         IsPause = context.performed;
     }
+    public void SetPauseTouch()
+    {       
+        Pause?.Invoke();
+    }
+    #endregion
+
+
+
 
     public void SetAutoFire(InputAction.CallbackContext context)
     {

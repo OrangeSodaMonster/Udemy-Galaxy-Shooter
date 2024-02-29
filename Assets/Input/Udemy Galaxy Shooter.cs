@@ -965,6 +965,76 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PointAndClick"",
+            ""id"": ""71dddab0-5709-4f1b-ab42-d993d788c039"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""398ccd65-5c73-41b3-b028-7a18e0fab469"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f7ab8dde-74ff-4e7e-a5aa-5b925a2bcb7a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""034d28f3-153e-4c12-8f18-0df3d910a7c5"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29329b10-2c16-4aff-a6b1-b519514adaef"",
+                    ""path"": ""<Touchscreen>/touch*/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa42aa39-5bca-4e49-b8a3-19ddb2fe0764"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c666253-9427-4063-8e38-e04312bee906"",
+                    ""path"": ""<Touchscreen>/touch*/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1049,6 +1119,10 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_PauseUI = m_UI.FindAction("PauseUI", throwIfNotFound: true);
         m_UI_DisableButton = m_UI.FindAction("DisableButton", throwIfNotFound: true);
+        // PointAndClick
+        m_PointAndClick = asset.FindActionMap("PointAndClick", throwIfNotFound: true);
+        m_PointAndClick_Click = m_PointAndClick.FindAction("Click", throwIfNotFound: true);
+        m_PointAndClick_Point = m_PointAndClick.FindAction("Point", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1302,6 +1376,60 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // PointAndClick
+    private readonly InputActionMap m_PointAndClick;
+    private List<IPointAndClickActions> m_PointAndClickActionsCallbackInterfaces = new List<IPointAndClickActions>();
+    private readonly InputAction m_PointAndClick_Click;
+    private readonly InputAction m_PointAndClick_Point;
+    public struct PointAndClickActions
+    {
+        private @UdemyGalaxyShooter m_Wrapper;
+        public PointAndClickActions(@UdemyGalaxyShooter wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_PointAndClick_Click;
+        public InputAction @Point => m_Wrapper.m_PointAndClick_Point;
+        public InputActionMap Get() { return m_Wrapper.m_PointAndClick; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PointAndClickActions set) { return set.Get(); }
+        public void AddCallbacks(IPointAndClickActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PointAndClickActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PointAndClickActionsCallbackInterfaces.Add(instance);
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+            @Point.started += instance.OnPoint;
+            @Point.performed += instance.OnPoint;
+            @Point.canceled += instance.OnPoint;
+        }
+
+        private void UnregisterCallbacks(IPointAndClickActions instance)
+        {
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+            @Point.started -= instance.OnPoint;
+            @Point.performed -= instance.OnPoint;
+            @Point.canceled -= instance.OnPoint;
+        }
+
+        public void RemoveCallbacks(IPointAndClickActions instance)
+        {
+            if (m_Wrapper.m_PointAndClickActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPointAndClickActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PointAndClickActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PointAndClickActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PointAndClickActions @PointAndClick => new PointAndClickActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1367,5 +1495,10 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnPauseUI(InputAction.CallbackContext context);
         void OnDisableButton(InputAction.CallbackContext context);
+    }
+    public interface IPointAndClickActions
+    {
+        void OnClick(InputAction.CallbackContext context);
+        void OnPoint(InputAction.CallbackContext context);
     }
 }
