@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class IonStreamScript : MonoBehaviour
 {
 
     [SerializeField] float visualDuration = .3f;
+    [SerializeField, Range(0,1)] float fadePortion = .5f;
     [SerializeField] LayerMask layersToHit;
     [SerializeField] LineRenderer lineRenderer;
 
@@ -25,6 +27,11 @@ public class IonStreamScript : MonoBehaviour
     PlayerUpgradesManager upgradesManager;
     RaycastHit2D[] hits;
     List<Vector2> lineNodes = new List<Vector2>();
+    float fadeDuration;
+    float timeToStartFade;
+    Color2 defaultColor = new();
+    Color2 endColor = new();
+    Gradient defaultLineGrad = new Gradient();
 
     void Start()
     {
@@ -33,11 +40,23 @@ public class IonStreamScript : MonoBehaviour
         UpdateValues();
 
         lineRenderer.gameObject.SetActive(false);
+
+        fadeDuration = visualDuration * fadePortion;
+        timeToStartFade = visualDuration - fadeDuration;
+
+        defaultColor.ca = Color.white; 
+        defaultColor.cb = Color.white; 
+
+        Color endC = new Color(0,0,0,0);
+        endColor.ca = endC;
+        endColor.cb = endC;
+
+        defaultLineGrad = lineRenderer.colorGradient;
     }
 
     void Update()
     {
-        if (GameStatus.IsPaused) return;
+        if (GameStatus.IsPaused || GameStatus.IsPortal) return;
 
         UpdateValues();
 
@@ -134,6 +153,7 @@ public class IonStreamScript : MonoBehaviour
             }
             
             lineRenderer.gameObject.SetActive(true);
+            lineRenderer.colorGradient = defaultLineGrad;
             lineRenderer.material = material;
             lineRenderer.widthMultiplier = lineWidht;
             lineRenderer.positionCount = lineNodes.Count;
@@ -141,15 +161,15 @@ public class IonStreamScript : MonoBehaviour
             {
                 lineRenderer.SetPosition(i, lineNodes[i]);
             }
-            StartCoroutine(DestroyLine(lineRenderer.gameObject, visualDuration));
+            StartCoroutine(DisableLine(lineRenderer, visualDuration));
         }
     }
 
-    IEnumerator DestroyLine(GameObject line, float time)
+    IEnumerator DisableLine(LineRenderer line, float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(timeToStartFade);
 
-        line.SetActive(false);
+        line.DOColor(defaultColor, endColor, fadeDuration).OnComplete(() => line.gameObject.SetActive(false));
     }
 
     private void OnDrawGizmosSelected()

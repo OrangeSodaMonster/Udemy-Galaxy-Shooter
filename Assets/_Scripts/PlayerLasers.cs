@@ -26,7 +26,7 @@ public class PlayerLasers : MonoBehaviour
 
     void Update()
     {
-        if (GameStatus.IsPaused) return;
+        if (GameStatus.IsPaused || GameStatus.IsPortal) return;
 
         FrontLasersShoot();
         SpreadLaserShoot();

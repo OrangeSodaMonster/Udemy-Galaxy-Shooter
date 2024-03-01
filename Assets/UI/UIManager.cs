@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -19,8 +20,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] RectTransform shieldUpgradePage;
     [SerializeField] RectTransform ionStreamUpgradePage;
     [SerializeField] RectTransform dronesUpgradePage;
-    [SerializeField] RectTransform configPage;
+    [SerializeField] RectTransform audioPage;
+    [SerializeField] RectTransform touchPage;
     [SerializeField] RectTransform[] disableOnPause;
+
+    public static UnityEvent PauseGame = new();
 
     bool isOnPage;
 
@@ -34,6 +38,7 @@ public class UIManager : MonoBehaviour
         }
 
         s_gameoverCanvas = gameoverCanvas;
+        PauseGame.AddListener(SetPause);
     }
 
     private void OnEnable()
@@ -126,11 +131,18 @@ public class UIManager : MonoBehaviour
         StartCoroutine(DisableEnableUpgradeDelay(dronesUpgradePage));
         isOnPage = true;
     }
-    public void EnableConfigPage()
+    public void EnableAudioPage()
     {
         if (!GameStatus.IsPaused) return;
 
-        StartCoroutine(DisableEnableUpgradeDelay(configPage));
+        StartCoroutine(DisableEnableUpgradeDelay(audioPage));
+        isOnPage = true;
+    }
+    public void EnableTouchPage()
+    {
+        if (!GameStatus.IsPaused) return;
+
+        StartCoroutine(DisableEnableUpgradeDelay(touchPage));
         isOnPage = true;
     }
     public void DisableAllCanvas()
@@ -140,7 +152,8 @@ public class UIManager : MonoBehaviour
         shieldUpgradePage.gameObject.SetActive(false);
         ionStreamUpgradePage.gameObject.SetActive(false);
         dronesUpgradePage.gameObject.SetActive(false);
-        configPage.gameObject.SetActive(false);
+        audioPage.gameObject.SetActive(false);
+        touchPage.gameObject.SetActive(false);
         pauseCanvas.gameObject.SetActive(false);         
     }
 

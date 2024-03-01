@@ -31,6 +31,7 @@ public class ThrusterControl : MonoBehaviour
     float inputSizeMod = 0;
     Tween inputSizeModTween;
     Vector3 newScale = new();
+    PlayerMove playerMove;
 
     VisualEffect trailVFX;
     float defaultVFXSpawnRate;
@@ -49,14 +50,18 @@ public class ThrusterControl : MonoBehaviour
             AudioManager.Instance.PlayThruster();
         else
             AudioManager.Instance.PlayReverse();
+
+        playerMove = FindObjectOfType<PlayerMove>();
     }
 
     void Update()
     {
         isAccel = InputHolder.Instance.Acceleration > 0;
         isReverse = InputHolder.Instance.Acceleration < 0;
-        turnDir = (int)Mathf.Sign(InputHolder.Instance.Turning);
-        if (InputHolder.Instance.Turning == 0) turnDir = 0;
+        //turnDir = (int)Mathf.Sign(InputHolder.Instance.Turning);
+        turnDir = playerMove.GetTurningDirection() == 0 ? (int)Mathf.Sign(InputHolder.Instance.Turning) : playerMove.GetTurningDirection();
+        //Debug.Log($"TurnDir: {turnDir}, Input: {(int)Mathf.Sign(InputHolder.Instance.Turning)}, Direction: {playerMove.GetTurningDirection()}");
+        if (InputHolder.Instance.Turning == 0 && playerMove.GetTurningDirection() == 0) turnDir = 0;
 
         InputSizeDealer();
         SetTrailVFX();
@@ -130,6 +135,7 @@ public class ThrusterControl : MonoBehaviour
 
     private void InputSizeDealer()
     {
+        //Debug.Log($"TurningDir = {turnDir}, Last = {turnDirLastFrame}");
         // Accel Thrust
         if (thrusterType == ThrusterType.Acceleration && isAccel && !wasAccelLastFrame)
         {
@@ -151,23 +157,30 @@ public class ThrusterControl : MonoBehaviour
         }
 
         // Turning Left
-        else if (thrusterType == ThrusterType.TurnLeft && turnDir == -1 && turnDirLastFrame != -1)
+        else if (thrusterType == ThrusterType.TurnLeft && (turnDir == -1) && turnDirLastFrame != -1)
         {
             TweenInputSize(1);
+            //Debug.Log("LEFT start");
         }
-        else if (thrusterType == ThrusterType.TurnLeft && turnDir != -1 && turnDirLastFrame == -1)
+        else if (thrusterType == ThrusterType.TurnLeft && (turnDir != -1) && turnDirLastFrame == -1)
         {
             TweenInputSize(0);
+            //Debug.Log("LEFT stop");
+
         }
 
         // Turning Right
-        else if (thrusterType == ThrusterType.TurnRight && turnDir == 1 && turnDirLastFrame != 1)
+        else if (thrusterType == ThrusterType.TurnRight && (turnDir == 1) && turnDirLastFrame != 1)
         {
             TweenInputSize(1);
+            //Debug.Log("RIGHT start");
+
         }
-        else if (thrusterType == ThrusterType.TurnRight && turnDir != 1 && turnDirLastFrame == 1)
+        else if (thrusterType == ThrusterType.TurnRight && (turnDir != 1) && turnDirLastFrame == 1)
         {
             TweenInputSize(0);
+            //Debug.Log("Right stop");
+
         }
     }
 

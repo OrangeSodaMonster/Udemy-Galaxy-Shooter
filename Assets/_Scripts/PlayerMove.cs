@@ -51,7 +51,8 @@ public class PlayerMove : MonoBehaviour
     {
         UpdateValues();
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
-      
+
+        #region Ymove
         //Acceleration
         if (InputHolder.Instance.Acceleration >= float.Epsilon)
             velocity.y = Mathf.Clamp(velocity.y + acceleration * Time.fixedDeltaTime * InputHolder.Instance.Acceleration, -maxSpeed, maxSpeed);
@@ -105,8 +106,11 @@ public class PlayerMove : MonoBehaviour
 
         playerVelocity = rb.velocity;
 
+        #endregion
+
         ///////////////////////////////////////////////////////////////////////////
 
+        #region turning
         //Angular Velocity
 
         //Debug.Log("Turning: " + Input.Turning);
@@ -139,12 +143,13 @@ public class PlayerMove : MonoBehaviour
                 rb.angularVelocity = Mathf.Clamp(rb.angularVelocity + l_decelFactor, -maxTurningSpeed, 0);
         }
 
-        DrawDirectionLine();
+        //DrawDirectionLine();
         TurnToDirection();
         ClampDirection();
 
         rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -maxTurningSpeed, maxTurningSpeed);           
     }
+    #endregion
 
 
     float directionTime = 0;
@@ -172,12 +177,14 @@ public class PlayerMove : MonoBehaviour
             turningValue = Mathf.Clamp(turningValue, 0, 1);
 
             rb.angularVelocity += AngularAccel * turningSpeedCurve.Evaluate(turningValue) * Time.fixedDeltaTime * Mathf.Sign(directionDifference);
+            
         }
         else if(Mathf.Abs(directionDifference) <= angleToStartDecel)
         {
             float turningValue = 2 * Mathf.Abs(directionDifference) / angleToStartDecel;
             turningValue = Mathf.Clamp(turningValue, 0.2f, 1);
-            rb.angularVelocity = maxTurningSpeed * stoppingDirInputCurve.Evaluate(turningValue) * Mathf.Sign(directionDifference);
+
+            rb.angularVelocity = maxTurningSpeed * stoppingDirInputCurve.Evaluate(turningValue) * Mathf.Sign(directionDifference);            
         }
     }
 
@@ -185,14 +192,30 @@ public class PlayerMove : MonoBehaviour
     {
         float futureRotation = rb.rotation + rb.angularVelocity * Time.fixedDeltaTime;
         Vector2 futureDirection = new Vector2(Mathf.Sin(-futureRotation * Mathf.Deg2Rad), Mathf.Cos(-futureRotation * Mathf.Deg2Rad));
-        if (Mathf.Sign(directionDifference) < Mathf.Sign(analogAngleToRotateMin) && 
+        if (Mathf.Abs(directionDifference) <= Mathf.Abs(analogAngleToRotateMin) && 
             Mathf.Sign(directionDifference) != Mathf.Sign(Vector2.SignedAngle(futureDirection, InputHolder.Instance.Direction)))
         {
             rb.MoveRotation(Vector2.SignedAngle(InputHolder.Instance.Direction, Vector2.up) * -1);
             rb.angularVelocity = 0;
             directionTime = 0;
-            //Debug.Log($"Set rotation: {Vector2.SignedAngle(Input.Direction, Vector2.up)* -1}");
         }
+        //Debug.Log($"Turning: {isTurning}");
+    }    
+    public int GetTurningDirection()
+    {
+        bool isTurning = false;
+        if (InputHolder.Instance.Direction != Vector2.zero && Mathf.Abs(directionDifference) > Mathf.Abs(analogAngleToRotateMin))
+        {
+            isTurning = true;
+        }
+        else
+        {
+            isTurning= false;
+        }
+
+        if(!isTurning) return 0;
+
+        return (int)Mathf.Sign(directionDifference) * -1;
     }
 
     void DrawDirectionLine()

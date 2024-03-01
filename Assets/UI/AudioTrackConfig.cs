@@ -110,13 +110,13 @@ public class AudioTrackConfig : MonoBehaviour
         sfxTrackVolume = MMSoundManager.Instance.GetTrackVolume(MMSoundManager.MMSoundManagerTracks.Sfx, false);
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.MuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
 
-        Debug.Log($"Mute SFX {sfxTrackVolume}");
+        //Debug.Log($"Mute SFX {sfxTrackVolume}");
     }
     public void UnmuteVFX()
     {
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, sfxTrackVolume);
 
-        Debug.Log($"Unmute SFX {sfxTrackVolume}");
+        //Debug.Log($"Unmute SFX {sfxTrackVolume}");
     }
 }

@@ -88,7 +88,17 @@ public class SaveLoad : MonoBehaviour
         data.UiVolume = (int)AudioTrackConfig.Instance.uiVolume.value;
 
         MMSaveLoadManager.Save(data, "Config.saveFile", "Save" + CurrentSaveSlot);
+    }
 
+    public void SaveTouchInfo()
+    {
+        MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
+        SaveConfigObj data = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
+
+        data.touchAlpha = TouchControlsManager.buttonsAlpha;
+        data.touchTurnToDirection = TouchControlsManager.isTurnToDirection;
+
+        MMSaveLoadManager.Save(data, "Config.saveFile", "Save" + CurrentSaveSlot);
     }
 
     [ContextMenu("LoadConfig")]
@@ -98,7 +108,9 @@ public class SaveLoad : MonoBehaviour
 
         SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
         InputHolder.Instance.IsAutoFire = loadedData.IsAutoFire;
-        AudioTrackConfig.Instance.LoadVolume(loadedData.MasterVolume, loadedData.MusicVolume, loadedData.EffectsVolume, loadedData.UiVolume);        
+        AudioTrackConfig.Instance.LoadVolume(loadedData.MasterVolume, loadedData.MusicVolume, loadedData.EffectsVolume, loadedData.UiVolume);
+
+        TouchControlsManager.LoadValues(loadedData.touchAlpha, loadedData.touchTurnToDirection);
 
         Debug.Log("Loaded Config");
     }
@@ -268,6 +280,8 @@ public class SaveLoad : MonoBehaviour
     class SaveConfigObj
     {
         public bool IsAutoFire = true;
+        public int touchAlpha = 5;
+        public bool touchTurnToDirection = true;
 
         public int MasterVolume = 5;
         public int EffectsVolume = 5;

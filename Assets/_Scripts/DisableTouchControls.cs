@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DisableTouchControls : MonoBehaviour
 {
 	[SerializeField] Canvas touchCanvas;
+
+    public static UnityEvent EnableTouchControls = new();
+
+    private void Awake()
+    {
+        EnableTouchControls.AddListener(EnableTouch);
+    }
 
     private void Update()
     {
@@ -17,5 +25,10 @@ public class DisableTouchControls : MonoBehaviour
             touchCanvas.enabled = true;
         }
 
+    }
+
+    void EnableTouch()
+    {
+        touchCanvas.enabled = true;
     }
 }

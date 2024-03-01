@@ -31,6 +31,23 @@ public class InputHolder : MonoBehaviour
             Instance = this;
     }
 
+    private void Start()
+    {
+        if(GameStatus.IsMobile && !GameStatus.IsJoystick) IsAutoFire = true;
+
+        GameStatus.DisconectedJoystick.AddListener(OnDeviceLost);
+    }
+
+    public void OnDeviceLost()
+    {
+        UIManager.PauseGame?.Invoke();
+
+        if(GameStatus.IsMobile && !GameStatus.IsJoystick)
+        {
+            DisableTouchControls.EnableTouchControls?.Invoke();
+            IsAutoFire = true;
+        }
+    }
 
     #region Accel
     public void GetAcceleration(InputAction.CallbackContext context)
@@ -56,16 +73,17 @@ public class InputHolder : MonoBehaviour
     bool touchDirection = false;
     public void GetTurning(InputAction.CallbackContext context)
     {
-        if (touchTurning) return;
+        //if (touchTurning) return;
         Turning = context.ReadValue<float>();
     }
     public void GetDirection(InputAction.CallbackContext context)
     {
-        if (touchDirection) return;
+        //if (touchDirection) return;
         Direction = context.ReadValue<Vector2>();
     }
     public void GetDirectionTouch(Vector2 direction)
     {
+        if (GameStatus.IsJoystick) return;
         Direction = direction;
     }
     public void SetTrueTouchDirection()
@@ -142,15 +160,14 @@ public class InputHolder : MonoBehaviour
     }
     #endregion
 
-
-
-
     public void SetAutoFire(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             IsAutoFire = !IsAutoFire;
         }
+        if(GameStatus.IsMobile && !GameStatus.IsJoystick) 
+            IsAutoFire = true;
     }
 
     public void SetCancelUI(InputAction.CallbackContext context)
