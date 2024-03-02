@@ -132,6 +132,18 @@ public class ShieldStrenght : MonoBehaviour
         lastCollisionHash = 0;
     }
 
+    public void DamageStrenght(int value)
+    {
+        CurrentStr -= Mathf.Abs(value);
+        HitFX();
+
+        if (CurrentStr <= 0)
+        {
+            PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr));
+            CurrentStr = 0;
+        }
+    }
+
     void HitFX()
     {
         mat.SetFloat("_ShieldHitColor", 0);

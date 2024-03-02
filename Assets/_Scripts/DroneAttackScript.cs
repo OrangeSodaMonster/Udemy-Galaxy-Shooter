@@ -32,7 +32,7 @@ public class DroneAttackScript : MonoBehaviour
         beamVFX.gameObject.SetActive(false);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (GameStatus.IsPaused) return;
 
@@ -40,7 +40,7 @@ public class DroneAttackScript : MonoBehaviour
 
         target = GetClosestTarget();
 
-        if (target != null & AttackLineRenderer != null)
+        if (target != null && AttackLineRenderer != null)
         {
             transform.up = target.position - transform.position;
 
@@ -72,7 +72,7 @@ public class DroneAttackScript : MonoBehaviour
             beamVFX.SetGradient("Color", LineColor);            
         }
 
-        if (target != null & timeSinceDamage > timeToDamage)
+        if (target != null && timeSinceDamage >= timeToDamage)
         {            
             if(target.GetComponent<EnemyHP>() != null)
             {
@@ -82,7 +82,7 @@ public class DroneAttackScript : MonoBehaviour
                 GameObject vfx = VFXPoolerScript.Instance.DroneAttackVFXPooler.GetPooledGameObject();
                 vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);
                 vfx.transform.position = AttackLineRenderer.GetPosition(2);
-                vfx.transform.localScale = (VFXScaleMultiplier) * Vector3.one;
+                vfx.transform.localScale = vfx.transform.localScale * VFXScaleMultiplier;
                 vfx.SetActive(true);
             }
         }
@@ -94,6 +94,7 @@ public class DroneAttackScript : MonoBehaviour
     private void OnDisable()
     {
         AttackLineRenderer.gameObject.SetActive(false);
+        beamVFX.gameObject.SetActive(false);
     }
 
     private Transform GetClosestTarget()
@@ -106,7 +107,7 @@ public class DroneAttackScript : MonoBehaviour
             foreach (RaycastHit2D hit in hits)
             {
                 if (Vector2.SqrMagnitude((Vector2)hit.transform.position - (Vector2)transform.position) < minDistance
-                    & hit.transform.GetComponent<EnemyHP>() != null)
+                    && hit.transform.GetComponent<EnemyHP>() != null)
                 {
                     minDistance = Vector2.SqrMagnitude((Vector2)hit.transform.position - (Vector2)transform.position);
                     closestTarget = hit.transform;

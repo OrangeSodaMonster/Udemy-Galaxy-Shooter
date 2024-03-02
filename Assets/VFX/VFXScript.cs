@@ -7,9 +7,17 @@ public class VFXScript : MonoBehaviour
 {    
     VisualEffect effect;
 
+    Vector3 defaultScale;
+
     private void Awake()
     {
         effect = GetComponent<VisualEffect>();
+        defaultScale = transform.localScale;
+    }
+
+    private void OnDisable()
+    {
+        transform.localScale = defaultScale;
     }
 
     private void OnEnable()

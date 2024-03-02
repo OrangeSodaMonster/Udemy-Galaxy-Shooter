@@ -59,7 +59,7 @@ public class Cheats : MonoBehaviour
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
 
         playerHP.isInvencible = false;
-        PlayerHP.Instance.ChangePlayerHP(-PlayerHP.Instance.CurrentHP, true);
+        PlayerHP.Instance.ChangePlayerHP(-PlayerHP.Instance.CurrentHP, ignoreInvencibility:true);
     }
 
     public void SetInvencibility()

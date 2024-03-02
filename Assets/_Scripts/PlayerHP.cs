@@ -117,7 +117,7 @@ public class PlayerHP : MonoBehaviour
         CurrentHP = MaxHP - missingHP;
     }
 
-    public void ChangePlayerHP(int value, bool ignoreInvencibility = false)
+    public void ChangePlayerHP(int value, bool ignoreInvencibility = false, bool playHitSound = false)
     {
         MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
 
@@ -126,5 +126,10 @@ public class PlayerHP : MonoBehaviour
         CurrentHP += value;
         if (CurrentHP > MaxHP) CurrentHP = MaxHP;
         else if (CurrentHP <= 0) CurrentHP = 0;
+
+        if (playHitSound)
+        {
+            AudioManager.Instance.PlayerHitSound.PlayFeedbacks();
+        }
     }
 }
