@@ -31,4 +31,9 @@ public class MainMenuConfig : MonoBehaviour
         mainMenuCanvas.gameObject.SetActive(true);
         SaveSlotCanvas.gameObject.SetActive(false);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

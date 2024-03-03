@@ -183,8 +183,15 @@ public class InputHolder : MonoBehaviour
         if (context.started)
         {
             DisableUI?.Invoke();
+            IsDisableUI = true;
         }
-
-        IsDisableUI = context.performed;
+        else if (context.canceled)
+        {
+            IsDisableUI = false;
+        }
     }
+
+    public void SetTrueDisableUI() => IsDisableUI = true;   
+
+    public void SetFalseDisableUI() => IsDisableUI = false;
 }

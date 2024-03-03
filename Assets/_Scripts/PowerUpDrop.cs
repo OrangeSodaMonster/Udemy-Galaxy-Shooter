@@ -67,7 +67,6 @@ public class PowerUpDrop : MonoBehaviour
         }
 
         float randomSpawnValue = UnityEngine.Random.Range(0, totalSpawnWeight);
-        Debug.Log($"0->{totalSpawnWeight} >>> {randomSpawnValue}");
         
         for(int i = 0; i < PuDrops.Count; i++)
         {

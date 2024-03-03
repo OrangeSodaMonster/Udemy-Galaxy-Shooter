@@ -34,7 +34,14 @@ public class MenuNavigationScript : MonoBehaviour
 
         if (submitOnBackInput)
         {
-            selectOnCancel.GetComponent<Button>().onClick.Invoke();
+            if (selectOnCancel.TryGetComponent(out ButtonScript buttonScript))
+            {
+                buttonScript.CallClickEvent();
+            }
+            else
+            {
+                selectOnCancel.GetComponent<Button>().onClick.Invoke();
+            }
         }
     }
 }

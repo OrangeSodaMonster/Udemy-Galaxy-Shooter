@@ -58,6 +58,22 @@ MonoBehaviour:
   clickEvents:
     m_PersistentCalls:
       m_Calls: []
+  holdEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1122950851191819922}
+        m_TargetAssemblyTypeName: RightClickButton, Assembly-CSharp
+        m_MethodName: CallRightClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  holdDuration: 2
   playHoverSound: 1
   playSelectionSound: 1
   playConfirmationSound: 0

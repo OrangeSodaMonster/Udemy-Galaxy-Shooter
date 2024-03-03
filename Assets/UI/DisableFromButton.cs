@@ -26,7 +26,7 @@ public class DisableFromButton : MonoBehaviour
     void DisableButton()
     {
         if(EventSystem.current.currentSelectedGameObject == gameObject)
-            rClick.OnRightClick.Invoke();
+            rClick.CallRightClick();
     }
 
 }

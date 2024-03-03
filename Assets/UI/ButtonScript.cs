@@ -15,15 +15,22 @@ public class ButtonScript : MonoBehaviour
     //[SerializeField] bool disableOnClick = false;
     [FormerlySerializedAs("secondClickEvent")]
 	[SerializeField] UnityEvent clickEvents;
+	[SerializeField] UnityEvent holdEvents;
+	[SerializeField] UnityEvent onPointerDownEvents;
+	[SerializeField] UnityEvent onPointerUpEvents;
+	[SerializeField] float holdDuration = 2f;
     [SerializeField] bool playHoverSound = true;
     [SerializeField] bool playSelectionSound = true;
     [SerializeField] bool playConfirmationSound = true;
     [SerializeField] bool playBackSound = false;
 
     public event Action ClickedOnInterface;
+    static GameObject lastSelected;
 
     Button button;
-    static GameObject lastSelected;
+    bool isHoldingButton;
+    bool calledHold;
+    float holdingTime;
 
     private void OnEnable()
     {
@@ -37,11 +44,52 @@ public class ButtonScript : MonoBehaviour
     {
         ClickedOnInterface -= SelectOnClick;
     }
-     
+    public void OnPointerDown(BaseEventData baseData)
+    {
+        PointerEventData pointerData = baseData as PointerEventData;
+        if (pointerData.button == PointerEventData.InputButton.Right)
+            return;
+
+        isHoldingButton = true;
+        onPointerDownEvents?.Invoke();
+    }
+
+    public void OnPointerUp(BaseEventData baseData)    
+    {
+        PointerEventData pointerData = baseData as PointerEventData;
+        if (pointerData.button == PointerEventData.InputButton.Right)
+            return;
+
+        onPointerUpEvents?.Invoke();
+        isHoldingButton = false;
+        calledHold = false;
+
+        if(holdingTime < holdDuration && calledHold == false)
+        {
+            CallClickEvent();
+        }
+
+        holdingTime = 0;
+    }
+
+    private void Update()
+    {
+        if (!isHoldingButton)
+            return;
+
+        holdingTime += Time.unscaledDeltaTime;
+
+        if (holdingTime >= holdDuration && calledHold == false)
+        {
+            holdEvents?.Invoke();
+            calledHold = true;
+        }
+    }
+
     private void Start()
     {
         button = GetComponentInChildren<Button>();
-        button.onClick.AddListener(CallClickEvent);
+        //button.onClick.AddListener(CallClickEvent);
 
         EventTrigger trigger = button.gameObject.GetComponent<EventTrigger>()??button.gameObject.AddComponent<EventTrigger>();
 
@@ -52,6 +100,18 @@ public class ButtonScript : MonoBehaviour
         EventTrigger.Entry hoverEvent = new() { eventID = EventTriggerType.PointerEnter };
         hoverEvent.callback.AddListener((eventData) => PlayHoverSound());
         trigger.triggers.Add(hoverEvent);
+
+        EventTrigger.Entry pointerDownEvent = new() { eventID = EventTriggerType.PointerDown };
+        pointerDownEvent.callback.AddListener(OnPointerDown);
+        trigger.triggers.Add(pointerDownEvent);
+
+        EventTrigger.Entry pointerUpEvent = new() { eventID = EventTriggerType.PointerUp };
+        pointerUpEvent.callback.AddListener(OnPointerUp);
+        trigger.triggers.Add(pointerUpEvent);
+
+        EventTrigger.Entry submitEvent = new() { eventID = EventTriggerType.Submit };
+        submitEvent.callback.AddListener((eventData) => CallClickEvent());
+        trigger.triggers.Add(submitEvent);
     }
 
     public void CallClickEvent()

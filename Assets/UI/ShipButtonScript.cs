@@ -115,6 +115,7 @@ public class ShipButtonScript : MonoBehaviour
     public void BuyTractor()
     {
         if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel == shipUpgradeInfo.TractorBeamUpgrade.Length) return;
+        if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite) return;
 
         if (!PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled)
         {

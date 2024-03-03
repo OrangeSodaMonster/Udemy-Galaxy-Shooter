@@ -17,4 +17,9 @@ public class RightClickButton : MonoBehaviour, IPointerClickHandler
             OnRightClick?.Invoke();
         }
     }
+
+    public void CallRightClick()
+    {
+        OnRightClick?.Invoke();
+    }
 }

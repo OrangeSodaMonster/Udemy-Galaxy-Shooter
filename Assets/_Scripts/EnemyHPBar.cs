@@ -53,8 +53,6 @@ public class EnemyHPBar : MonoBehaviour
 
     private void DealWithBar()
     {
-        //Debug.Log("DealWithBar chamado");
-
         if (enemyHP.CurrentHP >= enemyHP.MaxHP)
         {
             hpBar.gameObject.SetActive(false);
@@ -64,16 +62,14 @@ public class EnemyHPBar : MonoBehaviour
             if (hpInstance == null)
             {         
                 hpInstance = EnemyPoolRef.s_hpBarPool.GetPooledGameObject().transform;
-                hpInstance.position = Vector3.zero;
                 hpBar = hpInstance.GetComponentInChildren<Slider>();
                 hpBar.fillRect.gameObject.GetComponent<Image>().color = hpColor;
+                hpInstance.position = transform.position + hpPositionOffset;
                 hpInstance.gameObject.SetActive(true);
             }
             
             hpBar.gameObject.SetActive(true);
             hpBar.value = enemyHP.CurrentHP / enemyHP.MaxHP;
-
-            //Debug.Log($"{enemyHP.CurrentHP}, {enemyHP.MaxHP}, {enemyHP.CurrentHP / enemyHP.MaxHP}");
         }
     }
 }
