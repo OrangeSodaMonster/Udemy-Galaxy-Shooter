@@ -56,7 +56,7 @@ public class LaserMove : MonoBehaviour
             if (collision.TryGetComponent(out EnemyHP enemyHP))
             {
                 if (enemyHP.IsAsteroid)
-                    AudioManager.Instance.AsteroidHitSound.PlayFeedbacks();
+                    AudioManager.Instance.PlayAsteroidHitSound();
                 else
                     AudioManager.Instance.EnemyHitSound.PlayFeedbacks();
             }

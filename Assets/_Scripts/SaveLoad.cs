@@ -68,9 +68,13 @@ public class SaveLoad : MonoBehaviour
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
         SaveConfigObj saveConfig = new SaveConfigObj();
-        saveConfig.IsAutoFire = InputHolder.Instance.IsAutoFire;        
+
+        if (TryGetConfig(CurrentSaveSlot))
+            saveConfig = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);            
+
+        saveConfig.IsAutoFire = GameManager.IsAutoFire;        
         
-        saveConfig.CreationDate = GetCreationDate(CurrentSaveSlot);
+        //saveConfig.CreationDate = GetCreationDate(CurrentSaveSlot);
 
         MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Save" + CurrentSaveSlot);
 
@@ -82,23 +86,32 @@ public class SaveLoad : MonoBehaviour
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
         SaveConfigObj data = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
 
-        data.MasterVolume = (int)AudioTrackConfig.Instance.masterVolume.value;
-        data.MusicVolume = (int)AudioTrackConfig.Instance.musicVolume.value;
-        data.EffectsVolume = (int)AudioTrackConfig.Instance.sfxVolume.value;
-        data.UiVolume = (int)AudioTrackConfig.Instance.uiVolume.value;
+        data.MasterVolume = GameManager.MasterVolume;
+        data.MusicVolume = GameManager.MusicVolume;
+        data.EffectsVolume = GameManager.EffectsVolume;
+        data.UiVolume = GameManager.UiVolume;
+
+        data.IsAutoFire = GameManager.IsAutoFire;
 
         MMSaveLoadManager.Save(data, "Config.saveFile", "Save" + CurrentSaveSlot);
+
+        Debug.Log($"Saved Volumes: {data.MasterVolume}, {data.MusicVolume}, {data.EffectsVolume}, {data.UiVolume}");
     }
 
-    public void SaveTouchInfo()
+    public void SaveConfigInfo()
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
         SaveConfigObj data = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
 
-        data.touchAlpha = TouchControlsManager.buttonsAlpha;
-        data.touchTurnToDirection = TouchControlsManager.isTurnToDirection;
+        data.TouchAlpha = GameManager.TouchAlpha;
+        data.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
+        data.IsVibration = GameManager.IsVibration;
+
+        data.IsAutoFire = GameManager.IsAutoFire;
 
         MMSaveLoadManager.Save(data, "Config.saveFile", "Save" + CurrentSaveSlot);
+
+        Debug.Log($"Saved Config");
     }
 
     [ContextMenu("LoadConfig")]
@@ -107,10 +120,12 @@ public class SaveLoad : MonoBehaviour
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
         SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
-        InputHolder.Instance.IsAutoFire = loadedData.IsAutoFire;
-        AudioTrackConfig.Instance.LoadVolume(loadedData.MasterVolume, loadedData.MusicVolume, loadedData.EffectsVolume, loadedData.UiVolume);
 
-        TouchControlsManager.LoadValues(loadedData.touchAlpha, loadedData.touchTurnToDirection);
+        GameManager.LoadValues(loadedData);
+        //GameManager.IsAutoFire = loadedData.IsAutoFire;
+        //AudioTrackConfig.Instance.LoadVolume(loadedData.MasterVolume, loadedData.MusicVolume, loadedData.EffectsVolume, loadedData.UiVolume);
+
+        //TouchControlsManager.LoadValues(loadedData.touchAlpha, loadedData.touchTurnToDirection);
 
         Debug.Log("Loaded Config");
     }
@@ -276,20 +291,7 @@ public class SaveLoad : MonoBehaviour
         Debug.Log("SAVED DISABLES");
     }
 
-    // Save Objects
-    class SaveConfigObj
-    {
-        public bool IsAutoFire = true;
-        public int touchAlpha = 5;
-        public bool touchTurnToDirection = true;
-
-        public int MasterVolume = 5;
-        public int EffectsVolume = 5;
-        public int MusicVolume = 5;
-        public int UiVolume = 5;
-
-        public string CreationDate;
-    }     
+    // Save Objects       
     
     class SaveResourcesObj
     {
@@ -548,4 +550,19 @@ public class SaveLoad : MonoBehaviour
     {
         public int slot;
     }
+}
+
+public class SaveConfigObj
+{
+    public bool IsVibration = true;
+    public bool IsAutoFire = true;
+    public int TouchAlpha = 5;
+    public bool IsTouchTurnToDirection = true;
+
+    public int MasterVolume = 5;
+    public int EffectsVolume = 5;
+    public int MusicVolume = 5;
+    public int UiVolume = 5;
+
+    public string CreationDate;
 }

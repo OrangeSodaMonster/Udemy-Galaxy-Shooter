@@ -5,41 +5,41 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class TouchControlsManager : MonoBehaviour
 {
-    public static bool isTurnToDirection = true;
-    public static int buttonsAlpha = 5;
+    //public static bool isTurnToDirection = true;
+    //public static int buttonsAlpha = 5;
 
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] GameObject analogTurning;
     [SerializeField] GameObject lrTurning;
 
-    public static void LoadValues(int alpha, bool turnToDirection)
-    {
-        isTurnToDirection = turnToDirection;
-        buttonsAlpha = alpha;
-    }
+    //public static void LoadValues(int alpha, bool turnToDirection)
+    //{
+    //    isTurnToDirection = turnToDirection;
+    //    buttonsAlpha = alpha;
+    //}
 
     private void Start()
     {
         SetTurningInput();
-        SetAlpha(buttonsAlpha);
+        SetAlpha();
     }
 
-    public void SetAlpha(float value)
+    public void SetAlpha()
     {
-        canvasGroup.alpha = value * 0.1f;
-        buttonsAlpha = (int)value;
+        canvasGroup.alpha = GameManager.TouchAlpha * 0.1f;
+        //buttonsAlpha = (int)value;
     }
 
     public void SetTurningMode()
     {
-        isTurnToDirection = !isTurnToDirection;
+        GameManager.IsTouchTurnToDirection = !GameManager.IsTouchTurnToDirection;
         SetTurningInput();
     }
 
     void SetTurningInput()
     {
-        analogTurning.SetActive(isTurnToDirection);
-        lrTurning.SetActive(!isTurnToDirection);
+        analogTurning.SetActive(GameManager.IsTouchTurnToDirection);
+        lrTurning.SetActive(!GameManager.IsTouchTurnToDirection);
     }
 
 

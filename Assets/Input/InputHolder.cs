@@ -13,9 +13,9 @@ public class InputHolder : MonoBehaviour
     public float Acceleration;
     public float Turning;
     public Vector2 Direction;
-    public bool IsAutoFire = false;
+    //public bool IsAutoFire = false;
     public bool IsFiring;
-    public bool IsAutoFiring;
+    //public bool IsAutoFiring;
     public bool IsSpecial;
     public event Action Special;
     public bool IsPause;
@@ -33,7 +33,7 @@ public class InputHolder : MonoBehaviour
 
     private void Start()
     {
-        if(GameStatus.IsMobile && !GameStatus.IsJoystick) IsAutoFire = true;
+        if(GameStatus.IsMobile && !GameStatus.IsJoystick) GameManager.IsAutoFire = true;
 
         GameStatus.DisconectedJoystick.AddListener(OnDeviceLost);
     }
@@ -45,7 +45,7 @@ public class InputHolder : MonoBehaviour
         if(GameStatus.IsMobile && !GameStatus.IsJoystick)
         {
             DisableTouchControls.EnableTouchControls?.Invoke();
-            IsAutoFire = true;
+            GameManager.IsAutoFire = true;
         }
     }
 
@@ -162,10 +162,10 @@ public class InputHolder : MonoBehaviour
     {
         if (context.started)
         {
-            IsAutoFire = !IsAutoFire;
+            GameManager.IsAutoFire = !GameManager.IsAutoFire;
         }
-        if(GameStatus.IsMobile && !GameStatus.IsJoystick) 
-            IsAutoFire = true;
+        if(GameStatus.IsMobile && !GameStatus.IsJoystick)
+            GameManager.IsAutoFire = true;
     }
 
     public void SetCancelUI(InputAction.CallbackContext context)

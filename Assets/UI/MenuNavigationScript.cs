@@ -38,10 +38,8 @@ public class MenuNavigationScript : MonoBehaviour
             {
                 buttonScript.CallClickEvent();
             }
-            else
-            {
-                selectOnCancel.GetComponent<Button>().onClick.Invoke();
-            }
+           
+            selectOnCancel.GetComponent<Button>().onClick.Invoke();
         }
     }
 }

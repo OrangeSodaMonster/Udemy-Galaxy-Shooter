@@ -3501,6 +3501,7 @@ GameObject:
   - component: {fileID: 5192989632329018110}
   - component: {fileID: 6488107421536374396}
   - component: {fileID: 5491222883184716668}
+  - component: {fileID: 7377080712780626775}
   m_Layer: 0
   m_Name: PlayerHit
   m_TagString: Untagged
@@ -3537,6 +3538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 5491222883184716668}
+  - {fileID: 7377080712780626775}
   InitializationMode: 2
   AutoInitialization: 1
   SafeMode: 3
@@ -3711,6 +3713,50 @@ MonoBehaviour:
   RolloffMode: 0
   MinDistance: 1
   MaxDistance: 500
+--- !u!114 &7377080712780626775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3025520762066277205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Haptic Preset
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Preset: 7
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!1 &3043838886038746538
 GameObject:
   m_ObjectHideFlags: 0
@@ -4666,8 +4712,8 @@ MonoBehaviour:
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
-  MinVolume: 0.04
-  MaxVolume: 0.07
+  MinVolume: 0.015
+  MaxVolume: 0.03
   MinPitch: 0.9
   MaxPitch: 1
   MmSoundManagerTrack: 0
@@ -5161,6 +5207,7 @@ GameObject:
   - component: {fileID: 4389368231545910439}
   - component: {fileID: 9181792877179260138}
   - component: {fileID: 1199623780290620743}
+  - component: {fileID: 531914971900467297}
   m_Layer: 0
   m_Name: PlayerDestruction
   m_TagString: Untagged
@@ -5197,6 +5244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 1199623780290620743}
+  - {fileID: 531914971900467297}
   InitializationMode: 2
   AutoInitialization: 1
   SafeMode: 3
@@ -5371,6 +5419,50 @@ MonoBehaviour:
   RolloffMode: 0
   MinDistance: 1
   MaxDistance: 500
+--- !u!114 &531914971900467297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339994641426967023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Haptic Preset
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Preset: 6
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!1 &4455234607368125617
 GameObject:
   m_ObjectHideFlags: 0
@@ -6967,6 +7059,7 @@ GameObject:
   - component: {fileID: 4120895255056806775}
   - component: {fileID: 9215567077348659779}
   - component: {fileID: 8813093041099827736}
+  - component: {fileID: 7847599023985576119}
   m_Layer: 0
   m_Name: ShieldHit
   m_TagString: Untagged
@@ -7003,6 +7096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 8813093041099827736}
+  - {fileID: 7847599023985576119}
   InitializationMode: 2
   AutoInitialization: 1
   SafeMode: 3
@@ -7177,6 +7271,50 @@ MonoBehaviour:
   RolloffMode: 0
   MinDistance: 1
   MaxDistance: 500
+--- !u!114 &7847599023985576119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6890870282951449637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Haptic Preset
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Preset: 4
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!1 &6946355592999822081
 GameObject:
   m_ObjectHideFlags: 0
@@ -7409,6 +7547,7 @@ GameObject:
   - component: {fileID: 6263330692765528132}
   - component: {fileID: 3353257756991473642}
   - component: {fileID: 7872241799976082118}
+  - component: {fileID: 646300218108265661}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -7445,6 +7584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 7872241799976082118}
+  - {fileID: 646300218108265661}
   InitializationMode: 2
   AutoInitialization: 1
   SafeMode: 3
@@ -7619,6 +7759,50 @@ MonoBehaviour:
   RolloffMode: 0
   MinDistance: 1
   MaxDistance: 500
+--- !u!114 &646300218108265661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974524322328987252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Haptic Preset
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Preset: 3
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!1 &7115747709314551369
 GameObject:
   m_ObjectHideFlags: 0

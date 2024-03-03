@@ -43,6 +43,8 @@ public class SentinelAttack : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(GameStatus.IsGameover || GameStatus.IsPortal || playerHP == null) return;
+
         if (Vector2.SqrMagnitude(playerHP.transform.position - transform.position) <= rangeSqr)
         {
             target = playerHP.transform;

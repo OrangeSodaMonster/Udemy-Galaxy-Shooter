@@ -260,4 +260,36 @@ public class AudioManager : MonoBehaviour
             canPlayLaser = true;
         }
     }
+
+    bool canPlayPickUp = true;
+    public void PlayMetalPickUpSound(MMFeedbacks soundFB)
+    {
+        if (!canPlayPickUp) return;
+
+        soundFB.PlayFeedbacks();
+        canPlayPickUp = false;
+        StartCoroutine(EnableMetalPU());
+
+        IEnumerator EnableMetalPU()
+        {
+            yield return new WaitForSeconds(0.1f);
+            canPlayPickUp = true;
+        }
+    }
+
+    bool canPlayAsteroidHit = true;
+    public void PlayAsteroidHitSound()
+    {
+        if (!canPlayAsteroidHit) return;
+
+        AsteroidHitSound.PlayFeedbacks();
+        canPlayAsteroidHit = false;
+        StartCoroutine(EnableAsteroidHit());
+
+        IEnumerator EnableAsteroidHit()
+        {
+            yield return new WaitForSeconds(0.1f);
+            canPlayAsteroidHit = true;
+        }
+    }
 }

@@ -128,11 +128,11 @@ public class CollectiblesPickUps : MonoBehaviour
             switch (type)
             {
                 case CollectibleType.MetalCrumb:
+                    AudioManager.Instance.PlayMetalPickUpSound(AudioManager.Instance.MetalCrumbSound);
                     PlayerCollectiblesCount.MetalAmount += 1;
-                    AudioManager.Instance.MetalCrumbSound.PlayFeedbacks();
                     break;
                 case CollectibleType.RareMetalCrumb:
-                    AudioManager.Instance.RareMetalCrumbSound.PlayFeedbacks();
+                    AudioManager.Instance.PlayMetalPickUpSound(AudioManager.Instance.RareMetalCrumbSound);
                     PlayerCollectiblesCount.RareMetalAmount += 1;
                     break;
                 case CollectibleType.EnergyCristal:

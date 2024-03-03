@@ -17,9 +17,7 @@ public class GameStatus : MonoBehaviour
 	public static bool IsPortal = false;
 	public static bool IsMobile = false;
 	public static bool IsJoystick = false;
-    public static UnityEvent DisconectedJoystick = new();
-
-    [SerializeField] bool saveConfigOnGameOver = true;
+    public static UnityEvent DisconectedJoystick = new();    
 
     int joysticksConnected;
 
@@ -27,9 +25,7 @@ public class GameStatus : MonoBehaviour
     {
         IsPaused = false;
         IsGameover = false;
-        IsStageClear = false;
-
-        GameOver += SaveConfigOnGameOver;
+        IsStageClear = false;        
 
         joysticksConnected = Input.GetJoystickNames().Length;
         IsJoystick = joysticksConnected > 0;
@@ -62,7 +58,6 @@ public class GameStatus : MonoBehaviour
 
     private void OnDisable()
     {
-        GameOver -= SaveConfigOnGameOver;   
         StopAllCoroutines();
     }
 
@@ -82,15 +77,7 @@ public class GameStatus : MonoBehaviour
 
         pausedLastFrame = IsPaused;
         gameoverLastFrame = IsGameover;
-    }
-
-    void SaveConfigOnGameOver()
-    {
-        if (saveConfigOnGameOver)
-        {
-            SaveLoad.instance.SaveConfig();
-        }
-    }
+    }  
 
     static public void ClearStage()
     {

@@ -12,10 +12,10 @@ public class AudioTrackConfig : MonoBehaviour
     public Slider sfxVolume;
     public Slider uiVolume;
 
-    int currentMaster = 1;
-    int currentMusic = 1;
-    int currentSFX = 1;
-    int currentUI = 1;
+    //int currentMaster = 1;
+    //int currentMusic = 1;
+    //int currentSFX = 1;
+    //int currentUI = 1;
 
     public static AudioTrackConfig Instance;
     private void Awake()
@@ -29,43 +29,53 @@ public class AudioTrackConfig : MonoBehaviour
     private void OnEnable()
     {
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
+        StartCoroutine(LoadVolumes());
     }
 
     public void SetSliders()
     {
         // Mudar para usar os valores salvos dos sliders
 
-        masterVolume.SetValueWithoutNotify(currentMaster);
-        musicVolume.SetValueWithoutNotify(currentMusic);
-        sfxVolume.SetValueWithoutNotify(currentSFX);
-        uiVolume.SetValueWithoutNotify(currentUI);
+        masterVolume.SetValueWithoutNotify(GameManager.MasterVolume);
+        musicVolume.SetValueWithoutNotify(GameManager.MusicVolume);
+        sfxVolume.SetValueWithoutNotify(GameManager.EffectsVolume);
+        uiVolume.SetValueWithoutNotify(GameManager.UiVolume);
 
-        Debug.Log($"SET SLIDERS: {currentMaster}, {currentMusic}, {currentSFX}, {currentUI}");
+        Debug.Log($"SET SLIDERS: {GameManager.MasterVolume}, {GameManager.MusicVolume}, {GameManager.EffectsVolume}, {GameManager.UiVolume}");
     }
-    public void LoadVolume(int master, int music, int sfx, int ui)
+    //public void LoadVolume(int master, int music, int sfx, int ui)
+    //{
+    //    StartCoroutine(Routine());
+
+    //    IEnumerator Routine()
+    //    {
+    //        yield return null;
+
+    //        // slider 5 >>> volume 1
+    //        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Master, master * 0.2f);
+    //        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Music, music * 0.2f);
+    //        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, sfx * 0.2f);
+    //        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.UI, ui * 0.2f);
+    //    }
+
+    //    //currentMaster = master;
+    //    //currentMusic = music;
+    //    //currentSFX = sfx;
+    //    //currentUI = ui;
+
+    //    Debug.Log($"Volumes: {master}, {music}, {sfx}, {ui}");
+    //}
+
+    public IEnumerator LoadVolumes()
     {
-        StartCoroutine(Routine());
+        yield return null;
 
-        IEnumerator Routine()
-        {
-            yield return null;
-
-            // slider 5 >>> volume 1
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Master, master * 0.2f);
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Music, music * 0.2f);
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, sfx * 0.2f);
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.UI, ui * 0.2f);
-        }
-
-        currentMaster = master;
-        currentMusic = music;
-        currentSFX = sfx;
-        currentUI = ui;
-
-        Debug.Log($"Volumes: {master}, {music}, {sfx}, {ui}");
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Master, GameManager.MasterVolume * 0.2f);
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Music, GameManager.MusicVolume * 0.2f);
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, GameManager.EffectsVolume * 0.2f);
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.UI, GameManager.UiVolume * 0.2f);
     }
 
-    // Chamar em load, salvar valores dos sliders
     public void SetVolumes()
     {
         SetMaster();
@@ -78,13 +88,13 @@ public class AudioTrackConfig : MonoBehaviour
     {        
         float newVolume = 0.2f * masterVolume.value;
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Master, newVolume);
-        currentMaster = (int)masterVolume.value;
+        GameManager.MasterVolume = (int)masterVolume.value;
     }
     public void SetMusic()
     {
         float newVolume = 0.2f * musicVolume.value;
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Music, newVolume);
-        currentMusic = (int)musicVolume.value;
+        GameManager.MusicVolume = (int)musicVolume.value;
     }       
 
     float sfxTrackVolume;
@@ -94,7 +104,7 @@ public class AudioTrackConfig : MonoBehaviour
 
         if(!MMSoundManager.Instance.IsMuted(MMSoundManager.MMSoundManagerTracks.Sfx))
             MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.Sfx, sfxTrackVolume);
-        currentSFX = (int)sfxVolume.value;
+        GameManager.EffectsVolume = (int)sfxVolume.value;
 
         Debug.Log(sfxTrackVolume);
     }
@@ -102,7 +112,7 @@ public class AudioTrackConfig : MonoBehaviour
     {
         float newVolume = 0.2f * uiVolume.value;
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, MMSoundManager.MMSoundManagerTracks.UI, newVolume);
-        currentUI = (int)uiVolume.value;
+        GameManager.UiVolume = (int)uiVolume.value;
     }
 
     public void MuteVFX()

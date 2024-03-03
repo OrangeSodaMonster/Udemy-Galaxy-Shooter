@@ -26,7 +26,7 @@ public class TouchTurningToogleScript : MonoBehaviour
 
     public void UpdateVisual()
     {
-        if (TouchControlsManager.isTurnToDirection)
+        if (GameManager.IsTouchTurnToDirection)
         {
             border.color = enabledBorderColor;
             Image.color = enabledImageColor;

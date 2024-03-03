@@ -5,13 +5,13 @@ using UnityEngine;
 public class MainMenuConfig : MonoBehaviour
 {
 	[SerializeField] Canvas mainMenuCanvas;
-	[SerializeField] Canvas configCanvas;
+	[SerializeField] Canvas audioCanvas;
 	[SerializeField] Canvas SaveSlotCanvas;
 
-	public void OpenConfig()
+	public void OpenAudio()
 	{
 		mainMenuCanvas.gameObject.SetActive(false);
-        configCanvas.gameObject.SetActive(true);
+        audioCanvas.gameObject.SetActive(true);
 	}
 
     public void OpenSaveSlot()
@@ -20,10 +20,10 @@ public class MainMenuConfig : MonoBehaviour
         SaveSlotCanvas.gameObject.SetActive(true);
     }
 
-    public void CloseConfig()
+    public void CloseAudio()
     {
         mainMenuCanvas.gameObject.SetActive(true);
-        configCanvas.gameObject.SetActive(false);
+        audioCanvas.gameObject.SetActive(false);
     }
 
     public void CloseSaveSlot()

@@ -14,6 +14,6 @@ public class SetAlphaSlider : MonoBehaviour
 
     private void OnEnable()
     {
-        slider.value = TouchControlsManager.buttonsAlpha;
+        slider.value = GameManager.TouchAlpha;
     }
 }
