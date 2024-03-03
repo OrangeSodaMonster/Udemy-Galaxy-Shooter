@@ -88,13 +88,13 @@ public class EnemyHP : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Deal with enemy collision
-        
-        if(TryGetComponent(out EnemyDropDealer dropDealer))
-            dropDealer.SpawnDrops();
+        //Deal with enemy collision     
 
         if (destroyOnCollision)
         {
+            if (TryGetComponent(out EnemyDropDealer dropDealer))
+                dropDealer.SpawnDrops();
+
             Died?.Invoke();
             DestroySequence();
         }

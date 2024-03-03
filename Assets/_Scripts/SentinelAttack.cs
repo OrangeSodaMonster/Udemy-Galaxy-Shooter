@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.VFX;
 
 public class SentinelAttack : MonoBehaviour
@@ -13,50 +10,67 @@ public class SentinelAttack : MonoBehaviour
     [SerializeField] LayerMask layersToHit;
     [SerializeField] LineRenderer lineRenderer;
     [SerializeField] VisualEffect beamVFX;
+    [SerializeField] VisualEffect hitVFX;
     [SerializeField] Transform origins;
     
     bool isFiring;
     float timeSinceDamage = 0;
     Gradient lineColor;
-    RaycastHit2D[] hits;
     Transform target;
+    float rangeSqr;
+    PlayerHP playerHP;
 
     private void Awake()
     {
-        //lineRenderer = GetComponentInChildren<LineRenderer>();
         lineColor = lineRenderer.colorGradient;
         lineRenderer.transform.localScale /= transform.localScale.x;
-        //beamVFX = GetComponentInChildren<VisualEffect>();
+        rangeSqr = range * range;
     }
 
     private void OnEnable()
     {
         StopAttack();
     }
+    private void OnDisable()
+    {
+        AudioManager.Instance.PauseSentinel();
+    }
+
+    private void Start()
+    {
+        playerHP = FindObjectOfType<PlayerHP>();
+    }
 
     void FixedUpdate()
     {
-        target = GetClosestTarget();        
-
-        if (target != null)
+        if (Vector2.SqrMagnitude(playerHP.transform.position - transform.position) <= rangeSqr)
         {
-            PlayerHP playerHP = target.GetComponent<PlayerHP>();
-            ShieldStrenght shieldStr = target.GetComponent<ShieldStrenght>();
+            target = playerHP.transform;
+            LaserAttack();
 
-            LaserAttack(playerHP, shieldStr);
+            AudioManager.Instance.PlaySentinel();
         }
         else if (isFiring)
         {
             StopAttack();
+            AudioManager.Instance.PauseSentinel();
         }
     }
 
-    void LaserAttack(PlayerHP playerHP, ShieldStrenght strenght)
+    void LaserAttack()
     {
-        lineRenderer.gameObject.SetActive(true);
-        lineRenderer.positionCount = 3;
         Vector3 hitPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
         Transform closestOrigin = GetClosestOrigin(hitPos);
+
+        ShieldStrenght strenght = null;
+        if(CheckForShield(closestOrigin.position, hitPos, out ShieldStrenght shieldStr, out Vector2 shieldHit))
+        {
+            strenght = shieldStr;
+            hitPos = shieldHit;
+        }
+
+        lineRenderer.gameObject.SetActive(true);
+        lineRenderer.positionCount = 3;        
         lineRenderer.SetPosition(0, closestOrigin.position - transform.position);
         lineRenderer.SetPosition(1, (closestOrigin.position + (hitPos - closestOrigin.position) / 2) - transform.position);
         lineRenderer.SetPosition(2, hitPos - transform.position);
@@ -64,16 +78,19 @@ public class SentinelAttack : MonoBehaviour
         beamVFX.transform.position = closestOrigin.position;
         beamVFX.gameObject.SetActive(true);
 
+        hitVFX.transform.position = lineRenderer.GetPosition(2) + transform.position;
+        hitVFX.gameObject.SetActive(true);
+
         isFiring = true;
 
         timeSinceDamage += Time.deltaTime;
 
         if (timeSinceDamage >= damageInterval)
         {
-            if(playerHP != null)
-                playerHP.ChangePlayerHP(-Mathf.Abs(damage), playHitSound:true);
-            else if(strenght != null)
+            if (strenght != null && strenght.CurrentStr > 0)
                 strenght.DamageStrenght(damage);
+            else if (playerHP != null)
+                playerHP.ChangePlayerHP(-Mathf.Abs(damage), playHitSound:true);            
 
             timeSinceDamage = 0;
 
@@ -103,29 +120,32 @@ public class SentinelAttack : MonoBehaviour
     {
         lineRenderer.gameObject.SetActive(false);
         beamVFX.gameObject.SetActive(false);
+        hitVFX.gameObject.SetActive(false);
         timeSinceDamage = 0;
 
         isFiring= false;
     }
 
-    private Transform GetClosestTarget()
+    bool CheckForShield(Vector2 originPos, Vector2 hitPos, out ShieldStrenght shieldStr, out Vector2 shieldHit)
     {
-        hits = Physics2D.CircleCastAll(transform.position, range, Vector2.zero, 0, layersToHit);
-        Transform closestTarget = null;
-        if (hits.Length > 0)
+        shieldStr = null;
+        shieldHit = Vector2.zero;
+
+        Vector2 dir = (hitPos - originPos).normalized;
+        float distance = Vector2.Distance(originPos, hitPos);
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(originPos, dir, distance, layersToHit);
+
+        foreach (RaycastHit2D hit in hits)
         {
-            float minDistance = float.MaxValue;
-            foreach (RaycastHit2D hit in hits)
+            if(hit.transform.TryGetComponent(out shieldStr))
             {
-                if (Vector2.SqrMagnitude((Vector2)hit.transform.position - (Vector2)transform.position) < minDistance
-                    && (hit.transform.GetComponent<PlayerHP>() != null || hit.transform.GetComponent<ShieldStrenght>() != null))
-                {
-                    minDistance = Vector2.SqrMagnitude((Vector2)hit.transform.position - (Vector2)transform.position);
-                    closestTarget = hit.transform;
-                }
+                shieldHit = hit.point;
+                return true;
             }
         }
-        return closestTarget;
+
+        return false;
     }
 
 }

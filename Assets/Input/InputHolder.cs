@@ -69,8 +69,6 @@ public class InputHolder : MonoBehaviour
     #endregion
 
     #region turning
-    bool touchTurning = false;
-    bool touchDirection = false;
     public void GetTurning(InputAction.CallbackContext context)
     {
         //if (touchTurning) return;
@@ -86,27 +84,27 @@ public class InputHolder : MonoBehaviour
         if (GameStatus.IsJoystick) return;
         Direction = direction;
     }
-    public void SetTrueTouchDirection()
-    {
-        touchDirection = true;
-    }
-    public void SetFalseTouchDirection()
-    {
-        touchDirection = false;
-    }
+    //public void SetTrueTouchDirection()
+    //{
+    //    touchDirection = true;
+    //}
+    //public void SetFalseTouchDirection()
+    //{
+    //    touchDirection = false;
+    //}
     public void SetTurnRightTouch()
     {
-        touchTurning = true;
+        //touchTurning = true;
         Turning = 1;
     }    
     public void SetTurnLeftTouch()
     {
-        touchTurning = true;
+        //touchTurning = true;
         Turning = -1;
     }
     public void StopTurningTouch()
     {
-        touchTurning = false;
+        //touchTurning = false;
         Turning = 0;
     }
 

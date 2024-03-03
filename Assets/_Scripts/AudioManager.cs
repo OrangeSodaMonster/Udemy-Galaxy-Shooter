@@ -47,6 +47,7 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public MMFeedbacks EnemyChargeSound { get; private set; }
     [field: SerializeField] public MMFeedbacks EnemyFireSound { get; private set; }
     [field: SerializeField] public MMFeedbacks DroneSpawnSound { get; private set; }
+    [field: SerializeField] public AudioSource SentinelBeamSound { get; private set; }
 
     [field: Header("Interface")]
     [field: SerializeField] public MMFeedbacks SelectionClickSound { get; private set; }
@@ -67,6 +68,7 @@ public class AudioManager : MonoBehaviour
     float alarmDefaultVolume;
     float thrusterDefaultVolume;
     float reverseDefaultVolume;
+    float sentinelDefaultVolume;
     MMFeedbackMMSoundManagerSound enemyChargeFB;
     MMFeedbackMMSoundManagerSound asteroidDestructionFB;
     float asteroidDestructionDefaultVolume;
@@ -83,6 +85,8 @@ public class AudioManager : MonoBehaviour
         transform.parent = null;
         DontDestroyOnLoad(this);
 
+        PauseAllLoops();
+
         GameStatus.GameOver += PauseAllLoops;
         GameStatus.StageCleared += PauseAllLoops;
     }
@@ -94,14 +98,11 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        DronesSound.Pause();
         dronesDefaultVolume = DronesSound.volume;
-        AlarmSound.Pause();
         alarmDefaultVolume = AlarmSound.volume;
-        //ThrusterSound.Pause();
         thrusterDefaultVolume = ThrusterSound.volume;
-        //ReverseSound.Pause();
         reverseDefaultVolume = ReverseSound.volume;
+        sentinelDefaultVolume = SentinelBeamSound.volume;
 
         enemyChargeFB = EnemyChargeSound.GetComponent<MMFeedbackMMSoundManagerSound>();
         asteroidDestructionFB = AsteroidDestructionSound.GetComponent<MMFeedbackMMSoundManagerSound>();
@@ -196,12 +197,31 @@ public class AudioManager : MonoBehaviour
         playedAlarm = true;
     }
 
+    bool playedSentinel;
+    public void PauseSentinel()
+    {
+        if (!playedSentinel) return;
+
+        SentinelBeamSound.DOFade(0, .1f).OnComplete(() => SentinelBeamSound.Pause());
+        playedSentinel = false;
+    }
+    public void PlaySentinel()
+    {
+        if (playedSentinel) return;
+
+        SentinelBeamSound.volume = 0;
+        SentinelBeamSound.Play();
+        SentinelBeamSound.DOFade(sentinelDefaultVolume, .3f);
+        playedSentinel = true;
+    }
+
     public void PauseAllLoops()
     {
         PauseAlarm();
         PauseDrone();
         PauseReverse();
         PauseThruster();
+        PauseSentinel();
 
         Debug.Log("Pause All");
     }
