@@ -1,6 +1,7 @@
 using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public class Cheats : MonoBehaviour
     [SerializeField] Button selfDestructButton;
     [SerializeField] Button fillHPButton;
     [SerializeField] Button addResourcesButton;
+    [SerializeField] Button monitorButton;
+    TextMeshProUGUI monitorText;
 
     Color defaultTextColor;
 
@@ -27,7 +30,8 @@ public class Cheats : MonoBehaviour
         invencibilityText = invencibilityButton.GetComponentInChildren<TextMeshProUGUI>();
         defaultTextColor = invencibilityText.color;
 
-        spawnerText = spawnerButton.GetComponentInChildren<TextMeshProUGUI>();        
+        spawnerText = spawnerButton.GetComponentInChildren<TextMeshProUGUI>();  
+        monitorText = monitorButton.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Start()
@@ -41,6 +45,7 @@ public class Cheats : MonoBehaviour
         selfDestructButton.onClick.AddListener(SelfDestruct);
         fillHPButton.onClick.AddListener(FillHP);
         addResourcesButton.onClick.AddListener(AddResources);
+        monitorButton.onClick.AddListener(ToogleMonitor);
 
         UpdateTextColor(invencibilityText, playerHP.isInvencible);
         UpdateTextColor(spawnerText, !spawner.enabled);
@@ -75,6 +80,12 @@ public class Cheats : MonoBehaviour
         rareSpawner.enabled = spawner.enabled;
 
         UpdateTextColor(spawnerText, !spawner.enabled);
+    }
+
+    public void ToogleMonitor()
+    {
+        EnableDisableMonitor.isMonitor = !EnableDisableMonitor.isMonitor;
+        UpdateTextColor(monitorText, EnableDisableMonitor.isMonitor);
     }
 
     public void AddResources()

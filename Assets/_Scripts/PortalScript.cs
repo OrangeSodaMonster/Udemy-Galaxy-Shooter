@@ -157,11 +157,16 @@ public class PortalScript : MonoBehaviour
     void Update()
     {
         activeObjectives = 0;
-        foreach (var obj in Objectives)
+
+        if(Objectives != null)
         {
-            if(obj.gameObject.activeSelf)
-                activeObjectives++;
+            foreach (var obj in Objectives)
+            {
+                if (obj.gameObject.activeSelf)
+                    activeObjectives++;
+            }
         }
+        
 
         Vector3 posInCam = Camera.main.WorldToViewportPoint(transform.position);
         if (activeObjectives == 0)
