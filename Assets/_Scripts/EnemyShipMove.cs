@@ -95,7 +95,7 @@ public class EnemyShipMove : MonoBehaviour
 
         Vector3 playerPos = player != null ? player.position : EnemySpawner.Instance.PlayerLastPos;
         Vector2 toPlayerVector = (Vector2)playerPos - rb.position;
-        rb.rotation = Vector2.SignedAngle(Vector2.up, toPlayerVector);
+        rb.MoveRotation(Vector2.SignedAngle(Vector2.up, toPlayerVector));
 
         if (toPlayerVector.sqrMagnitude > distanceToKeep + distanceToleranceFraction)
         {

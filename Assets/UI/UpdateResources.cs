@@ -12,18 +12,24 @@ public class UpdateResources : MonoBehaviour
 
     [SerializeField] InterfaceDataHolder InterfaceDataHolder;
 
-    void Update()
+    private void Start()
     {
-        metalText.text = $"{PlayerCollectiblesCount.MetalAmount}";
+        PlayerCollectiblesCount.OnPickCollectible.AddListener(UpdateText);
+        UpdateText();
+    }
+
+    public void UpdateText()
+    {
+        metalText.text = PlayerCollectiblesCount.MetalAmount.ToString();
         metalText.color = InterfaceDataHolder.metalColor;
 
-        alloyText.text = $"{PlayerCollectiblesCount.RareMetalAmount}";
+        alloyText.text = PlayerCollectiblesCount.RareMetalAmount.ToString();
         alloyText.color = InterfaceDataHolder.alloyColor;
 
-        cristalText.text = $"{PlayerCollectiblesCount.EnergyCristalAmount}";
+        cristalText.text = PlayerCollectiblesCount.EnergyCristalAmount.ToString();
         cristalText.color = InterfaceDataHolder.energyCristalColor;
 
-        condCristalText.text = $"{PlayerCollectiblesCount.CondensedEnergyCristalAmount}";
+        condCristalText.text = PlayerCollectiblesCount.CondensedEnergyCristalAmount.ToString();
         condCristalText.color = InterfaceDataHolder.condensedCristalColor;
     }
 }

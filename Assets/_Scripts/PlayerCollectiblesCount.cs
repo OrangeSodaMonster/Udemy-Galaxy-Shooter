@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum ResourceType
 {
@@ -39,16 +40,7 @@ public class PlayerCollectiblesCount : MonoBehaviour
     public int CristalView = 0;
     public int RareCristalView = 0;
 
-    private void Awake()
-    {
-        // REMOVER
-        //MetalCrumbsAmount = MetalCrumbsView;
-        //MetalAmount = MetalView;
-        //RareMetalCrumbsAmount = RareMetalCrumbsView;
-        //RareMetalAmount = RareMetalView;
-        //EnergyCristalAmount = CristalView;
-        //CondensedEnergyCristalAmount = RareCristalView;
-    }
+    public static UnityEvent OnPickCollectible = new();   
 
     private void Start()
     {
@@ -136,5 +128,10 @@ public class PlayerCollectiblesCount : MonoBehaviour
         RareMetalAmount = rareMetal;
         EnergyCristalAmount = EnergyCrystal;
         CondensedEnergyCristalAmount = CondEnergyCrystal;
+    }
+
+    public static void PickedCollectible()
+    {
+        OnPickCollectible?.Invoke();
     }
 }

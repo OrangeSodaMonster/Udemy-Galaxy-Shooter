@@ -28,7 +28,7 @@ public class EnemyDroneMove : MonoBehaviour
     {
         //Vector3 playerPos = player != null ? player.position : EnemySpawn.PlayerLastPos;
         if(!GameStatus.IsGameover && !GameStatus.IsStageClear && player != null)
-            rb.rotation = Vector2.SignedAngle(Vector2.up, player.position - transform.position);
+            rb.MoveRotation(Vector2.SignedAngle(Vector2.up, player.position - transform.position));
 
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
         velocity.y = MoveSpeed;

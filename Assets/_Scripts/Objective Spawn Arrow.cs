@@ -15,6 +15,7 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     Vector2 direction;
     SpriteRenderer arrowSR;
     float defaultAlpha;
+    Camera cam = new();
 
     void OnEnable()
     {
@@ -25,9 +26,12 @@ public class ObjectiveSpawnArrow : MonoBehaviour
         arrowSR = arrow.GetComponent<SpriteRenderer>();
         defaultAlpha = arrowSR.color.a;
         arrowSR.color = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
+
+        cam = Camera.main;
     }
 
     Tween fadeArrowTween = null;
+    Vector3 hpPosInCam = new();
     void Update()
     {
         if(player.IsDestroyed()) return;
@@ -35,7 +39,7 @@ public class ObjectiveSpawnArrow : MonoBehaviour
         direction = (transform.position - player.position).normalized;
         arrow.SetPositionAndRotation((Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
 
-        Vector3 hpPosInCam = Camera.main.WorldToViewportPoint(transform.position);
+        hpPosInCam = cam.WorldToViewportPoint(transform.position);
         if (hpPosInCam.x > 0 && hpPosInCam.x < 1 && hpPosInCam.y > 0 && hpPosInCam.y < 1
              && !fadeArrowTween.IsActive())
             fadeArrowTween = arrowSR.DOFade(0, 0.35f);
@@ -48,13 +52,22 @@ public class ObjectiveSpawnArrow : MonoBehaviour
 
     bool HasChildActive()
     {
-        foreach (Transform child in transform)
+        for (int i = 0; i < gameObject.transform.childCount; i++)
         {
-            if (child.gameObject.activeInHierarchy)
-
-            return true;
+            if (transform.GetChild(i).gameObject.activeInHierarchy)
+            {
+                return true;
+            }
         }
         return false;
+
+        //foreach (Transform child in transform)
+        //{
+        //    if (child.gameObject.activeInHierarchy)
+
+        //    return true;
+        //}
+        //return false;
     }
 
     private void OnDisable()

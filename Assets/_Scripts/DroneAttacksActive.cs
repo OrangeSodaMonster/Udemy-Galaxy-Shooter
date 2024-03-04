@@ -7,15 +7,27 @@ public class DroneAttacksActive : MonoBehaviour
     int activeNow;
     int activeLast;
 
+    int childCount = 0;
+
+    private void Start()
+    {
+        childCount = transform.childCount;
+    }
     void Update()
     {
         activeNow = 0;
 
-        foreach(Transform child in transform)
+        for(int i = 0; i < childCount; i++)
         {
-            if (child.gameObject.activeSelf)
+            if(transform.GetChild(i).gameObject.activeSelf)
                 activeNow++;
         }
+
+        //foreach(Transform child in transform)
+        //{
+        //    if (child.gameObject.activeSelf)
+        //        activeNow++;
+        //}
 
         if (activeNow == 0)
         {

@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
     public static int MusicVolume = 5;
     public static int UiVolume = 5;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     private void OnEnable()
     {
 

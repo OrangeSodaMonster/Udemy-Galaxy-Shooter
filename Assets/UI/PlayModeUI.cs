@@ -24,11 +24,13 @@ public class PlayModeUI : MonoBehaviour
 
         if(startDisabled)
             gameObject.SetActive(false);
+
+        BombScript.OnChangeBombs.AddListener(SetBombNumText);
+        SetBombNumText();
     }
 
     void Update()
-    {        
-        numberOfBombs.text = $"{BombScript.BombAmount}";
+    {      
         if(BombScript.BombAmount <= 0)
         {
             bombIcon.gameObject.SetActive(false);
@@ -39,6 +41,11 @@ public class PlayModeUI : MonoBehaviour
             bombIcon.gameObject.SetActive(true);
             numberOfBombs.gameObject.SetActive(true);
         }
+    }
+
+    public void SetBombNumText()
+    {
+        numberOfBombs.text = $"{BombScript.BombAmount}";
     }
 
     public void OnHPChange()

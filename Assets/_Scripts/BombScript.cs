@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.VFX;
 
 public class BombScript : MonoBehaviour
@@ -8,6 +9,7 @@ public class BombScript : MonoBehaviour
     [SerializeField] int startingBombs = 1;
     public static int BombAmount = 1;
     public static int MaxBombs = 3;
+    public static UnityEvent OnChangeBombs = new();
 
     //[SerializeField] InputSO Input;
     [SerializeField] float radius;
@@ -18,12 +20,15 @@ public class BombScript : MonoBehaviour
     [SerializeField] float damageDelay = .2f;
 
     float timeSinceUsedBomb = float.MaxValue;
+    float bombAmountLastFrame;
     RaycastHit2D[] hits;
+
 
     void Start()
     {
         BombAmount = startingBombs;
         vfx.gameObject.SetActive(false);
+        bombAmountLastFrame = BombAmount;
     }
 
     private void OnEnable()
@@ -39,12 +44,20 @@ public class BombScript : MonoBehaviour
     void Update()
     {
         timeSinceUsedBomb += Time.deltaTime;
+
+        if(bombAmountLastFrame != BombAmount)
+            OnChangeBombs?.Invoke();
+    }
+    private void LateUpdate()
+    {
+        bombAmountLastFrame = BombAmount;
     }
 
     void UseBomb()
     {
         if (BombAmount > 0 && timeSinceUsedBomb >= coolDown)
         {
+            vfx.gameObject.SetActive(false);
             vfx.gameObject.SetActive(true);
 
             hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0, layersToHit);

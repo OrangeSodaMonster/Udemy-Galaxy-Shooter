@@ -145,6 +145,7 @@ public class CollectiblesPickUps : MonoBehaviour
                     break;
             }
 
+            PlayerCollectiblesCount.PickedCollectible();
             DestroySequence();
         }
     }
