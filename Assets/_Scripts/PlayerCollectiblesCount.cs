@@ -40,7 +40,7 @@ public class PlayerCollectiblesCount : MonoBehaviour
     public int CristalView = 0;
     public int RareCristalView = 0;
 
-    public static UnityEvent OnPickCollectible = new();   
+    public static UnityEvent OnChangedCollectibleAmount = new();   
 
     private void Start()
     {
@@ -119,7 +119,10 @@ public class PlayerCollectiblesCount : MonoBehaviour
                 EnergyCristalAmount -= resourceNumber.Amount;
             else if (resourceNumber.ResourceType == ResourceType.CondensedEnergyCristal)
                 CondensedEnergyCristalAmount -= resourceNumber.Amount;
+
         }
+            OnChangedCollectibleAmount?.Invoke();
+
     }
 
     public static void LoadResources(int metal, int rareMetal, int EnergyCrystal, int CondEnergyCrystal)
@@ -132,6 +135,6 @@ public class PlayerCollectiblesCount : MonoBehaviour
 
     public static void PickedCollectible()
     {
-        OnPickCollectible?.Invoke();
+        OnChangedCollectibleAmount?.Invoke();
     }
 }

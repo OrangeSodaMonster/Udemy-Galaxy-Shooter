@@ -14,7 +14,7 @@ public class UpdateResources : MonoBehaviour
 
     private void Start()
     {
-        PlayerCollectiblesCount.OnPickCollectible.AddListener(UpdateText);
+        PlayerCollectiblesCount.OnChangedCollectibleAmount.AddListener(UpdateText);
         UpdateText();
     }
 

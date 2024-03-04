@@ -14,7 +14,6 @@ public class SaveLoad : MonoBehaviour
     [Range(1,4)] public int CurrentSaveSlot = 1;
     [SerializeField] UpgradesSO startUpgrades;
     public event Action ChangedSaveSlot;
-
     static public SaveLoad instance;
 
     private void Awake()
@@ -35,7 +34,6 @@ public class SaveLoad : MonoBehaviour
         CurrentSaveSlot = slot;
 
         SaveSlot();
-
         LoadOrCreateSave();
 
         ChangedSaveSlot?.Invoke();
@@ -67,14 +65,21 @@ public class SaveLoad : MonoBehaviour
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
-        SaveConfigObj saveConfig = new SaveConfigObj();
+        SaveConfigObj saveConfig = new SaveConfigObj();           
 
-        if (TryGetConfig(CurrentSaveSlot))
-            saveConfig = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);            
+        saveConfig.IsVibration = GameManager.IsVibration;
+        saveConfig.IsAutoFire = GameManager.IsAutoFire;  
+        saveConfig.TouchAlpha = GameManager.TouchAlpha;
+        saveConfig.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
 
-        saveConfig.IsAutoFire = GameManager.IsAutoFire;        
+        saveConfig.MasterVolume = GameManager.MasterVolume;
+        saveConfig.MusicVolume = GameManager.MusicVolume;
+        saveConfig.EffectsVolume = GameManager.EffectsVolume;
+        saveConfig.UiVolume = GameManager.UiVolume;
         
-        //saveConfig.CreationDate = GetCreationDate(CurrentSaveSlot);
+        //saveConfig.CreationDate = currentSlotDate;
+
+        saveConfig.CreationDate = GetCreationDate(CurrentSaveSlot);
 
         MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Save" + CurrentSaveSlot);
 

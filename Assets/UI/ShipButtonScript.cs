@@ -80,15 +80,21 @@ public class ShipButtonScript : MonoBehaviour
         {
             // O custo está no index 0 nesse caso, não no 1
             if (!PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled)
+            {
                 interfaceData.SetUnlockedCostVisual(shipUpgradeInfo.TractorBeamUpgrade[0].Cost, costs);
-
-            if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel == shipUpgradeInfo.TractorBeamUpgrade.Length)
-                costToSend = shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].Cost;
+                //interfaceData.SetBoolButtonVisual(icon, border, upgradeLevelTxt, shipUpgradeInfo.TractorBeamUpgrade[0].Cost, costs, false);
+                //Debug.Log("Tractor disabled");
+            }
             else
-                costToSend = shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel].Cost;
-                        
-            interfaceData.UpdateButtonVisual(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel, shipUpgradeInfo.TractorBeamUpgrade.Length, icon, border, upgradeLevelTxt, costs,
-            costToSend, PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled, false, isDisableOverwrite: PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite);            
+            {
+                if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel == shipUpgradeInfo.TractorBeamUpgrade.Length)
+                    costToSend = shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].Cost;
+                else
+                    costToSend = shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel].Cost;
+
+                interfaceData.UpdateButtonVisual(PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel, shipUpgradeInfo.TractorBeamUpgrade.Length, icon, border, upgradeLevelTxt, costs,
+                costToSend, PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled, false, isDisableOverwrite: PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite);
+            }
         }
     }
 
