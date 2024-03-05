@@ -36,8 +36,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 9a210da667a791c4fa1cc6519c1be8b8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Mask:
         m_Texture: {fileID: 2800000, guid: 9a210da667a791c4fa1cc6519c1be8b8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: fd146ccf15c8b244f94a6df739492ca9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,13 +62,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MainNoiseScale: 4
-    - _SubNoiseScale: 4
+    - _MainNoiseScale: 0.5
+    - _SubNoiseScale: 0.3
     m_Colors:
     - _BGColor: {r: 0.31708592, g: 0, b: 0.41509432, a: 1}
     - _MainColor: {r: 0.14891319, g: 0, b: 0.7921569, a: 1}
     - _MainScrollSpeed: {r: -2.25, g: 0, b: 0, a: 0}
-    - _MainTilling: {r: 1, g: 1, b: 0, a: 0}
+    - _MainTilling: {r: 0.9, g: 1, b: 0, a: 0}
     - _SubColor: {r: 0, g: 0.4035518, b: 0.509434, a: 1}
     - _SubScrollSpeed: {r: -1.125, g: 0, b: 0, a: 0}
     - _SubTilling: {r: 1, g: 1.2, b: 0, a: 0}

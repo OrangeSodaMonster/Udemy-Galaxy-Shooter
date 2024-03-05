@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6133178081160600566
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SD_Mat
+  m_Name: Metal
   m_Shader: {fileID: -6465566751694194690, guid: 6f88afdc747ccd34d921c5b61cedd77e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -23,36 +36,24 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _ContourTex:
-        m_Texture: {fileID: 2800000, guid: 4ee9e407ae0f6ec41934feef7edd74ae, type: 3}
+        m_Texture: {fileID: 2800000, guid: b29b5a9025a3be946bf8e07925f93ac3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FillTex:
-        m_Texture: {fileID: 2800000, guid: 03ef0ff5e56faa84aa97f51659eb660c, type: 3}
+        m_Texture: {fileID: 2800000, guid: c32df49ab90f4db4588154b9fbe09cd4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FillText2:
-        m_Texture: {fileID: 2800000, guid: 7567480ea08630e468e57d71859e0e44, type: 3}
+        m_Texture: {fileID: 2800000, guid: 75a8d1395605545478adb09b601f2fb5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GlowTex:
-        m_Texture: {fileID: 2800000, guid: 0cd913cda59f88d448a5aa332d2fe3e0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 59d954e6d34375d48883a3a8650e7460, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MaskTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b29b5a9025a3be946bf8e07925f93ac3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -69,34 +70,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EnableExternalAlpha: 0
-    - _GlowMin: 0.95
-    - _GlowSpeed: 2.1
+    - _GlowMin: 0.5
+    - _GlowSpeed: 1
     - _HealedValue: 0
     - _InHazardValue: 0
     - _WasHitValue: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ContourColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
-    - _Fill2Color: {r: 0, g: 0, b: 0, a: 1}
-    - _FillColor: {r: 0.08627451, g: 0.12156863, b: 0.078431375, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 0.092278466, g: 1.4980392, b: 0, a: 1}
+    - _ContourColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Fill2Color: {r: 0.14721127, g: 0.156, b: 0.13183099, a: 1}
+    - _FillColor: {r: 0.26277766, g: 0.277, b: 0.23545, a: 1}
+    - _GlowColor: {r: 0, g: 0.72378767, b: 2.6082375, a: 0}
     - _HealedColor: {r: 0.4292453, g: 1, b: 0.4292453, a: 1}
     - _InHazardColor: {r: 1, g: 0, b: 0, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _WasHitColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &1882920437368568612
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7

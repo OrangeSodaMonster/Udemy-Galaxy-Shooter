@@ -364,11 +364,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 420096091590750910, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: baseSpawnCD
-      value: 2.5
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 420096091590750910, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: timeToStartSpawning
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 420096091590750910, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: enemiesToSpawn.Array.size
@@ -399,8 +399,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6243549505769645271, guid: 1a43d60dc2f95d04288ff60ca2a18f90, type: 3}
     - target: {fileID: 420096091590750910, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[0].spawnWeight
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 420096091590750910, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: enemiesToSpawn.Array.data[3].spawnWeight
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 420096091590750910, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: enemiesToSpawn.Array.data[4].spawnWeight
@@ -672,7 +676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 1}
-  starsSpeed: 0.005
+  starsSpeed: 0.01
   scrollSpeedLayerMod: 1.5
 --- !u!1001 &1452637992
 PrefabInstance:
@@ -995,6 +999,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI MM
       objectReference: {fileID: 0}
+    - target: {fileID: 3091750530409748616, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3091750530409748616, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3091750530409748616, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3775895608568735754, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
       propertyPath: holdEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1007,6 +1023,10 @@ PrefabInstance:
       propertyPath: onPointerUpEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 619670307}
+    - target: {fileID: 4143225045698784565, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4202102862794823109, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
       propertyPath: clickEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1063,6 +1083,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MainMenuConfig, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6982368667971997094, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7374355974037349181, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
       propertyPath: holdEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1090,6 +1114,10 @@ PrefabInstance:
     - target: {fileID: 7391572057338238570, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769705434008926761, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8162428651873459762, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
       propertyPath: holdEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -48,6 +48,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: fd146ccf15c8b244f94a6df739492ca9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -67,15 +71,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _Frequency: 30
-    - _NoiseScale: 3.51
+    - _Frequency: 25
+    - _NoiseScale: 0.24
     - _NoiseSpeed: 0.7
-    - _Speed: 2.5
+    - _Speed: 3.5
     m_Colors:
     - _BG_Color: {r: 47.605457, g: 0, b: 193.46051, a: 1}
     - _CenterPoint: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Color: {r: 0.1500947, g: 0, b: 1.3176471, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _NoiseClamp: {r: 0.15, g: 1, b: 0, a: 0}
+    - _NoiseClamp: {r: 0.15, g: 1.5, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

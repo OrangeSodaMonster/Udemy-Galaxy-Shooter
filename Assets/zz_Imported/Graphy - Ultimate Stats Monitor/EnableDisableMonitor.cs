@@ -24,13 +24,13 @@ public class EnableDisableMonitor : MonoBehaviour
     void SetMonitor()
     {
         statsMonitor.gameObject.SetActive(isMonitor);
-        Debug.Log("Set Monitor");
+        //Debug.Log("Set Monitor");
     }
 
     void DisableMonitor()
     {
         statsMonitor.gameObject.SetActive(false);
-        Debug.Log("HideMonitor");
+        //Debug.Log("HideMonitor");
     }
     	
 }

@@ -44,6 +44,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 3c4ffe5bad9999e4c9dbad37e7ba0602, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: fd146ccf15c8b244f94a6df739492ca9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _StarBG:
         m_Texture: {fileID: 2800000, guid: 8881fdf57fb9a91418fcea5ea6b5da5f, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -72,17 +76,17 @@ Material:
     m_Floats:
     - _BG_ImagePower: 0.417
     - _DustOclusionPower: 0.3
-    - _DustPower: 0.14
-    - _DustScale: 195
-    - _DustSpeedMod: 0.07
+    - _DustPower: 0.15
+    - _DustScale: 5
+    - _DustSpeedMod: 0.25
     - _MyTime: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ScrollSpeed: 1
     - _ScrollSpeedLayerMod: 1.5
-    - _TwinkleNoiseScale: 2600
+    - _TwinkleNoiseScale: 100
     - _TwinklePower: 0.6
-    - _TwinkleSpeed: 0.0008
+    - _TwinkleSpeed: 0.05
     m_Colors:
     - _BGColor: {r: 0, g: 0, b: 0.047169805, a: 1}
     - _DustColor: {r: 0.18303551, g: 0, b: 0.3301887, a: 1}
