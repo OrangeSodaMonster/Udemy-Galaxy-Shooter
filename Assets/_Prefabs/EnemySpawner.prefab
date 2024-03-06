@@ -93,7 +93,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3466182207189955914}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa0b61fa8535518419e8529d7db2b009, type: 3}
   m_Name: 
@@ -117,9 +117,9 @@ MonoBehaviour:
     spawnWeight: 0.3
   enemiesToSpawnByTime:
   - enemy: {fileID: 7803575928964027051, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
-    timeSec: 200
+    timeSec: 6
   - enemy: {fileID: 7421692332896096082, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
-    timeSec: 200
+    timeSec: 10
   PlayerLastPos: {x: 0, y: 0, z: 0}
 --- !u!114 &9069363442810099157
 MonoBehaviour:

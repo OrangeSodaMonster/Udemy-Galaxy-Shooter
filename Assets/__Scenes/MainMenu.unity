@@ -188,6 +188,18 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 5.5
       objectReference: {fileID: 0}
+    - target: {fileID: 9133285083107881058, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.03773582
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133285083107881058, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.014675039
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133285083107881058, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9098753222125736875, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
     m_RemovedGameObjects:
@@ -263,6 +275,10 @@ PrefabInstance:
     - target: {fileID: 6335716912398499549, guid: da04b018a7e2ffc40a53eb8d5f02f278, type: 3}
       propertyPath: m_Name
       value: GalaxyBG
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335716912398499549, guid: da04b018a7e2ffc40a53eb8d5f02f278, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3335004715596895900, guid: da04b018a7e2ffc40a53eb8d5f02f278, type: 3}
@@ -676,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 1}
-  starsSpeed: 0.01
+  starsSpeed: 0.015
   scrollSpeedLayerMod: 1.5
 --- !u!1001 &1452637992
 PrefabInstance:

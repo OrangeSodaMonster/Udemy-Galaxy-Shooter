@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DropRandomizer : MonoBehaviour
 {
-    [SerializeField] Sprite[] sprites;
+    //[SerializeField] Sprite[] sprites;
+    [SerializeField] SpriteHolderSO sprites;
     [SerializeField] bool sizeVariation = false;
     [SerializeField] float sizeVariationPerc = 5;
 
@@ -15,7 +16,7 @@ public class DropRandomizer : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         index = GetRandomMatIndex();
-        spriteRenderer.sprite = sprites[index];
+        spriteRenderer.sprite = sprites.Sprites[index];
         spriteRenderer.flipX = RandomBool();
         spriteRenderer.flipY = RandomBool();
 
@@ -39,7 +40,7 @@ public class DropRandomizer : MonoBehaviour
 
     int GetRandomMatIndex()
     {
-        return UnityEngine.Random.Range(0, sprites.Length);
+        return UnityEngine.Random.Range(0, sprites.Sprites.Length);
     }
 
     void ApplySizeVariation()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectiveRandomizer : MonoBehaviour
 {
-    [SerializeField] AsteroidMatHolderSO mats;
+    [SerializeField] SpriteHolderSO sprites;
     [SerializeField] ObjectiveColHolderSO colls;
 
     SpriteRenderer spriteRenderer;
@@ -15,7 +15,7 @@ public class ObjectiveRandomizer : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         index = GetRandomMatIndex();
-        spriteRenderer.material = mats.Mats[index];
+        spriteRenderer.sprite = sprites.Sprites[index];
         Vector3 localScale = transform.localScale;
         localScale.x *= RandomSign();
         localScale.y *= RandomSign();
@@ -33,7 +33,7 @@ public class ObjectiveRandomizer : MonoBehaviour
 
     int GetRandomMatIndex()
     {
-        return UnityEngine.Random.Range(0, mats.Mats.Length);
+        return UnityEngine.Random.Range(0, sprites.Sprites.Length);
     }
 
     //Component CopyComponent(Component original, GameObject destination)

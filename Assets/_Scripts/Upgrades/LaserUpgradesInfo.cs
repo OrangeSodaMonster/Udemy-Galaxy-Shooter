@@ -9,7 +9,8 @@ public struct LaserPowerUpgrade
 {
     public ResourceNumber[] Cost;
     public int Damage;
-    public Material Material;
+    //public Material Material;
+    public Sprite Sprite;
     [GradientUsage(true)]
     public Gradient VFXGradient;
 }

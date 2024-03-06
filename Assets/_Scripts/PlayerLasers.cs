@@ -21,7 +21,7 @@ public class PlayerLasers : MonoBehaviour
 
     private void Awake()
     {
-        upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
+        upgradesManager = PlayerUpgradesManager.Instance;
     }
 
     void Update()
@@ -138,7 +138,8 @@ public class PlayerLasers : MonoBehaviour
     {
         GameObject laser = objPool.GetPooledGameObject();
         laser.transform.SetPositionAndRotation(transform.position + transform.TransformDirection(laserParent.position), transform.rotation * laserParent.rotation);
-        laser.GetComponent<SpriteRenderer>().material = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Material;
+        //laser.GetComponent<SpriteRenderer>().material = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Material;
+        laser.GetComponent<SpriteRenderer>().sprite = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Sprite;
         laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
         laser.GetComponent<LaserMove>().VFXGradient = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].VFXGradient;
         laser.SetActive(true);

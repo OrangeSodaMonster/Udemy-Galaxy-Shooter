@@ -715,7 +715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8126e3ec4a46dfd4299ff5aa305d4597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingBombs: 1
+  startingBombs: 3
   radius: 5.5
   layersToHit:
     serializedVersion: 2
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   HealCost:
   - ResourceType: 1
     Amount: 1
-  - ResourceType: 3
+  - ResourceType: 2
     Amount: 1
   currentSecondsBetweenHeal: 0
   isFreeHeal: 0
@@ -1596,6 +1596,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 8853551737626405848, guid: e6f3189b65abb12418c68e93e44634ad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ebea84f345cb654482b5bbcafcba0a0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2129,6 +2133,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
       objectReference: {fileID: 0}
+    - target: {fileID: 8853551737626405848, guid: e6f3189b65abb12418c68e93e44634ad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ebea84f345cb654482b5bbcafcba0a0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3030,6 +3038,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8853551737626405848, guid: e6f3189b65abb12418c68e93e44634ad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ebea84f345cb654482b5bbcafcba0a0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

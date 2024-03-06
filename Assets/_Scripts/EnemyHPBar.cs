@@ -21,7 +21,6 @@ public class EnemyHPBar : MonoBehaviour
 
         enemyHP.TookDamage += DealWithBar;
         enemyHP.Healed += DealWithBar;
-
         hpPositionOffset.Scale(transform.lossyScale);
     }
 

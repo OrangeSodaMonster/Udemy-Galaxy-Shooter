@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AsteroisRandomizer : MonoBehaviour
 {
-    [SerializeField] AsteroidMatHolderSO mats;
+    [SerializeField] SpriteHolderSO sprites;
     [SerializeField] bool sizeVariation = false;
     [SerializeField] float sizeVariationPerc = 10;
 
@@ -16,7 +16,7 @@ public class AsteroisRandomizer : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         index = GetRandomMatIndex();
-        spriteRenderer.material = mats.Mats[index];
+        spriteRenderer.sprite = sprites.Sprites[index];
         spriteRenderer.flipX = RandomBool();
         spriteRenderer.flipY = RandomBool();
 
@@ -35,7 +35,7 @@ public class AsteroisRandomizer : MonoBehaviour
 
     int GetRandomMatIndex()
     {
-        return UnityEngine.Random.Range(0, mats.Mats.Length);
+        return UnityEngine.Random.Range(0, sprites.Sprites.Length);
     }
 
     void ApplySizeVariation()

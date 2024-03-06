@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player
-  m_Shader: {fileID: -6465566751694194690, guid: 40d99ffe48cac3247899a8ad4e086a85, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b9481eee0cf03e84bb2e98de37c5a0e7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -43,8 +43,12 @@ Material:
         m_Texture: {fileID: 2800000, guid: 969e83387eaebfb4288a400513ef0a2b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Glow_Tex:
+        m_Texture: {fileID: 2800000, guid: bab4ca5191ee2d34b84f1982f0848b76, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e09a085e22b8c2a4094af3ee5f034cca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -71,7 +75,7 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _GlowMin: 0.75
-    - _GlowSpeed: 0.5
+    - _GlowSpeed: 1.6
     - _HealedValue: 0
     - _InHazardValue: 0
     - _WasHitValue: 0
