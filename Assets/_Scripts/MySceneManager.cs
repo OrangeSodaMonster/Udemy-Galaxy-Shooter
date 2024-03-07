@@ -50,4 +50,9 @@ public class MySceneManager : MonoBehaviour
     {
         SetChildrenEnableStatus(false);
     }
+
+    public void CallGC()
+    {
+        System.GC.Collect();
+    }
 }

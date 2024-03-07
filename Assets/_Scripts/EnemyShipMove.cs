@@ -67,7 +67,7 @@ public class EnemyShipMove : MonoBehaviour
         if (shouldStop)
         {
             DOTween.To(() => newVelocity.x, x => newVelocity.x = x, 0, 1);
-            DOTween.To(() => newVelocity.y, y => newVelocity.y = y, 0, 1).OnComplete(() => StartCoroutine(Delay())); 
+            DOTween.To(() => newVelocity.y, y => newVelocity.y = y, 0, 1).OnComplete(() => CallFowardMovement()); 
             shouldStop = false;
         }
 
@@ -75,6 +75,12 @@ public class EnemyShipMove : MonoBehaviour
         {
             DOTween.To(() => newVelocity.y, y => newVelocity.y = y, maxYSpeed, 1.5f);
             shouldMoveFoward = false;
+        }
+
+        void CallFowardMovement()
+        {
+            if (gameObject.activeInHierarchy)
+                StartCoroutine(Delay());
         }
 
         IEnumerator Delay()

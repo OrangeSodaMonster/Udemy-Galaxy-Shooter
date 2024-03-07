@@ -25,13 +25,15 @@ public class IonStreamScript : MonoBehaviour
     float timeSinceFired = float.MaxValue;
     Transform player;
     PlayerUpgradesManager upgradesManager;
-    RaycastHit2D[] hits;
+    //RaycastHit2D[] hits;
     List<Vector2> lineNodes = new List<Vector2>();
     float fadeDuration;
     float timeToStartFade;
     Color2 defaultColor = new();
     Color2 endColor = new();
     Gradient defaultLineGrad = new Gradient();
+
+    Collider2D[] hits = new Collider2D[3];
 
     void Start()
     {
@@ -60,7 +62,8 @@ public class IonStreamScript : MonoBehaviour
 
         UpdateValues();
 
-        if (isIonStreamEnabled && timeSinceFired > timeBetweenActivations && Physics2D.CircleCast(player.position, radiusFromPlayer, Vector2.zero, 0, layersToHit))
+        //if (isIonStreamEnabled && timeSinceFired > timeBetweenActivations && Physics2D.CircleCast(player.position, radiusFromPlayer, Vector2.zero, 0, layersToHit))
+        if (isIonStreamEnabled && timeSinceFired > timeBetweenActivations && Physics2D.OverlapCircleNonAlloc(player.position, radiusFromPlayer, hits, layersToHit) > 0)
         {
             FireIonStream();
             timeSinceFired = 0;
@@ -97,9 +100,13 @@ public class IonStreamScript : MonoBehaviour
         lineNodes.Clear();
         lineNodes.Add(player.position);
 
-        for (int i = 0; i < numberOfHits; i++)
+        for (int j = 0; j < numberOfHits; j++)
         {
-            hits = Physics2D.CircleCastAll(castingOrigin, castingRadius, Vector2.zero, 0, layersToHit);
+            for (int i = 0; i < hits.Length; i++)
+                hits[i] = null;
+
+            //hits = Physics2D.CircleCastAll(castingOrigin, castingRadius, Vector2.zero, 0, layersToHit);
+            Physics2D.OverlapCircleNonAlloc(castingOrigin, castingRadius, hits, layersToHit);
             lineNodes.Add(placeHolderVector);
             hitHashs.Add(0);
 
@@ -109,23 +116,28 @@ public class IonStreamScript : MonoBehaviour
             {
                 float minDistance = float.MaxValue;
                 target = null;
-                foreach (RaycastHit2D hit in hits)
+                //foreach (RaycastHit2D hit in hits)
+                for (int i = 0; i < hits.Length; i++)
                 {
                     //Debug.Log(hit.transform.name);
                     //Debug.Log(hit.transform.name + " pos: " + hit.transform.position +  " distance: " + (testingOrigin - (Vector2)hit.transform.position).sqrMagnitude);
-                    if (!hitHashs.Contains(hit.transform.GetHashCode()) & hit.transform.GetComponent<EnemyHP>() != null
-                        & Vector2.SqrMagnitude((Vector2)hit.transform.position - castingOrigin) < minDistance)
+                    if (hits[i] == null) break;
+
+                    if (!hitHashs.Contains(hits[i].transform.GetHashCode()) &&
+                        Vector2.SqrMagnitude((Vector2)hits[i].transform.position - castingOrigin) < minDistance &&
+                        hits[i].transform.GetComponent<EnemyHP>() != null)
                     {
-                        minDistance = Vector2.SqrMagnitude((Vector2)hit.transform.position - castingOrigin);
-                        target = hit.transform;
-                        lineNodes[i+1]= (Vector2)hit.transform.position;                        
+                        minDistance = Vector2.SqrMagnitude((Vector2)hits[i].transform.position - castingOrigin);
+                        target = hits[i].transform;
+                        lineNodes[j+1]= (Vector2)hits[i].transform.position;                        
                     }
                 }
                 castingRadius = radiusFromLastHit;
                 if (target != null)
                 {
-                    if(target.GetComponent<EnemyHP>() != null)
-                        target.GetComponent<EnemyHP>().ChangeHP(-Mathf.Abs(damage));
+                    //if(target.GetComponent<EnemyHP>() != null)
+                    if(target.TryGetComponent(out EnemyHP enemyHP))
+                        enemyHP.ChangeHP(-Mathf.Abs(damage));
 
                     GameObject vfx = VFXPoolerScript.Instance.IonStreamVFXPooler.GetPooledGameObject();
                     //vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);
@@ -138,7 +150,7 @@ public class IonStreamScript : MonoBehaviour
                     AudioManager.Instance.IonStreamSound.PlayFeedbacks();
 
                     castingOrigin = (Vector2)target.transform.position;
-                    hitHashs[i]= target.GetHashCode();
+                    hitHashs[j]= target.GetHashCode();
                 }
             }
         }

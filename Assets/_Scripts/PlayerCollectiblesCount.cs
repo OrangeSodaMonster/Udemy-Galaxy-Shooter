@@ -133,7 +133,7 @@ public class PlayerCollectiblesCount : MonoBehaviour
         CondensedEnergyCristalAmount = CondEnergyCrystal;
     }
 
-    public static void PickedCollectible()
+    public static void ChangedCollectbleAmount()
     {
         OnChangedCollectibleAmount?.Invoke();
     }

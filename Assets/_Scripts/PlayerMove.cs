@@ -218,12 +218,12 @@ public class PlayerMove : MonoBehaviour
         return (int)Mathf.Sign(directionDifference) * -1;
     }
 
-    void DrawDirectionLine()
-    {
-        Debug.DrawLine(transform.position, transform.position + 5 * (Vector3)InputHolder.Instance.Direction);
+    //void DrawDirectionLine()
+    //{
+    //    Debug.DrawLine(transform.position, transform.position + 5 * (Vector3)InputHolder.Instance.Direction);
 
-        Debug.DrawLine(transform.position, (Vector2)transform.position + 3 * new Vector2(Mathf.Sin(-rb.rotation * Mathf.Deg2Rad), Mathf.Cos(-rb.rotation * Mathf.Deg2Rad)));
-    }
+    //    Debug.DrawLine(transform.position, (Vector2)transform.position + 3 * new Vector2(Mathf.Sin(-rb.rotation * Mathf.Deg2Rad), Mathf.Cos(-rb.rotation * Mathf.Deg2Rad)));
+    //}
 
     void UpdateValues()
     {

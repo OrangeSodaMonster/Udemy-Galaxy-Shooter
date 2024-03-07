@@ -21,21 +21,22 @@ public class BlackHolePull : MonoBehaviour
 
     void FixedUpdate()
     {
-        foreach (var rb in objsToPull)
+        for (int i = 0; i < objsToPull.Count; i++)
+        //foreach (var rb in objsToPull)
         {
-            if (rb == null)
+            if (objsToPull[i] == null)
             {
-                objsToPull.Remove(rb);
+                objsToPull.Remove(objsToPull[i]);
                 return;
             }            
 
-            Vector2 direction = (transform.position - rb.transform.position).normalized;
+            Vector2 direction = (transform.position - objsToPull[i].transform.position).normalized;
 
-            float pullForce = Vector2.Distance((Vector2)rb.transform.position, (Vector2)transform.position);
+            float pullForce = Vector2.Distance((Vector2)objsToPull[i].transform.position, (Vector2)transform.position);
             pullForce = Mathf.Clamp(pullForce / radius, 0, 1);
             pullForce = pullMaxForce * pullCurve.Evaluate(pullForce);
 
-            rb.AddForce(pullForce * direction, ForceMode2D.Force);
+            objsToPull[i].AddForce(pullForce * direction, ForceMode2D.Force);
         }
     }
 

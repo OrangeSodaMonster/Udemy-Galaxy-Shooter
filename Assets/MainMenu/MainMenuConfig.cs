@@ -6,6 +6,7 @@ public class MainMenuConfig : MonoBehaviour
 {
 	[SerializeField] Canvas mainMenuCanvas;
 	[SerializeField] Canvas audioCanvas;
+	[SerializeField] Canvas configCanvas;
 	[SerializeField] Canvas SaveSlotCanvas;
 
 	public void OpenAudio()
@@ -30,6 +31,18 @@ public class MainMenuConfig : MonoBehaviour
     {
         mainMenuCanvas.gameObject.SetActive(true);
         SaveSlotCanvas.gameObject.SetActive(false);
+    }
+
+    public void OpenConfig()
+    {
+        mainMenuCanvas.gameObject.SetActive(false);
+        configCanvas.gameObject.SetActive(true);
+    }
+
+    public void CloseConfig()
+    {
+        mainMenuCanvas.gameObject.SetActive(true);
+        configCanvas.gameObject.SetActive(false);
     }
 
     public void QuitGame()

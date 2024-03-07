@@ -94,6 +94,8 @@ public class Cheats : MonoBehaviour
         PlayerCollectiblesCount.RareMetalAmount += 50;
         PlayerCollectiblesCount.EnergyCristalAmount += 50;
         PlayerCollectiblesCount.CondensedEnergyCristalAmount += 50;
+
+        PlayerCollectiblesCount.ChangedCollectbleAmount();
     }
 
     void UpdateTextColor(TextMeshProUGUI text, bool enabled)

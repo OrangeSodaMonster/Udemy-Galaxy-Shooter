@@ -29,6 +29,7 @@ public class GameStatus : MonoBehaviour
 
         joysticksConnected = Input.GetJoystickNames().Length;
         IsJoystick = joysticksConnected > 0;
+        Debug.Log($"Joystick: {IsJoystick}");
         //StartCoroutine(CheckJoysticksConnectedCO());
     }
 

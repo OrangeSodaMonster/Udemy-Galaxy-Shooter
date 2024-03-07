@@ -22,7 +22,8 @@ public class DroneAttackScript : MonoBehaviour
     float timeSinceDamage = float.MaxValue;
     Transform target;
     Transform player;
-    RaycastHit2D[] hits;
+    //RaycastHit2D[] hits;
+    Collider2D[] hits = new Collider2D[3];
 
     private void Start()
     {
@@ -99,21 +100,29 @@ public class DroneAttackScript : MonoBehaviour
 
     private Transform GetClosestTarget()
     {
-        hits = Physics2D.CircleCastAll(transform.position, Range, Vector2.zero, 0, layersToHit);
-        Transform closestTarget = null;
-        if (hits.Length > 0)
+        //hits = Physics2D.CircleCastAll(transform.position, Range, Vector2.zero, 0, layersToHit);
+
+        for (int i = 0; i < hits.Length; i++)
+            hits[i] = null;
+
+            Physics2D.OverlapCircleNonAlloc(transform.position, Range, hits, layersToHit);
+
+        Transform closestTarget = null;        
+        float minDistance = float.MaxValue;
+
+        for(int i = 0; i < hits.Length; i++)
+        //foreach (RaycastHit2D hit in hits)
         {
-            float minDistance = float.MaxValue;
-            foreach (RaycastHit2D hit in hits)
+            if (hits[i] == null) break;
+
+            if (Vector2.SqrMagnitude((Vector2)hits[i].transform.position - (Vector2)transform.position) < minDistance
+                && hits[i].transform.GetComponent<EnemyHP>() != null)
             {
-                if (Vector2.SqrMagnitude((Vector2)hit.transform.position - (Vector2)transform.position) < minDistance
-                    && hit.transform.GetComponent<EnemyHP>() != null)
-                {
-                    minDistance = Vector2.SqrMagnitude((Vector2)hit.transform.position - (Vector2)transform.position);
-                    closestTarget = hit.transform;
-                }
+                minDistance = Vector2.SqrMagnitude((Vector2)hits[i].transform.position - (Vector2)transform.position);
+                closestTarget = hits[i].transform;
             }
-        }        
+        }
+                
             return closestTarget;
     }
 

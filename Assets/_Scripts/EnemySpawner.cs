@@ -124,15 +124,16 @@ public class EnemySpawner : MonoBehaviour
         float spawnValue = UnityEngine.Random.Range(0 + float.Epsilon, totalSpawnWeight - float.Epsilon);
 
         GameObject nextSpawn = null;
-        foreach(EnemiesToSpawn enemy in EnemiesToSpawn)
+        //foreach(EnemiesToSpawn enemy in EnemiesToSpawn)
+        for (int i = 0; i < EnemiesToSpawn.Length; i++)
         {
-            if (spawnValue <= enemy.spawnWeight)
+            if (spawnValue <= EnemiesToSpawn[i].spawnWeight)
             {
-                nextSpawn = enemy.enemy;
+                nextSpawn = EnemiesToSpawn[i].enemy;
                 break;                
             }
             else
-                spawnValue -= enemy.spawnWeight;
+                spawnValue -= EnemiesToSpawn[i].spawnWeight;
         }
         return nextSpawn;
     }

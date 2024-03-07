@@ -69,6 +69,7 @@ public class SaveLoad : MonoBehaviour
 
         saveConfig.IsVibration = GameManager.IsVibration;
         saveConfig.IsAutoFire = GameManager.IsAutoFire;  
+        saveConfig.IsLightWeightBG = GameManager.IsLightWeightBG;  
         saveConfig.TouchAlpha = GameManager.TouchAlpha;
         saveConfig.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
 
@@ -111,6 +112,7 @@ public class SaveLoad : MonoBehaviour
         data.TouchAlpha = GameManager.TouchAlpha;
         data.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
         data.IsVibration = GameManager.IsVibration;
+        data.IsLightWeightBG = GameManager.IsLightWeightBG;
 
         data.IsAutoFire = GameManager.IsAutoFire;
 
@@ -561,6 +563,7 @@ public class SaveConfigObj
 {
     public bool IsVibration = true;
     public bool IsAutoFire = true;
+    public bool IsLightWeightBG = false;
     public int TouchAlpha = 5;
     public bool IsTouchTurnToDirection = true;
 

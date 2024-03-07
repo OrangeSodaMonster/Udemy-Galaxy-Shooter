@@ -21,7 +21,8 @@ public class BombScript : MonoBehaviour
 
     float timeSinceUsedBomb = float.MaxValue;
     float bombAmountLastFrame;
-    RaycastHit2D[] hits;
+    //RaycastHit2D[] hits;
+    Collider2D[] hits = new Collider2D[12];
 
 
     void Start()
@@ -60,10 +61,16 @@ public class BombScript : MonoBehaviour
             vfx.gameObject.SetActive(false);
             vfx.gameObject.SetActive(true);
 
-            hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0, layersToHit);
+            for (int i = 0; i < hits.Length; i++)
+                hits[i] = null;
 
-            foreach (RaycastHit2D hit in hits)
+            //hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0, layersToHit);
+            Physics2D.OverlapCircleNonAlloc(transform.position, radius, hits, layersToHit);
+
+            foreach (Collider2D hit in hits)
             {
+                if (hit == null) break;
+
                 if (hit.transform.TryGetComponent(out EnemyHP enemyHP))
                 {
                     StartCoroutine(ApplyDamage(hit, enemyHP));
@@ -82,7 +89,7 @@ public class BombScript : MonoBehaviour
         }
     }
 
-    private IEnumerator ApplyDamage(RaycastHit2D hit, EnemyHP enemyHP)
+    private IEnumerator ApplyDamage(Collider2D hit, EnemyHP enemyHP)
     {
         yield return new WaitForSeconds(damageDelay);
 

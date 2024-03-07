@@ -36,9 +36,14 @@ public class EnemyDropDealer : MonoBehaviour
 
         float dropsNumber = UnityEngine.Random.Range(minDropsNum, maxDropsNum);
 
-        foreach (var drop in dropsToSpawn)
+        //foreach (var drop in dropsToSpawn)
+        //{
+        //    totalSpawnWeight += drop.spawnWeight;
+        //}
+
+        for (int i = 0; i < dropsToSpawn.Length; i++)
         {
-            totalSpawnWeight += drop.spawnWeight;
+            totalSpawnWeight += dropsToSpawn[i].spawnWeight;
         }
 
         for (int i = 0; i < dropsNumber; i++)
@@ -61,11 +66,13 @@ public class EnemyDropDealer : MonoBehaviour
 
     void SpawnGuaranteedDrops()
     {
-        foreach (var drops in dropsGuaranteed) 
+        //foreach (var drops in dropsGuaranteed) 
+        for(int j = 0; j < dropsGuaranteed.Length; j++)
         {
-            for(int i = 0; i < drops.Amount; i++)
+            //for(int i = 0; i < drops.Amount; i++)
+            for(int i = 0; i < dropsGuaranteed[j].Amount; i++)
             {
-                MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[drops.drop];
+                MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[dropsGuaranteed[j].drop];
 
                 if (dropPooler != null)
                 {
@@ -79,18 +86,21 @@ public class EnemyDropDealer : MonoBehaviour
             }
         }
     }
+
     ResourceType GetNextDrop(float spawnValue)
     {
         ResourceType nextDrop = ResourceType.Metal;
-        foreach (DropsToSpawn drop in dropsToSpawn)
+
+        for(int i=0; i < dropsToSpawn.Length; i++)
+        //foreach (DropsToSpawn drop in dropsToSpawn)
         {
-            if (spawnValue <= drop.spawnWeight)
+            if (spawnValue <= dropsToSpawn[i].spawnWeight)
             {
-                nextDrop = drop.drop;
+                nextDrop = dropsToSpawn[i].drop;
                 break;
             }
             else
-                spawnValue -= drop.spawnWeight;
+                spawnValue -= dropsToSpawn[i].spawnWeight;
         }
         return nextDrop;
     }

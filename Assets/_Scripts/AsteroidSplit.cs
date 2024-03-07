@@ -8,7 +8,7 @@ using UnityEngine.PlayerLoop;
 
 public class AsteroidSplit : MonoBehaviour
 {
-    [SerializeField] bool drawGizmos;
+    //[SerializeField] bool drawGizmos;
     [SerializeField] GameObject asteroidToSplitInto;
     [SerializeField] float spawnDistance = 1f;
     [SerializeField] float baseNewDirectionAngle = 20f;
@@ -21,20 +21,20 @@ public class AsteroidSplit : MonoBehaviour
     {
         StartCoroutine(GetVelocity());
 
-        if (drawGizmos)
-        {
+        //if (drawGizmos)
+        //{
            
-            for (int i = 0; i < spawnPos.Length; i++)
-            {
-                //Relative to object pos
-                spawnPos[i] = (Quaternion.AngleAxis((0+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
+        //    for (int i = 0; i < spawnPos.Length; i++)
+        //    {
+        //        //Relative to object pos
+        //        spawnPos[i] = (Quaternion.AngleAxis((0+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
 
-                float angleVariance = Mathf.Abs(Random.Range(-newDirectionVariance, newDirectionVariance) + baseNewDirectionAngle);
-                newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
-                float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed - moveSpeed*(newSpeedVarPerc/100), moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
-            }
+        //        float angleVariance = Mathf.Abs(Random.Range(-newDirectionVariance, newDirectionVariance) + baseNewDirectionAngle);
+        //        newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
+        //        float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed - moveSpeed*(newSpeedVarPerc/100), moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
+        //    }
             
-        }
+        //}
     }
 
     IEnumerator GetVelocity()
@@ -54,17 +54,17 @@ public class AsteroidSplit : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (drawGizmos)
-        {
-            for (int i = 0; i < spawnPos.Length; i++)
-            {
-                Debug.DrawRay(transform.position, spawnPos[i], Color.blue);
-                Debug.DrawRay(transform.position, newMoveDir[i], Color.cyan);
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (drawGizmos)
+    //    {
+    //        for (int i = 0; i < spawnPos.Length; i++)
+    //        {
+    //            Debug.DrawRay(transform.position, spawnPos[i], Color.blue);
+    //            Debug.DrawRay(transform.position, newMoveDir[i], Color.cyan);
+    //        }
+    //    }
+    //}
 
     Vector3[] spawnPos = new Vector3[3];
     Vector3[] newMoveDir = new Vector3[3];
