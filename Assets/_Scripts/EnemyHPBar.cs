@@ -39,9 +39,7 @@ public class EnemyHPBar : MonoBehaviour
     private void OnDisable()
     {
         if (hpInstance != null)
-        {
             hpInstance.gameObject.SetActive(false);
-        }
     }
 
     void Update()
@@ -54,7 +52,8 @@ public class EnemyHPBar : MonoBehaviour
     {
         if (enemyHP.CurrentHP >= enemyHP.MaxHP)
         {
-            hpBar.gameObject.SetActive(false);
+            if (hpInstance != null)
+                hpInstance.gameObject.SetActive(false);
         }
         else
         {

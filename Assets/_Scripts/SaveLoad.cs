@@ -33,14 +33,14 @@ public class SaveLoad : MonoBehaviour
     {
         CurrentSaveSlot = slot;
 
-        SaveSlot();
+        SaveGeneral();
         LoadOrCreateSave();
 
         ChangedSaveSlot?.Invoke();
     }
 
     // Save Slot
-    void SaveSlot()
+    void SaveGeneral()
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
@@ -69,7 +69,8 @@ public class SaveLoad : MonoBehaviour
 
         saveConfig.IsVibration = GameManager.IsVibration;
         saveConfig.IsAutoFire = GameManager.IsAutoFire;  
-        saveConfig.IsLightWeightBG = GameManager.IsLightWeightBG;  
+        saveConfig.IsLightWeightBG = GameManager.IsLightWeightBG;
+        saveConfig.QualityLevel = GameManager.QualityLevel;
         saveConfig.TouchAlpha = GameManager.TouchAlpha;
         saveConfig.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
 
@@ -113,6 +114,7 @@ public class SaveLoad : MonoBehaviour
         data.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
         data.IsVibration = GameManager.IsVibration;
         data.IsLightWeightBG = GameManager.IsLightWeightBG;
+        data.QualityLevel = GameManager.QualityLevel;
 
         data.IsAutoFire = GameManager.IsAutoFire;
 
@@ -146,7 +148,7 @@ public class SaveLoad : MonoBehaviour
 
         MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Save" + CurrentSaveSlot);
 
-        Debug.Log($"<color=red>Damage: CONFIG CREATED</color>");
+        Debug.Log($"<color=red>CONFIG CREATED</color>");
     }
 
     public string GetCreationDate(int slot)
@@ -236,7 +238,7 @@ public class SaveLoad : MonoBehaviour
         if (CurrentSaveSlot == slot)
         {
             CurrentSaveSlot = 1;
-            SaveSlot();
+            SaveGeneral();
         }
 
         MMSaveLoadManager.DeleteSaveFolder("Save" + slot);
@@ -564,6 +566,8 @@ public class SaveConfigObj
     public bool IsVibration = true;
     public bool IsAutoFire = true;
     public bool IsLightWeightBG = false;
+    public int QualityLevel = -1;
+
     public int TouchAlpha = 5;
     public bool IsTouchTurnToDirection = true;
 

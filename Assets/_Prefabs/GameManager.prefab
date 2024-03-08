@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 8301927158804262948}
   - component: {fileID: 6510323894878613736}
   - component: {fileID: 5352173929461112413}
+  - component: {fileID: 8161914971348545171}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -250,8 +251,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb45f8cae8ba1d4429059663306b57f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultBG: {fileID: 0}
+  lightBG: {fileID: 0}
   enableVib: {fileID: 2669678581097302924}
   disableVib: {fileID: 8310930760438436004}
+  saveConfigOnGameOver: 1
 --- !u!114 &1946017592968526182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a53d73483b2374f8d8dda94ab473e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveConfigOnGameOver: 1
 --- !u!114 &4970301456840857924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +330,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3ff923b4c34c214e99f10ee50e84774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8161914971348545171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329679553767856033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db670723cf7e9a40a0b440c40f86b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4112380401310063756

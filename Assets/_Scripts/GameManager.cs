@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public static bool IsVibration = true;
     public static bool IsAutoFire = true;
     public static bool IsLightWeightBG;
+    public static int QualityLevel = -1;
 
     public static bool IsTouchTurnToDirection = true;
     public static int TouchAlpha = 5;
@@ -42,9 +43,10 @@ public class GameManager : MonoBehaviour
         s_DisableVib = disableVib;
 
         GameStatus.GameOver += SaveConfigOnGameOver;
-        OnChangeBG.AddListener(ChangeBG);
+        OnChangeBG.AddListener(SetBG);
         OnLoadedConfig.AddListener(SetVibration);        
-        OnLoadedConfig.AddListener(SetBG);        
+        OnLoadedConfig.AddListener(SetBG);
+        // Touch alpha set on TouchControlsManager
     }
 
     private void OnDisable()
@@ -54,9 +56,11 @@ public class GameManager : MonoBehaviour
 
     static public void LoadValues(SaveConfigObj save)
     {
+        Debug.Log($"Quality: {QualitySettings.GetQualityLevel()}");
         IsVibration = save.IsVibration;
         IsAutoFire = save.IsAutoFire;
         IsLightWeightBG = save.IsLightWeightBG;
+        QualityLevel = save.QualityLevel == -1 ? QualitySettings.GetQualityLevel() : save.QualityLevel;        
 
         IsTouchTurnToDirection = save.IsTouchTurnToDirection;
         TouchAlpha = save.TouchAlpha;
@@ -97,12 +101,12 @@ public class GameManager : MonoBehaviour
         }
     }   
 
-    public void ChangeBG()
-    {
-        IsLightWeightBG = !IsLightWeightBG;
+    //public void ChangeBG()
+    //{
+    //    IsLightWeightBG = !IsLightWeightBG;
 
-        SetBG();
-    }
+    //    SetBG();
+    //}
 
     void SetBG()
     {

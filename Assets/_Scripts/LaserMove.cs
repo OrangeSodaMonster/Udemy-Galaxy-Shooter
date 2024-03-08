@@ -32,8 +32,9 @@ public class LaserMove : MonoBehaviour
     void FixedUpdate()
     {
         //transform.Translate(moveSpeed*Time.deltaTime*transform.up, Space.World);
-        transform.up = rb.velocity;
-        
+        float anglesToRotate = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 90f;
+        rb.MoveRotation(anglesToRotate);
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

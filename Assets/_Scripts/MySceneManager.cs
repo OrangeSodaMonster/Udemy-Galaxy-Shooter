@@ -54,5 +54,6 @@ public class MySceneManager : MonoBehaviour
     public void CallGC()
     {
         System.GC.Collect();
+
     }
 }

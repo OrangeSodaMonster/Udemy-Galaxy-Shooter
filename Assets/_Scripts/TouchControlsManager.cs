@@ -1,33 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
 public class TouchControlsManager : MonoBehaviour
 {
-    //public static bool isTurnToDirection = true;
-    //public static int buttonsAlpha = 5;
-
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] GameObject analogTurning;
     [SerializeField] GameObject lrTurning;
 
-    //public static void LoadValues(int alpha, bool turnToDirection)
-    //{
-    //    isTurnToDirection = turnToDirection;
-    //    buttonsAlpha = alpha;
-    //}
-
-    private void Start()
+    private void OnEnable()
     {
         SetTurningInput();
-        SetAlpha();
+        SetCanvasAlpha();
     }
 
-    public void SetAlpha()
+    public void SetAlphaValue(float value)
+    {        
+        GameManager.TouchAlpha = (int)value;
+        SetCanvasAlpha();
+    }
+
+    public void SetCanvasAlpha()
     {
         canvasGroup.alpha = GameManager.TouchAlpha * 0.1f;
-        //buttonsAlpha = (int)value;
+        Debug.Log($"Touch Alpha: {GameManager.TouchAlpha}");
     }
 
     public void SetTurningMode()
