@@ -34,7 +34,8 @@ public class EnemyDropDealer : MonoBehaviour
     {
         SpawnGuaranteedDrops();
 
-        float dropsNumber = UnityEngine.Random.Range(minDropsNum, maxDropsNum);
+        int dropsNumber = UnityEngine.Random.Range(minDropsNum, maxDropsNum+1);
+        Debug.Log($" Min: {minDropsNum}, Max: {maxDropsNum}, => {dropsNumber}");
 
         //foreach (var drop in dropsToSpawn)
         //{
@@ -92,7 +93,6 @@ public class EnemyDropDealer : MonoBehaviour
         ResourceType nextDrop = ResourceType.Metal;
 
         for(int i=0; i < dropsToSpawn.Length; i++)
-        //foreach (DropsToSpawn drop in dropsToSpawn)
         {
             if (spawnValue <= dropsToSpawn[i].spawnWeight)
             {

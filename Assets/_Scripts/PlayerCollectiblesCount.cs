@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using UnityEngine.Events;
 public enum ResourceType
 {
     //MetalCrumb,
+    [GUIColor("blue")]
     Metal = 1,
     //RareMetalCrumb,
     RareMetal = 2,
@@ -17,7 +19,9 @@ public enum ResourceType
 [Serializable]
 public struct ResourceNumber
 {
+    [HorizontalGroup("G",width: .6f), LabelWidth(90)]
     public ResourceType ResourceType;
+    [HorizontalGroup("G"),GUIColor("cyan"), LabelWidth(45)]
     public int Amount;
 }
 

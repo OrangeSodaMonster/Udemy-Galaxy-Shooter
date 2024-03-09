@@ -1,55 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &599046338247247769
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8215164316014496778}
-  - component: {fileID: 7111192606368338239}
-  m_Layer: 0
-  m_Name: ProjectilePool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8215164316014496778
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599046338247247769}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 3608846974427473172}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7111192606368338239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599046338247247769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b7277539b95c0d45895792ecc99ce66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MutualizeWaitingPools: 0
-  NestWaitingPool: 1
-  NestUnderThis: 1
-  GameObjectToPool: {fileID: 1250797867374824522, guid: 645435d149b3671469a35e59c34343cb, type: 3}
-  PoolSize: 5
-  PoolCanExpand: 1
 --- !u!1 &3466182207189955914
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1159418621486533106}
-  - {fileID: 8215164316014496778}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &420096091590750910
@@ -130,12 +79,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3466182207189955914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83f2ef79d89be874296e7042b4ba50b9, type: 3}
+  m_Script: {fileID: 11500000, guid: af4a6943be744194c9162957aae66f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poolerPrefab: {fileID: 2558180511330203973, guid: 40d581c416ef7354fba605351e5470c2, type: 3}
   hpBarPool: {fileID: 5343377643956284378}
-  projectilePool: {fileID: 7111192606368338239}
 --- !u!114 &5599987194531963812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +106,11 @@ MonoBehaviour:
   intervalToEnableAtBegining: 7
   intervalBetweenSpawns: 10
   playSound: 1
+  highlightPref: {fileID: 0}
+  showArrow: 1
+  arrowPref: {fileID: 0}
+  arrowDistanceFromPlayer: 3.2
+  arrowDuration: 1
 --- !u!1 &8059279360510778739
 GameObject:
   m_ObjectHideFlags: 0

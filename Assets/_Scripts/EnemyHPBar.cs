@@ -59,7 +59,7 @@ public class EnemyHPBar : MonoBehaviour
         {
             if (hpInstance == null)
             {         
-                hpInstance = EnemyPoolRef.s_hpBarPool.GetPooledGameObject().transform;
+                hpInstance = PoolRefs.s_hpBarPool.GetPooledGameObject().transform;
                 hpBar = hpInstance.GetComponentInChildren<Slider>();
                 hpBar.fillRect.gameObject.GetComponent<Image>().color = hpColor;
                 hpInstance.position = transform.position + hpPositionOffset;

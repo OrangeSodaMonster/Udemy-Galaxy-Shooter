@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     float totalSpawnWeight = 0;
     Vector3 nextSpawnPoint;
     float currentSpawnCD;
-    EnemyPoolRef poolRef;
+    PoolRefs poolRef;
 
     public static EnemySpawner Instance;
 
@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
             Instance = this;
         }
 
-        poolRef = GetComponent<EnemyPoolRef>();
+        poolRef = GetComponent<PoolRefs>();
         noSpawnZoneRadiusStatic = noSpawnZoneRadius;
         spawnZoneRadiusStatic = spawnZoneRadius;
 
@@ -100,7 +100,7 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject nextEnemytoSpawn = GetNextSpawn();
 
-            GameObject enemy = poolRef.enemyPoolers[nextEnemytoSpawn].GetPooledGameObject();
+            GameObject enemy = poolRef.Poolers[nextEnemytoSpawn].GetPooledGameObject();
             enemy.transform.position = GetSpawnPoint();
             enemy.SetActive(true);
 
@@ -114,7 +114,7 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         //Instantiate(enemy, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
-        GameObject enemy = poolRef.enemyPoolers[enemyToSpawn].GetPooledGameObject();
+        GameObject enemy = poolRef.Poolers[enemyToSpawn].GetPooledGameObject();
         enemy.transform.position = GetSpawnPoint();
         enemy.SetActive(true);
     }
@@ -140,7 +140,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnAsteroid(GameObject asteroidObject, Vector3 position, Vector3 moveDirection, float speed, int damageToApply)
     {
-        GameObject newAsteroid = poolRef.enemyPoolers[asteroidObject].GetPooledGameObject();
+        GameObject newAsteroid = poolRef.Poolers[asteroidObject].GetPooledGameObject();
         newAsteroid.transform.SetPositionAndRotation(position, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward));
         newAsteroid.SetActive(true);
 
@@ -169,9 +169,9 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnDrone(Vector3 position, GameObject drone)
     {
-        if (poolRef.enemyPoolers.ContainsKey(drone))
+        if (poolRef.Poolers.ContainsKey(drone))
         {
-            GameObject spawn = poolRef.enemyPoolers[drone].GetPooledGameObject();
+            GameObject spawn = poolRef.Poolers[drone].GetPooledGameObject();
             spawn.transform.position = position;
             spawn.SetActive(true);
         }

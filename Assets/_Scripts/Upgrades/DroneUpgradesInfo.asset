@@ -18,8 +18,10 @@ MonoBehaviour:
   - ResourceType: 2
     Amount: 1
   PowerUpgrades:
-  - Cost: []
-    DamagePerSecond: 10
+  - Cost:
+    - ResourceType: 1
+      Amount: 0
+    DamagePerSecond: 3
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 0.74650204, b: 0, a: 0.6901961}
@@ -55,12 +57,12 @@ MonoBehaviour:
       Amount: 1
     - ResourceType: 3
       Amount: 1
-    DamagePerSecond: 15
+    DamagePerSecond: 6
     Color:
       serializedVersion: 2
-      key0: {r: 1, g: 0.8780921, b: 0, a: 0.8627451}
-      key1: {r: 1, g: 0, b: 0, a: 0.8784314}
-      key2: {r: 1, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 0.8780921, b: 0, a: 0.9019608}
+      key1: {r: 1, g: 0, b: 0, a: 0.8039216}
+      key2: {r: 1, g: 0, b: 0, a: 0.8784314}
       key3: {r: 1, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -76,7 +78,7 @@ MonoBehaviour:
       ctime7: 0
       atime0: 0
       atime1: 65535
-      atime2: 0
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -91,11 +93,11 @@ MonoBehaviour:
       Amount: 1
     - ResourceType: 3
       Amount: 1
-    DamagePerSecond: 20
+    DamagePerSecond: 10
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 0.8780921, b: 0, a: 1}
+      key1: {r: 1, g: 0.8780921, b: 0, a: 0.8627451}
       key2: {r: 1, g: 0.19862808, b: 0, a: 0}
       key3: {r: 1, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -127,11 +129,11 @@ MonoBehaviour:
       Amount: 1
     - ResourceType: 3
       Amount: 1
-    DamagePerSecond: 25
+    DamagePerSecond: 14
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 0.7402892, b: 0, a: 1}
+      key1: {r: 1, g: 0.7402892, b: 0, a: 0.9411765}
       key2: {r: 1, g: 0.2760729, b: 0, a: 0}
       key3: {r: 1, g: 0.7402892, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -139,8 +141,8 @@ MonoBehaviour:
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 41827
-      ctime2: 63993
+      ctime1: 45682
+      ctime2: 65535
       ctime3: 65535
       ctime4: 0
       ctime5: 0
@@ -163,7 +165,7 @@ MonoBehaviour:
       Amount: 1
     - ResourceType: 4
       Amount: 1
-    DamagePerSecond: 30
+    DamagePerSecond: 18
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -199,21 +201,21 @@ MonoBehaviour:
       Amount: 1
     - ResourceType: 4
       Amount: 1
-    DamagePerSecond: 40
+    DamagePerSecond: 22
     Color:
       serializedVersion: 2
-      key0: {r: 1, g: 0.8366399, b: 0.4470588, a: 1}
-      key1: {r: 0.9999304, g: 0.95868236, b: 0.4960994, a: 1}
-      key2: {r: 0.99923444, g: 1, b: 0.97596157, a: 0}
-      key3: {r: 0.9697471, g: 1, b: 0.050049305, a: 0}
+      key0: {r: 0.99923444, g: 1, b: 0.97596157, a: 1}
+      key1: {r: 1, g: 1, b: 0, a: 1}
+      key2: {r: 1, g: 0.62911344, b: 0, a: 0}
+      key3: {r: 1, g: 0.62911344, b: 0, a: 0}
       key4: {r: 1, g: 0.62911344, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 20046
-      ctime2: 33924
-      ctime3: 47417
+      ctime0: 19275
+      ctime1: 58211
+      ctime2: 63993
+      ctime3: 63993
       ctime4: 63993
       ctime5: 0
       ctime6: 0
@@ -228,7 +230,7 @@ MonoBehaviour:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
+      m_NumColorKeys: 2
       m_NumAlphaKeys: 2
   RangeUpgrades:
   - Cost: []

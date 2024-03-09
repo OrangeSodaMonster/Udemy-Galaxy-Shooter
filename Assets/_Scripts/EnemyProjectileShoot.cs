@@ -7,6 +7,7 @@ using UnityEngine.VFX;
 
 public class EnemyProjectileShoot : MonoBehaviour
 {
+    [field:SerializeField] public GameObject projectilePref { get; private set; }
     [SerializeField] float baseShootCD = 4;
     [SerializeField] float shootCDVariation = 0.5f;
     [SerializeField] Transform projectileOrigin;
@@ -15,6 +16,7 @@ public class EnemyProjectileShoot : MonoBehaviour
     [SerializeField] LayerMask raycastLayers;
 
     float shootCD;
+    PoolRefs poolRefs;
 	
     void OnEnable()
     {
@@ -22,6 +24,11 @@ public class EnemyProjectileShoot : MonoBehaviour
         preShootVFX.gameObject.SetActive(false);
 
         StartCoroutine(Shoot());
+    }
+
+    private void Start()
+    {
+        poolRefs = FindObjectOfType<PoolRefs>();
     }
 
     private void OnDisable()
@@ -47,8 +54,12 @@ public class EnemyProjectileShoot : MonoBehaviour
 
             yield return new WaitForSeconds(preShootVFXTimePrior);
 
-            //Instantiate(projectile, projectileOrigin.position, transform.rotation, transform.parent);
-            GameObject projectile = EnemyPoolRef.s_projectilePool.GetPooledGameObject();
+            GameObject projectile;
+            if (poolRefs.Poolers.ContainsKey(projectilePref))
+                projectile = poolRefs.Poolers[projectilePref].GetPooledGameObject();
+            else
+                projectile = Instantiate(projectilePref);
+
             projectile.transform.SetLocalPositionAndRotation(projectileOrigin.position, transform.rotation);
             projectile.GetComponent<LaserMove>().SourceHash = gameObject.GetHashCode();            
             projectile.SetActive(true);

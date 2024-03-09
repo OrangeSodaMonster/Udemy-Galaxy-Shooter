@@ -66,6 +66,7 @@ public class LaserMove : MonoBehaviour
         {
             GameObject vfx = VFXPoolerScript.Instance.ProjectileVFXPooler.GetPooledGameObject();
             vfx.transform.position = collision.ClosestPoint(transform.position);
+            vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", VFXGradient);
             vfx.SetActive(true);
 
             AudioManager.Instance.EnemyProjectileDestructionSound.PlayFeedbacks();

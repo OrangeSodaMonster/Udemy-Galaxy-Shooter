@@ -44,6 +44,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 3c4ffe5bad9999e4c9dbad37e7ba0602, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NoiseTex:
         m_Texture: {fileID: 2800000, guid: fd146ccf15c8b244f94a6df739492ca9, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -74,7 +78,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BG_ImagePower: 0.417
+    - _BG_ImagePower: 0.15
     - _DustOclusionPower: 0.3
     - _DustPower: 0.15
     - _DustScale: 5
