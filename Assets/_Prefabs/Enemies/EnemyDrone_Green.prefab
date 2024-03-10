@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <projectilePref>k__BackingField: {fileID: 1250797867374824522, guid: 645435d149b3671469a35e59c34343cb, type: 3}
-  BaseShootCD: 0
-  ShootCDVariation: 0
+  BaseShootCD: 6
+  ShootCDVariation: 1
   projectileOrigin: {fileID: 7501308407415674733}
   preShootVFX: {fileID: 8271918894049419804}
   preShootVFXTimePrior: 2
@@ -241,16 +241,24 @@ MonoBehaviour:
   radiusToSpawn: 0.4
   DropsToSpawn:
   - drop: 1
-    spawnWeight: 5
+    spawnWeight: 10
   - drop: 2
-    spawnWeight: 2
+    spawnWeight: 3
   - drop: 3
-    spawnWeight: 0.2
+    spawnWeight: 0.1
   - drop: 4
-    spawnWeight: 0.02
+    spawnWeight: 0
   MinDropsNum: 1
   MaxDropsNum: 3
-  dropsGuaranteed: []
+  dropsGuaranteed:
+  - drop: 1
+    Amount: 0
+  - drop: 2
+    Amount: 0
+  - drop: 3
+    Amount: 0
+  - drop: 4
+    Amount: 0
 --- !u!114 &6894032270590602362
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -40,7 +40,7 @@ public class ObjInfoEditor : OdinMenuEditorWindow
         public CreateNewEnemyData()
         {
             enemyData = ScriptableObject.CreateInstance<EnemyInfoSO>();
-            enemyData.Name = "New Asteroid";
+            enemyData.Name = "New Objective";
         }
 
         [InlineEditor(Expanded = true)]

@@ -12,74 +12,142 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20f964955f4ebc40aa7dcc44c00f00f, type: 3}
   m_Name: ShieldUpgradesInfo
   m_EditorClassIdentifier: 
+  UnlockCostLine:
+    Resource1: 1
+    Cost1: 0
+    Resource2: 0
+    Cost2: 0
   UnlockCost:
-  - ResourceType: 2
-    Amount: 1
-  - ResourceType: 3
-    Amount: 1
+  - ResourceType: 1
+    Amount: 0
+  - ResourceType: 0
+    Amount: 0
   StrenghtUpgrades:
-  - Cost: []
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Strenght: 5
     AlphaAtThisStr: 0.2
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Strenght: 10
     AlphaAtThisStr: 0.26
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Strenght: 15
     AlphaAtThisStr: 0.32
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Strenght: 20
     AlphaAtThisStr: 0.39
-  - Cost:
-    - ResourceType: 3
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Strenght: 25
     AlphaAtThisStr: 0.47
-  - Cost:
-    - ResourceType: 3
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Strenght: 30
     AlphaAtThisStr: 0.55
   RecoveryUpgrades:
-  - Cost: []
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 8
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 7.2
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 6.4
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 5.8
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 5

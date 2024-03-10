@@ -13,182 +13,329 @@ MonoBehaviour:
   m_Name: ShipUpgradesInfo
   m_EditorClassIdentifier: 
   HP_Upgrade:
-  - Cost: []
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 50
-  - Cost:
-    - ResourceType: 1
-      Amount: 3
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 60
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 70
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 80
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 90
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 100
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 120
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 140
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 170
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     HP: 200
   SpeedUpgrade:
-  - Cost: []
+  - CostLine:
+      Resource1: 2
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 2
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Speed: 3
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Speed: 3.36
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Speed: 3.72
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Speed: 4.08
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Speed: 4.44
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Speed: 4.8
   ManobrabilityUpgrade:
-  - Cost: []
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TurningSpeed: 180
     TimeToStop: 4
     TimeToStopRotating: 2
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TurningSpeed: 184
     TimeToStop: 3.6
     TimeToStopRotating: 1.8
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TurningSpeed: 188
     TimeToStop: 3.2
     TimeToStopRotating: 1.6
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TurningSpeed: 192
     TimeToStop: 2.8
     TimeToStopRotating: 1.4
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TurningSpeed: 196
     TimeToStop: 2.4
     TimeToStopRotating: 1.2
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TurningSpeed: 200
     TimeToStop: 2
     TimeToStopRotating: 1
   TractorBeamUpgrade:
-  - Cost:
+  - CostLine:
+      Resource1: 1
+      Cost1: 6
+      Resource2: 0
+      Cost2: 0
+    Cost:
     - ResourceType: 1
-      Amount: 2
-    - ResourceType: 3
-      Amount: 2
+      Amount: 6
+    - ResourceType: 0
+      Amount: 0
     RadiusMod: 1
     PullForce: 3.5
     Alpha: 0.025
     TextureSpeed: 4
-  - Cost:
-    - ResourceType: 1
-      Amount: 3
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     RadiusMod: 1.5
     PullForce: 4.2
     Alpha: 0.03
     TextureSpeed: 4.2
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     RadiusMod: 2
     PullForce: 4.9
     Alpha: 0.035
     TextureSpeed: 4.4
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     RadiusMod: 2.5
     PullForce: 5.6
     Alpha: 0.04
     TextureSpeed: 4.6
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     RadiusMod: 3
     PullForce: 6.3
     Alpha: 0.045

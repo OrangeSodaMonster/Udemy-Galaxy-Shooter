@@ -7,21 +7,27 @@ using UnityEngine;
 [Serializable]
 public struct ShipHPUpgrade
 {
-    public ResourceNumber[] Cost;
+    [BoxGroup("Cost", ShowLabel = false), HideLabel]
+    public UpgradeCost CostLine;
+    [HideInInspector]public ResourceNumber[] Cost;
     public int HP;
 }
 
 [Serializable]
 public struct ShipSpeedUpgrade
 {
-    public ResourceNumber[] Cost;
+    [BoxGroup("Cost", ShowLabel = false), HideLabel]
+    public UpgradeCost CostLine;
+    [HideInInspector] public ResourceNumber[] Cost;
     public float Speed;
 }
 
 [Serializable]
 public struct ShipManobrabilityUpgrade
 {
-    public ResourceNumber[] Cost;
+    [BoxGroup("Cost", ShowLabel = false), HideLabel]
+    public UpgradeCost CostLine;
+    [HideInInspector] public ResourceNumber[] Cost;
     [HorizontalGroup("G"), Tooltip("TurningSpeed")]
     public float TurningSpeed;
     [HorizontalGroup("G"), Tooltip("TimeToStop")]
@@ -33,7 +39,9 @@ public struct ShipManobrabilityUpgrade
 [Serializable]
 public struct ShipTractorBeamUpgrade
 {
-    public ResourceNumber[] Cost;
+    [BoxGroup("Cost", ShowLabel = false), HideLabel]
+    public UpgradeCost CostLine;
+    [HideInInspector] public ResourceNumber[] Cost;
     [HorizontalGroup("G")]
     public float RadiusMod;
     [HorizontalGroup("G")]
@@ -55,4 +63,44 @@ public class ShipUpgradesInfo : ScriptableObject
     public ShipManobrabilityUpgrade[] ManobrabilityUpgrade;
     [GUIColor("#ffd9f2")]
     public ShipTractorBeamUpgrade[] TractorBeamUpgrade;
+
+    private void OnValidate()
+    {
+        ConvertHP();
+        ConvertSpeed();
+        ConvertManobrability();
+        ConvertTractor();
+    }
+
+    void ConvertHP()
+    {
+        for (int i = 0; i < HP_Upgrade.Length; i++)
+        {
+            HP_Upgrade[i].Cost = PlayerCollectiblesCount.ConvertUpgradeCost(HP_Upgrade[i].CostLine);
+        }
+    }
+
+    void ConvertSpeed()
+    {
+        for (int i = 0; i < SpeedUpgrade.Length; i++)
+        {
+            SpeedUpgrade[i].Cost = PlayerCollectiblesCount.ConvertUpgradeCost(SpeedUpgrade[i].CostLine);
+        }
+    }
+
+    void ConvertManobrability()
+    {
+        for (int i = 0; i < ManobrabilityUpgrade.Length; i++)
+        {
+            ManobrabilityUpgrade[i].Cost = PlayerCollectiblesCount.ConvertUpgradeCost(ManobrabilityUpgrade[i].CostLine);
+        }
+    }
+
+    void ConvertTractor()
+    {
+        for (int i = 0; i < TractorBeamUpgrade.Length; i++)
+        {
+            TractorBeamUpgrade[i].Cost = PlayerCollectiblesCount.ConvertUpgradeCost(TractorBeamUpgrade[i].CostLine);
+        }
+    }
 }

@@ -12,13 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ceb09019274ef543a1474f3f13cd165, type: 3}
   m_Name: IonStreamUpgradesInfo
   m_EditorClassIdentifier: 
+  UnlockCostLine:
+    Resource1: 1
+    Cost1: 0
+    Resource2: 0
+    Cost2: 0
   UnlockCost:
   - ResourceType: 1
-    Amount: 1
-  - ResourceType: 3
-    Amount: 1
+    Amount: 0
+  - ResourceType: 0
+    Amount: 0
   PowerUpgrades:
-  - Cost: []
+  - CostLine:
+      Resource1: 0
+      Cost1: 1
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 1
+    - ResourceType: 0
+      Amount: 0
     Damage: 10
     Widht: 0.1
     Material: {fileID: 2100000, guid: 548c708950057134a8dc31215d09aaea, type: 2}
@@ -52,11 +66,16 @@ MonoBehaviour:
       m_ColorSpace: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Damage: 15
     Widht: 0.12
     Material: {fileID: 2100000, guid: 74fe3afdd6f2d1e4a85b5450b94407e4, type: 2}
@@ -90,11 +109,16 @@ MonoBehaviour:
       m_ColorSpace: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Damage: 20
     Widht: 0.15
     Material: {fileID: 2100000, guid: d89e7609dbf684a469ded72d1335527d, type: 2}
@@ -128,11 +152,16 @@ MonoBehaviour:
       m_ColorSpace: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Damage: 25
     Widht: 0.18
     Material: {fileID: 2100000, guid: 9c3de35b3053c6340abe3a04cfd5a662, type: 2}
@@ -166,11 +195,16 @@ MonoBehaviour:
       m_ColorSpace: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Damage: 30
     Widht: 0.21
     Material: {fileID: 2100000, guid: 2df945f07299ace488d65e4b34fff5de, type: 2}
@@ -205,88 +239,175 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
   CadencyUpgrades:
-  - Cost: []
+  - CostLine:
+      Resource1: 1
+      Cost1: 3
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 3
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 3
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 2.5
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 2
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 1.5
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 2
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     TimeBetween: 1
   RangeUpgrades:
-  - Cost: []
+  - CostLine:
+      Resource1: 0
+      Cost1: 4
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 4
+    - ResourceType: 0
+      Amount: 0
     RangeFromPlayer: 3.5
     RangeFromHit: 2.5
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     RangeFromPlayer: 4.1
     RangeFromHit: 3
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     RangeFromPlayer: 4.7
     RangeFromHit: 3.5
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     RangeFromPlayer: 5.3
     RangeFromHit: 4
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     RangeFromPlayer: 6
     RangeFromHit: 4.6
   HitNumUpgrades:
-  - Cost: []
+  - CostLine:
+      Resource1: 0
+      Cost1: 7
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 7
+    - ResourceType: 0
+      Amount: 0
     NumberOfHits: 3
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     NumberOfHits: 4
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     NumberOfHits: 5
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     NumberOfHits: 7
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     NumberOfHits: 10

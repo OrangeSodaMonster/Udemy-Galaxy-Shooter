@@ -24,6 +24,32 @@ public struct ResourceNumber
     public int Amount;
 }
 
+[Serializable]
+public struct CollectibleLine
+{
+    [HorizontalGroup("G", 0.2f), LabelText("Metal"), GUIColor("white"), LabelWidth(40)]
+    public float MetalCrumb;
+    [HorizontalGroup("G", .26f), LabelText("RareMetal"), GUIColor("green"), LabelWidth(65)]
+    public float RareMetalCrumb;
+    [HorizontalGroup("G"), LabelText("Crystal"), GUIColor("blue"), LabelWidth(50)]
+    public float EnergyCristal;
+    [HorizontalGroup("G", .3f), LabelText("CondCrystal"), GUIColor("purple"), LabelWidth(77)]
+    public float CondensedEnergyCristal;
+}
+
+[Serializable]
+public struct UpgradeCost
+{
+    [HorizontalGroup("G"), HideLabel]
+    public ResourceType Resource1;
+    [HorizontalGroup("G"), HideLabel]
+    public int Cost1;
+    [HorizontalGroup("G"), HideLabel]
+    public ResourceType Resource2;
+    [HorizontalGroup("G"), HideLabel]
+    public int Cost2;
+}
+
 public class PlayerCollectiblesCount : MonoBehaviour
 {
 	//static public int MetalCrumbsAmount = 0;   
@@ -139,5 +165,18 @@ public class PlayerCollectiblesCount : MonoBehaviour
     public static void ChangedCollectbleAmount()
     {
         OnChangedCollectibleAmount?.Invoke();
+    }
+
+    static public ResourceNumber[] ConvertUpgradeCost(UpgradeCost cost)
+    {
+        ResourceNumber[] costArray = new ResourceNumber[2];
+
+        costArray[0].ResourceType = cost.Resource1;
+        costArray[0].Amount = cost.Cost1;
+
+        costArray[1].ResourceType = cost.Resource2;
+        costArray[1].Amount = cost.Cost2;
+
+        return costArray;
     }
 }

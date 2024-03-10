@@ -174,7 +174,7 @@ MonoBehaviour:
   <IsAsteroid>k__BackingField: 0
   asteroidVolumeMultiplier: 1
   destroyOnCollision: 1
-  MaxHP: 0
+  MaxHP: 10
 --- !u!114 &5556342535090201594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,8 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8340fada8b02f4199f8a23b0820ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
-  ImpactVelocity: 1
+  Damage: 20
+  ImpactVelocity: 0.6
 --- !u!114 &4871147860128078388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7149ebbafdf7674493888b819d92d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseSpeed: 4
+  BaseSpeed: 2
   SpeedVariationPerc: 10
 --- !u!114 &8810601949308987788
 MonoBehaviour:
@@ -217,8 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radiusToSpawn: 0.4
   DropsToSpawn: []
-  MinDropsNum: 2
-  MaxDropsNum: 5
+  MinDropsNum: 0
+  MaxDropsNum: 0
   dropsGuaranteed: []
 --- !u!114 &6894032270590602362
 MonoBehaviour:

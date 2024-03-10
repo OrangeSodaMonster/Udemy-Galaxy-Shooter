@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpawnDroneFromShip : MonoBehaviour
 {
-    [SerializeField] float baseSpawnCD = 9;
-    [SerializeField] float spawnCDVariation = 1f;
+    [HideInInspector] public float BaseSpawnCD = 9;
+    [HideInInspector] public float SpawnCDVariation = 1f;
     [SerializeField] GameObject droneToSpawn;
     public GameObject DroneToSpawn => droneToSpawn;
 
@@ -13,7 +13,7 @@ public class SpawnDroneFromShip : MonoBehaviour
 
     void OnEnable()
     {
-        spawnCD = baseSpawnCD;
+        spawnCD = BaseSpawnCD;
 
         StartCoroutine(SpawnDroneRoutine());
     }
@@ -33,7 +33,7 @@ public class SpawnDroneFromShip : MonoBehaviour
 
             EnemySpawner.Instance.SpawnDrone(transform.position, droneToSpawn);
 
-            spawnCD = Random.Range(-spawnCDVariation, spawnCDVariation) + baseSpawnCD;
+            spawnCD = Random.Range(-SpawnCDVariation, SpawnCDVariation) + BaseSpawnCD;
 
             AudioManager.Instance.DroneSpawnSound.PlayFeedbacks();
         }

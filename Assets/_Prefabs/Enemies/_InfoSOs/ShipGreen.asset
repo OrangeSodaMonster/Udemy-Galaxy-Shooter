@@ -10,36 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13db7f8e275713d4e983a34de1a1dcf4, type: 3}
-  m_Name: DroneGreen
+  m_Name: ShipGreen
   m_EditorClassIdentifier: 
-  enemy: {fileID: 7803575928964027051, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
-  MaxHP: 15
-  Speed: 2.5
-  SpeedVarPerc: 10
-  CollisionDamage: 20
-  ImpactVelocity: 0.6
-  MinDrops: 1
-  MaxDrops: 3
+  enemy: {fileID: 7421692332896096082, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+  MaxHP: 30
+  Speed: 6.2
+  SpeedVarPerc: 0
+  CollisionDamage: 30
+  ImpactVelocity: 1
+  MinDrops: 0
+  MaxDrops: 0
   DropWeightsLine:
-    MetalCrumb: 10
-    RareMetalCrumb: 3
-    EnergyCristal: 0.1
+    MetalCrumb: 0
+    RareMetalCrumb: 0
+    EnergyCristal: 0
     CondensedEnergyCristal: 0
   GuaranteedLine:
     MetalCrumb: 0
     RareMetalCrumb: 0
     EnergyCristal: 0
     CondensedEnergyCristal: 0
-  ShootCD: 6
-  ShootCdVar: 1
+  ShootCD: 0
+  ShootCdVar: 0
   PuDropChance: 0
   PuDrops: []
-  XSpeed: 0
-  RotChangeTime: 0
-  RotTimeVar: 0
-  DroneSpawnTime: 0
-  DroneSpawnTimeVar: 0
+  XSpeed: 4
+  RotChangeTime: 6
+  RotTimeVar: 2
+  DroneSpawnTime: 10
+  DroneSpawnTimeVar: 1
   SentRange: 0
   SentDamage: 0
   SentDamageInterval: 0
-  Name: DroneGreen
+  Name: ShipGreen

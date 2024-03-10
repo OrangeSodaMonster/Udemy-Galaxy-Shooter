@@ -62,7 +62,7 @@ public class DroneButtonScript : MonoBehaviour
         {
             interfaceData.SetBoolButtonVisual(icon, border, upgradeLevelTxt, droneUpgradeInfo.UnlockCost, costs, droneUpgrades.Enabled,
                 droneUpgrades.DamageLevel == droneUpgradeInfo.PowerUpgrades.Length && droneUpgrades.RangeLevel == droneUpgradeInfo.RangeUpgrades.Length
-                && droneUpgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length, isDisableOverwrite: droneUpgrades.DisableOverwrite);
+                && droneUpgrades.HealingLevel == droneUpgradeInfo.HealUpgrades.Length, isDisableOverwrite: droneUpgrades.DisableOverwrite);
         }
         else if (upgradeType == DroneUpgradeType.Power)
         {
@@ -86,12 +86,12 @@ public class DroneButtonScript : MonoBehaviour
         }
         else if (upgradeType == DroneUpgradeType.Heal)
         {
-            if (droneUpgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length)
-                costToSend = droneUpgradeInfo.HealUpgrade[droneUpgrades.HealingLevel - 1].Cost;
+            if (droneUpgrades.HealingLevel == droneUpgradeInfo.HealUpgrades.Length)
+                costToSend = droneUpgradeInfo.HealUpgrades[droneUpgrades.HealingLevel - 1].Cost;
             else
-                costToSend = droneUpgradeInfo.HealUpgrade[droneUpgrades.HealingLevel].Cost;
+                costToSend = droneUpgradeInfo.HealUpgrades[droneUpgrades.HealingLevel].Cost;
 
-            interfaceData.UpdateButtonVisual(droneUpgrades.HealingLevel, droneUpgradeInfo.HealUpgrade.Length,
+            interfaceData.UpdateButtonVisual(droneUpgrades.HealingLevel, droneUpgradeInfo.HealUpgrades.Length,
                 icon, border, upgradeLevelTxt, costs, costToSend, droneUpgrades.Enabled);
         }
     }
@@ -126,9 +126,9 @@ public class DroneButtonScript : MonoBehaviour
     }
     public void BuyOneHeal()
     {
-        if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length) return;
+        if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrades.Length) return;
 
-        BuyUpgrade(droneUpgradeInfo.HealUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
+        BuyUpgrade(droneUpgradeInfo.HealUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_1_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
     }
     public void UnlockDroneTwo()
     {
@@ -159,9 +159,9 @@ public class DroneButtonScript : MonoBehaviour
     }
     public void BuyTwoHeal()
     {
-        if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length) return;
+        if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrades.Length) return;
 
-        BuyUpgrade(droneUpgradeInfo.HealUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
+        BuyUpgrade(droneUpgradeInfo.HealUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_2_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
     }
     public void UnlockDroneThree()
     {
@@ -192,9 +192,9 @@ public class DroneButtonScript : MonoBehaviour
     }
     public void BuyThreeHeal()
     {
-        if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrade.Length) return;
+        if (PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.HealingLevel == droneUpgradeInfo.HealUpgrades.Length) return;
 
-        BuyUpgrade(droneUpgradeInfo.HealUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
+        BuyUpgrade(droneUpgradeInfo.HealUpgrades[PlayerUpgradesManager.Instance.CurrentUpgrades.Drone_3_Upgrades.HealingLevel].Cost, DroneUpgradeType.Heal);
     }   
 
     void BuyUpgrade(ResourceNumber[] cost, DroneUpgradeType upgradeType)

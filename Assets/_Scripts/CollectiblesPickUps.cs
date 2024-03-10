@@ -1,3 +1,5 @@
+using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +9,7 @@ enum CollectibleType
     MetalCrumb = 1,
     RareMetalCrumb = 2,
     EnergyCristal = 3,
-    RareEnergyCristal = 4,
+    CondensedEnergyCristal = 4,
 }
 
 public class CollectiblesPickUps : MonoBehaviour
@@ -46,8 +48,8 @@ public class CollectiblesPickUps : MonoBehaviour
 
     private void OnEnable()
     {
-        driftDirection = Random.insideUnitCircle.normalized;
-        driftSpeed = Random.Range(minDriftMoveSpeed, maxDriftMoveSpeed);
+        driftDirection = UnityEngine.Random.insideUnitCircle.normalized;
+        driftSpeed = UnityEngine.Random.Range(minDriftMoveSpeed, maxDriftMoveSpeed);
         currentDriftSpeed = driftSpeed;
         transform.localScale = defaultScale;
 
@@ -139,7 +141,7 @@ public class CollectiblesPickUps : MonoBehaviour
                     AudioManager.Instance.EnergyCrystalSound.PlayFeedbacks();
                     PlayerCollectiblesCount.EnergyCristalAmount += 1;
                     break;
-                case CollectibleType.RareEnergyCristal:
+                case CollectibleType.CondensedEnergyCristal:
                     AudioManager.Instance.CondensedEnergyCrystalSound.PlayFeedbacks();
                     PlayerCollectiblesCount.CondensedEnergyCristalAmount += 1;
                     break;

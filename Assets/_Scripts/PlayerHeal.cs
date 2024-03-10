@@ -37,15 +37,15 @@ public class PlayerHeal : MonoBehaviour
 
         if(upgradesManager.CurrentUpgrades.Drone_1_Upgrades.Enabled)
             for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_1_Upgrades.HealingLevel; i++)
-                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrade[i].ReduceFromHealInterval;
+                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
         
         if (upgradesManager.CurrentUpgrades.Drone_2_Upgrades.Enabled)
             for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_2_Upgrades.HealingLevel; i++)
-                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrade[i].ReduceFromHealInterval;
+                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
         
         if (upgradesManager.CurrentUpgrades.Drone_3_Upgrades.Enabled)
             for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_3_Upgrades.HealingLevel; i++)
-                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrade[i].ReduceFromHealInterval;
+                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
 
         return healIntervalReduction;
     }

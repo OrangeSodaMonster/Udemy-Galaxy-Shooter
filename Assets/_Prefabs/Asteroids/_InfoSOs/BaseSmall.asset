@@ -10,28 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13db7f8e275713d4e983a34de1a1dcf4, type: 3}
-  m_Name: DroneGreen
+  m_Name: BaseSmall
   m_EditorClassIdentifier: 
-  enemy: {fileID: 7803575928964027051, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
-  MaxHP: 15
-  Speed: 2.5
+  enemy: {fileID: 2280188036016598454, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+  MaxHP: 10
+  Speed: 3
   SpeedVarPerc: 10
-  CollisionDamage: 20
-  ImpactVelocity: 0.6
-  MinDrops: 1
-  MaxDrops: 3
-  DropWeightsLine:
-    MetalCrumb: 10
-    RareMetalCrumb: 3
-    EnergyCristal: 0.1
-    CondensedEnergyCristal: 0
-  GuaranteedLine:
-    MetalCrumb: 0
-    RareMetalCrumb: 0
-    EnergyCristal: 0
-    CondensedEnergyCristal: 0
-  ShootCD: 6
-  ShootCdVar: 1
+  CollisionDamage: 10
+  ImpactVelocity: 0.5
+  MinDrops: 0
+  MaxDrops: 0
+  DropsChances: []
+  DropsGuaranteed: []
+  ShootCD: 0
+  ShootCdVar: 0
   PuDropChance: 0
   PuDrops: []
   XSpeed: 0
@@ -42,4 +34,4 @@ MonoBehaviour:
   SentRange: 0
   SentDamage: 0
   SentDamageInterval: 0
-  Name: DroneGreen
+  Name: BaseSmall

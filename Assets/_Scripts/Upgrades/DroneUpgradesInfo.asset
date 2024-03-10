@@ -12,15 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff9aa4477fb2234a92b5ad83ca871fc, type: 3}
   m_Name: DroneUpgradesInfo
   m_EditorClassIdentifier: 
+  UnlockCostLine:
+    Resource1: 0
+    Cost1: 0
+    Resource2: 0
+    Cost2: 0
   UnlockCost:
-  - ResourceType: 1
-    Amount: 1
-  - ResourceType: 2
-    Amount: 1
+  - ResourceType: 0
+    Amount: 0
+  - ResourceType: 0
+    Amount: 0
   PowerUpgrades:
-  - Cost:
+  - CostLine:
+      Resource1: 1
+      Cost1: 2
+      Resource2: 3
+      Cost2: 1
+    Cost:
     - ResourceType: 1
-      Amount: 0
+      Amount: 2
+    - ResourceType: 3
+      Amount: 1
     DamagePerSecond: 3
     Color:
       serializedVersion: 2
@@ -52,11 +64,16 @@ MonoBehaviour:
       m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - Cost:
+  - CostLine:
+      Resource1: 1
+      Cost1: 1
+      Resource2: 0
+      Cost2: 0
+    Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 3
-      Amount: 1
+    - ResourceType: 0
+      Amount: 0
     DamagePerSecond: 6
     Color:
       serializedVersion: 2
@@ -88,11 +105,16 @@ MonoBehaviour:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     DamagePerSecond: 10
     Color:
       serializedVersion: 2
@@ -124,11 +146,16 @@ MonoBehaviour:
       m_ColorSpace: 0
       m_NumColorKeys: 3
       m_NumAlphaKeys: 2
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     DamagePerSecond: 14
     Color:
       serializedVersion: 2
@@ -160,11 +187,16 @@ MonoBehaviour:
       m_ColorSpace: 0
       m_NumColorKeys: 3
       m_NumAlphaKeys: 2
-  - Cost:
-    - ResourceType: 1
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     DamagePerSecond: 18
     Color:
       serializedVersion: 2
@@ -196,11 +228,16 @@ MonoBehaviour:
       m_ColorSpace: -1
       m_NumColorKeys: 3
       m_NumAlphaKeys: 2
-  - Cost:
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
     - ResourceType: 1
-      Amount: 1
-    - ResourceType: 4
-      Amount: 1
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     DamagePerSecond: 22
     Color:
       serializedVersion: 2
@@ -233,44 +270,92 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
   RangeUpgrades:
-  - Cost: []
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Range: 3
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Range: 3.5
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Range: 4
-  - Cost:
-    - ResourceType: 2
-      Amount: 1
-    - ResourceType: 3
-      Amount: 1
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
     Range: 4.5
-  - Cost:
+  - CostLine:
+      Resource1: 0
+      Cost1: 0
+      Resource2: 0
+      Cost2: 0
+    Cost:
+    - ResourceType: 0
+      Amount: 0
+    - ResourceType: 0
+      Amount: 0
+    Range: 5
+  HealUpgrades:
+  - CostLine:
+      Resource1: 2
+      Cost1: 1
+      Resource2: 1
+      Cost2: 1
+    Cost:
     - ResourceType: 2
       Amount: 1
-    - ResourceType: 4
-      Amount: 1
-    Range: 5
-  HealUpgrade:
-  - Cost: []
-    ReduceFromHealInterval: 0.5
-  - Cost:
     - ResourceType: 1
       Amount: 1
-    - ResourceType: 2
-      Amount: 1
     ReduceFromHealInterval: 0.5
-  - Cost:
-    - ResourceType: 2
+  - CostLine:
+      Resource1: 1
+      Cost1: 1
+      Resource2: 1
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
       Amount: 1
-    - ResourceType: 3
-      Amount: 1
+    - ResourceType: 1
+      Amount: 0
+    ReduceFromHealInterval: 0.5
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 1
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 0
+    - ResourceType: 1
+      Amount: 0
     ReduceFromHealInterval: 0.5
