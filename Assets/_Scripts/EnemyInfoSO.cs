@@ -56,7 +56,10 @@ public class EnemyInfoSO : ScriptableObject
 	[HorizontalGroup("Sentinel/G", 0.45f), LabelWidth(100)]
 	[SerializeField] public float SentDamageInterval;
 
-    [Button("SavePrefab",ButtonSizes.Medium,  ButtonAlignment = 1, Stretch = false), PropertyOrder(-1), GUIColor("Green")]
+    [HorizontalGroup("Top", .7f), PropertyOrder(-1), LabelWidth(40)]
+    public string Name;
+
+    [Button("SavePrefab",ButtonSizes.Medium,  ButtonAlignment = 1, Stretch = false), PropertyOrder(-1), GUIColor("Green"), HorizontalGroup("Top")]
     public void UpdateValues()
     {
         if (enemy.TryGetComponent(out EnemyHP enemyHP))

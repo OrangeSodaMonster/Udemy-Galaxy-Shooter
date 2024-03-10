@@ -239,7 +239,7 @@ MonoBehaviour:
   <IsAsteroid>k__BackingField: 0
   asteroidVolumeMultiplier: 1
   destroyOnCollision: 1
-  <MaxHP>k__BackingField: 45
+  MaxHP: 0
 --- !u!114 &8773309586190827830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,8 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8340fada8b02f4199f8a23b0820ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 50
-  <ImpactVelocity>k__BackingField: 0.5
+  Damage: 1
+  ImpactVelocity: 1
 --- !u!114 &3338502948657128667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,12 +269,12 @@ MonoBehaviour:
   distanceToKeep: 5
   distanceToleranceFraction: 0.2
   timeToMaxSpeed: 1.5
-  maxXSpeed: 4
-  maxYSpeed: 6.2
+  MaxXSpeed: 0
+  MaxYSpeed: 0
   isRotating: 0
   rotateClockWise: 1
-  rotationChangeTime: 8
-  rotationChangeTimeVar: 4
+  RotationChangeTime: 6
+  RotationChangeTimeVar: 3
 --- !u!114 &1263677378974625367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,8 +288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <projectilePref>k__BackingField: {fileID: 1250797867374824522, guid: 645435d149b3671469a35e59c34343cb, type: 3}
-  baseShootCD: 4
-  shootCDVariation: 0.5
+  BaseShootCD: 4
+  ShootCDVariation: 0.5
   projectileOrigin: {fileID: 6232597142013545533}
   preShootVFX: {fileID: 3828722212198539157}
   preShootVFXTimePrior: 2
@@ -309,17 +309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusToSpawn: 0.65
-  dropsToSpawn:
-  - drop: 1
-    spawnWeight: 5
-  - drop: 2
-    spawnWeight: 5
-  - drop: 3
-    spawnWeight: 1
-  - drop: 4
-    spawnWeight: 0.5
-  minDropsNum: 3
-  maxDropsNum: 6
+  DropsToSpawn: []
+  MinDropsNum: 2
+  MaxDropsNum: 5
   dropsGuaranteed: []
 --- !u!114 &6790481219519100727
 MonoBehaviour:
@@ -458,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69333f3c3ca8a547aa84d68cc8d568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToDrop: 4
+  ChanceToDrop: 2
   PuDrops:
   - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
     Weight: 10
