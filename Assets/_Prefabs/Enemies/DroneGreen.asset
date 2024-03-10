@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13db7f8e275713d4e983a34de1a1dcf4, type: 3}
+  m_Name: DroneGreen
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7803575928964027051, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+  MaxHP: 15
+  Speed: 2.5
+  SpeedVarPerc: 10
+  CollisionDamage: 20
+  ImpactVelocity: 0.6
+  MinDrops: 1
+  MaxDrops: 3
+  DropsChances:
+  - drop: 1
+    spawnWeight: 5
+  - drop: 2
+    spawnWeight: 2
+  - drop: 3
+    spawnWeight: 0.2
+  - drop: 4
+    spawnWeight: 0.02
+  DropsGuaranteed: []
+  ShootCD: 0
+  ShootCdVar: 0
+  PuDropChance: 0
+  PuDrops: []
+  XSpeed: 0
+  RotChangeTime: 0
+  RotTimeVar: 0
+  SentRange: 0
+  SentDamage: 0
+  SentDamageInterval: 0

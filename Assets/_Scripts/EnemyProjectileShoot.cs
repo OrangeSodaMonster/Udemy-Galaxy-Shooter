@@ -8,8 +8,8 @@ using UnityEngine.VFX;
 public class EnemyProjectileShoot : MonoBehaviour
 {
     [field:SerializeField] public GameObject projectilePref { get; private set; }
-    [SerializeField] float baseShootCD = 4;
-    [SerializeField] float shootCDVariation = 0.5f;
+    [HideInInspector] public float BaseShootCD = 4;
+    [HideInInspector] public float ShootCDVariation = 0.5f;
     [SerializeField] Transform projectileOrigin;
     [SerializeField] VisualEffect preShootVFX;
     [SerializeField] float preShootVFXTimePrior = 3;
@@ -20,7 +20,7 @@ public class EnemyProjectileShoot : MonoBehaviour
 	
     void OnEnable()
     {
-        shootCD = baseShootCD;
+        shootCD = BaseShootCD;
         preShootVFX.gameObject.SetActive(false);
 
         StartCoroutine(Shoot());
@@ -69,7 +69,7 @@ public class EnemyProjectileShoot : MonoBehaviour
             }
 
             preShootVFX.gameObject.SetActive(false);
-            shootCD = Random.Range(-shootCDVariation, shootCDVariation) + baseShootCD;
+            shootCD = Random.Range(-ShootCDVariation, ShootCDVariation) + BaseShootCD;
 
             AudioManager.Instance.EnemyFireSound.PlayFeedbacks();
         } 

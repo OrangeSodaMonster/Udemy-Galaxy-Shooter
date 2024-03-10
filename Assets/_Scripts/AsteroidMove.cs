@@ -9,8 +9,8 @@ public class AsteroidMove : MonoBehaviour
     public Vector3 MoveDirection = Vector3.zero;
     public float MoveSpeed = 0;
 
-    [SerializeField] float baseSpeed = 3;
-    [SerializeField] float speedVariationPerc = 25;
+    [HideInInspector] public float BaseSpeed = 3;
+    [HideInInspector] public float SpeedVariationPerc = 25;
     [SerializeField] float moveDirVariation = 0.1f;
 
     Transform player;
@@ -28,7 +28,7 @@ public class AsteroidMove : MonoBehaviour
 
     void OnEnable()
     {
-        MoveSpeed = Mathf.Abs(Random.Range(baseSpeed - baseSpeed*(speedVariationPerc/100), baseSpeed + baseSpeed*(speedVariationPerc/100)));
+        MoveSpeed = Mathf.Abs(Random.Range(BaseSpeed - BaseSpeed*(SpeedVariationPerc/100), BaseSpeed + BaseSpeed*(SpeedVariationPerc/100)));
 
         if (!GameStatus.IsGameover && player != null)
         {

@@ -34,6 +34,7 @@ public class LaserMove : MonoBehaviour
         //transform.Translate(moveSpeed*Time.deltaTime*transform.up, Space.World);
         float anglesToRotate = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 90f;
         rb.MoveRotation(anglesToRotate);
+        //transform.up = rb.velocity;
 
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -1,4 +1,5 @@
 using MoreMountains.Tools;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +8,16 @@ using UnityEngine;
 [Serializable]
 public struct PowerUpDrops
 {
+    [HorizontalGroup("G", width: .6f), LabelWidth(60)]
     public GameObject PowerUp;
+    [HorizontalGroup("G"), GUIColor("#b894ff"), LabelWidth(50)]
     public float Weight;
 }
 
 public class PowerUpDrop : MonoBehaviour
 {
-    [SerializeField,Range(0,100)] float chanceToDrop = 2f;
-    [SerializeField] List<PowerUpDrops> PuDrops;
+    [HideInInspector, Range(0, 100)] public float ChanceToDrop = 2f;
+    [HideInInspector] public List<PowerUpDrops> PuDrops;
 
     EnemyHP enemyHP;
     bool canDropShield;
@@ -51,7 +54,7 @@ public class PowerUpDrop : MonoBehaviour
 
     bool ShouldDrop()
     {
-        if(UnityEngine.Random.Range(0f,100f) < chanceToDrop)
+        if(UnityEngine.Random.Range(0f,100f) < ChanceToDrop)
             return true;
 
         return false;

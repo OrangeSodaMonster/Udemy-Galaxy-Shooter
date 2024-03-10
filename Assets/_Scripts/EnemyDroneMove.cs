@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyDroneMove : MonoBehaviour
 {
-    [SerializeField] float baseSpeed = 4;
-    [SerializeField] float speedVariationPerc = 10;
+    [HideInInspector] public float BaseSpeed = 4;
+    [HideInInspector] public float SpeedVariationPerc = 10;
 
     Transform player;
     float MoveSpeed = 0;
@@ -19,7 +19,7 @@ public class EnemyDroneMove : MonoBehaviour
     void OnEnable()
     {
         if (MoveSpeed == 0)
-            MoveSpeed = Mathf.Abs(Random.Range(baseSpeed - baseSpeed*(speedVariationPerc/100), baseSpeed + baseSpeed*(speedVariationPerc/100)));
+            MoveSpeed = Mathf.Abs(Random.Range(BaseSpeed - BaseSpeed*(SpeedVariationPerc/100), BaseSpeed + BaseSpeed*(SpeedVariationPerc/100)));
 
         player = FindAnyObjectByType<PlayerMove>()?.transform;
     }
@@ -34,9 +34,9 @@ public class EnemyDroneMove : MonoBehaviour
         velocity.y = MoveSpeed;
 
         if (velocity.x >= float.Epsilon)
-            velocity.x = Mathf.Clamp(velocity.x - baseSpeed * 0.2f * Time.fixedDeltaTime, 0, baseSpeed * 0.5f);
+            velocity.x = Mathf.Clamp(velocity.x - BaseSpeed * 0.2f * Time.fixedDeltaTime, 0, BaseSpeed * 0.5f);
         else if (velocity.x <= float.Epsilon)
-            velocity.x = Mathf.Clamp(velocity.x + baseSpeed * 0.2f * Time.fixedDeltaTime, -baseSpeed * 0.5f, 0);
+            velocity.x = Mathf.Clamp(velocity.x + BaseSpeed * 0.2f * Time.fixedDeltaTime, -BaseSpeed * 0.5f, 0);
 
         rb.velocity = transform.TransformDirection(velocity);
     }

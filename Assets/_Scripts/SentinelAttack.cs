@@ -3,9 +3,9 @@ using UnityEngine.VFX;
 
 public class SentinelAttack : MonoBehaviour
 {
-    [SerializeField] float range = 3;
-    [SerializeField] int damage = 5;
-    [SerializeField] float damageInterval = 1;
+    [HideInInspector] public float Range = 3;
+    [HideInInspector] public int Damage = 5;
+    [HideInInspector] public float DamageInterval = 1;
     [SerializeField] float vfxScaleMultiplier = 1.3f;
     [SerializeField] LayerMask layersToHit;
     [SerializeField] LineRenderer lineRenderer;
@@ -24,7 +24,7 @@ public class SentinelAttack : MonoBehaviour
     {
         lineColor = lineRenderer.colorGradient;
         lineRenderer.transform.localScale /= transform.localScale.x;
-        rangeSqr = range * range;
+        rangeSqr = Range * Range;
     }
 
     private void OnEnable()
@@ -87,12 +87,12 @@ public class SentinelAttack : MonoBehaviour
 
         timeSinceDamage += Time.deltaTime;
 
-        if (timeSinceDamage >= damageInterval)
+        if (timeSinceDamage >= DamageInterval)
         {
             if (strenght != null && strenght.CurrentStr > 0)
-                strenght.DamageStrenght(damage);
+                strenght.DamageStrenght(Damage);
             else if (playerHP != null)
-                playerHP.ChangePlayerHP(-Mathf.Abs(damage), playHitSound:true);            
+                playerHP.ChangePlayerHP(-Mathf.Abs(Damage), playHitSound:true);            
 
             timeSinceDamage = 0;
 

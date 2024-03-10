@@ -7,8 +7,7 @@ using UnityEngine.Events;
 
 public enum ResourceType
 {
-    //MetalCrumb,
-    [GUIColor("blue")]
+    //MetalCrumb,    
     Metal = 1,
     //RareMetalCrumb,
     RareMetal = 2,

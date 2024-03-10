@@ -8,13 +8,13 @@ public class EnemyShipMove : MonoBehaviour
     [SerializeField] float distanceToKeep;
     [SerializeField] float distanceToleranceFraction = .1f;
     [SerializeField] float timeToMaxSpeed = 1;
-    [SerializeField] float maxXSpeed;
-    [SerializeField] float maxYSpeed;
+    [HideInInspector] public float MaxXSpeed;
+    [HideInInspector] public float MaxYSpeed;
 
     [SerializeField] bool isRotating;
     [SerializeField] bool rotateClockWise = true;
-    [SerializeField] float rotationChangeTime = 6f;
-    [SerializeField] float rotationChangeTimeVar = 3f;
+    [HideInInspector] public float RotationChangeTime = 6f;
+    [HideInInspector] public float RotationChangeTimeVar = 3f;
 
     int rotateDirection = 1;
     float currentMaxXSpeed;
@@ -73,7 +73,7 @@ public class EnemyShipMove : MonoBehaviour
 
         if (shouldMoveFoward)
         {
-            DOTween.To(() => newVelocity.y, y => newVelocity.y = y, maxYSpeed, 1.5f);
+            DOTween.To(() => newVelocity.y, y => newVelocity.y = y, MaxYSpeed, 1.5f);
             shouldMoveFoward = false;
         }
 
@@ -95,9 +95,9 @@ public class EnemyShipMove : MonoBehaviour
     {
         newVelocity = transform.InverseTransformDirection(rb.velocity);
         Vector2 playerVelocity = playerRB != null ? playerRB.velocity : Vector2.zero;
-        currentMaxXSpeed = maxXSpeed + Vector2.Dot(transform.right, playerVelocity) * 0.5f;
+        currentMaxXSpeed = MaxXSpeed + Vector2.Dot(transform.right, playerVelocity) * 0.5f;
         float xAccel = currentMaxXSpeed / timeToMaxSpeed;
-        float yAccel = maxYSpeed / timeToMaxSpeed;
+        float yAccel = MaxYSpeed / timeToMaxSpeed;
 
         Vector3 playerPos = player != null ? player.position : EnemySpawner.Instance.PlayerLastPos;
         Vector2 toPlayerVector = (Vector2)playerPos - rb.position;
@@ -106,28 +106,28 @@ public class EnemyShipMove : MonoBehaviour
         if (toPlayerVector.sqrMagnitude > distanceToKeep + distanceToleranceFraction)
         {
             //Debug.Log("Distancia enorme");
-            newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * Time.fixedDeltaTime, -maxYSpeed, maxYSpeed);
+            newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * Time.fixedDeltaTime, -MaxYSpeed, MaxYSpeed);
         }
         else if (toPlayerVector.sqrMagnitude > distanceToKeep)
         {
             //Debug.Log("Média-Grande");
             if (newVelocity.y > 0)
-                newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * 1.5f * Time.fixedDeltaTime, 0, maxYSpeed);
+                newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * 1.5f * Time.fixedDeltaTime, 0, MaxYSpeed);
             else if (newVelocity.y < 0)
-                newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * 1.5f * Time.fixedDeltaTime, -maxYSpeed, 0);
+                newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * 1.5f * Time.fixedDeltaTime, -MaxYSpeed, 0);
         }
         else if (toPlayerVector.sqrMagnitude > distanceToKeep - distanceToleranceFraction)
         {
             //Debug.Log("Pequena");
             if (newVelocity.y > 0)
-                newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * 1.5f * Time.fixedDeltaTime, 0, maxYSpeed);
+                newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * 1.5f * Time.fixedDeltaTime, 0, MaxYSpeed);
             else if (newVelocity.y < 0)
-                newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * 1.5f * Time.fixedDeltaTime, -maxYSpeed, 0);
+                newVelocity.y = Mathf.Clamp(newVelocity.y + yAccel * 1.5f * Time.fixedDeltaTime, -MaxYSpeed, 0);
         }
         else if (toPlayerVector.sqrMagnitude < distanceToKeep - distanceToleranceFraction)
         {
             //Debug.Log("Mínima");
-            newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * Time.fixedDeltaTime * 1.5f, -maxYSpeed, maxYSpeed);
+            newVelocity.y = Mathf.Clamp(newVelocity.y - yAccel * Time.fixedDeltaTime * 1.5f, -MaxYSpeed, MaxYSpeed);
         }
 
         if (!isRotating)
@@ -161,7 +161,7 @@ public class EnemyShipMove : MonoBehaviour
             else
                 isRotating = false;
 
-            timeToChangeRotation = Random.Range(-rotationChangeTimeVar, rotationChangeTimeVar) + rotationChangeTime;
+            timeToChangeRotation = Random.Range(-RotationChangeTimeVar, RotationChangeTimeVar) + RotationChangeTime;
             if (!isRotating)
                 timeToChangeRotation *= 0.4f;            
 

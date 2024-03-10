@@ -1,4 +1,5 @@
 using MoreMountains.Tools;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,13 +9,17 @@ using UnityEngine;
 [Serializable]
 public struct DropsToSpawn
 {
+    [HorizontalGroup("G", width: .6f), LabelWidth(40)]
     public ResourceType drop;
+    [HorizontalGroup("G"), GUIColor("cyan"), LabelWidth(90)]
     public float spawnWeight;
 }
 [Serializable]
 public struct DropsGuaranteed
 {
+    [HorizontalGroup("G", width: .6f), LabelWidth(40)]
     public ResourceType drop;
+    [HorizontalGroup("G"), GUIColor("#ff61e5"), LabelWidth(90)]
     public int Amount;
 }
 
@@ -22,9 +27,9 @@ public class EnemyDropDealer : MonoBehaviour
 {
     [SerializeField] float radiusToSpawn = 1;
     [Space]
-    [SerializeField] DropsToSpawn[] dropsToSpawn;
-    [SerializeField] int minDropsNum = 2;
-    [SerializeField] int maxDropsNum = 5;
+    [HideInInspector] public DropsToSpawn[] DropsToSpawn;
+    [HideInInspector] public int MinDropsNum = 2;
+    [HideInInspector] public int MaxDropsNum = 5;
     [Space]
     [SerializeField] DropsGuaranteed[] dropsGuaranteed;
     
@@ -34,17 +39,17 @@ public class EnemyDropDealer : MonoBehaviour
     {
         SpawnGuaranteedDrops();
 
-        int dropsNumber = UnityEngine.Random.Range(minDropsNum, maxDropsNum+1);
-        Debug.Log($" Min: {minDropsNum}, Max: {maxDropsNum}, => {dropsNumber}");
+        int dropsNumber = UnityEngine.Random.Range(MinDropsNum, MaxDropsNum+1);
+        //Debug.Log($" Min: {minDropsNum}, Max: {maxDropsNum}, => {dropsNumber}");
 
         //foreach (var drop in dropsToSpawn)
         //{
         //    totalSpawnWeight += drop.spawnWeight;
         //}
 
-        for (int i = 0; i < dropsToSpawn.Length; i++)
+        for (int i = 0; i < DropsToSpawn.Length; i++)
         {
-            totalSpawnWeight += dropsToSpawn[i].spawnWeight;
+            totalSpawnWeight += DropsToSpawn[i].spawnWeight;
         }
 
         for (int i = 0; i < dropsNumber; i++)
@@ -92,15 +97,15 @@ public class EnemyDropDealer : MonoBehaviour
     {
         ResourceType nextDrop = ResourceType.Metal;
 
-        for(int i=0; i < dropsToSpawn.Length; i++)
+        for(int i=0; i < DropsToSpawn.Length; i++)
         {
-            if (spawnValue <= dropsToSpawn[i].spawnWeight)
+            if (spawnValue <= DropsToSpawn[i].spawnWeight)
             {
-                nextDrop = dropsToSpawn[i].drop;
+                nextDrop = DropsToSpawn[i].drop;
                 break;
             }
             else
-                spawnValue -= dropsToSpawn[i].spawnWeight;
+                spawnValue -= DropsToSpawn[i].spawnWeight;
         }
         return nextDrop;
     }

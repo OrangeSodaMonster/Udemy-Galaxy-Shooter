@@ -176,7 +176,7 @@ MonoBehaviour:
   <IsAsteroid>k__BackingField: 0
   asteroidVolumeMultiplier: 1
   destroyOnCollision: 1
-  <MaxHP>k__BackingField: 15
+  MaxHP: 15
 --- !u!114 &5556342535090201594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,8 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8340fada8b02f4199f8a23b0820ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 35
-  <ImpactVelocity>k__BackingField: 0.6
+  Damage: 20
+  ImpactVelocity: 0.6
 --- !u!114 &4871147860128078388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,8 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7149ebbafdf7674493888b819d92d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2.5
-  speedVariationPerc: 10
+  BaseSpeed: 2.5
+  SpeedVariationPerc: 10
 --- !u!114 &3938272113056073347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <projectilePref>k__BackingField: {fileID: 1250797867374824522, guid: 645435d149b3671469a35e59c34343cb, type: 3}
-  baseShootCD: 5
-  shootCDVariation: 0.5
+  BaseShootCD: 0
+  ShootCDVariation: 0
   projectileOrigin: {fileID: 7501308407415674733}
   preShootVFX: {fileID: 8271918894049419804}
   preShootVFXTimePrior: 2
@@ -239,17 +239,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusToSpawn: 0.4
-  dropsToSpawn:
+  DropsToSpawn:
   - drop: 1
     spawnWeight: 5
   - drop: 2
-    spawnWeight: 5
+    spawnWeight: 2
   - drop: 3
-    spawnWeight: 0.3
+    spawnWeight: 0.2
   - drop: 4
-    spawnWeight: 0.1
-  minDropsNum: 2
-  maxDropsNum: 4
+    spawnWeight: 0.02
+  MinDropsNum: 1
+  MaxDropsNum: 3
   dropsGuaranteed: []
 --- !u!114 &6894032270590602362
 MonoBehaviour:
@@ -373,18 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69333f3c3ca8a547aa84d68cc8d568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToDrop: 1.5
-  PuDrops:
-  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
-    Weight: 10
-  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
-    Weight: 7
-  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
-    Weight: 6
-  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
-    Weight: 10
-  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
-    Weight: 10
+  ChanceToDrop: 0
+  PuDrops: []
 --- !u!114 &-2419304842710714408
 MonoBehaviour:
   m_ObjectHideFlags: 0
