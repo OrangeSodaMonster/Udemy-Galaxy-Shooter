@@ -187,7 +187,7 @@ MonoBehaviour:
   drawGizmos: 0
   MoveDirection: {x: 0, y: 0, z: 0}
   MoveSpeed: 0
-  BaseSpeed: 2
+  BaseSpeed: 2.3
   SpeedVariationPerc: 20
   moveDirVariation: 0.09
 --- !u!114 &7857951331720398694
@@ -250,10 +250,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusToSpawn: 1
-  DropsToSpawn: []
-  MinDropsNum: 0
-  MaxDropsNum: 0
-  dropsGuaranteed: []
+  DropsToSpawn:
+  - drop: 1
+    spawnWeight: 20
+  - drop: 2
+    spawnWeight: 1
+  - drop: 3
+    spawnWeight: 0.05
+  - drop: 4
+    spawnWeight: 0
+  MinDropsNum: 1
+  MaxDropsNum: 2
+  dropsGuaranteed:
+  - drop: 1
+    Amount: 0
+  - drop: 2
+    Amount: 0
+  - drop: 3
+    Amount: 0
+  - drop: 4
+    Amount: 0
 --- !u!114 &5286106063799904959
 MonoBehaviour:
   m_ObjectHideFlags: 0

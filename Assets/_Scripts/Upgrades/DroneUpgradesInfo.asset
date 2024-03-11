@@ -13,26 +13,26 @@ MonoBehaviour:
   m_Name: DroneUpgradesInfo
   m_EditorClassIdentifier: 
   UnlockCostLine:
-    Resource1: 0
-    Cost1: 0
-    Resource2: 0
-    Cost2: 0
+    Resource1: 1
+    Cost1: 15
+    Resource2: 2
+    Cost2: 5
   UnlockCost:
-  - ResourceType: 0
-    Amount: 0
-  - ResourceType: 0
-    Amount: 0
+  - ResourceType: 1
+    Amount: 15
+  - ResourceType: 2
+    Amount: 5
   PowerUpgrades:
   - CostLine:
       Resource1: 1
-      Cost1: 2
+      Cost1: 0
       Resource2: 3
-      Cost2: 1
+      Cost2: 0
     Cost:
     - ResourceType: 1
-      Amount: 2
+      Amount: 0
     - ResourceType: 3
-      Amount: 1
+      Amount: 0
     DamagePerSecond: 3
     Color:
       serializedVersion: 2
@@ -66,14 +66,14 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
   - CostLine:
       Resource1: 1
-      Cost1: 1
-      Resource2: 0
-      Cost2: 0
+      Cost1: 10
+      Resource2: 3
+      Cost2: 1
     Cost:
     - ResourceType: 1
+      Amount: 10
+    - ResourceType: 3
       Amount: 1
-    - ResourceType: 0
-      Amount: 0
     DamagePerSecond: 6
     Color:
       serializedVersion: 2
@@ -106,15 +106,15 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 25
+      Resource2: 3
+      Cost2: 3
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 1
+      Amount: 25
+    - ResourceType: 3
+      Amount: 3
     DamagePerSecond: 10
     Color:
       serializedVersion: 2
@@ -147,15 +147,15 @@ MonoBehaviour:
       m_NumColorKeys: 3
       m_NumAlphaKeys: 2
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 2
+      Cost1: 15
+      Resource2: 3
+      Cost2: 10
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 2
+      Amount: 15
+    - ResourceType: 3
+      Amount: 10
     DamagePerSecond: 14
     Color:
       serializedVersion: 2
@@ -188,15 +188,15 @@ MonoBehaviour:
       m_NumColorKeys: 3
       m_NumAlphaKeys: 2
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 2
+      Cost1: 30
+      Resource2: 4
+      Cost2: 1
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 2
+      Amount: 30
+    - ResourceType: 4
+      Amount: 1
     DamagePerSecond: 18
     Color:
       serializedVersion: 2
@@ -229,15 +229,15 @@ MonoBehaviour:
       m_NumColorKeys: 3
       m_NumAlphaKeys: 2
   - CostLine:
-      Resource1: 1
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 2
+      Cost1: 50
+      Resource2: 4
+      Cost2: 3
     Cost:
-    - ResourceType: 1
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 2
+      Amount: 50
+    - ResourceType: 4
+      Amount: 3
     DamagePerSecond: 22
     Color:
       serializedVersion: 2
@@ -273,89 +273,89 @@ MonoBehaviour:
   - CostLine:
       Resource1: 1
       Cost1: 0
-      Resource2: 0
+      Resource2: 3
       Cost2: 0
     Cost:
     - ResourceType: 1
       Amount: 0
-    - ResourceType: 0
+    - ResourceType: 3
       Amount: 0
     Range: 3
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 15
+      Resource2: 3
+      Cost2: 2
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 1
+      Amount: 15
+    - ResourceType: 3
+      Amount: 2
     Range: 3.5
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 50
+      Resource2: 3
+      Cost2: 6
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 1
+      Amount: 50
+    - ResourceType: 3
+      Amount: 6
     Range: 4
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
-    Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
-    Range: 4.5
-  - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
-    Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
-    Range: 5
-  HealUpgrades:
-  - CostLine:
       Resource1: 2
-      Cost1: 1
-      Resource2: 1
+      Cost1: 25
+      Resource2: 4
       Cost2: 1
     Cost:
     - ResourceType: 2
+      Amount: 25
+    - ResourceType: 4
       Amount: 1
+    Range: 4.5
+  - CostLine:
+      Resource1: 2
+      Cost1: 50
+      Resource2: 4
+      Cost2: 3
+    Cost:
+    - ResourceType: 2
+      Amount: 50
+    - ResourceType: 4
+      Amount: 3
+    Range: 5
+  HealUpgrades:
+  - CostLine:
+      Resource1: 1
+      Cost1: 10
+      Resource2: 2
+      Cost2: 5
+    Cost:
     - ResourceType: 1
-      Amount: 1
+      Amount: 10
+    - ResourceType: 2
+      Amount: 5
     ReduceFromHealInterval: 0.5
   - CostLine:
       Resource1: 1
-      Cost1: 1
-      Resource2: 1
-      Cost2: 0
+      Cost1: 40
+      Resource2: 2
+      Cost2: 20
     Cost:
     - ResourceType: 1
-      Amount: 1
-    - ResourceType: 1
-      Amount: 0
+      Amount: 40
+    - ResourceType: 2
+      Amount: 20
     ReduceFromHealInterval: 0.5
   - CostLine:
       Resource1: 1
-      Cost1: 0
-      Resource2: 1
-      Cost2: 0
+      Cost1: 100
+      Resource2: 2
+      Cost2: 50
     Cost:
     - ResourceType: 1
-      Amount: 0
-    - ResourceType: 1
-      Amount: 0
+      Amount: 100
+    - ResourceType: 2
+      Amount: 50
     ReduceFromHealInterval: 0.5

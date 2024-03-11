@@ -90,10 +90,10 @@ public class Cheats : MonoBehaviour
 
     public void AddResources()
     {
-        PlayerCollectiblesCount.MetalAmount += 50;
-        PlayerCollectiblesCount.RareMetalAmount += 50;
-        PlayerCollectiblesCount.EnergyCristalAmount += 50;
-        PlayerCollectiblesCount.CondensedEnergyCristalAmount += 50;
+        PlayerCollectiblesCount.MetalAmount += 500;
+        PlayerCollectiblesCount.RareMetalAmount += 500;
+        PlayerCollectiblesCount.EnergyCristalAmount += 500;
+        PlayerCollectiblesCount.CondensedEnergyCristalAmount += 500;
 
         PlayerCollectiblesCount.ChangedCollectbleAmount();
     }

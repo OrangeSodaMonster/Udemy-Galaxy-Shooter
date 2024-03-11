@@ -14,14 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 5902244170977490884, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
   MaxHP: 25
-  Speed: 2.5
+  Speed: 2.8
   SpeedVarPerc: 15
   CollisionDamage: 25
   ImpactVelocity: 0.6
-  MinDrops: 0
-  MaxDrops: 0
-  DropsChances: []
-  DropsGuaranteed: []
+  MinDrops: 1
+  MaxDrops: 2
+  DropWeightsLine:
+    MetalCrumb: 20
+    RareMetalCrumb: 1
+    EnergyCristal: 0
+    CondensedEnergyCristal: 0
+  GuaranteedLine:
+    MetalCrumb: 0
+    RareMetalCrumb: 0
+    EnergyCristal: 0
+    CondensedEnergyCristal: 0
   ShootCD: 0
   ShootCdVar: 0
   PuDropChance: 0

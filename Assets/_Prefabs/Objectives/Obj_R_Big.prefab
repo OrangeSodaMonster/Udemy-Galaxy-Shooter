@@ -166,10 +166,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusToSpawn: 1
-  DropsToSpawn: []
-  MinDropsNum: 0
-  MaxDropsNum: 0
-  dropsGuaranteed: []
+  DropsToSpawn:
+  - drop: 1
+    spawnWeight: 5
+  - drop: 2
+    spawnWeight: 10
+  - drop: 3
+    spawnWeight: 1
+  - drop: 4
+    spawnWeight: 0
+  MinDropsNum: 1
+  MaxDropsNum: 3
+  dropsGuaranteed:
+  - drop: 1
+    Amount: 0
+  - drop: 2
+    Amount: 2
+  - drop: 3
+    Amount: 0
+  - drop: 4
+    Amount: 0
 --- !u!114 &5286106063799904959
 MonoBehaviour:
   m_ObjectHideFlags: 0

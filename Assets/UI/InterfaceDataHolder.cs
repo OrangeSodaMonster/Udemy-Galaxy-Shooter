@@ -39,8 +39,13 @@ public class InterfaceDataHolder : ScriptableObject
             upgradeLevelTxt.enabled = false;
             icon.color = Color.gray;
 
-            SetCost(resourceNumber[0], costOne, costOneTxt);
-            SetCost(resourceNumber[1], costTwo, costTwoTxt);
+            //SetCost(resourceNumber[0], costOne, costOneTxt, avaliable: false);
+            //SetCost(resourceNumber[1], costTwo, costTwoTxt, avaliable: false);
+
+            costOne.enabled = false;
+            costOneTxt.enabled = false;
+            costTwo.enabled = false;
+            costTwoTxt.enabled = false;
 
             if (disableIfUnavaliable)
                 icon.GetComponent<Button>().enabled = false;

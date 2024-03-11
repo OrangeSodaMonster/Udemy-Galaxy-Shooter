@@ -19,9 +19,17 @@ MonoBehaviour:
   CollisionDamage: 20
   ImpactVelocity: 0.6
   MinDrops: 0
-  MaxDrops: 0
-  DropsChances: []
-  DropsGuaranteed: []
+  MaxDrops: 1
+  DropWeightsLine:
+    MetalCrumb: 30
+    RareMetalCrumb: 1
+    EnergyCristal: 0
+    CondensedEnergyCristal: 0
+  GuaranteedLine:
+    MetalCrumb: 0
+    RareMetalCrumb: 0
+    EnergyCristal: 0
+    CondensedEnergyCristal: 0
   ShootCD: 0
   ShootCdVar: 0
   PuDropChance: 0

@@ -14,24 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnlockCostLine:
     Resource1: 1
-    Cost1: 0
-    Resource2: 0
-    Cost2: 0
+    Cost1: 15
+    Resource2: 3
+    Cost2: 1
   UnlockCost:
   - ResourceType: 1
-    Amount: 0
-  - ResourceType: 0
-    Amount: 0
+    Amount: 15
+  - ResourceType: 3
+    Amount: 1
   PowerUpgrades:
   - CostLine:
       Resource1: 1
       Cost1: 0
-      Resource2: 0
+      Resource2: 3
       Cost2: 0
     Cost:
     - ResourceType: 1
       Amount: 0
-    - ResourceType: 0
+    - ResourceType: 3
       Amount: 0
     Damage: 10
     Sprite: {fileID: -2003739274, guid: ae2e87f11189527449f6b2db1fee67ae, type: 3}
@@ -66,15 +66,15 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 15
+      Resource2: 3
+      Cost2: 1
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 1
+      Amount: 15
+    - ResourceType: 3
+      Amount: 1
     Damage: 15
     Sprite: {fileID: -1966415050, guid: ae2e87f11189527449f6b2db1fee67ae, type: 3}
     VFXGradient:
@@ -108,15 +108,15 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 30
+      Resource2: 3
+      Cost2: 3
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 1
+      Amount: 30
+    - ResourceType: 3
+      Amount: 3
     Damage: 20
     Sprite: {fileID: 1099113670, guid: ae2e87f11189527449f6b2db1fee67ae, type: 3}
     VFXGradient:
@@ -150,15 +150,15 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 50
+      Resource2: 3
+      Cost2: 6
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 1
+      Amount: 50
+    - ResourceType: 3
+      Amount: 6
     Damage: 25
     Sprite: {fileID: -1120515609, guid: ae2e87f11189527449f6b2db1fee67ae, type: 3}
     VFXGradient:
@@ -192,15 +192,15 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 2
+      Cost1: 30
+      Resource2: 4
+      Cost2: 1
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
+    - ResourceType: 2
+      Amount: 30
+    - ResourceType: 4
+      Amount: 1
     Damage: 30
     Sprite: {fileID: 2106605276, guid: ae2e87f11189527449f6b2db1fee67ae, type: 3}
     VFXGradient:
@@ -234,16 +234,16 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 2
+      Cost1: 65
+      Resource2: 4
+      Cost2: 3
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
-    Damage: 40
+    - ResourceType: 2
+      Amount: 65
+    - ResourceType: 4
+      Amount: 3
+    Damage: 35
     Sprite: {fileID: 1465540081, guid: ae2e87f11189527449f6b2db1fee67ae, type: 3}
     VFXGradient:
       serializedVersion: 2
@@ -279,55 +279,55 @@ MonoBehaviour:
   - CostLine:
       Resource1: 1
       Cost1: 0
-      Resource2: 0
+      Resource2: 2
       Cost2: 0
     Cost:
     - ResourceType: 1
       Amount: 0
-    - ResourceType: 0
+    - ResourceType: 2
       Amount: 0
     TimeBetween: 0.5
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 15
+      Resource2: 2
+      Cost2: 5
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
-    TimeBetween: 0.42
+    - ResourceType: 1
+      Amount: 15
+    - ResourceType: 2
+      Amount: 5
+    TimeBetween: 0.45
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 25
+      Resource2: 2
+      Cost2: 10
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
-    TimeBetween: 0.36
+    - ResourceType: 1
+      Amount: 25
+    - ResourceType: 2
+      Amount: 10
+    TimeBetween: 0.4
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 50
+      Resource2: 2
+      Cost2: 25
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
-    TimeBetween: 0.28
+    - ResourceType: 1
+      Amount: 50
+    - ResourceType: 2
+      Amount: 25
+    TimeBetween: 0.35
   - CostLine:
-      Resource1: 0
-      Cost1: 0
-      Resource2: 0
-      Cost2: 0
+      Resource1: 1
+      Cost1: 100
+      Resource2: 2
+      Cost2: 55
     Cost:
-    - ResourceType: 0
-      Amount: 0
-    - ResourceType: 0
-      Amount: 0
-    TimeBetween: 0.2
+    - ResourceType: 1
+      Amount: 100
+    - ResourceType: 2
+      Amount: 55
+    TimeBetween: 0.3

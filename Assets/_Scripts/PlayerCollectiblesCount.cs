@@ -7,9 +7,7 @@ using UnityEngine.Events;
 
 public enum ResourceType
 {
-    //MetalCrumb,    
     Metal = 1,
-    //RareMetalCrumb,
     RareMetal = 2,
     EnergyCristal = 3,
     CondensedEnergyCristal = 4,
@@ -27,26 +25,26 @@ public struct ResourceNumber
 [Serializable]
 public struct CollectibleLine
 {
-    [HorizontalGroup("G", 0.2f), LabelText("Metal"), GUIColor("white"), LabelWidth(40)]
+    [HorizontalGroup("G", 0.2f), LabelText("Metal"), GUIColor("white"), LabelWidth(40), MinValue(0)]
     public float MetalCrumb;
-    [HorizontalGroup("G", .26f), LabelText("RareMetal"), GUIColor("green"), LabelWidth(65)]
+    [HorizontalGroup("G", .26f), LabelText("RareMetal"), GUIColor("green"), LabelWidth(65), MinValue(0)]
     public float RareMetalCrumb;
-    [HorizontalGroup("G"), LabelText("Crystal"), GUIColor("blue"), LabelWidth(50)]
+    [HorizontalGroup("G"), LabelText("Crystal"), GUIColor("blue"), LabelWidth(50), MinValue(0)]
     public float EnergyCristal;
-    [HorizontalGroup("G", .3f), LabelText("CondCrystal"), GUIColor("purple"), LabelWidth(77)]
+    [HorizontalGroup("G", .3f), LabelText("CondCrystal"), GUIColor("purple"), LabelWidth(77), MinValue(0)]
     public float CondensedEnergyCristal;
 }
 
 [Serializable]
 public struct UpgradeCost
 {
-    [HorizontalGroup("G"), HideLabel]
+    [HorizontalGroup("G"), HideLabel, MinValue(1)]
     public ResourceType Resource1;
-    [HorizontalGroup("G"), HideLabel]
+    [HorizontalGroup("G"), HideLabel, MinValue(0)]
     public int Cost1;
-    [HorizontalGroup("G"), HideLabel]
+    [HorizontalGroup("G"), HideLabel, MinValue(1)]
     public ResourceType Resource2;
-    [HorizontalGroup("G"), HideLabel]
+    [HorizontalGroup("G"), HideLabel, MinValue(0)]
     public int Cost2;
 }
 
