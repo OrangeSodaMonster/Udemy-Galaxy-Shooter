@@ -172,7 +172,9 @@ public class EnemyInfoSO : ScriptableObject
             spawnDrone.SpawnCDVariation = DroneSpawnTimeVar;
         }
 
-        PrefabUtility.SavePrefabAsset(enemy, out bool success);
-        Debug.Log(success ? $"Saved {name}" : "Could not save asset");
+        # if UNITY_EDITOR
+            PrefabUtility.SavePrefabAsset(enemy, out bool success);
+            Debug.Log(success ? $"Saved {name}" : "Could not save asset");
+        #endif
     }
 }

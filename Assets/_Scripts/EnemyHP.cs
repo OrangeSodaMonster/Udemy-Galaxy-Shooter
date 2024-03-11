@@ -52,10 +52,10 @@ public class EnemyHP : MonoBehaviour
         {
             if (TryGetComponent(out AsteroidSplit split))
             {
-                if (transform.parent != null && transform.parent.GetComponent<ObjectiveSpawnArrow>() != null)
-                    split.SplitParented(currentHP, transform.parent);
-                else
-                    split.Split(currentHP);
+                //if (transform.parent != null && transform.parent.GetComponent<ObjectiveSpawnArrow>() != null)
+                //    split.SplitParented(currentHP, transform.parent);
+                //else
+                split.Split(currentHP);
             }
 
             if (TryGetComponent(out EnemyDropDealer dropDealer))

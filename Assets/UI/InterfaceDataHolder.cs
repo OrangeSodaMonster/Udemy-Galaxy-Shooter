@@ -33,6 +33,11 @@ public class InterfaceDataHolder : ScriptableObject
         TextMeshProUGUI costOneTxt = costs[0].GetComponentInChildren<TextMeshProUGUI>();
         TextMeshProUGUI costTwoTxt = costs[1].GetComponentInChildren<TextMeshProUGUI>();
 
+        costOne.enabled = isAvaliable;
+        costOneTxt.enabled = isAvaliable;
+        costTwo.enabled = isAvaliable;
+        costTwoTxt.enabled = isAvaliable;
+
         if (!isAvaliable)
         {
             border.color = unavaliableColor;
@@ -40,12 +45,7 @@ public class InterfaceDataHolder : ScriptableObject
             icon.color = Color.gray;
 
             //SetCost(resourceNumber[0], costOne, costOneTxt, avaliable: false);
-            //SetCost(resourceNumber[1], costTwo, costTwoTxt, avaliable: false);
-
-            costOne.enabled = false;
-            costOneTxt.enabled = false;
-            costTwo.enabled = false;
-            costTwoTxt.enabled = false;
+            //SetCost(resourceNumber[1], costTwo, costTwoTxt, avaliable: false);            
 
             if (disableIfUnavaliable)
                 icon.GetComponent<Button>().enabled = false;

@@ -9,6 +9,7 @@ using UnityEngine.PlayerLoop;
 public class AsteroidSplit : MonoBehaviour
 {
     //[SerializeField] bool drawGizmos;
+    public bool IsObjective = false;
     [SerializeField] GameObject asteroidToSplitInto;
     [SerializeField] float spawnDistance = 1f;
     [SerializeField] float baseNewDirectionAngle = 20f;
@@ -17,24 +18,10 @@ public class AsteroidSplit : MonoBehaviour
 
     Vector3 moveDirection;
     float moveSpeed;
+    Transform objParent;
     private void OnEnable()
     {
         StartCoroutine(GetVelocity());
-
-        //if (drawGizmos)
-        //{
-           
-        //    for (int i = 0; i < spawnPos.Length; i++)
-        //    {
-        //        //Relative to object pos
-        //        spawnPos[i] = (Quaternion.AngleAxis((0+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
-
-        //        float angleVariance = Mathf.Abs(Random.Range(-newDirectionVariance, newDirectionVariance) + baseNewDirectionAngle);
-        //        newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
-        //        float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed - moveSpeed*(newSpeedVarPerc/100), moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
-        //    }
-            
-        //}
     }
 
     IEnumerator GetVelocity()
@@ -50,26 +37,43 @@ public class AsteroidSplit : MonoBehaviour
         {
             moveDirection = Random.insideUnitCircle.normalized;
             moveSpeed = 0;
-            //Debug.Log(moveDirection);
         }
+
+        if(transform.parent.GetComponent<ObjectiveSpawnArrow>() != null)
+        {
+            objParent = transform.parent;
+        }
+
+        if (IsObjective)
+            SetObjChildren(objParent);
     }
 
-    //void Update()
-    //{
-    //    if (drawGizmos)
-    //    {
-    //        for (int i = 0; i < spawnPos.Length; i++)
-    //        {
-    //            Debug.DrawRay(transform.position, spawnPos[i], Color.blue);
-    //            Debug.DrawRay(transform.position, newMoveDir[i], Color.cyan);
-    //        }
-    //    }
-    //}
+    public void SetObjChildren(Transform objParent = null)
+    {
+        if (transform.childCount >= 3) return;
+        if (objParent != null) this.objParent = objParent;
+
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject child = Instantiate(asteroidToSplitInto, transform);
+            if(child.TryGetComponent(out AsteroidSplit split) && split.IsObjective)
+            {
+                split.SetObjChildren(this.objParent);
+            }
+            child.SetActive(false);
+        }
+    }
 
     Vector3[] spawnPos = new Vector3[3];
     Vector3[] newMoveDir = new Vector3[3];
     public void Split(int extraDamage)
     {
+        if (IsObjective)
+        {
+            SplitParented(extraDamage);
+            return;
+        }
+
         int[] damageToApply = CalculateDamageToApply(ref extraDamage);
 
         for (int i = 0; i < spawnPos.Length; i++)
@@ -84,19 +88,22 @@ public class AsteroidSplit : MonoBehaviour
         }
     }    
 
-    public void SplitParented(int extraDamage, Transform parent)
+    public void SplitParented(int extraDamage)
     {
         int[] damageToApply = CalculateDamageToApply(ref extraDamage);
 
-        for (int i = 0; i < spawnPos.Length; i++)
+        for (int i = 0; i < 3; i++)
         {
-            spawnPos[i] = transform.position + (Quaternion.AngleAxis((-120+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
+            //Debug.Log(transform.childCount);
+            GameObject child = transform.GetChild(0).gameObject;
+            child.transform.position = transform.position + (Quaternion.AngleAxis((-120+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
+            child.transform.parent = objParent;
+            child.SetActive(true);
 
-            float angleVariance = Mathf.Abs(Random.Range(-newDirectionVariance, newDirectionVariance) + baseNewDirectionAngle);
-            newMoveDir[i] = (Quaternion.AngleAxis((-angleVariance + angleVariance * i), Vector3.forward) * moveDirection.normalized);
-            float newMoveSpeed = Mathf.Abs(Random.Range(moveSpeed, moveSpeed + moveSpeed*(newSpeedVarPerc/100)));
-
-            EnemySpawner.Instance.SpawnAsteroidParented(asteroidToSplitInto, spawnPos[i], newMoveDir[i], newMoveSpeed, damageToApply[i], parent);
+            if (damageToApply[i] > 0 && child.TryGetComponent(out EnemyHP hp))
+            {
+                hp.ChangeHP(-Mathf.Abs(damageToApply[i]));
+            }
         }
     }
 
@@ -116,7 +123,6 @@ public class AsteroidSplit : MonoBehaviour
             if(i >= spawnPos.Length)
                 i = 0;
         }
-        //Debug.Log(damageToApply[0] + " " + damageToApply[1] + " " + damageToApply[2]);
         return damageToApply;
     }
 }

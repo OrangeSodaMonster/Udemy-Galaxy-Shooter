@@ -82,11 +82,13 @@ public class ShipButtonScript : MonoBehaviour
             if (!PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled)
             {
                 interfaceData.SetUnlockedCostVisual(shipUpgradeInfo.TractorBeamUpgrade[0].Cost, costs);
+                upgradeLevelTxt.enabled = false;
                 //interfaceData.SetBoolButtonVisual(icon, border, upgradeLevelTxt, shipUpgradeInfo.TractorBeamUpgrade[0].Cost, costs, false);
                 //Debug.Log("Tractor disabled");
             }
             else
             {
+                upgradeLevelTxt.enabled = true;
                 if (PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel == shipUpgradeInfo.TractorBeamUpgrade.Length)
                     costToSend = shipUpgradeInfo.TractorBeamUpgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].Cost;
                 else

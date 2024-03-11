@@ -14,14 +14,15 @@ public class EnemyHPBar : MonoBehaviour
     Transform hpInstance;
     Slider hpBar;
     EnemyHP enemyHP;
+    Vector3 defaultPosOffset;
 	
     void Awake()
     {
         enemyHP = GetComponent<EnemyHP>();
 
+        defaultPosOffset = hpPositionOffset;
         enemyHP.TookDamage += DealWithBar;
-        enemyHP.Healed += DealWithBar;
-        hpPositionOffset.Scale(transform.lossyScale);
+        enemyHP.Healed += DealWithBar;        
     }
 
     private void OnDestroy()
@@ -34,6 +35,9 @@ public class EnemyHPBar : MonoBehaviour
     {
         hpInstance = null;
         hpBar = null;
+
+        hpPositionOffset = defaultPosOffset;
+        hpPositionOffset.Scale(transform.lossyScale);
     }
 
     private void OnDisable()
