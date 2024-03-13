@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13db7f8e275713d4e983a34de1a1dcf4, type: 3}
+  m_Name: ShipRed
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 5937920505952327345, guid: 80fe15d761246824e9e20b3dcd8d4f8b, type: 3}
+  MaxHP: 600
+  Speed: 6.5
+  SpeedVarPerc: 0
+  CollisionDamage: 150
+  ImpactVelocity: 1
+  MinDrops: 1
+  MaxDrops: 2
+  DropWeightsLine:
+    MetalCrumb: 10
+    RareMetalCrumb: 10
+    EnergyCristal: 0
+    CondensedEnergyCristal: 0
+  GuaranteedLine:
+    MetalCrumb: 0
+    RareMetalCrumb: 0
+    EnergyCristal: 1
+    CondensedEnergyCristal: 1
+  ShootCD: 4
+  ShootCdVar: 0.5
+  PuDropChance: 25
+  PuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
+  XSpeed: 4.5
+  RotChangeTime: 5
+  RotTimeVar: 1
+  DroneSpawnTime: 5.5
+  DroneSpawnTimeVar: 0.5
+  SentRange: 0
+  SentDamage: 0
+  SentDamageInterval: 0
+  Name: ShipRed

@@ -61,14 +61,18 @@ MonoBehaviour:
   - enemy: {fileID: 3596066275569553282, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
     spawnWeight: 1
   - enemy: {fileID: 7803575928964027051, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
-    spawnWeight: 0.9
+    spawnWeight: 0.5
   - enemy: {fileID: 7421692332896096082, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
-    spawnWeight: 0.3
+    spawnWeight: 0.2
   enemiesToSpawnByTime:
-  - enemy: {fileID: 7803575928964027051, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
-    timeSec: 6
-  - enemy: {fileID: 7421692332896096082, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+  - enemy: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
     timeSec: 10
+  - enemy: {fileID: 4976847092858403906, guid: 5a32e13870368424fad448cd615fcc70, type: 3}
+    timeSec: 10
+  - enemy: {fileID: 7283826026378168471, guid: 8f0b2c60373833f41816ee440acbc4d6, type: 3}
+    timeSec: 20
+  - enemy: {fileID: 5954638457871095047, guid: 12e1b50773635dd4782ab6e37de9910c, type: 3}
+    timeSec: 40
   PlayerLastPos: {x: 0, y: 0, z: 0}
 --- !u!114 &9069363442810099157
 MonoBehaviour:
@@ -97,20 +101,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RareSpawns:
-  - RareSpawn: {fileID: 411063981202400271, guid: 8e69b803762d62c40a36497855c30693, type: 3}
-    ChancePerMinute: 5
+  - RareSpawn: {fileID: 5576540212291046909, guid: 98a49b10e9f4b8a4cacfcd26650538c0, type: 3}
+    ChancePerMinute: 6
     ChancePerSecond: 0
-  - RareSpawn: {fileID: 2736164722901121699, guid: deca90c3753134b489f1a8efbc6d48e4, type: 3}
+  - RareSpawn: {fileID: 538371842349740114, guid: 1d5d8546ff9e8f84facd2c6cb32a6d40, type: 3}
     ChancePerMinute: 2
     ChancePerSecond: 0
   intervalToEnableAtBegining: 7
   intervalBetweenSpawns: 10
   playSound: 1
-  highlightPref: {fileID: 0}
+  highlightPref: {fileID: 2891326370554154253, guid: 1b0e558e850b2564699ef202d4f15cba, type: 3}
   showArrow: 1
-  arrowPref: {fileID: 0}
+  arrowPref: {fileID: 8427524829759873127, guid: 8602b95be267a684a8d023b30ff3c2f3, type: 3}
   arrowDistanceFromPlayer: 3.2
-  arrowDuration: 1
+  arrowDuration: 1.3
 --- !u!1 &8059279360510778739
 GameObject:
   m_ObjectHideFlags: 0

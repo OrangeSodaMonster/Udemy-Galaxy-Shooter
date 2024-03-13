@@ -191,6 +191,10 @@ public class SaveLoad : MonoBehaviour
         saveResources.CondensedEnergyCristalCount = PlayerCollectiblesCount.CondensedEnergyCristalAmount;
         MMSaveLoadManager.Save(saveResources, "Resources.saveFile", "Save" + CurrentSaveSlot);
 
+        SaveStageAndTimeObj SaveStages = new();
+        SaveStages.HighestStageCleared = GameManager.HighestStageCleared;
+        MMSaveLoadManager.Save(SaveStages, "Stages.saveFile", "Save" + CurrentSaveSlot);
+
         Debug.Log("Saved State");
     }
 
@@ -205,6 +209,9 @@ public class SaveLoad : MonoBehaviour
         SaveResourcesObj loadedResources = (SaveResourcesObj)MMSaveLoadManager.Load(typeof(SaveResourcesObj), "Resources.saveFile", "Save" + CurrentSaveSlot);
         PlayerCollectiblesCount.LoadResources(loadedResources.MetalCount, loadedResources.RareMetalCount, loadedResources.EnergyCristalCount, loadedResources.CondensedEnergyCristalCount);
 
+        SaveStageAndTimeObj loadedStages = (SaveStageAndTimeObj)MMSaveLoadManager.Load(typeof(SaveStageAndTimeObj), "Stages.saveFile", "Save" + CurrentSaveSlot);
+        GameManager.HighestStageCleared = loadedStages.HighestStageCleared;
+
         Debug.Log("Loaded State");
     }
 
@@ -217,6 +224,9 @@ public class SaveLoad : MonoBehaviour
 
         SaveResourcesObj saveResources = new();
         MMSaveLoadManager.Save(saveResources, "Resources.saveFile", "Save" + CurrentSaveSlot);
+
+        SaveStageAndTimeObj SaveStages = new();
+        MMSaveLoadManager.Save(SaveStages, "Stages.saveFile", "Save" + CurrentSaveSlot);
     }
 
     public bool TryGetState(int slot)
@@ -261,6 +271,7 @@ public class SaveLoad : MonoBehaviour
         else
         {
             CreateConfig();
+            LoadConfig();
         }
 
         if (TryGetState(CurrentSaveSlot))
@@ -270,6 +281,7 @@ public class SaveLoad : MonoBehaviour
         else
         {            
             CreateSaveState();
+            LoadState();
         }
     }
 
@@ -308,6 +320,11 @@ public class SaveLoad : MonoBehaviour
         public int RareMetalCount = 0;
         public int EnergyCristalCount = 0;
         public int CondensedEnergyCristalCount = 0;
+    }
+
+    class SaveStageAndTimeObj
+    {
+        public int HighestStageCleared = 0;
     }
 
     class SaveUpgradesObj

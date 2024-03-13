@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
+[SelectionBase]
 public class ObjectiveSpawnArrow : MonoBehaviour
 {
     [SerializeField] Transform arrowPrefab;
     [SerializeField] float arrowDistanceFromPlayer;
-    [SerializeField] EnemyHPBar target;
-
+    public UnityEvent OnClearedObjective;
+    
+    EnemyHPBar target;
     Transform arrow;
     Transform player;
     Vector2 direction;
@@ -21,6 +24,7 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMove>().transform;
         direction = (transform.position - player.position).normalized;
+        target = GetComponentInChildren<EnemyHPBar>();
 
         arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
         arrowSR = arrow.GetComponent<SpriteRenderer>();
@@ -47,7 +51,10 @@ public class ObjectiveSpawnArrow : MonoBehaviour
             fadeArrowTween = arrowSR.DOFade(defaultAlpha, 0.35f);
 
         if (!HasChildActive())
+        {
+            OnClearedObjective?.Invoke();
             gameObject.SetActive(false);
+        }
     }
 
     bool HasChildActive()
@@ -60,14 +67,6 @@ public class ObjectiveSpawnArrow : MonoBehaviour
             }
         }
         return false;
-
-        //foreach (Transform child in transform)
-        //{
-        //    if (child.gameObject.activeInHierarchy)
-
-        //    return true;
-        //}
-        //return false;
     }
 
     private void OnDisable()

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ShipGreen
   m_EditorClassIdentifier: 
   enemy: {fileID: 7421692332896096082, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
-  MaxHP: 30
+  MaxHP: 45
   Speed: 6.2
   SpeedVarPerc: 0
   CollisionDamage: 30
   ImpactVelocity: 1
-  MinDrops: 2
+  MinDrops: 1
   MaxDrops: 3
   DropWeightsLine:
     MetalCrumb: 10
@@ -30,11 +30,21 @@ MonoBehaviour:
     RareMetalCrumb: 0
     EnergyCristal: 0
     CondensedEnergyCristal: 0
-  ShootCD: 0
-  ShootCdVar: 0
-  PuDropChance: 0
-  PuDrops: []
-  XSpeed: 4
+  ShootCD: 6
+  ShootCdVar: 1
+  PuDropChance: 5
+  PuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
+  XSpeed: 3.5
   RotChangeTime: 6
   RotTimeVar: 2
   DroneSpawnTime: 10

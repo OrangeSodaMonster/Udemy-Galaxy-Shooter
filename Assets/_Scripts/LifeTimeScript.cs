@@ -24,10 +24,18 @@ public class LifeTimeScript : MonoBehaviour
     float fastBlinkTime;
     Color defaultColor;
 
+    WaitForSeconds lifeWait;
+    WaitForSeconds blinkWait;
+    WaitForSeconds fastBlinkWait;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
+
+        lifeWait = new WaitForSeconds(lifeTime);
+        blinkWait = new WaitForSeconds(lifeTime - blinkSeconds);
+        fastBlinkWait = new WaitForSeconds(blinkSeconds - fastBlinkSeconds);
     }
 
     void OnEnable()
@@ -50,17 +58,16 @@ public class LifeTimeScript : MonoBehaviour
 
     IEnumerator BlinkRoutine()
     {
-        yield return new WaitForSeconds(lifeTime - blinkSeconds);
+        yield return blinkWait;
         blinkingTween = spriteRenderer.DOFade(0, blinkTime).SetEase(ease).SetLoops(-1, LoopType.Yoyo).Play();
 
-        yield return new WaitForSeconds(blinkSeconds - fastBlinkSeconds);
+        yield return fastBlinkWait;
         blinkingTween.Kill();
         blinkingTween = spriteRenderer.DOFade(0, fastBlinkTime).SetEase(ease).SetLoops(-1, LoopType.Yoyo).Play();
-    }
-
+    }    
     IEnumerator LifeTimeRoutine()
     {
-        yield return new WaitForSeconds(lifeTime);
+        yield return lifeWait;
 
         if (vfxOnDeath)
         {

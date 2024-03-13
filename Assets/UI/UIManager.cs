@@ -59,6 +59,7 @@ public class UIManager : MonoBehaviour
         if (!GameStatus.IsPaused && !isOnPage && MySceneManager.IsFeedbackEnabled)
         {
             StartPause();
+            CallGarbageColector.CallGC();
         }
         else if (GameStatus.IsPaused && !isOnPage)
         {

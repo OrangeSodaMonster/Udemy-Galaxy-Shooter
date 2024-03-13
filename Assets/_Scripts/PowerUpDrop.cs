@@ -16,8 +16,8 @@ public struct PowerUpDrops
 
 public class PowerUpDrop : MonoBehaviour
 {
-    [HideInInspector, Range(0, 100)] public float ChanceToDrop = 2f;
-    [HideInInspector] public List<PowerUpDrops> PuDrops;
+    [Range(0, 100)] public float ChanceToDrop = 2f;
+    public List<PowerUpDrops> PuDrops;
 
     EnemyHP enemyHP;
     bool canDropShield;

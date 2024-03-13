@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 730843654295728852, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5798656742553944027, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
       propertyPath: m_Name
       value: Cameras
@@ -449,6 +453,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8427524829759873127, guid: 8602b95be267a684a8d023b30ff3c2f3, type: 3}
     - target: {fileID: 5599987194531963812, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599987194531963812, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: playSound
       value: 0
       objectReference: {fileID: 0}
@@ -461,20 +469,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2891326370554154253, guid: 1b0e558e850b2564699ef202d4f15cba, type: 3}
     - target: {fileID: 5599987194531963812, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
+      propertyPath: RareSpawns.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599987194531963812, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: intervalToEnableAtBegining
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5599987194531963812, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: RareSpawns.Array.data[0].RareSpawn
       value: 
-      objectReference: {fileID: 6796529581843978727, guid: 6c677c06c32766443a5012afdc77a173, type: 3}
+      objectReference: {fileID: 1969255480821374272, guid: 143d0e28d86b9a740b557790e99c78ad, type: 3}
     - target: {fileID: 5599987194531963812, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: RareSpawns.Array.data[1].RareSpawn
       value: 
-      objectReference: {fileID: 5381452980213982201, guid: e7992d7fdc3e30343b3bc9dc5c89bf72, type: 3}
+      objectReference: {fileID: 1969255480821374272, guid: 143d0e28d86b9a740b557790e99c78ad, type: 3}
     - target: {fileID: 5599987194531963812, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: RareSpawns.Array.data[0].ChancePerMinute
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5599987194531963812, guid: 9b26ad101bb210a4789c27cd7ae54ee1, type: 3}
       propertyPath: RareSpawns.Array.data[1].ChancePerMinute
@@ -1336,6 +1348,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2258975818505799757, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258975818505799757, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258975818505799757, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7529412
+      objectReference: {fileID: 0}
     - target: {fileID: 2406897831419706282, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1420,6 +1444,10 @@ PrefabInstance:
       propertyPath: onPointerUpEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 619670307}
+    - target: {fileID: 4661355866651782188, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 65535
+      objectReference: {fileID: 0}
     - target: {fileID: 5494735531109656563, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
       propertyPath: m_Camera
       value: 

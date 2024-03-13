@@ -246,7 +246,8 @@ public class AudioManager : MonoBehaviour
     }
 
     bool canPlayLaser = true;
-    public void PlayLaserSound(float laserSoundInterval)
+    WaitForSeconds laserWait = new WaitForSeconds(.1f);
+    public void PlayLaserSound()
     {
         if (!canPlayLaser) return;
 
@@ -256,12 +257,13 @@ public class AudioManager : MonoBehaviour
 
         IEnumerator EnableLaser()
         {
-            yield return new WaitForSeconds(laserSoundInterval);
+            yield return laserWait;
             canPlayLaser = true;
         }
     }
 
     bool canPlayPickUp = true;
+    WaitForSeconds pickUpWait = new WaitForSeconds(.1f);
     public void PlayMetalPickUpSound(MMFeedbacks soundFB)
     {
         if (!canPlayPickUp) return;
@@ -272,12 +274,13 @@ public class AudioManager : MonoBehaviour
 
         IEnumerator EnableMetalPU()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return pickUpWait;
             canPlayPickUp = true;
         }
     }
 
     bool canPlayAsteroidHit = true;
+    WaitForSeconds astHitWait = new WaitForSeconds(.1f);
     public void PlayAsteroidHitSound()
     {
         if (!canPlayAsteroidHit) return;
@@ -288,7 +291,7 @@ public class AudioManager : MonoBehaviour
 
         IEnumerator EnableAsteroidHit()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return astHitWait;
             canPlayAsteroidHit = true;
         }
     }

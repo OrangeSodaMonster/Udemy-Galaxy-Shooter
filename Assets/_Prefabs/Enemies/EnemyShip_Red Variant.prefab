@@ -16,18 +16,86 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d847b9b6532701d428d58b3389c42970, type: 2}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: MaxDropsNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[2].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[3].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: BaseShootCD
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: projectilePref
       value: 
       objectReference: {fileID: 9201868408255658033, guid: c02b3e0fb02e67e409bd09c0e101c55c, type: 3}
     - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: ShootCDVariation
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: <projectilePref>k__BackingField
       value: 
       objectReference: {fileID: 9201868408255658033, guid: c02b3e0fb02e67e409bd09c0e101c55c, type: 3}
     - target: {fileID: 1305956521399732184, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: BaseSpawnCD
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305956521399732184, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: droneToSpawn
       value: 
       objectReference: {fileID: 7123209894796936868, guid: ab45223f789d2304689d1006fd475fbd, type: 3}
+    - target: {fileID: 1305956521399732184, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: SpawnCDVariation
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228053111234539559, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: MaxHP
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: MaxXSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: MaxYSpeed
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: distanceToKeep
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: timeToMaxSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: RotationChangeTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: RotationChangeTimeVar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: distanceToleranceFraction
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3828722212198539157, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.size
       value: 1
@@ -160,13 +228,29 @@ PrefabInstance:
       propertyPath: vfxRingsColor.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4159148617365990426, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: ChanceToDrop
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.8349905
+      value: -2.42
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5308682
+      value: -0.73
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalPosition.z
@@ -235,6 +319,10 @@ PrefabInstance:
     - target: {fileID: 7484402040076671517, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key1.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773309586190827830, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: Damage
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

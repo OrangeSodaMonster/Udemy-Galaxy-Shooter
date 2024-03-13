@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,19 @@ public struct EnemiesToSpawnByTime
     public GameObject enemy;
     public float timeSec;
 }
+[Serializable]
+public struct EnemiesToLoopSpawn
+{
+    public GameObject enemy;
+    [HorizontalGroup("G")]
+    public float timeSec;
+    [HorizontalGroup("G")]
+    public float timeVarSec;
+    [HorizontalGroup("G")]
+    public float timeToStart;
+
+    [HideInInspector] public WaitForSeconds[] waits;
+}
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -29,7 +43,8 @@ public class EnemySpawner : MonoBehaviour
     public EnemiesToSpawn[] EnemiesToSpawn => enemiesToSpawn;
     [SerializeField] EnemiesToSpawnByTime[] enemiesToSpawnByTime;
     public EnemiesToSpawnByTime[] EnemiesToSpawnByTime => enemiesToSpawnByTime;
-    public Vector3 PlayerLastPos = new();
+    public EnemiesToLoopSpawn[] EnemiesToLoopSpawn;
+    [HideInInspector] public Vector3 PlayerLastPos = new();
     float noSpawnZoneRadiusStatic;
     public float NoSpawnZoneRadius { get { return noSpawnZoneRadiusStatic; } }
     float spawnZoneRadiusStatic;
@@ -41,7 +56,6 @@ public class EnemySpawner : MonoBehaviour
     PoolRefs poolRef;
 
     public static EnemySpawner Instance;
-
 
     private void Awake()
     {      
@@ -67,6 +81,11 @@ public class EnemySpawner : MonoBehaviour
         foreach (var spawn in enemiesToSpawnByTime)
         {
             StartCoroutine(SpawnByTime(spawn.enemy, spawn.timeSec));
+        }
+
+        foreach (var spawn in EnemiesToLoopSpawn)
+        {
+            StartCoroutine(SpawnLoop(spawn));
         }
     }
 
@@ -109,7 +128,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnByTime(GameObject enemyToSpawn, float time)
+    public IEnumerator SpawnByTime(GameObject enemyToSpawn, float time)
     {
         yield return new WaitForSeconds(time);
 
@@ -117,6 +136,28 @@ public class EnemySpawner : MonoBehaviour
         GameObject enemy = poolRef.Poolers[enemyToSpawn].GetPooledGameObject();
         enemy.transform.position = GetSpawnPoint();
         enemy.SetActive(true);
+    }
+
+    public IEnumerator SpawnLoop(EnemiesToLoopSpawn loopSpawn)
+    {
+        loopSpawn.waits = new WaitForSeconds[5];
+        for(int i = 0; i < 5; i++)
+        {
+            float waitTime = UnityEngine.Random.Range(loopSpawn.timeSec - loopSpawn.timeVarSec, loopSpawn.timeSec + loopSpawn.timeVarSec);
+            loopSpawn.waits[i] = new WaitForSeconds(waitTime);
+        }
+
+        yield return new WaitForSeconds(loopSpawn.timeToStart);
+
+        while (true)
+        {
+            GameObject enemy = poolRef.Poolers[loopSpawn.enemy].GetPooledGameObject();
+            enemy.transform.position = GetSpawnPoint();
+            enemy.SetActive(true);
+
+            int RandomIndex = UnityEngine.Random.Range(0, 5);
+            yield return loopSpawn.waits[RandomIndex];
+        }    
     }
 
     GameObject GetNextSpawn()

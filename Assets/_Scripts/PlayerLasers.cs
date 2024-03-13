@@ -13,8 +13,6 @@ public class PlayerLasers : MonoBehaviour
     [SerializeField] Transform[] backLaserParents;
     [SerializeField] MMSimpleObjectPooler objPool;
 
-    [SerializeField] float laserSoundInterval = 0.1f;
-
     float currentLaserCDMod = 1;
 
     PlayerUpgradesManager upgradesManager;
@@ -144,7 +142,7 @@ public class PlayerLasers : MonoBehaviour
         laser.GetComponent<LaserMove>().VFXGradient = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].VFXGradient;
         laser.SetActive(true);
 
-        AudioManager.Instance.PlayLaserSound(laserSoundInterval);
+        AudioManager.Instance.PlayLaserSound();
     }
 
     public void PowerUpStart(float value)

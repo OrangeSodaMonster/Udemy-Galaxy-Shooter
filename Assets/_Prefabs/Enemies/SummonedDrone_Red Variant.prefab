@@ -17,12 +17,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: d847b9b6532701d428d58b3389c42970, type: 2}
     - target: {fileID: 2003824453320199944, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003824453320199944, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003824453320199944, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003824453320199944, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.363839
+      value: -2.839564
       objectReference: {fileID: 0}
     - target: {fileID: 2003824453320199944, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5137812
+      value: -2.0977435
       objectReference: {fileID: 0}
     - target: {fileID: 2003824453320199944, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -112,6 +124,10 @@ PrefabInstance:
       propertyPath: vfxRingsColor.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4871147860128078388, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: BaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5045146221006717326, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.b
       value: 0.7412694
@@ -135,6 +151,14 @@ PrefabInstance:
     - target: {fileID: 5045146221006717326, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key1.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556342535090201594, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: Damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556342535090201594, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: ImpactVelocity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6786363138637217978, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.b
@@ -247,6 +271,14 @@ PrefabInstance:
     - target: {fileID: 8271918894049419804, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_NumColorKeys
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

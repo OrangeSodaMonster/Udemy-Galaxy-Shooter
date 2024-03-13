@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public static int MusicVolume = 5;
     public static int UiVolume = 5;
 
+    public static int HighestStageCleared = 0;
+
     public static UnityEvent OnChangeBG = new();
     public static UnityEvent OnLoadedConfig = new();
 
@@ -120,5 +122,11 @@ public class GameManager : MonoBehaviour
             lightBG.SetActive(false);
             defaultBG.SetActive(true);
         }
+    }
+
+    public void SetHighestStageCleared(int stage)
+    {
+        if(stage > HighestStageCleared)
+            HighestStageCleared = stage;
     }
 }

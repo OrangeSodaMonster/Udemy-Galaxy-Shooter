@@ -239,7 +239,7 @@ MonoBehaviour:
   <IsAsteroid>k__BackingField: 0
   asteroidVolumeMultiplier: 1
   destroyOnCollision: 1
-  MaxHP: 30
+  MaxHP: 45
 --- !u!114 &8773309586190827830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   distanceToKeep: 5
   distanceToleranceFraction: 0.2
   timeToMaxSpeed: 1.5
-  MaxXSpeed: 4
+  MaxXSpeed: 3.5
   MaxYSpeed: 6.2
   isRotating: 0
   rotateClockWise: 1
@@ -288,8 +288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <projectilePref>k__BackingField: {fileID: 1250797867374824522, guid: 645435d149b3671469a35e59c34343cb, type: 3}
-  BaseShootCD: 0
-  ShootCDVariation: 0
+  BaseShootCD: 6
+  ShootCDVariation: 1
   projectileOrigin: {fileID: 6232597142013545533}
   preShootVFX: {fileID: 3828722212198539157}
   preShootVFXTimePrior: 2
@@ -318,7 +318,7 @@ MonoBehaviour:
     spawnWeight: 0.3
   - drop: 4
     spawnWeight: 0
-  MinDropsNum: 2
+  MinDropsNum: 1
   MaxDropsNum: 3
   dropsGuaranteed:
   - drop: 1
@@ -466,8 +466,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69333f3c3ca8a547aa84d68cc8d568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChanceToDrop: 0
-  PuDrops: []
+  ChanceToDrop: 5
+  PuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
 --- !u!1001 &5981190111537814895
 PrefabInstance:
   m_ObjectHideFlags: 0

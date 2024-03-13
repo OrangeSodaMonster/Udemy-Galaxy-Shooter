@@ -139,7 +139,7 @@ MonoBehaviour:
   <IsAsteroid>k__BackingField: 1
   asteroidVolumeMultiplier: 1.35
   destroyOnCollision: 0
-  MaxHP: 300
+  MaxHP: 500
 --- !u!114 &-8246086450867371592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,12 +177,12 @@ MonoBehaviour:
   - drop: 4
     spawnWeight: 0
   MinDropsNum: 1
-  MaxDropsNum: 3
+  MaxDropsNum: 2
   dropsGuaranteed:
   - drop: 1
     Amount: 0
   - drop: 2
-    Amount: 2
+    Amount: 1
   - drop: 3
     Amount: 0
   - drop: 4

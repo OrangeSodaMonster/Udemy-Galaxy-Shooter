@@ -8,6 +8,7 @@ public class VFXScript : MonoBehaviour
     VisualEffect effect;
 
     Vector3 defaultScale;
+    WaitForSeconds wait = new WaitForSeconds(.1f);
 
     private void Awake()
     {
@@ -29,7 +30,7 @@ public class VFXScript : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(.1f);
+            yield return wait;
 
             if (!effect.HasAnySystemAwake())
                 gameObject.SetActive(false);

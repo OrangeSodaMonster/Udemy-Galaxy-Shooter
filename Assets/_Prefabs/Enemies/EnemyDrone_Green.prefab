@@ -176,7 +176,7 @@ MonoBehaviour:
   <IsAsteroid>k__BackingField: 0
   asteroidVolumeMultiplier: 1
   destroyOnCollision: 1
-  MaxHP: 15
+  MaxHP: 25
 --- !u!114 &5556342535090201594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   - drop: 4
     spawnWeight: 0
   MinDropsNum: 1
-  MaxDropsNum: 3
+  MaxDropsNum: 2
   dropsGuaranteed:
   - drop: 1
     Amount: 0
@@ -381,8 +381,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69333f3c3ca8a547aa84d68cc8d568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChanceToDrop: 0
-  PuDrops: []
+  ChanceToDrop: 1.5
+  PuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
 --- !u!114 &-2419304842710714408
 MonoBehaviour:
   m_ObjectHideFlags: 0

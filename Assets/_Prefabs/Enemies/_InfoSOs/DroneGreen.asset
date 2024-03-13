@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: DroneGreen
   m_EditorClassIdentifier: 
   enemy: {fileID: 7803575928964027051, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
-  MaxHP: 15
+  MaxHP: 25
   Speed: 2.5
   SpeedVarPerc: 10
   CollisionDamage: 20
   ImpactVelocity: 0.6
   MinDrops: 1
-  MaxDrops: 3
+  MaxDrops: 2
   DropWeightsLine:
     MetalCrumb: 10
     RareMetalCrumb: 2
@@ -32,8 +32,18 @@ MonoBehaviour:
     CondensedEnergyCristal: 0
   ShootCD: 6
   ShootCdVar: 1
-  PuDropChance: 0
-  PuDrops: []
+  PuDropChance: 1.5
+  PuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
   XSpeed: 0
   RotChangeTime: 0
   RotTimeVar: 0

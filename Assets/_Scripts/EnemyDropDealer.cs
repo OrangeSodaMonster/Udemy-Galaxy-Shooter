@@ -31,7 +31,7 @@ public class EnemyDropDealer : MonoBehaviour
     [HideInInspector] public int MinDropsNum = 2;
     [HideInInspector] public int MaxDropsNum = 5;
     [Space]
-    [HideInInspector] public DropsGuaranteed[] dropsGuaranteed;
+    public DropsGuaranteed[] dropsGuaranteed;
     
     float totalSpawnWeight;
 

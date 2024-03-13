@@ -14,7 +14,7 @@ public class EnemyHP : MonoBehaviour
     [field:SerializeField] public bool IsAsteroid { get; private set; } = false;
     [SerializeField] float asteroidVolumeMultiplier = 1;
     [SerializeField] bool destroyOnCollision = true;
-    [HideInInspector] public int MaxHP;
+    public int MaxHP;
 
     int currentHP;
     int lastFrameHP;

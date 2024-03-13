@@ -126,9 +126,10 @@ public class ShieldStrenght : MonoBehaviour
         } 
     }
 
+    WaitForSeconds waitClean = new WaitForSeconds(.15f);
     IEnumerator CleanLastHit()
     {
-        yield return new WaitForSeconds(.15f);
+        yield return waitClean;
         lastCollisionHash = 0;
     }
 
@@ -156,13 +157,14 @@ public class ShieldStrenght : MonoBehaviour
         AudioManager.Instance.ShieldHitSound.PlayFeedbacks();
     }
 
+    WaitForSecondsRealtime updateStrWait = new WaitForSecondsRealtime(.1f);
     public void UpgradeStr()
     {
         StartCoroutine(UpgradeDelay());
 
         IEnumerator UpgradeDelay()
         {
-            yield return new WaitForSecondsRealtime(.1f);
+            yield return updateStrWait;
 
             CurrentStr = MaxStr;
         }

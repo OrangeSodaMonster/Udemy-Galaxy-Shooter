@@ -36,6 +36,8 @@ public class RareSpawnScript : MonoBehaviour
     Transform rareSpawn;
     Transform highlight;
     Vector3 highlightDefaultScale = new();
+    WaitForSeconds wait1 = new WaitForSeconds(1);
+    WaitForSeconds waitIntervalMinus1;
 
     void Start()
     {
@@ -55,6 +57,8 @@ public class RareSpawnScript : MonoBehaviour
         highlight = Instantiate(highlightPref,transform).transform;
         highlightDefaultScale = highlight.localScale;
         highlight.gameObject.SetActive(false);
+
+        waitIntervalMinus1 = new WaitForSeconds(intervalBetweenSpawns - 1);
     }
 
     void OnEnable()
@@ -84,11 +88,11 @@ public class RareSpawnScript : MonoBehaviour
                 {
                     SpawnRare(rareDict[rare.RareSpawn]);
 
-                    yield return new WaitForSeconds(intervalBetweenSpawns - 1);
+                    yield return waitIntervalMinus1;
                 }
             }
 
-            yield return new WaitForSeconds(1);
+            yield return wait1;
         }
     }
 

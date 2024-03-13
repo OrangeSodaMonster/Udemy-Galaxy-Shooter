@@ -13,6 +13,7 @@ public class FaceVelocity : MonoBehaviour
 
     void Update()
     {
-        transform.up = rb.velocity;
+        float anglesToRotate = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 90f;
+        rb.MoveRotation(anglesToRotate);
     }
 }

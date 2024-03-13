@@ -23,13 +23,14 @@ public class BombScript : MonoBehaviour
     float bombAmountLastFrame;
     //RaycastHit2D[] hits;
     Collider2D[] hits = new Collider2D[12];
-
+    WaitForSeconds damageWait;
 
     void Start()
     {
         BombAmount = startingBombs;
         vfx.gameObject.SetActive(false);
         bombAmountLastFrame = BombAmount;
+        damageWait = new WaitForSeconds(damageDelay);
     }
 
     private void OnEnable()
@@ -91,7 +92,7 @@ public class BombScript : MonoBehaviour
 
     private IEnumerator ApplyDamage(Collider2D hit, EnemyHP enemyHP)
     {
-        yield return new WaitForSeconds(damageDelay);
+        yield return damageWait;
 
         enemyHP.ChangeHP(-Mathf.Abs(damage));
         GameObject hitVFX = VFXPoolerScript.Instance.BombHitVFXPooler.GetPooledGameObject();

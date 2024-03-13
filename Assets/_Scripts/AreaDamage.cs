@@ -12,6 +12,12 @@ public class AreaDamage : MonoBehaviour
     Dictionary<EnemyHP, Coroutine> enemyRoroutines = new();
     bool isDamagePlayer;
     Coroutine playerRoutine;
+    WaitForSeconds wait;
+
+    private void Awake()
+    {
+        wait = new WaitForSeconds(interval);
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -73,7 +79,7 @@ public class AreaDamage : MonoBehaviour
     {
         while (playerHP != null && isDamagePlayer || enemyHP != null && enemyRoroutines.ContainsKey(enemyHP))
         {
-            yield return new WaitForSeconds(interval);
+            yield return wait;
 
             if (playerHP != null)
                 PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(damage));

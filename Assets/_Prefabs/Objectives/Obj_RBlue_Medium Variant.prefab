@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1167365989404128105, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: MaxDropsNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167365989404128105, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: MinDropsNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167365989404128105, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[2].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167365989404128105, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2197979010377549906, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
       propertyPath: asteroidToSplitInto
       value: 
@@ -100,6 +116,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obj_RBlue_Medium Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5456466399879974904, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: MaxHP
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5973401939959784311, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -108,6 +128,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6b999ee717dd5c449b6cc71563b7830c, type: 2}
+    - target: {fileID: 9087634345164967564, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: Damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087634345164967564, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: ImpactVelocity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

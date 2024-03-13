@@ -40,22 +40,22 @@ public class GameStatus : MonoBehaviour
         #endif
     }
 
-    IEnumerator CheckJoysticksConnectedCO()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1.5f);
+    //IEnumerator CheckJoysticksConnectedCO()
+    //{
+    //    while (true)
+    //    {
+    //        yield return new WaitForSeconds(1.5f);
 
-            int joysticksLastFrame = joysticksConnected;
-            joysticksConnected = Input.GetJoystickNames().Length;
-            IsJoystick = joysticksConnected > 0;
+    //        int joysticksLastFrame = joysticksConnected;
+    //        joysticksConnected = Input.GetJoystickNames().Length;
+    //        IsJoystick = joysticksConnected > 0;
 
-            Debug.Log(Input.GetJoystickNames()[0]);
+    //        Debug.Log(Input.GetJoystickNames()[0]);
 
-            if (joysticksConnected < joysticksLastFrame)
-                DisconectedJoystick?.Invoke();
-        }
-    }
+    //        if (joysticksConnected < joysticksLastFrame)
+    //            DisconectedJoystick?.Invoke();
+    //    }
+    //}
 
     private void OnDisable()
     {

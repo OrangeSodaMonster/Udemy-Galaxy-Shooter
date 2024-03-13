@@ -210,9 +210,10 @@ public class PlayerPowerUps : MonoBehaviour
         }
     }
 
+    WaitForSeconds wait1 = new WaitForSeconds(1);
     IEnumerator CleanLastHash()
     {
-        yield return new WaitForSeconds(1);
+        yield return wait1;
 
         lastCollHash = 0;
     }

@@ -53,7 +53,14 @@ public class MySceneManager : MonoBehaviour
 
     public void CallGC()
     {
-        System.GC.Collect();
+        CallGarbageColector.CallGC();
+    }
+}
 
+public class CallGarbageColector : MonoBehaviour
+{
+    static public void CallGC()
+    {
+        System.GC.Collect();
     }
 }

@@ -35,6 +35,8 @@ public class IonStreamScript : MonoBehaviour
 
     Collider2D[] hits = new Collider2D[3];
 
+    WaitForSeconds fadeWait;
+
     void Start()
     {
         player = FindAnyObjectByType<PlayerMove>().transform;
@@ -49,11 +51,13 @@ public class IonStreamScript : MonoBehaviour
         defaultColor.ca = Color.white; 
         defaultColor.cb = Color.white; 
 
-        Color endC = new Color(0,0,0,0);
+        Color endC = Color.clear;
         endColor.ca = endC;
         endColor.cb = endC;
 
         defaultLineGrad = lineRenderer.colorGradient;
+
+        fadeWait = new WaitForSeconds(timeToStartFade);
     }
 
     void Update()
@@ -176,10 +180,10 @@ public class IonStreamScript : MonoBehaviour
             StartCoroutine(DisableLine(lineRenderer, visualDuration));
         }
     }
-
+    
     IEnumerator DisableLine(LineRenderer line, float time)
     {
-        yield return new WaitForSeconds(timeToStartFade);
+        yield return fadeWait;
 
         line.DOColor(defaultColor, endColor, fadeDuration).OnComplete(() => line.gameObject.SetActive(false));
     }

@@ -7,6 +7,8 @@ public class SpawnDroneFromShip : MonoBehaviour
     [HideInInspector] public float BaseSpawnCD = 9;
     [HideInInspector] public float SpawnCDVariation = 1f;
     [SerializeField] GameObject droneToSpawn;
+
+    WaitForSeconds wait;
     public GameObject DroneToSpawn => droneToSpawn;
 
     float spawnCD;
@@ -14,6 +16,7 @@ public class SpawnDroneFromShip : MonoBehaviour
     void OnEnable()
     {
         spawnCD = BaseSpawnCD;
+        wait = new WaitForSeconds(spawnCD);
 
         StartCoroutine(SpawnDroneRoutine());
     }
@@ -29,7 +32,7 @@ public class SpawnDroneFromShip : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnCD);
+            yield return wait;
 
             EnemySpawner.Instance.SpawnDrone(transform.position, droneToSpawn);
 

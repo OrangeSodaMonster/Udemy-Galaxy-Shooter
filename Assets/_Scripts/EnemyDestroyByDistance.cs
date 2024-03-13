@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class EnemyDestroyByDistance : MonoBehaviour
 {
-
     Transform player;
     float deSpawnZoneRadius;
+    WaitForSeconds wait = new WaitForSeconds(.5f);
+    Vector3 playerPos = new();
+
+    private void Awake()
+    {
+        
+    }
 
     void OnEnable()
     {
@@ -21,10 +27,9 @@ public class EnemyDestroyByDistance : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(.5f);
+            yield return wait;
 
-
-            Vector3 playerPos = player != null ? player.position : EnemySpawner.Instance.PlayerLastPos;
+            playerPos = player != null ? player.position : EnemySpawner.Instance.PlayerLastPos;
             if (Vector2.SqrMagnitude(transform.position - playerPos) > deSpawnZoneRadius)
             {
                 gameObject.SetActive(false);

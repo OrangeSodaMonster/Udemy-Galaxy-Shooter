@@ -58,9 +58,7 @@ public class ThrusterControl : MonoBehaviour
     {
         isAccel = InputHolder.Instance.Acceleration > 0;
         isReverse = InputHolder.Instance.Acceleration < 0;
-        //turnDir = (int)Mathf.Sign(InputHolder.Instance.Turning);
         turnDir = playerMove.GetTurningDirection() == 0 ? (int)Mathf.Sign(InputHolder.Instance.Turning) : playerMove.GetTurningDirection();
-        //Debug.Log($"TurnDir: {turnDir}, Input: {(int)Mathf.Sign(InputHolder.Instance.Turning)}, Direction: {playerMove.GetTurningDirection()}");
         if (InputHolder.Instance.Turning == 0 && playerMove.GetTurningDirection() == 0) turnDir = 0;
 
         InputSizeDealer();

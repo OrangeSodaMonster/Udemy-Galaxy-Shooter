@@ -7,10 +7,12 @@ public class PlayerKnockBackDealer : MonoBehaviour
 	[SerializeField] float knockBackImunityTime = 2f;
 	bool isKnockBackable = true;
 	Rigidbody2D rb;
+    WaitForSeconds knockBackWait;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        knockBackWait = new WaitForSeconds(knockBackImunityTime);
     }
 
     public void GetKnockedBack ( Vector2 velocityToAdd)
@@ -26,7 +28,7 @@ public class PlayerKnockBackDealer : MonoBehaviour
 
     IEnumerator TurnKnockBackOn()
     {
-        yield return new WaitForSeconds(knockBackImunityTime);
+        yield return knockBackWait;
 
         isKnockBackable = true;
     }
