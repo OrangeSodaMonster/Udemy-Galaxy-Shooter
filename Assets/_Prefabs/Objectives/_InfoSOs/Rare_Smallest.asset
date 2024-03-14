@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Rare_Smallest
   m_EditorClassIdentifier: 
   enemy: {fileID: 8414374947619526728, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
-  MaxHP: 50
+  MaxHP: 60
   Speed: 0
   SpeedVarPerc: 15
   CollisionDamage: 10
   ImpactVelocity: 0.5
-  MinDrops: 0
+  MinDrops: 1
   MaxDrops: 1
   DropWeightsLine:
-    MetalCrumb: 5
+    MetalCrumb: 10
     RareMetalCrumb: 10
     EnergyCristal: 1
     CondensedEnergyCristal: 0
@@ -43,3 +43,4 @@ MonoBehaviour:
   SentDamage: 0
   SentDamageInterval: 0
   Name: RareSmallest
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}

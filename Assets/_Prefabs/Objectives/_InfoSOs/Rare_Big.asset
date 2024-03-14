@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Rare_Big
   m_EditorClassIdentifier: 
   enemy: {fileID: 3596066275569553282, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
-  MaxHP: 500
+  MaxHP: 600
   Speed: 0
   SpeedVarPerc: 15
   CollisionDamage: 10
   ImpactVelocity: 1
-  MinDrops: 1
-  MaxDrops: 2
+  MinDrops: 0
+  MaxDrops: 1
   DropWeightsLine:
-    MetalCrumb: 5
+    MetalCrumb: 10
     RareMetalCrumb: 10
     EnergyCristal: 1
     CondensedEnergyCristal: 0
@@ -43,3 +43,4 @@ MonoBehaviour:
   SentDamage: 0
   SentDamageInterval: 0
   Name: RareBig
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}

@@ -28,6 +28,7 @@ public class RareSpawnScript : MonoBehaviour
     [SerializeField] float arrowDistanceFromPlayer = 3.2f;
     [SerializeField] float arrowDuration = 1f;
 
+    PoolRefs poolRefs;
     Dictionary<GameObject, GameObject> rareDict = new();
     Transform arrow;
     SpriteRenderer arrowRenderer;
@@ -41,10 +42,13 @@ public class RareSpawnScript : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < RareSpawns.Length; i++)
+        poolRefs = FindObjectOfType<PoolRefs>();
+
+        for (int i = 0; i < RareSpawns.Length; i++)
         {
-            rareDict.Add(RareSpawns[i].RareSpawn, Instantiate(RareSpawns[i].RareSpawn, transform));
-            rareDict[RareSpawns[i].RareSpawn].SetActive(false);
+            //rareDict.Add(RareSpawns[i].RareSpawn, Instantiate(RareSpawns[i].RareSpawn, transform));
+            //rareDict[RareSpawns[i].RareSpawn].SetActive(false);
+            poolRefs.CreatePoolsForObject(RareSpawns[i].RareSpawn, 1);
 
             RareSpawns[i].ChancePerSecond = RareSpawns[i].ChancePerMinute / 60;
         }
@@ -86,7 +90,8 @@ public class RareSpawnScript : MonoBehaviour
             {
                 if (CheckSpawn(rare))
                 {
-                    SpawnRare(rareDict[rare.RareSpawn]);
+                    //SpawnRare(rareDict[rare.RareSpawn]);                    
+                    SpawnRare(rare.RareSpawn);                    
 
                     yield return waitIntervalMinus1;
                 }
@@ -108,19 +113,27 @@ public class RareSpawnScript : MonoBehaviour
         else return false;
     }
 
-    void SpawnRare(GameObject rare)
+    // Does not use pool, send already pooled obj
+    public void SpawnRare(GameObject rare)
     {
-        if (!rare.activeSelf)
-        {
-            rare.transform.position = EnemySpawner.Instance.GetSpawnPoint();
-            rare.transform.rotation = Quaternion.identity;
-            rare.SetActive(true);
-            rareSpawn = rare.transform;
-        }
-        else
-        {
-            Instantiate(rare, EnemySpawner.Instance.GetSpawnPoint(), Quaternion.identity, transform);
-        }
+        GameObject spawn = poolRefs.Poolers[rare].GetPooledGameObject();
+
+        spawn.transform.position = EnemySpawner.Instance.GetSpawnPoint();
+        spawn.transform.rotation = Quaternion.identity;
+        spawn.SetActive(true);
+        rareSpawn = spawn.transform;
+
+        //if (!rare.activeSelf)
+        //{
+        //    rare.transform.position = EnemySpawner.Instance.GetSpawnPoint();
+        //    rare.transform.rotation = Quaternion.identity;
+        //    rare.SetActive(true);
+        //    rareSpawn = rare.transform;
+        //}
+        //else
+        //{
+        //    Instantiate(rare, EnemySpawner.Instance.GetSpawnPoint(), Quaternion.identity, transform);
+        //}
 
         SetHighlight();
 
@@ -128,7 +141,7 @@ public class RareSpawnScript : MonoBehaviour
             AudioManager.Instance.RareSpawnSound.PlayFeedbacks();
         if(showArrow)
             ShowArrow();
-    }
+    }    
 
     void ShowArrow()
     {

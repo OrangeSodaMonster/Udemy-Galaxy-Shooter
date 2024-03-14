@@ -97,12 +97,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4150830361148285520, guid: 3bfcc787339381f48a162223e26a8767, type: 3}
+      propertyPath: MinDropsNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150830361148285520, guid: 3bfcc787339381f48a162223e26a8767, type: 3}
       propertyPath: dropsGuaranteed.Array.data[1].Amount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4150830361148285520, guid: 3bfcc787339381f48a162223e26a8767, type: 3}
       propertyPath: DropsToSpawn.Array.data[0].spawnWeight
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150830361148285520, guid: 3bfcc787339381f48a162223e26a8767, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4150830361148285520, guid: 3bfcc787339381f48a162223e26a8767, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
@@ -118,7 +126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7066328487100620481, guid: 3bfcc787339381f48a162223e26a8767, type: 3}
       propertyPath: MaxHP
-      value: 300
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 7765309076345229711, guid: 3bfcc787339381f48a162223e26a8767, type: 3}
       propertyPath: m_Name

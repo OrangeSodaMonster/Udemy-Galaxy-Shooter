@@ -37,5 +37,9 @@ public class ColorStageButton : MonoBehaviour
             text.color = unavaliableTextColor;
             button.enabled = false;
         }
+        else
+        {
+            button.enabled = true;
+        }
     }
 }

@@ -59,6 +59,31 @@ public class PoolRefs : MonoBehaviour
                         Poolers[projectile].GameObjectToPool = projectile;
                     }
                 }
+
+                if(spawn.enemy.TryGetComponent(out AsteroidSplit split))
+                {
+                    GameObject asteroid = split.AsteroidToSplitInto;
+
+                    if (!Poolers.ContainsKey(asteroid))
+                    {
+                        Poolers.Add(asteroid, Instantiate(poolerPrefab, transform));
+                        Poolers[asteroid].PoolSize = (int)spawn.spawnWeight * 3;
+                        Poolers[asteroid].GameObjectToPool = asteroid;
+                    }
+
+                    if (asteroid.TryGetComponent(out AsteroidSplit split2))
+                    {
+                        GameObject asteroid2 = split2.AsteroidToSplitInto;
+
+                        if (!Poolers.ContainsKey(asteroid2))
+                        {
+                            Poolers.Add(asteroid2, Instantiate(poolerPrefab, transform));
+                            Poolers[asteroid2].PoolSize = (int)spawn.spawnWeight * 9;
+                            Poolers[asteroid2].GameObjectToPool = asteroid2;
+                        }
+                    }
+                }
+
             }
         }
         // Criar poolers para spawns cronometrados
@@ -94,6 +119,30 @@ public class PoolRefs : MonoBehaviour
                     Poolers[projectile].GameObjectToPool = projectile;
                 }
             }
+
+            if (spawn.enemy.TryGetComponent(out AsteroidSplit split))
+            {
+                GameObject asteroid = split.AsteroidToSplitInto;
+
+                if (!Poolers.ContainsKey(asteroid))
+                {
+                    Poolers.Add(asteroid, Instantiate(poolerPrefab, transform));
+                    Poolers[asteroid].PoolSize = 3;
+                    Poolers[asteroid].GameObjectToPool = asteroid;
+                }
+
+                if (asteroid.TryGetComponent(out AsteroidSplit split2))
+                {
+                    GameObject asteroid2 = split2.AsteroidToSplitInto;
+
+                    if (!Poolers.ContainsKey(asteroid2))
+                    {
+                        Poolers.Add(asteroid2, Instantiate(poolerPrefab, transform));
+                        Poolers[asteroid2].PoolSize = 9;
+                        Poolers[asteroid2].GameObjectToPool = asteroid2;
+                    }
+                }
+            }
         }
         // Criar poolers para spawns em loop
 
@@ -127,6 +176,30 @@ public class PoolRefs : MonoBehaviour
                     Poolers.Add(projectile, Instantiate(poolerPrefab, transform));
                     Poolers[projectile].PoolSize = 3;
                     Poolers[projectile].GameObjectToPool = projectile;
+                }
+            }
+
+            if (spawn.enemy.TryGetComponent(out AsteroidSplit split))
+            {
+                GameObject asteroid = split.AsteroidToSplitInto;
+
+                if (!Poolers.ContainsKey(asteroid))
+                {
+                    Poolers.Add(asteroid, Instantiate(poolerPrefab, transform));
+                    Poolers[asteroid].PoolSize = 6;
+                    Poolers[asteroid].GameObjectToPool = asteroid;
+                }
+
+                if (asteroid.TryGetComponent(out AsteroidSplit split2))
+                {
+                    GameObject asteroid2 = split2.AsteroidToSplitInto;
+
+                    if (!Poolers.ContainsKey(asteroid2))
+                    {
+                        Poolers.Add(asteroid2, Instantiate(poolerPrefab, transform));
+                        Poolers[asteroid2].PoolSize = 9;
+                        Poolers[asteroid2].GameObjectToPool = asteroid2;
+                    }
                 }
             }
         }

@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5173364807266320180, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: MaxHP
-      value: 1500
+      value: 1800
       objectReference: {fileID: 0}
     - target: {fileID: -3839799337710428878, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: vfxColor.key0.b
@@ -73,12 +73,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
+      propertyPath: MinDropsNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: dropsGuaranteed.Array.data[1].Amount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: DropsToSpawn.Array.data[0].spawnWeight
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight

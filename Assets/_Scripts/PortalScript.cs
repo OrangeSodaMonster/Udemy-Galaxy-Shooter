@@ -36,7 +36,7 @@ public class PortalScript : MonoBehaviour
     [SerializeField] float timeToCallOnExit = 1.5f;
     [SerializeField] UnityEvent onExit;
     [SerializeField] UnityEvent onExitImediate;
-
+    [SerializeField] UnityEvent onTouchPortal;
 
     Collider2D col;
     ObjectivePointer[] Objectives;
@@ -122,6 +122,8 @@ public class PortalScript : MonoBehaviour
         player.DORotate(360 * exitRotationNum * Vector3.back, exitDuration, RotateMode.FastBeyond360).SetEase(exitEase);
         player.DOScale(Vector3.zero, exitDuration).SetEase(exitEase).OnComplete(() => OnCompleteExit());
         GameStatus.IsPortal = true;
+
+        onTouchPortal?.Invoke();
     }
 
     void OnCompleteExit()

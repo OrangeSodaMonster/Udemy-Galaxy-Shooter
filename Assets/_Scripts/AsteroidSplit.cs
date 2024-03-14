@@ -11,6 +11,7 @@ public class AsteroidSplit : MonoBehaviour
     //[SerializeField] bool drawGizmos;
     public bool IsObjective = false;
     [SerializeField] GameObject asteroidToSplitInto;
+    public GameObject AsteroidToSplitInto => asteroidToSplitInto;
     [SerializeField] float spawnDistance = 1f;
     [SerializeField] float baseNewDirectionAngle = 20f;
     [SerializeField] float newDirectionVariance = 5f;

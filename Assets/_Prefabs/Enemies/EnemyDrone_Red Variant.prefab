@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 527927390162876369, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: ChanceToDrop
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1038812110682612912, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -16,13 +20,29 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d847b9b6532701d428d58b3389c42970, type: 2}
+    - target: {fileID: 1262007125356465842, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: MaxHP
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003824453320199944, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003824453320199944, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003824453320199944, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2003824453320199944, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.3215437
+      value: -1.3669531
       objectReference: {fileID: 0}
     - target: {fileID: 2003824453320199944, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5137812
+      value: -3.4062653
       objectReference: {fileID: 0}
     - target: {fileID: 2003824453320199944, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -61,9 +81,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: BaseShootCD
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: projectilePref
       value: 
       objectReference: {fileID: 9201868408255658033, guid: c02b3e0fb02e67e409bd09c0e101c55c, type: 3}
+    - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: ShootCDVariation
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: <projectilePref>k__BackingField
       value: 
@@ -128,6 +156,10 @@ PrefabInstance:
       propertyPath: vfxRingsColor.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4871147860128078388, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: BaseSpeed
+      value: 3.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5045146221006717326, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.b
       value: 0.7412694
@@ -151,6 +183,14 @@ PrefabInstance:
     - target: {fileID: 5045146221006717326, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key1.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556342535090201594, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: Damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556342535090201594, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: ImpactVelocity
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6786363138637217978, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
@@ -287,6 +327,26 @@ PrefabInstance:
     - target: {fileID: 8271918894049419804, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_NumColorKeys
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[3].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

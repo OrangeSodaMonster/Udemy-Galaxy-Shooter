@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13db7f8e275713d4e983a34de1a1dcf4, type: 3}
   m_Name: RareBlueBig
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1675102621112987908, guid: b3c55aa311f57444babea7e27a74422f, type: 3}
-  MaxHP: 250
+  enemy: {fileID: 5570164003847578745, guid: 8c232a1b53507c241bb1b4ef4c3a2a2c, type: 3}
+  MaxHP: 1000
   Speed: 0
   SpeedVarPerc: 15
   CollisionDamage: 0
@@ -22,12 +22,12 @@ MonoBehaviour:
   MaxDrops: 1
   DropWeightsLine:
     MetalCrumb: 5
-    RareMetalCrumb: 10
-    EnergyCristal: 0.2
+    RareMetalCrumb: 20
+    EnergyCristal: 5
     CondensedEnergyCristal: 0
   GuaranteedLine:
     MetalCrumb: 0
-    RareMetalCrumb: 1
+    RareMetalCrumb: 0
     EnergyCristal: 1
     CondensedEnergyCristal: 0
   ShootCD: 0
@@ -42,4 +42,5 @@ MonoBehaviour:
   SentRange: 0
   SentDamage: 0
   SentDamageInterval: 0
-  Name: RareBlueSmall
+  Name: RareBlueBig
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}

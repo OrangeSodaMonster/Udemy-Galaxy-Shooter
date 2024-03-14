@@ -72,6 +72,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2499522143343881708, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: Range
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499522143343881708, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DamageInterval
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612385110787100388, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: MaxHP
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 3299482844894171481, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.atime0
       value: 3277
@@ -264,9 +276,25 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: ChanceToDrop
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8041697703895849371, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8801818747454452340, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: vfxRingsColor.key0.b

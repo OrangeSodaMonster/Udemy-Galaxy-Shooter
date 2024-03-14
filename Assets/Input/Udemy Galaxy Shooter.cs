@@ -845,6 +845,17 @@ public partial class @UdemyGalaxyShooter: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""0534216f-9fb0-44aa-ad99-dd4c97fbbc01"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Touch"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3b1383bc-2b55-450c-bfab-003d9c9f74d7"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",

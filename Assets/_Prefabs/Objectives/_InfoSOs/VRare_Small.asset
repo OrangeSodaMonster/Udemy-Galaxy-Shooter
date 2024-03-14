@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: VRare_Small
   m_EditorClassIdentifier: 
   enemy: {fileID: 7835241179224167310, guid: f25bcceb1b97b9e47baf3838968e1879, type: 3}
-  MaxHP: 300
+  MaxHP: 450
   Speed: 0
   SpeedVarPerc: 15
   CollisionDamage: 0
   ImpactVelocity: 0
-  MinDrops: 1
+  MinDrops: 0
   MaxDrops: 1
   DropWeightsLine:
     MetalCrumb: 2
-    RareMetalCrumb: 10
+    RareMetalCrumb: 20
     EnergyCristal: 2
     CondensedEnergyCristal: 0
   GuaranteedLine:
     MetalCrumb: 0
-    RareMetalCrumb: 2
+    RareMetalCrumb: 1
     EnergyCristal: 0
     CondensedEnergyCristal: 0
   ShootCD: 0
@@ -43,3 +43,4 @@ MonoBehaviour:
   SentDamage: 0
   SentDamageInterval: 0
   Name: VeryRareSmall
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}

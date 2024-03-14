@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5173364807266320180, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: MaxHP
-      value: 120
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -5173364807266320180, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: <MaxHP>k__BackingField
@@ -74,11 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: MaxDropsNum
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: MinDropsNum
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: maxDropsNum
@@ -90,6 +90,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: dropsGuaranteed.Array.data[1].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -395976326572175079, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
@@ -126,11 +134,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.89
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5609953065812211394, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: m_LocalPosition.z

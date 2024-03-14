@@ -15,7 +15,10 @@ public struct EnemiesToSpawn
 public struct EnemiesToSpawnByTime
 {
     public GameObject enemy;
+    [HorizontalGroup("G")]
     public float timeSec;
+    [HorizontalGroup("G")]
+    public float timeVarSec;
 }
 [Serializable]
 public struct EnemiesToLoopSpawn
@@ -54,6 +57,8 @@ public class EnemySpawner : MonoBehaviour
     Vector3 nextSpawnPoint;
     float currentSpawnCD;
     PoolRefs poolRef;
+    float spawnTimer = 0;
+    float spawnTimerBegin = 0;
 
     public static EnemySpawner Instance;
 
@@ -80,7 +85,7 @@ public class EnemySpawner : MonoBehaviour
 
         foreach (var spawn in enemiesToSpawnByTime)
         {
-            StartCoroutine(SpawnByTime(spawn.enemy, spawn.timeSec));
+            StartCoroutine(SpawnByTime(spawn));
         }
 
         foreach (var spawn in EnemiesToLoopSpawn)
@@ -91,7 +96,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(RandomSpawnRoutine());
+        //StartCoroutine(RandomSpawnRoutine());
     }
 
     private void OnDisable()
@@ -102,6 +107,16 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         PlayerLastPos = player != null ? player.position : PlayerLastPos;
+
+        if(spawnTimer >= currentSpawnCD && spawnTimerBegin >= timeToStartSpawning)
+        {
+            SpawnEnemy(GetNextSpawn());
+            currentSpawnCD =Mathf.Abs(UnityEngine.Random.Range(baseSpawnCD - baseSpawnCD*(spawnCDVariationPerc/100), baseSpawnCD + baseSpawnCD*(spawnCDVariationPerc/100)));
+            spawnTimer = 0;
+        }
+
+        spawnTimer += Time.deltaTime;
+        spawnTimerBegin += Time.deltaTime;
     }
 
     public Vector3 GetSpawnPoint()
@@ -111,29 +126,36 @@ public class EnemySpawner : MonoBehaviour
         return (nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius)) + (Vector2)playerPos;
     }
 
-    IEnumerator RandomSpawnRoutine()
+    public void SpawnEnemy(GameObject spawn)
     {
-        yield return new WaitForSeconds(timeToStartSpawning);
-
-        while (true)
-        {
-            GameObject nextEnemytoSpawn = GetNextSpawn();
-
-            GameObject enemy = poolRef.Poolers[nextEnemytoSpawn].GetPooledGameObject();
-            enemy.transform.position = GetSpawnPoint();
-            enemy.SetActive(true);
-
-            currentSpawnCD =Mathf.Abs(UnityEngine.Random.Range(baseSpawnCD - baseSpawnCD*(spawnCDVariationPerc/100), baseSpawnCD + baseSpawnCD*(spawnCDVariationPerc/100)));
-            yield return new WaitForSeconds(currentSpawnCD);
-        }
+        GameObject enemy = poolRef.Poolers[spawn].GetPooledGameObject();
+        enemy.transform.position = GetSpawnPoint();
+        enemy.SetActive(true);
     }
 
-    public IEnumerator SpawnByTime(GameObject enemyToSpawn, float time)
+    //IEnumerator RandomSpawnRoutine()
+    //{
+    //    yield return new WaitForSeconds(timeToStartSpawning);
+
+    //    while (true)
+    //    {
+    //        GameObject nextEnemytoSpawn = GetNextSpawn();
+
+    //        GameObject enemy = poolRef.Poolers[nextEnemytoSpawn].GetPooledGameObject();
+    //        enemy.transform.position = GetSpawnPoint();
+    //        enemy.SetActive(true);
+
+    //        currentSpawnCD =Mathf.Abs(UnityEngine.Random.Range(baseSpawnCD - baseSpawnCD*(spawnCDVariationPerc/100), baseSpawnCD + baseSpawnCD*(spawnCDVariationPerc/100)));
+    //        yield return new WaitForSeconds(currentSpawnCD);
+    //    }
+    //}
+
+    public IEnumerator SpawnByTime(EnemiesToSpawnByTime spawn)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(spawn.timeSec - spawn.timeVarSec, spawn.timeSec + spawn.timeVarSec));
 
         //Instantiate(enemy, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
-        GameObject enemy = poolRef.Poolers[enemyToSpawn].GetPooledGameObject();
+        GameObject enemy = poolRef.Poolers[spawn.enemy].GetPooledGameObject();
         enemy.transform.position = GetSpawnPoint();
         enemy.SetActive(true);
     }

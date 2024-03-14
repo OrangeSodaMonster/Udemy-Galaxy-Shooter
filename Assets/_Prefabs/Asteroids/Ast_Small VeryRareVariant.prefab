@@ -12,9 +12,53 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -343895879, guid: 178bbd5f3baa7334392d78beb806876b, type: 3}
+    - target: {fileID: 1618927344174162680, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: MaxHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2280188036016598454, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: m_Name
       value: Ast_Small VeryRareVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581431035433264012, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: Damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581431035433264012, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: ImpactVelocity
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080440622588081913, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: BaseSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080440622588081913, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: SpeedVariationPerc
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: MinDropsNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[1].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 6808362333470970245, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: vfxColor.key0.b

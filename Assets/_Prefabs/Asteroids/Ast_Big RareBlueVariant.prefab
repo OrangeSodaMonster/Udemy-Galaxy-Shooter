@@ -8,20 +8,48 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8246086450867371592, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: Damage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -8246086450867371592, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: ImpactVelocity
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5173364807266320180, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: MaxHP
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: -3817480640764407943, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: sprites
       value: 
       objectReference: {fileID: 11400000, guid: 1a179fca3568f0c4bb09cb658ee25644, type: 2}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: dropsGuaranteed.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: dropsGuaranteed.Array.data[0].drop
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: dropsGuaranteed.Array.data[0].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[2].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1135126244599827535, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
@@ -59,6 +87,14 @@ PrefabInstance:
     - target: {fileID: -1135126244599827535, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: vfxRingsColor.key0.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359440957118289101, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: BaseSpeed
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 359440957118289101, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: SpeedVariationPerc
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2407189615707401283, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_Sprite

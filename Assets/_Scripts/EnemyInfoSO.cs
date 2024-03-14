@@ -72,8 +72,16 @@ public class EnemyInfoSO : ScriptableObject
 	[HorizontalGroup("Sentinel/G", 0.45f), LabelWidth(125)]
 	public float SentDamageInterval;
 
-    [HorizontalGroup("Top", .7f), PropertyOrder(-1), LabelWidth(40)]
+    [HorizontalGroup("Top", .65f), PropertyOrder(-1), LabelWidth(40)]
     public string Name;
+
+    [HorizontalGroup("Top"), PropertyOrder(-1), HideLabel(), ReadOnly()]
+    [SerializeField] Color saveStateColor = Color.green;
+
+    private void OnValidate()
+    {
+        saveStateColor = Color.red;
+    }
 
     void ConvertDropChance()
     {
@@ -172,7 +180,9 @@ public class EnemyInfoSO : ScriptableObject
             spawnDrone.SpawnCDVariation = DroneSpawnTimeVar;
         }
 
-        # if UNITY_EDITOR
+        saveStateColor = Color.green;
+
+        #if UNITY_EDITOR
             PrefabUtility.SavePrefabAsset(enemy, out bool success);
             Debug.Log(success ? $"Saved {name}" : "Could not save asset");
         #endif
