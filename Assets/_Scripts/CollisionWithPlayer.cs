@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CollisionWithPlayer : MonoBehaviour
 {
-    [HideInInspector] public int Damage = 1;
-    [HideInInspector] public float ImpactVelocity = 1;
+    public int Damage = 1;
+    public float ImpactVelocity = 1;
 
     bool hasCollidedWithPlayer = false;
 

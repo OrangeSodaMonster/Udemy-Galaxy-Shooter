@@ -31,10 +31,14 @@ public class ShaderStarsMoving : MonoBehaviour
     Vector2 scrollOffset = Vector2.zero;
     void Update()
     {
-        if (isStopStars) return;
-
         percentSpeedX = playerMove.PlayerVelocity.x / playerMove.MaxSpeed;
         percentSpeedY = playerMove.PlayerVelocity.y / playerMove.MaxSpeed;
+
+        if (isStopStars)
+        {
+            percentSpeedX = playerMoveOverride.x / playerMove.MaxSpeed;
+            percentSpeedY = playerMoveOverride.y / playerMove.MaxSpeed;
+        }
 
         scrollOffset.x += Mathf.Abs(percentSpeedX) * Time.deltaTime * playerMove.PlayerVelocity.normalized.x * scrollSpeedAxisMod.x;
         scrollOffset.y += Mathf.Abs(percentSpeedY) * Time.deltaTime * playerMove.PlayerVelocity.normalized.y * scrollSpeedAxisMod.y;
@@ -43,18 +47,16 @@ public class ShaderStarsMoving : MonoBehaviour
     }
 
     bool isStopStars;
-    Vector2 starsSpeed;
+    Vector2 playerMoveOverride;
     public void StopStars()
     {
         if(material == null) return;
 
-        isStopStars = true;
-        DOTween.To(() => scrollOffset.x, x => scrollOffset.x = x, 0, 1.2f).OnUpdate(() => UpdateStopping());
-        DOTween.To(() => scrollOffset.y, x => scrollOffset.y = x, 0, 1.2f).OnUpdate(() => UpdateStopping());
+        playerMoveOverride = playerMove.PlayerVelocity;
+        DOTween.To(() => playerMoveOverride.x, x => playerMoveOverride.x = x, 0, .7f);
+        DOTween.To(() => playerMoveOverride.y, x => playerMoveOverride.y = x, 0, .7f);
+    
+        isStopStars = true;        
     }
-
-    void UpdateStopping()
-    {
-        material.SetVector("_ScrollOffset", scrollOffset);
-    }
+        
 }

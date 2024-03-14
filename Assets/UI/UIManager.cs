@@ -1,3 +1,4 @@
+using DG.Tweening;
 using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
 
+    bool canPause = true;
+
     private void Awake()
     {
         if(Instance == null)
@@ -56,14 +59,15 @@ public class UIManager : MonoBehaviour
 
     private void SetPause()
     {
-        if (!GameStatus.IsPaused && !isOnPage && MySceneManager.IsFeedbackEnabled)
+        if (!GameStatus.IsPaused && canPause && !isOnPage && MySceneManager.IsFeedbackEnabled)
         {
             StartPause();
             CallGarbageColector.CallGC();
+            canPause = false;
         }
         else if (GameStatus.IsPaused && !isOnPage)
         {
-            LeavePause();
+            LeavePause();            
         }
     }
 
@@ -82,11 +86,15 @@ public class UIManager : MonoBehaviour
         AudioTrackConfig.Instance.MuteVFX();
     }
 
+    float timeScale = 0;
     public void LeavePause()
     {
         pauseCanvas.gameObject.SetActive(false);
         GameStatus.IsPaused = false;
-        Time.timeScale = 1;
+        StartCoroutine(AllowPauseCO());
+
+        timeScale = 0;
+        DOTween.To(() => timeScale, x => timeScale = x, 1, 1.5f).SetUpdate(true).OnUpdate(() => Time.timeScale = timeScale);
 
         DisablePlayerCommands.Instance.SetCommands(true);
 
@@ -94,7 +102,14 @@ public class UIManager : MonoBehaviour
         {
             rect.gameObject.SetActive(true);
         }
-        AudioTrackConfig.Instance.UnmuteVFX();
+        AudioTrackConfig.Instance.UnmuteVFX();        
+    }
+    IEnumerator AllowPauseCO()
+    {
+        Debug.Log("Before yeild");
+        yield return null;
+        canPause = true;
+        Debug.Log("After yeild");
     }
 
     public void EnableShipUpgradePage()

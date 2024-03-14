@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisableIfDevelopment : MonoBehaviour
+public class DisableIfNotDevelopment : MonoBehaviour
 {
     private void Awake()
     {
-        if(Debug.isDebugBuild && !Application.isEditor)
+        if(!Debug.isDebugBuild && !Application.isEditor)
             gameObject.SetActive(false);
     }
 }

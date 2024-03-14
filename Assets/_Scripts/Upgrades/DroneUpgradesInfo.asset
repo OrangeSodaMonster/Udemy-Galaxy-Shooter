@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnlockCostLine:
     Resource1: 1
-    Cost1: 35
+    Cost1: 25
     Resource2: 2
     Cost2: 15
   UnlockCost:
   - ResourceType: 1
-    Amount: 35
+    Amount: 25
   - ResourceType: 2
     Amount: 15
   PowerUpgrades:
@@ -33,7 +33,7 @@ MonoBehaviour:
       Amount: 0
     - ResourceType: 3
       Amount: 0
-    DamagePerSecond: 3
+    DamagePerSecond: 5
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 0.74650204, b: 0, a: 0.6901961}
@@ -74,7 +74,7 @@ MonoBehaviour:
       Amount: 10
     - ResourceType: 3
       Amount: 1
-    DamagePerSecond: 6
+    DamagePerSecond: 10
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 0.8780921, b: 0, a: 0.9019608}
@@ -115,7 +115,7 @@ MonoBehaviour:
       Amount: 25
     - ResourceType: 3
       Amount: 3
-    DamagePerSecond: 10
+    DamagePerSecond: 15
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -156,7 +156,7 @@ MonoBehaviour:
       Amount: 15
     - ResourceType: 3
       Amount: 10
-    DamagePerSecond: 14
+    DamagePerSecond: 20
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -197,7 +197,7 @@ MonoBehaviour:
       Amount: 30
     - ResourceType: 4
       Amount: 1
-    DamagePerSecond: 18
+    DamagePerSecond: 25
     Color:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -238,7 +238,7 @@ MonoBehaviour:
       Amount: 50
     - ResourceType: 4
       Amount: 3
-    DamagePerSecond: 22
+    DamagePerSecond: 30
     Color:
       serializedVersion: 2
       key0: {r: 0.99923444, g: 1, b: 0.97596157, a: 1}
@@ -280,7 +280,7 @@ MonoBehaviour:
       Amount: 0
     - ResourceType: 3
       Amount: 0
-    Range: 3
+    Range: 3.5
   - CostLine:
       Resource1: 1
       Cost1: 15
@@ -291,7 +291,7 @@ MonoBehaviour:
       Amount: 15
     - ResourceType: 3
       Amount: 2
-    Range: 3.5
+    Range: 4
   - CostLine:
       Resource1: 1
       Cost1: 50
@@ -302,7 +302,7 @@ MonoBehaviour:
       Amount: 50
     - ResourceType: 3
       Amount: 6
-    Range: 4
+    Range: 4.5
   - CostLine:
       Resource1: 2
       Cost1: 25
@@ -313,7 +313,7 @@ MonoBehaviour:
       Amount: 25
     - ResourceType: 4
       Amount: 1
-    Range: 4.5
+    Range: 5
   - CostLine:
       Resource1: 2
       Cost1: 50
@@ -324,7 +324,7 @@ MonoBehaviour:
       Amount: 50
     - ResourceType: 4
       Amount: 3
-    Range: 5
+    Range: 5.5
   HealUpgrades:
   - CostLine:
       Resource1: 1
@@ -336,7 +336,7 @@ MonoBehaviour:
       Amount: 10
     - ResourceType: 2
       Amount: 5
-    ReduceFromHealInterval: 0.5
+    ReduceFromHealInterval: 1
   - CostLine:
       Resource1: 1
       Cost1: 40
@@ -347,7 +347,7 @@ MonoBehaviour:
       Amount: 40
     - ResourceType: 2
       Amount: 20
-    ReduceFromHealInterval: 0.5
+    ReduceFromHealInterval: 1
   - CostLine:
       Resource1: 1
       Cost1: 100
@@ -358,4 +358,4 @@ MonoBehaviour:
       Amount: 100
     - ResourceType: 2
       Amount: 50
-    ReduceFromHealInterval: 0.5
+    ReduceFromHealInterval: 1

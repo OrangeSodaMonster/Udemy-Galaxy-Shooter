@@ -33,7 +33,7 @@ public class InputHolder : MonoBehaviour
 
     private void Start()
     {
-        if(GameStatus.IsMobile && !GameStatus.IsJoystick) GameManager.IsAutoFire = true;
+        if(GameStatus.IsMobile && !GameStatus.IsJoystick && !Application.isEditor) GameManager.IsAutoFire = true;
 
         GameStatus.DisconectedJoystick.AddListener(OnDeviceLost);
     }
@@ -164,7 +164,7 @@ public class InputHolder : MonoBehaviour
         {
             GameManager.IsAutoFire = !GameManager.IsAutoFire;
         }
-        if(GameStatus.IsMobile && !GameStatus.IsJoystick)
+        if(GameStatus.IsMobile && !GameStatus.IsJoystick && !Application.isEditor)
             GameManager.IsAutoFire = true;
     }
 
