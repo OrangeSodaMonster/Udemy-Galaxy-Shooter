@@ -57,8 +57,8 @@ public class PlayerCollectiblesCount : MonoBehaviour
 	static public int EnergyCristalAmount = 0;   
 	static public int CondensedEnergyCristalAmount = 0;
 
-    public ResourceNumber[] MetalCost;
-    public ResourceNumber[] AlloyCost;
+    //public ResourceNumber[] MetalCost;
+    //public ResourceNumber[] AlloyCost;
 
     //public int MetalCrumbsView = 0;
     public int MetalView = 0;
@@ -107,6 +107,14 @@ public class PlayerCollectiblesCount : MonoBehaviour
         else { return false; }
     }
 
+    static public bool ExpendResources(ResourceNumber costs)
+    {
+        ResourceNumber[] temp = new ResourceNumber[1];
+        temp[0] = costs;
+
+        return ExpendResources(temp);
+    }
+
     static public bool CheckResourcesAmmount(ResourceNumber[] costs)
     {
         bool hasEnough = true;
@@ -129,6 +137,13 @@ public class PlayerCollectiblesCount : MonoBehaviour
         
         return hasEnough;
     }
+    static public bool CheckResourcesAmmount(ResourceNumber costs)
+    {
+        ResourceNumber[] temp = new ResourceNumber[1];
+        temp[0] = costs;
+
+        return CheckResourcesAmmount(temp);
+    }
 
     static void SubtractResources(ResourceNumber[] costs)
     {
@@ -149,7 +164,38 @@ public class PlayerCollectiblesCount : MonoBehaviour
 
         }
             OnChangedCollectibleAmount?.Invoke();
+    }
 
+    public static void AddResourceNumber(ResourceNumber[] adds)
+    {
+        for (int i = 0; i < adds.Length; i++)
+        {
+            switch (adds[i].ResourceType)
+            {
+                case ResourceType.Metal:
+                    MetalAmount += adds[i].Amount;
+                    break;
+                case ResourceType.RareMetal:
+                    RareMetalAmount += adds[i].Amount;
+                    break;
+                case ResourceType.EnergyCristal:
+                    EnergyCristalAmount += adds[i].Amount;
+                    break;
+                case ResourceType.CondensedEnergyCristal:
+                    CondensedEnergyCristalAmount += adds[i].Amount;
+                    break;
+                case 0:
+                    break;
+            }
+        }
+    }
+
+    public static void AddResourceNumber(ResourceNumber add)
+    {
+        ResourceNumber[] temp = new ResourceNumber[1];
+        temp[0] = add;
+
+        AddResourceNumber(temp);
     }
 
     public static void LoadResources(int metal, int rareMetal, int EnergyCrystal, int CondEnergyCrystal)

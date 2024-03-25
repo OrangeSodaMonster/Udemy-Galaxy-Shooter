@@ -9,10 +9,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
-{   
-    [Header("")]
+{       
     [SerializeField] RectTransform pauseCanvas;
-    [Header("")]
+    [Space]
     [SerializeField] RectTransform gameoverCanvas;
     static RectTransform s_gameoverCanvas;
     [Header("Upgrade Canvas")]
