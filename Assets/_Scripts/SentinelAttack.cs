@@ -3,7 +3,7 @@ using UnityEngine.VFX;
 
 public class SentinelAttack : MonoBehaviour
 {
-    [HideInInspector] public float Range = 3;
+    public float Range = 3;
     [HideInInspector] public int Damage = 5;
     [HideInInspector] public float DamageInterval = 1;
     [SerializeField] float vfxScaleMultiplier = 1.3f;
@@ -23,7 +23,7 @@ public class SentinelAttack : MonoBehaviour
     private void Awake()
     {
         lineColor = lineRenderer.colorGradient;
-        lineRenderer.transform.localScale /= transform.localScale.x;
+        lineRenderer.transform.localScale /= transform.lossyScale.x;
         rangeSqr = Range * Range;
     }
 

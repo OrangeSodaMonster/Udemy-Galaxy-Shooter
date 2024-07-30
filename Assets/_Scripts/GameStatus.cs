@@ -19,7 +19,7 @@ public class GameStatus : MonoBehaviour
 	public static bool IsJoystick = false;
     public static UnityEvent DisconectedJoystick = new();    
 
-    int joysticksConnected;
+    //int joysticksConnected;
 
     private void OnEnable()
     {
@@ -27,8 +27,8 @@ public class GameStatus : MonoBehaviour
         IsGameover = false;
         IsStageClear = false;        
 
-        joysticksConnected = Input.GetJoystickNames().Length;
-        IsJoystick = joysticksConnected > 0;
+        //joysticksConnected = Input.GetJoystickNames().Length;
+        //IsJoystick = joysticksConnected > 0;
         Debug.Log($"Joystick: {IsJoystick}");
         //StartCoroutine(CheckJoysticksConnectedCO());
     }

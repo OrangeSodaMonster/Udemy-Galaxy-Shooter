@@ -9,6 +9,7 @@ public class BlackHolePull : MonoBehaviour
     [SerializeField] AnimationCurve pullCurve;
     [field: SerializeField] public float CollectiblePullForce = 7;
     [field: SerializeField] public float TimeToMaxPullCollec = 3;
+    [SerializeField] List<Rigidbody2D> objsToIgnore;
 
 	List<Rigidbody2D> objsToPull = new List<Rigidbody2D>();
     float radius;
@@ -28,7 +29,9 @@ public class BlackHolePull : MonoBehaviour
             {
                 objsToPull.Remove(objsToPull[i]);
                 return;
-            }            
+            }
+
+            if (objsToIgnore.Contains(objsToPull[i])) continue;
 
             Vector2 direction = (transform.position - objsToPull[i].transform.position).normalized;
 
