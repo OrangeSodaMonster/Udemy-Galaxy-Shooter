@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class SpawnDroneFromShip : MonoBehaviour
 {
-    [HideInInspector] public float BaseSpawnCD = 9;
-    [HideInInspector] public float SpawnCDVariation = 1f;
+    public float BaseSpawnCD = 9;
+    public float SpawnCDVariation = 1f;
     [SerializeField] GameObject droneToSpawn;
 
     WaitForSeconds wait;
     public GameObject DroneToSpawn => droneToSpawn;
 
     float spawnCD;
+    float stopSpawnDistance;
+    Transform player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerMove>().transform;
+        stopSpawnDistance = EnemySpawner.Instance.SpawnZoneRadius * 1.5f;
+        stopSpawnDistance *= stopSpawnDistance;
+    }
 
     void OnEnable()
     {
@@ -34,11 +43,13 @@ public class SpawnDroneFromShip : MonoBehaviour
         {
             yield return wait;
 
-            EnemySpawner.Instance.SpawnDrone(transform.position, droneToSpawn);
-
-            spawnCD = Random.Range(-SpawnCDVariation, SpawnCDVariation) + BaseSpawnCD;
-
-            AudioManager.Instance.DroneSpawnSound.PlayFeedbacks();
+            if (Vector2.SqrMagnitude(player.position - transform.position) < stopSpawnDistance)
+            {
+                EnemySpawner.Instance.SpawnDrone(transform.position, droneToSpawn);
+                AudioManager.Instance.DroneSpawnSound.PlayFeedbacks();
+                spawnCD = Random.Range(-SpawnCDVariation, SpawnCDVariation) + BaseSpawnCD;
+            }
+            
         }
     }
 }

@@ -59,6 +59,11 @@ public class SentinelAttack : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        lineRenderer.transform.rotation = Quaternion.identity;
+    }
+
     void LaserAttack()
     {
         Vector3 hitPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);

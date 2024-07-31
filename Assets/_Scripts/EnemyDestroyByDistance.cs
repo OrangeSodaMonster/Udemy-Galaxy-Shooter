@@ -11,12 +11,12 @@ public class EnemyDestroyByDistance : MonoBehaviour
 
     private void Awake()
     {
-        
+        player = FindAnyObjectByType<PlayerMove>()?.transform;
     }
 
     void OnEnable()
     {
-        player = FindAnyObjectByType<PlayerMove>()?.transform;
+        if (!player.gameObject.activeInHierarchy) player = null;
         deSpawnZoneRadius = EnemySpawner.Instance.SpawnZoneRadius * 1.5f;
         deSpawnZoneRadius *= deSpawnZoneRadius;
 

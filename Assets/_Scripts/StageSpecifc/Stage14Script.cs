@@ -8,6 +8,7 @@ public class Stage14Script : MonoBehaviour
     [SerializeField] List<Transform> cageNodes;
     [SerializeField] LineRenderer cageLine;
 
+    EnemySpawner enemySpawner;
 
     void Start()
     {
@@ -18,6 +19,8 @@ public class Stage14Script : MonoBehaviour
             nodesPos[i] = cageNodes[i].position - cageLine.transform.position;
         }
         cageLine.SetPositions(nodesPos);
+
+        enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     [Button]
@@ -25,8 +28,29 @@ public class Stage14Script : MonoBehaviour
     {
         for(int i = 0;i < cageNodes.Count; i++)
         {
-            cageNodes[i].GetComponent<Stage14_Nodes>().TurnOn();
+            cageNodes[i].GetComponent<ChangeMat>().ChangeMaterial();
         }
         cageLine.gameObject.SetActive(true);
+    }
+
+    public void TurnCageOff()
+    {
+        for (int i = 0; i < cageNodes.Count; i++)
+        {
+            cageNodes[i].GetComponent<ChangeMat>().ReturnOriginalMaterial();
+        }
+        cageLine.gameObject.SetActive(false);
+    }
+
+    public void DisableSpawn()
+    {
+        enemySpawner.GetComponent<RareSpawnScript>().enabled = false;
+        enemySpawner.enabled = false;
+    }
+
+    public void ReEnableSpawn()
+    {        
+        enemySpawner.enabled = true;
+        enemySpawner.GetComponent<RareSpawnScript>().enabled = true;
     }
 }

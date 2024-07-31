@@ -1,13 +1,24 @@
 using MoreMountains.Tools;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
+public struct ObjToPool
+{
+    public GameObject Obj;
+    public int Count;
+}
 
 public class PoolRefs : MonoBehaviour
 {
     [SerializeField] MMSimpleObjectPooler poolerPrefab;
     [SerializeField] MMSimpleObjectPooler hpBarPool;
+    [Space]
+    [SerializeField] List<ObjToPool> manualObjToMakePools;
+
     public static MMSimpleObjectPooler s_hpBarPool;
     //[SerializeField] MMSimpleObjectPooler projectilePool;
     //public static MMSimpleObjectPooler s_projectilePool;
@@ -25,7 +36,7 @@ public class PoolRefs : MonoBehaviour
 
         enemySpawn = GetComponent<EnemySpawner>();
 
-        foreach(EnemiesToSpawn spawn in enemySpawn.EnemiesToSpawn)
+        foreach (EnemiesToSpawn spawn in enemySpawn.EnemiesToSpawn)
         {
             // Criar poolers para cada inimigo na lista de spawns
             if (!Poolers.ContainsKey(spawn.enemy))
@@ -44,11 +55,11 @@ public class PoolRefs : MonoBehaviour
                         Poolers.Add(drone, Instantiate(poolerPrefab, transform));
                         Poolers[drone].PoolSize = (int)Mathf.Ceil(spawn.spawnWeight * 2) + 1;
                         Poolers[drone].GameObjectToPool = drone;
-                    }                        
+                    }
                 }
 
                 // pools para projectiles
-                if(spawn.enemy.TryGetComponent(out EnemyProjectileShoot shooter))
+                if (spawn.enemy.TryGetComponent(out EnemyProjectileShoot shooter))
                 {
                     GameObject projectile = shooter.projectilePref;
 
@@ -60,7 +71,7 @@ public class PoolRefs : MonoBehaviour
                     }
                 }
 
-                if(spawn.enemy.TryGetComponent(out AsteroidSplit split))
+                if (spawn.enemy.TryGetComponent(out AsteroidSplit split))
                 {
                     GameObject asteroid = split.AsteroidToSplitInto;
 
@@ -201,6 +212,18 @@ public class PoolRefs : MonoBehaviour
                         Poolers[asteroid2].GameObjectToPool = asteroid2;
                     }
                 }
+            }
+        }
+
+        // Pooler manuais
+        foreach (ObjToPool obj in manualObjToMakePools)
+        {
+            // Criar poolers para cada inimigo na lista de spawns
+            if (!Poolers.ContainsKey(obj.Obj))
+            {
+                Poolers.Add(obj.Obj, Instantiate(poolerPrefab, transform));
+                Poolers[obj.Obj].PoolSize = obj.Count;
+                Poolers[obj.Obj].GameObjectToPool = obj.Obj;
             }
         }
     }
