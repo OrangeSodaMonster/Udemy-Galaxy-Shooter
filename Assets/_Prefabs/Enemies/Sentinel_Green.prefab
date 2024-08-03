@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 664909706247074055}
   - component: {fileID: 5372358740534571402}
   m_Layer: 7
-  m_Name: SentinelAttack+
+  m_Name: SentinelAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5602a82baef59b4c84a6baead50c648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPositiveIndex: 1
+  laserTarget: 0
   Range: 5.5
   Damage: 5
   DamageInterval: 0.9
@@ -812,8 +812,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f36f00566a508d49b174c581b91afe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootInterval: 4
-  shootDistande: 7
+  shootInterval: 5
+  shootDistande: 10
   allowRotation: 1
   rotateInterval: 8
   rotateAfterShootInterval: 2.1

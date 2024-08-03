@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.VFX;
 
+[Serializable]
+public enum SentinelLaserTarget
+{
+    closest = 0,
+    positive = 1,
+    negative = 2,
+}
 public class SentinelAttack : MonoBehaviour
 {
-    [SerializeField] bool isPositiveIndex = true;
+    [SerializeField] SentinelLaserTarget laserTarget = SentinelLaserTarget.closest;
     public float Range = 3;
     [HideInInspector] public int Damage = 5;
     [HideInInspector] public float DamageInterval = 1;
@@ -130,17 +138,32 @@ public class SentinelAttack : MonoBehaviour
         }
 
         int originIndex;
-        if (isPositiveIndex)
+        if (laserTarget == SentinelLaserTarget.positive)
         {
             originIndex = shootScript.ShooterIndex + 1;
             if (originIndex >= origins.childCount)
                 originIndex = 0;
         }
-        else
+        else if (laserTarget == SentinelLaserTarget.negative)
         {
             originIndex = shootScript.ShooterIndex - 1;
             if (originIndex < 0)
                 originIndex = origins.childCount - 1;
+        }
+        else
+        {
+            int posIndex = shootScript.ShooterIndex + 1;
+            if(posIndex >= origins.childCount) posIndex = 0;
+
+            int negIndex = shootScript.ShooterIndex - 1;
+            if (negIndex < 0) negIndex = origins.childCount - 1;
+
+            originIndex = posIndex;
+            if (Vector2.SqrMagnitude(hitPos - origins.GetChild(posIndex).position) > 
+                Vector2.SqrMagnitude(hitPos - origins.GetChild(negIndex).position))
+            {
+                originIndex = negIndex;
+            }
         }
 
         return origins.GetChild(originIndex);
