@@ -23,7 +23,7 @@ public class SnakeBossMain : MonoBehaviour
     [SerializeField] List<GameObject> objsToEnableOnTurnOn;
     [SerializeField] GameObject headShield;
 
-    List<SnakeBossShooter> shooters = new();
+    List<BossShooter> shooters = new();
     Transform player;
     float currentShootTime = float.MaxValue;
     float shootTimer = 0;
@@ -54,7 +54,7 @@ public class SnakeBossMain : MonoBehaviour
 
         player = FindObjectOfType<PlayerMove>().transform;
 
-        GetComponentsInChildren<SnakeBossShooter>(true, shooters);
+        GetComponentsInChildren<BossShooter>(true, shooters);
         currentShootTime = minMaxShootTime.x;
         startingShooters = shooters.Count;
 
@@ -103,7 +103,7 @@ public class SnakeBossMain : MonoBehaviour
         if (Vector2.SqrMagnitude(player.position - parts[0].transform.position) > stopAttacksDistance)
             return;
 
-        SnakeBossShooter bestShooterSoFar = null;
+        BossShooter bestShooterSoFar = null;
         float bestDotSoFar = -1;
         for(int i = 0;i < shooters.Count;i++)
         {

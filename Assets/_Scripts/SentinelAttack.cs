@@ -3,6 +3,7 @@ using UnityEngine.VFX;
 
 public class SentinelAttack : MonoBehaviour
 {
+    [SerializeField] bool isPositiveIndex = true;
     public float Range = 3;
     [HideInInspector] public int Damage = 5;
     [HideInInspector] public float DamageInterval = 1;
@@ -19,12 +20,15 @@ public class SentinelAttack : MonoBehaviour
     Transform target;
     float rangeSqr;
     PlayerHP playerHP;
+    SentinelShoot shootScript;
 
     private void Awake()
     {
         lineColor = lineRenderer.colorGradient;
         lineRenderer.transform.localScale /= transform.lossyScale.x;
         rangeSqr = Range * Range;
+
+        shootScript = GetComponentInParent<SentinelShoot>();
     }
 
     private void OnEnable()
@@ -67,7 +71,7 @@ public class SentinelAttack : MonoBehaviour
     void LaserAttack()
     {
         Vector3 hitPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
-        Transform closestOrigin = GetClosestOrigin(hitPos);
+        Transform closestOrigin = GetOrigin(hitPos);
 
         ShieldStrenght strenght = null;
         if(CheckForShield(closestOrigin.position, hitPos, out ShieldStrenght shieldStr, out Vector2 shieldHit))
@@ -109,18 +113,37 @@ public class SentinelAttack : MonoBehaviour
         }       
     }
 
-    Transform GetClosestOrigin(Vector3 hitPos)
+    Transform GetOrigin(Vector3 hitPos)
     {
-        Transform closestOrigin = null;
-        foreach (Transform t in origins)
+        if(shootScript == null || shootScript.ShooterIndex < 0)
         {
-            if(closestOrigin == null || Vector2.SqrMagnitude(hitPos - t.position) < Vector2.SqrMagnitude(hitPos - closestOrigin.position))
+            Transform closestOrigin = null;
+            foreach (Transform t in origins)
             {
-                closestOrigin = t;
+                if (closestOrigin == null || Vector2.SqrMagnitude(hitPos - t.position) < Vector2.SqrMagnitude(hitPos - closestOrigin.position))
+                {
+                    closestOrigin = t;
+                }
             }
+
+            return closestOrigin;
         }
 
-        return closestOrigin;
+        int originIndex;
+        if (isPositiveIndex)
+        {
+            originIndex = shootScript.ShooterIndex + 1;
+            if (originIndex >= origins.childCount)
+                originIndex = 0;
+        }
+        else
+        {
+            originIndex = shootScript.ShooterIndex - 1;
+            if (originIndex < 0)
+                originIndex = origins.childCount - 1;
+        }
+
+        return origins.GetChild(originIndex);
     }
 
     void StopAttack()

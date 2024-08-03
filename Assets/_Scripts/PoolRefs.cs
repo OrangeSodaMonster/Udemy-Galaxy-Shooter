@@ -226,6 +226,64 @@ public class PoolRefs : MonoBehaviour
                 Poolers[obj.Obj].GameObjectToPool = obj.Obj;
             }
         }
+
+        foreach (ObjToPool obj in manualObjToMakePools)
+        {
+            if (!Poolers.ContainsKey(obj.Obj))
+            {
+                Poolers.Add(obj.Obj, Instantiate(poolerPrefab, transform));
+                Poolers[obj.Obj].PoolSize = obj.Count;
+                Poolers[obj.Obj].GameObjectToPool = obj.Obj;
+            }
+
+            if (obj.Obj.TryGetComponent(out SpawnDroneFromShip spawnDrone))
+            {
+                GameObject drone = spawnDrone.DroneToSpawn;
+
+                if (!Poolers.ContainsKey(drone))
+                {
+                    Poolers.Add(drone, Instantiate(poolerPrefab, transform));
+                    Poolers[drone].PoolSize = obj.Count * 2;
+                    Poolers[drone].GameObjectToPool = drone;
+                }
+            }
+
+            if (obj.Obj.TryGetComponent(out EnemyProjectileShoot shooter))
+            {
+                GameObject projectile = shooter.projectilePref;
+
+                if (!Poolers.ContainsKey(projectile))
+                {
+                    Poolers.Add(projectile, Instantiate(poolerPrefab, transform));
+                    Poolers[projectile].PoolSize = obj.Count * 3;
+                    Poolers[projectile].GameObjectToPool = projectile;
+                }
+            }
+
+            if (obj.Obj.TryGetComponent(out AsteroidSplit split))
+            {
+                GameObject asteroid = split.AsteroidToSplitInto;
+
+                if (!Poolers.ContainsKey(asteroid))
+                {
+                    Poolers.Add(asteroid, Instantiate(poolerPrefab, transform));
+                    Poolers[asteroid].PoolSize = obj.Count * 3;
+                    Poolers[asteroid].GameObjectToPool = asteroid;
+                }
+
+                if (asteroid.TryGetComponent(out AsteroidSplit split2))
+                {
+                    GameObject asteroid2 = split2.AsteroidToSplitInto;
+
+                    if (!Poolers.ContainsKey(asteroid2))
+                    {
+                        Poolers.Add(asteroid2, Instantiate(poolerPrefab, transform));
+                        Poolers[asteroid2].PoolSize = obj.Count * 9;
+                        Poolers[asteroid2].GameObjectToPool = asteroid2;
+                    }
+                }
+            }
+        }
     }
 
     public void CreatePoolsForObject(GameObject obj, int size)

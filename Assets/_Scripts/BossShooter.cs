@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class SnakeBossShooter : MonoBehaviour
+public class BossShooter : MonoBehaviour
 {
     [field: SerializeField] public GameObject projectilePref { get; private set; }
     [SerializeField] Transform projectileOrigin;
+    public Transform ProjectileOrigin { get { return projectileOrigin; }}
     [SerializeField] VisualEffect preShootVFX;
     [SerializeField] float preShootVFXTimePrior = 2;
     [SerializeField] LayerMask raycastLayers;
+    [SerializeField] bool playChargeSound = false;
 
     [HideInInspector] public bool IsShooting;
     PoolRefs poolRefs;
@@ -27,7 +29,8 @@ public class SnakeBossShooter : MonoBehaviour
 
     private void OnDisable()
     {
-        //AudioManager.Instance.StopEnemyCharge(gameObject.GetHashCode());
+        if(playChargeSound)
+            AudioManager.Instance.StopEnemyCharge(gameObject.GetHashCode());
         StopAllCoroutines();
     }
 
@@ -42,9 +45,10 @@ public class SnakeBossShooter : MonoBehaviour
     {        
         IsShooting = true;
         preShootVFX.gameObject.SetActive(true);
-        //AudioManager.Instance.PlayEnemyCharge(gameObject.GetHashCode());
+        if (playChargeSound)
+            AudioManager.Instance.PlayEnemyCharge(gameObject.GetHashCode());
 
-        yield return new WaitForSeconds(preShootVFXTimePrior);
+            yield return new WaitForSeconds(preShootVFXTimePrior);
 
         GameObject projectile;
         if (poolRefs.Poolers.ContainsKey(projectilePref))

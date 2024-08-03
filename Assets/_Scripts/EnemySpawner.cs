@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
     public float SpawnZoneRadius { get { return spawnZoneRadiusStatic; } }
 
     float totalSpawnWeight = 0;
-    Vector3 nextSpawnPoint;
+    //Vector3 nextSpawnPoint;
     float currentSpawnCD;
     PoolRefs poolRef;
     float spawnTimer = 0;
@@ -94,11 +94,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        //StartCoroutine(RandomSpawnRoutine());
-    }
-
     private void OnDisable()
     {
         StopAllCoroutines();
@@ -130,6 +125,12 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject enemy = poolRef.Poolers[spawn].GetPooledGameObject();
         enemy.transform.position = GetSpawnPoint();
+        enemy.SetActive(true);
+    }    
+    public void SpawnEnemy(GameObject spawn, Vector3 spawnPoint)
+    {
+        GameObject enemy = poolRef.Poolers[spawn].GetPooledGameObject();
+        enemy.transform.position = spawnPoint;
         enemy.SetActive(true);
     }
 
