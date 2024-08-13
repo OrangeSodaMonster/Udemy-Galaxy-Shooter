@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c6b36146b23fcf940aa518b41be6616f, type: 2}
+    - target: {fileID: 1262007125356465842, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: MaxHP
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 2003824453320199944, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.91
@@ -104,6 +108,10 @@ PrefabInstance:
       propertyPath: vfxRingsColor.key2.r
       value: 0.92156863
       objectReference: {fileID: 0}
+    - target: {fileID: 4871147860128078388, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: BaseSpeed
+      value: 2.38
+      objectReference: {fileID: 0}
     - target: {fileID: 5045146221006717326, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
       value: 0
@@ -163,6 +171,14 @@ PrefabInstance:
     - target: {fileID: 5045146221006717326, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_NumColorKeys
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556342535090201594, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: Damage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556342535090201594, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: ImpactVelocity
+      value: 0.71400005
       objectReference: {fileID: 0}
     - target: {fileID: 6786363138637217978, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
@@ -311,6 +327,18 @@ PrefabInstance:
     - target: {fileID: 8271918894049419804, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_NumColorKeys
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: MaxDropsNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: 6e1729ea7bd37fc40abb6e63aff1ddd8, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

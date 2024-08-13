@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseSpeed: 2
-  SpeedVariationPerc: 10
+  SpeedVariationPerc: 5
 --- !u!114 &8810601949308987788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,9 +218,9 @@ MonoBehaviour:
   radiusToSpawn: 0.4
   DropsToSpawn:
   - drop: 1
-    spawnWeight: 30
+    spawnWeight: 10
   - drop: 2
-    spawnWeight: 1
+    spawnWeight: 0.3
   - drop: 3
     spawnWeight: 0
   - drop: 4

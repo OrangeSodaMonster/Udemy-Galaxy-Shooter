@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserTarget: 0
-  Range: 5.5
+  Range: 6
   Damage: 5
   DamageInterval: 0.9
   vfxScaleMultiplier: 1.3
@@ -661,9 +661,9 @@ MonoBehaviour:
   - drop: 1
     Amount: 0
   - drop: 2
-    Amount: 0
-  - drop: 3
     Amount: 1
+  - drop: 3
+    Amount: 0
   - drop: 4
     Amount: 0
 --- !u!114 &3450916988362504428
@@ -791,15 +791,15 @@ MonoBehaviour:
   ChanceToDrop: 15
   PuDrops:
   - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
-    Weight: 15
+    Weight: 10
   - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
     Weight: 5
   - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
     Weight: 5
   - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
-    Weight: 10
+    Weight: 5
   - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
-    Weight: 7
+    Weight: 10
 --- !u!114 &108331989794297970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootInterval: 5
-  shootDistande: 10
+  shootDistance: 10
   allowRotation: 1
   rotateInterval: 8
   rotateAfterShootInterval: 2.1

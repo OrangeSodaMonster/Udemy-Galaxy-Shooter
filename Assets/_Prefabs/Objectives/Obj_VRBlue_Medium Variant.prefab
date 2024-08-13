@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1167365989404128105, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167365989404128105, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167365989404128105, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2197979010377549906, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
       propertyPath: asteroidToSplitInto
       value: 
@@ -123,6 +135,10 @@ PrefabInstance:
     - target: {fileID: 4785651162450018486, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
       propertyPath: m_Name
       value: Obj_VRBlue_Medium Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456466399879974904, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
+      propertyPath: MaxHP
+      value: 1090
       objectReference: {fileID: 0}
     - target: {fileID: 5973401939959784311, guid: 63a3b254762471b4cac968f6b7352965, type: 3}
       propertyPath: m_Sprite

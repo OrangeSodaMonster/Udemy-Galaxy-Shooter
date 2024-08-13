@@ -7,6 +7,7 @@ public class Stage14Script : MonoBehaviour
 {
     [SerializeField] List<Transform> cageNodes;
     [SerializeField] LineRenderer cageLine;
+    [SerializeField] GameObject colliders;
 
     EnemySpawner enemySpawner;
 
@@ -31,6 +32,7 @@ public class Stage14Script : MonoBehaviour
             cageNodes[i].GetComponent<ChangeMat>().ChangeMaterial();
         }
         cageLine.gameObject.SetActive(true);
+        colliders.SetActive(true);
     }
 
     public void TurnCageOff()
@@ -40,6 +42,7 @@ public class Stage14Script : MonoBehaviour
             cageNodes[i].GetComponent<ChangeMat>().ReturnOriginalMaterial();
         }
         cageLine.gameObject.SetActive(false);
+        colliders.SetActive(false);
     }
 
     public void DisableSpawn()

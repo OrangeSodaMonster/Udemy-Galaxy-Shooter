@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 527927390162876369, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: ChanceToDrop
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 527927390162876369, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: PuDrops.Array.data[1].Weight
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1038812110682612912, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_Sprite
@@ -66,12 +70,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: BaseShootCD
-      value: 5
+      value: 5.1000004
       objectReference: {fileID: 0}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: projectilePref
       value: 
       objectReference: {fileID: 5444939176136045151, guid: dac548a56d4a9e54ba81300525b3308e, type: 3}
+    - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: ShootCDVariation
+      value: 0.51000005
+      objectReference: {fileID: 0}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: <projectilePref>k__BackingField
       value: 
@@ -106,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4871147860128078388, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: BaseSpeed
-      value: 2.7
+      value: 2.7250001
       objectReference: {fileID: 0}
     - target: {fileID: 5045146221006717326, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.atime0
@@ -166,11 +174,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5556342535090201594, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: Damage
-      value: 35
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5556342535090201594, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: ImpactVelocity
-      value: 0.7
+      value: 0.65400004
       objectReference: {fileID: 0}
     - target: {fileID: 6786363138637217978, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.atime0
@@ -313,16 +321,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[0].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: DropsToSpawn.Array.data[0].spawnWeight
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: DropsToSpawn.Array.data[1].spawnWeight
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8810601949308987788, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
-      value: 0.3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

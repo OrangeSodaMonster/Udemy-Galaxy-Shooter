@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8554f9fbeb503489fc723c4b1825fc, type: 3}
+  m_Name: _MasterEnemyInfo
+  m_EditorClassIdentifier: 
+  shootCdVariationPerc: 10
+  speedVariationPerc: 5
+  shipRotationTimeVariationPerc: 30
+  shipDroneSpawnVariationPerc: 10
+  hPDroneGreen: 25
+  shootCdDroneGreen: 6
+  speedDroneGreen: 2.5
+  colDamageDroneGreen: 20
+  impactVelDroneGreen: 0.6
+  hPShipGreen: 45
+  shootCdShipGreen: 6
+  speedShipGreen: 6.2
+  colDamageShipGreen: 30
+  impactVelShipGreen: 1
+  droneSpawnTimeShipGreen: 10
+  xSpeedShipGreen: 3.5
+  rotChangeTimeShipGreen: 6
+  hPSumDroneGreen: 10
+  speedSumDroneGreen: 2
+  colDamageSumDroneGreen: 20
+  impactSumDroneGreen: 0.6
+  hPSentinelGreen: 150
+  shootCdSentinelGreen: 5
+  colDamageSentinelGreen: 15
+  impactSentinelGreen: 1
+  yellowHpMult: 3
+  orangeHpMult: 7
+  redHpMult: 12
+  yellowShootCdMult: 0.85
+  orangeShootCdMult: 0.75
+  redShootCdMult: 0.65
+  yellowSpeedMult: 1.09
+  orangeSpeedMult: 1.19
+  redSpeedMult: 1.3
+  yellowColDamageMult: 1.5
+  orangeColDamageMult: 2
+  redColDamageMult: 2.5
+  greenPuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
+  yellowPuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 7
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
+  orangePuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
+  redPuDrops:
+  - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
+    Weight: 10
+  - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
+    Weight: 15
+  - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
+    Weight: 5
+  - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
+    Weight: 10
+  saveStateColor: {r: 1, g: 0, b: 0, a: 1}
+  OnUpdateAndSaveAll:
+    m_PersistentCalls:
+      m_Calls: []

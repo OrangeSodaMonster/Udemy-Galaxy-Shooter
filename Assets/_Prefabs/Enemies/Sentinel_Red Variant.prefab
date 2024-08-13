@@ -493,9 +493,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserTarget: 2
-  Range: 7.5
+  Range: 9
   Damage: 5
-  DamageInterval: 0.9
+  DamageInterval: 0.33
   vfxScaleMultiplier: 1.3
   layersToHit:
     serializedVersion: 2
@@ -552,9 +552,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserTarget: 1
-  Range: 7.5
+  Range: 9
   Damage: 5
-  DamageInterval: 0.9
+  DamageInterval: 0.33
   vfxScaleMultiplier: 1.3
   layersToHit:
     serializedVersion: 2
@@ -1928,6 +1928,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2612385110787100388, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: MaxHP
+      value: 1800
+      objectReference: {fileID: 0}
     - target: {fileID: 3299482844894171481, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.ctime1
       value: 26792
@@ -2128,9 +2132,53 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: ChanceToDrop
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: PuDrops.Array.data[1].Weight
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8041697703895849371, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: MaxDropsNum
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: MinDropsNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[1].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[2].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[3].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8801818747454452340, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: vfxRingsColor.atime0
@@ -2233,8 +2281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f36f00566a508d49b174c581b91afe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootInterval: 2.31
-  shootDistande: 15
+  shootInterval: 3.25
+  shootDistance: 15
   allowRotation: 1
   rotateInterval: 4
   rotateAfterShootInterval: 2.1

@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseSpeed: 2.5
-  SpeedVariationPerc: 10
+  SpeedVariationPerc: 5
 --- !u!114 &3938272113056073347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <projectilePref>k__BackingField: {fileID: 1250797867374824522, guid: 645435d149b3671469a35e59c34343cb, type: 3}
   BaseShootCD: 6
-  ShootCDVariation: 1
+  ShootCDVariation: 0.59999996
   projectileOrigin: {fileID: 7501308407415674733}
   preShootVFX: {fileID: 8271918894049419804}
   preShootVFXTimePrior: 2
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69333f3c3ca8a547aa84d68cc8d568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChanceToDrop: 1.5
+  ChanceToDrop: 2
   PuDrops:
   - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
     Weight: 10

@@ -9,12 +9,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 108331989794297970, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: shootDistance
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 108331989794297970, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: shootDistande
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 108331989794297970, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: shootInterval
-      value: 3
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 108331989794297970, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: rotateInterval
@@ -187,6 +191,10 @@ PrefabInstance:
     - target: {fileID: 2429708347998334096, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key1.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612385110787100388, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: MaxHP
+      value: 1050
       objectReference: {fileID: 0}
     - target: {fileID: 2650738017495839331, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.g
@@ -402,7 +410,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c6b36146b23fcf940aa518b41be6616f, type: 2}
     - target: {fileID: 5372358740534571402, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: Range
-      value: 6.5
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5372358740534571402, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: Damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5372358740534571402, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DamageInterval
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5865216072349825618, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: <projectilePref>k__BackingField
@@ -475,6 +491,14 @@ PrefabInstance:
     - target: {fileID: 5894904586705286895, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_NumColorKeys
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: ChanceToDrop
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: PuDrops.Array.data[1].Weight
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5949452603026786008, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.atime0
@@ -619,6 +643,38 @@ PrefabInstance:
     - target: {fileID: 8041697703895849371, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: MaxDropsNum
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: MinDropsNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[1].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[2].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454279595169421599, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8801818747454452340, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: vfxRingsColor.key0.b

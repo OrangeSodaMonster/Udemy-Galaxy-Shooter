@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 [Serializable]
@@ -18,6 +19,7 @@ public class PoolRefs : MonoBehaviour
     [SerializeField] MMSimpleObjectPooler hpBarPool;
     [Space]
     [SerializeField] List<ObjToPool> manualObjToMakePools;
+    public List<ObjToPool> ManualObjToMakePools { get { return manualObjToMakePools; } set { manualObjToMakePools = value; } }
 
     public static MMSimpleObjectPooler s_hpBarPool;
     //[SerializeField] MMSimpleObjectPooler projectilePool;
@@ -221,72 +223,74 @@ public class PoolRefs : MonoBehaviour
             // Criar poolers para cada inimigo na lista de spawns
             if (!Poolers.ContainsKey(obj.Obj))
             {
-                Poolers.Add(obj.Obj, Instantiate(poolerPrefab, transform));
-                Poolers[obj.Obj].PoolSize = obj.Count;
-                Poolers[obj.Obj].GameObjectToPool = obj.Obj;
+                CreatePoolsForObject(obj.Obj, obj.Count);
+
+                //Poolers.Add(obj.Obj, Instantiate(poolerPrefab, transform));
+                //Poolers[obj.Obj].PoolSize = obj.Count;
+                //Poolers[obj.Obj].GameObjectToPool = obj.Obj;
             }
         }
 
-        foreach (ObjToPool obj in manualObjToMakePools)
-        {
-            if (!Poolers.ContainsKey(obj.Obj))
-            {
-                Poolers.Add(obj.Obj, Instantiate(poolerPrefab, transform));
-                Poolers[obj.Obj].PoolSize = obj.Count;
-                Poolers[obj.Obj].GameObjectToPool = obj.Obj;
-            }
+        //foreach (ObjToPool obj in manualObjToMakePools)
+        //{
+        //    if (!Poolers.ContainsKey(obj.Obj))
+        //    {
+        //        Poolers.Add(obj.Obj, Instantiate(poolerPrefab, transform));
+        //        Poolers[obj.Obj].PoolSize = obj.Count;
+        //        Poolers[obj.Obj].GameObjectToPool = obj.Obj;
+        //    }
 
-            if (obj.Obj.TryGetComponent(out SpawnDroneFromShip spawnDrone))
-            {
-                GameObject drone = spawnDrone.DroneToSpawn;
+        //    if (obj.Obj.TryGetComponent(out SpawnDroneFromShip spawnDrone))
+        //    {
+        //        GameObject drone = spawnDrone.DroneToSpawn;
 
-                if (!Poolers.ContainsKey(drone))
-                {
-                    Poolers.Add(drone, Instantiate(poolerPrefab, transform));
-                    Poolers[drone].PoolSize = obj.Count * 2;
-                    Poolers[drone].GameObjectToPool = drone;
-                }
-            }
+        //        if (!Poolers.ContainsKey(drone))
+        //        {
+        //            Poolers.Add(drone, Instantiate(poolerPrefab, transform));
+        //            Poolers[drone].PoolSize = obj.Count * 2;
+        //            Poolers[drone].GameObjectToPool = drone;
+        //        }
+        //    }
 
-            if (obj.Obj.TryGetComponent(out EnemyProjectileShoot shooter))
-            {
-                GameObject projectile = shooter.projectilePref;
+        //    if (obj.Obj.TryGetComponent(out EnemyProjectileShoot shooter))
+        //    {
+        //        GameObject projectile = shooter.projectilePref;
 
-                if (!Poolers.ContainsKey(projectile))
-                {
-                    Poolers.Add(projectile, Instantiate(poolerPrefab, transform));
-                    Poolers[projectile].PoolSize = obj.Count * 3;
-                    Poolers[projectile].GameObjectToPool = projectile;
-                }
-            }
+        //        if (!Poolers.ContainsKey(projectile))
+        //        {
+        //            Poolers.Add(projectile, Instantiate(poolerPrefab, transform));
+        //            Poolers[projectile].PoolSize = obj.Count * 3;
+        //            Poolers[projectile].GameObjectToPool = projectile;
+        //        }
+        //    }
 
-            if (obj.Obj.TryGetComponent(out AsteroidSplit split))
-            {
-                GameObject asteroid = split.AsteroidToSplitInto;
+        //    if (obj.Obj.TryGetComponent(out AsteroidSplit split))
+        //    {
+        //        GameObject asteroid = split.AsteroidToSplitInto;
 
-                if (!Poolers.ContainsKey(asteroid))
-                {
-                    Poolers.Add(asteroid, Instantiate(poolerPrefab, transform));
-                    Poolers[asteroid].PoolSize = obj.Count * 3;
-                    Poolers[asteroid].GameObjectToPool = asteroid;
-                }
+        //        if (!Poolers.ContainsKey(asteroid))
+        //        {
+        //            Poolers.Add(asteroid, Instantiate(poolerPrefab, transform));
+        //            Poolers[asteroid].PoolSize = obj.Count * 3;
+        //            Poolers[asteroid].GameObjectToPool = asteroid;
+        //        }
 
-                if (asteroid.TryGetComponent(out AsteroidSplit split2))
-                {
-                    GameObject asteroid2 = split2.AsteroidToSplitInto;
+        //        if (asteroid.TryGetComponent(out AsteroidSplit split2))
+        //        {
+        //            GameObject asteroid2 = split2.AsteroidToSplitInto;
 
-                    if (!Poolers.ContainsKey(asteroid2))
-                    {
-                        Poolers.Add(asteroid2, Instantiate(poolerPrefab, transform));
-                        Poolers[asteroid2].PoolSize = obj.Count * 9;
-                        Poolers[asteroid2].GameObjectToPool = asteroid2;
-                    }
-                }
-            }
-        }
+        //            if (!Poolers.ContainsKey(asteroid2))
+        //            {
+        //                Poolers.Add(asteroid2, Instantiate(poolerPrefab, transform));
+        //                Poolers[asteroid2].PoolSize = obj.Count * 9;
+        //                Poolers[asteroid2].GameObjectToPool = asteroid2;
+        //            }
+        //        }
+        //    }
+        //}
     }
 
-    public void CreatePoolsForObject(GameObject obj, int size)
+    public void CreatePoolsForObject(GameObject obj, int size, bool canExpand = true)
     {       
         if (!Poolers.ContainsKey(obj))
         {
@@ -294,6 +298,7 @@ public class PoolRefs : MonoBehaviour
             Poolers[obj].PoolSize = size;
             Poolers[obj].GameObjectToPool = obj;
             Poolers[obj].FillObjectPool();
+            Poolers[obj].PoolCanExpand = canExpand;
         }
 
         if (obj.TryGetComponent(out SpawnDroneFromShip spawnDrone))
@@ -319,6 +324,30 @@ public class PoolRefs : MonoBehaviour
                 Poolers[projectile].PoolSize = size + 1;
                 Poolers[projectile].GameObjectToPool = projectile;
                 Poolers[projectile].FillObjectPool();
+            }
+        }
+
+        if (obj.TryGetComponent(out AsteroidSplit split))
+        {
+            GameObject asteroid = split.AsteroidToSplitInto;
+
+            if (!Poolers.ContainsKey(asteroid))
+            {
+                Poolers.Add(asteroid, Instantiate(poolerPrefab, transform));
+                Poolers[asteroid].PoolSize = size * 3;
+                Poolers[asteroid].GameObjectToPool = asteroid;
+            }
+
+            if (asteroid.TryGetComponent(out AsteroidSplit split2))
+            {
+                GameObject asteroid2 = split2.AsteroidToSplitInto;
+
+                if (!Poolers.ContainsKey(asteroid2))
+                {
+                    Poolers.Add(asteroid2, Instantiate(poolerPrefab, transform));
+                    Poolers[asteroid2].PoolSize = size * 9;
+                    Poolers[asteroid2].GameObjectToPool = asteroid2;
+                }
             }
         }
     }

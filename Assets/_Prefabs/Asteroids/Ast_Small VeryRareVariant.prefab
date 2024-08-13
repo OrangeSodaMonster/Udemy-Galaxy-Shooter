@@ -22,19 +22,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2581431035433264012, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: Damage
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2581431035433264012, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: ImpactVelocity
-      value: 0.8
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 3080440622588081913, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: BaseSpeed
-      value: 0
+      value: 3.8939998
       objectReference: {fileID: 0}
     - target: {fileID: 3080440622588081913, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: SpeedVariationPerc
-      value: 15
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: MaxDropsNum
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: MinDropsNum
@@ -50,15 +54,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: DropsToSpawn.Array.data[1].spawnWeight
-      value: 20
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
-      value: 0.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: DropsToSpawn.Array.data[3].spawnWeight
-      value: 0.02
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6808362333470970245, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: vfxColor.key0.b

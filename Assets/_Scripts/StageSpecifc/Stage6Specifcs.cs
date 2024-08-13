@@ -5,7 +5,9 @@ using UnityEngine;
 public class Stage6Specifcs : MonoBehaviour
 {
     [SerializeField] EnemiesToLoopSpawn postObjectiveSpawns1;
+    [SerializeField] int maxObjectiveSpawns1 = 20;
     [SerializeField] EnemiesToLoopSpawn postObjectiveSpawns2;
+    [SerializeField] int maxObjectiveSpawns2 = 15;
     [SerializeField] EnemiesToSpawnByTime timedSpawn;
 
     EnemySpawner enemySpawner;
@@ -18,8 +20,8 @@ public class Stage6Specifcs : MonoBehaviour
         poolRefs = FindObjectOfType<PoolRefs>();
         rareSpawner = FindObjectOfType<RareSpawnScript>();
 
-        poolRefs.CreatePoolsForObject(postObjectiveSpawns1.enemy, 12);
-        poolRefs.CreatePoolsForObject(postObjectiveSpawns2.enemy, 7);
+        poolRefs.CreatePoolsForObject(postObjectiveSpawns1.enemy, maxObjectiveSpawns1, false);
+        poolRefs.CreatePoolsForObject(postObjectiveSpawns2.enemy, maxObjectiveSpawns2, false);
         poolRefs.CreatePoolsForObject(timedSpawn.enemy, 1);
 
         StartCoroutine(SpawnByTime(timedSpawn));

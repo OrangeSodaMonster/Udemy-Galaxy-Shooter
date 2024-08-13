@@ -170,7 +170,7 @@ public class SnakeBossMain : MonoBehaviour
         linePos1 = new Vector3[linePoints1.Count];
         for(int i = 0; i < linePoints1.Count; i++)
         {
-            linePos1[i] = linePoints1[i].position;
+            linePos1[i] = linePoints1[i].position - transform.position;
         }
         lineRenderer1.SetPositions(linePos1);
 
@@ -178,7 +178,7 @@ public class SnakeBossMain : MonoBehaviour
         linePos2 = new Vector3[linePoints2.Count];
         for (int i = 0; i < linePoints2.Count; i++)
         {
-            linePos2[i] = linePoints2[i].position;
+            linePos2[i] = linePoints2[i].position - transform.position;
         }
         lineRenderer2.SetPositions(linePos2);
     }

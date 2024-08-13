@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8246086450867371592, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: Damage
-      value: 40
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -8246086450867371592, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: ImpactVelocity
-      value: 0.8
+      value: 0.848
       objectReference: {fileID: 0}
     - target: {fileID: -5173364807266320180, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: MaxHP
-      value: 100
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: -3817480640764407943, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: sprites
@@ -26,15 +26,19 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 39b185be39abdf8419d0705a213a4b85, type: 2}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: MaxDropsNum
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: dropsGuaranteed.Array.data[0].Amount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: DropsToSpawn.Array.data[0].spawnWeight
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -1135126244599827535, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: vfxColor.key0.b
@@ -62,11 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 359440957118289101, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: BaseSpeed
-      value: 2.5
+      value: 2.4485998
       objectReference: {fileID: 0}
     - target: {fileID: 359440957118289101, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: SpeedVariationPerc
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2407189615707401283, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: m_Sprite

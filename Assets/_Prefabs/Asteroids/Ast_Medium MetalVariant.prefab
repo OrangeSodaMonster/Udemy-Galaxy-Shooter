@@ -9,12 +9,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: MaxDropsNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: dropsGuaranteed.Array.data[0].Amount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: DropsToSpawn.Array.data[0].spawnWeight
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 937379767427989280, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: asteroidToSplitInto
@@ -110,19 +118,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6357874219665864842, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: MaxHP
-      value: 45
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7274383573634608267, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: BaseSpeed
-      value: 3
+      value: 2.9733
       objectReference: {fileID: 0}
     - target: {fileID: 7899090428514662910, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: Damage
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7899090428514662910, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: ImpactVelocity
-      value: 0.7
+      value: 0.68899995
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

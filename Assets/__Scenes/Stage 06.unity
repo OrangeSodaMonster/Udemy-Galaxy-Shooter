@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,11 +156,13 @@ MonoBehaviour:
     timeSec: 2.5
     timeVarSec: 1
     timeToStart: 6
+  maxObjectiveSpawns1: 20
   postObjectiveSpawns2:
     enemy: {fileID: 5954638457871095047, guid: 12e1b50773635dd4782ab6e37de9910c, type: 3}
     timeSec: 4
     timeVarSec: 1
     timeToStart: 6
+  maxObjectiveSpawns2: 15
   timedSpawn:
     enemy: {fileID: 4196060696236624735, guid: 97577ea2f3b80ae4f8f023d34e285b10, type: 3}
     timeSec: 35
@@ -235,7 +236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7950037974920486273, guid: 63d9f15dfabc6ed46a74cb061ccb8741, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 128.6
+      value: 111.9
       objectReference: {fileID: 0}
     - target: {fileID: 7950037974920486273, guid: 63d9f15dfabc6ed46a74cb061ccb8741, type: 3}
       propertyPath: m_LocalPosition.y
@@ -357,6 +358,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 405712345345903253, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 568629625243054178, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -579,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0000004172325
+      value: -0.0000004367903
       objectReference: {fileID: 0}
     - target: {fileID: 5887057512710262436, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_Enabled
@@ -659,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097865085451408690, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0000004172325
+      value: -0.0000004367903
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

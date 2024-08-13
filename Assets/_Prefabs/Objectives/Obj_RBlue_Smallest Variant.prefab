@@ -114,19 +114,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2782239545712978839, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
       propertyPath: DropsToSpawn.Array.data[1].spawnWeight
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2782239545712978839, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 5238269414536156786, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
-      propertyPath: Damage
+    - target: {fileID: 2782239545712978839, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5238269414536156786, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
+      propertyPath: Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238269414536156786, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
       propertyPath: ImpactVelocity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7226615373886700425, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
       propertyPath: m_Sprite
@@ -142,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9013552548584969990, guid: dacea44b102203545b0a8ef2384bce20, type: 3}
       propertyPath: MaxHP
-      value: 120
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

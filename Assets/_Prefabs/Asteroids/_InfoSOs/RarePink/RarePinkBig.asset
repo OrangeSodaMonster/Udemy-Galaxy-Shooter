@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a3480f966f46649a40a299f1fbda28, type: 3}
+  m_Name: RarePinkBig
+  m_EditorClassIdentifier: 
+  asteroidSize: 2
+  asteroidMaterial: 2
+  asteroidCrystal: 2
+  masterSO: {fileID: 11400000, guid: 7c499649e8740fc4fb0e5e900cbb2aa8, type: 2}
+  enemy: {fileID: 525070469092234547, guid: 42c7e0dec717b3343bf9df5bc92a6bde, type: 3}
+  MaxHP: 660
+  Speed: 2.5872
+  SpeedVarPerc: 10
+  CollisionDamage: 65
+  ImpactVelocity: 0.896
+  Drops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 5
+      RareMetalCrumb: 10
+      EnergyCristal: 0
+      CondensedEnergyCristal: 5
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  Name: RarePinkBig
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}

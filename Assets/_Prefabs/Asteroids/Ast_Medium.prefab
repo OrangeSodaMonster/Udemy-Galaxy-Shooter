@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8246086450867371592, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: ImpactVelocity
-      value: 0.6
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: -8246086450867371592, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: <Damage>k__BackingField
@@ -45,6 +45,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
+      propertyPath: MinDropsNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: maxDropsNum
       value: 2
       objectReference: {fileID: 0}
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
-      value: 0.05
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -1135126244599827535, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: vfxScale
@@ -74,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 359440957118289101, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: BaseSpeed
-      value: 2.8
+      value: 2.805
       objectReference: {fileID: 0}
     - target: {fileID: 359440957118289101, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: baseSpeed
@@ -82,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 359440957118289101, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: SpeedVariationPerc
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 434640270311845536, guid: c875ab3705ae95f488ebd3646c7edfb6, type: 3}
       propertyPath: minMaxAbsAngularSpeed.x

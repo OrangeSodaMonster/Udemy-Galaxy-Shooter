@@ -31,7 +31,8 @@ public struct EnemiesToLoopSpawn
     [HorizontalGroup("G")]
     public float timeToStart;
 
-    [HideInInspector] public WaitForSeconds[] waits;
+    [HideInInspector]
+    public WaitForSeconds[] waits;
 }
 
 public class EnemySpawner : MonoBehaviour
@@ -134,23 +135,6 @@ public class EnemySpawner : MonoBehaviour
         enemy.SetActive(true);
     }
 
-    //IEnumerator RandomSpawnRoutine()
-    //{
-    //    yield return new WaitForSeconds(timeToStartSpawning);
-
-    //    while (true)
-    //    {
-    //        GameObject nextEnemytoSpawn = GetNextSpawn();
-
-    //        GameObject enemy = poolRef.Poolers[nextEnemytoSpawn].GetPooledGameObject();
-    //        enemy.transform.position = GetSpawnPoint();
-    //        enemy.SetActive(true);
-
-    //        currentSpawnCD =Mathf.Abs(UnityEngine.Random.Range(baseSpawnCD - baseSpawnCD*(spawnCDVariationPerc/100), baseSpawnCD + baseSpawnCD*(spawnCDVariationPerc/100)));
-    //        yield return new WaitForSeconds(currentSpawnCD);
-    //    }
-    //}
-
     public IEnumerator SpawnByTime(EnemiesToSpawnByTime spawn)
     {
         yield return new WaitForSeconds(UnityEngine.Random.Range(spawn.timeSec - spawn.timeVarSec, spawn.timeSec + spawn.timeVarSec));
@@ -164,9 +148,10 @@ public class EnemySpawner : MonoBehaviour
     public IEnumerator SpawnLoop(EnemiesToLoopSpawn loopSpawn)
     {
         loopSpawn.waits = new WaitForSeconds[5];
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             float waitTime = UnityEngine.Random.Range(loopSpawn.timeSec - loopSpawn.timeVarSec, loopSpawn.timeSec + loopSpawn.timeVarSec);
+            waitTime = Mathf.Clamp(waitTime, 1, 9999999);
             loopSpawn.waits[i] = new WaitForSeconds(waitTime);
         }
 
@@ -179,7 +164,7 @@ public class EnemySpawner : MonoBehaviour
             enemy.SetActive(true);
 
             int RandomIndex = UnityEngine.Random.Range(0, 5);
-            yield return loopSpawn.waits[RandomIndex];
+            yield return loopSpawn.waits[RandomIndex];            
         }    
     }
 

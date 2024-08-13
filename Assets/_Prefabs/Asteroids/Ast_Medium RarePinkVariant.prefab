@@ -9,16 +9,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
-      propertyPath: dropsGuaranteed.Array.size
-      value: 1
+      propertyPath: MaxDropsNum
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
-      propertyPath: dropsGuaranteed.Array.data[0].drop
+      propertyPath: dropsGuaranteed.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
-      propertyPath: dropsGuaranteed.Array.data[0].Amount
+      propertyPath: dropsGuaranteed.Array.data[0].drop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[0].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 937379767427989280, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: asteroidToSplitInto
@@ -115,6 +135,22 @@ PrefabInstance:
     - target: {fileID: 5902244170977490884, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: m_Name
       value: Ast_Medium RarePinkVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6357874219665864842, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: MaxHP
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274383573634608267, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: BaseSpeed
+      value: 3.1416001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899090428514662910, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: Damage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899090428514662910, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: ImpactVelocity
+      value: 0.728
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

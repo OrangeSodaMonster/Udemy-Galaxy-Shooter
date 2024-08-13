@@ -17,8 +17,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: b517717626aa83f4ea786cbcb3237af0, type: 2}
     - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
-      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      propertyPath: MaxDropsNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[0].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[1].Amount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: DropsToSpawn.Array.data[1].spawnWeight
@@ -26,35 +38,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
-      value: 1
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: BaseShootCD
-      value: 5
+      value: 5.1000004
       objectReference: {fileID: 0}
     - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: projectilePref
       value: 
       objectReference: {fileID: 5444939176136045151, guid: dac548a56d4a9e54ba81300525b3308e, type: 3}
     - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: ShootCDVariation
+      value: 0.51000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: <projectilePref>k__BackingField
       value: 
       objectReference: {fileID: 5444939176136045151, guid: dac548a56d4a9e54ba81300525b3308e, type: 3}
     - target: {fileID: 1305956521399732184, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: BaseSpawnCD
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305956521399732184, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: droneToSpawn
       value: 
       objectReference: {fileID: 3436539786902221821, guid: b235fbae7defffe4ab20650db04a6dac, type: 3}
+    - target: {fileID: 1305956521399732184, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: SpawnCDVariation
+      value: 0.84999996
+      objectReference: {fileID: 0}
     - target: {fileID: 2228053111234539559, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: MaxHP
-      value: 140
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: MaxXSpeed
-      value: 3.7
+      value: 3.815
       objectReference: {fileID: 0}
     - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: MaxYSpeed
-      value: 6.3
+      value: 6.758
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: RotationChangeTime
+      value: 5.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338502948657128667, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: RotationChangeTimeVar
+      value: 1.5300001
       objectReference: {fileID: 0}
     - target: {fileID: 3828722212198539157, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.size
@@ -158,6 +190,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4159148617365990426, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: ChanceToDrop
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159148617365990426, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: PuDrops.Array.data[1].Weight
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
@@ -266,7 +302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8773309586190827830, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: Damage
-      value: 60
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773309586190827830, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: ImpactVelocity
+      value: 1.09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -6,11 +6,15 @@ using UnityEngine;
 public class SentinelShoot : MonoBehaviour
 {
     [SerializeField] float shootInterval = 2.35f;
-    [SerializeField] float shootDistande = 10;
+    public float ShootInterval { get => shootInterval; set { shootInterval = value; } }
+    [SerializeField] float shootDistance = 10;
+    public float ShootDistance { get => shootDistance; set { shootDistance = value; } }
     [Space]
     [SerializeField] bool allowRotation = true;
     [SerializeField, Tooltip("Will also rotate after shooting")] float rotateInterval = 4;
+    public float RotateInterval { get => rotateInterval; set { rotateInterval = value; } }
     [SerializeField] float rotateAfterShootInterval = 2.1f;
+    public float RotateAfterShootInterval { get => rotateAfterShootInterval; set { rotateAfterShootInterval = value; } }
 
     [HideInInspector] public int ShooterIndex = -1;
     float shootTimer = 0;
@@ -66,7 +70,7 @@ public class SentinelShoot : MonoBehaviour
         rotateAfterShootTimer = 0;
         rotateTimer = 0;        
 
-        if (Vector2.SqrMagnitude(player.position - transform.position) > shootDistande * shootDistande)
+        if (Vector2.SqrMagnitude(player.position - transform.position) > shootDistance * shootDistance)
             return;
 
         if (!allowRotation) return;
@@ -80,7 +84,7 @@ public class SentinelShoot : MonoBehaviour
     {
         bossShooter = null;        
 
-        if (Vector2.SqrMagnitude(player.position - transform.position) > shootDistande * shootDistande)
+        if (Vector2.SqrMagnitude(player.position - transform.position) > shootDistance * shootDistance)
             return false;
 
         float bestDotSoFar = -1;

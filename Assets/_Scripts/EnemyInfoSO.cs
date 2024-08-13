@@ -1,31 +1,51 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+
 [CreateAssetMenu(fileName = "EnemyInfo", menuName = "MySOs/EnemyInfo")]
 [InlineEditor]
 public class EnemyInfoSO : ScriptableObject
-{    
+{
+    #region "values"
+
+    [BoxGroup("Enemy Type")]
+    [SerializeField, HorizontalGroup("Enemy Type/1")] EnemyType enemyType;
+    public EnemyType EnemyType => enemyType;
+    [SerializeField, HorizontalGroup("Enemy Type/1")] EnemyColor enemyColor;
+    public EnemyColor EnemyColor => enemyColor;
+
+    [SerializeField] EnemyInfoMasterSO masterSO;
+
     [BoxGroup("Basics"), HorizontalGroup("Basics/G", .2f), PreviewField(85, Alignment = ObjectFieldAlignment.Left), HideLabel()]
 	[SerializeField] GameObject enemy;
 
-	[BoxGroup("Basics"), VerticalGroup("Basics/G/1"), LabelWidth(100), GUIColor("#ff5959")]
+	[ReadOnly, BoxGroup("Basics"), VerticalGroup("Basics/G/1"), LabelWidth(100), GUIColor("#ff5959")]
 	public int MaxHP;	
-	[BoxGroup("Basics")][VerticalGroup("Basics/G/1"), LabelWidth(100), Space, GUIColor("#8559ff")]
+	[ReadOnly, BoxGroup("Basics")][VerticalGroup("Basics/G/1"), LabelWidth(100), Space, GUIColor("#8559ff")]
 	public float Speed;
-    [BoxGroup("Basics")][VerticalGroup("Basics/G/2"), LabelWidth(100), Space(30), GUIColor("#8559ff"), Tooltip("in %")]    
+    [ReadOnly, BoxGroup("Basics")][VerticalGroup("Basics/G/2"), LabelWidth(100), Space(30), GUIColor("#8559ff"), Tooltip("in %")]    
 	public float SpeedVarPerc = 15;	
-	[BoxGroup("Basics")][VerticalGroup("Basics/G/1"), LabelWidth(100), GUIColor("#efff85")]
+	[ReadOnly, BoxGroup("Basics")][VerticalGroup("Basics/G/1"), LabelWidth(100), GUIColor("#efff85")]
 	public int CollisionDamage;
-	[BoxGroup("Basics")][VerticalGroup("Basics/G/2"), LabelWidth(100), GUIColor("#efff85")]
+	[ReadOnly, BoxGroup("Basics")][VerticalGroup("Basics/G/2"), LabelWidth(100), GUIColor("#efff85")]
 	public float ImpactVelocity;
+
+    //Shooting
+
+    [ReadOnly, BoxGroup("Shooting"), HorizontalGroup("Shooting/G"), LabelWidth(90), GUIColor("#ffb0b0")]
+    public float ShootCD;
+    [ReadOnly, Tooltip("in Seconds"), HorizontalGroup("Shooting/G"), LabelWidth(90), GUIColor("#ffb0b0")]
+    public float ShootCdVar;
 
     // Drops
 
-	[BoxGroup("Drops"), HorizontalGroup("Drops/Drops"), LabelWidth(60), Range(0,10), GUIColor("#b0fff6")]
+    [BoxGroup("Drops"), HorizontalGroup("Drops/Drops"), LabelWidth(60), Range(0,10), GUIColor("#b0fff6")]
 	public int MinDrops;
 	[HorizontalGroup("Drops/Drops"), LabelWidth(60), Range(0, 10), GUIColor("#b0fff6")]
 	public int MaxDrops;
@@ -34,33 +54,26 @@ public class EnemyInfoSO : ScriptableObject
     DropsToSpawn[] DropsChances;
     [FoldoutGroup("Drops/Drops Guaranteed"), HideLabel]
     [SerializeField] CollectibleLine GuaranteedLine;
-    DropsGuaranteed[] DropsGuaranteed;
-
-    //Shooting
-
-    [BoxGroup("Shooting"), HorizontalGroup("Shooting/G"), LabelWidth(90), GUIColor("#ffb0b0")]
-    public float ShootCD;
-    [Tooltip("in Seconds"), HorizontalGroup("Shooting/G"), LabelWidth(90), GUIColor("#ffb0b0")]
-    public float ShootCdVar;
+    DropsGuaranteed[] DropsGuaranteed;    
 
     // PowerUps
 
     [BoxGroup("PowerUps"), LabelWidth(100), GUIColor("#d5b0ff")]
 	[Range(0,100)] public float PuDropChance;
-    [BoxGroup("PowerUps"), GUIColor("#d5b0ff")]
-    public List<PowerUpDrops> PuDrops;
+    [BoxGroup("PowerUps")]
+    [ReadOnly] public List<PowerUpDrops> PuDrops;
 
     // EnemyShip
 
-    [FoldoutGroup("EnemyShip"), HorizontalGroup("EnemyShip/G"), LabelWidth(50)]
+    [ReadOnly, FoldoutGroup("EnemyShip"), HorizontalGroup("EnemyShip/G"), LabelWidth(50)]
 	public float XSpeed;
-	[HorizontalGroup("EnemyShip/G"), LabelWidth(100)]
+	[ReadOnly, HorizontalGroup("EnemyShip/G"), LabelWidth(100)]
 	public float RotChangeTime;
-	[HorizontalGroup("EnemyShip/G"), LabelWidth(80)]
+	[ReadOnly, HorizontalGroup("EnemyShip/G"), LabelWidth(80)]
 	public float RotTimeVar;
-    [HorizontalGroup("EnemyShip/D"), LabelWidth(80)]
+    [ReadOnly, HorizontalGroup("EnemyShip/D"), LabelWidth(80)]
     public float DroneSpawnTime;
-    [HorizontalGroup("EnemyShip/D"), LabelWidth(80)]
+    [ReadOnly, HorizontalGroup("EnemyShip/D"), LabelWidth(80)]
     public float DroneSpawnTimeVar;
 
     // Sentinel
@@ -71,6 +84,14 @@ public class EnemyInfoSO : ScriptableObject
 	public int SentDamage;
 	[HorizontalGroup("Sentinel/G", 0.45f), LabelWidth(125)]
 	public float SentDamageInterval;
+    [HorizontalGroup("Sentinel/G2")]
+    public float ShootDistance;
+    [HorizontalGroup("Sentinel/G2")]
+    public float RotateInterval;
+    [HorizontalGroup("Sentinel/G2"), Tooltip("Rotate After Shoot Interval")]
+    public float RotateAfterShootInterval;
+
+    ///////////////
 
     [HorizontalGroup("Top", .65f), PropertyOrder(-1), LabelWidth(40)]
     public string Name;
@@ -78,9 +99,12 @@ public class EnemyInfoSO : ScriptableObject
     [HorizontalGroup("Top"), PropertyOrder(-1), HideLabel(), ReadOnly()]
     [SerializeField] Color saveStateColor = Color.green;
 
+    #endregion
+
     private void OnValidate()
     {
         saveStateColor = Color.red;
+        masterSO.OnUpdateAndSaveAll.AddListener(UpdateValues);
     }
 
     void ConvertDropChance()
@@ -109,11 +133,27 @@ public class EnemyInfoSO : ScriptableObject
         DropsGuaranteed[3].Amount = (int)GuaranteedLine.CondensedEnergyCristal;
     }
 
-    [Button("SavePrefab",ButtonSizes.Medium,  ButtonAlignment = 1, Stretch = false), PropertyOrder(-1), GUIColor("Green"), HorizontalGroup("Top")]
+    [Button("SavePrefab",ButtonSizes.Medium,  ButtonAlignment = 1, Stretch = false), PropertyOrder(-1), GUIColor("Cyan"), HorizontalGroup("Top")]
     public void UpdateValues()
     {
+        PuDrops = masterSO.GetPowerUpList(enemyColor);
         ConvertDropChance();
         ConvertDropGuaranteed();
+
+        MaxHP = masterSO.CalculateHP(enemyType, enemyColor);
+        Speed = masterSO.CalculateSpeed(enemyType, enemyColor);
+        XSpeed = masterSO.CalculateXSpeed(enemyType, enemyColor);
+        SpeedVarPerc = masterSO.SpeedVariationPerc;
+        CollisionDamage = masterSO.CalculateColDamage(enemyType, enemyColor);
+        if (enemyType == EnemyType.Sentinel) CollisionDamage = masterSO.ColDamageSentinelGreen;
+        ImpactVelocity = masterSO.CalculateImpactVelocity(enemyType, enemyColor);
+        if (enemyType == EnemyType.Sentinel) ImpactVelocity = masterSO.ImpactSentinelGreen;
+        ShootCD = masterSO.CalculateShootCD(enemyType, enemyColor);
+        ShootCdVar = masterSO.ShootCdVariationPerc * 0.01f * ShootCD;
+        RotChangeTime = masterSO.CalculateRotationChangeTime(enemyType, enemyColor);
+        RotTimeVar = masterSO.ShipRotationTimeVariationPerc * 0.01f * ShootCD;
+        DroneSpawnTime = masterSO.CalculateDroneSpawnTime(enemyType, enemyColor);
+        DroneSpawnTimeVar = masterSO.ShipDroneSpawnVariationPerc * 0.01f * DroneSpawnTime;
 
         if (enemy.TryGetComponent(out EnemyHP enemyHP))
         {
@@ -167,14 +207,24 @@ public class EnemyInfoSO : ScriptableObject
             powerUpDrop.PuDrops = PuDrops;
         }
 
-        if (enemy.TryGetComponent(out SentinelAttack sentAttack))
+        foreach(Transform child in enemy.transform)
         {
-            sentAttack.Range = SentRange;
-            sentAttack.Damage = SentDamage;
-            sentAttack.DamageInterval = SentDamageInterval;
+            if (child.TryGetComponent(out SentinelAttack sentAttack))
+            {
+                sentAttack.Range = SentRange;
+                sentAttack.Damage = SentDamage;
+                sentAttack.DamageInterval = SentDamageInterval;
+            }
+        }
+        if (enemy.TryGetComponent(out SentinelShoot sentinelShoot))
+        {
+            sentinelShoot.ShootInterval = ShootCD;
+            sentinelShoot.ShootDistance = ShootDistance;
+            sentinelShoot.RotateInterval = RotateInterval;
+            sentinelShoot.RotateAfterShootInterval = RotateAfterShootInterval;
         }
 
-        if(enemy.TryGetComponent(out SpawnDroneFromShip spawnDrone))
+        if (enemy.TryGetComponent(out SpawnDroneFromShip spawnDrone))
         {
             spawnDrone.BaseSpawnCD = DroneSpawnTime;
             spawnDrone.SpawnCDVariation = DroneSpawnTimeVar;

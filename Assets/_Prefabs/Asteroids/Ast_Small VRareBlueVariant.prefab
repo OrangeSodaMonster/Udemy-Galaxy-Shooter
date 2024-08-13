@@ -16,21 +16,61 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6b999ee717dd5c449b6cc71563b7830c, type: 2}
+    - target: {fileID: 1618927344174162680, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: MaxHP
+      value: 135
+      objectReference: {fileID: 0}
     - target: {fileID: 2280188036016598454, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: m_Name
       value: Ast_Small VRareBlueVariant
       objectReference: {fileID: 0}
+    - target: {fileID: 2581431035433264012, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: Damage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581431035433264012, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: ImpactVelocity
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080440622588081913, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: BaseSpeed
+      value: 3.8939998
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: MaxDropsNum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: dropsGuaranteed.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: dropsGuaranteed.Array.data[0].drop
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: dropsGuaranteed.Array.data[0].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[2].Amount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: DropsToSpawn.Array.data[1].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6808362333470970245, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: vfxColor.key0.b

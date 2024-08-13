@@ -6,7 +6,7 @@ using UnityEngine.Splines;
 public class SnakeBossPart : MonoBehaviour
 {
     SnakeBossMain snakeBossMain;
-    [SerializeField] bool isTail = false;
+    public bool isTail = false;
 
     private void Awake()
     {
@@ -15,7 +15,7 @@ public class SnakeBossPart : MonoBehaviour
 
     private void OnDisable()
     {
-        snakeBossMain.RemovePart(GetComponent<SplineAnimate>());
+        snakeBossMain.RemovePart(GetComponent<SplineAnimate>(), isTail);
     }
 
 }

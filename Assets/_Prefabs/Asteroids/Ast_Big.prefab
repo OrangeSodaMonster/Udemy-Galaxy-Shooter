@@ -187,8 +187,8 @@ MonoBehaviour:
   drawGizmos: 0
   MoveDirection: {x: 0, y: 0, z: 0}
   MoveSpeed: 0
-  BaseSpeed: 2.3
-  SpeedVariationPerc: 20
+  BaseSpeed: 2.31
+  SpeedVariationPerc: 10
   moveDirVariation: 0.09
 --- !u!114 &7857951331720398694
 MonoBehaviour:
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 30
-  ImpactVelocity: 0.7
+  ImpactVelocity: 0.8
 --- !u!114 &-2036024542243111843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,10 +257,10 @@ MonoBehaviour:
   - drop: 2
     spawnWeight: 1
   - drop: 3
-    spawnWeight: 0.05
+    spawnWeight: 0.01
   - drop: 4
     spawnWeight: 0
-  MinDropsNum: 0
+  MinDropsNum: 1
   MaxDropsNum: 1
   dropsGuaranteed:
   - drop: 1

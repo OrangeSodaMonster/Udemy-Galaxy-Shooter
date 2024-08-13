@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8246086450867371592, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: Damage
-      value: 0
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8246086450867371592, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: ImpactVelocity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5173364807266320180, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: MaxHP
-      value: 1800
+      value: 1820
       objectReference: {fileID: 0}
     - target: {fileID: -3839799337710428878, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: vfxColor.key0.b
@@ -70,15 +70,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: MaxDropsNum
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: MinDropsNum
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: dropsGuaranteed.Array.data[1].Amount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: DropsToSpawn.Array.data[0].spawnWeight
@@ -86,11 +86,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: DropsToSpawn.Array.data[1].spawnWeight
-      value: 20
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2036024542243111843, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2407189615707401283, guid: 213641374e4fda542a2ccd78179c7897, type: 3}
       propertyPath: m_Sprite

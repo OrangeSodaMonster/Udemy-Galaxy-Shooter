@@ -274,7 +274,7 @@ MonoBehaviour:
   isRotating: 0
   rotateClockWise: 1
   RotationChangeTime: 6
-  RotationChangeTimeVar: 2
+  RotationChangeTimeVar: 1.8
 --- !u!114 &1263677378974625367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <projectilePref>k__BackingField: {fileID: 1250797867374824522, guid: 645435d149b3671469a35e59c34343cb, type: 3}
   BaseShootCD: 6
-  ShootCDVariation: 1
+  ShootCDVariation: 0.59999996
   projectileOrigin: {fileID: 6232597142013545533}
   preShootVFX: {fileID: 3828722212198539157}
   preShootVFXTimePrior: 2
@@ -313,16 +313,16 @@ MonoBehaviour:
   - drop: 1
     spawnWeight: 10
   - drop: 2
-    spawnWeight: 3
+    spawnWeight: 4
   - drop: 3
     spawnWeight: 0.3
   - drop: 4
     spawnWeight: 0
   MinDropsNum: 1
-  MaxDropsNum: 3
+  MaxDropsNum: 2
   dropsGuaranteed:
   - drop: 1
-    Amount: 0
+    Amount: 1
   - drop: 2
     Amount: 0
   - drop: 3
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69333f3c3ca8a547aa84d68cc8d568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChanceToDrop: 5
+  ChanceToDrop: 10
   PuDrops:
   - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
     Weight: 10

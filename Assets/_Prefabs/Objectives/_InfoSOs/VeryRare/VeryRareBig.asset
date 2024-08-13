@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 731f1574392fa9b4082fb4d44c0ba03e, type: 3}
+  m_Name: VeryRareBig
+  m_EditorClassIdentifier: 
+  objectiveSize: 3
+  objectiveMaterial: 1
+  objectiveCrystal: 0
+  masterSO: {fileID: 11400000, guid: 8da6f8e314c237147b42307e07512f63, type: 2}
+  enemy: {fileID: 9222923883712144806, guid: eb72e3dc9e058054c9a7e542ef3843b9, type: 3}
+  MaxHP: 1820
+  CollisionDamage: 15
+  ImpactVelocity: 1
+  Drops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 2
+      RareMetalCrumb: 11
+      EnergyCristal: 2
+      CondensedEnergyCristal: 0.1
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  Name: VeryRareBig
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}

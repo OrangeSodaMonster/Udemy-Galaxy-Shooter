@@ -22,15 +22,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2581431035433264012, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: Damage
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2581431035433264012, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: ImpactVelocity
-      value: 0.7
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 3080440622588081913, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: BaseSpeed
-      value: 3.7
+      value: 3.6959999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
+      propertyPath: MaxDropsNum
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: dropsGuaranteed.Array.data[1].Amount
@@ -38,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: DropsToSpawn.Array.data[0].spawnWeight
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: DropsToSpawn.Array.data[1].spawnWeight
@@ -46,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5619797163737849449, guid: e69467d31b8c7764a9ab44d414825748, type: 3}
       propertyPath: DropsToSpawn.Array.data[3].spawnWeight

@@ -9,8 +9,8 @@ public class AsteroidMove : MonoBehaviour
     public Vector3 MoveDirection = Vector3.zero;
     public float MoveSpeed = 0;
 
-    [HideInInspector] public float BaseSpeed = 3;
-    [HideInInspector] public float SpeedVariationPerc = 25;
+    public float BaseSpeed = 3;
+    public float SpeedVariationPerc = 25;
     [SerializeField] float moveDirVariation = 0.1f;
 
     Transform player;

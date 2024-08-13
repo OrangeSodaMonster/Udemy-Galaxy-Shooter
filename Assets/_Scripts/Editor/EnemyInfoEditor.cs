@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using Codice.CM.Client.Differences.Graphic;
+using System.Collections.Generic;
 
 public class EnemyInfoEditor : OdinMenuEditorWindow
 {
@@ -31,7 +32,12 @@ public class EnemyInfoEditor : OdinMenuEditorWindow
         createNewEnemyData = new CreateNewEnemyData();
 
         tree.Add("Create New", createNewEnemyData);
-        tree.AddAllAssetsAtPath("Enemy Info", "Assets/_Prefabs/Enemies/_InfoSOs/", typeof(EnemyInfoSO));
+        tree.AddAllAssetsAtPath("OutOfFolder", "Assets/_Prefabs/Enemies/_InfoSOs/", typeof(EnemyInfoSO));
+        tree.AddAllAssetsAtPath("Greens", "Assets/_Prefabs/Enemies/_InfoSOs/Green/", typeof(EnemyInfoSO));
+        tree.AddAllAssetsAtPath("Yellows", "Assets/_Prefabs/Enemies/_InfoSOs/Yellow/", typeof(EnemyInfoSO));
+        tree.AddAllAssetsAtPath("Orange", "Assets/_Prefabs/Enemies/_InfoSOs/Orange/", typeof(EnemyInfoSO));
+        tree.AddAllAssetsAtPath("Red", "Assets/_Prefabs/Enemies/_InfoSOs/Red/", typeof(EnemyInfoSO));
+        
         return tree;
     }
 
@@ -49,7 +55,13 @@ public class EnemyInfoEditor : OdinMenuEditorWindow
         [Button("Add New Enemy SO")]
         private void CreateNewData()
         {
-            AssetDatabase.CreateAsset(enemyData, "Assets/_Prefabs/Enemies/_InfoSOs/" + enemyData.Name + ".asset");
+            string color = "";
+            if (enemyData.EnemyColor == EnemyColor.Green) color = "Green/";
+            if (enemyData.EnemyColor == EnemyColor.Yellow) color = "Yellow/";
+            if (enemyData.EnemyColor == EnemyColor.Orange) color = "Orange/";
+            if (enemyData.EnemyColor == EnemyColor.Red) color = "Red/";              
+
+            AssetDatabase.CreateAsset(enemyData, "Assets/_Prefabs/Enemies/_InfoSOs/" + color + enemyData.Name + ".asset");
             AssetDatabase.SaveAssets();
         }
     }

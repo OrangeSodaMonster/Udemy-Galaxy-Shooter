@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1216099880294862292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: -1, z: -0}
+  m_LocalPosition: {x: 0.2, y: -0.5, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 4903114138691319128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 1, z: -0}
+  m_LocalPosition: {x: 0.2, y: 0.5, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -364,8 +364,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5935001, y: 2.28, z: 2.28}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.29675, y: 1.1399999, z: 1.1399999}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8217110146121633209}
   - {fileID: 5939089369426258455}
@@ -660,7 +660,7 @@ PrefabInstance:
     - target: {fileID: 979883825492809819, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1020231514, guid: 0886bc910701cb4458eaa5925defd0ab, type: 3}
+      objectReference: {fileID: -1955707459, guid: 0767c1f669982ea4cb42bc5cb8b353b1, type: 3}
     - target: {fileID: 979883825492809819, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_Color.b
       value: 0.4
@@ -672,6 +672,10 @@ PrefabInstance:
     - target: {fileID: 979883825492809819, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_Color.r
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 979883825492809819, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 979883825492809819, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -907,23 +911,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.35
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.35
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.35
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.327614
+      value: 5.834178
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.191865
+      value: -3.408172
       objectReference: {fileID: 0}
     - target: {fileID: 5286976627104225600, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1121,7 +1125,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1129,10 +1133,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.45829678, y: -2.2796865}
-      - {x: -2.1353588, y: -0.004796982}
-      - {x: 0.45577356, y: 2.2823012}
-      - {x: 2.176673, y: -0.0055195093}
+    - - {x: 0.2287736, y: -1.1568172}
+      - {x: -1.0901356, y: -0.0022761347}
+      - {x: 0.21926224, y: 1.1635233}
+      - {x: 1.1096704, y: 0.013029333}
   m_UseDelaunayMesh: 0
 --- !u!114 &3273334415861517203
 MonoBehaviour:

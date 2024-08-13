@@ -9,8 +9,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
+      propertyPath: MaxDropsNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: dropsGuaranteed.Array.data[1].Amount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: DropsToSpawn.Array.data[0].spawnWeight
@@ -18,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: DropsToSpawn.Array.data[1].spawnWeight
-      value: 20
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
-      value: 0.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 266176936998421531, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: DropsToSpawn.Array.data[3].spawnWeight
-      value: 0.02
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 937379767427989280, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: asteroidToSplitInto
@@ -126,15 +130,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7274383573634608267, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: BaseSpeed
-      value: 3.4
+      value: 3.3098998
       objectReference: {fileID: 0}
     - target: {fileID: 7899090428514662910, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: Damage
-      value: 100
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7899090428514662910, guid: f182fdabfae8cc84c962d2ee526b834d, type: 3}
       propertyPath: ImpactVelocity
-      value: 0.9
+      value: 0.76699996
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

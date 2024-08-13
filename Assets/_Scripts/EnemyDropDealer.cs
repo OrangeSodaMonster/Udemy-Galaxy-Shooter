@@ -27,9 +27,9 @@ public class EnemyDropDealer : MonoBehaviour
 {
     [SerializeField] float radiusToSpawn = 1;
     [Space]
-    [HideInInspector] public DropsToSpawn[] DropsToSpawn;
-    [HideInInspector] public int MinDropsNum = 2;
-    [HideInInspector] public int MaxDropsNum = 5;
+    public DropsToSpawn[] DropsToSpawn;
+    public int MinDropsNum = 2;
+    public int MaxDropsNum = 5;
     [Space]
     public DropsGuaranteed[] dropsGuaranteed;
     

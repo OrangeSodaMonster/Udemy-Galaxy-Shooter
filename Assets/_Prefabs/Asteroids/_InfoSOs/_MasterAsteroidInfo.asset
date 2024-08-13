@@ -1,0 +1,252 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcf7a68dd69d4844b9325089843a375, type: 3}
+  m_Name: _MasterAsteroidInfo
+  m_EditorClassIdentifier: 
+  speedVariationPerc: 10
+  hPBaseSmall: 10
+  speedBaseSmall: 3.3
+  colDamageBaseSmall: 10
+  impactVelBaseSmall: 0.5
+  mediumHpMult: 2.5
+  bigHpMult: 6
+  metalHpMult: 2
+  rareHpMult: 5
+  veryRareHpMult: 10
+  blueCrystalHpMult: 1.4
+  pinkCrystalHpMult: 2
+  mediumSpeedMult: 0.85
+  bigSpeedMult: 0.7
+  metalSpeedMult: 1.06
+  rareSpeedMult: 1.12
+  veryRareSpeedMult: 1.18
+  mediumColDamageMult: 2
+  bigColDamageMult: 3
+  metalColDamageMult: 1.5
+  rareColDamageMult: 2
+  veryRareColDamageMult: 3
+  blueCrystalColDamageMult: 1.05
+  pinkCrystalColDamageMult: 1.1
+  mediumImpactMult: 1.3
+  bigImpactMult: 1.6
+  baseDestroyDrops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 20
+      RareMetalCrumb: 1
+      EnergyCristal: 0.01
+      CondensedEnergyCristal: 0
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  baseSplitDrops:
+    MinDrops: 1
+    MaxDrops: 1
+    DropWeightsLine:
+      MetalCrumb: 20
+      RareMetalCrumb: 1
+      EnergyCristal: 0.01
+      CondensedEnergyCristal: 0
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  metalDestroyDrops:
+    MinDrops: 1
+    MaxDrops: 1
+    DropWeightsLine:
+      MetalCrumb: 10
+      RareMetalCrumb: 1
+      EnergyCristal: 0.1
+      CondensedEnergyCristal: 0
+    GuaranteedLine:
+      MetalCrumb: 1
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  metalSplitDrops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 10
+      RareMetalCrumb: 1
+      EnergyCristal: 0.1
+      CondensedEnergyCristal: 0
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  rareDestroyDrops:
+    MinDrops: 1
+    MaxDrops: 1
+    DropWeightsLine:
+      MetalCrumb: 5
+      RareMetalCrumb: 10
+      EnergyCristal: 0.5
+      CondensedEnergyCristal: 0.01
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 1
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  rareSplitDrops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 5
+      RareMetalCrumb: 10
+      EnergyCristal: 0.5
+      CondensedEnergyCristal: 0.01
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  rareBlueDestroyDrops:
+    MinDrops: 1
+    MaxDrops: 1
+    DropWeightsLine:
+      MetalCrumb: 5
+      RareMetalCrumb: 10
+      EnergyCristal: 5
+      CondensedEnergyCristal: 0
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 1
+      CondensedEnergyCristal: 0
+  rareBlueSplitDrops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 5
+      RareMetalCrumb: 10
+      EnergyCristal: 5
+      CondensedEnergyCristal: 0
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  rarePinkDestroyDrops:
+    MinDrops: 1
+    MaxDrops: 1
+    DropWeightsLine:
+      MetalCrumb: 5
+      RareMetalCrumb: 10
+      EnergyCristal: 0
+      CondensedEnergyCristal: 5
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 1
+  rarePinkSplitDrops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 5
+      RareMetalCrumb: 10
+      EnergyCristal: 0
+      CondensedEnergyCristal: 5
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  veryRareDestroyDrops:
+    MinDrops: 1
+    MaxDrops: 1
+    DropWeightsLine:
+      MetalCrumb: 2
+      RareMetalCrumb: 11
+      EnergyCristal: 2
+      CondensedEnergyCristal: 0.1
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 1
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  veryRareSplitDrops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 2
+      RareMetalCrumb: 11
+      EnergyCristal: 2
+      CondensedEnergyCristal: 0.1
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  veryRareBlueDestroyDrops:
+    MinDrops: 1
+    MaxDrops: 1
+    DropWeightsLine:
+      MetalCrumb: 1
+      RareMetalCrumb: 10
+      EnergyCristal: 10
+      CondensedEnergyCristal: 0.1
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 1
+      CondensedEnergyCristal: 0
+  veryRareBlueSplitDrops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 1
+      RareMetalCrumb: 10
+      EnergyCristal: 10
+      CondensedEnergyCristal: 0.1
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  veryRarePinkDestroyDrops:
+    MinDrops: 1
+    MaxDrops: 1
+    DropWeightsLine:
+      MetalCrumb: 1
+      RareMetalCrumb: 10
+      EnergyCristal: 2
+      CondensedEnergyCristal: 9
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 1
+  veryRarePinkSplitDrops:
+    MinDrops: 1
+    MaxDrops: 2
+    DropWeightsLine:
+      MetalCrumb: 1
+      RareMetalCrumb: 10
+      EnergyCristal: 2
+      CondensedEnergyCristal: 9
+    GuaranteedLine:
+      MetalCrumb: 0
+      RareMetalCrumb: 0
+      EnergyCristal: 0
+      CondensedEnergyCristal: 0
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}
+  OnUpdateAndSaveAll:
+    m_PersistentCalls:
+      m_Calls: []
