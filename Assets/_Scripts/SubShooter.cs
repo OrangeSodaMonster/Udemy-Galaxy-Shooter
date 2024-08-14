@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class BossShooter : MonoBehaviour
+public class SubShooter : MonoBehaviour
 {
+    [SerializeField, HorizontalGroup("1"), LabelWidth(120)] bool playChargeSound = false;
+    [SerializeField, HorizontalGroup("1"), LabelWidth(100)] bool playFastCharge = false;
     [field: SerializeField] public GameObject projectilePref { get; private set; }
     [SerializeField] Transform projectileOrigin;
     public Transform ProjectileOrigin { get { return projectileOrigin; }}
     [SerializeField] VisualEffect preShootVFX;
     [SerializeField] float preShootVFXTimePrior = 2;
     [SerializeField] LayerMask raycastLayers;
-    [SerializeField] bool playChargeSound = false;
 
     [HideInInspector] public bool IsShooting;
     PoolRefs poolRefs;
@@ -45,10 +46,12 @@ public class BossShooter : MonoBehaviour
     {        
         IsShooting = true;
         preShootVFX.gameObject.SetActive(true);
-        if (playChargeSound)
+        if (playChargeSound && !playFastCharge)
             AudioManager.Instance.PlayEnemyCharge(gameObject.GetHashCode());
+        else if (playChargeSound && playFastCharge)
+            AudioManager.Instance.PlayEnemyChargeFast(gameObject.GetHashCode());
 
-            yield return new WaitForSeconds(preShootVFXTimePrior);
+        yield return new WaitForSeconds(preShootVFXTimePrior);
 
         GameObject projectile;
         if (poolRefs.Poolers.ContainsKey(projectilePref))

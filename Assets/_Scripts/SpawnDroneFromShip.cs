@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class SpawnDroneFromShip : MonoBehaviour
 {
     public float BaseSpawnCD = 9;
     public float SpawnCDVariation = 1f;
     [SerializeField] GameObject droneToSpawn;
+    [SerializeField] VisualEffect spawnVFX;
 
     WaitForSeconds wait;
     public GameObject DroneToSpawn => droneToSpawn;
@@ -47,6 +49,7 @@ public class SpawnDroneFromShip : MonoBehaviour
             {
                 EnemySpawner.Instance.SpawnDrone(transform.position, droneToSpawn);
                 AudioManager.Instance.DroneSpawnSound.PlayFeedbacks();
+                spawnVFX.gameObject.SetActive(true);
                 spawnCD = Random.Range(-SpawnCDVariation, SpawnCDVariation) + BaseSpawnCD;
             }
             

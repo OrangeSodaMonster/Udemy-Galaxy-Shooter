@@ -272,8 +272,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -13.292137, y: 26.894592, z: 0}
-  - {x: -5.3762207, y: 10.87793, z: 0}
+  - {x: -13.292141, y: 26.894592, z: 0}
+  - {x: -5.376213, y: 10.87793, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -1252,8 +1252,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 9.543968, y: 28.441387, z: 0}
-  - {x: 3.860199, y: 11.503552, z: 0}
+  - {x: 9.543968, y: 28.441391, z: 0}
+  - {x: 3.860199, y: 11.503555, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -1433,7 +1433,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: -14.385948, y: -42.222084, z: 0}
-  - {x: -15.879997, y: -46.91999, z: 0}
+  - {x: -15.879997, y: -46.92, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -1873,7 +1873,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -5.4786224, y: 11.012482, z: 0}
+  - {x: -5.4786224, y: 11.012474, z: 0}
   - {x: 2.8344116, y: 8.446663, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -2129,6 +2129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 5490492339571981556, guid: eabef0c7074e9174cb160c58a0eca42a, type: 3}
+  spawnVFX: {fileID: 0}
   spawnTime: 30
   spawnTimeVar: 5
   minDistanceToSpawn: 40
@@ -2540,6 +2541,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45.304
       objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       propertyPath: m_Name
       value: SpawnerYellow
@@ -2554,9 +2567,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 187516076}
-    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 187516077}
   m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
 --- !u!4 &187516074 stripped
 Transform:
@@ -2595,23 +2605,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &187516077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187516075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 5954638457871095047, guid: 12e1b50773635dd4782ab6e37de9910c, type: 3}
-  spawnTime: 15
-  spawnTimeVar: 5
-  minDistanceToSpawn: 40
-  CanSpawn: 0
 --- !u!1001 &203664300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4170,7 +4163,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -3.8602066, y: -11.503553, z: 0}
+  - {x: -3.8602028, y: -11.5035515, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -4403,8 +4396,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 1.5832901, y: -13.285453, z: 0}
-  - {x: -3.8602066, y: -11.503553, z: 0}
+  - {x: 1.5832901, y: -13.285452, z: 0}
+  - {x: -3.8602028, y: -11.5035515, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -4622,8 +4615,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -11.943481, y: -51.976585, z: 0}
-  - {x: -14.429733, y: -47.38613, z: 0}
+  - {x: -11.943481, y: -51.976562, z: 0}
+  - {x: -14.429733, y: -47.386124, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -5038,7 +5031,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -5.3762207, y: 10.87793, z: 0}
+  - {x: -5.376213, y: 10.87793, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -5190,8 +5183,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 9.276703, y: 9.641206, z: 0}
-  - {x: 3.860199, y: 11.503552, z: 0}
+  - {x: 9.276703, y: 9.641205, z: 0}
+  - {x: 3.860199, y: 11.503555, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -5576,7 +5569,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 1.1058807, y: -13.333679, z: 0}
+  - {x: 1.1058807, y: -13.333687, z: 0}
   - {x: -4.270218, y: -11.357735, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -5743,8 +5736,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 13.285454, y: 1.583293, z: 0}
-  - {x: 11.503548, y: -3.8602, z: 0}
+  - {x: 13.285454, y: 1.5832939, z: 0}
+  - {x: 11.503548, y: -3.860199, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -5900,8 +5893,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 10.970001, y: 33.829994, z: 0}
-  - {x: 15.529129, y: 32.267693, z: 0}
+  - {x: 10.970001, y: 33.83, z: 0}
+  - {x: 15.529144, y: 32.267708, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -6089,6 +6082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 5490492339571981556, guid: eabef0c7074e9174cb160c58a0eca42a, type: 3}
+  spawnVFX: {fileID: 0}
   spawnTime: 30
   spawnTimeVar: 5
   minDistanceToSpawn: 40
@@ -6196,8 +6190,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -13.285454, y: -1.583293, z: 0}
-  - {x: -11.503548, y: 3.8602, z: 0}
+  - {x: -13.28545, y: -1.5832901, z: 0}
+  - {x: -11.5035515, y: 3.860199, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -6333,8 +6327,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -8.30217, y: -10.492096, z: 0}
-  - {x: -10.87793, y: -5.3762054, z: 0}
+  - {x: -8.302166, y: -10.492096, z: 0}
+  - {x: -10.877926, y: -5.3762054, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -6591,6 +6585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 4976847092858403906, guid: 5a32e13870368424fad448cd615fcc70, type: 3}
+  spawnVFX: {fileID: 0}
   spawnTime: 22
   spawnTimeVar: 5
   minDistanceToSpawn: 40
@@ -7190,7 +7185,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -10.5576935, y: -28.08087, z: 0}
+  - {x: -10.5576935, y: -28.080864, z: 0}
   - {x: -4.270218, y: -11.357735, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -7371,6 +7366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 4976847092858403906, guid: 5a32e13870368424fad448cd615fcc70, type: 3}
+  spawnVFX: {fileID: 0}
   spawnTime: 22
   spawnTimeVar: 5
   minDistanceToSpawn: 40
@@ -8028,8 +8024,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -28.441399, y: 9.543969, z: 0}
-  - {x: -11.503548, y: 3.8602, z: 0}
+  - {x: -28.441391, y: 9.543968, z: 0}
+  - {x: -11.5035515, y: 3.860199, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -8168,6 +8164,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45.304
       objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       propertyPath: m_Name
       value: SpawnerYellow
@@ -8182,9 +8190,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 686236727}
-    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 686236728}
   m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
 --- !u!4 &686236725 stripped
 Transform:
@@ -8223,23 +8228,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &686236728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686236726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 5954638457871095047, guid: 12e1b50773635dd4782ab6e37de9910c, type: 3}
-  spawnTime: 15
-  spawnTimeVar: 5
-  minDistanceToSpawn: 40
-  CanSpawn: 0
 --- !u!1001 &689014855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8312,6 +8300,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.911
       objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       propertyPath: m_Name
       value: SpawnerYellow_1
@@ -8326,9 +8330,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 689014858}
-    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 689014859}
   m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
 --- !u!4 &689014856 stripped
 Transform:
@@ -8367,23 +8368,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &689014859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689014857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
-  spawnTime: 21
-  spawnTimeVar: 5
-  minDistanceToSpawn: 40
-  CanSpawn: 0
 --- !u!1001 &691535177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9436,6 +9420,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45.304
       objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       propertyPath: m_Name
       value: SpawnerYellow
@@ -9450,9 +9446,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 768272136}
-    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 768272137}
   m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
 --- !u!4 &768272134 stripped
 Transform:
@@ -9491,23 +9484,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &768272137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768272135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 5954638457871095047, guid: 12e1b50773635dd4782ab6e37de9910c, type: 3}
-  spawnTime: 15
-  spawnTimeVar: 5
-  minDistanceToSpawn: 40
-  CanSpawn: 0
 --- !u!1001 &769037718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10364,8 +10340,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -9.641205, y: 9.2767, z: 0}
-  - {x: -11.503548, y: 3.8602, z: 0}
+  - {x: -9.641205, y: 9.276703, z: 0}
+  - {x: -11.5035515, y: 3.860199, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -10707,7 +10683,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 10.970001, y: 33.829998, z: 0}
+  - {x: 10.970001, y: 33.829994, z: 0}
   - {x: 9.4739685, y: 28.881386, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -10931,6 +10907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 5490492339571981556, guid: eabef0c7074e9174cb160c58a0eca42a, type: 3}
+  spawnVFX: {fileID: 0}
   spawnTime: 30
   spawnTimeVar: 5
   minDistanceToSpawn: 40
@@ -11190,7 +11167,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -11.503548, y: 3.8602, z: 0}
+  - {x: -11.5035515, y: 3.860199, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -11395,6 +11372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 4976847092858403906, guid: 5a32e13870368424fad448cd615fcc70, type: 3}
+  spawnVFX: {fileID: 0}
   spawnTime: 22
   spawnTimeVar: 5
   minDistanceToSpawn: 40
@@ -11498,6 +11476,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.911
       objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       propertyPath: m_Name
       value: SpawnerYellow_1
@@ -11512,9 +11506,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1008575033}
-    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1008575034}
   m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
 --- !u!4 &1008575031 stripped
 Transform:
@@ -11553,23 +11544,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1008575034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008575032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
-  spawnTime: 21
-  spawnTimeVar: 5
-  minDistanceToSpawn: 40
-  CanSpawn: 0
 --- !u!1 &1014874632
 GameObject:
   m_ObjectHideFlags: 0
@@ -11646,7 +11620,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -28.080872, y: 10.5576935, z: 0}
+  - {x: -28.080856, y: 10.557701, z: 0}
   - {x: -11.357727, y: 4.270218, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -12379,7 +12353,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 5.39888, y: 16.088882, z: 0}
+  - {x: 5.39888, y: 16.088875, z: 0}
   - {x: 2.8344116, y: 8.446663, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -12573,6 +12547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 5490492339571981556, guid: eabef0c7074e9174cb160c58a0eca42a, type: 3}
+  spawnVFX: {fileID: 0}
   spawnTime: 30
   spawnTimeVar: 5
   minDistanceToSpawn: 40
@@ -12715,8 +12690,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 9.641205, y: -9.276701, z: 0}
-  - {x: 11.503548, y: -3.8602, z: 0}
+  - {x: 9.641205, y: -9.276699, z: 0}
+  - {x: 11.503548, y: -3.860199, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -13984,8 +13959,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -0.22273254, y: 13.377609, z: 0}
-  - {x: -5.3762207, y: 10.87793, z: 0}
+  - {x: -0.22272873, y: 13.377609, z: 0}
+  - {x: -5.376213, y: 10.87793, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -14440,7 +14415,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -10.87793, y: -5.3762054, z: 0}
+  - {x: -10.877926, y: -5.3762054, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -14765,7 +14740,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: -13.377609, y: -0.22273254, z: 0}
-  - {x: -10.87793, y: -5.3762054, z: 0}
+  - {x: -10.877926, y: -5.3762054, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -15423,8 +15398,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 9.924568, y: 34.15133, z: 0}
-  - {x: 7.546715, y: 38.67675, z: 0}
+  - {x: 9.924568, y: 34.15132, z: 0}
+  - {x: 7.546715, y: 38.676727, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -16912,8 +16887,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -20.807907, y: -45.205956, z: 0}
-  - {x: -15.87999, y: -46.92, z: 0}
+  - {x: -20.807907, y: -45.205948, z: 0}
+  - {x: -15.87999, y: -46.91999, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -17064,8 +17039,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 13.292145, y: -26.894585, z: 0}
-  - {x: 5.3762054, y: -10.87793, z: 0}
+  - {x: 13.292149, y: -26.894592, z: 0}
+  - {x: 5.3762093, y: -10.87793, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -17368,8 +17343,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 28.441383, y: -9.543973, z: 0}
-  - {x: 11.503548, y: -3.8602, z: 0}
+  - {x: 28.441383, y: -9.543972, z: 0}
+  - {x: 11.503548, y: -3.860199, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -17672,7 +17647,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 3.860199, y: 11.503552, z: 0}
+  - {x: 3.860199, y: 11.503555, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -17820,6 +17795,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.911
       objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       propertyPath: m_Name
       value: SpawnerYellow_1
@@ -17834,9 +17825,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1525694934}
-    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1525694935}
   m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
 --- !u!4 &1525694932 stripped
 Transform:
@@ -17875,23 +17863,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1525694935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525694933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
-  spawnTime: 21
-  spawnTimeVar: 5
-  minDistanceToSpawn: 40
-  CanSpawn: 0
 --- !u!1001 &1526112664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18053,8 +18024,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -9.276703, y: -9.641203, z: 0}
-  - {x: -3.8602066, y: -11.503553, z: 0}
+  - {x: -9.276703, y: -9.641201, z: 0}
+  - {x: -3.8602028, y: -11.5035515, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -18257,8 +18228,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 13.377609, y: 0.22273254, z: 0}
-  - {x: 10.877922, y: 5.3762054, z: 0}
+  - {x: 13.377613, y: 0.22273254, z: 0}
+  - {x: 10.877926, y: 5.3762054, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -18642,7 +18613,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: -10.492096, y: 8.30217, z: 0}
-  - {x: -5.3762207, y: 10.87793, z: 0}
+  - {x: -5.376213, y: 10.87793, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -18878,7 +18849,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 11.503548, y: -3.8602, z: 0}
+  - {x: 11.503548, y: -3.860199, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -20223,6 +20194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 4976847092858403906, guid: 5a32e13870368424fad448cd615fcc70, type: 3}
+  spawnVFX: {fileID: 0}
   spawnTime: 22
   spawnTimeVar: 5
   minDistanceToSpawn: 40
@@ -20315,8 +20287,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0.22271729, y: -13.377609, z: 0}
-  - {x: 5.3762054, y: -10.87793, z: 0}
+  - {x: 0.22272491, y: -13.377609, z: 0}
+  - {x: 5.3762093, y: -10.87793, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -20482,7 +20454,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 5.3762054, y: -10.87793, z: 0}
+  - {x: 5.3762093, y: -10.87793, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -20716,6 +20688,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.911
       objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       propertyPath: m_Name
       value: SpawnerYellow_1
@@ -20730,9 +20718,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1838046310}
-    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1838046311}
   m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
 --- !u!4 &1838046308 stripped
 Transform:
@@ -20771,23 +20756,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1838046311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1838046309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
-  spawnTime: 21
-  spawnTimeVar: 5
-  minDistanceToSpawn: 40
-  CanSpawn: 0
 --- !u!1001 &1840835342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21019,7 +20987,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: -26.894592, y: -13.292145, z: 0}
-  - {x: -10.87793, y: -5.3762054, z: 0}
+  - {x: -10.877926, y: -5.3762054, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -21342,8 +21310,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 8.302162, y: 10.492096, z: 0}
-  - {x: 10.877922, y: 5.3762054, z: 0}
+  - {x: 8.302166, y: 10.492096, z: 0}
+  - {x: 10.877926, y: 5.3762054, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -21643,8 +21611,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 26.894592, y: 13.292145, z: 0}
-  - {x: 10.877922, y: 5.3762054, z: 0}
+  - {x: 26.894596, y: 13.292145, z: 0}
+  - {x: 10.877926, y: 5.3762054, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -22034,6 +22002,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45.304
       objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       propertyPath: m_Name
       value: SpawnerYellow
@@ -22045,9 +22025,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1907866226}
-    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1907866227}
   m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
 --- !u!4 &1907866224 stripped
 Transform:
@@ -22086,23 +22063,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1907866227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907866225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyToSpawn: {fileID: 5954638457871095047, guid: 12e1b50773635dd4782ab6e37de9910c, type: 3}
-  spawnTime: 15
-  spawnTimeVar: 5
-  minDistanceToSpawn: 40
-  CanSpawn: 0
 --- !u!1 &1939854146
 GameObject:
   m_ObjectHideFlags: 0
@@ -22179,8 +22139,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -1.5832901, y: 13.285451, z: 0}
-  - {x: 3.860199, y: 11.503552, z: 0}
+  - {x: -1.5832939, y: 13.285454, z: 0}
+  - {x: 3.860199, y: 11.503555, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -22627,7 +22587,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 10.877922, y: 5.3762054, z: 0}
+  - {x: 10.877926, y: 5.3762054, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -23065,7 +23025,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -5.4786224, y: 11.012482, z: 0}
+  - {x: -5.4786224, y: 11.012474, z: 0}
   - {x: -8.446663, y: 2.8344116, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -23217,8 +23177,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -9.543961, y: -28.441391, z: 0}
-  - {x: -3.8602066, y: -11.503553, z: 0}
+  - {x: -9.543968, y: -28.441391, z: 0}
+  - {x: -3.8602028, y: -11.5035515, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -23577,7 +23537,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 10.492096, y: -8.30217, z: 0}
-  - {x: 5.3762054, y: -10.87793, z: 0}
+  - {x: 5.3762093, y: -10.87793, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -24527,7 +24487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2745386294756518846, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: onExitImediate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2745386294756518846, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: onExitImediate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -24568,6 +24528,10 @@ PrefabInstance:
     - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0000004367903
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000019650906
       objectReference: {fileID: 0}
     - target: {fileID: 5887057512710262436, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_Enabled

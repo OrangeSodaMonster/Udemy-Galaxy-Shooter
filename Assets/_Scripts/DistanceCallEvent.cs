@@ -19,7 +19,7 @@ public class DistanceCallEvent : MonoBehaviour
 
     private void Update()
     {
-        if (eventCalled) return;
+        if (eventCalled || GameStatus.IsGameover || GameStatus.IsStageClear) return;
 
         if(Vector2.SqrMagnitude(transform.position - player.position) <= distanceSqr)
         {

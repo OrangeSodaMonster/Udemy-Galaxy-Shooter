@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class SpawnerScript : MonoBehaviour
 {
     [SerializeField] GameObject enemyToSpawn;
+    [SerializeField] VisualEffect spawnVFX;
     [SerializeField] float spawnTime = 10;
     [SerializeField] float spawnTimeVar = 2;
     [SerializeField] float minDistanceToSpawn = 25;
@@ -32,7 +34,8 @@ public class SpawnerScript : MonoBehaviour
             currentInterval = Random.Range(spawnTime-spawnTimeVar, spawnTime+spawnTimeVar);
             timer = 0;
 
-            //ADD SOUND
+            AudioManager.Instance.SpawnerSound.PlayFeedbacks();
+            spawnVFX.gameObject.SetActive(true);
         }
 
         timer += Time.deltaTime;

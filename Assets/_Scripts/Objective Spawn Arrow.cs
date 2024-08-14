@@ -20,7 +20,8 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     float defaultAlpha;
     Camera cam = new();
 
-    void OnEnable()
+    bool isFirstFrame = true;
+    void Start()
     {
         player = FindObjectOfType<PlayerMove>().transform;
         direction = (transform.position - player.position).normalized;
@@ -32,13 +33,15 @@ public class ObjectiveSpawnArrow : MonoBehaviour
         arrowSR.color = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
 
         cam = Camera.main;
-    }
+    }    
 
     Tween fadeArrowTween = null;
     Vector3 hpPosInCam = new();
     void Update()
     {
-        if(player.IsDestroyed()) return;
+        isFirstFrame = false;
+        if (player.IsDestroyed()) return;
+        //if (isFirstFrame) return;
 
         direction = (transform.position - player.position).normalized;
         arrow.SetPositionAndRotation((Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
@@ -55,6 +58,7 @@ public class ObjectiveSpawnArrow : MonoBehaviour
             OnClearedObjective?.Invoke();
             gameObject.SetActive(false);
         }
+        
     }
 
     bool HasChildActive()

@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51292ab8ce7e654aa231ad6d42b98bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playChargeSound: 1
+  playFastCharge: 1
   <projectilePref>k__BackingField: {fileID: 9201868408255658033, guid: c02b3e0fb02e67e409bd09c0e101c55c, type: 3}
   projectileOrigin: {fileID: 66562528342153145}
   preShootVFX: {fileID: 5136948842469269659}
@@ -52,7 +54,6 @@ MonoBehaviour:
   raycastLayers:
     serializedVersion: 2
     m_Bits: 8192
-  playChargeSound: 0
   IsShooting: 0
 --- !u!1 &4216240731230223531
 GameObject:
@@ -99,6 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51292ab8ce7e654aa231ad6d42b98bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playChargeSound: 1
+  playFastCharge: 1
   <projectilePref>k__BackingField: {fileID: 9201868408255658033, guid: c02b3e0fb02e67e409bd09c0e101c55c, type: 3}
   projectileOrigin: {fileID: 1499912883221374675}
   preShootVFX: {fileID: 4363579446461848979}
@@ -106,7 +109,6 @@ MonoBehaviour:
   raycastLayers:
     serializedVersion: 2
     m_Bits: 8192
-  playChargeSound: 0
   IsShooting: 0
 --- !u!1 &7202025668131572028
 GameObject:

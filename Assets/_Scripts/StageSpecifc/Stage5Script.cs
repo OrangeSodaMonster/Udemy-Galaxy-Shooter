@@ -6,14 +6,10 @@ public class Stage5Script : MonoBehaviour
 {
 	[SerializeField] GameObject bossPref;
 	[SerializeField] EnemiesToLoopSpawn postObjectiveSpawns;
+    [SerializeField] bool spawnEnemiesFromStart = false;
 
     EnemySpawner enemySpawner;    
-    PoolRefs poolRefs;
-
-    private void Awake()
-    {
-        
-    }
+    PoolRefs poolRefs;    
 
     private void Start()
     {
@@ -21,6 +17,11 @@ public class Stage5Script : MonoBehaviour
         poolRefs = FindObjectOfType<PoolRefs>();
         poolRefs.CreatePoolsForObject(bossPref, 1);
         poolRefs.CreatePoolsForObject(postObjectiveSpawns.enemy, 2);
+
+        if (spawnEnemiesFromStart)
+        {
+            StartPostObjective();
+        }
     }
 
     public void SpawnBoss()

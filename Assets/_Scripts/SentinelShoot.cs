@@ -24,21 +24,23 @@ public class SentinelShoot : MonoBehaviour
     float rotateAfterShootTimer = 0f;
     bool isRotating;
     Transform player;
-    List<BossShooter> shooters = new();
+    List<SubShooter> shooters = new();
 
     void Start()
     {
         player = FindObjectOfType<PlayerMove>().transform;
-        GetComponentsInChildren<BossShooter>(true, shooters);
+        GetComponentsInChildren<SubShooter>(true, shooters);
     }
 
     void Update()
     {
-        if(shootVerificationTimer >= shootVerificationInterval)
+        if (GameStatus.IsGameover || GameStatus.IsStageClear) return;
+
+        if (shootVerificationTimer >= shootVerificationInterval)
         {
             shootVerificationTimer = 0;
             
-            if(shootTimer >= shootInterval && !isRotating && DotVerification(out BossShooter bossShooter))
+            if(shootTimer >= shootInterval && !isRotating && DotVerification(out SubShooter bossShooter))
             {
                 Shoot(bossShooter);
                 shootTimer = 0;
@@ -46,8 +48,6 @@ public class SentinelShoot : MonoBehaviour
             }
         }
 
-        //if(rotateTimer > rotateInterval + 1)
-        //    isRotating = false;
 
         if(rotateTimer >= rotateInterval && !isRotating)
         {
@@ -80,8 +80,8 @@ public class SentinelShoot : MonoBehaviour
                 () => isRotating = false);
     }
 
-    bool DotVerification(out BossShooter bossShooter)
-    {
+    bool DotVerification(out SubShooter bossShooter)
+    {       
         bossShooter = null;        
 
         if (Vector2.SqrMagnitude(player.position - transform.position) > shootDistance * shootDistance)
@@ -120,7 +120,7 @@ public class SentinelShoot : MonoBehaviour
             return false;
     }
 
-    public void Shoot(BossShooter bossShooter)
+    public void Shoot(SubShooter bossShooter)
     {
         bossShooter?.StartShoot();
         ShooterIndex = shooters.IndexOf(bossShooter);

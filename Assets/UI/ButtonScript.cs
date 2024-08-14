@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -168,5 +169,19 @@ public class ButtonScript : MonoBehaviour
         if (!playHoverSound || !button.enabled) return;
 
         AudioManager.Instance.HoverSound.PlayFeedbacks();
+    }
+
+    public void ChangeClickEvents(UnityAction call, bool wipeEvents = false)
+    {
+        if (wipeEvents)
+        {
+            for (int i = 0; i < clickEvents.GetPersistentEventCount(); i++)
+            {
+                UnityEventTools.RemovePersistentListener(clickEvents, i);
+            }
+            clickEvents.RemoveAllListeners();
+        }            
+
+        clickEvents.AddListener(call);
     }
 }

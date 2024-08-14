@@ -43,10 +43,12 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public MMFeedbacks AsteroidDestructionSound { get; private set; }
     [field: SerializeField] public MMFeedbacks PlayerDestructionSound { get; private set; }
 
-    [field: Header("Enemy Fire")]
+    [field: Header("Enemies")]
     [field: SerializeField] public MMFeedbacks EnemyChargeSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks EnemyChargeFast { get; private set; }
     [field: SerializeField] public MMFeedbacks EnemyFireSound { get; private set; }
     [field: SerializeField] public MMFeedbacks DroneSpawnSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks SpawnerSound { get; private set; }
     [field: SerializeField] public AudioSource SentinelBeamSound { get; private set; }
 
     [field: Header("Interface")]
@@ -103,7 +105,6 @@ public class AudioManager : MonoBehaviour
         thrusterDefaultVolume = ThrusterSound.volume;
         reverseDefaultVolume = ReverseSound.volume;
         sentinelDefaultVolume = SentinelBeamSound.volume;
-
         enemyChargeFB = EnemyChargeSound.GetComponent<MMFeedbackMMSoundManagerSound>();
         asteroidDestructionFB = AsteroidDestructionSound.GetComponent<MMFeedbackMMSoundManagerSound>();
         asteroidDestructionDefaultVolume = asteroidDestructionFB.MinVolume;
@@ -230,6 +231,11 @@ public class AudioManager : MonoBehaviour
     {
         enemyChargeFB.ID = enemyHash;
         EnemyChargeSound.PlayFeedbacks();
+    }  
+    public void PlayEnemyChargeFast(int enemyHash)
+    {
+        enemyChargeFB.ID = enemyHash;
+        EnemyChargeFast.PlayFeedbacks();
     }
     public void StopEnemyCharge(int enemyHash)
     {

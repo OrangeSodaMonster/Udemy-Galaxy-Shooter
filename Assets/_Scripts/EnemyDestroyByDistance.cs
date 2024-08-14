@@ -16,7 +16,7 @@ public class EnemyDestroyByDistance : MonoBehaviour
 
     void OnEnable()
     {
-        if (!player.gameObject.activeInHierarchy) player = null;
+        if (GameStatus.IsGameover || GameStatus.IsStageClear) player = null;
         deSpawnZoneRadius = EnemySpawner.Instance.SpawnZoneRadius * 1.5f;
         deSpawnZoneRadius *= deSpawnZoneRadius;
 
