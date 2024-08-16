@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.Windows;
+using System.ComponentModel;
 
 public class ButtonScript : MonoBehaviour
 {
@@ -24,10 +24,12 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] bool playSelectionSound = true;
     [SerializeField] bool playConfirmationSound = true;
     [SerializeField] bool playBackSound = false;
+    [SerializeField] UnityEvent alternativeClickEvents;
 
     public event Action ClickedOnInterface;
     static GameObject lastSelected;
 
+    public bool UseAlternativeClickEvents { get; private set; }
     Button button;
     bool isHoldingButton;
     bool calledHold;
@@ -161,7 +163,10 @@ public class ButtonScript : MonoBehaviour
         if (playBackSound)
             AudioManager.Instance.BackSound.PlayFeedbacks();
 
-        clickEvents.Invoke();
+        if(!UseAlternativeClickEvents)
+            clickEvents.Invoke();
+        else
+            alternativeClickEvents.Invoke();
     }
 
     public void PlayHoverSound()
@@ -171,17 +176,15 @@ public class ButtonScript : MonoBehaviour
         AudioManager.Instance.HoverSound.PlayFeedbacks();
     }
 
-    public void ChangeClickEvents(UnityAction call, bool wipeEvents = false)
+    [Description("Can't wipe persistent events (set in editor)")]
+    public void SetAlternativeClickEvents(bool useAlternativeClickEvents, UnityAction call = null, bool wipeEvents = false)
     {
         if (wipeEvents)
-        {
-            for (int i = 0; i < clickEvents.GetPersistentEventCount(); i++)
-            {
-                UnityEventTools.RemovePersistentListener(clickEvents, i);
-            }
-            clickEvents.RemoveAllListeners();
-        }            
+            alternativeClickEvents.RemoveAllListeners();
 
-        clickEvents.AddListener(call);
+        if(call != null)
+            alternativeClickEvents.AddListener(call);
+
+        UseAlternativeClickEvents = useAlternativeClickEvents;
     }
 }

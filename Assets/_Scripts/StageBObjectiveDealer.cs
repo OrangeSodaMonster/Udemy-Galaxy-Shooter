@@ -44,7 +44,7 @@ public class StageBObjectiveDealer : MonoBehaviour
         // Cria objetivos nos pontos selecionados (objetivo escolhido aleatoriamente da lista)
         for(int i = 0;i < selectedSpots.Count; i++)
         {
-            Transform parent = Instantiate(objParent.transform, selectedSpots[i]);
+            Transform parent = Instantiate(objParent.transform, selectedSpots[i].position, Quaternion.identity, transform);
 
             int objIndex = 0;
             if (getRandomObjectives)
@@ -53,7 +53,6 @@ public class StageBObjectiveDealer : MonoBehaviour
             }            
                 
             GameObject obj = Instantiate(possibleObjectives[objIndex].gameObject, parent);
-            obj.transform.localScale /= parent.lossyScale.x;
 
             if (!getRandomObjectives && possibleObjectives.Count > 0)
             {

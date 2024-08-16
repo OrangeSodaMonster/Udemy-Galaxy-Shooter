@@ -306,12 +306,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[0].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: dropsGuaranteed.Array.data[2].Amount
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: dropsGuaranteed.Array.data[3].Amount
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: DropsToSpawn.Array.data[1].spawnWeight
@@ -319,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1103471141016602533, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: DropsToSpawn.Array.data[2].spawnWeight
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1263677378974625367, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: BaseShootCD
@@ -531,7 +539,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4159148617365990426, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: ChanceToDrop
-      value: 50
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159148617365990426, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: PuDrops.Array.data[1].Weight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159148617365990426, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
+      propertyPath: PuDrops.Array.data[2].Weight
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4159148617365990426, guid: ef4c8bd7e1461ed41904b1cd0de4f840, type: 3}
       propertyPath: PuDrops.Array.data[4].Weight

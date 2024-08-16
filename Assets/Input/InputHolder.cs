@@ -40,7 +40,7 @@ public class InputHolder : MonoBehaviour
 
     public void OnDeviceLost()
     {
-        UIManager.PauseGame?.Invoke();
+        PauseAndUIManager.PauseGame?.Invoke();
 
         if(GameStatus.IsMobile && !GameStatus.IsJoystick)
         {

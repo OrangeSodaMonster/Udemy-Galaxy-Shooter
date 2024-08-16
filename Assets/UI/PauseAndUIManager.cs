@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class PauseAndUIManager : MonoBehaviour
 {       
     [SerializeField] RectTransform pauseCanvas;
     [Space]
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
 
     bool isOnPage;
 
-    public static UIManager Instance;
+    public static PauseAndUIManager Instance;
 
     bool canPause = true;
 
@@ -74,6 +74,7 @@ public class UIManager : MonoBehaviour
     {
         pauseCanvas.gameObject.SetActive(true);
         GameStatus.IsPaused = true;
+        leavePauseTween.Kill();
         Time.timeScale = 0;
 
         DisablePlayerCommands.Instance.SetCommands(false);
@@ -85,6 +86,7 @@ public class UIManager : MonoBehaviour
         AudioTrackConfig.Instance.MuteVFX();
     }
 
+    Tween leavePauseTween;   
     float timeScale = 0;
     public void LeavePause()
     {
@@ -93,7 +95,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(AllowPauseCO());
 
         timeScale = 0;
-        DOTween.To(() => timeScale, x => timeScale = x, 1, 1.5f).SetUpdate(true).OnUpdate(() => Time.timeScale = timeScale);
+        leavePauseTween = DOTween.To(() => timeScale, x => timeScale = x, 1, 1.5f).SetUpdate(true).OnUpdate(() => Time.timeScale = timeScale);
 
         DisablePlayerCommands.Instance.SetCommands(true);
 

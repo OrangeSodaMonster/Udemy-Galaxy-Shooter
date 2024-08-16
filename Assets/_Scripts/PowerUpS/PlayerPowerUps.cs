@@ -192,7 +192,7 @@ public class PlayerPowerUps : MonoBehaviour
                 isHealingPU = false;
                 healing.PowerUpEnd();
 
-                AudioManager.Instance.EndPUSound.PlayFeedbacks();
+                //AudioManager.Instance.EndPUSound.PlayFeedbacks();
             }
         }
     }

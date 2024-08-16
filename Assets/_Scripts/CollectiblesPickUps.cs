@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 enum CollectibleType
@@ -82,6 +83,8 @@ public class CollectiblesPickUps : MonoBehaviour
         }
         else
         {
+            if(tractorBeam.IsDestroyed() || tractorBeam == null) isTractor = false;
+
             if (isTractor)
             {
                 tractorCurrentPull = Mathf.Clamp(tractorCurrentPull + acceleration * Time.deltaTime, Mathf.Abs(driftSpeed), Mathf.Abs(maxAtractionSpeed));

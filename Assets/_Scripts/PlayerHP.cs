@@ -105,7 +105,7 @@ public class PlayerHP : MonoBehaviour
             AudioManager.Instance.PlayerDestructionSound.PlayFeedbacks();
         }
 
-        UIManager.EnableGameoverCanvas();
+        PauseAndUIManager.EnableGameoverCanvas();
         GameStatus.IsGameover = true;
         Destroy(gameObject);
     }

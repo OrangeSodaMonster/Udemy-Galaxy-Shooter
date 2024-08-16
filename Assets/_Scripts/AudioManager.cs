@@ -4,6 +4,7 @@ using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -87,15 +88,17 @@ public class AudioManager : MonoBehaviour
         transform.parent = null;
         DontDestroyOnLoad(this);
 
-        PauseAllLoops();
+        //PauseAllLoops();        
 
         GameStatus.GameOver += PauseAllLoops;
         GameStatus.StageCleared += PauseAllLoops;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void OnDisable()
     {
         GameStatus.GameOver -= PauseAllLoops;
         GameStatus.StageCleared -= PauseAllLoops;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
@@ -108,6 +111,23 @@ public class AudioManager : MonoBehaviour
         enemyChargeFB = EnemyChargeSound.GetComponent<MMFeedbackMMSoundManagerSound>();
         asteroidDestructionFB = AsteroidDestructionSound.GetComponent<MMFeedbackMMSoundManagerSound>();
         asteroidDestructionDefaultVolume = asteroidDestructionFB.MinVolume;
+
+        
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PauseAllLoops();
+    }
+
+    private void LateUpdate()
+    {
+        if (ShouldPlaySentinelLaser)
+            PlaySentinel();
+        else
+            PauseSentinel();
+
+        ShouldPlaySentinelLaser = false;
     }
 
     bool playedDrones;
@@ -124,7 +144,7 @@ public class AudioManager : MonoBehaviour
 
         DronesSound.volume = 0;
         DronesSound.Play();
-        DronesSound.DOFade(dronesDefaultVolume, .3f);
+        DronesSound.DOFade(dronesDefaultVolume, .15f);
         playedDrones = true;
     }
     public void SetDroneVolume(int activeNum)
@@ -198,22 +218,23 @@ public class AudioManager : MonoBehaviour
         playedAlarm = true;
     }
 
-    bool playedSentinel;
+    public bool ShouldPlaySentinelLaser;
+    bool playingSentinel;
+    Tween sentinelTween;
     public void PauseSentinel()
     {
-        if (!playedSentinel) return;
-
-        SentinelBeamSound.DOFade(0, .1f).OnComplete(() => SentinelBeamSound.Pause());
-        playedSentinel = false;
+        if (!SentinelBeamSound.isPlaying) return;
+        sentinelTween.Kill();
+        sentinelTween = SentinelBeamSound.DOFade(0, .1f).OnComplete(() => SentinelBeamSound.Pause());
     }
     public void PlaySentinel()
     {
-        if (playedSentinel) return;
+        if (SentinelBeamSound.isPlaying) return;
 
+        sentinelTween.Kill();
         SentinelBeamSound.volume = 0;
         SentinelBeamSound.Play();
-        SentinelBeamSound.DOFade(sentinelDefaultVolume, .3f);
-        playedSentinel = true;
+        sentinelTween = SentinelBeamSound.DOFade(sentinelDefaultVolume, .1f);
     }
 
     public void PauseAllLoops()

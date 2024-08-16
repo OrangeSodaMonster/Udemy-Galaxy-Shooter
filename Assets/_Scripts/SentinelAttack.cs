@@ -53,7 +53,7 @@ public class SentinelAttack : MonoBehaviour
         playerHP = FindObjectOfType<PlayerHP>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(GameStatus.IsGameover || GameStatus.IsPortal || playerHP == null) return;
 
@@ -62,7 +62,8 @@ public class SentinelAttack : MonoBehaviour
             target = playerHP.transform;
             LaserAttack();
 
-            AudioManager.Instance.PlaySentinel();
+            //AudioManager.Instance.PlaySentinel();
+            AudioManager.Instance.ShouldPlaySentinelLaser = true;
         }
         else if (isFiring)
         {

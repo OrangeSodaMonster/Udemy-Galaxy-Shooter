@@ -36,7 +36,7 @@ public class StageButtonScript : MonoBehaviour
             text.color = clearedTextColor;
 
             if(stageB_call.GetPersistentEventCount() > 0)
-                buttonScript.ChangeClickEvents(CallStageB, true);
+                buttonScript.SetAlternativeClickEvents(true, CallStageB, true);
         }
 
         if(stageNum > GameManager.HighestStageCleared + 1)

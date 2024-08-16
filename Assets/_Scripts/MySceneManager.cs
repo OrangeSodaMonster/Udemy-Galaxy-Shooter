@@ -22,7 +22,7 @@ public class MySceneManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= SetRestartSceneName;
     }
-    
+
     private void SetRestartSceneName(Scene s1, LoadSceneMode s2)
     {
         RestartScene.DestinationSceneName = s1.name;

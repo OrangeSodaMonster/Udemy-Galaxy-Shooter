@@ -58,7 +58,7 @@ public class Cheats : MonoBehaviour
 
     public void SelfDestruct()
     {
-        UIManager.Instance.DisableAllCanvas();
+        PauseAndUIManager.Instance.DisableAllCanvas();
         Time.timeScale = 1;
         GameStatus.IsPaused = false;
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
