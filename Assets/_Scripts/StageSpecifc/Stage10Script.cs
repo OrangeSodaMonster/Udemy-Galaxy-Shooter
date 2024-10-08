@@ -57,7 +57,7 @@ public class Stage10Script : MonoBehaviour
         for (int i = 0; i < number; i++)
         {
             GameObject spawn = poolRefs.Poolers[enemy].GetPooledGameObject();
-            spawn.transform.position = enemySpawner.GetSpawnPoint();
+            spawn.transform.position = enemySpawner.GetSpawnPoint360();
             spawn.SetActive(true);
         }
     }
@@ -82,7 +82,7 @@ public class Stage10Script : MonoBehaviour
         SpawnWave(fourthSpawns, fourthSpawnsNumber);
 
         GameObject boss = poolRefs.Poolers[bossPrefab].GetPooledGameObject();
-        boss.transform.position = enemySpawner.GetSpawnPoint();
+        boss.transform.position = enemySpawner.GetSpawnPoint360();
         boss.SetActive(true);
     }
 

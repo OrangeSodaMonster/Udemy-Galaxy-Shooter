@@ -28,7 +28,7 @@ public class Stage5Script : MonoBehaviour
     {
         Debug.Log(poolRefs.Poolers[bossPref]);
         GameObject boss = poolRefs.Poolers[bossPref].GetPooledGameObject();
-        boss.transform.position = enemySpawner.GetSpawnPoint();
+        boss.transform.position = enemySpawner.GetSpawnPoint360();
         boss.SetActive(true);
     }
 

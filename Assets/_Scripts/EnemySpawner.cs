@@ -60,6 +60,9 @@ public class EnemySpawner : MonoBehaviour
     PoolRefs poolRef;
     float spawnTimer = 0;
     float spawnTimerBegin = 0;
+    //Rigidbody2D playerRB;
+    PlayerMove playerMove;
+    float minSpawnAngleFoward = 160;
 
     public static EnemySpawner Instance;
 
@@ -93,6 +96,9 @@ public class EnemySpawner : MonoBehaviour
         {
             StartCoroutine(SpawnLoop(spawn));
         }
+
+        //playerRB = player.GetComponent<Rigidbody2D>();
+        playerMove = player.GetComponent<PlayerMove>();
     }
 
     private void OnDisable()
@@ -115,7 +121,34 @@ public class EnemySpawner : MonoBehaviour
         spawnTimerBegin += Time.deltaTime;
     }
 
-    public Vector3 GetSpawnPoint()
+    public Vector3 GetSpawnPointAheadOfPlayer()
+    {
+        float playerSpeed = playerMove.PlayerVelocity.magnitude;
+        float spawnAngle = 360;
+        if (playerSpeed > 0.1f)
+        {
+            float speedProportion = playerSpeed / playerMove.MaxSpeed;
+            if(speedProportion > 1) speedProportion = 1;
+
+            spawnAngle = Mathf.Lerp(360, minSpawnAngleFoward, speedProportion);
+        }
+        else
+            return GetSpawnPoint360();
+
+        spawnAngle = UnityEngine.Random.Range(-spawnAngle*0.5f, spawnAngle*0.5f);
+        spawnAngle = spawnAngle * Mathf.Deg2Rad;
+        Vector2 nextSpawnDirection = playerMove.PlayerVelocity.normalized;
+        nextSpawnDirection = new Vector2(
+            nextSpawnDirection.x * Mathf.Cos(spawnAngle) - nextSpawnDirection.y * Mathf.Sin(spawnAngle),
+            nextSpawnDirection.x * Mathf.Sin(spawnAngle) + nextSpawnDirection.y * Mathf.Cos(spawnAngle));
+        nextSpawnDirection *= UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius);
+
+        Vector3 playerPos = player != null ? player.position : PlayerLastPos;
+
+        return nextSpawnDirection + (Vector2)playerPos;
+    }
+
+    public Vector3 GetSpawnPoint360()
     {
         Vector2 nextSpawnDirection = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
         Vector3 playerPos = player != null ? player.position : PlayerLastPos;
@@ -125,7 +158,11 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy(GameObject spawn)
     {
         GameObject enemy = poolRef.Poolers[spawn].GetPooledGameObject();
-        enemy.transform.position = GetSpawnPoint();
+        if(enemy != null && enemy.GetComponent<EnemyHP>() && enemy.GetComponent<EnemyHP>().IsAsteroid)
+            enemy.transform.position = GetSpawnPointAheadOfPlayer();
+        else
+            enemy.transform.position = GetSpawnPoint360();
+
         enemy.SetActive(true);
     }    
     public void SpawnEnemy(GameObject spawn, Vector3 spawnPoint)
@@ -141,7 +178,10 @@ public class EnemySpawner : MonoBehaviour
 
         //Instantiate(enemy, nextSpawnPoint + player.position, Quaternion.identity, this.transform);
         GameObject enemy = poolRef.Poolers[spawn.enemy].GetPooledGameObject();
-        enemy.transform.position = GetSpawnPoint();
+        if (enemy != null && enemy.GetComponent<EnemyHP>() && enemy.GetComponent<EnemyHP>().IsAsteroid)
+            enemy.transform.position = GetSpawnPointAheadOfPlayer();
+        else
+            enemy.transform.position = GetSpawnPoint360();
         enemy.SetActive(true);
     }
 
@@ -160,7 +200,10 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             GameObject enemy = poolRef.Poolers[loopSpawn.enemy].GetPooledGameObject();
-            enemy.transform.position = GetSpawnPoint();
+            if (enemy != null && enemy.GetComponent<EnemyHP>() && enemy.GetComponent<EnemyHP>().IsAsteroid)
+                enemy.transform.position = GetSpawnPointAheadOfPlayer();
+            else
+                enemy.transform.position = GetSpawnPoint360();
             enemy.SetActive(true);
 
             int RandomIndex = UnityEngine.Random.Range(0, 5);

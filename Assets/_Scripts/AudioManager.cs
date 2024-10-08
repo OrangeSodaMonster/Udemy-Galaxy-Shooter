@@ -122,30 +122,42 @@ public class AudioManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        // Sentinel Laser
         if (ShouldPlaySentinelLaser)
             PlaySentinel();
         else
             PauseSentinel();
 
         ShouldPlaySentinelLaser = false;
+
+        // DZ Alarm
+        if (ShouldPlayAlarm)
+            PlayAlarm();
+        else
+            PauseAlarm();
+
+        ShouldPlayAlarm = false;
     }
 
-    bool playedDrones;
+    Tween dronesTween;
+    bool isPlayingDrone;
     public void PauseDrone()
     {
-        if (!playedDrones) return;
+        if (!isPlayingDrone) return;
 
-        DronesSound.DOFade(0, .1f).OnComplete(() => DronesSound.Pause());
-        playedDrones = false;
+        isPlayingDrone = false;
+        dronesTween.Kill();
+        dronesTween = DronesSound.DOFade(0, .1f).OnComplete(() => DronesSound.Pause());
     }
     public void PlayDrone()
     {
-        if (playedDrones) return;
+        if (isPlayingDrone) return;
 
+        isPlayingDrone = true;
+        dronesTween.Kill();
         DronesSound.volume = 0;
         DronesSound.Play();
-        DronesSound.DOFade(dronesDefaultVolume, .15f);
-        playedDrones = true;
+        dronesTween = DronesSound.DOFade(dronesDefaultVolume, .15f);
     }
     public void SetDroneVolume(int activeNum)
     {
@@ -200,26 +212,26 @@ public class AudioManager : MonoBehaviour
         ReverseSound.volume = reverseDefaultVolume * volumeMod;
     }
 
-    bool playedAlarm;
+    public bool ShouldPlayAlarm;
+    Tween alarmTween;
+    //bool playedAlarm;
     public void PauseAlarm()
     {
-        if (!playedAlarm) return;
-
-        AlarmSound.DOFade(0, .3f).OnComplete(() => AlarmSound.Pause());
-        playedAlarm = false;
+        if (!AlarmSound.isPlaying) return;
+        alarmTween.Kill();
+        alarmTween = AlarmSound.DOFade(0, .3f).OnComplete(() => AlarmSound.Pause());        
     }
     public void PlayAlarm()
     {
-        if (playedAlarm) return;
+        if (AlarmSound.isPlaying) return;
 
+        alarmTween.Kill();
         AlarmSound.volume = 0;
         AlarmSound.Play();
         AlarmSound.DOFade(alarmDefaultVolume, 1f);
-        playedAlarm = true;
     }
 
-    public bool ShouldPlaySentinelLaser;
-    bool playingSentinel;
+    public bool ShouldPlaySentinelLaser;    
     Tween sentinelTween;
     public void PauseSentinel()
     {

@@ -42,7 +42,7 @@ public class Stage15Script : MonoBehaviour
     [Button]
     public void SpawnSquadron()
     {
-        Vector3 spawnPos = enemySpawner.GetSpawnPoint();
+        Vector3 spawnPos = enemySpawner.GetSpawnPoint360();
         
         for (int i = 0; i < numOrange; i++)
         {

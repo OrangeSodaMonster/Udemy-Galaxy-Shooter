@@ -19,15 +19,18 @@ public class AreaDamage : MonoBehaviour
         wait = new WaitForSeconds(interval);
     }
 
+    private void Update()
+    {
+        if (isDamagePlayer) AudioManager.Instance.ShouldPlayAlarm = true;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(!isDamagePlayer && collision.TryGetComponent(out PlayerHP playerHP))
         {
             //Debug.Log("Player at risk");
             isDamagePlayer = true;
-            playerRoutine = StartCoroutine(DamageRoutine(null, playerHP));
-
-            AudioManager.Instance.PlayAlarm();
+            playerRoutine = StartCoroutine(DamageRoutine(null, playerHP));            
 
             if (collision.TryGetComponent(out SpriteOverlayScript overlay))
             {
@@ -54,8 +57,6 @@ public class AreaDamage : MonoBehaviour
             //Debug.Log("Player safe");
             isDamagePlayer = false;
             StopCoroutine(playerRoutine);
-
-            AudioManager.Instance.PauseAlarm();
 
             if (collision.TryGetComponent(out SpriteOverlayScript overlay))
             {

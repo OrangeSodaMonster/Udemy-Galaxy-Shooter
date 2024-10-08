@@ -118,7 +118,7 @@ public class RareSpawnScript : MonoBehaviour
     {
         GameObject spawn = poolRefs.Poolers[rare].GetPooledGameObject();
 
-        spawn.transform.position = EnemySpawner.Instance.GetSpawnPoint();
+        spawn.transform.position = EnemySpawner.Instance.GetSpawnPointAheadOfPlayer();
         spawn.transform.rotation = Quaternion.identity;
         spawn.SetActive(true);
         rareSpawn = spawn.transform;

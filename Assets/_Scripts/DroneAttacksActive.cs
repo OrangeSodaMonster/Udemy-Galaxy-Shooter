@@ -23,20 +23,19 @@ public class DroneAttacksActive : MonoBehaviour
                 activeNow++;
         }
 
-        //foreach(Transform child in transform)
-        //{
-        //    if (child.gameObject.activeSelf)
-        //        activeNow++;
-        //}
-
         if (activeNow == 0)
         {
             AudioManager.Instance.PauseDrone();
+
+            if (activeNow != activeLast)
+                Debug.Log("PauseDronesSound");
         }
         else if (activeNow != activeLast)
         {
             AudioManager.Instance.SetDroneVolume(activeNow);
             AudioManager.Instance.PlayDrone();
+
+            Debug.Log("PlayDronesSound");
         }
 
     }

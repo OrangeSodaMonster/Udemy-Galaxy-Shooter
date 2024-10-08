@@ -67,8 +67,11 @@ public class SpriteOverlayScript : MonoBehaviour
             .OnKill(() => material.SetFloat(healValueID, 0));
     }
 
+    int numDZ = 0;
     public void StartHazardOverlay()
     {
+        numDZ++;
+
         material.SetFloat(hazardValueID, hazardMinMaxValues[0]);
         material.DOFloat(hazardMinMaxValues[1], hazardValueID, hazardFrequency * 0.5f).SetEase(hazardEase).SetLoops(-1, LoopType.Yoyo)
             .OnKill(() => material.SetFloat(hazardValueID, 0)); ;
@@ -76,6 +79,10 @@ public class SpriteOverlayScript : MonoBehaviour
 
     public void StopHazardOverlay()
     {
+        numDZ--;
+        if(numDZ < 0) numDZ = 0;
+
+        if (numDZ > 0) return;
         material.SetFloat(hazardValueID, 0);
         material.DOKill();
     }
