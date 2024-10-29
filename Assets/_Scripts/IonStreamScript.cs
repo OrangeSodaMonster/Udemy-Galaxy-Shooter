@@ -96,6 +96,7 @@ public class IonStreamScript : MonoBehaviour
     float castingRadius;
     Transform target;
     List<int> hitHashs = new List<int>();
+
     private void FireIonStream()
     {
         castingOrigin = player.position;
@@ -103,7 +104,7 @@ public class IonStreamScript : MonoBehaviour
         hitHashs.Clear();
         lineNodes.Clear();
         lineNodes.Add(player.position);
-
+        hits = new Collider2D[(int)numberOfHits+1];
         //Debug.Log(numberOfHits);
 
         for (int j = 0; j < numberOfHits; j++)
@@ -135,14 +136,14 @@ public class IonStreamScript : MonoBehaviour
                     {
                         minDistance = Vector2.SqrMagnitude((Vector2)hits[i].transform.position - castingOrigin);
                         target = hits[i].transform;
-                        lineNodes[j+1]= (Vector2)hits[i].transform.position;                        
+                        lineNodes[j+1]= (Vector2)hits[i].transform.position;
                     }
                 }
                 castingRadius = radiusFromLastHit;
                 if (target != null)
                 {
                     //if(target.GetComponent<EnemyHP>() != null)
-                    if(target.TryGetComponent(out EnemyHP enemyHP))
+                    if (target.TryGetComponent(out EnemyHP enemyHP))
                         enemyHP.ChangeHP(-Mathf.Abs(damage));
 
                     GameObject vfx = VFXPoolerScript.Instance.IonStreamVFXPooler.GetPooledGameObject();
@@ -151,7 +152,7 @@ public class IonStreamScript : MonoBehaviour
                     vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife",
                         upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[upgradesManager.CurrentUpgrades.IonStreamUpgrades.DamageLevel-1].VFXGradient);
                     vfx.transform.localScale = (0.95f+0.05f*upgradesManager.CurrentUpgrades.IonStreamUpgrades.DamageLevel) * Vector3.one;
-                    vfx.SetActive(true);                    
+                    vfx.SetActive(true);
 
                     castingOrigin = (Vector2)target.transform.position;
                     hitHashs[j]= target.GetHashCode();
@@ -169,7 +170,7 @@ public class IonStreamScript : MonoBehaviour
                 lineNodes.Add(lineNodes[1]);
                 lineNodes[1] = lineNodes[0] + (lineNodes[1] - lineNodes[0]) / 2;
             }
-            
+
             lineRenderer.gameObject.SetActive(true);
             lineRenderer.colorGradient = defaultLineGrad;
             lineRenderer.material = material;
@@ -182,7 +183,7 @@ public class IonStreamScript : MonoBehaviour
             StartCoroutine(DisableLine(lineRenderer, visualDuration));
         }
     }
-    
+
     IEnumerator DisableLine(LineRenderer line, float time)
     {
         yield return fadeWait;

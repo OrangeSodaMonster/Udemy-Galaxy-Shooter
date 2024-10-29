@@ -24,6 +24,9 @@ public class DroneAttackScript : MonoBehaviour
     Transform player;
     //RaycastHit2D[] hits;
     Collider2D[] hits = new Collider2D[3];
+    bool canChangeTarget = true;
+    //float minTimeToChangeTarget = 0.5f;
+    //float timeSinceChangedTarget = float.MaxValue;
 
     private void Start()
     {
@@ -39,7 +42,17 @@ public class DroneAttackScript : MonoBehaviour
 
         damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
 
-        target = GetClosestTarget();
+        //if (timeSinceChangedTarget >= minTimeToChangeTarget)
+        //{
+        if (canChangeTarget)
+        {
+            target = GetClosestTarget();
+            if (target != null)
+                canChangeTarget = false;
+        }
+            //timeSinceChangedTarget = 0;
+        //}
+        //timeSinceChangedTarget += Time.fixedDeltaTime;
 
         if (target != null && AttackLineRenderer != null)
         {
@@ -79,6 +92,7 @@ public class DroneAttackScript : MonoBehaviour
             {
                 target.GetComponent<EnemyHP>().ChangeHP(-Mathf.Abs(damage));
                 timeSinceDamage = 0;
+                canChangeTarget = true;
 
                 GameObject vfx = VFXPoolerScript.Instance.DroneAttackVFXPooler.GetPooledGameObject();
                 vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);
@@ -88,7 +102,7 @@ public class DroneAttackScript : MonoBehaviour
             }
         }
 
-        timeSinceDamage += Time.deltaTime;
+        timeSinceDamage += Time.fixedDeltaTime;
         wasFiringLastFrame = isFiring;
     }
 
