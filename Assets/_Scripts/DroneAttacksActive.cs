@@ -27,15 +27,15 @@ public class DroneAttacksActive : MonoBehaviour
         {
             AudioManager.Instance.PauseDrone();
 
-            if (activeNow != activeLast)
-                Debug.Log("PauseDronesSound");
+            //if (activeNow != activeLast)
+                //Debug.Log("PauseDronesSound");
         }
         else if (activeNow != activeLast)
         {
             AudioManager.Instance.SetDroneVolume(activeNow);
             AudioManager.Instance.PlayDrone();
 
-            Debug.Log("PlayDronesSound");
+            //Debug.Log("PlayDronesSound");
         }
 
     }

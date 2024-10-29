@@ -104,6 +104,8 @@ public class IonStreamScript : MonoBehaviour
         lineNodes.Clear();
         lineNodes.Add(player.position);
 
+        //Debug.Log(numberOfHits);
+
         for (int j = 0; j < numberOfHits; j++)
         {
             for (int i = 0; i < hits.Length; i++)
@@ -149,9 +151,7 @@ public class IonStreamScript : MonoBehaviour
                     vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife",
                         upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[upgradesManager.CurrentUpgrades.IonStreamUpgrades.DamageLevel-1].VFXGradient);
                     vfx.transform.localScale = (0.95f+0.05f*upgradesManager.CurrentUpgrades.IonStreamUpgrades.DamageLevel) * Vector3.one;
-                    vfx.SetActive(true);
-
-                    AudioManager.Instance.IonStreamSound.PlayFeedbacks();
+                    vfx.SetActive(true);                    
 
                     castingOrigin = (Vector2)target.transform.position;
                     hitHashs[j]= target.GetHashCode();
@@ -162,6 +162,8 @@ public class IonStreamScript : MonoBehaviour
 
         if (lineNodes.Count >= 2)
         {
+            AudioManager.Instance.IonStreamSound.PlayFeedbacks();
+
             if (lineNodes.Count == 2)
             {
                 lineNodes.Add(lineNodes[1]);

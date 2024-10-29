@@ -37,7 +37,8 @@ public class EnemyHPBar : MonoBehaviour
         hpBar = null;
 
         hpPositionOffset = defaultPosOffset;
-        hpPositionOffset.Scale(transform.lossyScale);
+        Vector3 positiveLossy = new Vector3(Mathf.Abs(transform.lossyScale.x), Mathf.Abs(transform.lossyScale.y), Mathf.Abs(transform.lossyScale.z));
+        hpPositionOffset.Scale(positiveLossy);
     }
 
     private void OnDisable()

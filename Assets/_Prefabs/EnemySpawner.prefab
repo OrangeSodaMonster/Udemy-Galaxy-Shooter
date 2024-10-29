@@ -67,12 +67,17 @@ MonoBehaviour:
   enemiesToSpawnByTime:
   - enemy: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
     timeSec: 10
+    timeVarSec: 0
   - enemy: {fileID: 4976847092858403906, guid: 5a32e13870368424fad448cd615fcc70, type: 3}
     timeSec: 10
+    timeVarSec: 0
   - enemy: {fileID: 7283826026378168471, guid: 8f0b2c60373833f41816ee440acbc4d6, type: 3}
     timeSec: 20
+    timeVarSec: 0
   - enemy: {fileID: 5954638457871095047, guid: 12e1b50773635dd4782ab6e37de9910c, type: 3}
     timeSec: 40
+    timeVarSec: 0
+  EnemiesToLoopSpawn: []
   PlayerLastPos: {x: 0, y: 0, z: 0}
 --- !u!114 &9069363442810099157
 MonoBehaviour:
@@ -88,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolerPrefab: {fileID: 2558180511330203973, guid: 40d581c416ef7354fba605351e5470c2, type: 3}
   hpBarPool: {fileID: 5343377643956284378}
+  manualObjToMakePools: []
 --- !u!114 &5599987194531963812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,5 +169,5 @@ MonoBehaviour:
   NestWaitingPool: 1
   NestUnderThis: 1
   GameObjectToPool: {fileID: 4673865754226211464, guid: 3935062b95a19034a98292a7656f791d, type: 3}
-  PoolSize: 10
+  PoolSize: 12
   PoolCanExpand: 1

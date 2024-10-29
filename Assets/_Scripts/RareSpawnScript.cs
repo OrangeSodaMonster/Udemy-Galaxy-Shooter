@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -113,7 +114,27 @@ public class RareSpawnScript : MonoBehaviour
         else return false;
     }
 
-    // Does not use pool, send already pooled obj
+    [Button]
+    public void SpawnRare(int i)
+    {
+        GameObject rare = RareSpawns[i].RareSpawn;
+
+        GameObject spawn = poolRefs.Poolers[rare].GetPooledGameObject();
+
+        spawn.transform.position = EnemySpawner.Instance.GetSpawnPointAheadOfPlayer();
+        spawn.transform.rotation = Quaternion.identity;
+        spawn.SetActive(true);
+        rareSpawn = spawn.transform;
+
+        SetHighlight();
+
+        if (playSound)
+            AudioManager.Instance.RareSpawnSound.PlayFeedbacks();
+        if (showArrow)
+            ShowArrow();
+    }
+
+    // Does not use pool, send already pooled obj    
     public void SpawnRare(GameObject rare)
     {
         GameObject spawn = poolRefs.Poolers[rare].GetPooledGameObject();
@@ -122,18 +143,6 @@ public class RareSpawnScript : MonoBehaviour
         spawn.transform.rotation = Quaternion.identity;
         spawn.SetActive(true);
         rareSpawn = spawn.transform;
-
-        //if (!rare.activeSelf)
-        //{
-        //    rare.transform.position = EnemySpawner.Instance.GetSpawnPoint();
-        //    rare.transform.rotation = Quaternion.identity;
-        //    rare.SetActive(true);
-        //    rareSpawn = rare.transform;
-        //}
-        //else
-        //{
-        //    Instantiate(rare, EnemySpawner.Instance.GetSpawnPoint(), Quaternion.identity, transform);
-        //}
 
         SetHighlight();
 

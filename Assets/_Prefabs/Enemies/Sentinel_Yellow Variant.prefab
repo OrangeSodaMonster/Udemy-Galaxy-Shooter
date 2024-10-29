@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 108331989794297970, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: shootInterval
-      value: 4.25
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 108331989794297970, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: rotateInterval
@@ -206,7 +206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2612385110787100388, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: MaxHP
-      value: 450
+      value: 375
       objectReference: {fileID: 0}
     - target: {fileID: 2650738017495839331, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key1.b
@@ -398,7 +398,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b517717626aa83f4ea786cbcb3237af0, type: 2}
     - target: {fileID: 5372358740534571402, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: Range
-      value: 7
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 5372358740534571402, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: DamageInterval
@@ -478,11 +478,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: ChanceToDrop
-      value: 21
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: PuDrops.Array.data[1].Weight
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: PuDrops.Array.data[2].Weight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940143518794423311, guid: cdca5bc322db4b746be64e5580014988, type: 3}
+      propertyPath: PuDrops.Array.data[3].Weight
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5949452603026786008, guid: cdca5bc322db4b746be64e5580014988, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.atime0

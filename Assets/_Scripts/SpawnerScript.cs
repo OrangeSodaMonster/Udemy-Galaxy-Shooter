@@ -23,7 +23,7 @@ public class SpawnerScript : MonoBehaviour
         sqrDistance = minDistanceToSpawn * minDistanceToSpawn;
         player = FindObjectOfType<PlayerMove>().transform;
 
-        currentInterval = Random.Range(1, spawnTime+spawnTimeVar);
+        currentInterval = Random.Range(1, spawnTime*0.5f);
     }
 
     void Update()
@@ -38,7 +38,8 @@ public class SpawnerScript : MonoBehaviour
             spawnVFX.gameObject.SetActive(true);
         }
 
-        timer += Time.deltaTime;
+        if (CanSpawn)
+            timer += Time.deltaTime;
     }
 
     private void OnDrawGizmosSelected()
@@ -46,6 +47,11 @@ public class SpawnerScript : MonoBehaviour
         Gizmos.color = Color.yellow;
 
         Gizmos.DrawWireSphere(transform.position, minDistanceToSpawn);
+    }
+
+    public void SetSpawn(bool spawn)
+    {
+        CanSpawn = spawn;
     }
 
 }

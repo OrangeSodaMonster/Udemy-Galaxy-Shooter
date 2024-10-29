@@ -15,7 +15,8 @@ public class SnakeBossPart : MonoBehaviour
 
     private void OnDisable()
     {
-        snakeBossMain.RemovePart(GetComponent<SplineAnimate>(), isTail);
+        if (!GameStatus.IsRestart && !GameStatus.IsStageClear)
+            snakeBossMain.RemovePart(GetComponent<SplineAnimate>(), isTail);
     }
 
 }

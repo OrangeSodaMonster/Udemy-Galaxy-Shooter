@@ -62,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
     float spawnTimerBegin = 0;
     //Rigidbody2D playerRB;
     PlayerMove playerMove;
-    float minSpawnAngleFoward = 160;
+    float minSpawnAngleFoward = 110;
 
     public static EnemySpawner Instance;
 

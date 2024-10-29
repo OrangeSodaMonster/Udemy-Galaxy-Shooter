@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyDroneMove : MonoBehaviour
 {
-    [HideInInspector] public float BaseSpeed = 4;
-    [HideInInspector] public float SpeedVariationPerc = 10;
+    public float BaseSpeed = 4;
+    public float SpeedVariationPerc = 10;
 
     Transform player;
     float MoveSpeed = 0;

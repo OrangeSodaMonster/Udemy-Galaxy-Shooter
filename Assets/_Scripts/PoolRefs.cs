@@ -336,6 +336,7 @@ public class PoolRefs : MonoBehaviour
                 Poolers.Add(asteroid, Instantiate(poolerPrefab, transform));
                 Poolers[asteroid].PoolSize = size * 3;
                 Poolers[asteroid].GameObjectToPool = asteroid;
+                Poolers[asteroid].FillObjectPool();
             }
 
             if (asteroid.TryGetComponent(out AsteroidSplit split2))
@@ -347,6 +348,7 @@ public class PoolRefs : MonoBehaviour
                     Poolers.Add(asteroid2, Instantiate(poolerPrefab, transform));
                     Poolers[asteroid2].PoolSize = size * 9;
                     Poolers[asteroid2].GameObjectToPool = asteroid2;
+                    Poolers[asteroid2].FillObjectPool();
                 }
             }
         }

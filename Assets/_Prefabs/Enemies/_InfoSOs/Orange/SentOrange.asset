@@ -16,13 +16,13 @@ MonoBehaviour:
   enemyColor: 2
   masterSO: {fileID: 11400000, guid: 3d8885104da86454b95b04d4f92bea42, type: 2}
   enemy: {fileID: 2925026503200049138, guid: d70ab99d5b8741642b5a55d2630f2992, type: 3}
-  MaxHP: 1050
+  MaxHP: 850
   Speed: 0
   SpeedVarPerc: 5
   CollisionDamage: 15
   ImpactVelocity: 1
-  ShootCD: 3.75
-  ShootCdVar: 0.375
+  ShootCD: 4.05
+  ShootCdVar: 0.405
   MinDrops: 2
   MaxDrops: 3
   DropWeightsLine:
@@ -42,17 +42,17 @@ MonoBehaviour:
   - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
     Weight: 10
   - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
-    Weight: 5
+    Weight: 15
   - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
-    Weight: 5
+    Weight: 20
   - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
     Weight: 10
   XSpeed: 0
   RotChangeTime: 0
-  RotTimeVar: 1.125
+  RotTimeVar: 1.215
   DroneSpawnTime: 0
   DroneSpawnTimeVar: 0
-  SentRange: 8
+  SentRange: 7
   SentDamage: 5
   SentDamageInterval: 0.5
   ShootDistance: 13

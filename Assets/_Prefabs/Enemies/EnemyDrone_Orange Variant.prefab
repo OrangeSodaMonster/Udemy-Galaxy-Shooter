@@ -10,11 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 527927390162876369, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: ChanceToDrop
-      value: 8
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 527927390162876369, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: PuDrops.Array.data[1].Weight
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 527927390162876369, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: PuDrops.Array.data[2].Weight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 527927390162876369, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
+      propertyPath: PuDrops.Array.data[3].Weight
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1038812110682612912, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_Sprite
@@ -26,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c6b36146b23fcf940aa518b41be6616f, type: 2}
     - target: {fileID: 1262007125356465842, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: MaxHP
-      value: 175
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2003824453320199944, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: m_LocalScale.x
@@ -82,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: BaseShootCD
-      value: 4.5
+      value: 4.86
       objectReference: {fileID: 0}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: projectilePref
@@ -90,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 2076605620132821353, guid: 59b101a9a3087c348b73fb12c8b097a1, type: 3}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: ShootCDVariation
-      value: 0.45
+      value: 0.486
       objectReference: {fileID: 0}
     - target: {fileID: 3938272113056073347, guid: f1b62c0a9689163469046c96fd01648e, type: 3}
       propertyPath: <projectilePref>k__BackingField
