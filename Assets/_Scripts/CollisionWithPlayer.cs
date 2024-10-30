@@ -22,15 +22,17 @@ public class CollisionWithPlayer : MonoBehaviour
             else
                 l_forceDirection = playerMove.transform.position - transform.position;
 
-            PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(Damage));
+            //PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(Damage));
             playerMove.GetComponent<PlayerKnockBackDealer>().GetKnockedBack(ImpactVelocity * (Vector2)(l_forceDirection).normalized); 
             hasCollidedWithPlayer = true;
+
+            PlayerHP.Instance.OnPlayerHit(transform.position, Damage);
         }
 
-        if (collision.gameObject.GetComponent<PlayerHP>() != null)
-        {
-            AudioManager.Instance.PlayerHitSound.PlayFeedbacks();
-        }
+        //if (collision.gameObject.GetComponent<PlayerHP>() != null)
+        //{
+        //    AudioManager.Instance.PlayerHitSound.PlayFeedbacks();
+        //}
     }
 
     private void LateUpdate()

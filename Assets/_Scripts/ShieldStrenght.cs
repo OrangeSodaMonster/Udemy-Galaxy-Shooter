@@ -88,50 +88,61 @@ public class ShieldStrenght : MonoBehaviour
             SetShieldStartingValues(PlayerUpgradesManager.Instance.CurrentUpgrades.LeftShieldUpgrades);
     }
 
-    int lastCollisionHash = 0;
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<CollisionWithPlayer>() != null && lastCollisionHash != collision.gameObject.GetHashCode())
-        {
-            HitFX();
-            CurrentStr -= collision.gameObject.GetComponent<CollisionWithPlayer>().Damage;
-            lastCollisionHash = collision.gameObject.GetHashCode();
-            StartCoroutine(CleanLastHit());
-        }
+    //int lastCollisionHash = 0;
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.GetComponent<CollisionWithPlayer>() != null && lastCollisionHash != collision.gameObject.GetHashCode())
+    //    {
+    //        HitFX();
+    //        CurrentStr -= collision.gameObject.GetComponent<CollisionWithPlayer>().Damage;
+    //        lastCollisionHash = collision.gameObject.GetHashCode();
+    //        StartCoroutine(CleanLastHit());
+    //    }
 
-        if (CurrentStr <= 0)
-        {
-            PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr));
-            CurrentStr = 0;
-        } 
-    }
+    //    if (CurrentStr <= 0)
+    //    {
+    //        PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr));
+    //        CurrentStr = 0;
+    //    } 
+    //}
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
        
-        if (lastCollisionHash != collision.gameObject.GetHashCode())
-        {            
-            if (collision.gameObject.TryGetComponent(out EnemyWeaponDamage weaponDamage))
-            {
-                HitFX();                
-                CurrentStr -= weaponDamage.Damage;
-                lastCollisionHash = collision.gameObject.GetHashCode();
-                StartCoroutine(CleanLastHit());                
-            }
-            if (CurrentStr <= 0)
-            {
-                PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr));
-                CurrentStr = 0;
-            }       
-        } 
+    //    if (lastCollisionHash != collision.gameObject.GetHashCode())
+    //    {            
+    //        if (collision.gameObject.TryGetComponent(out EnemyWeaponDamage weaponDamage))
+    //        {
+    //            HitFX();                
+    //            CurrentStr -= weaponDamage.Damage;
+    //            lastCollisionHash = collision.gameObject.GetHashCode();
+    //            StartCoroutine(CleanLastHit());                
+    //        }
+    //        if (CurrentStr <= 0)
+    //        {
+    //            PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr));
+    //            CurrentStr = 0;
+    //        }       
+    //    } 
+    //}
+
+    public void OnShieldHit(int damage)
+    {
+        HitFX();
+        CurrentStr -= Mathf.Abs(damage);
+        if (CurrentStr < 0)
+        {
+            PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr), playHitSound: true);
+            CurrentStr = 0;
+        }
     }
 
-    WaitForSeconds waitClean = new WaitForSeconds(.15f);
-    IEnumerator CleanLastHit()
-    {
-        yield return waitClean;
-        lastCollisionHash = 0;
-    }
+    //WaitForSeconds waitClean = new WaitForSeconds(.15f);
+    //IEnumerator CleanLastHit()
+    //{
+    //    yield return waitClean;
+    //    lastCollisionHash = 0;
+    //}
 
     public void DamageStrenght(int value)
     {

@@ -24,6 +24,12 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] UnityEvent wasHealed;
     [SerializeField] VisualEffect deathVFX;
 
+    [Header("Shields")]
+    [SerializeField] ShieldStrenght frontShield;
+    [SerializeField] ShieldStrenght backShield;
+    [SerializeField] ShieldStrenght leftShield;
+    [SerializeField] ShieldStrenght rightShield;
+
     PlayerUpgradesManager upgradesManager;
 
     public static PlayerHP Instance;
@@ -82,8 +88,44 @@ public class PlayerHP : MonoBehaviour
             & lastCollisionHash != collision.gameObject.GetHashCode()
             & !isInvencible)
         {
-            ChangePlayerHP(-Mathf.Abs(collision.GetComponent<EnemyWeaponDamage>().Damage));
-            lastCollisionHash = collision.gameObject.GetHashCode();            
+            //ChangePlayerHP(-Mathf.Abs(collision.GetComponent<EnemyWeaponDamage>().Damage));
+            lastCollisionHash = collision.gameObject.GetHashCode();   
+            OnPlayerHit(collision.transform.position, collision.GetComponent<EnemyWeaponDamage>().Damage);
+        }
+    }
+
+    public void OnPlayerHit(Vector3 hitPos, int damage)
+    {
+        damage = Mathf.Abs(damage);
+        float dot = Vector2.Dot(transform.up, (hitPos-transform.position).normalized);
+        //Debug.Log($"dot: {dot}, playerUp:{transform.up},hitPos: {hitPos}, hitDir:{(hitPos-transform.position).normalized}");
+        // 1 na frente
+        // -1 atrás
+        if (dot > 0.707 && frontShield.gameObject.activeSelf) // Front
+        {
+            //Debug.Log("Front hit");            
+            frontShield.OnShieldHit(damage);
+        }
+        else if (dot < -0.707 && backShield.gameObject.activeSelf) // Back
+        {
+            //Debug.Log("Back Hit");
+            backShield.OnShieldHit(damage);
+        }
+        else
+        {
+            Vector3 cross = Vector3.Cross(transform.up, (hitPos-transform.position).normalized);
+            // cross.z > 0 na esquerda
+            // cross.z < 0 na direita
+            if(cross.z > 0 && leftShield.gameObject.activeSelf)
+            {
+                //Debug.Log("Left hit");
+                leftShield.OnShieldHit(damage);
+            }
+            else if (cross.z < 0 && rightShield.gameObject.activeSelf)
+            {
+                //Debug.Log("Right hit");
+                rightShield.OnShieldHit(damage);
+            }
         }
     }
 
