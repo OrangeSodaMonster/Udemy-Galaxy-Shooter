@@ -15,6 +15,7 @@ public class EnemyHP : MonoBehaviour
     [SerializeField] float asteroidVolumeMultiplier = 1;
     [SerializeField] bool destroyOnCollision = true;
     public int MaxHP;
+    [SerializeField, Range(0, 1)] float startingHpPerc = 1;
 
     int currentHP;
     int lastFrameHP;
@@ -31,7 +32,7 @@ public class EnemyHP : MonoBehaviour
     void OnEnable()
     {
         //currentHP = MaxHP - OnBirthDamage;
-        currentHP = MaxHP;
+        currentHP = (int)Mathf.Ceil(MaxHP * startingHpPerc);
         //Debug.Log("Birth Damage= " + OnBirthDamage);
         lastFrameHP = MaxHP;
         transform.localScale = defaultScale;

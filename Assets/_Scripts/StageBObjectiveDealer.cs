@@ -52,7 +52,8 @@ public class StageBObjectiveDealer : MonoBehaviour
                 objIndex = Random.Range(0, possibleObjectives.Count);
             }            
                 
-            GameObject obj = Instantiate(possibleObjectives[objIndex].gameObject, parent);
+            //GameObject obj = Instantiate(possibleObjectives[objIndex].gameObject, parent);
+            Instantiate(possibleObjectives[objIndex].gameObject, parent);
 
             if (!getRandomObjectives && possibleObjectives.Count > 0)
             {

@@ -10,18 +10,19 @@ public class RightClickButton : MonoBehaviour, IPointerClickHandler
 {
     public UnityEvent OnRightClick;
 
-    private void Start()
-    {
-        #if UNITY_ANDROID || UNITY_IPHONE
-            this.enabled = false;
-        #endif
-    }
+    //private void Start()
+    //{
+    //    #if UNITY_ANDROID || UNITY_IPHONE
+    //        this.enabled = false;
+    //    #endif
+    //}
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             OnRightClick?.Invoke();
+            //Debug.Log("RightClick");
         }
     }
 

@@ -118,7 +118,8 @@ public class ShipButtonScript : MonoBehaviour
 
         BuyUpgrade(shipUpgradeInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel].Cost, ShipUpgradeType.HP);
 
-        PlayerHP.Instance.ApplyHPUpgrade();
+        if(PlayerHP.Instance != null)
+            PlayerHP.Instance.ApplyHPUpgrade();
     }
     public void BuyTractor()
     {

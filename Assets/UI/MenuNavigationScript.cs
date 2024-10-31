@@ -42,4 +42,9 @@ public class MenuNavigationScript : MonoBehaviour
             selectOnCancel.GetComponent<Button>().onClick.Invoke();
         }
     }
+
+    public void SetFirstSelected(GameObject firstSelected)
+    {
+        this.firstSelected = firstSelected;
+    }
 }
