@@ -66,6 +66,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public MMFeedbacks RareSpawnSound { get; private set; }
     [field: SerializeField] public MMFeedbacks PortalArrivalSound { get; private set; }
     [field: SerializeField] public MMFeedbacks PortalExitSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks CageUpSound { get; private set; }
+    [field: SerializeField] public MMFeedbacks CageDownSound { get; private set; }
 
     float dronesDefaultVolume;
     float alarmDefaultVolume;

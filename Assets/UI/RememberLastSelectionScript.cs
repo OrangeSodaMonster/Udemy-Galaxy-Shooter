@@ -79,7 +79,7 @@ public class RememberLastSelectionScript : MonoBehaviour
         if(firstSelectedCanvasButton != null)
         {
             Debug.Log("Set first select on canvas");
-            firstSelectedCanvasButton.SetFirstSelected(lastAcceptableButton.gameObject);
+            firstSelectedCanvasButton.SetFirstSelected(this.gameObject);
         }
 
         thisButton.navigation = buttonNav;

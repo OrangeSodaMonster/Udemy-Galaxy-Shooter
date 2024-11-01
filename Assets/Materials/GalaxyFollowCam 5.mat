@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-81622646467674678
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GalaxyFollowCam 5
+  m_Shader: {fileID: -6465566751694194690, guid: 439e06bbaf6b2cb428e7b6f814cb1408, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _DustTex:
+        m_Texture: {fileID: 2800000, guid: d9efe99db6a6a2d4182d08912110d360, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GalaxyTex:
+        m_Texture: {fileID: 2800000, guid: 3c4ffe5bad9999e4c9dbad37e7ba0602, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: fd146ccf15c8b244f94a6df739492ca9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarBG:
+        m_Texture: {fileID: 2800000, guid: 8881fdf57fb9a91418fcea5ea6b5da5f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarsFG:
+        m_Texture: {fileID: 2800000, guid: e7c70fb014a909244aa38495e6b42d16, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarsMG:
+        m_Texture: {fileID: 2800000, guid: 32b31fe9b6899d442bb6af4b2f9bd484, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BG_ImagePower: 0
+    - _DustOclusionPower: 0.637
+    - _DustPower: 0.5
+    - _DustScale: 0.1
+    - _DustSpeedMod: 0.13
+    - _MyTime: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ScrollSpeed: 0.015
+    - _ScrollSpeedLayerMod: 1.5
+    - _TwinkleNoiseScale: 2
+    - _TwinklePower: 0.6
+    - _TwinkleSpeed: 0.1
+    m_Colors:
+    - _BGColor: {r: 0, g: 0, b: 0.047169805, a: 1}
+    - _DustColor: {r: 0.33962262, g: 0, b: 0.035747185, a: 1}
+    - _ScrollOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _ScrollSpeed: {r: 0, g: 0.15, b: 0, a: 0}
+    - _ScrollSpeedLayerMod: {r: 1, g: 2, b: 0, a: 0}
+    - _StarsBGTilling: {r: 2, g: 2, b: 0, a: 0}
+    - _StarsColor: {r: 6.500749, g: 5.5561914, b: 8.474191, a: 1}
+    - _StarsFGTilling: {r: 3, g: 3, b: 0, a: 0}
+    - _StarsMGTilling: {r: 2.5, g: 2.5, b: 0, a: 0}
+  m_BuildTextureStacks: []

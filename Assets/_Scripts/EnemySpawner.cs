@@ -62,7 +62,6 @@ public class EnemySpawner : MonoBehaviour
     float spawnTimerBegin = 0;
     //Rigidbody2D playerRB;
     PlayerMove playerMove;
-    float minSpawnAngleFoward = 110;
 
     public static EnemySpawner Instance;
 
@@ -121,8 +120,17 @@ public class EnemySpawner : MonoBehaviour
         spawnTimerBegin += Time.deltaTime;
     }
 
+
+    float minSpawnAngleFoward = 100;
+    float chanceOfSpawn360 = 20;
     public Vector3 GetSpawnPointAheadOfPlayer()
     {
+        if(UnityEngine.Random.Range(0f,100f) < chanceOfSpawn360)
+        {
+            Debug.Log("Pick 360 Spawn Location");
+            return GetSpawnPoint360();
+        }
+
         float playerSpeed = playerMove.PlayerVelocity.magnitude;
         float spawnAngle = 360;
         if (playerSpeed > 0.1f)

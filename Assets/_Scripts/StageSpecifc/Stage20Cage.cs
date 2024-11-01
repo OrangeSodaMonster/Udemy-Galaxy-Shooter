@@ -58,6 +58,7 @@ public class Stage20Cage : MonoBehaviour
         enemySpawner.enabled = false;
         rareSpawner.enabled = false;
         stageScript.CanSpawnEnemies = false;
+        AudioManager.Instance.CageUpSound.PlayFeedbacks();
     }
 
     [Button]
@@ -73,11 +74,7 @@ public class Stage20Cage : MonoBehaviour
             lines[i].gameObject.SetActive(false);
         }
 
-        for (int i = 0; i < conduits.Count; i++)
-        {
-            conduits[i].color = offColor;
-            conduits[i].material = offMat;
-        }
+        TurnOffConduits();
 
         for (int i = 0; i < changeMats.Count; i++)
         {
@@ -87,5 +84,16 @@ public class Stage20Cage : MonoBehaviour
         enemySpawner.enabled = true;
         rareSpawner.enabled = true;
         stageScript.CanSpawnEnemies = true;
+        AudioManager.Instance.CageDownSound.PlayFeedbacks();
+    }
+
+    [Button]
+    public void TurnOffConduits()
+    {
+        for (int i = 0; i < conduits.Count; i++)
+        {
+            conduits[i].color = offColor;
+            conduits[i].material = offMat;
+        }
     }
 }

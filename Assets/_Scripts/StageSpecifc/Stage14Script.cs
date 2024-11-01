@@ -33,6 +33,7 @@ public class Stage14Script : MonoBehaviour
         }
         cageLine.gameObject.SetActive(true);
         colliders.SetActive(true);
+        AudioManager.Instance.CageUpSound.PlayFeedbacks();
     }
 
     public void TurnCageOff()
@@ -43,6 +44,7 @@ public class Stage14Script : MonoBehaviour
         }
         cageLine.gameObject.SetActive(false);
         colliders.SetActive(false);
+        AudioManager.Instance.CageDownSound.PlayFeedbacks();
     }
 
     public void DisableSpawn()
