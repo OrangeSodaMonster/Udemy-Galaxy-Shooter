@@ -3,6 +3,7 @@ using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -237,7 +238,7 @@ public class AudioManager : MonoBehaviour
     Tween sentinelTween;
     public void PauseSentinel()
     {
-        if (!SentinelBeamSound.isPlaying) return;
+        if (!SentinelBeamSound.IsDestroyed() && !SentinelBeamSound.isPlaying) return;
         sentinelTween.Kill();
         sentinelTween = SentinelBeamSound.DOFade(0, .1f).OnComplete(() => SentinelBeamSound.Pause());
     }

@@ -559,12 +559,21 @@ namespace MoreMountains.Feedbacks
 			Gizmos.DrawWireSphere(_gizmoCenter, MaxDistance);
 		}
 
-		#region TestMethods
+		public void ExternalTestPlaySound()
+		{
+			TestPlaySound();
+        }
+        public void ExternalTestStopSound()
+        {
+            TestStopSound();
+        }
 
-		/// <summary>
-		/// A test method that creates an audiosource, plays it, and destroys itself after play
-		/// </summary>
-		protected virtual async void TestPlaySound()
+        #region TestMethods
+
+        /// <summary>
+        /// A test method that creates an audiosource, plays it, and destroys itself after play
+        /// </summary>
+        protected virtual async void TestPlaySound()
 		{
 			AudioClip tmpAudioClip = null;
 

@@ -3433,6 +3433,68 @@ Transform:
   - {fileID: 200574013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &514979843
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1360084929}
+    m_Modifications:
+    - target: {fileID: 4879351237657191461, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_Name
+      value: LastBoss - MusicManager Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+--- !u!4 &514979844 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7119787073766548086, guid: 39a80429fef56004db0b9ee89019ebba, type: 3}
+  m_PrefabInstance: {fileID: 514979843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &531185508
 GameObject:
   m_ObjectHideFlags: 0
@@ -13773,6 +13835,14 @@ PrefabInstance:
       propertyPath: onExitImediate.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2847590012951756181, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: musicID
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847590012951756181, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: musicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c49fc03d8c862341865f7a286f39cf8, type: 3}
     - target: {fileID: 3179114079212378186, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -13980,6 +14050,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7072452630021896361, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 514979844}
     - targetCorrespondingSourceObject: {fileID: 4202790365911755995, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 877309472}
@@ -14004,6 +14077,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb45f8cae8ba1d4429059663306b57f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1360084929 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7072452630021896361, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+  m_PrefabInstance: {fileID: 1360084926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1375743123
 PrefabInstance:
   m_ObjectHideFlags: 0
