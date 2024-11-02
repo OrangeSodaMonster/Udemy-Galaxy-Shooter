@@ -16,6 +16,7 @@ public class ButtonScript : MonoBehaviour
     //[SerializeField] bool disableOnClick = false;
     [FormerlySerializedAs("secondClickEvent")]
 	[SerializeField] UnityEvent clickEvents;
+    [HideInInspector] public UnityEvent OnClick = new();
 	[SerializeField] UnityEvent holdEvents;
 	[SerializeField] UnityEvent onPointerDownEvents;
 	[SerializeField] UnityEvent onPointerUpEvents;
@@ -92,6 +93,7 @@ public class ButtonScript : MonoBehaviour
     private void Start()
     {
         button = GetComponentInChildren<Button>();
+        clickEvents.AddListener(CallPublicOnClick);
         //button.onClick.AddListener(CallClickEvent);
 
         EventTrigger trigger = button.gameObject.GetComponent<EventTrigger>()??button.gameObject.AddComponent<EventTrigger>();
@@ -187,4 +189,11 @@ public class ButtonScript : MonoBehaviour
 
         UseAlternativeClickEvents = useAlternativeClickEvents;
     }
+
+    void CallPublicOnClick()
+    {
+        OnClick.Invoke();
+    }
+
+    
 }

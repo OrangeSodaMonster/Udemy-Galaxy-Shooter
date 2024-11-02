@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHeal : MonoBehaviour
 {
     [SerializeField] float baseSecondsBetweenHeal = 8;
     [SerializeField] ResourceNumber[] HealCost;
     [SerializeField] float currentSecondsBetweenHeal;
+    public float CurrentSecondsBetweenHeal => currentSecondsBetweenHeal;
 
     public bool isFreeHeal = false;
+    [HideInInspector] public UnityEvent OnHealTimeChange = new();
+    float lastSecondsBetweenHeal;
 
     PlayerUpgradesManager upgradesManager;
     bool isHealing;
@@ -20,8 +24,15 @@ public class PlayerHeal : MonoBehaviour
 
     void Update()
     {
-        if(!isFreeHeal)
+        if (!isFreeHeal)
+        {
             currentSecondsBetweenHeal = baseSecondsBetweenHeal - GetHealIntervalReduction();
+            if(currentSecondsBetweenHeal != lastSecondsBetweenHeal)
+            {
+                OnHealTimeChange.Invoke();
+            }
+            lastSecondsBetweenHeal = currentSecondsBetweenHeal;
+        }
 
         // && PlayerHP.LastFrameHP >= PlayerHP.MaxHP
         if (PlayerHP.Instance.CurrentHP <= PlayerHP.Instance.MaxHP - 5 && !isHealing)
