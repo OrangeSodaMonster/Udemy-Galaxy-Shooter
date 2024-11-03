@@ -94,39 +94,48 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
-    public void OnPlayerHit(Vector3 hitPos, int damage)
+    public void OnPlayerHit(Vector3 hitPos, int damage, bool playSound = false)
     {
         damage = Mathf.Abs(damage);
         float dot = Vector2.Dot(transform.up, (hitPos-transform.position).normalized);
-        //Debug.Log($"dot: {dot}, playerUp:{transform.up},hitPos: {hitPos}, hitDir:{(hitPos-transform.position).normalized}");
         // 1 na frente
         // -1 atrás
-        if (dot > 0.707 && frontShield.gameObject.activeSelf) // Front
+        if (dot > 0.707) // Front
         {
-            //Debug.Log("Front hit");            
-            frontShield.OnShieldHit(damage);
+            if (frontShield.gameObject.activeSelf)
+                frontShield.OnShieldHit(damage);
+            else
+                ChangePlayerHP(-damage);
         }
-        else if (dot < -0.707 && backShield.gameObject.activeSelf) // Back
+        else if (dot < -0.707) // Back
         {
-            //Debug.Log("Back Hit");
-            backShield.OnShieldHit(damage);
+            if (backShield.gameObject.activeSelf)
+                backShield.OnShieldHit(damage);
+            else
+                ChangePlayerHP(-damage);
         }
         else
         {
             Vector3 cross = Vector3.Cross(transform.up, (hitPos-transform.position).normalized);
             // cross.z > 0 na esquerda
             // cross.z < 0 na direita
-            if(cross.z > 0 && leftShield.gameObject.activeSelf)
+            if(cross.z > 0)
             {
-                //Debug.Log("Left hit");
-                leftShield.OnShieldHit(damage);
+                if (leftShield.gameObject.activeSelf)
+                    leftShield.OnShieldHit(damage);
+                else
+                    ChangePlayerHP(-damage);
             }
-            else if (cross.z < 0 && rightShield.gameObject.activeSelf)
+            else if (cross.z < 0)
             {
-                //Debug.Log("Right hit");
-                rightShield.OnShieldHit(damage);
+                if (rightShield.gameObject.activeSelf)
+                    rightShield.OnShieldHit(damage);
+                else
+                    ChangePlayerHP(-damage);
             }
         }
+
+        if(playSound) AudioManager.Instance.PlayerHitSound.PlayFeedbacks();
     }
 
     public IEnumerator PlayerDestructionSequence()

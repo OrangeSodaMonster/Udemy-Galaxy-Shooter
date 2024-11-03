@@ -71,12 +71,10 @@ public class GameStatus : MonoBehaviour
         if(IsPaused && !pausedLastFrame)
         {
             PausedGame?.Invoke();
-            Debug.Log("pausedGame");
         }
         else if (!IsPaused && pausedLastFrame)
         {
             UnPausedGame?.Invoke();
-            Debug.Log("UN PausedGame");
         }
 
         if(IsGameover && !gameoverLastFrame)

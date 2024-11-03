@@ -107,10 +107,8 @@ public class PauseAndUIManager : MonoBehaviour
     }
     IEnumerator AllowPauseCO()
     {
-        Debug.Log("Before yeild");
         yield return null;
         canPause = true;
-        Debug.Log("After yeild");
     }
 
     public void EnableShipUpgradePage()

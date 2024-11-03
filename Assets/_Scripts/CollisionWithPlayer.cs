@@ -26,7 +26,7 @@ public class CollisionWithPlayer : MonoBehaviour
             playerMove.GetComponent<PlayerKnockBackDealer>().GetKnockedBack(ImpactVelocity * (Vector2)(l_forceDirection).normalized); 
             hasCollidedWithPlayer = true;
 
-            PlayerHP.Instance.OnPlayerHit(transform.position, Damage);
+            PlayerHP.Instance.OnPlayerHit(transform.position, Damage, playSound: true);
         }
 
         //if (collision.gameObject.GetComponent<PlayerHP>() != null)

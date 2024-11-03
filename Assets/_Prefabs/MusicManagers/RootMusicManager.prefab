@@ -213,8 +213,8 @@ MonoBehaviour:
         AudioGroup: {fileID: 0}
         RecycleAudioSource: {fileID: 0}
         Loop: 1
-        Persistent: 1
-        DoNotPlayIfClipAlreadyPlaying: 1
+        Persistent: 0
+        DoNotPlayIfClipAlreadyPlaying: 0
         StopSoundOnFeedbackStop: 0
         Fade: 1
         FadeInitialVolume: 0
@@ -356,7 +356,7 @@ MonoBehaviour:
   customMusicID: 0
   musicFeedback: {fileID: 1605232124394878255}
   fade: {fileID: 641472642110791734}
-  freeAudio: {fileID: 4494371507185249368}
+  musicControl: {fileID: 4494371507185249368}
 --- !u!1 &1158787758710987395
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 534911640400283398}
   - component: {fileID: 4494371507185249368}
   m_Layer: 0
-  m_Name: FreeAudio
+  m_Name: control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

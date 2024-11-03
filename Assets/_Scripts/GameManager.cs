@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     static public void LoadValues(SaveConfigObj save)
     {
-        Debug.Log($"Quality: {QualitySettings.GetQualityLevel()}");
+        //Debug.Log($"Quality: {QualitySettings.GetQualityLevel()}");
         IsVibration = save.IsVibration;
         IsAutoFire = save.IsAutoFire;
         IsLightWeightBG = save.IsLightWeightBG;

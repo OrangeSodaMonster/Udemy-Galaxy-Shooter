@@ -127,7 +127,6 @@ public class EnemySpawner : MonoBehaviour
     {
         if(UnityEngine.Random.Range(0f,100f) < chanceOfSpawn360)
         {
-            Debug.Log("Pick 360 Spawn Location");
             return GetSpawnPoint360();
         }
 
