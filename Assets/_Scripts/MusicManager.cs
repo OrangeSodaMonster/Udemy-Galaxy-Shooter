@@ -16,12 +16,12 @@ public class MusicManager : MonoBehaviour
     [SerializeField] MMF_Player musicFeedback;
     [SerializeField][PreviouslySerializedAs("fadeOut")] MMF_Player fade;
     [SerializeField] MMF_Player musicControl;
-
+    
     static int lastMusicID = -111;
     static bool wasPaused = false; // Usado para saber se o fadeOut de pausa foi acionado, para saber se foi dado um restart
     MMF_MMSoundManagerSoundFade fadeFB;
     MMF_MMSoundManagerSoundControl musicControlFB;
-    float fadeDuration = 2f;
+    float fadeDuration = 1.8f;
     WaitForSeconds halfFade;
     int musicID = -1;
 
@@ -45,12 +45,14 @@ public class MusicManager : MonoBehaviour
         }
 
         GameStatus.PausedGame += FadeOutOnPause;
+        GameStatus.GameOver += FadeOutOnPause;
         GameStatus.UnPausedGame += FadeInUnpause;
     }
 
     private void OnDisable()
     {
         GameStatus.PausedGame -= FadeOutOnPause;
+        GameStatus.GameOver -= FadeOutOnPause;
         GameStatus.UnPausedGame -= FadeInUnpause;
     }
 
@@ -82,29 +84,31 @@ public class MusicManager : MonoBehaviour
     Coroutine FadeOutCO;
     void FadeOutOnPause()
     {
-        FadeOutCO = StartCoroutine(FadeOutRoutine());
-        wasPaused = true;
+        fadeFB.SoundID = lastMusicID;
+        fadeFB.FadeDuration = fadeDuration*0.5f;
+        fadeFB.FinalVolume = musicVolume * 0.15f;
+        fade.PlayFeedbacks();
 
-        IEnumerator FadeOutRoutine()
-        {
-            fadeFB.SoundID = lastMusicID;
-            fadeFB.FadeDuration = fadeDuration*0.5f;
-            fadeFB.FinalVolume = 0;
-            fade.PlayFeedbacks();
-            yield return halfFade;
-            musicControlFB.SoundID = lastMusicID;
-            musicControlFB.ControlMode = MMSoundManagerSoundControlEventTypes.Pause;
-            musicControl.PlayFeedbacks();
-        }
-    }    
+        //FadeOutCO = StartCoroutine(FadeOutRoutine());
+        wasPaused = true;        
+    }
+    IEnumerator FadeOutRoutine()
+    {        
+        yield return halfFade;
+        Debug.Log("Pause music");
+        musicControlFB.SoundID = lastMusicID;
+        musicControlFB.ControlMode = MMSoundManagerSoundControlEventTypes.Pause;
+        musicControl.PlayFeedbacks();
+    }
 
     void FadeInUnpause()
     {
-        if(FadeOutCO != null)
+        Debug.Log("Pause Coroutine");
+        if (FadeOutCO != null)
             StopCoroutine(FadeOutCO);
         musicControlFB.SoundID = lastMusicID;
         musicControlFB.ControlMode = MMSoundManagerSoundControlEventTypes.Resume;
-        musicControl.PlayFeedbacks();
+        //musicControl.PlayFeedbacks();
         fadeFB.SoundID = lastMusicID;
         fadeFB.FadeDuration = fadeDuration*0.5f;
         fadeFB.FinalVolume = musicVolume;

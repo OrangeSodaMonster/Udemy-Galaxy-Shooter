@@ -259,8 +259,6 @@ public class AudioManager : MonoBehaviour
         PauseReverse();
         PauseThruster();
         PauseSentinel();
-
-        Debug.Log("Pause All");
     }
 
     public void PlayEnemyCharge(int enemyHash)
