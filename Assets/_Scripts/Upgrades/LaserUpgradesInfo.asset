@@ -153,12 +153,12 @@ MonoBehaviour:
       Resource1: 1
       Cost1: 50
       Resource2: 3
-      Cost2: 6
+      Cost2: 8
     Cost:
     - ResourceType: 1
       Amount: 50
     - ResourceType: 3
-      Amount: 6
+      Amount: 8
     Damage: 19
     Sprite: {fileID: -1120515609, guid: ae2e87f11189527449f6b2db1fee67ae, type: 3}
     VFXGradient:
@@ -193,12 +193,12 @@ MonoBehaviour:
       m_NumAlphaKeys: 3
   - CostLine:
       Resource1: 2
-      Cost1: 30
+      Cost1: 35
       Resource2: 4
       Cost2: 1
     Cost:
     - ResourceType: 2
-      Amount: 30
+      Amount: 35
     - ResourceType: 4
       Amount: 1
     Damage: 22
@@ -235,14 +235,14 @@ MonoBehaviour:
       m_NumAlphaKeys: 3
   - CostLine:
       Resource1: 2
-      Cost1: 65
+      Cost1: 75
       Resource2: 4
-      Cost2: 3
+      Cost2: 4
     Cost:
     - ResourceType: 2
-      Amount: 65
+      Amount: 75
     - ResourceType: 4
-      Amount: 3
+      Amount: 4
     Damage: 25
     Sprite: {fileID: 1465540081, guid: ae2e87f11189527449f6b2db1fee67ae, type: 3}
     VFXGradient:
@@ -297,37 +297,37 @@ MonoBehaviour:
       Amount: 15
     - ResourceType: 2
       Amount: 5
-    TimeBetween: 0.45
+    TimeBetween: 0.44
   - CostLine:
       Resource1: 1
-      Cost1: 25
+      Cost1: 40
       Resource2: 2
       Cost2: 10
     Cost:
     - ResourceType: 1
-      Amount: 25
+      Amount: 40
     - ResourceType: 2
       Amount: 10
-    TimeBetween: 0.4
-  - CostLine:
-      Resource1: 1
-      Cost1: 50
-      Resource2: 2
-      Cost2: 25
-    Cost:
-    - ResourceType: 1
-      Amount: 50
-    - ResourceType: 2
-      Amount: 25
-    TimeBetween: 0.34
+    TimeBetween: 0.38
   - CostLine:
       Resource1: 1
       Cost1: 100
       Resource2: 2
-      Cost2: 55
+      Cost2: 30
     Cost:
     - ResourceType: 1
       Amount: 100
     - ResourceType: 2
-      Amount: 55
-    TimeBetween: 0.28
+      Amount: 30
+    TimeBetween: 0.31
+  - CostLine:
+      Resource1: 1
+      Cost1: 220
+      Resource2: 2
+      Cost2: 70
+    Cost:
+    - ResourceType: 1
+      Amount: 220
+    - ResourceType: 2
+      Amount: 70
+    TimeBetween: 0.25

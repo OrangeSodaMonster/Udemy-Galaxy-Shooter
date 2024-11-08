@@ -81,12 +81,24 @@ PrefabInstance:
       value: EnemyDrone_Red GiantVariant Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8294236408006685616, guid: 8f0b2c60373833f41816ee440acbc4d6, type: 3}
+      propertyPath: MinDropsNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294236408006685616, guid: 8f0b2c60373833f41816ee440acbc4d6, type: 3}
       propertyPath: dropsGuaranteed.Array.data[2].Amount
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8294236408006685616, guid: 8f0b2c60373833f41816ee440acbc4d6, type: 3}
       propertyPath: dropsGuaranteed.Array.data[3].Amount
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294236408006685616, guid: 8f0b2c60373833f41816ee440acbc4d6, type: 3}
+      propertyPath: DropsToSpawn.Array.data[0].spawnWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294236408006685616, guid: 8f0b2c60373833f41816ee440acbc4d6, type: 3}
+      propertyPath: DropsToSpawn.Array.data[3].spawnWeight
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

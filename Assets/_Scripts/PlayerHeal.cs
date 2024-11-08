@@ -35,7 +35,7 @@ public class PlayerHeal : MonoBehaviour
         }
 
         // && PlayerHP.LastFrameHP >= PlayerHP.MaxHP
-        if (PlayerHP.Instance.CurrentHP <= PlayerHP.Instance.MaxHP - 5 && !isHealing)
+        if (PlayerHP.Instance != null && PlayerHP.Instance.CurrentHP <= PlayerHP.Instance.MaxHP - 5 && !isHealing)
         {
             //Debug.Log("Started heal rotine");
             StartCoroutine(HealRotine());

@@ -2620,7 +2620,6 @@ Transform:
   - {fileID: 1089097145}
   - {fileID: 1652961870}
   - {fileID: 1225896567}
-  - {fileID: 1210955204}
   - {fileID: 1963148744}
   - {fileID: 554780093}
   m_Father: {fileID: 1710853067}
@@ -10624,118 +10623,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1785784550}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1001 &1210955203
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 391232523}
-    m_Modifications:
-    - target: {fileID: 80637436264974334, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: spawnTime
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 704825282662587594, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_Name
-      value: SpawnerRed_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9964834
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.08379161
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 9.613
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 704825282662587594, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1210955207}
-  m_SourcePrefab: {fileID: 100100000, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
---- !u!4 &1210955204 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8948057708011534378, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-  m_PrefabInstance: {fileID: 1210955203}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1210955205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 704825282662587594, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-  m_PrefabInstance: {fileID: 1210955203}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1210955206 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 80637436264974334, guid: 7573eb3f2bf75e64b9bd62b8b5855b7c, type: 3}
-  m_PrefabInstance: {fileID: 1210955203}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210955205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da778ba55669c104d92f92bce39094c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1210955207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210955205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db69cc8d6381733448fde385b3983383, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnDisableOrDestroy:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1192867769}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -18804,7 +18691,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1210955206}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SpawnerScript, Assembly-CSharp
         m_MethodName: SetSpawn
         m_Mode: 6

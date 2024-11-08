@@ -1,8 +1,18 @@
 using MoreMountains.Feedbacks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+
+[Serializable]
+public enum Language
+{
+    English = 0,
+    Português = 1,
+    Español = 2,
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public static bool IsTouchTurnToDirection = true;
     public static int TouchAlpha = 5;
+    public static Language CurrentLanguage = Language.English;
 
     public static int MasterVolume = 5;
     public static int EffectsVolume = 5;
@@ -62,7 +73,8 @@ public class GameManager : MonoBehaviour
         IsVibration = save.IsVibration;
         IsAutoFire = save.IsAutoFire;
         IsLightWeightBG = save.IsLightWeightBG;
-        QualityLevel = save.QualityLevel == -1 ? QualitySettings.GetQualityLevel() : save.QualityLevel;        
+        QualityLevel = save.QualityLevel == -1 ? QualitySettings.GetQualityLevel() : save.QualityLevel;
+        CurrentLanguage = save.Language;
 
         IsTouchTurnToDirection = save.IsTouchTurnToDirection;
         TouchAlpha = save.TouchAlpha;
@@ -128,5 +140,19 @@ public class GameManager : MonoBehaviour
     {
         if(stage > HighestStageCleared)
             HighestStageCleared = stage;
+    }
+
+    public static UnityEvent OnLanguageChange = new();
+    public void ChangeLanguage()
+    {
+        if(CurrentLanguage == Language.English)
+            CurrentLanguage = Language.Español;
+        else if (CurrentLanguage == Language.Español)
+            CurrentLanguage = Language.Português;
+        else if (CurrentLanguage == Language.Português)
+            CurrentLanguage = Language.English;
+
+        OnLanguageChange?.Invoke();
+        Debug.Log(CurrentLanguage);
     }
 }

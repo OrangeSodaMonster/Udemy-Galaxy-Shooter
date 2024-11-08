@@ -156,12 +156,12 @@ MonoBehaviour:
       Resource1: 2
       Cost1: 35
       Resource2: 4
-      Cost2: 1
+      Cost2: 2
     Cost:
     - ResourceType: 2
       Amount: 35
     - ResourceType: 4
-      Amount: 1
+      Amount: 2
     Damage: 40
     Widht: 0.18
     Material: {fileID: 2100000, guid: 9c3de35b3053c6340abe3a04cfd5a662, type: 2}
@@ -197,14 +197,14 @@ MonoBehaviour:
       m_NumAlphaKeys: 3
   - CostLine:
       Resource1: 2
-      Cost1: 75
+      Cost1: 85
       Resource2: 4
-      Cost2: 5
+      Cost2: 6
     Cost:
     - ResourceType: 2
-      Amount: 75
+      Amount: 85
     - ResourceType: 4
-      Amount: 5
+      Amount: 6
     Damage: 50
     Widht: 0.21
     Material: {fileID: 2100000, guid: 2df945f07299ace488d65e4b34fff5de, type: 2}
@@ -260,7 +260,7 @@ MonoBehaviour:
       Amount: 20
     - ResourceType: 2
       Amount: 5
-    TimeBetween: 4.5
+    TimeBetween: 4.6
   - CostLine:
       Resource1: 1
       Cost1: 50
@@ -271,29 +271,29 @@ MonoBehaviour:
       Amount: 50
     - ResourceType: 2
       Amount: 15
-    TimeBetween: 4
+    TimeBetween: 4.2
   - CostLine:
       Resource1: 1
-      Cost1: 100
+      Cost1: 120
       Resource2: 2
-      Cost2: 45
+      Cost2: 50
     Cost:
     - ResourceType: 1
-      Amount: 100
+      Amount: 120
     - ResourceType: 2
-      Amount: 45
+      Amount: 50
+    TimeBetween: 3.8
+  - CostLine:
+      Resource1: 1
+      Cost1: 300
+      Resource2: 2
+      Cost2: 120
+    Cost:
+    - ResourceType: 1
+      Amount: 300
+    - ResourceType: 2
+      Amount: 120
     TimeBetween: 3.5
-  - CostLine:
-      Resource1: 1
-      Cost1: 250
-      Resource2: 2
-      Cost2: 100
-    Cost:
-    - ResourceType: 1
-      Amount: 250
-    - ResourceType: 2
-      Amount: 100
-    TimeBetween: 3
   RangeUpgrades:
   - CostLine:
       Resource1: 1
@@ -309,48 +309,48 @@ MonoBehaviour:
     RangeFromHit: 2.5
   - CostLine:
       Resource1: 1
-      Cost1: 10
+      Cost1: 15
       Resource2: 3
       Cost2: 2
     Cost:
     - ResourceType: 1
-      Amount: 10
+      Amount: 15
     - ResourceType: 3
       Amount: 2
     RangeFromPlayer: 4.1
     RangeFromHit: 3
   - CostLine:
       Resource1: 1
-      Cost1: 30
+      Cost1: 40
       Resource2: 3
       Cost2: 5
     Cost:
     - ResourceType: 1
-      Amount: 30
+      Amount: 40
     - ResourceType: 3
       Amount: 5
     RangeFromPlayer: 4.7
     RangeFromHit: 3.5
   - CostLine:
       Resource1: 2
-      Cost1: 20
+      Cost1: 25
       Resource2: 4
       Cost2: 1
     Cost:
     - ResourceType: 2
-      Amount: 20
+      Amount: 25
     - ResourceType: 4
       Amount: 1
     RangeFromPlayer: 5.3
     RangeFromHit: 4
   - CostLine:
       Resource1: 2
-      Cost1: 50
+      Cost1: 60
       Resource2: 4
       Cost2: 3
     Cost:
     - ResourceType: 2
-      Amount: 50
+      Amount: 60
     - ResourceType: 4
       Amount: 3
     RangeFromPlayer: 6

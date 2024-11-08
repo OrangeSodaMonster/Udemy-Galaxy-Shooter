@@ -29,7 +29,7 @@ public class TooltipRateLink : TooltipLink
 
         if(rateSource == RateSource.Drone1 || rateSource == RateSource.Drone2 || rateSource == RateSource.Drone3)
         {
-            playerHeal.OnHealTimeChange.AddListener(UpdateTooltip);
+            playerHeal?.OnHealTimeChange.AddListener(UpdateTooltip);
         }
     }
 
@@ -55,11 +55,11 @@ public class TooltipRateLink : TooltipLink
                     PlayerUpgradesManager.Instance.CurrentUpgrades.IonStreamUpgrades.CadencyLevel - 1].TimeBetween.ToString();
 
             case RateSource.Drone1:
-                return playerHeal.CurrentSecondsBetweenHeal.ToString();
+                return playerHeal?.CurrentSecondsBetweenHeal.ToString();
             case RateSource.Drone2:
-                return playerHeal.CurrentSecondsBetweenHeal.ToString();
+                return playerHeal?.CurrentSecondsBetweenHeal.ToString();
             case RateSource.Drone3:
-                return playerHeal.CurrentSecondsBetweenHeal.ToString();
+                return playerHeal?.CurrentSecondsBetweenHeal.ToString();
 
             case RateSource.FrontShield:
                 return PlayerUpgradesManager.Instance.ShieldUpgradesInfo.RecoveryUpgrades[

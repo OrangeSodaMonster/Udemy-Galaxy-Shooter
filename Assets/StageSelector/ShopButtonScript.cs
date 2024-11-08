@@ -23,7 +23,7 @@ public class ShopButtonScript : MonoBehaviour
 
     void Start()
     {
-        if (stageToUnlock > GameManager.HighestStageCleared + 1)
+        if (stageToUnlock > GameManager.HighestStageCleared)
         {
             buttonImage.color = unavaliableColor;
             text.color = unavaliableTextColor;

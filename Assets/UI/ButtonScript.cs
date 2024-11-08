@@ -18,6 +18,7 @@ public class ButtonScript : MonoBehaviour
 	[SerializeField] UnityEvent clickEvents;
     [HideInInspector] public UnityEvent OnClick = new();
 	[SerializeField] UnityEvent holdEvents;
+	[SerializeField] UnityEvent onSelectionEvents;
 	[SerializeField] UnityEvent onPointerDownEvents;
 	[SerializeField] UnityEvent onPointerUpEvents;
 	[SerializeField] float holdDuration = 2f;
@@ -88,6 +89,12 @@ public class ButtonScript : MonoBehaviour
             holdEvents?.Invoke();
             calledHold = true;
         }
+
+        //if(lastSelected != button.gameObject && EventSystem.current.currentSelectedGameObject == button.gameObject)
+        //{
+        //    onSelectionEvents?.Invoke();
+        //    Debug.Log($"OnSelected: {gameObject.name}");
+        //}
     }
 
     private void Start()
@@ -117,6 +124,10 @@ public class ButtonScript : MonoBehaviour
         EventTrigger.Entry submitEvent = new() { eventID = EventTriggerType.Submit };
         submitEvent.callback.AddListener((eventData) => CallClickEvent());
         trigger.triggers.Add(submitEvent);
+
+        EventTrigger.Entry selectEvent = new() { eventID = EventTriggerType.Select };
+        selectEvent.callback.AddListener((eventData) => OnSelect());
+        trigger.triggers.Add(selectEvent);
     }
 
     public void CallClickEvent()
@@ -124,12 +135,22 @@ public class ButtonScript : MonoBehaviour
         ClickedOnInterface?.Invoke();
     }
 
+    public void OnSelect()
+    {
+        if (!button.enabled) return;
+
+        if (playSelectionSound && button.gameObject != lastSelected)
+            AudioManager.Instance.SelectionClickSound.PlayFeedbacks();
+
+        onSelectionEvents?.Invoke();
+    }
+
     public void SelectOnMove()
     {
-        if (EventSystem.current.currentSelectedGameObject != lastSelected)
-        {
-            AudioManager.Instance.SelectionClickSound.PlayFeedbacks();
-        }
+        //if (EventSystem.current.currentSelectedGameObject != lastSelected)
+        //{
+        //    AudioManager.Instance.SelectionClickSound.PlayFeedbacks();
+        //}
 
         lastSelected = EventSystem.current.currentSelectedGameObject;
     }
@@ -143,11 +164,13 @@ public class ButtonScript : MonoBehaviour
             {
                 InvokeClick();
             }
-            else
-            {
-                if(playSelectionSound)
-                    AudioManager.Instance.SelectionClickSound.PlayFeedbacks();
-            }
+            //else
+            //{
+            //    if (playSelectionSound)
+            //    {
+            //        AudioManager.Instance.SelectionClickSound.PlayFeedbacks();
+            //    }
+            //}
 
             lastSelected = EventSystem.current.currentSelectedGameObject;
         }
@@ -193,6 +216,11 @@ public class ButtonScript : MonoBehaviour
     void CallPublicOnClick()
     {
         OnClick.Invoke();
+    }
+
+    public void SelectButton()
+    {
+        EventSystem.current.SetSelectedGameObject(button.gameObject);
     }
 
     

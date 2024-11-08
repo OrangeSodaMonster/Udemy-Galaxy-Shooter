@@ -588,6 +588,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db670723cf7e9a40a0b440c40f86b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6351730353506164591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8712135981467744530, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
+  m_PrefabInstance: {fileID: 2360546593268409981}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb45f8cae8ba1d4429059663306b57f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7411004970986446331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5051760458643061638, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
@@ -1315,6 +1326,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7294005656184399168, guid: c8e1e6e29a6e68242951eaa15a8062c9, type: 3}
+      propertyPath: clickEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6351730353506164591}
+    - target: {fileID: 7294005656184399168, guid: c8e1e6e29a6e68242951eaa15a8062c9, type: 3}
+      propertyPath: clickEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeLanguage
+      objectReference: {fileID: 0}
     - target: {fileID: 7451366202084125601, guid: c8e1e6e29a6e68242951eaa15a8062c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1375,6 +1394,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8977510020801790072}
+    - target: {fileID: 8994865580678426338, guid: c8e1e6e29a6e68242951eaa15a8062c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToPauseCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994865580678426338, guid: c8e1e6e29a6e68242951eaa15a8062c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseAndUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 9123098441652704739, guid: c8e1e6e29a6e68242951eaa15a8062c9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 

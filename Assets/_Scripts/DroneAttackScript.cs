@@ -42,17 +42,15 @@ public class DroneAttackScript : MonoBehaviour
 
         damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
 
-        //if (timeSinceChangedTarget >= minTimeToChangeTarget)
-        //{
-        if (canChangeTarget)
+        if (target != null && (!target.gameObject.activeSelf || target.GetComponent<EnemyHP>().CurrentHP == 0))
+            target = null;
+
+        if (canChangeTarget || target == null)
         {
             target = GetClosestTarget();
             if (target != null)
                 canChangeTarget = false;
-        }
-            //timeSinceChangedTarget = 0;
-        //}
-        //timeSinceChangedTarget += Time.fixedDeltaTime;
+        }        
 
         if (target != null && AttackLineRenderer != null)
         {

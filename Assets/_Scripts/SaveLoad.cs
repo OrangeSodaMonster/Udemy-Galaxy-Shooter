@@ -115,6 +115,7 @@ public class SaveLoad : MonoBehaviour
         data.IsVibration = GameManager.IsVibration;
         data.IsLightWeightBG = GameManager.IsLightWeightBG;
         data.QualityLevel = GameManager.QualityLevel;
+        data.Language = GameManager.CurrentLanguage;
 
         data.IsAutoFire = GameManager.IsAutoFire;
 
@@ -584,6 +585,7 @@ public class SaveConfigObj
     public bool IsAutoFire = true;
     public bool IsLightWeightBG = false;
     public int QualityLevel = -1;
+    public Language Language = Language.English;
 
     public int TouchAlpha = 5;
     public bool IsTouchTurnToDirection = true;

@@ -42,7 +42,7 @@ public class RememberLastSelectionScript : MonoBehaviour
         }
 
         if(EventSystem.current.currentSelectedGameObject.TryGetComponent(out Button currentButton) &&
-            acceptableReturns.Contains(currentButton))
+            currentButton != null && acceptableReturns.Contains(currentButton))
         {
             lastAcceptableSelection = EventSystem.current.currentSelectedGameObject;
         }

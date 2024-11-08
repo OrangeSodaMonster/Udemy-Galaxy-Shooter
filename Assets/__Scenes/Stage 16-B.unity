@@ -2001,9 +2001,25 @@ PrefabInstance:
       value: 54.4
       objectReference: {fileID: 0}
     - target: {fileID: 2887199383724495668, guid: 30f9808d2846fa341bdd25728d27f677, type: 3}
+      propertyPath: numberOfObjectives
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2887199383724495668, guid: 30f9808d2846fa341bdd25728d27f677, type: 3}
+      propertyPath: getRandomObjectives
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2887199383724495668, guid: 30f9808d2846fa341bdd25728d27f677, type: 3}
+      propertyPath: possibleObjectives.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2887199383724495668, guid: 30f9808d2846fa341bdd25728d27f677, type: 3}
       propertyPath: possibleObjectives.Array.data[0]
       value: 
       objectReference: {fileID: 472456951708921564, guid: 85eb72f22710f194fa3f53ad2d0cee89, type: 3}
+    - target: {fileID: 2887199383724495668, guid: 30f9808d2846fa341bdd25728d27f677, type: 3}
+      propertyPath: possibleObjectives.Array.data[1]
+      value: 
+      objectReference: {fileID: 3792912196244308070, guid: 91204367ff10ad84a9c5f9646aab1e55, type: 3}
     - target: {fileID: 3784558990386271251, guid: 30f9808d2846fa341bdd25728d27f677, type: 3}
       propertyPath: m_LocalPosition.x
       value: 60.4
@@ -2315,7 +2331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: baseSpawnCD
-      value: 0.7
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: spawnZoneRadius
@@ -2571,7 +2587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000044424087
+      value: -0.0000003548339
       objectReference: {fileID: 0}
     - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2739,7 +2755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097865085451408690, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000044424087
+      value: -0.0000003548339
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

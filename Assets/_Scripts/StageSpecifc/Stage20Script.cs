@@ -28,13 +28,15 @@ public class Stage20Script : MonoBehaviour
     [SerializeField] GameObject conduitOrange;
     bool orangeDisabled = false;
 
-    [HideInInspector] public bool CanSpawnEnemies;
+    //[HideInInspector] 
+    public bool CanSpawnEnemies = true;
 
     EnemySpawner enemySpawner;
 
     private void Start()
     {
         enemySpawner = EnemySpawner.Instance;
+        CanSpawnEnemies = true;
 
         for (int i = 0; i< loopSpawnsGreen.Length; i++)
         {

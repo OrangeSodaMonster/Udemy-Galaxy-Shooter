@@ -397,6 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuCanvas: {fileID: 5494735531109656563}
   audioCanvas: {fileID: 9029364209780717495}
+  configCanvas: {fileID: 0}
   SaveSlotCanvas: {fileID: 7547589522940446}
 --- !u!1 &3777927835938968062
 GameObject:
@@ -879,7 +880,13 @@ MonoBehaviour:
   clickEvents:
     m_PersistentCalls:
       m_Calls: []
+  OnClick:
+    m_PersistentCalls:
+      m_Calls: []
   holdEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  onSelectionEvents:
     m_PersistentCalls:
       m_Calls: []
   onPointerDownEvents:
@@ -893,6 +900,9 @@ MonoBehaviour:
   playSelectionSound: 1
   playConfirmationSound: 0
   playBackSound: 1
+  alternativeClickEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5412440863838423966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,6 +2520,10 @@ PrefabInstance:
     - target: {fileID: 2983365817610700841, guid: 6c992080083fe8840a24c4c552d20453, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972877970195552115, guid: 6c992080083fe8840a24c4c552d20453, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 6352392306520997476, guid: 6c992080083fe8840a24c4c552d20453, type: 3}
       propertyPath: m_Pivot.x

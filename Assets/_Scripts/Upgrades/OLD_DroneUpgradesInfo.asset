@@ -1,0 +1,361 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff9aa4477fb2234a92b5ad83ca871fc, type: 3}
+  m_Name: OLD_DroneUpgradesInfo
+  m_EditorClassIdentifier: 
+  UnlockCostLine:
+    Resource1: 1
+    Cost1: 25
+    Resource2: 2
+    Cost2: 15
+  UnlockCost:
+  - ResourceType: 1
+    Amount: 25
+  - ResourceType: 2
+    Amount: 15
+  PowerUpgrades:
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 3
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 0
+    - ResourceType: 3
+      Amount: 0
+    DamagePerSecond: 5
+    Color:
+      serializedVersion: 2
+      key0: {r: 1, g: 0.74650204, b: 0, a: 0.6901961}
+      key1: {r: 1, g: 0, b: 0, a: 0.7058824}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 60716
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: -1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  - CostLine:
+      Resource1: 1
+      Cost1: 10
+      Resource2: 3
+      Cost2: 1
+    Cost:
+    - ResourceType: 1
+      Amount: 10
+    - ResourceType: 3
+      Amount: 1
+    DamagePerSecond: 10
+    Color:
+      serializedVersion: 2
+      key0: {r: 1, g: 0.8780921, b: 0, a: 0.9019608}
+      key1: {r: 1, g: 0, b: 0, a: 0.8039216}
+      key2: {r: 1, g: 0, b: 0, a: 0.8784314}
+      key3: {r: 1, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 8674
+      ctime1: 65535
+      ctime2: 65535
+      ctime3: 65535
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 65535
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  - CostLine:
+      Resource1: 1
+      Cost1: 25
+      Resource2: 3
+      Cost2: 3
+    Cost:
+    - ResourceType: 1
+      Amount: 25
+    - ResourceType: 3
+      Amount: 3
+    DamagePerSecond: 15
+    Color:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 0.8780921, b: 0, a: 0.8627451}
+      key2: {r: 1, g: 0.19862808, b: 0, a: 0}
+      key3: {r: 1, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 4626
+      ctime1: 22552
+      ctime2: 65535
+      ctime3: 65535
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 3
+      m_NumAlphaKeys: 2
+  - CostLine:
+      Resource1: 2
+      Cost1: 15
+      Resource2: 3
+      Cost2: 10
+    Cost:
+    - ResourceType: 2
+      Amount: 15
+    - ResourceType: 3
+      Amount: 10
+    DamagePerSecond: 20
+    Color:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 0.7402892, b: 0, a: 0.9411765}
+      key2: {r: 1, g: 0.2760729, b: 0, a: 0}
+      key3: {r: 1, g: 0.7402892, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 45682
+      ctime2: 65535
+      ctime3: 65535
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 3
+      m_NumAlphaKeys: 2
+  - CostLine:
+      Resource1: 2
+      Cost1: 30
+      Resource2: 4
+      Cost2: 1
+    Cost:
+    - ResourceType: 2
+      Amount: 30
+    - ResourceType: 4
+      Amount: 1
+    DamagePerSecond: 25
+    Color:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 0.95441294, b: 0, a: 1}
+      key2: {r: 1, g: 0.58323777, b: 0.08018869, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 31418
+      ctime2: 63993
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: -1
+      m_NumColorKeys: 3
+      m_NumAlphaKeys: 2
+  - CostLine:
+      Resource1: 2
+      Cost1: 50
+      Resource2: 4
+      Cost2: 3
+    Cost:
+    - ResourceType: 2
+      Amount: 50
+    - ResourceType: 4
+      Amount: 3
+    DamagePerSecond: 30
+    Color:
+      serializedVersion: 2
+      key0: {r: 0.99923444, g: 1, b: 0.97596157, a: 1}
+      key1: {r: 1, g: 1, b: 0, a: 1}
+      key2: {r: 1, g: 0.62911344, b: 0, a: 0}
+      key3: {r: 1, g: 0.62911344, b: 0, a: 0}
+      key4: {r: 1, g: 0.62911344, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 19275
+      ctime1: 58211
+      ctime2: 63993
+      ctime3: 63993
+      ctime4: 63993
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  RangeUpgrades:
+  - CostLine:
+      Resource1: 1
+      Cost1: 0
+      Resource2: 3
+      Cost2: 0
+    Cost:
+    - ResourceType: 1
+      Amount: 0
+    - ResourceType: 3
+      Amount: 0
+    Range: 3.5
+  - CostLine:
+      Resource1: 1
+      Cost1: 15
+      Resource2: 3
+      Cost2: 2
+    Cost:
+    - ResourceType: 1
+      Amount: 15
+    - ResourceType: 3
+      Amount: 2
+    Range: 4
+  - CostLine:
+      Resource1: 1
+      Cost1: 50
+      Resource2: 3
+      Cost2: 6
+    Cost:
+    - ResourceType: 1
+      Amount: 50
+    - ResourceType: 3
+      Amount: 6
+    Range: 4.5
+  - CostLine:
+      Resource1: 2
+      Cost1: 25
+      Resource2: 4
+      Cost2: 1
+    Cost:
+    - ResourceType: 2
+      Amount: 25
+    - ResourceType: 4
+      Amount: 1
+    Range: 5
+  - CostLine:
+      Resource1: 2
+      Cost1: 50
+      Resource2: 4
+      Cost2: 3
+    Cost:
+    - ResourceType: 2
+      Amount: 50
+    - ResourceType: 4
+      Amount: 3
+    Range: 5.5
+  HealUpgrades:
+  - CostLine:
+      Resource1: 1
+      Cost1: 10
+      Resource2: 2
+      Cost2: 5
+    Cost:
+    - ResourceType: 1
+      Amount: 10
+    - ResourceType: 2
+      Amount: 5
+    ReduceFromHealInterval: 1
+  - CostLine:
+      Resource1: 1
+      Cost1: 40
+      Resource2: 2
+      Cost2: 20
+    Cost:
+    - ResourceType: 1
+      Amount: 40
+    - ResourceType: 2
+      Amount: 20
+    ReduceFromHealInterval: 1
+  - CostLine:
+      Resource1: 1
+      Cost1: 100
+      Resource2: 2
+      Cost2: 50
+    Cost:
+    - ResourceType: 1
+      Amount: 100
+    - ResourceType: 2
+      Amount: 50
+    ReduceFromHealInterval: 1
