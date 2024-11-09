@@ -10,9 +10,11 @@ public abstract class TooltipLink : MonoBehaviour
     [Space]
     [SerializeField, TextArea(2, 3)] string descriptionText = "Current\nDamage";
     [SerializeField, TextArea(2, 3)] string descriptionTextPT = "Dano\nAtual";
+    [SerializeField, TextArea(2, 3)] string descriptionTexteESP = "Daño\nActual";
     [Space]
     [SerializeField] string unityText = "per hit";
     [SerializeField] string unityTextPT = "por acerto";
+    [SerializeField] string unityTextESP = "por acierto";
 
     Button thisButton;
     ButtonScript buttonScript;
@@ -45,11 +47,23 @@ public abstract class TooltipLink : MonoBehaviour
     public void UpdateTooltip()
     {
         tooltip.gameObject.SetActive(true);
-        tooltip.descriptionTextMesh.text = descriptionText;
         tooltip.valueTextMesh.text = GetValue();
-        tooltip.unityTextMesh.text = unityText;
 
-        Debug.Log("UPDATE TOOLTIP");
+        if(GameManager.CurrentLanguage == Language.English)
+        {
+            tooltip.descriptionTextMesh.text = descriptionText;
+            tooltip.unityTextMesh.text = unityText;
+        }
+        else if (GameManager.CurrentLanguage == Language.Português)
+        {
+            tooltip.descriptionTextMesh.text = descriptionTextPT;
+            tooltip.unityTextMesh.text = unityTextPT;
+        }
+        else if (GameManager.CurrentLanguage == Language.Español)
+        {
+            tooltip.descriptionTextMesh.text = descriptionTexteESP;
+            tooltip.unityTextMesh.text = unityTextESP;
+        }
     }
 
     abstract public string GetValue();

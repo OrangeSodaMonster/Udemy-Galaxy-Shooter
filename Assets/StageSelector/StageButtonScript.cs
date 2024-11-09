@@ -12,6 +12,7 @@ public class StageButtonScript : MonoBehaviour
     [SerializeField] Color clearedTextColor;
     [SerializeField] Color unavaliableColor;
     [SerializeField] Color unavaliableTextColor;
+    [SerializeField] Image border;
     [Space]
     [SerializeField] UnityEvent stageB_call;
 
@@ -43,6 +44,7 @@ public class StageButtonScript : MonoBehaviour
         {
             buttonImage.color = unavaliableColor;
             text.color = unavaliableTextColor;
+            border.enabled = false;
             button.enabled = false;
         }
         else

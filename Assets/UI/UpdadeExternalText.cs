@@ -12,8 +12,18 @@ public class UpdadeExternalText : MonoBehaviour
 
     public void UpdateText()
     {
-        Debug.Log("Stage Name Update");
-        textObj.text = text;
+        if(GameManager.CurrentLanguage == Language.English)
+        {
+            textObj.text = text;
+        }
+        else if (GameManager.CurrentLanguage == Language.Português)
+        {
+            textObj.text = textPT;
+        }
+        else if (GameManager.CurrentLanguage == Language.Español)
+        {
+            textObj.text = textESP;
+        }
     }
 
     

@@ -9,6 +9,7 @@ public class ShopButtonScript : MonoBehaviour
     [SerializeField] int stageToUnlock;
     [SerializeField] Color unavaliableColor;
     [SerializeField] Color unavaliableTextColor;
+    [SerializeField] Image border;
 
     Image buttonImage;
     TextMeshProUGUI text;
@@ -27,6 +28,7 @@ public class ShopButtonScript : MonoBehaviour
         {
             buttonImage.color = unavaliableColor;
             text.color = unavaliableTextColor;
+            border.enabled = false;
             button.enabled = false;
         }
         else
