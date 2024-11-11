@@ -8,7 +8,11 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
+    [SerializeField] bool randomMusic = false;
+    [ShowIf("@randomMusic == false")]
     [SerializeField] AudioClip musicClip;
+    [ShowIf("@randomMusic == true")]
+    [SerializeField] AudioClip[] musicClips;
     [SerializeField, Range(0,1)] float musicVolume = .15f;
     [SerializeField, HorizontalGroup("1")] bool useCustomMusicID;
     [SerializeField, HorizontalGroup("1")] int customMusicID;
@@ -27,6 +31,9 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
+        if(randomMusic && musicClips.Length > 0)
+            musicClip = musicClips[Random.Range(0, musicClips.Length - 1)];
+
         fadeFB = fade.GetFeedbackOfType<MMF_MMSoundManagerSoundFade>();
         halfFade = new WaitForSeconds(fadeDuration * 0.5f);
         musicControlFB = musicControl.GetFeedbackOfType<MMF_MMSoundManagerSoundControl>();

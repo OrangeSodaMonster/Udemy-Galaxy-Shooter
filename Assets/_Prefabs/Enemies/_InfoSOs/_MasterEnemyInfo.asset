@@ -35,7 +35,7 @@ MonoBehaviour:
   impactSumDroneGreen: 0.6
   hPSentinelGreen: 150
   shootCdSentinelGreen: 5
-  colDamageSentinelGreen: 15
+  colDamageSentinelGreen: 25
   impactSentinelGreen: 1
   yellowHpMult: 2.5
   orangeHpMult: 6
@@ -93,7 +93,7 @@ MonoBehaviour:
     Weight: 10
   - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
     Weight: 10
-  saveStateColor: {r: 1, g: 0, b: 0, a: 1}
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}
   OnUpdateAndSaveAll:
     m_PersistentCalls:
       m_Calls: []

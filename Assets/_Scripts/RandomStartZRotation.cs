@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Random2DRotationOnEnable : MonoBehaviour
+public class RandomStartZRotation : MonoBehaviour
 {
     private void OnEnable()
     {

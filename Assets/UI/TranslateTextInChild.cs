@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ChangeTextChild : MonoBehaviour
+public class TranslateTextInChild : MonoBehaviour
 {
     [SerializeField, TextArea(2, 3)] string English = "";
     [SerializeField, TextArea(2, 3)] string Portugues = "";

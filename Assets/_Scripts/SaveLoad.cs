@@ -73,6 +73,7 @@ public class SaveLoad : MonoBehaviour
         saveConfig.QualityLevel = GameManager.QualityLevel;
         saveConfig.TouchAlpha = GameManager.TouchAlpha;
         saveConfig.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
+        saveConfig.Language = GameManager.CurrentLanguage;
 
         saveConfig.MasterVolume = GameManager.MasterVolume;
         saveConfig.MusicVolume = GameManager.MusicVolume;

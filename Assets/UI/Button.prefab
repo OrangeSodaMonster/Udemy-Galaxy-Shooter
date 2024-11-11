@@ -138,10 +138,29 @@ MonoBehaviour:
   clickEvents:
     m_PersistentCalls:
       m_Calls: []
+  OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+  holdEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  onSelectionEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  onPointerDownEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  onPointerUpEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  holdDuration: 2
   playHoverSound: 1
   playSelectionSound: 1
   playConfirmationSound: 1
   playBackSound: 0
+  alternativeClickEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8195335347995936878
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +265,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -17
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

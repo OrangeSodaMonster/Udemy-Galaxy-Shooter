@@ -914,6 +914,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4506855388334501019}
     m_Modifications:
+    - target: {fileID: 3333595709988350582, guid: af3b16de032bae34788d74b048274ec0, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3795127211890983357, guid: af3b16de032bae34788d74b048274ec0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1334,8 +1338,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   English: Select Stage
-  Portugues: Fases
-  Espanol: Fases
+  Portugues: 'Selecionar
+
+    Fase'
+  Espanol: 'Seleccionar
+
+    Fases'
 --- !u!1001 &2095991207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1470,6 +1478,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 39815944756639629, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 56862791453638090, guid: 9b402e35b5f338040bd5a1baf049a5fd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -24,6 +24,12 @@ public class ShaderStarsMoving : MonoBehaviour
         playerMove = FindObjectOfType<PlayerMove>();
         material.SetFloat("_ScrollSpeed", maxStarsSpeed);
         material.SetFloat("_ScrollSpeedLayerMod", scrollSpeedLayerMod);
+
+        GameStatus.GameOver += StopStars;
+    }
+    private void OnDestroy()
+    {
+        GameStatus.GameOver -= StopStars;
     }
 
     float percentSpeedX;

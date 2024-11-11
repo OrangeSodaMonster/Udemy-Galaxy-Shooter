@@ -55,7 +55,11 @@ public class SentinelAttack : MonoBehaviour
 
     void Update()
     {
-        if(GameStatus.IsGameover || GameStatus.IsPortal || playerHP == null) return;
+        if (GameStatus.IsGameover || GameStatus.IsPortal || playerHP == null)
+        {
+            StopLaserOnGameOver();
+            return;
+        } 
 
         if (Vector2.SqrMagnitude(playerHP.transform.position - transform.position) <= rangeSqr)
         {
@@ -98,7 +102,7 @@ public class SentinelAttack : MonoBehaviour
         beamVFX.transform.position = closestOrigin.position;
         beamVFX.gameObject.SetActive(true);
 
-        hitVFX.transform.position = lineRenderer.GetPosition(2) + transform.position;
+        hitVFX.transform.position = hitPos;
         hitVFX.gameObject.SetActive(true);
 
         isFiring = true;
@@ -120,6 +124,13 @@ public class SentinelAttack : MonoBehaviour
             vfx.transform.localScale = vfx.transform.localScale * vfxScaleMultiplier;
             vfx.SetActive(true);
         }       
+    }
+
+    void StopLaserOnGameOver()
+    {
+        beamVFX.gameObject.SetActive(false);
+        hitVFX.gameObject.SetActive(false);
+        lineRenderer.gameObject.SetActive(false);
     }
 
     Transform GetOrigin(Vector3 hitPos)
