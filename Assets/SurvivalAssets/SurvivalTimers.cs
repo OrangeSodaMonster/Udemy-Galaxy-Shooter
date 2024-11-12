@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static SurvivalSection;
 
@@ -12,16 +13,25 @@ public class SurvivalSection
     public class SectionEvent
     {
         [Tooltip("The Time For This Event To Happen")]
-        [HorizontalGroup("1")]
+        [HorizontalGroup("1", .2f, LabelWidth = 35)]
         public float Time;
+
+        [Tooltip("Choose Random Level of 2")]
+        [HorizontalGroup("1", .2f, LabelWidth = 60)]
+        public bool IsRandomLevel = false;        
+
         [Tooltip("Event Difficult Level, Starts at 0")]
         [MinValue(0)][HorizontalGroup("1")]
         public int Level;
+
+        [Tooltip("Event Difficult Level is one of two")][GUIColor("yellow")]       
+        [MinValue(0)][HorizontalGroup("1")][ShowIf("@IsRandomLevel == true")]
+        public int PossibleLevel;
     }
 
     [HorizontalGroup("0"), MinValue(3)]
     public float Duration = 120;
-    [HorizontalGroup("0"), MinValue(0)]
+    [HorizontalGroup("0"), MinValue(0), GUIColor("cyan")]
     public int NumPositiveEvents = 1;
     [HorizontalGroup("1"), MinValue(1)]
     public int NumberOfEvents = 5;
@@ -33,15 +43,17 @@ public class SurvivalSection
     [GUIColor("cyan")]
     [ShowIf("@NumPositiveEvents > 0")]
     public List<SectionEvent> PositiveEvents;
-    [GUIColor("red")]
+    [GUIColor("red"), HorizontalGroup("END", 0.25f)]
+    public bool hasCalledEndEvent = false;
+    [GUIColor("red"), HorizontalGroup("END")]
     public SectionEvent EndEvent;
     //Tempo para lidar com o último evento antes de iniciar a próxima seção
-    [MinValue(0)]
+    [MinValue(0)][GUIColor("purple")]
     public float LastEventExtraTime = 20;
 }
 
 [RequireComponent(typeof(EventsHolder))]
-public class SurvivalTimer : MonoBehaviour
+public class SurvivalTimers : MonoBehaviour
 {
     public List<SurvivalSection> Sections;
     public float TotalTime;
@@ -100,8 +112,8 @@ public class SurvivalTimer : MonoBehaviour
                     Sections[i].Events[j].Time += UnityEngine.Random.Range(-Sections[i].EventTimeVariation, Sections[i].EventTimeVariation);
             }
 
-            //Positive Events 
-            //TO DO: SET TIME BETWEEN EVENTS
+            //Positive Events                        
+            
             while (Sections[i].PositiveEvents.Count < Sections[i].NumPositiveEvents)
             {
                 Sections[i].PositiveEvents.Add(new SectionEvent());
@@ -111,13 +123,37 @@ public class SurvivalTimer : MonoBehaviour
                 Sections[i].PositiveEvents.RemoveAt(Sections[i].PositiveEvents.Count-1);
             }
 
-            float timeBetweenPositiveEvents = Sections[i].Duration / (Sections[i].PositiveEvents.Count + 1);
-            for (int j = 0; j < Sections[i].PositiveEvents.Count; j++)
+            //SET TIME BETWEEN EVENTS            
+            List<int> eventIndexes = new List<int>();
+            for (int j = 0; j < Sections[i].Events.Count; j++)
             {
-                Sections[i].PositiveEvents[j].Time = timeBetweenPositiveEvents * (j+1) + totalSectionsDuration;
-                if (useRandom)
-                    Sections[i].PositiveEvents[j].Time += UnityEngine.Random.Range(-timeBetweenPositiveEvents, timeBetweenPositiveEvents);
+                eventIndexes.Add(j);
             }
+            eventIndexes.Add(eventIndexes.Count);
+
+                for (int j = 0; j < Sections[i].PositiveEvents.Count; j++)
+                {
+                    int eventIndex = eventIndexes[UnityEngine.Random.Range(0, eventIndexes.Count)];
+                    //Debug.Log($"Event Index: {eventIndex}");
+
+                    if (eventIndex == (int)0)
+                    {
+                        Sections[i].PositiveEvents[j].Time = Sections[i].Events[eventIndex].Time * 0.5f;
+                    }
+                    else if (eventIndex == Sections[i].Events.Count)
+                    {
+                        float timeBetween = Sections[i].EndEvent.Time - Sections[i].Events[eventIndex - 1].Time;
+                        Sections[i].PositiveEvents[j].Time = Sections[i].EndEvent.Time - (timeBetween * 0.5f);
+                    }
+                    else
+                    {
+                        float timeBetween = Sections[i].Events[eventIndex].Time;
+                        timeBetween -= Sections[i].Events[eventIndex - 1].Time;
+                        Sections[i].PositiveEvents[j].Time = Sections[i].Events[eventIndex].Time - (timeBetween * 0.5f);
+                    } 
+
+                    eventIndexes.Remove(eventIndex);
+                }   
 
             Sections[i].EndEvent.Time = Sections[i].Duration + totalSectionsDuration;
             totalSectionsDuration += Sections[i].Duration + Sections[i].LastEventExtraTime;
@@ -133,32 +169,56 @@ public class SurvivalTimer : MonoBehaviour
             {
                 if(TotalTime > Sections[i].Events[j].Time)
                 {
-                    EventsHolder.CallEvent(Sections[i].Events[j].Level);
+                    int level = Sections[i].Events[j].Level;
+                    if(Sections[i].Events[j].IsRandomLevel)
+                        level = GetRandomOfTwo(level, Sections[i].Events[j].PossibleLevel);
+
+                    EventsHolder.CallEvent(level);
                     Sections[i].Events.RemoveAt(j);
                 }           
             }
+
             //Positive Events
             for (int j = 0; j < Sections[i].PositiveEvents.Count; j++)
-            {
+            {       
                 if (TotalTime > Sections[i].PositiveEvents[j].Time)
                 {
-                    EventsHolder.CallEvent(Sections[i].PositiveEvents[j].Level);
+                    int level = Sections[i].PositiveEvents[j].Level;
+                    if (Sections[i].PositiveEvents[j].IsRandomLevel)
+                        level = GetRandomOfTwo(level, Sections[i].PositiveEvents[j].PossibleLevel);
+
+                    EventsHolder.CallPositiveEvent(level);
                     Sections[i].PositiveEvents.RemoveAt(j);
                 }
             }
+
             //End Event
-            if (TotalTime > Sections[i].EndEvent.Time)
+            if (!Sections[i].hasCalledEndEvent && TotalTime > Sections[i].EndEvent.Time)
             {
-                EventsHolder.CallEvent(Sections[i].EndEvent.Level);
-                Sections[i].EndEvent.Time = float.MaxValue;
+                int level = Sections[i].EndEvent.Level;
+                if (Sections[i].EndEvent.IsRandomLevel)
+                    level = GetRandomOfTwo(level, Sections[i].EndEvent.PossibleLevel);
+
+                EventsHolder.CallEndEvent(level);
+                Sections[i].hasCalledEndEvent = true;
             }
+
             //Change Section
             if (TotalTime > Sections[i].EndEvent.Time + Sections[i].LastEventExtraTime)
             {
                 CurrentSection++;
-                Sections.RemoveAt(i);
+                Sections.RemoveAt(0);
+                Debug.Log($"NEW SECTION: {CurrentSection}");
             }
         }       
+    }
+
+    int GetRandomOfTwo(int x, int y)
+    {
+        if (Mathf.Sign(UnityEngine.Random.Range(-1f, 1f)) == 1)
+            return x;
+        else
+            return y;
     }
 
     void CheckEventLevels()

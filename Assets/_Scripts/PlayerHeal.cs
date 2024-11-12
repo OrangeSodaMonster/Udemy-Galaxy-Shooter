@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerHeal : MonoBehaviour
 {
@@ -80,6 +82,9 @@ public class PlayerHeal : MonoBehaviour
 
     void Heal()
     {
+        if (GameManager.CombatLog != null)
+            GameManager.CombatLog.TotalDamageHealed += (int)MathF.Min(5, PlayerHP.Instance.MaxHP - PlayerHP.Instance.CurrentHP);
+
         PlayerHP.Instance.ChangePlayerHP(+5);
         AudioManager.Instance.ShipFix.PlayFeedbacks();
     }

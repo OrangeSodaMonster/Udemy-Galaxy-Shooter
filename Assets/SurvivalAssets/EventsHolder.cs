@@ -18,7 +18,9 @@ public class EventsHolder : MonoBehaviour
     [SerializeField, GUIColor("red")] Transform EndEventsObj;
     [Space]
     public List<EventsClass> ListOfEvents = new();
+    [GUIColor("cyan")]
     public List<EventsClass> ListOfPositiveEvents = new();
+    [GUIColor("red")]
     public List<EventsClass> ListOfEndEvents = new();
 
     [Button, PropertyOrder(-1), HorizontalGroup("1")]
@@ -61,19 +63,21 @@ public class EventsHolder : MonoBehaviour
         }
     }
 
+
+
     [Button, HorizontalGroup("2")]
     public void CallEvent(int level)
     {
-        ListOfEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEvents[level].MyEvents.Count-1)].PlayFeedbacks();
+        ListOfEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEvents[level].MyEvents.Count)].PlayFeedbacks();
     }
     [Button, GUIColor("cyan"), HorizontalGroup("2")]
     public void CallPositiveEvent(int level)
     {
-        ListOfPositiveEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEvents[level].MyEvents.Count-1)].PlayFeedbacks();
+        ListOfPositiveEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfPositiveEvents[level].MyEvents.Count)].PlayFeedbacks();
     }
     [Button, GUIColor("red"), HorizontalGroup("2")]
     public void CallEndEvent(int level)
     {
-        ListOfEndEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEvents[level].MyEvents.Count-1)].PlayFeedbacks();
+        ListOfEndEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEndEvents[level].MyEvents.Count)].PlayFeedbacks();
     }
 }

@@ -32,7 +32,7 @@ public class MusicManager : MonoBehaviour
     private void Awake()
     {
         if(randomMusic && musicClips.Length > 0)
-            musicClip = musicClips[Random.Range(0, musicClips.Length - 1)];
+            musicClip = musicClips[Random.Range(0, musicClips.Length)];
 
         fadeFB = fade.GetFeedbackOfType<MMF_MMSoundManagerSoundFade>();
         halfFade = new WaitForSeconds(fadeDuration * 0.5f);

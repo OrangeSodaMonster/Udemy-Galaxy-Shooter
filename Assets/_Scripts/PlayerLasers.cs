@@ -42,13 +42,13 @@ public class PlayerLasers : MonoBehaviour
         
         if (IsFrontShotActivated && !justFiredLeftFrontLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceFrontLaserShoot >= frontLaserCD)
         {
-            InstantiateLaser(frontLaserParents[0], upgradesManager.CurrentUpgrades.FrontLaserUpgrades);
+            InstantiateLaser(frontLaserParents[0], upgradesManager.CurrentUpgrades.FrontLaserUpgrades, LaserType.Frontal);
             timeSinceFrontLaserShoot = 0;
             justFiredLeftFrontLaser = true;
         }
         else if (IsFrontShotActivated && justFiredLeftFrontLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceFrontLaserShoot > frontLaserCD)
         {
-            InstantiateLaser(frontLaserParents[1], upgradesManager.CurrentUpgrades.FrontLaserUpgrades);
+            InstantiateLaser(frontLaserParents[1], upgradesManager.CurrentUpgrades.FrontLaserUpgrades, LaserType.Frontal);
 
             timeSinceFrontLaserShoot = 0;
             justFiredLeftFrontLaser = false;
@@ -66,7 +66,7 @@ public class PlayerLasers : MonoBehaviour
 
         if (IsSpreadShotActivated && !justFiredRightSpreadLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceSpreadLaserShoot >= spreadLaserCD)
         {
-            InstantiateLaser(spreadLaserParents[1], upgradesManager.CurrentUpgrades.SpreadLaserUpgrades);
+            InstantiateLaser(spreadLaserParents[1], upgradesManager.CurrentUpgrades.SpreadLaserUpgrades, LaserType.Spread);
 
             timeSinceSpreadLaserShoot = 0;
             justFiredRightSpreadLaser = true;
@@ -74,7 +74,7 @@ public class PlayerLasers : MonoBehaviour
         else if (IsSpreadShotActivated & justFiredRightSpreadLaser & (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) & timeSinceSpreadLaserShoot >= spreadLaserCD)
         {
 
-            InstantiateLaser(spreadLaserParents[0], upgradesManager.CurrentUpgrades.SpreadLaserUpgrades);
+            InstantiateLaser(spreadLaserParents[0], upgradesManager.CurrentUpgrades.SpreadLaserUpgrades, LaserType.Spread);
 
             timeSinceSpreadLaserShoot = 0;
             justFiredRightSpreadLaser = false;
@@ -92,14 +92,14 @@ public class PlayerLasers : MonoBehaviour
 
         if (IsSideShotActivated && !justFiredLeftSideLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceSideLaserShoot >= sideLaserCD)
         {
-            InstantiateLaser(sideLaserParents[0], upgradesManager.CurrentUpgrades.SideLaserUpgrades);
+            InstantiateLaser(sideLaserParents[0], upgradesManager.CurrentUpgrades.SideLaserUpgrades, LaserType.Lateral);
 
             timeSinceSideLaserShoot = 0;
             justFiredLeftSideLaser = true;
         }
         else if (IsSideShotActivated && justFiredLeftSideLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceSideLaserShoot > sideLaserCD)
         {
-            InstantiateLaser(sideLaserParents[1], upgradesManager.CurrentUpgrades.SideLaserUpgrades);
+            InstantiateLaser(sideLaserParents[1], upgradesManager.CurrentUpgrades.SideLaserUpgrades, LaserType.Lateral);
 
             timeSinceSideLaserShoot = 0;
             justFiredLeftSideLaser = false;
@@ -117,14 +117,14 @@ public class PlayerLasers : MonoBehaviour
 
         if (IsBackShotActivated && !justFiredRightBackLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceBackLaserShoot >= backLaserCD)
         {
-            InstantiateLaser(backLaserParents[1], upgradesManager.CurrentUpgrades.BackLaserUpgrades);
+            InstantiateLaser(backLaserParents[1], upgradesManager.CurrentUpgrades.BackLaserUpgrades, LaserType.Back);
 
             timeSinceBackLaserShoot = 0;
             justFiredRightBackLaser = true;
         }
         else if (IsBackShotActivated && justFiredRightBackLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceBackLaserShoot >= backLaserCD)
         {
-            InstantiateLaser(backLaserParents[0], upgradesManager.CurrentUpgrades.BackLaserUpgrades);
+            InstantiateLaser(backLaserParents[0], upgradesManager.CurrentUpgrades.BackLaserUpgrades, LaserType.Back);
 
             timeSinceBackLaserShoot = 0;
             justFiredRightBackLaser = false;
@@ -132,7 +132,7 @@ public class PlayerLasers : MonoBehaviour
         timeSinceBackLaserShoot += Time.deltaTime;
     }
 
-    void InstantiateLaser(Transform laserParent, LaserUpgrades laserUpgrades)
+    void InstantiateLaser(Transform laserParent, LaserUpgrades laserUpgrades, LaserType type)
     {
         GameObject laser = objPool.GetPooledGameObject();
         laser.transform.SetPositionAndRotation(transform.position + transform.TransformDirection(laserParent.position), transform.rotation * laserParent.rotation);
@@ -140,6 +140,7 @@ public class PlayerLasers : MonoBehaviour
         laser.GetComponent<SpriteRenderer>().sprite = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Sprite;
         laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
         laser.GetComponent<LaserMove>().VFXGradient = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].VFXGradient;
+        laser.GetComponent<PlayerLaserDamage>().LaserType = type;
         laser.SetActive(true);
 
         AudioManager.Instance.PlayLaserSound();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -170,6 +171,9 @@ public class PlayerHP : MonoBehaviour
 
     public void ChangePlayerHP(int value, bool ignoreInvencibility = false, bool playHitSound = false)
     {
+        if(value < 0 && GameManager.CombatLog != null)
+            GameManager.CombatLog.TotalDamageTaken += (int)MathF.Min(Mathf.Abs(value), CurrentHP);
+
         MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
 
         if (s_IsInvencible && !ignoreInvencibility && value < 0) return;

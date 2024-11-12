@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
 
     public static UnityEvent OnChangeBG = new();
     public static UnityEvent OnLoadedConfig = new();
+    public static CombatLog CombatLog = new();
+    public static ScoreHolder ScoreHolder = new();
+    public static bool IsSurvival;
 
     private void Awake()
     {
@@ -59,6 +62,10 @@ public class GameManager : MonoBehaviour
         OnChangeBG.AddListener(SetBG);
         OnLoadedConfig.AddListener(SetVibration);        
         OnLoadedConfig.AddListener(SetBG);
+
+        CombatLog = FindObjectOfType<CombatLog>();
+        ScoreHolder = FindObjectOfType<ScoreHolder>();
+        if(ScoreHolder != null && CombatLog != null) IsSurvival = true;
         // Touch alpha set on TouchControlsManager
     }
 

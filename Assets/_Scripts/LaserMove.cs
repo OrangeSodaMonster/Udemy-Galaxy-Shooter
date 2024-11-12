@@ -1,3 +1,5 @@
+using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -121,5 +123,4 @@ public class LaserMove : MonoBehaviour
         collIgnored = coll;
         Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), coll, ignore);
     }
-
 }

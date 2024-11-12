@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -144,7 +145,14 @@ public class IonStreamScript : MonoBehaviour
                 {
                     //if(target.GetComponent<EnemyHP>() != null)
                     if (target.TryGetComponent(out EnemyHP enemyHP))
+                    {
+                        if (GameManager.CombatLog != null)
+                        {
+                            GameManager.CombatLog.IonStreamTotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
+                        }
+
                         enemyHP.ChangeHP(-Mathf.Abs(damage));
+                    }
 
                     GameObject vfx = VFXPoolerScript.Instance.IonStreamVFXPooler.GetPooledGameObject();
                     //vfx.GetComponent<VisualEffect>().SetGradient("ColorOverLife", LineColor);

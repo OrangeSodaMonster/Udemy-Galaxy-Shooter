@@ -1241,6 +1241,9 @@ MonoBehaviour:
     Amount: 1
   currentSecondsBetweenHeal: 0
   isFreeHeal: 0
+  OnHealTimeChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1708822803970070799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1623,7 +1626,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4299815899333702471, guid: f5ee7c33139c42c4c9ae1d831b301e06, type: 3}
       propertyPath: shieldSide
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4299815899333702471, guid: f5ee7c33139c42c4c9ae1d831b301e06, type: 3}
       propertyPath: hitDuration

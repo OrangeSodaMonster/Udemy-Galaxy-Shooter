@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
+
 public class DroneAttackScript : MonoBehaviour
 {
+    [SerializeField] DroneNumber droneNumber;
     public LineRenderer AttackLineRenderer;
     public float Range = 2.5f;
     public float DamagePerSecond = 2.5f;
@@ -86,9 +89,14 @@ public class DroneAttackScript : MonoBehaviour
 
         if (target != null && timeSinceDamage >= timeToDamage)
         {            
-            if(target.GetComponent<EnemyHP>() != null)
+            if(target.TryGetComponent(out EnemyHP enemyHP))
             {
-                target.GetComponent<EnemyHP>().ChangeHP(-Mathf.Abs(damage));
+                if (GameManager.CombatLog != null)
+                {
+                    UpdadeCombatLog(enemyHP);
+                }
+
+                enemyHP.ChangeHP(-Mathf.Abs(damage));
                 timeSinceDamage = 0;
                 canChangeTarget = true;
 
@@ -136,6 +144,22 @@ public class DroneAttackScript : MonoBehaviour
         }
                 
             return closestTarget;
+    }
+
+    void UpdadeCombatLog(EnemyHP enemyHP)
+    {
+        switch (droneNumber)
+        {
+            case DroneNumber.One:
+                GameManager.CombatLog.Drone1TotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
+                break;
+            case DroneNumber.Two:
+                GameManager.CombatLog.Drone2TotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
+                break;
+            case DroneNumber.Three:
+                GameManager.CombatLog.Drone3TotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
+                break;
+        }
     }
 
     private void OnDrawGizmosSelected()

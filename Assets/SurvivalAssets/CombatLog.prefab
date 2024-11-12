@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1165417067742776241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7117476608780692216}
+  - component: {fileID: 8141443225983277847}
+  m_Layer: 0
+  m_Name: CombatLog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7117476608780692216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165417067742776241}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8141443225983277847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165417067742776241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d5d824a983f3947a3b9d13744b2f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FrontalLasersTotalDamage: 0
+  SpreadLasersTotalDamage: 0
+  LateralLasersTotalDamage: 0
+  BackLasersTotalDamage: 0
+  LasersTotalDamage: 0
+  IonStreamTotalDamage: 0
+  Drone1TotalDamage: 0
+  Drone2TotalDamage: 0
+  Drone3TotalDamage: 0
+  DronesTotalDamage: 0
+  FrontShieldTotalBlocked: 0
+  RightShieldTotalBlocked: 0
+  LeftShieldTotalBlocked: 0
+  BackShieldTotalBlocked: 0
+  ShieldsTotalBlocked: 0
+  TotalDamageHealed: 0
+  TotalDamageTaken: 0

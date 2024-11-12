@@ -75,8 +75,13 @@ public class EnemyHP : MonoBehaviour
         // Enemy hit by player
         if (collision.TryGetComponent(out PlayerLaserDamage laserDamage) && lastCollisionHash != collision.gameObject.GetHashCode())
         {
+            if (GameManager.CombatLog != null)
+            {
+                UpdateCombatLog(laserDamage);
+            }
+
             ChangeHP (-Mathf.Abs(laserDamage.Damage));
-            lastCollisionHash = collision.gameObject.GetHashCode();            
+            lastCollisionHash = collision.gameObject.GetHashCode(); 
         }
         //Enemy hit by enemy
         else if (IsAsteroid && collision.TryGetComponent(out EnemyWeaponDamage projectileDamage) && collision.GetComponent<LaserMove>().SourceHash != gameObject.GetHashCode() &&
@@ -104,6 +109,11 @@ public class EnemyHP : MonoBehaviour
 
     public void DestroySequence()
     {
+        if(GameManager.ScoreHolder != null && CurrentHP <= 0)
+        {
+            GameManager.ScoreHolder.UpdateScoreKilledEnemy(MaxHP, IsAsteroid);
+        }
+
         if (!IsAsteroid && CurrentHP <= 0)
             AudioManager.Instance.EnemyDestructionSound.PlayFeedbacks();
         else if (IsAsteroid && CurrentHP <= 0)
@@ -122,5 +132,24 @@ public class EnemyHP : MonoBehaviour
     public void SetHP(int value)
     {
         currentHP = value;
+    }
+
+    void UpdateCombatLog(PlayerLaserDamage laserDamage)
+    {
+        switch (laserDamage.LaserType)
+        {
+            case LaserType.Frontal:
+                GameManager.CombatLog.FrontalLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
+                break;
+            case LaserType.Spread:
+                GameManager.CombatLog.SpreadLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
+                break;
+            case LaserType.Lateral:
+                GameManager.CombatLog.LateralLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
+                break;
+            case LaserType.Back:
+                GameManager.CombatLog.BackLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
+                break;
+        }
     }
 }

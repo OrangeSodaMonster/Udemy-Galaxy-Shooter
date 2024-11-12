@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum ShieldSide
 {
@@ -109,7 +110,7 @@ public class ShieldStrenght : MonoBehaviour
 
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
-       
+
     //    if (lastCollisionHash != collision.gameObject.GetHashCode())
     //    {            
     //        if (collision.gameObject.TryGetComponent(out EnemyWeaponDamage weaponDamage))
@@ -129,8 +130,12 @@ public class ShieldStrenght : MonoBehaviour
 
     public void OnShieldHit(int damage)
     {
-        HitFX();
+        if (GameManager.CombatLog != null)
+            UpdateCombatLog(damage);
+
         CurrentStr -= Mathf.Abs(damage);
+        HitFX();
+
         if (CurrentStr < 0)
         {
             PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr), playHitSound: true);
@@ -147,6 +152,9 @@ public class ShieldStrenght : MonoBehaviour
 
     public void DamageStrenght(int value)
     {
+        if (GameManager.CombatLog != null)
+            UpdateCombatLog(value);
+
         CurrentStr -= Mathf.Abs(value);
         HitFX();
 
@@ -179,6 +187,25 @@ public class ShieldStrenght : MonoBehaviour
             yield return updateStrWait;
 
             CurrentStr = MaxStr;
+        }
+    }
+
+    void UpdateCombatLog(int damage)
+    {
+        switch (shieldSide)
+        {
+            case ShieldSide.Front:
+                GameManager.CombatLog.FrontShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
+                break;
+            case ShieldSide.Right:
+                GameManager.CombatLog.RightShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
+                break;
+            case ShieldSide.Left:
+                GameManager.CombatLog.LeftShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
+                break;
+            case ShieldSide.Back:
+                GameManager.CombatLog.BackShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
+                break;
         }
     }
     
