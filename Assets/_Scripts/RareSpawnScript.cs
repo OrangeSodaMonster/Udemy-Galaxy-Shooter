@@ -6,18 +6,21 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
+public struct RareSpawnsChances
+{
+    [HorizontalGroup("0", 0.12f), PreviewField(38, Alignment = ObjectFieldAlignment.Left), HideLabel]
+    public GameObject RareSpawn;
+    [VerticalGroup("0/1"), LabelWidth(10), LabelText(""), ReadOnly]
+    public string Name;
+    [HorizontalGroup("0/1/2"), LabelWidth(40), LabelText("P/Min")]
+    [Tooltip("ChancePerMinute In %")] public float ChancePerMinute;
+    [HorizontalGroup("0/1/2"), LabelWidth(40), LabelText("P/Sec")]
+    [ReadOnly] public float ChancePerSecond;
+}
 
 public class RareSpawnScript : MonoBehaviour
-{
-    [Serializable]
-    struct RareSpawnsChances
-    {
-        public GameObject RareSpawn;
-        [Tooltip("In %")]
-        public float ChancePerMinute;
-        public float ChancePerSecond;
-    }
-
+{   
     [SerializeField] RareSpawnsChances[] RareSpawns;
     [SerializeField] float intervalToEnableAtBegining = 10f;
     [SerializeField] float intervalBetweenSpawns = 5f;
@@ -45,14 +48,15 @@ public class RareSpawnScript : MonoBehaviour
     {
         poolRefs = FindObjectOfType<PoolRefs>();
 
-        for (int i = 0; i < RareSpawns.Length; i++)
+        if (!GameManager.IsSurvival)
         {
-            //rareDict.Add(RareSpawns[i].RareSpawn, Instantiate(RareSpawns[i].RareSpawn, transform));
-            //rareDict[RareSpawns[i].RareSpawn].SetActive(false);
-            poolRefs.CreatePoolsForObject(RareSpawns[i].RareSpawn, 1);
+            for (int i = 0; i < RareSpawns.Length; i++)
+            {
+                poolRefs.CreatePoolsForObject(RareSpawns[i].RareSpawn, 1);
+            }
+        }            
 
-            RareSpawns[i].ChancePerSecond = RareSpawns[i].ChancePerMinute / 60;
-        }
+        SetChances();
 
         player = FindObjectOfType<PlayerMove>().transform;
         arrow = Instantiate(arrowPref, transform).transform;
@@ -66,9 +70,17 @@ public class RareSpawnScript : MonoBehaviour
         waitIntervalMinus1 = new WaitForSeconds(intervalBetweenSpawns - 1);
     }
 
+    void SetChances()
+    {
+        for (int i = 0; i < RareSpawns.Length; i++)
+        {
+            RareSpawns[i].ChancePerSecond = RareSpawns[i].ChancePerMinute / 60;
+        }
+    }
+
     void OnEnable()
     {
-        StartCoroutine(rareSpawnerRoutine());
+        StartCoroutine(RareSpawnerRoutine());
     }
 
     private void OnDisable()
@@ -81,22 +93,26 @@ public class RareSpawnScript : MonoBehaviour
         HighlightDealer();
     }
 
-    IEnumerator rareSpawnerRoutine()
+    IEnumerator RareSpawnerRoutine()
     {
-        yield return new WaitForSeconds(intervalToEnableAtBegining);
+        if(intervalToEnableAtBegining > 0)
+            yield return new WaitForSeconds(intervalToEnableAtBegining);
 
         while(true)
         {
-            foreach (var rare in RareSpawns)
+            if(RareSpawns.Length > 0)
             {
-                if (CheckSpawn(rare))
+                //foreach (var rare in RareSpawns)
+                for (int i = 0; i < RareSpawns.Length; i++)
                 {
-                    //SpawnRare(rareDict[rare.RareSpawn]);                    
-                    SpawnRare(rare.RareSpawn);                    
+                    if (CheckSpawn(RareSpawns[i]))
+                    {
+                        SpawnRare(RareSpawns[i].RareSpawn);
 
-                    yield return waitIntervalMinus1;
+                        yield return waitIntervalMinus1;
+                    }
                 }
-            }
+            }            
 
             yield return wait1;
         }
@@ -193,6 +209,25 @@ public class RareSpawnScript : MonoBehaviour
         else
         {
             highlight.gameObject.SetActive(false);
+        }
+    }
+
+    public void SetRareSpawns(RareSpawnsChances[] rareSpawns)
+    {
+        intervalToEnableAtBegining = 0;
+        RareSpawns = rareSpawns;
+        SetChances();
+    }
+
+    private void OnValidate()
+    {
+        SetChances();
+        for (int i = 0; i < RareSpawns.Length; i++)
+        {
+            if (RareSpawns[i].RareSpawn != null)
+            {
+                RareSpawns[i].Name = RareSpawns[i].RareSpawn.name;
+            }
         }
     }
 }

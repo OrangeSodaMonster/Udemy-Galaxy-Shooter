@@ -171,8 +171,8 @@ public class PlayerHP : MonoBehaviour
 
     public void ChangePlayerHP(int value, bool ignoreInvencibility = false, bool playHitSound = false)
     {
-        if(value < 0 && GameManager.CombatLog != null)
-            GameManager.CombatLog.TotalDamageTaken += (int)MathF.Min(Mathf.Abs(value), CurrentHP);
+        if(value < 0 && GameManager.IsSurvival)
+            SurvivalManager.CombatLog.TotalDamageTaken += (int)MathF.Min(Mathf.Abs(value), CurrentHP);
 
         MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
 

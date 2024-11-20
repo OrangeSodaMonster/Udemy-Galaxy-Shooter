@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using static SurvivalSection;
 
 [Serializable]
@@ -49,16 +51,17 @@ public class SurvivalSection
     public SectionEvent EndEvent;
     //Tempo para lidar com o último evento antes de iniciar a próxima seção
     [MinValue(0)][GUIColor("purple")]
-    public float LastEventExtraTime = 20;
+    public float EndEventExtraTime = 20;
 }
 
 [RequireComponent(typeof(EventsHolder))]
 public class SurvivalTimers : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI timeText;
     public List<SurvivalSection> Sections;
     public float TotalTime;
-    public int CurrentSection;
 
+    public static UnityEvent OnSectionChange = new();
     EventsHolder EventsHolder;
 
     private void Awake()
@@ -79,15 +82,36 @@ public class SurvivalTimers : MonoBehaviour
     {
         TotalTime += Time.deltaTime;
         CheckTimers();
+        ClockDealer();
+    }
+        
+    void ClockDealer()
+    {
+        int hour = (int)MathF.Floor(TotalTime/3600);
+        int min = (int)MathF.Floor((TotalTime - (hour * 3600))/60);
+        int sec = (int)MathF.Floor((TotalTime - (hour * 3600))%60);
+
+        if (TotalTime < 3600)
+            timeText.text = string.Format("{0:00}:{1:00}", min, sec);
+        else
+            timeText.text = string.Format("{0:00}:{1:00}:{2:00}",hour, min, sec);
     }
 
     private void OnValidate()
     {
         SetTimers();
         CheckEventLevels();
+        //SetObjPerSection();
     }
 
-    [Button("SetTimers"), PropertyOrder(-1)]
+    [Button, PropertyOrder(-1), HorizontalGroup("0")]
+    void SetListsSize()
+    {
+        FindObjectOfType<SurvivalObjectiveDealer>()?.SetObjPerSectionSize(Sections.Count + 1);
+        FindObjectOfType<EnemySpawnerDealer>()?.SetListSize(Sections.Count + 1);
+    }
+
+    [Button("SetTimers"), PropertyOrder(-2), HorizontalGroup("0",.8f)]
     void SetTimers(bool useRandom = false)
     {
         float totalSectionsDuration = 0;
@@ -156,7 +180,7 @@ public class SurvivalTimers : MonoBehaviour
                 }   
 
             Sections[i].EndEvent.Time = Sections[i].Duration + totalSectionsDuration;
-            totalSectionsDuration += Sections[i].Duration + Sections[i].LastEventExtraTime;
+            totalSectionsDuration += Sections[i].Duration + Sections[i].EndEventExtraTime;
         }
     }
 
@@ -201,14 +225,16 @@ public class SurvivalTimers : MonoBehaviour
 
                 EventsHolder.CallEndEvent(level);
                 Sections[i].hasCalledEndEvent = true;
+                SurvivalObjectiveDealer.IsWaitingEndEvent = true;
             }
 
             //Change Section
-            if (TotalTime > Sections[i].EndEvent.Time + Sections[i].LastEventExtraTime)
+            if (TotalTime > Sections[i].EndEvent.Time + Sections[i].EndEventExtraTime)
             {
-                CurrentSection++;
+                SurvivalManager.CurrentSection++;
+                OnSectionChange?.Invoke();
                 Sections.RemoveAt(0);
-                Debug.Log($"NEW SECTION: {CurrentSection}");
+                SurvivalObjectiveDealer.IsWaitingEndEvent = false;
             }
         }       
     }

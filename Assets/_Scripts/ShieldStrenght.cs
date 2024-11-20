@@ -130,7 +130,7 @@ public class ShieldStrenght : MonoBehaviour
 
     public void OnShieldHit(int damage)
     {
-        if (GameManager.CombatLog != null)
+        if (GameManager.IsSurvival)
             UpdateCombatLog(damage);
 
         CurrentStr -= Mathf.Abs(damage);
@@ -152,7 +152,7 @@ public class ShieldStrenght : MonoBehaviour
 
     public void DamageStrenght(int value)
     {
-        if (GameManager.CombatLog != null)
+        if (GameManager.IsSurvival)
             UpdateCombatLog(value);
 
         CurrentStr -= Mathf.Abs(value);
@@ -195,16 +195,16 @@ public class ShieldStrenght : MonoBehaviour
         switch (shieldSide)
         {
             case ShieldSide.Front:
-                GameManager.CombatLog.FrontShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
+                SurvivalManager.CombatLog.FrontShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
                 break;
             case ShieldSide.Right:
-                GameManager.CombatLog.RightShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
+                SurvivalManager.CombatLog.RightShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
                 break;
             case ShieldSide.Left:
-                GameManager.CombatLog.LeftShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
+                SurvivalManager.CombatLog.LeftShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
                 break;
             case ShieldSide.Back:
-                GameManager.CombatLog.BackShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
+                SurvivalManager.CombatLog.BackShieldTotalBlocked += (int)MathF.Min(Mathf.Abs(damage), CurrentStr);
                 break;
         }
     }

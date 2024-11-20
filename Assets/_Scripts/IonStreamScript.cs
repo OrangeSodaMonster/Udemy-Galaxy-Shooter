@@ -146,9 +146,9 @@ public class IonStreamScript : MonoBehaviour
                     //if(target.GetComponent<EnemyHP>() != null)
                     if (target.TryGetComponent(out EnemyHP enemyHP))
                     {
-                        if (GameManager.CombatLog != null)
+                        if (GameManager.IsSurvival)
                         {
-                            GameManager.CombatLog.IonStreamTotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
+                            SurvivalManager.CombatLog.IonStreamTotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
                         }
 
                         enemyHP.ChangeHP(-Mathf.Abs(damage));

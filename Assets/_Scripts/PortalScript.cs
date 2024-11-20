@@ -162,16 +162,16 @@ public class PortalScript : MonoBehaviour
 
         if(Objectives != null)
         {
-            foreach (var obj in Objectives)
+            //foreach (var obj in Objectives)
+            for (int i = 0; i < Objectives.Length; i++)
             {
-                if (obj.gameObject.activeSelf)
+                if (Objectives[i].gameObject.activeSelf)
                     activeObjectives++;
             }
-        }
-        
+        }        
 
         Vector3 posInCam = Camera.main.WorldToViewportPoint(transform.position);
-        if (activeObjectives == 0)
+        if (!GameManager.IsSurvival && activeObjectives == 0)
         {
             vortexSprite.color = enabledColor;
             bgSprite.color = enableBgColor;

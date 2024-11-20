@@ -45,7 +45,7 @@ public class AsteroidSplit : MonoBehaviour
             objParent = transform.parent;
         }
 
-        if (IsObjective)
+        if (IsObjective && !GameManager.IsSurvival)
             SetObjChildren(objParent);
     }
 
@@ -71,7 +71,7 @@ public class AsteroidSplit : MonoBehaviour
     {
         if (IsObjective)
         {
-            SplitParented(extraDamage);
+            SplitAsteroid(extraDamage);
             return;
         }
 
@@ -89,10 +89,34 @@ public class AsteroidSplit : MonoBehaviour
         }
     }    
 
-    public void SplitParented(int extraDamage)
+    public void SplitAsteroid(int extraDamage)
     {
         int[] damageToApply = CalculateDamageToApply(ref extraDamage);
 
+        if (!GameManager.IsSurvival)
+            SplitAsteroidParented(damageToApply);
+        else
+            SplitAsteroidSurvival(damageToApply);
+    }
+
+    void SplitAsteroidSurvival(int[] damageToApply)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject child = ObjPools.PoolObjective(asteroidToSplitInto);
+            child.transform.position = transform.position + (Quaternion.AngleAxis((-120+120*i), Vector3.forward) * moveDirection.normalized) * spawnDistance;
+            child.transform.parent = transform.parent;
+            child.SetActive(true);
+
+            if (damageToApply[i] > 0 && child.TryGetComponent(out EnemyHP hp))
+            {
+                hp.ChangeHP(-Mathf.Abs(damageToApply[i]));
+            }
+        }
+    }
+
+    void SplitAsteroidParented(int[] damageToApply)
+    {
         for (int i = 0; i < 3; i++)
         {
             //Debug.Log(transform.childCount);

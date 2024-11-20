@@ -82,8 +82,8 @@ public class PlayerHeal : MonoBehaviour
 
     void Heal()
     {
-        if (GameManager.CombatLog != null)
-            GameManager.CombatLog.TotalDamageHealed += (int)MathF.Min(5, PlayerHP.Instance.MaxHP - PlayerHP.Instance.CurrentHP);
+        if (GameManager.IsSurvival)
+            SurvivalManager.CombatLog.TotalDamageHealed += (int)MathF.Min(5, PlayerHP.Instance.MaxHP - PlayerHP.Instance.CurrentHP);
 
         PlayerHP.Instance.ChangePlayerHP(+5);
         AudioManager.Instance.ShipFix.PlayFeedbacks();

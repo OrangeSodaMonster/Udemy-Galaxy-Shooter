@@ -19,7 +19,7 @@ MonoBehaviour:
   MaxHP: 150
   Speed: 0
   SpeedVarPerc: 5
-  CollisionDamage: 15
+  CollisionDamage: 25
   ImpactVelocity: 1
   ShootCD: 5
   ShootCdVar: 0.5
@@ -38,13 +38,13 @@ MonoBehaviour:
   PuDropChance: 20
   PuDrops:
   - PowerUp: {fileID: 6877744765972372322, guid: 06d3980f3a17f714baee54b40bacc6b5, type: 3}
-    Weight: 10
+    Weight: 15
   - PowerUp: {fileID: 6877744765972372322, guid: ff5684bb8b3e8ab499e452f06610137a, type: 3}
     Weight: 5
   - PowerUp: {fileID: 6877744765972372322, guid: 39d3fdbabb65146459288a06ac569317, type: 3}
-    Weight: 5
+    Weight: 12
   - PowerUp: {fileID: 6877744765972372322, guid: 0ac34dd48d967aa42a8194eef44de6c4, type: 3}
-    Weight: 5
+    Weight: 10
   - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
     Weight: 10
   XSpeed: 0
@@ -52,11 +52,11 @@ MonoBehaviour:
   RotTimeVar: 1.5
   DroneSpawnTime: 0
   DroneSpawnTimeVar: 0
-  SentRange: 6
+  SentRange: 4.5
   SentDamage: 5
   SentDamageInterval: 0.9
   ShootDistance: 10
   RotateInterval: 8
   RotateAfterShootInterval: 2.1
   Name: SentGreen
-  saveStateColor: {r: 1, g: 0, b: 0, a: 1}
+  saveStateColor: {r: 0, g: 1, b: 0, a: 1}

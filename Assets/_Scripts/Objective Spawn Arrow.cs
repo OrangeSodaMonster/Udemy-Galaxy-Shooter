@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,48 +18,106 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     Transform player;
     Vector2 direction;
     SpriteRenderer arrowSR;
-    float defaultAlpha;
+    Color defaultArrowColor;
+    Vector3 defaultArrowScale;
+    float defaultAlpha = 0;
     Camera cam = new();
 
-    bool isFirstFrame = true;
     void Start()
     {
         player = FindObjectOfType<PlayerMove>().transform;
         direction = (transform.position - player.position).normalized;
         target = GetComponentInChildren<EnemyHPBar>();
 
+        cam = Camera.main;
+
+        if (GameManager.IsSurvival) return; // Não rodar fora de Survival
         arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
         arrowSR = arrow.GetComponent<SpriteRenderer>();
         defaultAlpha = arrowSR.color.a;
-        arrowSR.color = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
+        defaultArrowColor = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
+        arrowSR.color = defaultArrowColor;
+        defaultArrowScale = arrow.transform.localScale;
+        EnterArrow();
+    }
 
-        cam = Camera.main;
-    }    
+    private void OnEnable()
+    {
+        if (!GameManager.IsSurvival) return; // Apenas em survival
+
+        arrow = arrowPrefab;
+        arrowSR = arrow.GetComponent<SpriteRenderer>();
+        if(defaultAlpha == 0)
+            defaultAlpha = arrowSR.color.a;
+        target = transform.GetChild(0).GetComponent<EnemyHPBar>();
+        defaultArrowColor = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
+        arrowSR.color = defaultArrowColor;
+        arrow.gameObject.SetActive(true);
+        defaultArrowScale = arrow.transform.localScale;
+        EnterArrow();
+    }
 
     Tween fadeArrowTween = null;
+    Tween growArrowTween = null;    
     Vector3 hpPosInCam = new();
+    [SerializeField, ReadOnly] bool isEnterArrow;
+    [SerializeField, ReadOnly] bool isNormalizeArrow;
+    [SerializeField, ReadOnly] bool isExitArrow;
+    [SerializeField, ReadOnly] bool isShowingArrow;
     void Update()
     {
-        isFirstFrame = false;
         if (player.IsDestroyed()) return;
-        //if (isFirstFrame) return;
 
         direction = (transform.position - player.position).normalized;
         arrow.SetPositionAndRotation((Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
 
         hpPosInCam = cam.WorldToViewportPoint(transform.position);
-        if (hpPosInCam.x > 0 && hpPosInCam.x < 1 && hpPosInCam.y > 0 && hpPosInCam.y < 1
-             && !fadeArrowTween.IsActive())
-            fadeArrowTween = arrowSR.DOFade(0, 0.35f);
-        else if (!fadeArrowTween.IsActive())
-            fadeArrowTween = arrowSR.DOFade(defaultAlpha, 0.35f);
+        bool isObjInScreen = hpPosInCam.x > 0 && hpPosInCam.x < 1 && hpPosInCam.y > 0 && hpPosInCam.y < 1;
+        if (!isObjInScreen && !isShowingArrow)
+            EnterArrow();
+        else if (isObjInScreen && isShowingArrow && !isEnterArrow && !isNormalizeArrow && !isExitArrow)
+            ExitArrow();
 
         if (!HasChildActive())
         {
             OnClearedObjective?.Invoke();
             gameObject.SetActive(false);
-        }
-        
+        }        
+    }
+    float tweenDuration = 0.35f;
+    void EnterArrow()
+    {
+        //Debug.Log("Enter Arrow");
+        isEnterArrow = true;
+        isShowingArrow = true;
+        fadeArrowTween.Kill();
+        growArrowTween.Kill();
+        arrow.gameObject.SetActive(true);
+        arrowSR.color = Color.clear;
+        arrow.transform.localScale = defaultArrowScale;
+        Color maxColor = new(defaultArrowColor.r, defaultArrowColor.g, defaultArrowColor.b, 0.8f);
+        fadeArrowTween = arrowSR.DOColor(maxColor, tweenDuration);
+        growArrowTween = arrow.DOScale(defaultArrowScale*1.2f, tweenDuration).OnComplete(() => NormalizeArrow());        
+    }
+
+    void NormalizeArrow()
+    {
+        //Debug.Log("Normalize Arrow");
+        isEnterArrow = false;
+        isNormalizeArrow = true;
+        fadeArrowTween.Kill();
+        growArrowTween.Kill();
+        fadeArrowTween = arrowSR.DOColor(defaultArrowColor, tweenDuration);
+        growArrowTween = arrow.DOScale(defaultArrowScale, tweenDuration).OnComplete(() => isNormalizeArrow = false);
+    }
+
+    void ExitArrow()
+    {
+        //Debug.Log("Exit Arrow");
+        isExitArrow = true;
+        fadeArrowTween.Kill();
+        growArrowTween.Kill();
+        fadeArrowTween = arrowSR.DOFade(0f, 0.35f).OnComplete(() => isShowingArrow = false).OnComplete(() => isExitArrow = false);
     }
 
     bool HasChildActive()
@@ -76,7 +135,9 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     private void OnDisable()
     {
         fadeArrowTween.Kill();
+        growArrowTween.Kill();
         if (arrow != null)
-            Destroy(arrow.gameObject);
+            arrow.gameObject.SetActive(false);
+            //Destroy(arrow.gameObject);
     }
 }

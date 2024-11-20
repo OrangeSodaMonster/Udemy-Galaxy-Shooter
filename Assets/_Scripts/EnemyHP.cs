@@ -75,7 +75,7 @@ public class EnemyHP : MonoBehaviour
         // Enemy hit by player
         if (collision.TryGetComponent(out PlayerLaserDamage laserDamage) && lastCollisionHash != collision.gameObject.GetHashCode())
         {
-            if (GameManager.CombatLog != null)
+            if (GameManager.IsSurvival)
             {
                 UpdateCombatLog(laserDamage);
             }
@@ -109,9 +109,9 @@ public class EnemyHP : MonoBehaviour
 
     public void DestroySequence()
     {
-        if(GameManager.ScoreHolder != null && CurrentHP <= 0)
+        if(GameManager.IsSurvival && CurrentHP <= 0)
         {
-            GameManager.ScoreHolder.UpdateScoreKilledEnemy(MaxHP, IsAsteroid);
+            SurvivalManager.ScoreHolder.UpdateScoreKilledEnemy(MaxHP, IsAsteroid);
         }
 
         if (!IsAsteroid && CurrentHP <= 0)
@@ -139,16 +139,16 @@ public class EnemyHP : MonoBehaviour
         switch (laserDamage.LaserType)
         {
             case LaserType.Frontal:
-                GameManager.CombatLog.FrontalLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
+                SurvivalManager.CombatLog.FrontalLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
                 break;
             case LaserType.Spread:
-                GameManager.CombatLog.SpreadLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
+                SurvivalManager.CombatLog.SpreadLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
                 break;
             case LaserType.Lateral:
-                GameManager.CombatLog.LateralLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
+                SurvivalManager.CombatLog.LateralLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
                 break;
             case LaserType.Back:
-                GameManager.CombatLog.BackLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
+                SurvivalManager.CombatLog.BackLasersTotalDamage += (int)MathF.Min(Mathf.Abs(laserDamage.Damage), CurrentHP);
                 break;
         }
     }

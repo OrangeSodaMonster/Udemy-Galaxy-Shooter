@@ -8,27 +8,37 @@ using UnityEngine;
 [Serializable]
 public struct EnemiesToSpawn
 {
+    [HorizontalGroup("0", 0.12f), PreviewField(38, Alignment = ObjectFieldAlignment.Left), HideLabel]
     public GameObject enemy;
+    [VerticalGroup("0/1"), LabelWidth(10), LabelText(""), ReadOnly]
+    public string Name;
+    [VerticalGroup("0/1"), LabelWidth(40)]
     public float spawnWeight;
 }
 [Serializable]
 public struct EnemiesToSpawnByTime
 {
+    [HorizontalGroup("0", 0.12f), PreviewField(38, Alignment = ObjectFieldAlignment.Left), HideLabel]
     public GameObject enemy;
-    [HorizontalGroup("G")]
+    [VerticalGroup("0/1"), LabelWidth(10), LabelText(""), ReadOnly]
+    public string Name;
+    [HorizontalGroup("0/1/2"), LabelWidth(40), LabelText("Time")]
     public float timeSec;
-    [HorizontalGroup("G")]
+    [HorizontalGroup("0/1/2"), LabelWidth(40), LabelText("Var"), Tooltip("timeVarSec")]
     public float timeVarSec;
 }
 [Serializable]
 public struct EnemiesToLoopSpawn
 {
+    [HorizontalGroup("0", 0.12f), PreviewField(38, Alignment = ObjectFieldAlignment.Left), HideLabel]
     public GameObject enemy;
-    [HorizontalGroup("G")]
+    [VerticalGroup("0/1"), LabelWidth(10), LabelText(""), ReadOnly]
+    public string Name;
+    [HorizontalGroup("0/1/2"), LabelWidth(40), LabelText("Time")]
     public float timeSec;
-    [HorizontalGroup("G")]
+    [HorizontalGroup("0/1/2"), LabelWidth(40), LabelText("Var")]
     public float timeVarSec;
-    [HorizontalGroup("G")]
+    [HorizontalGroup("0/1/2"), LabelWidth(40), LabelText("Start"), Tooltip("timeVarSec")]
     public float timeToStart;
 
     [HideInInspector]
@@ -55,12 +65,10 @@ public class EnemySpawner : MonoBehaviour
     public float SpawnZoneRadius { get { return spawnZoneRadiusStatic; } }
 
     float totalSpawnWeight = 0;
-    //Vector3 nextSpawnPoint;
     float currentSpawnCD;
     PoolRefs poolRef;
     float spawnTimer = 0;
     float spawnTimerBegin = 0;
-    //Rigidbody2D playerRB;
     PlayerMove playerMove;
 
     public static EnemySpawner Instance;
@@ -80,24 +88,39 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void Start()
-    {      
-        foreach (var enemy in enemiesToSpawn)
-        {
-            totalSpawnWeight += enemy.spawnWeight;
-        }  
+    {
+        SetRoutines();
 
-        foreach (var spawn in enemiesToSpawnByTime)
-        {
-            StartCoroutine(SpawnByTime(spawn));
-        }
-
-        foreach (var spawn in EnemiesToLoopSpawn)
-        {
-            StartCoroutine(SpawnLoop(spawn));
-        }
-
-        //playerRB = player.GetComponent<Rigidbody2D>();
         playerMove = player.GetComponent<PlayerMove>();
+    }
+
+    Coroutine TimeSpawnRoutine;
+    Coroutine LoopSpawnRoutine;
+    public void SetRoutines()
+    {
+        totalSpawnWeight = 0;
+        if(TimeSpawnRoutine != null)
+            StopCoroutine(TimeSpawnRoutine);
+        if(LoopSpawnRoutine != null)
+            StopCoroutine(LoopSpawnRoutine);
+
+        //foreach (var enemy in enemiesToSpawn)
+        for(int i = 0; i < enemiesToSpawn.Length; i++)
+        {
+            totalSpawnWeight += enemiesToSpawn[i].spawnWeight;
+        }
+
+        //foreach (var spawn in enemiesToSpawnByTime)
+        for(int i = 0; i < enemiesToSpawnByTime.Length; i++)
+        {
+            TimeSpawnRoutine = StartCoroutine(SpawnByTime(enemiesToSpawnByTime[i]));
+        }
+
+        //foreach (var spawn in EnemiesToLoopSpawn)
+        for(int i = 0; i < EnemiesToLoopSpawn.Length; i++)
+        {
+            LoopSpawnRoutine = StartCoroutine(SpawnLoop(EnemiesToLoopSpawn[i]));
+        }
     }
 
     private void OnDisable()
@@ -277,6 +300,47 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             Debug.Log("Não há pool para esse drone");
+        }
+    }
+
+    public void SetEnemiesToSpawn(float spawnCD, float spawnCDVar, EnemiesToSpawn[] enemiesToSpawn)
+    {
+        this.baseSpawnCD = spawnCD;
+        this.spawnCDVariationPerc = spawnCDVar;
+        this.enemiesToSpawn = enemiesToSpawn;
+    }
+
+    public void SetEnemiesToSpawnByTime(EnemiesToSpawnByTime[] enemiesToSpawnByTime)
+    {
+        this.enemiesToSpawnByTime = enemiesToSpawnByTime;
+    }
+    public void SetEnemiesToLoopSpawn(EnemiesToLoopSpawn[] enemiesToLoopSpawn)
+    {
+        this.EnemiesToLoopSpawn = enemiesToLoopSpawn;
+    }
+
+    private void OnValidate()
+    {
+        for (int i = 0; i < enemiesToSpawn.Length; i++)
+        {
+            if (enemiesToSpawn[i].enemy != null)
+            {
+                enemiesToSpawn[i].Name = enemiesToSpawn[i].enemy.name;
+            }
+        }
+        for (int i = 0; i < enemiesToSpawnByTime.Length; i++)
+        {
+            if (enemiesToSpawnByTime[i].enemy != null)
+            {
+                enemiesToSpawnByTime[i].Name = enemiesToSpawnByTime[i].enemy.name;
+            }
+        }
+        for (int i = 0; i < EnemiesToLoopSpawn.Length; i++)
+        {
+            if (EnemiesToLoopSpawn[i].enemy != null)
+            {
+                EnemiesToLoopSpawn[i].Name = EnemiesToLoopSpawn[i].enemy.name;
+            }
         }
     }
 
