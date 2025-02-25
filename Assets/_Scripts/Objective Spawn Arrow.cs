@@ -18,8 +18,8 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     Transform player;
     Vector2 direction;
     SpriteRenderer arrowSR;
-    Color defaultArrowColor;
-    Vector3 defaultArrowScale;
+    [SerializeField, ReadOnly] Color defaultArrowColor;
+    Vector3 defaultArrowScale = Vector3.zero;
     float defaultAlpha = 0;
     Camera cam = new();
 
@@ -31,29 +31,39 @@ public class ObjectiveSpawnArrow : MonoBehaviour
 
         cam = Camera.main;
 
-        if (GameManager.IsSurvival) return; // Não rodar fora de Survival
-        arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
-        arrowSR = arrow.GetComponent<SpriteRenderer>();
-        defaultAlpha = arrowSR.color.a;
-        defaultArrowColor = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
-        arrowSR.color = defaultArrowColor;
-        defaultArrowScale = arrow.transform.localScale;
-        EnterArrow();
+        
+        if(!GameManager.IsSurvival) // Não rodar fora de Survival
+        {
+            Debug.Log("NOT SURVIVAL");
+            arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
+            arrowSR = arrow.GetComponent<SpriteRenderer>();
+            defaultArrowScale = arrow.transform.localScale;
+            defaultAlpha = arrowSR.color.a;
+            defaultArrowColor = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
+            arrowSR.color = defaultArrowColor;
+            EnterArrow();
+        }        
     }
 
     private void OnEnable()
     {
         if (!GameManager.IsSurvival) return; // Apenas em survival
 
-        arrow = arrowPrefab;
-        arrowSR = arrow.GetComponent<SpriteRenderer>();
+        if(arrow == null)
+            arrow = arrowPrefab;
+        if(defaultArrowScale == Vector3.zero)
+            defaultArrowScale = arrow.transform.localScale;
+        if(arrowSR == null)
+            arrowSR = arrow.GetComponent<SpriteRenderer>();
         if(defaultAlpha == 0)
             defaultAlpha = arrowSR.color.a;
+
         target = transform.GetChild(0).GetComponent<EnemyHPBar>();
         defaultArrowColor = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
         arrowSR.color = defaultArrowColor;
+        arrow.transform.localScale = defaultArrowScale;
         arrow.gameObject.SetActive(true);
-        defaultArrowScale = arrow.transform.localScale;
+        
         EnterArrow();
     }
 
@@ -84,7 +94,8 @@ public class ObjectiveSpawnArrow : MonoBehaviour
             gameObject.SetActive(false);
         }        
     }
-    float tweenDuration = 0.35f;
+
+    float tweenDuration = 0.5f;
     void EnterArrow()
     {
         //Debug.Log("Enter Arrow");
@@ -117,7 +128,13 @@ public class ObjectiveSpawnArrow : MonoBehaviour
         isExitArrow = true;
         fadeArrowTween.Kill();
         growArrowTween.Kill();
-        fadeArrowTween = arrowSR.DOFade(0f, 0.35f).OnComplete(() => isShowingArrow = false).OnComplete(() => isExitArrow = false);
+        fadeArrowTween = arrowSR.DOFade(0f, 0.35f).OnComplete(() => ResetBools());
+
+        void ResetBools()
+        {
+            isShowingArrow = false;
+            isExitArrow = false;
+        }
     }
 
     bool HasChildActive()

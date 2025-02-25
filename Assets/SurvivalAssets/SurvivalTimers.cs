@@ -58,6 +58,7 @@ public class SurvivalSection
 public class SurvivalTimers : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timeText;
+    [SerializeField] TextMeshProUGUI sectionText;
     public List<SurvivalSection> Sections;
     public float TotalTime;
 
@@ -72,9 +73,10 @@ public class SurvivalTimers : MonoBehaviour
     private void Start()
     {
         SetTimers(useRandom:true);
+        sectionText.text = (SurvivalManager.CurrentSection + 1).ToString();
 
-        #if UNITY_EDITOR
-            CheckEventLevels();
+#if UNITY_EDITOR
+        CheckEventLevels();
         #endif
     }
 
@@ -234,7 +236,10 @@ public class SurvivalTimers : MonoBehaviour
                 SurvivalManager.CurrentSection++;
                 OnSectionChange?.Invoke();
                 Sections.RemoveAt(0);
+                sectionText.text = (SurvivalManager.CurrentSection + 1).ToString();
+                SurvivalManager.ChangeQuadrant();
                 SurvivalObjectiveDealer.IsWaitingEndEvent = false;
+                SurvivalObjectiveDealer.EraseLastObj();
             }
         }       
     }

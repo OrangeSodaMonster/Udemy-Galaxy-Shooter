@@ -41,4 +41,17 @@ public class ObjPools : MonoBehaviour
         return pooledObj;
     }
 
+    private void OnValidate()
+    {
+        for (int i = 0; i < poolDescriptions.Count; i++)
+        {
+            if (poolDescriptions[i].Obj != null)
+            {
+                ObjToPool otp = poolDescriptions[i];
+                otp.Name = otp.Obj.name;
+                poolDescriptions[i] = otp;
+            }
+        }
+    }
+
 }

@@ -24,58 +24,79 @@ class PossibleObjectives
 public class SurvivalObjectiveDealer : MonoBehaviour
 {
     [BoxGroup("Quadrants")]
-    [SerializeField] Transform CenterQuadrant;
-    [SerializeField] List<ObjSpotScript> CenterSpots;
+    [SerializeField] QuadrantDealer CenterQuadrant;
+    [SerializeField] float nextObjCD = 60;
+    //[SerializeField] List<ObjSpotScript> CenterSpots;
 
     [SerializeField, GUIColor("lightBlue")] Transform objParents;
     [SerializeField] List<PossibleObjectives> objectivesPerSection = new();
+        
+    [HorizontalGroup("Sent",.5f)]
+    [SerializeField] GameObject Sentinel;
+    [HorizontalGroup("Sent")]
+    [SerializeField] int SentNum;
+    [HorizontalGroup("Sent")]
+    [SerializeField] float SentRadius = 3;
 
     [Sirenix.OdinInspector.ReadOnly]
     public List<ObjSpotScript> InUseSpots;
-    [Sirenix.OdinInspector.ReadOnly]
     public static bool IsWaitingEndEvent = false;
-    int numActiveObjectives = 0;
-    ObjSpotScript lastObj;
-    Transform player;
-    int numObjParents;
+    public static ObjSpotScript LastObj;
 
-    private void Awake()
-    {
-        PopulateLists();
-    }
+    int numActiveObjectives = 0;
+    Transform player;
+    int numObjParents;    
+    PoolRefs poolRefs;
+    float nextObjTimer;    
 
     private void Start()
     {
         player = FindObjectOfType<PlayerHP>().transform;
+        poolRefs = FindObjectOfType<PoolRefs>();
 
         numObjParents = objParents.childCount;
+        SurvivalManager.CurrentQuadrant = CenterQuadrant;
+        SurvivalTimers.OnSectionChange.AddListener(ResetTimer);
     }
 
     private void Update()
     {
-        if(numActiveObjectives == 0 && !GameStatus.IsPortal && !IsWaitingEndEvent)
+        if (numActiveObjectives == 0 && !GameStatus.IsPortal && !IsWaitingEndEvent)
         {
             PickAnObjective();
+            ResetTimer();
         }
+
+        //if (nextObjTimer > nextObjCD && LastObj != null)
+        //{
+        //    SetACloseObjectiveFromPlayerAtQuad(SurvivalManager.CurrentQuadrant.Spots);
+        //    ResetTimer();
+        //}
+
+        //if(!GameStatus.IsPortal && !IsWaitingEndEvent)
+        //    nextObjTimer += Time.deltaTime;
     }
 
     void PickAnObjective()
     {
-        if(lastObj == null)
+        Debug.Log($"LastObj: {LastObj}");
+        if (LastObj == null)
         {
-            SetVeryCloseObjectiveFromPlayer(CenterSpots); // TO DO: send right quadrant
+            Debug.Log($"NEW OBJ AT QUAD: {SurvivalManager.CurrentQuadrant.name}");
+            SetACloseObjectiveFromPlayerAtQuad(SurvivalManager.CurrentQuadrant.Spots);
         }
         else
         {
+            Debug.Log($"NEW OBJ CLOSE: {SurvivalManager.CurrentQuadrant.name}");
             SetCloseObjective();
-        }
+        }        
     }
 
     [Button, GUIColor("lightGreen")] // Called when lastObj == null;
-    void SetVeryCloseObjectiveFromPlayer(List<ObjSpotScript> quadrantSpots)
+    void SetACloseObjectiveFromPlayerAtQuad(List<ObjSpotScript> quadrantSpots)
     {
         if (numActiveObjectives >= numObjParents) return;   
-        lastObj = FindVeryCloseToNearestSpotFromPlayer(quadrantSpots);
+        LastObj = FindVeryCloseToNearestSpotFromPlayer(quadrantSpots);
         GameObject obj = ObjPools.PoolObjective(GetObjective());
 
         HandleObjActivation(obj);
@@ -84,7 +105,7 @@ public class SurvivalObjectiveDealer : MonoBehaviour
     public void SetVeryCloseObjective()
     {
         if (numActiveObjectives >= numObjParents) return;
-        lastObj = lastObj.GetVeryClosePoint(InUseSpots);
+        LastObj = LastObj.GetVeryClosePoint(InUseSpots);
         GameObject obj = ObjPools.PoolObjective(GetObjective());
 
         HandleObjActivation(obj);
@@ -92,7 +113,7 @@ public class SurvivalObjectiveDealer : MonoBehaviour
     public void SetVeryCloseObjective(GameObject obj)
     {
         if (numActiveObjectives >= numObjParents) return;
-        lastObj = lastObj.GetVeryClosePoint(InUseSpots);
+        LastObj = LastObj.GetVeryClosePoint(InUseSpots);
 
         HandleObjActivation(obj);
     }
@@ -100,7 +121,7 @@ public class SurvivalObjectiveDealer : MonoBehaviour
     void SetCloseObjective()
     {
         if (numActiveObjectives >= numObjParents) return;
-        lastObj = lastObj.GetClosePoint(InUseSpots);
+        LastObj = LastObj.GetClosePoint(InUseSpots);
         GameObject obj = ObjPools.PoolObjective(GetObjective());
 
         HandleObjActivation(obj);
@@ -111,14 +132,46 @@ public class SurvivalObjectiveDealer : MonoBehaviour
         if(obj == null) return;
 
         Transform parent = GetFirstDisabledObjParent();        
-        parent.GetComponent<ObjSpotHandler>().CurrentSpot = lastObj;
-        InUseSpots.Add(lastObj);
+        parent.GetComponent<ObjSpotHandler>().CurrentSpot = LastObj;
+        InUseSpots.Add(LastObj);
         obj.transform.position = parent.position;
         obj.transform.parent = parent;
         obj.SetActive(true);
-        parent.position = lastObj.transform.position;
+        parent.position = LastObj.transform.position;
         parent.gameObject.SetActive(true);
         numActiveObjectives++;
+        HandleSentinels();
+    }
+
+    void HandleSentinels()
+    {
+        if (Sentinel == null || SentNum == 0) return;
+
+        float originalAngle = UnityEngine.Random.Range(0, 360);
+        float angleVariation = 360/SentNum;
+
+        Vector2 pos = LastObj.transform.position;
+
+        for (int i = 0; i < SentNum; i++)
+        {
+            float angle = (originalAngle + angleVariation * i) * Mathf.Deg2Rad;
+            Vector2 direction = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
+            direction *= SentRadius;
+
+            GameObject Sent = poolRefs.Poolers[Sentinel].GetPooledGameObject();
+            Sent.transform.position = pos + direction;
+            Sent.SetActive(true);            
+        }
+
+        Sentinel = null;
+        SentNum = 0;
+    }
+
+    public void SetSentinels (GameObject sentinel, int sentNum)
+    {
+        if(!sentinel.GetComponent<SentinelShoot>()) return;
+        Sentinel = sentinel;
+        SentNum = sentNum;
     }
 
     Transform GetFirstDisabledObjParent()
@@ -136,7 +189,6 @@ public class SurvivalObjectiveDealer : MonoBehaviour
     ObjSpotScript FindNearestSpotFromPlayer(List<ObjSpotScript> quadrantSpots)
     {
         float minDistSqr = float.MaxValue;
-        if (quadrantSpots == null) quadrantSpots = CenterSpots;
         ObjSpotScript spot = quadrantSpots[0];
         for(int i = 0; i < quadrantSpots.Count; i++)
         {
@@ -207,9 +259,9 @@ public class SurvivalObjectiveDealer : MonoBehaviour
     [Button]
     void TestFindVeryCloseToNearest()
     {
-        PopulateLists();
+        CenterQuadrant.PopulateList();
         player = FindObjectOfType<PlayerHP>().transform;
-        ObjSpotScript spot = FindVeryCloseToNearestSpotFromPlayer(CenterSpots);
+        ObjSpotScript spot = FindVeryCloseToNearestSpotFromPlayer(CenterQuadrant.Spots);
         Color oldColor = spot.GetComponent<SpriteRenderer>().color;
         spot.GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(ReturnColor());
@@ -221,19 +273,20 @@ public class SurvivalObjectiveDealer : MonoBehaviour
         }
     }
 
-    private void OnValidate()
+    private void ResetTimer()
     {
-        PopulateLists();
-    }
-
-    void PopulateLists()
-    {
-        CenterQuadrant.GetComponentsInChildren(CenterSpots);
+        nextObjTimer = 0;
     }
 
     public void SetObjPerSectionSize(int size)
     {
         Debug.Log($"OBJ LIST SIZE: {size}");
         objectivesPerSection.SetLength(size);
+    }
+
+    public static void EraseLastObj()
+    {
+        LastObj = null;
+        Debug.Log("LastObj NULL");
     }
 }

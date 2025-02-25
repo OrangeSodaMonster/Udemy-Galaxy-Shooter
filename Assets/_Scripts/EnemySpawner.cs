@@ -59,10 +59,8 @@ public class EnemySpawner : MonoBehaviour
     public EnemiesToSpawnByTime[] EnemiesToSpawnByTime => enemiesToSpawnByTime;
     public EnemiesToLoopSpawn[] EnemiesToLoopSpawn;
     [HideInInspector] public Vector3 PlayerLastPos = new();
-    float noSpawnZoneRadiusStatic;
-    public float NoSpawnZoneRadius { get { return noSpawnZoneRadiusStatic; } }
-    float spawnZoneRadiusStatic;
-    public float SpawnZoneRadius { get { return spawnZoneRadiusStatic; } }
+    public float NoSpawnZoneRadius { get { return noSpawnZoneRadius; } }
+    public float SpawnZoneRadius { get { return spawnZoneRadius; } }
 
     float totalSpawnWeight = 0;
     float currentSpawnCD;
@@ -81,8 +79,6 @@ public class EnemySpawner : MonoBehaviour
         }
 
         poolRef = GetComponent<PoolRefs>();
-        noSpawnZoneRadiusStatic = noSpawnZoneRadius;
-        spawnZoneRadiusStatic = spawnZoneRadius;
 
         currentSpawnCD = baseSpawnCD;
     }

@@ -78,6 +78,7 @@ public class PortalScript : MonoBehaviour
         // Arrow
         direction = (transform.position - player.position).normalized;
 
+        if (GameManager.IsSurvival) return;
         arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
         arrowSR = arrow.GetComponent<SpriteRenderer>();
         arrowSR.color = arrowColor;
@@ -181,7 +182,7 @@ public class PortalScript : MonoBehaviour
         }
 
         //Arrow
-        if (player.IsDestroyed() || !arrow.gameObject.activeSelf) return;
+        if (GameManager.IsSurvival || player.IsDestroyed() || !arrow.gameObject.activeSelf) return;
 
         direction = (transform.position - player.position).normalized;
         arrow.SetPositionAndRotation((Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
