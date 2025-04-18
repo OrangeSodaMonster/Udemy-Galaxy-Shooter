@@ -39,8 +39,13 @@ public class PlayerLasers : MonoBehaviour
         bool IsFrontShotActivated = upgradesManager.CurrentUpgrades.FrontLaserUpgrades.Enabled && !upgradesManager.CurrentUpgrades.FrontLaserUpgrades.DisableOverwrite;
         float frontLaserCD = 
             upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.FrontLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
-        
-        if (IsFrontShotActivated && !justFiredLeftFrontLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceFrontLaserShoot >= frontLaserCD)
+        if (GameManager.IsSurvival)
+        {
+            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
+            frontLaserCD *= bonusMultiplier;
+        }
+
+            if (IsFrontShotActivated && !justFiredLeftFrontLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceFrontLaserShoot >= frontLaserCD)
         {
             InstantiateLaser(frontLaserParents[0], upgradesManager.CurrentUpgrades.FrontLaserUpgrades, LaserType.Frontal);
             timeSinceFrontLaserShoot = 0;
@@ -63,6 +68,11 @@ public class PlayerLasers : MonoBehaviour
         bool IsSpreadShotActivated = upgradesManager.CurrentUpgrades.SpreadLaserUpgrades.Enabled && !upgradesManager.CurrentUpgrades.SpreadLaserUpgrades.DisableOverwrite;
         float spreadLaserCD =
             upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.SpreadLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
+        if (GameManager.IsSurvival)
+        {
+            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
+            spreadLaserCD *= bonusMultiplier;
+        }
 
         if (IsSpreadShotActivated && !justFiredRightSpreadLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceSpreadLaserShoot >= spreadLaserCD)
         {
@@ -89,6 +99,11 @@ public class PlayerLasers : MonoBehaviour
         bool IsSideShotActivated = upgradesManager.CurrentUpgrades.SideLaserUpgrades.Enabled  && !upgradesManager.CurrentUpgrades.SideLaserUpgrades.DisableOverwrite;
         float sideLaserCD =
             upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.SideLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
+        if (GameManager.IsSurvival)
+        {
+            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
+            sideLaserCD *= bonusMultiplier;
+        }
 
         if (IsSideShotActivated && !justFiredLeftSideLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceSideLaserShoot >= sideLaserCD)
         {
@@ -114,6 +129,11 @@ public class PlayerLasers : MonoBehaviour
         bool IsBackShotActivated = upgradesManager.CurrentUpgrades.BackLaserUpgrades.Enabled && !upgradesManager.CurrentUpgrades.BackLaserUpgrades.DisableOverwrite;
         float backLaserCD =
             upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.BackLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
+        if (GameManager.IsSurvival)
+        {
+            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
+            backLaserCD *= bonusMultiplier;
+        }
 
         if (IsBackShotActivated && !justFiredRightBackLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceBackLaserShoot >= backLaserCD)
         {
@@ -138,9 +158,11 @@ public class PlayerLasers : MonoBehaviour
         laser.transform.SetPositionAndRotation(transform.position + transform.TransformDirection(laserParent.position), transform.rotation * laserParent.rotation);
         //laser.GetComponent<SpriteRenderer>().material = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Material;
         laser.GetComponent<SpriteRenderer>().sprite = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Sprite;
-        laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
         laser.GetComponent<LaserMove>().VFXGradient = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].VFXGradient;
         laser.GetComponent<PlayerLaserDamage>().LaserType = type;
+        laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
+        if (GameManager.IsSurvival)
+            laser.GetComponent<PlayerLaserDamage>().Damage += BonusPowersDealer.Instance.LaserPower;
         laser.SetActive(true);
 
         AudioManager.Instance.PlayLaserSound();

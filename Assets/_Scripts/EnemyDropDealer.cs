@@ -39,13 +39,10 @@ public class EnemyDropDealer : MonoBehaviour
     {
         SpawnGuaranteedDrops();
 
-        int dropsNumber = UnityEngine.Random.Range(MinDropsNum, MaxDropsNum+1);
-        //Debug.Log($" Min: {minDropsNum}, Max: {maxDropsNum}, => {dropsNumber}");
+        if (GameManager.IsSurvival)
+            SpawnBonusDrops();
 
-        //foreach (var drop in dropsToSpawn)
-        //{
-        //    totalSpawnWeight += drop.spawnWeight;
-        //}
+        int dropsNumber = UnityEngine.Random.Range(MinDropsNum, MaxDropsNum+1);
 
         for (int i = 0; i < DropsToSpawn.Length; i++)
         {
@@ -89,6 +86,61 @@ public class EnemyDropDealer : MonoBehaviour
                     drop.transform.position = spawnPoint;
                     drop.SetActive(true);
                 }
+            }
+        }
+    }
+
+    void SpawnBonusDrops()
+    {
+        float energyCristalDropWeight = 0;
+        float condEnergyCristalDropWeight = 0;
+        float totalDropWeight = 0;
+        float cristalDropWeight = 0;
+
+        for (int i = 0; i < DropsToSpawn.Length; i++)
+        {
+            if (DropsToSpawn[i].drop == ResourceType.EnergyCristal)
+            {
+                energyCristalDropWeight = DropsToSpawn[i].spawnWeight;
+                cristalDropWeight += DropsToSpawn[i].spawnWeight;
+            }
+            else if (DropsToSpawn[i].drop == ResourceType.CondensedEnergyCristal)
+            {
+                condEnergyCristalDropWeight = DropsToSpawn[i].spawnWeight;
+                cristalDropWeight += DropsToSpawn[i].spawnWeight;
+            }
+            totalDropWeight += DropsToSpawn[i].spawnWeight;
+        }
+
+        float cristalDropChance = (cristalDropWeight / totalDropWeight)*100;
+        cristalDropChance *= BonusPowersDealer.Instance.EnergyCristalsDrop/100;
+        float condensedDropChance = (condEnergyCristalDropWeight / cristalDropWeight)*100;
+
+        float randomDropValue = UnityEngine.Random.Range(0, 100);
+        if(randomDropValue >= cristalDropChance)
+        {
+            randomDropValue = UnityEngine.Random.Range(0, 100);
+            if (condensedDropChance >= randomDropValue)
+            {
+                MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[ResourceType.CondensedEnergyCristal];
+                Vector3 spawnPoint = UnityEngine.Random.insideUnitCircle * radiusToSpawn;
+                spawnPoint += transform.position;
+
+                GameObject drop = dropPooler.GetPooledGameObject();
+                drop.transform.position = spawnPoint;
+                drop.SetActive(true);
+                Debug.Log($"<color=#d900ff>Bonus: Condensed Energy Cristal</color>");
+            }
+            else
+            {
+                MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[ResourceType.EnergyCristal];
+                Vector3 spawnPoint = UnityEngine.Random.insideUnitCircle * radiusToSpawn;
+                spawnPoint += transform.position;
+
+                GameObject drop = dropPooler.GetPooledGameObject();
+                drop.transform.position = spawnPoint;
+                drop.SetActive(true);
+                Debug.Log($"<color=#00bbff>Bonus: Energy Cristal</color>");
             }
         }
     }

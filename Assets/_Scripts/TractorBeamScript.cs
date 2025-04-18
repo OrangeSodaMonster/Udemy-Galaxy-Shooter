@@ -58,6 +58,13 @@ public class TractorBeamScript : MonoBehaviour
         basePullForce = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].PullForce;;
         defaultAlpha = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].Alpha;
         defaultTextureSpeed = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].TextureSpeed;
+
+        if (GameManager.IsSurvival)
+        {
+            float bonusMultiplier = 1 + BonusPowersDealer.Instance.Tractor/100;
+            radiusMod *= bonusMultiplier;
+            basePullForce *= bonusMultiplier;
+        }
     }
 
     void SetEnabled()

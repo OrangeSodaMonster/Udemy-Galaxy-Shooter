@@ -31,6 +31,15 @@ public class PowerUpDrop : MonoBehaviour
     private void OnEnable()
     {
         enemyHP.Died += TryDropPowerUp;
+
+        if (GameManager.IsSurvival)
+        {
+            float bonusMult = 1 + BonusPowersDealer.Instance.PowerUpDrop/100;
+            ChanceToDrop *= bonusMult;
+            if (ChanceToDrop > 100) ChanceToDrop = 100;
+        }
+
+
     }
 
     private void OnDisable()

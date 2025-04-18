@@ -83,6 +83,13 @@ public class ShieldScript : MonoBehaviour
     {
         shield.MaxStr = upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
         shield.baseRegenTime = upgradesManager.ShieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
+
+        if (GameManager.IsSurvival)
+        {
+            shield.MaxStr += BonusPowersDealer.Instance.ShieldStrenght;
+            float bonusMult = 1 - BonusPowersDealer.Instance.ShieldRecovery;
+            shield.baseRegenTime *= bonusMult;
+        }
     }
     void SetShieldsValues()
     {

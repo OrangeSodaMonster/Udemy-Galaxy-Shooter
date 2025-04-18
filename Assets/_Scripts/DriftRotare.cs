@@ -5,6 +5,7 @@ using UnityEngine;
 public class DriftRotare : MonoBehaviour
 {
 	[SerializeField] Vector2 minMaxAbsAngularSpeed = new Vector2(1,2);
+	[SerializeField] bool randomSpinDirection = true;
 
     float angularSpeed;
     Rigidbody2D rb;
@@ -17,7 +18,8 @@ public class DriftRotare : MonoBehaviour
     private void OnEnable()
     {   
         angularSpeed = Random.Range(minMaxAbsAngularSpeed.x, minMaxAbsAngularSpeed.y);
-        angularSpeed *= Mathf.Sign(Random.Range(-1,1));
+        if(randomSpinDirection )
+            angularSpeed *= Mathf.Sign(Random.Range(-1,1));
 
         if (rb != null)
         {

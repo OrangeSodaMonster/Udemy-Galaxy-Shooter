@@ -29,6 +29,12 @@ public class PlayerHeal : MonoBehaviour
         if (!isFreeHeal)
         {
             currentSecondsBetweenHeal = baseSecondsBetweenHeal - GetHealIntervalReduction();
+            if (GameManager.IsSurvival)
+            {
+                float bonusMult = 1 - BonusPowersDealer.Instance.HP_Recovery/100;
+                currentSecondsBetweenHeal *= bonusMult;
+            }
+
             if(currentSecondsBetweenHeal != lastSecondsBetweenHeal)
             {
                 OnHealTimeChange.Invoke();

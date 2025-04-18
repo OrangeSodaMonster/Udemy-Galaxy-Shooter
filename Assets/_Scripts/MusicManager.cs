@@ -31,8 +31,8 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
-        if(randomMusic && musicClips.Length > 0)
-            musicClip = musicClips[Random.Range(0, musicClips.Length)];
+        if (randomMusic && musicClips.Length > 0)
+            PickMusic();        
 
         fadeFB = fade.GetFeedbackOfType<MMF_MMSoundManagerSoundFade>();
         halfFade = new WaitForSeconds(fadeDuration * 0.5f);
@@ -41,6 +41,15 @@ public class MusicManager : MonoBehaviour
         else musicID = musicClip.name.GetHashCode();
 
         UpdadeValues();
+    }
+
+    [Button]
+    void PickMusic()
+    {
+        int randomIndex = Random.Range(0, musicClips.Length);      
+        musicClip = musicClips[randomIndex];
+
+        Debug.Log($"RandomIndex: {randomIndex}; #Clips: {musicClips.Length};\nClip: {musicClips[randomIndex].name} ");
     }
 
 

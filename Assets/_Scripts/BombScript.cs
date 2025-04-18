@@ -49,6 +49,8 @@ public class BombScript : MonoBehaviour
 
         if(bombAmountLastFrame != BombAmount)
             OnChangeBombs?.Invoke();
+
+        BonusBombGenerator();
     }
     private void LateUpdate()
     {
@@ -94,10 +96,38 @@ public class BombScript : MonoBehaviour
     {
         yield return damageWait;
 
-        enemyHP.ChangeHP(-Mathf.Abs(damage));
+        if (GameManager.IsSurvival)
+            enemyHP.ChangeHP(-Mathf.Abs(damage+BonusPowersDealer.Instance.BombPower));
+        else
+            enemyHP.ChangeHP(-Mathf.Abs(damage));
+
         GameObject hitVFX = VFXPoolerScript.Instance.BombHitVFXPooler.GetPooledGameObject();
         hitVFX.transform.position = hit.transform.position;
         hitVFX.gameObject.SetActive(true);
+    }
+
+    public static void AddBomb(int number)
+    {
+        BombAmount += number;
+        if(BombAmount > MaxBombs) BombAmount = MaxBombs;
+
+        AudioManager.Instance.BombPickSound.PlayFeedbacks();
+    }
+
+    float timeSinceBonusBomb = 0;
+    static public float TimeToBonusBombPerc = 0;
+    void BonusBombGenerator()
+    {
+        if(!GameManager.IsSurvival) return;
+
+        if(timeSinceBonusBomb > BonusPowersDealer.Instance.BombRegeneration)
+        {
+            AddBomb(1);
+            timeSinceBonusBomb = 0;
+        }
+
+        timeSinceBonusBomb += Time.deltaTime;
+        TimeToBonusBombPerc = timeSinceBonusBomb/BonusPowersDealer.Instance.BombRegeneration;
     }
 
     private void OnDrawGizmosSelected()

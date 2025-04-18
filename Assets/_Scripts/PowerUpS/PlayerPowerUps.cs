@@ -202,9 +202,7 @@ public class PlayerPowerUps : MonoBehaviour
         if (BombScript.BombAmount < BombScript.MaxBombs)
         {
             BombPowerUp bombPowerUp = collision.GetComponent<BombPowerUp>();
-            BombScript.BombAmount += bombPowerUp.NumberOfCharges;
-
-            AudioManager.Instance.BombPickSound.PlayFeedbacks();
+            BombScript.AddBomb(bombPowerUp.NumberOfCharges);            
 
             DestroyPowerUpPickUp(collision);
         }

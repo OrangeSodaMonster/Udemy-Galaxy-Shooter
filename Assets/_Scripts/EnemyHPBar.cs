@@ -55,7 +55,13 @@ public class EnemyHPBar : MonoBehaviour
 
     private void DealWithBar()
     {
-        if (enemyHP.CurrentHP >= enemyHP.MaxHP)
+        int MaxHP;
+        if (GameManager.IsSurvival)
+            MaxHP = enemyHP.SurvivalMaxHP;
+        else
+            MaxHP = enemyHP.MaxHP;
+
+            if (enemyHP.CurrentHP >= MaxHP)
         {
             if (hpInstance != null)
                 hpInstance.gameObject.SetActive(false);
@@ -72,7 +78,7 @@ public class EnemyHPBar : MonoBehaviour
             }
             
             hpBar.gameObject.SetActive(true);
-            hpBar.value = enemyHP.CurrentHP / enemyHP.MaxHP;
+            hpBar.value = enemyHP.CurrentHP / MaxHP;
         }
     }
 }

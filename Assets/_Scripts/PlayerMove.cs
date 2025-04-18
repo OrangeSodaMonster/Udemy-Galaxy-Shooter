@@ -236,6 +236,17 @@ public class PlayerMove : MonoBehaviour
         AngularAccel = maxTurningSpeed / timeToMaxTurning;
         deceleration = maxSpeed / timeUntilStop;
         AngDeceleration = maxTurningSpeed / timeToStopRotation;
+
+        if(GameManager.IsSurvival)
+        {
+            float bonumMult = 1 + BonusPowersDealer.Instance.Mobility/100;
+            maxSpeed *= bonumMult;
+            maxTurningSpeed *= bonumMult;
+
+            bonumMult = 1 - BonusPowersDealer.Instance.Mobility/100;
+            timeUntilStop *= bonumMult;
+            timeToStopRotation *= bonumMult;
+        }
     }
 
 }

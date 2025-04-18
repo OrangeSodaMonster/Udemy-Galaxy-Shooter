@@ -12,9 +12,11 @@ public class EnemyHP : MonoBehaviour
     //public int OnBirthDamage;
 
     [field:SerializeField] public bool IsAsteroid { get; private set; } = false;
+    [field:SerializeField] public bool IsObjective { get; private set; } = false; // Objectives também são asteroids
     [SerializeField] float asteroidVolumeMultiplier = 1;
     [SerializeField] bool destroyOnCollision = true;
     public int MaxHP;
+    public int SurvivalMaxHP;
     [SerializeField, Range(0, 1)] float startingHpPerc = 1;
 
     int currentHP;
@@ -33,6 +35,22 @@ public class EnemyHP : MonoBehaviour
     {
         //currentHP = MaxHP - OnBirthDamage;
         currentHP = (int)Mathf.Ceil(MaxHP * startingHpPerc);
+        if (GameManager.IsSurvival)
+        {
+            if(!IsAsteroid && !IsObjective)
+            {
+                float bonusMultiplier = 1 - BonusPowersDealer.Instance.ExtraDamageToEnemies/100;
+                SurvivalMaxHP =(int)Mathf.Ceil(MaxHP * bonusMultiplier);
+                currentHP = SurvivalMaxHP;
+            }
+            if(IsObjective)
+            {
+                float bonusMultiplier = 1 - BonusPowersDealer.Instance.ExtraDamageToObjectives/100;
+                SurvivalMaxHP =(int)Mathf.Ceil(MaxHP * bonusMultiplier);
+                currentHP = SurvivalMaxHP;
+            }            
+        }
+
         //Debug.Log("Birth Damage= " + OnBirthDamage);
         lastFrameHP = MaxHP;
         transform.localScale = defaultScale;

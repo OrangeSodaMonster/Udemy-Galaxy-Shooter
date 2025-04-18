@@ -43,7 +43,10 @@ public class DroneAttackScript : MonoBehaviour
     {
         if (GameStatus.IsPaused) return;
 
-        damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
+        if (GameManager.IsSurvival)
+            damage = (int)Mathf.Ceil((DamagePerSecond+BonusPowersDealer.Instance.DronePower) * timeToDamage);
+        else            
+            damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
 
         if (target != null && (!target.gameObject.activeSelf || target.GetComponent<EnemyHP>().CurrentHP == 0))
             target = null;
@@ -124,14 +127,19 @@ public class DroneAttackScript : MonoBehaviour
 
         for (int i = 0; i < hits.Length; i++)
             hits[i] = null;
+        float range = Range;
+        if (GameManager.IsSurvival)
+        {
+            float bonusMultiplier = 1 + BonusPowersDealer.Instance.DroneIonStreamRange/100;
+            range *= bonusMultiplier;
+        }
 
-            Physics2D.OverlapCircleNonAlloc(transform.position, Range, hits, layersToHit);
+        Physics2D.OverlapCircleNonAlloc(transform.position, range, hits, layersToHit);
 
         Transform closestTarget = null;        
         float minDistance = float.MaxValue;
 
         for(int i = 0; i < hits.Length; i++)
-        //foreach (RaycastHit2D hit in hits)
         {
             if (hits[i] == null) break;
 

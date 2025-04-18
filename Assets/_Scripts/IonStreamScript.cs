@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -66,6 +67,11 @@ public class IonStreamScript : MonoBehaviour
         if (GameStatus.IsPaused || GameStatus.IsPortal) return;
 
         UpdateValues();
+        if (GameManager.IsSurvival)
+        {
+            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
+            timeBetweenActivations *= bonusMultiplier;
+        }
 
         //if (isIonStreamEnabled && timeSinceFired > timeBetweenActivations && Physics2D.CircleCast(player.position, radiusFromPlayer, Vector2.zero, 0, layersToHit))
         if (isIonStreamEnabled && timeSinceFired > timeBetweenActivations && Physics2D.OverlapCircleNonAlloc(player.position, radiusFromPlayer, hits, layersToHit) > 0)
@@ -89,6 +95,14 @@ public class IonStreamScript : MonoBehaviour
         numberOfHits = upgradesManager.IonStreamUpgradesInfo.HitNumUpgrades[ionStreamUpgrades.NumberHitsLevel - 1].NumberOfHits;
         radiusFromPlayer = upgradesManager.IonStreamUpgradesInfo.RangeUpgrades[ionStreamUpgrades.RangeLevel - 1].RangeFromPlayer;
         radiusFromLastHit = upgradesManager.IonStreamUpgradesInfo.RangeUpgrades[ionStreamUpgrades.RangeLevel - 1].RangeFromHit;
+
+        if (GameManager.IsSurvival)
+        {
+            damage += BonusPowersDealer.Instance.IonStreamPower;
+            float bonusMultiplier = 1 + BonusPowersDealer.Instance.DroneIonStreamRange/100;
+            radiusFromPlayer *= bonusMultiplier;
+            radiusFromLastHit *= bonusMultiplier;
+        }
     }
 
 
@@ -150,7 +164,7 @@ public class IonStreamScript : MonoBehaviour
                         {
                             SurvivalManager.CombatLog.IonStreamTotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
                         }
-
+                                                
                         enemyHP.ChangeHP(-Mathf.Abs(damage));
                     }
 
@@ -206,5 +220,11 @@ public class IonStreamScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radiusFromPlayer);
         Gizmos.DrawWireSphere(transform.position, radiusFromLastHit);
 
+    }
+
+    [Button]
+    void GetExtraPower()
+    {
+        Debug.Log(BonusPowersDealer.Instance.IonStreamPower);
     }
 }
