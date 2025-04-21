@@ -16,10 +16,16 @@ public class PlayerLasers : MonoBehaviour
     float currentLaserCDMod = 1;
 
     PlayerUpgradesManager upgradesManager;
+    PlayerStats stats;
 
     private void Awake()
     {
         upgradesManager = PlayerUpgradesManager.Instance;
+    }
+
+    private void Start()
+    {
+        stats = PlayerStats.Instance;
     }
 
     void Update()
@@ -36,15 +42,12 @@ public class PlayerLasers : MonoBehaviour
     bool justFiredLeftFrontLaser = false;
     void FrontLasersShoot()
     {
-        bool IsFrontShotActivated = upgradesManager.CurrentUpgrades.FrontLaserUpgrades.Enabled && !upgradesManager.CurrentUpgrades.FrontLaserUpgrades.DisableOverwrite;
-        float frontLaserCD = 
-            upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.FrontLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
-        if (GameManager.IsSurvival)
-        {
-            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
-            frontLaserCD *= bonusMultiplier;
-        }
+        PlayerStats.LaserStats laserStats = PlayerStats.Instance.Lasers.FrontLaser;
+        bool IsFrontShotActivated = laserStats.Enabled;
 
+        float frontLaserCD = laserStats.CurrentInterval/2/currentLaserCDMod;
+            //upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.FrontLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
+        
             if (IsFrontShotActivated && !justFiredLeftFrontLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceFrontLaserShoot >= frontLaserCD)
         {
             InstantiateLaser(frontLaserParents[0], upgradesManager.CurrentUpgrades.FrontLaserUpgrades, LaserType.Frontal);
@@ -60,19 +63,14 @@ public class PlayerLasers : MonoBehaviour
         }
         timeSinceFrontLaserShoot += Time.deltaTime;
     }
-
     float timeSinceSpreadLaserShoot = float.MaxValue;
     bool justFiredRightSpreadLaser = false;
+
     void SpreadLaserShoot()
     {
-        bool IsSpreadShotActivated = upgradesManager.CurrentUpgrades.SpreadLaserUpgrades.Enabled && !upgradesManager.CurrentUpgrades.SpreadLaserUpgrades.DisableOverwrite;
-        float spreadLaserCD =
-            upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.SpreadLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
-        if (GameManager.IsSurvival)
-        {
-            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
-            spreadLaserCD *= bonusMultiplier;
-        }
+        PlayerStats.LaserStats laserStats = PlayerStats.Instance.Lasers.SpreadLaser;
+        bool IsSpreadShotActivated = laserStats.Enabled;
+        float spreadLaserCD = laserStats.CurrentInterval/2/currentLaserCDMod;
 
         if (IsSpreadShotActivated && !justFiredRightSpreadLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceSpreadLaserShoot >= spreadLaserCD)
         {
@@ -96,14 +94,9 @@ public class PlayerLasers : MonoBehaviour
     bool justFiredLeftSideLaser = false;
     void SideLasersShoot()
     {
-        bool IsSideShotActivated = upgradesManager.CurrentUpgrades.SideLaserUpgrades.Enabled  && !upgradesManager.CurrentUpgrades.SideLaserUpgrades.DisableOverwrite;
-        float sideLaserCD =
-            upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.SideLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
-        if (GameManager.IsSurvival)
-        {
-            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
-            sideLaserCD *= bonusMultiplier;
-        }
+        PlayerStats.LaserStats laserStats = PlayerStats.Instance.Lasers.SideLaser;
+        bool IsSideShotActivated = laserStats.Enabled;
+        float sideLaserCD = laserStats.CurrentInterval/2/currentLaserCDMod;
 
         if (IsSideShotActivated && !justFiredLeftSideLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceSideLaserShoot >= sideLaserCD)
         {
@@ -126,14 +119,9 @@ public class PlayerLasers : MonoBehaviour
     bool justFiredRightBackLaser = false;
     void BackLasersShoot()
     {
-        bool IsBackShotActivated = upgradesManager.CurrentUpgrades.BackLaserUpgrades.Enabled && !upgradesManager.CurrentUpgrades.BackLaserUpgrades.DisableOverwrite;
-        float backLaserCD =
-            upgradesManager.LaserUpgradesInfo.CadencyUpgrades[upgradesManager.CurrentUpgrades.BackLaserUpgrades.CadencyLevel-1].TimeBetween / 2 / currentLaserCDMod;
-        if (GameManager.IsSurvival)
-        {
-            float bonusMultiplier = 1 - BonusPowersDealer.Instance.LaserIonStreamCadency/100;
-            backLaserCD *= bonusMultiplier;
-        }
+        PlayerStats.LaserStats laserStats = PlayerStats.Instance.Lasers.BackLaser;
+        bool IsBackShotActivated = laserStats.Enabled;
+        float backLaserCD = laserStats.CurrentInterval/2/currentLaserCDMod;
 
         if (IsBackShotActivated && !justFiredRightBackLaser && (GameManager.IsAutoFire || InputHolder.Instance.IsFiring) && timeSinceBackLaserShoot >= backLaserCD)
         {
@@ -160,12 +148,28 @@ public class PlayerLasers : MonoBehaviour
         laser.GetComponent<SpriteRenderer>().sprite = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Sprite;
         laser.GetComponent<LaserMove>().VFXGradient = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].VFXGradient;
         laser.GetComponent<PlayerLaserDamage>().LaserType = type;
-        laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
-        if (GameManager.IsSurvival)
-            laser.GetComponent<PlayerLaserDamage>().Damage += BonusPowersDealer.Instance.LaserPower;
+        //laser.GetComponent<PlayerLaserDamage>().Damage = upgradesManager.LaserUpgradesInfo.PowerUpgrades[laserUpgrades.DamageLevel - 1].Damage;
+        laser.GetComponent<PlayerLaserDamage>().Damage = GetLaserDamage(type);
+        
         laser.SetActive(true);
 
         AudioManager.Instance.PlayLaserSound();
+    }
+    int GetLaserDamage(LaserType type)
+    {
+        switch (type)
+        {
+            case LaserType.Frontal:
+                return stats.Lasers.FrontLaser.CurrentPower;
+            case LaserType.Spread:
+                return stats.Lasers.SpreadLaser.CurrentPower;
+            case LaserType.Lateral:
+                return stats.Lasers.SideLaser.CurrentPower;
+            case LaserType.Back:
+                return stats.Lasers.BackLaser.CurrentPower;
+            default:
+                return 0;
+        }
     }
 
     public void PowerUpStart(float value)

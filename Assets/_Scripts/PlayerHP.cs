@@ -58,10 +58,12 @@ public class PlayerHP : MonoBehaviour
     {
         s_IsInvencible = isInvencible;
 
-        MaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
+        MaxHP = PlayerStats.Instance.Ship.CurrentMaxHP;
 
         if (CurrentHP == 0)
             StartCoroutine(PlayerDestructionSequence());
+
+        PlayerStats.Instance.Ship.CurrentHP = CurrentHP;
     }
 
     void LateUpdate()
@@ -165,7 +167,7 @@ public class PlayerHP : MonoBehaviour
     public void ApplyHPUpgrade()
     {
         int missingHP = MaxHP - CurrentHP;
-        MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
+        MaxHP = PlayerStats.Instance.Ship.CurrentMaxHP;
         CurrentHP = MaxHP - missingHP;
     }
 
@@ -174,7 +176,7 @@ public class PlayerHP : MonoBehaviour
         if(value < 0 && GameManager.IsSurvival)
             SurvivalManager.CombatLog.TotalDamageTaken += (int)MathF.Min(Mathf.Abs(value), CurrentHP);
 
-        MaxHP = PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
+        MaxHP = PlayerStats.Instance.Ship.CurrentMaxHP;
 
         if (s_IsInvencible && !ignoreInvencibility && value < 0) return;
 

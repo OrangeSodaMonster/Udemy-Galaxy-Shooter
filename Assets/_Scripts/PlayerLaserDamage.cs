@@ -15,6 +15,6 @@ public enum LaserType
 
 public class PlayerLaserDamage : MonoBehaviour
 {
-    public int Damage { get; set; } = 1;
+    [field:SerializeField] public int Damage { get; set; } = 1;
     public LaserType LaserType;
 }

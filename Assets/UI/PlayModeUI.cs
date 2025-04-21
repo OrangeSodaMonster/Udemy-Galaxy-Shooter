@@ -45,7 +45,7 @@ public class PlayModeUI : MonoBehaviour
 
     public void SetBombNumText()
     {
-        numberOfBombs.text = $"{BombScript.BombAmount}";
+        numberOfBombs.text = $"{PlayerStats.Instance.Bomb.Charges}";
     }
 
     public void OnHPChange()

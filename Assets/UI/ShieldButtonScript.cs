@@ -9,7 +9,7 @@ enum ShieldUpgradeType
 {
     Main, Strenght, RecoveryRate,
 }
-enum ShieldPosition
+public enum ShieldPosition
 {
     Front, Right, Left, Back,
 }

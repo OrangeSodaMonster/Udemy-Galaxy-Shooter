@@ -8,6 +8,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class PlayerHeal : MonoBehaviour
 {
     [SerializeField] float baseSecondsBetweenHeal = 8;
+    public float BaseSecondsBetweenHeal { get => baseSecondsBetweenHeal;}
     [SerializeField] ResourceNumber[] HealCost;
     [SerializeField] float currentSecondsBetweenHeal;
     public float CurrentSecondsBetweenHeal => currentSecondsBetweenHeal;
@@ -28,12 +29,7 @@ public class PlayerHeal : MonoBehaviour
     {
         if (!isFreeHeal)
         {
-            currentSecondsBetweenHeal = baseSecondsBetweenHeal - GetHealIntervalReduction();
-            if (GameManager.IsSurvival)
-            {
-                float bonusMult = 1 - BonusPowersDealer.Instance.HP_Recovery/100;
-                currentSecondsBetweenHeal *= bonusMult;
-            }
+            currentSecondsBetweenHeal = PlayerStats.Instance.Drones.CurrentHealInterval;            
 
             if(currentSecondsBetweenHeal != lastSecondsBetweenHeal)
             {
@@ -50,24 +46,24 @@ public class PlayerHeal : MonoBehaviour
         }
     }
 
-    float GetHealIntervalReduction()
-    {
-        float healIntervalReduction = 0;
+    //float GetHealIntervalReduction()
+    //{
+    //    float healIntervalReduction = 0;
 
-        if(upgradesManager.CurrentUpgrades.Drone_1_Upgrades.Enabled)
-            for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_1_Upgrades.HealingLevel; i++)
-                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
+    //    if(upgradesManager.CurrentUpgrades.Drone_1_Upgrades.Enabled)
+    //        for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_1_Upgrades.HealingLevel; i++)
+    //            healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
         
-        if (upgradesManager.CurrentUpgrades.Drone_2_Upgrades.Enabled)
-            for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_2_Upgrades.HealingLevel; i++)
-                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
+    //    if (upgradesManager.CurrentUpgrades.Drone_2_Upgrades.Enabled)
+    //        for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_2_Upgrades.HealingLevel; i++)
+    //            healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
         
-        if (upgradesManager.CurrentUpgrades.Drone_3_Upgrades.Enabled)
-            for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_3_Upgrades.HealingLevel; i++)
-                healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
+    //    if (upgradesManager.CurrentUpgrades.Drone_3_Upgrades.Enabled)
+    //        for (int i = 0; i < upgradesManager.CurrentUpgrades.Drone_3_Upgrades.HealingLevel; i++)
+    //            healIntervalReduction += upgradesManager.DroneUpgradesInfo.HealUpgrades[i].ReduceFromHealInterval;
 
-        return healIntervalReduction;
-    }
+    //    return healIntervalReduction;
+    //}
 
     IEnumerator HealRotine()
     {
@@ -105,7 +101,7 @@ public class PlayerHeal : MonoBehaviour
 
     public void PowerUpEnd()
     {
-        currentSecondsBetweenHeal = baseSecondsBetweenHeal - GetHealIntervalReduction();
+        //currentSecondsBetweenHeal = baseSecondsBetweenHeal - GetHealIntervalReduction();
         isFreeHeal = false;
     }
 }

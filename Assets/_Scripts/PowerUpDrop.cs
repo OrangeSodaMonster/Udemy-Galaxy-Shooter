@@ -34,12 +34,10 @@ public class PowerUpDrop : MonoBehaviour
 
         if (GameManager.IsSurvival)
         {
-            float bonusMult = 1 + BonusPowersDealer.Instance.PowerUpDrop/100;
+            float bonusMult = 1 + BonusPowersDealer.Instance.PowerUpDrop/100f;
             ChanceToDrop *= bonusMult;
             if (ChanceToDrop > 100) ChanceToDrop = 100;
         }
-
-
     }
 
     private void OnDisable()

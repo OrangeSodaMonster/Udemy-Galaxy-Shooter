@@ -4,30 +4,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.VFX;
 
-public class IonStreamScript : MonoBehaviour
+public class SecondIonStream : MonoBehaviour
 {
-
     [SerializeField] float visualDuration = .3f;
-    [SerializeField, Range(0,1)] float fadePortion = .5f;
+    [SerializeField, Range(0, 1)] float fadePortion = .5f;
     [SerializeField] LayerMask layersToHit;
     [SerializeField] LineRenderer lineRenderer;
 
-    bool isIonStreamEnabled;
     int damage;
     float lineWidht;
     Material material;
-    float timeBetweenActivations;
     float numberOfHits;
     float radiusFromPlayer;
     float radiusFromLastHit;
 
-    float timeSinceFired = float.MaxValue;
     Transform player;
     PlayerUpgradesManager upgradesManager;
-    //RaycastHit2D[] hits;
     List<Vector2> lineNodes = new List<Vector2>();
     float fadeDuration;
     float timeToStartFade;
@@ -38,7 +32,6 @@ public class IonStreamScript : MonoBehaviour
     Collider2D[] hits = new Collider2D[3];
 
     WaitForSeconds fadeWait;
-    SecondIonStream secondIonStream;
 
     void Start()
     {
@@ -51,8 +44,8 @@ public class IonStreamScript : MonoBehaviour
         fadeDuration = visualDuration * fadePortion;
         timeToStartFade = visualDuration - fadeDuration;
 
-        defaultColor.ca = Color.white; 
-        defaultColor.cb = Color.white; 
+        defaultColor.ca = Color.white;
+        defaultColor.cb = Color.white;
 
         Color endC = Color.clear;
         endColor.ca = endC;
@@ -61,51 +54,40 @@ public class IonStreamScript : MonoBehaviour
         defaultLineGrad = lineRenderer.colorGradient;
 
         fadeWait = new WaitForSeconds(timeToStartFade);
-
-        if (GameManager.IsSurvival)
-            secondIonStream = FindObjectOfType<SecondIonStream>();
     }
 
     void Update()
     {
         if (GameStatus.IsPaused || GameStatus.IsPortal) return;
 
-        UpdateValues();
-        if (GameManager.IsSurvival)
-        {
-            if (timeSinceFired > timeBetweenActivations*0.5f)
-            {
-                secondIonStream.FireSecondIonStream();
-                secondIonStream.HasResetMainIon = false;
-            }
-        }
-
-        if (isIonStreamEnabled && timeSinceFired > timeBetweenActivations && Physics2D.OverlapCircleNonAlloc(player.position, radiusFromPlayer, hits, layersToHit) > 0)
-        {
-            FireIonStream();
-            timeSinceFired = 0;
-
-            if (GameManager.IsSurvival)
-                secondIonStream.HasResetMainIon = true;
-        }        
-
-        timeSinceFired += Time.deltaTime;
-    } 
+        UpdateValues();        
+    }
 
     void UpdateValues()
-    {
-
+    {        
         IonStreamUpgrades ionStreamUpgrades = upgradesManager.CurrentUpgrades.IonStreamUpgrades;
-        PlayerStats.IonStreamStats stats = PlayerStats.Instance.IonStream;
-        isIonStreamEnabled = stats.Enabled;
-        damage = stats.CurrentPower;
-        lineWidht = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Widht;
-        material = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[ionStreamUpgrades.DamageLevel - 1].Material;
-        timeBetweenActivations = stats.CurrentInterval;
-        numberOfHits = stats.CurrentHitNumber;
-        radiusFromPlayer = stats.CurrentPlayerRange;
-        radiusFromLastHit = stats.CurrentHitRange;
+        int damageLevel = ionStreamUpgrades.DamageLevel - 2;
+        if(damageLevel < 0) damageLevel = 0;
+        damage = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[damageLevel].Damage;
+        lineWidht = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[damageLevel].Widht;
+        material = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[damageLevel].Material;
+        int numberHitsLevel = ionStreamUpgrades.NumberHitsLevel - 2;
+        if (damageLevel < 0) numberHitsLevel = 0;
+        numberOfHits = upgradesManager.IonStreamUpgradesInfo.HitNumUpgrades[numberHitsLevel].NumberOfHits;
+        int rangeLevel = ionStreamUpgrades.RangeLevel - 2;
+        if (damageLevel < 0) rangeLevel = 0;
+        radiusFromPlayer = upgradesManager.IonStreamUpgradesInfo.RangeUpgrades[rangeLevel].RangeFromPlayer;
+        radiusFromLastHit = upgradesManager.IonStreamUpgradesInfo.RangeUpgrades[rangeLevel].RangeFromHit;
+
+        if (GameManager.IsSurvival)
+        {
+            damage += BonusPowersDealer.Instance.IonStreamPower;
+            float bonusMultiplier = 1 + BonusPowersDealer.Instance.DroneIonStreamBombRange/100;
+            radiusFromPlayer *= bonusMultiplier;
+            radiusFromLastHit *= bonusMultiplier;
+        }
     }
+
 
     Vector2 placeHolderVector = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
     Vector2 castingOrigin;
@@ -113,8 +95,17 @@ public class IonStreamScript : MonoBehaviour
     Transform target;
     List<int> hitHashs = new List<int>();
 
-    private void FireIonStream()
+    public bool HasResetMainIon = true;
+    public void FireSecondIonStream()
     {
+        if (HasResetMainIon && Physics2D.OverlapCircleNonAlloc(player.position, radiusFromPlayer, hits, layersToHit) > 0)
+            FireIonStream();
+    }
+
+    void FireIonStream()
+    {
+        if(!GameManager.IsSurvival || !BonusPowersDealer.Instance.IsSecondIonStream) return;
+
         castingOrigin = player.position;
         castingRadius = radiusFromPlayer;
         hitHashs.Clear();
@@ -165,7 +156,7 @@ public class IonStreamScript : MonoBehaviour
                         {
                             SurvivalManager.CombatLog.IonStreamTotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
                         }
-                                                
+
                         enemyHP.ChangeHP(-Mathf.Abs(damage));
                     }
 

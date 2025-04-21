@@ -67,6 +67,22 @@ public class ShieldStrenght : MonoBehaviour
         }
 
         lastFrameStr = CurrentStr;
+        UpdateStatsCurrentStrenght(shieldSide);
+    }
+
+    void UpdateStatsCurrentStrenght(ShieldSide side)
+    {
+        switch (side)
+        {
+            case ShieldSide.Front:
+                PlayerStats.Instance.Shields.ShieldFront.CurrentStrenght = CurrentStr; break;
+            case ShieldSide.Right:
+                PlayerStats.Instance.Shields.ShieldRight.CurrentStrenght = CurrentStr; break;
+            case ShieldSide.Left:
+                PlayerStats.Instance.Shields.ShieldLeft.CurrentStrenght = CurrentStr; break;
+            case ShieldSide.Back:
+                PlayerStats.Instance.Shields.ShieldBack.CurrentStrenght = CurrentStr; break;
+        }
     }
 
     void SetShieldStartingValues(ShieldUpgrades shieldUpgrades)

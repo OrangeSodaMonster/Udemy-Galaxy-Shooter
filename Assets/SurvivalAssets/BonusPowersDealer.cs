@@ -99,12 +99,61 @@ public class BonusPowersDealer : MonoBehaviour
     #region Supers
     [FoldoutGroup("Supers")]
     [SerializeField] bool fourthDrone = false;
-    [FoldoutGroup("Supers")]
+    [HorizontalGroup("Supers/BombSuper")]
     [SerializeField] bool superBomb = false;
-    [FoldoutGroup("Supers")]
+    [HorizontalGroup("Supers/BombSuper")]
+    [SerializeField] int superBombExtraDamage = 200;
+    [HorizontalGroup("Supers/BombSuper")]
+    [SerializeField] float superBombExtraRangePerc = 15;
+    [HorizontalGroup("Supers/LaserSuper", 0.45f, LabelWidth = 150)]
     [SerializeField] bool moreLaserCadency = false;
+    [HorizontalGroup("Supers/LaserSuper")]
+    [SerializeField] float moreLaserCadencyPerc = 15;
     [FoldoutGroup("Supers")]
     [SerializeField] bool secondIonStream = false;
+    #endregion
+
+    #region AutoConvertion
+    [FoldoutGroup("AutoConversion")]
+    [HorizontalGroup("AutoConversion/Metal to RareMetal")]
+    [SerializeField] int minMetalToRareMetal = 150;
+    [HorizontalGroup("AutoConversion/Metal to RareMetal")]
+    [SerializeField] int metalToRareMetalPrice = 15;
+    [HorizontalGroup("AutoConversion/RareMetal to EnergyCristal")]
+    [SerializeField] int minRareMetalToEnergyCristal = 100;
+    [HorizontalGroup("AutoConversion/RareMetal to EnergyCristal")]
+    [SerializeField] int rareMetalToEnergyCristalPrice = 10;
+    [HorizontalGroup("AutoConversion/EnergyCristal to CondensedEnergyCristal")]
+    [SerializeField] int minEnergyCristalToCondensedEnergyCristal = 100;
+    [HorizontalGroup("AutoConversion/EnergyCristal to CondensedEnergyCristal")]
+    [SerializeField] int energyCristalToCondensedEnergyCristalPrice = 25;
+
+    float AutoConvertionTimer = 0;
+    void AutoConvertionDealer()
+    {
+        if(AutoConvertionTimer >= AutoConvertion)
+        {
+            if(PlayerCollectiblesCount.MetalAmount >= minMetalToRareMetal)
+            {
+                PlayerCollectiblesCount.MetalAmount -= metalToRareMetalPrice;
+                PlayerCollectiblesCount.RareMetalAmount += 1;
+            }
+            if (PlayerCollectiblesCount.RareMetalAmount >= minRareMetalToEnergyCristal)
+            {
+                PlayerCollectiblesCount.RareMetalAmount -= rareMetalToEnergyCristalPrice;
+                PlayerCollectiblesCount.EnergyCristalAmount += 1;
+            }
+            if (PlayerCollectiblesCount.EnergyCristalAmount >= minEnergyCristalToCondensedEnergyCristal)
+            {
+                PlayerCollectiblesCount.EnergyCristalAmount -= energyCristalToCondensedEnergyCristalPrice;
+                PlayerCollectiblesCount.CondensedEnergyCristalAmount += 1;
+            }
+            PlayerCollectiblesCount.OnChangedCollectibleAmount?.Invoke();
+            AutoConvertionTimer = 0;
+        }
+
+        AutoConvertionTimer += Time.deltaTime;
+    }
     #endregion
 
     #region CurrentPower
@@ -133,7 +182,7 @@ public class BonusPowersDealer : MonoBehaviour
         get => GetBonusValue(laserIonStreamCadencyLevel, laserIonStreamCadencyPerc); 
         set => laserIonStreamCadencyLevel = SetBonusValue(value);
     }
-    public int BombRegeneration 
+    public int BombGeneration 
     {
         get => GetBonusValue(bombRegenerationLevel, bombRegenerationTimer); 
         set => bombRegenerationLevel = SetBonusValue(value);
@@ -156,7 +205,7 @@ public class BonusPowersDealer : MonoBehaviour
         get => GetBonusValue(tractorLevel, tractorExtraPerc);
         set => tractorLevel = SetBonusValue(value);
     }
-    public int DroneIonStreamRange
+    public int DroneIonStreamBombRange
     {
         get => GetBonusValue(droneIonStreamRangeLevel, droneIonStreamRangeExtraPerc); 
         set => droneIonStreamRangeLevel = SetBonusValue(value);
@@ -199,22 +248,35 @@ public class BonusPowersDealer : MonoBehaviour
     #endregion
 
     #region CurrentSupers
-    public bool FourthDrone 
+    public bool IsFourthDrone 
     {
         get => fourthDrone;
         set => fourthDrone = value;
     }
-    public bool SuperBomb 
+    public bool IsSuperBomb 
     {
         get => superBomb;
         set => superBomb = value;
     }
-    public bool MoreLaserCadency 
+    public int SuperBombExtraDamage
+    {
+        get => superBombExtraDamage;
+    }
+    public float SuperBombExtraRange
+    {
+        get => superBombExtraRangePerc;
+    }
+    public bool IsMoreLaserCadency 
     {
         get => moreLaserCadency;
         set => moreLaserCadency = value;
     }
-    public bool SecondIonStream 
+    public float MoreLaserCadencyPerc
+    {
+        get => moreLaserCadencyPerc;
+        //set => moreLaserCadencyPerc = value;
+    }
+    public bool IsSecondIonStream 
     {
         get => secondIonStream;
         set => secondIonStream = value;
@@ -229,6 +291,14 @@ public class BonusPowersDealer : MonoBehaviour
             Instance = this;
     }
 
+    private void Update()
+    {
+        if(autoConvertionLevel >= 1)
+        {
+            AutoConvertionDealer();
+        }
+    }
+
     int GetBonusValue(int level, int[] array)
     {
         if (level == 0) return 0;
@@ -241,4 +311,5 @@ public class BonusPowersDealer : MonoBehaviour
         else if (value > 3) return 3;
         else return value;        
     }
+
 }

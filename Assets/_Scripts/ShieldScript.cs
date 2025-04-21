@@ -79,24 +79,44 @@ public class ShieldScript : MonoBehaviour
         shieldStr.GetComponent<SpriteRenderer>().color = new Color (defaultColor.r, defaultColor.g, defaultColor.b, alpha);
     }
 
-    public void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades)
+    public void SetShieldValues(ShieldStrenght shield, ShieldUpgrades shieldUpgrades, ShieldSide type)
     {
-        shield.MaxStr = upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[shieldUpgrades.ResistenceLevel - 1].Strenght;
-        shield.baseRegenTime = upgradesManager.ShieldUpgradesInfo.RecoveryUpgrades[shieldUpgrades.RecoveryLevel - 1].TimeBetween;
+        GetValues(type, out int maxStr, out float regenTime);
 
-        if (GameManager.IsSurvival)
+        shield.MaxStr = maxStr;
+        shield.baseRegenTime = regenTime;
+
+        void GetValues(ShieldSide type, out int maxStr, out float regenTime)
         {
-            shield.MaxStr += BonusPowersDealer.Instance.ShieldStrenght;
-            float bonusMult = 1 - BonusPowersDealer.Instance.ShieldRecovery;
-            shield.baseRegenTime *= bonusMult;
-        }
+            maxStr = 0;
+            regenTime = 0;
+            switch (type)
+            {
+                case ShieldSide.Front:
+                    maxStr = PlayerStats.Instance.Shields.ShieldFront.CurrentMaxStrenght;
+                    regenTime = PlayerStats.Instance.Shields.ShieldFront.CurrentMaxStrenght;
+                    break;
+                case ShieldSide.Right:
+                    maxStr = PlayerStats.Instance.Shields.ShieldRight.CurrentMaxStrenght;
+                    regenTime = PlayerStats.Instance.Shields.ShieldRight.CurrentMaxStrenght;
+                    break;
+                case ShieldSide.Left:
+                    maxStr = PlayerStats.Instance.Shields.ShieldLeft.CurrentMaxStrenght;
+                    regenTime = PlayerStats.Instance.Shields.ShieldLeft.CurrentMaxStrenght;
+                    break;
+                case ShieldSide.Back:
+                    maxStr = PlayerStats.Instance.Shields.ShieldBack.CurrentMaxStrenght;
+                    regenTime = PlayerStats.Instance.Shields.ShieldBack.CurrentMaxStrenght;
+                    break;
+            }
+        } 
     }
     void SetShieldsValues()
     {
-        SetShieldValues(frontShield, upgradesManager.CurrentUpgrades.FrontShieldUpgrades);
-        SetShieldValues(rightShield, upgradesManager.CurrentUpgrades.RightShieldUpgrades);
-        SetShieldValues(backShield, upgradesManager.CurrentUpgrades.BackShieldUpgrades);
-        SetShieldValues(leftShield, upgradesManager.CurrentUpgrades.LeftShieldUpgrades);
+        SetShieldValues(frontShield, upgradesManager.CurrentUpgrades.FrontShieldUpgrades, ShieldSide.Front);
+        SetShieldValues(rightShield, upgradesManager.CurrentUpgrades.RightShieldUpgrades, ShieldSide.Right);
+        SetShieldValues(backShield, upgradesManager.CurrentUpgrades.BackShieldUpgrades, ShieldSide.Back);
+        SetShieldValues(leftShield, upgradesManager.CurrentUpgrades.LeftShieldUpgrades, ShieldSide.Left);
     }
 
     private void SetPartsActivateStatus()

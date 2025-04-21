@@ -49,6 +49,8 @@ public class PlayerMove : MonoBehaviour
     float velocityFraction;
     void FixedUpdate()
     {
+        //if(GameStatus.IsPortal) return;
+
         UpdateValues();
         Vector2 velocity = transform.InverseTransformDirection(rb.velocity);
 
@@ -218,35 +220,26 @@ public class PlayerMove : MonoBehaviour
         return (int)Mathf.Sign(directionDifference) * -1;
     }
 
-    //void DrawDirectionLine()
-    //{
-    //    Debug.DrawLine(transform.position, transform.position + 5 * (Vector3)InputHolder.Instance.Direction);
-
-    //    Debug.DrawLine(transform.position, (Vector2)transform.position + 3 * new Vector2(Mathf.Sin(-rb.rotation * Mathf.Deg2Rad), Mathf.Cos(-rb.rotation * Mathf.Deg2Rad)));
-    //}
-
     void UpdateValues()
     {
-        maxSpeed = upgradesManager.ShipUpgradesInfo.SpeedUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.SpeedLevel - 1].Speed;
-        maxTurningSpeed = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TurningSpeed;
-        timeUntilStop = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStop;
-        timeToStopRotation = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStopRotating;
+        if (!GameStatus.IsPortal)
+        {
+            maxSpeed = PlayerStats.Instance.Ship.CurrentMaxSpeed;
+            maxTurningSpeed = PlayerStats.Instance.Ship.CurrentMaxTurningSpeed;
+            timeUntilStop = PlayerStats.Instance.Ship.CurrentLinearInertia;
+            timeToStopRotation = PlayerStats.Instance.Ship.CurrentAngularInertia;
+        }
+        else
+        {
+            maxSpeed = upgradesManager.ShipUpgradesInfo.SpeedUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.SpeedLevel - 1].Speed;
+            maxTurningSpeed = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TurningSpeed;
+            timeUntilStop = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStop;
+            timeToStopRotation = upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStopRotating;
+        }
 
         acceleration = maxSpeed / timeToMaxSpeed;
         AngularAccel = maxTurningSpeed / timeToMaxTurning;
         deceleration = maxSpeed / timeUntilStop;
-        AngDeceleration = maxTurningSpeed / timeToStopRotation;
-
-        if(GameManager.IsSurvival)
-        {
-            float bonumMult = 1 + BonusPowersDealer.Instance.Mobility/100;
-            maxSpeed *= bonumMult;
-            maxTurningSpeed *= bonumMult;
-
-            bonumMult = 1 - BonusPowersDealer.Instance.Mobility/100;
-            timeUntilStop *= bonumMult;
-            timeToStopRotation *= bonumMult;
-        }
+        AngDeceleration = maxTurningSpeed / timeToStopRotation;        
     }
-
 }

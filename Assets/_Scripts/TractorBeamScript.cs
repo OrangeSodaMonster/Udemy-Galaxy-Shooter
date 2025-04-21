@@ -54,24 +54,15 @@ public class TractorBeamScript : MonoBehaviour
 
     void UpdateValues()
     {
-        radiusMod = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].RadiusMod;
-        basePullForce = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].PullForce;;
+        radiusMod = PlayerStats.Instance.Ship.Tractor.CurrentRange;
+        basePullForce = PlayerStats.Instance.Ship.Tractor.CurrentForce;
         defaultAlpha = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].Alpha;
         defaultTextureSpeed = upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade[upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamLevel - 1].TextureSpeed;
-
-        if (GameManager.IsSurvival)
-        {
-            float bonusMultiplier = 1 + BonusPowersDealer.Instance.Tractor/100;
-            radiusMod *= bonusMultiplier;
-            basePullForce *= bonusMultiplier;
-        }
     }
 
     void SetEnabled()
     {
-        bool isEnable = upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamEnabled && 
-            !upgradesManager.CurrentUpgrades.ShipUpgrades.TractorBeamDisableOverwrite &&
-            !GameStatus.IsPortal;
+        bool isEnable = PlayerStats.Instance.Ship.Tractor.Enabled && !GameStatus.IsPortal;
 
         spriteRenderer.enabled = isEnable;
         coll.enabled = isEnable;

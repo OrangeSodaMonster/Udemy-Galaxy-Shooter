@@ -92,6 +92,8 @@ public class EnemyDropDealer : MonoBehaviour
 
     void SpawnBonusDrops()
     {
+        if(BonusPowersDealer.Instance.EnergyCristalsDrop == 0) return;
+
         float energyCristalDropWeight = 0;
         float condEnergyCristalDropWeight = 0;
         float totalDropWeight = 0;
@@ -112,15 +114,73 @@ public class EnemyDropDealer : MonoBehaviour
             totalDropWeight += DropsToSpawn[i].spawnWeight;
         }
 
-        float cristalDropChance = (cristalDropWeight / totalDropWeight)*100;
-        cristalDropChance *= BonusPowersDealer.Instance.EnergyCristalsDrop/100;
-        float condensedDropChance = (condEnergyCristalDropWeight / cristalDropWeight)*100;
+        float averageDrops = (MinDropsNum + MaxDropsNum)*0.5f;
+        float cristalDropChance = (cristalDropWeight / totalDropWeight)*100f;
+        cristalDropChance *= (BonusPowersDealer.Instance.EnergyCristalsDrop/100f); //Obter 10% da chance de dropar cristal, por exemplo
+        cristalDropChance *= averageDrops;
+        float condensedDropChance = (condEnergyCristalDropWeight / cristalDropWeight)*100f;
 
-        float randomDropValue = UnityEngine.Random.Range(0, 100);
-        if(randomDropValue >= cristalDropChance)
+        float randomDropValue = UnityEngine.Random.Range(0f, 100f);
+        Debug.Log($"NormalCristalChance: {cristalDropChance}...RandomN: {randomDropValue}");
+        if(randomDropValue < cristalDropChance)
         {
-            randomDropValue = UnityEngine.Random.Range(0, 100);
-            if (condensedDropChance >= randomDropValue)
+            randomDropValue = UnityEngine.Random.Range(0f, 100f);
+            Debug.Log($"NormalCondCristalChance: {condensedDropChance}...RandomN: {randomDropValue}");
+            if (randomDropValue < condensedDropChance)
+            {
+                MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[ResourceType.CondensedEnergyCristal];
+                Vector3 spawnPoint = UnityEngine.Random.insideUnitCircle * radiusToSpawn;
+                spawnPoint += transform.position;
+
+                GameObject drop = dropPooler.GetPooledGameObject();
+                drop.transform.position = spawnPoint;
+                drop.SetActive(true);
+                Debug.Log($"<color=#d900ff>Bonus: Condensed Energy Cristal</color>");
+            }
+            else
+            {
+                MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[ResourceType.EnergyCristal];
+                Vector3 spawnPoint = UnityEngine.Random.insideUnitCircle * radiusToSpawn;
+                spawnPoint += transform.position;
+
+                GameObject drop = dropPooler.GetPooledGameObject();
+                drop.transform.position = spawnPoint;
+                drop.SetActive(true);
+                Debug.Log($"<color=#00bbff>Bonus: Energy Cristal</color>");
+            }
+        }
+        SpawnBonusGaranteedDrops();
+    }
+    void SpawnBonusGaranteedDrops()
+    {
+        if (BonusPowersDealer.Instance.EnergyCristalsDrop == 0) return;
+
+        float totalCristals = 0;
+        float totalCondensedCristals = 0;
+
+        for (int i = 0; i < dropsGuaranteed.Length; i++)
+        {
+            if (dropsGuaranteed[i].drop == ResourceType.EnergyCristal)
+            {
+                totalCristals += dropsGuaranteed[i].Amount;
+            }
+            else if (dropsGuaranteed[i].drop == ResourceType.CondensedEnergyCristal)
+            {
+                totalCristals += dropsGuaranteed[i].Amount;
+                totalCondensedCristals = dropsGuaranteed[i].Amount;
+            }
+        }
+
+        float cristalDropChance = totalCristals * (BonusPowersDealer.Instance.EnergyCristalsDrop);
+        float condensedDropChance = (totalCondensedCristals / totalCristals)*100f;
+
+        float randomDropValue = UnityEngine.Random.Range(0f, 100f);
+        Debug.Log($"GaranteedCristalChance: {cristalDropChance}...RandomN: {randomDropValue}");
+        if (randomDropValue < cristalDropChance)
+        {
+            randomDropValue = UnityEngine.Random.Range(0f, 100f);
+            Debug.Log($"GaranteedCondCristalChance: {condensedDropChance}...RandomN: {randomDropValue}");
+            if (randomDropValue < condensedDropChance)
             {
                 MMSimpleObjectPooler dropPooler = DropsPoolRef.Instance.ResourcePoolers[ResourceType.CondensedEnergyCristal];
                 Vector3 spawnPoint = UnityEngine.Random.insideUnitCircle * radiusToSpawn;

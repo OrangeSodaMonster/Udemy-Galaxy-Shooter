@@ -35,20 +35,19 @@ public class EnemyHP : MonoBehaviour
     {
         //currentHP = MaxHP - OnBirthDamage;
         currentHP = (int)Mathf.Ceil(MaxHP * startingHpPerc);
-        if (GameManager.IsSurvival)
+        if (GameManager.IsSurvival && (!IsAsteroid || IsObjective))
         {
             if(!IsAsteroid && !IsObjective)
             {
-                float bonusMultiplier = 1 - BonusPowersDealer.Instance.ExtraDamageToEnemies/100;
-                SurvivalMaxHP =(int)Mathf.Ceil(MaxHP * bonusMultiplier);
-                currentHP = SurvivalMaxHP;
+                float bonusMultiplier = 1 - BonusPowersDealer.Instance.ExtraDamageToEnemies/100f;
+                SurvivalMaxHP =(int)Mathf.Ceil(MaxHP * bonusMultiplier);                
             }
             if(IsObjective)
             {
-                float bonusMultiplier = 1 - BonusPowersDealer.Instance.ExtraDamageToObjectives/100;
+                float bonusMultiplier = 1 - BonusPowersDealer.Instance.ExtraDamageToObjectives/100f;
                 SurvivalMaxHP =(int)Mathf.Ceil(MaxHP * bonusMultiplier);
-                currentHP = SurvivalMaxHP;
-            }            
+            }
+            currentHP = (int)Mathf.Ceil(SurvivalMaxHP * startingHpPerc);
         }
 
         //Debug.Log("Birth Damage= " + OnBirthDamage);

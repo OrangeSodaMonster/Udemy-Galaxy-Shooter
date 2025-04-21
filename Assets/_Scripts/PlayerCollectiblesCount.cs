@@ -145,7 +145,7 @@ public class PlayerCollectiblesCount : MonoBehaviour
         return CheckResourcesAmmount(temp);
     }
 
-    static void SubtractResources(ResourceNumber[] costs)
+    static public void SubtractResources(ResourceNumber[] costs)
     {
         foreach (ResourceNumber resourceNumber in costs)
         {

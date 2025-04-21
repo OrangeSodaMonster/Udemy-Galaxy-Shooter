@@ -42,11 +42,8 @@ public class DroneAttackScript : MonoBehaviour
     void FixedUpdate()
     {
         if (GameStatus.IsPaused) return;
-
-        if (GameManager.IsSurvival)
-            damage = (int)Mathf.Ceil((DamagePerSecond+BonusPowersDealer.Instance.DronePower) * timeToDamage);
-        else            
-            damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
+        
+        damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
 
         if (target != null && (!target.gameObject.activeSelf || target.GetComponent<EnemyHP>().CurrentHP == 0))
             target = null;
@@ -127,12 +124,7 @@ public class DroneAttackScript : MonoBehaviour
 
         for (int i = 0; i < hits.Length; i++)
             hits[i] = null;
-        float range = Range;
-        if (GameManager.IsSurvival)
-        {
-            float bonusMultiplier = 1 + BonusPowersDealer.Instance.DroneIonStreamRange/100;
-            range *= bonusMultiplier;
-        }
+        float range = Range;        
 
         Physics2D.OverlapCircleNonAlloc(transform.position, range, hits, layersToHit);
 
