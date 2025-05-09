@@ -497,8 +497,9 @@ GameObject:
   - component: {fileID: 1946333786061635428}
   - component: {fileID: 5612261113590107961}
   - component: {fileID: 4381825225397409369}
+  - component: {fileID: 176395086271238058}
   m_Layer: 9
-  m_Name: SuperPowerUp
+  m_Name: BonusPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -603,6 +604,18 @@ MonoBehaviour:
   isNormalizeArrow: 0
   isExitArrow: 0
   isShowingArrow: 0
+--- !u!114 &176395086271238058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877744765972372322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b412f972b72d6a4c9876d520a291983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6892311153440515658
 GameObject:
   m_ObjectHideFlags: 0

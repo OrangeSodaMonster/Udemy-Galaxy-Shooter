@@ -20,6 +20,7 @@ public class PauseAndUIManager : MonoBehaviour
     [SerializeField] RectTransform shieldUpgradePage;
     [SerializeField] RectTransform ionStreamUpgradePage;
     [SerializeField] RectTransform dronesUpgradePage;
+    [SerializeField] RectTransform statsPage;
     [SerializeField] RectTransform audioPage;
     [SerializeField] RectTransform touchPage;
     [SerializeField] RectTransform[] disableOnPause;
@@ -56,7 +57,7 @@ public class PauseAndUIManager : MonoBehaviour
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, MMSoundManager.MMSoundManagerTracks.Sfx);
     }
 
-    private void SetPause()
+    void SetPause()
     {
         if (!GameStatus.IsPaused && canPause && !isOnPage && MySceneManager.IsFeedbackEnabled)
         {
@@ -70,40 +71,52 @@ public class PauseAndUIManager : MonoBehaviour
         }
     }
 
+    Tween leavePauseTween;
+    float timeScale = 0;
+    public void PauseDealer(bool setPause)
+    {
+        if (setPause)
+        {
+            GameStatus.IsPaused = true;
+            leavePauseTween.Kill();
+            Time.timeScale = 0;
+            DisablePlayerCommands.Instance.SetCommands(false);
+
+            foreach (RectTransform rect in disableOnPause)
+            {
+                rect.gameObject.SetActive(false);
+            }
+            AudioTrackConfig.Instance.MuteVFX();
+        }
+        else
+        {
+            GameStatus.IsPaused = false;
+            StartCoroutine(AllowPauseCO());
+
+            timeScale = 0;
+            leavePauseTween = DOTween.To(() => timeScale, x => timeScale = x, 1, 1.5f).SetUpdate(true).OnUpdate(() => Time.timeScale = timeScale);
+
+            DisablePlayerCommands.Instance.SetCommands(true);
+
+            foreach (RectTransform rect in disableOnPause)
+            {
+                rect.gameObject.SetActive(true);
+            }
+            AudioTrackConfig.Instance.UnmuteVFX();
+        }        
+    }
+
     public void StartPause()
     {
         pauseCanvas.gameObject.SetActive(true);
-        GameStatus.IsPaused = true;
-        leavePauseTween.Kill();
-        Time.timeScale = 0;
-
-        DisablePlayerCommands.Instance.SetCommands(false);
-
-        foreach(RectTransform rect in disableOnPause)
-        {
-            rect.gameObject.SetActive(false);
-        }
-        AudioTrackConfig.Instance.MuteVFX();
+        PauseDealer(true);
     }
 
-    Tween leavePauseTween;   
-    float timeScale = 0;
+    
     public void LeavePause()
     {
         pauseCanvas.gameObject.SetActive(false);
-        GameStatus.IsPaused = false;
-        StartCoroutine(AllowPauseCO());
-
-        timeScale = 0;
-        leavePauseTween = DOTween.To(() => timeScale, x => timeScale = x, 1, 1.5f).SetUpdate(true).OnUpdate(() => Time.timeScale = timeScale);
-
-        DisablePlayerCommands.Instance.SetCommands(true);
-
-        foreach (RectTransform rect in disableOnPause)
-        {
-            rect.gameObject.SetActive(true);
-        }
-        AudioTrackConfig.Instance.UnmuteVFX();        
+        PauseDealer(false);
     }
     IEnumerator AllowPauseCO()
     {
@@ -146,6 +159,13 @@ public class PauseAndUIManager : MonoBehaviour
         StartCoroutine(DisableEnableUpgradeDelay(dronesUpgradePage));
         isOnPage = true;
     }
+    public void EnableStatsPage()
+    {
+        if (!GameStatus.IsPaused) return;
+
+        StartCoroutine(DisableEnableUpgradeDelay(statsPage));
+        isOnPage = true;
+    }
     public void EnableAudioPage()
     {
         if (!GameStatus.IsPaused) return;
@@ -167,6 +187,7 @@ public class PauseAndUIManager : MonoBehaviour
         shieldUpgradePage.gameObject.SetActive(false);
         ionStreamUpgradePage.gameObject.SetActive(false);
         dronesUpgradePage.gameObject.SetActive(false);
+        statsPage.gameObject.SetActive(false);         
         audioPage.gameObject.SetActive(false);
         touchPage.gameObject.SetActive(false);
         pauseCanvas.gameObject.SetActive(false);         

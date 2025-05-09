@@ -610,6 +610,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7672117690116482826, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
+      propertyPath: playerHeal
+      value: 
+      objectReference: {fileID: 1686797277151434052}
+    - target: {fileID: 7672117690116482826, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
+      propertyPath: bonusPowers
+      value: 
+      objectReference: {fileID: 5576399773106618112}
     - target: {fileID: 8712135981467744530, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
       propertyPath: lightBG
       value: 
@@ -621,399 +629,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1329679553767856033, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5384773523193954679}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
---- !u!1 &3652876819002782172 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1329679553767856033, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
-  m_PrefabInstance: {fileID: 2360546593268409981}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5384773523193954679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3652876819002782172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fb525ac5f2f8c348b5b5d6974e22104, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradesManager: {fileID: 0}
-  bonusPowers: {fileID: 0}
-  Ship:
-    DefaultMaxHP: 0
-    CurrentMaxHP: 0
-    HpUpgradeLevel: 0
-    IsHpBonus: 0
-    CurrentHP: 0
-    HpUpgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-    DefaultMaxSpeed: 0
-    CurrentMaxSpeed: 0
-    SpeedUpgradeLevel: 0
-    IsSpeedBonus: 0
-    SpeedUpgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-    DefaultMaxTurningSpeed: 0
-    CurrentMaxTurningSpeed: 0
-    TurningSpeedUpgradeLevel: 0
-    IsTurningSpeedBonus: 0
-    ManobrabilityUpgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-    Tractor:
-      DefaultRange: 0
-      CurrentRange: 0
-      RangeUpgradeLevel: 0
-      IsRangeBonus: 0
-      DefaultForce: 0
-      CurrentForce: 0
-      ForceUpgradeLevel: 0
-      IsForceBonus: 0
-    TractorUpgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-    Upgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-  Lasers:
-    FrontLaser:
-      DefaultPower: 0
-      CurrentPower: 0
-      PowerUpgradeLevel: 0
-      IsPowerBonus: 0
-      PowerUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultInterval: 0
-      CurrentInterval: 0
-      CadencyUpgradeLevel: 0
-      IsCadencyBonus: 0
-      CadencyUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    SpreadLaser:
-      DefaultPower: 0
-      CurrentPower: 0
-      PowerUpgradeLevel: 0
-      IsPowerBonus: 0
-      PowerUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultInterval: 0
-      CurrentInterval: 0
-      CadencyUpgradeLevel: 0
-      IsCadencyBonus: 0
-      CadencyUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    SideLaser:
-      DefaultPower: 0
-      CurrentPower: 0
-      PowerUpgradeLevel: 0
-      IsPowerBonus: 0
-      PowerUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultInterval: 0
-      CurrentInterval: 0
-      CadencyUpgradeLevel: 0
-      IsCadencyBonus: 0
-      CadencyUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    BackLaser:
-      DefaultPower: 0
-      CurrentPower: 0
-      PowerUpgradeLevel: 0
-      IsPowerBonus: 0
-      PowerUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultInterval: 0
-      CurrentInterval: 0
-      CadencyUpgradeLevel: 0
-      IsCadencyBonus: 0
-      CadencyUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    Upgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-  IonStream:
-    DefaultPower: 0
-    CurrentPower: 0
-    PowerUpgradeLevel: 0
-    IsPowerBonus: 0
-    PowerUpgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-    DefaultInterval: 0
-    CurrentInterval: 0
-    CadencyUpgradeLevel: 0
-    IsCadencyBonus: 0
-    CadencyUpgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-    DefaultRange: 0
-    CurrentRange: 0
-    DefaultSecondaryRange: 0
-    CurrentSecondaryRange: 0
-    RangeUpgradeLevel: 0
-    IsRangeBonus: 0
-    RangeUpgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-    DefaultHitNumber: 0
-    CurrentHitNumber: 0
-    HitNumberUpgradeLevel: 0
-    IsHitNumberBonus: 0
-    HitNumberUpgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-    Upgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-  Drones:
-    Drone1:
-      DefaultPower: 0
-      CurrentPower: 0
-      PowerUpgradeLevel: 0
-      IsPowerBonus: 0
-      PowerUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultRange: 0
-      CurrentRange: 0
-      RangeUpgradeLevel: 0
-      IsRangeBonus: 0
-      RangeUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultHealInterval: 0
-      CurrentHealInterval: 0
-      HealUpgradeLevel: 0
-      IsHealBonus: 0
-      HealUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    Drone2:
-      DefaultPower: 0
-      CurrentPower: 0
-      PowerUpgradeLevel: 0
-      IsPowerBonus: 0
-      PowerUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultRange: 0
-      CurrentRange: 0
-      RangeUpgradeLevel: 0
-      IsRangeBonus: 0
-      RangeUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultHealInterval: 0
-      CurrentHealInterval: 0
-      HealUpgradeLevel: 0
-      IsHealBonus: 0
-      HealUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    Drone3:
-      DefaultPower: 0
-      CurrentPower: 0
-      PowerUpgradeLevel: 0
-      IsPowerBonus: 0
-      PowerUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultRange: 0
-      CurrentRange: 0
-      RangeUpgradeLevel: 0
-      IsRangeBonus: 0
-      RangeUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultHealInterval: 0
-      CurrentHealInterval: 0
-      HealUpgradeLevel: 0
-      IsHealBonus: 0
-      HealUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    Upgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-  Shields:
-    ShieldFront:
-      DefaultMaxStrenght: 0
-      CurrentMaxStrenght: 0
-      StrenghtUpgradeLevel: 0
-      IsStrenghtBonus: 0
-      CurrentStrenght: 0
-      StrenghtUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultInterval: 0
-      CurrentInterval: 0
-      RecoveryUpgradeLevel: 0
-      IsRecoveryBonus: 0
-      RecoveryUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    ShieldRight:
-      DefaultMaxStrenght: 0
-      CurrentMaxStrenght: 0
-      StrenghtUpgradeLevel: 0
-      IsStrenghtBonus: 0
-      CurrentStrenght: 0
-      StrenghtUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultInterval: 0
-      CurrentInterval: 0
-      RecoveryUpgradeLevel: 0
-      IsRecoveryBonus: 0
-      RecoveryUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    ShieldLeft:
-      DefaultMaxStrenght: 0
-      CurrentMaxStrenght: 0
-      StrenghtUpgradeLevel: 0
-      IsStrenghtBonus: 0
-      CurrentStrenght: 0
-      StrenghtUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultInterval: 0
-      CurrentInterval: 0
-      RecoveryUpgradeLevel: 0
-      IsRecoveryBonus: 0
-      RecoveryUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    ShieldBack:
-      DefaultMaxStrenght: 0
-      CurrentMaxStrenght: 0
-      StrenghtUpgradeLevel: 0
-      IsStrenghtBonus: 0
-      CurrentStrenght: 0
-      StrenghtUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      DefaultInterval: 0
-      CurrentInterval: 0
-      RecoveryUpgradeLevel: 0
-      IsRecoveryBonus: 0
-      RecoveryUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-      TotalUpgrades:
-        Upgrades: 0
-        UpgradesPerc: 0
-        NumberOfUpgrades: 0
-    Upgrades:
-      Upgrades: 0
-      UpgradesPerc: 0
-      NumberOfUpgrades: 0
-  Bomb:
-    DefaultPower: 0
-    CurrentPower: 0
-    Charges: 0
-    IsPowerBonus: 0
-    IsGenerationBonus: 0
-    GenerationInterval: 0
 --- !u!114 &4306562943531163419 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1946017592968526182, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
   m_PrefabInstance: {fileID: 2360546593268409981}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3652876819002782172}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0a53d73483b2374f8d8dda94ab473e0, type: 3}
@@ -1024,7 +647,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8161914971348545171, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
   m_PrefabInstance: {fileID: 2360546593268409981}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3652876819002782172}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0db670723cf7e9a40a0b440c40f86b48, type: 3}
@@ -1035,7 +658,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8712135981467744530, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
   m_PrefabInstance: {fileID: 2360546593268409981}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3652876819002782172}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb45f8cae8ba1d4429059663306b57f2, type: 3}
@@ -1051,7 +674,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6510323894878613736, guid: 7a7f82f447a12304ca6d7e1af59354f3, type: 3}
   m_PrefabInstance: {fileID: 2360546593268409981}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3652876819002782172}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b63411c3c963b02439083a40b49c0874, type: 3}
@@ -1200,7 +823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4965021748523607662, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000044424087
+      value: -0.0000003548339
       objectReference: {fileID: 0}
     - target: {fileID: 4965021748523607662, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1216,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 12799487033374074}
     - target: {fileID: 8452768730702735789, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000044424087
+      value: -0.0000003548339
       objectReference: {fileID: 0}
     - target: {fileID: 8452768730702735789, guid: a6c95c11435c0d44fa7e1f8f6c458fb0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1405,6 +1028,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6751909290836111696, guid: fd1206b4ec8636b4294b3fff45720db6, type: 3}
   m_PrefabInstance: {fileID: 6746076316323038250}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1686797277151434052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5401598833310912878, guid: fd1206b4ec8636b4294b3fff45720db6, type: 3}
+  m_PrefabInstance: {fileID: 6746076316323038250}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb66e64bc91b98b4bbdbd170aed8b3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5576399773106618112 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1224339898787101482, guid: fd1206b4ec8636b4294b3fff45720db6, type: 3}
+  m_PrefabInstance: {fileID: 6746076316323038250}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff106d9136503642b3c164cb446e5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6288854574466924035 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 781549635615111721, guid: fd1206b4ec8636b4294b3fff45720db6, type: 3}

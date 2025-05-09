@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 6510323894878613736}
   - component: {fileID: 5352173929461112413}
   - component: {fileID: 8161914971348545171}
+  - component: {fileID: 7672117690116482826}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -280,12 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571cf46f2c4f3f44d9292c0cde7a0542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MetalCost:
-  - ResourceType: 0
-    Amount: 3
-  AlloyCost:
-  - ResourceType: 2
-    Amount: 3
   MetalView: 1
   RareMetalView: 1
   CristalView: 1
@@ -344,6 +339,419 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db670723cf7e9a40a0b440c40f86b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7672117690116482826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329679553767856033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb525ac5f2f8c348b5b5d6974e22104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradesManager: {fileID: 8301927158804262948}
+  bonusPowers: {fileID: 0}
+  playerHeal: {fileID: 0}
+  Ship:
+    DefaultMaxHP: 0
+    CurrentMaxHP: 0
+    IsHpBonus: 0
+    CurrentHP: 0
+    HpUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    DefaultMaxSpeed: 0
+    CurrentMaxSpeed: 0
+    DefaultLinearInertia: 0
+    CurrentLinearInertia: 0
+    IsSpeedBonus: 0
+    SpeedUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    DefaultMaxTurningSpeed: 0
+    CurrentMaxTurningSpeed: 0
+    DefaultAngularInertia: 0
+    CurrentAngularInertia: 0
+    IsTurningSpeedBonus: 0
+    ManobrabilityUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    Tractor:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultRange: 0
+      CurrentRange: 0
+      IsRangeBonus: 0
+      DefaultForce: 0
+      CurrentForce: 0
+      IsForceBonus: 0
+    TractorUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    Upgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+  Lasers:
+    FrontLaser:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultPower: 0
+      CurrentPower: 0
+      IsPowerBonus: 0
+      PowerUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultInterval: 0
+      CurrentInterval: 0
+      CadencyUpgradeLevel: 0
+      IsCadencyBonus: 0
+      CadencyUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    SpreadLaser:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultPower: 0
+      CurrentPower: 0
+      IsPowerBonus: 0
+      PowerUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultInterval: 0
+      CurrentInterval: 0
+      CadencyUpgradeLevel: 0
+      IsCadencyBonus: 0
+      CadencyUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    SideLaser:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultPower: 0
+      CurrentPower: 0
+      IsPowerBonus: 0
+      PowerUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultInterval: 0
+      CurrentInterval: 0
+      CadencyUpgradeLevel: 0
+      IsCadencyBonus: 0
+      CadencyUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    BackLaser:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultPower: 0
+      CurrentPower: 0
+      IsPowerBonus: 0
+      PowerUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultInterval: 0
+      CurrentInterval: 0
+      CadencyUpgradeLevel: 0
+      IsCadencyBonus: 0
+      CadencyUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    PowerUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    CadencyUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    Upgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+  IonStream:
+    Unlocked: 0
+    ForceDisable: 0
+    Enabled: 0
+    DefaultPower: 0
+    CurrentPower: 0
+    IsPowerBonus: 0
+    PowerUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    DefaultInterval: 0
+    CurrentInterval: 0
+    IsCadencyBonus: 0
+    CadencyUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    DefaultPlayerRange: 0
+    CurrentPlayerRange: 0
+    DefaultHitRange: 0
+    CurrentHitRange: 0
+    IsRangeBonus: 0
+    RangeUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    DefaultHitNumber: 0
+    CurrentHitNumber: 0
+    IsHitNumberBonus: 0
+    HitNumberUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    Upgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+  Drones:
+    DefaultHealInterval: 0
+    CurrentHealInterval: 0
+    DronesHealIntervalSubtraction: 0
+    IsHealBonus: 0
+    Drone1:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultPower: 0
+      CurrentPower: 0
+      IsPowerBonus: 0
+      PowerUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultRange: 0
+      CurrentRange: 0
+      IsRangeBonus: 0
+      RangeUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      HealIntervalSubtraction: 0
+      HealUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    Drone2:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultPower: 0
+      CurrentPower: 0
+      IsPowerBonus: 0
+      PowerUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultRange: 0
+      CurrentRange: 0
+      IsRangeBonus: 0
+      RangeUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      HealIntervalSubtraction: 0
+      HealUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    Drone3:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultPower: 0
+      CurrentPower: 0
+      IsPowerBonus: 0
+      PowerUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultRange: 0
+      CurrentRange: 0
+      IsRangeBonus: 0
+      RangeUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      HealIntervalSubtraction: 0
+      HealUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    PowerUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    RangeUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    HealUpgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+    Upgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+  Shields:
+    ShieldFront:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultMaxStrenght: 0
+      CurrentMaxStrenght: 0
+      IsStrenghtBonus: 0
+      CurrentStrenght: 0
+      StrenghtUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultInterval: 0
+      CurrentInterval: 0
+      IsRecoveryBonus: 0
+      RecoveryUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    ShieldRight:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultMaxStrenght: 0
+      CurrentMaxStrenght: 0
+      IsStrenghtBonus: 0
+      CurrentStrenght: 0
+      StrenghtUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultInterval: 0
+      CurrentInterval: 0
+      IsRecoveryBonus: 0
+      RecoveryUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    ShieldLeft:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultMaxStrenght: 0
+      CurrentMaxStrenght: 0
+      IsStrenghtBonus: 0
+      CurrentStrenght: 0
+      StrenghtUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultInterval: 0
+      CurrentInterval: 0
+      IsRecoveryBonus: 0
+      RecoveryUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    ShieldBack:
+      Unlocked: 0
+      ForceDisable: 0
+      Enabled: 0
+      DefaultMaxStrenght: 0
+      CurrentMaxStrenght: 0
+      IsStrenghtBonus: 0
+      CurrentStrenght: 0
+      StrenghtUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      DefaultInterval: 0
+      CurrentInterval: 0
+      IsRecoveryBonus: 0
+      RecoveryUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+      TotalUpgrades:
+        Upgrades: 0
+        UpgradesPerc: 0
+        NumberOfUpgrades: 0
+    Upgrades:
+      Upgrades: 0
+      UpgradesPerc: 0
+      NumberOfUpgrades: 0
+  Bomb:
+    DefaultPower: 0
+    CurrentPower: 0
+    IsPowerBonus: 0
+    DefaultRange: 0
+    CurrentRange: 0
+    RangeModifier: 0
+    IsRangeBonus: 0
+    Charges: 0
+    IsGenerationBonus: 0
+    GenerationInterval: 0
 --- !u!1 &4112380401310063756
 GameObject:
   m_ObjectHideFlags: 0

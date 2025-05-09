@@ -30,7 +30,7 @@ public class TooltipShipLink : TooltipLink
             case ShipPart.Manobrability:
                 float currentManob = PlayerUpgradesManager.Instance.ShipUpgradesInfo.ManobrabilityUpgrade[
                     PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.ManobrabilityLevel - 1].TimeToStopRotating;
-                return $"{(defaultManob-currentManob)/defaultManob * 100}%";
+                return $"{PlayerStats.Instance.Ship.DefaultMaxTurningSpeed}";
             case ShipPart.Resistence:
                 return PlayerUpgradesManager.Instance.ShipUpgradesInfo.HP_Upgrade[
                     PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP.ToString();

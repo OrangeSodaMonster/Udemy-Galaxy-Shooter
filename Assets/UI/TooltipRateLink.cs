@@ -55,11 +55,11 @@ public class TooltipRateLink : TooltipLink
                     PlayerUpgradesManager.Instance.CurrentUpgrades.IonStreamUpgrades.CadencyLevel - 1].TimeBetween.ToString();
 
             case RateSource.Drone1:
-                return playerHeal?.CurrentSecondsBetweenHeal.ToString();
+                return $"{PlayerStats.Instance.Drones.Drone1.HealIntervalSubtraction}";
             case RateSource.Drone2:
-                return playerHeal?.CurrentSecondsBetweenHeal.ToString();
+                return $"{PlayerStats.Instance.Drones.Drone2.HealIntervalSubtraction}";
             case RateSource.Drone3:
-                return playerHeal?.CurrentSecondsBetweenHeal.ToString();
+                return $"{PlayerStats.Instance.Drones.Drone3.HealIntervalSubtraction}";
 
             case RateSource.FrontShield:
                 return PlayerUpgradesManager.Instance.ShieldUpgradesInfo.RecoveryUpgrades[

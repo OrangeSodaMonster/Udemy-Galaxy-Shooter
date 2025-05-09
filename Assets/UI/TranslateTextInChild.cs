@@ -42,4 +42,16 @@ public class TranslateTextInChild : MonoBehaviour
         }
     }
 
+    private void OnValidate()
+    {
+        textObj = GetComponentInChildren<TextMeshProUGUI>();
+
+        string largestText = English;
+        if (Portugues != null && largestText.Length < Portugues.Length) largestText = Portugues;
+        if (Espanol != null && largestText.Length < Espanol.Length) largestText = Espanol; 
+
+        if(largestText != null && textObj != null)
+            textObj.text = largestText;
+    }
+
 }

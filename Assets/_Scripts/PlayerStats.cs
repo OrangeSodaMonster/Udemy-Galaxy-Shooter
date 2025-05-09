@@ -120,9 +120,9 @@ public class PlayerStats : MonoBehaviour
         public TotalUpgrades RangeUpgrades;
         [BoxGroup("Hits")]
         [HorizontalGroup("Hits/Hit", LabelWidth = 130)]
-        [ReadOnly] public float DefaultHitNumber;
+        [ReadOnly] public int DefaultHitNumber;
         [HorizontalGroup("Hits/Hit", LabelWidth = 130)]
-        [ReadOnly] public float CurrentHitNumber;
+        [ReadOnly] public int CurrentHitNumber;
         //[HorizontalGroup("Hits/Hit2", LabelWidth = 130)]
         //[ReadOnly] public int HitNumberUpgradeLevel;
         [HorizontalGroup("Hits/Hit2", LabelWidth = 130)]
@@ -196,6 +196,8 @@ public class PlayerStats : MonoBehaviour
         public ShieldStats ShieldRight;
         public ShieldStats ShieldLeft;
         public ShieldStats ShieldBack;
+        public TotalUpgrades StrenghtUpgrades;
+        public TotalUpgrades RecoveryUpgrades;
         public TotalUpgrades Upgrades;
     }
     [Serializable]
@@ -372,8 +374,8 @@ public class PlayerStats : MonoBehaviour
             stats.ForceDisable = upgrades.DisableOverwrite;
             stats.Enabled = stats.Unlocked && !stats.ForceDisable;
             // Upgrades
-            UpdadeUpgrades(stats.PowerUpgrades, upgrades.DamageLevel, upgradesManager.LaserUpgradesInfo.PowerUpgrades.Length);
-            UpdadeUpgrades(stats.CadencyUpgrades, upgrades.CadencyLevel, upgradesManager.LaserUpgradesInfo.CadencyUpgrades.Length);
+            UpdadeUpgrades(stats.PowerUpgrades, upgrades.DamageLevel, upgradesManager.LaserUpgradesInfo.PowerUpgrades.Length, stats.Unlocked);
+            UpdadeUpgrades(stats.CadencyUpgrades, upgrades.CadencyLevel, upgradesManager.LaserUpgradesInfo.CadencyUpgrades.Length, stats.Unlocked);
             stats.TotalUpgrades = SumTotalUpgrades(stats.PowerUpgrades, stats.CadencyUpgrades);
             // Power
             stats.DefaultPower = upgradesManager.LaserUpgradesInfo.PowerUpgrades[upgrades.DamageLevel - 1].Damage;
@@ -416,6 +418,10 @@ public class PlayerStats : MonoBehaviour
 
         Shields.Upgrades = SumTotalUpgrades(Shields.ShieldFront.TotalUpgrades, Shields.ShieldRight.TotalUpgrades,
             Shields.ShieldLeft.TotalUpgrades, Shields.ShieldBack.TotalUpgrades);
+        Shields.StrenghtUpgrades = SumTotalUpgrades(Shields.ShieldFront.StrenghtUpgrades, Shields.ShieldRight.StrenghtUpgrades,
+            Shields.ShieldLeft.StrenghtUpgrades, Shields.ShieldBack.StrenghtUpgrades);
+        Shields.RecoveryUpgrades = SumTotalUpgrades(Shields.ShieldFront.RecoveryUpgrades, Shields.ShieldRight.RecoveryUpgrades,
+            Shields.ShieldLeft.RecoveryUpgrades, Shields.ShieldBack.RecoveryUpgrades);
 
         void UpdateShieldsStats(ShieldStats stats, ShieldUpgrades upgrades)
         {
@@ -424,8 +430,8 @@ public class PlayerStats : MonoBehaviour
             stats.ForceDisable = upgrades.DisableOverwrite;
             stats.Enabled = stats.Unlocked && !stats.ForceDisable;
             // Upgrades
-            UpdadeUpgrades(stats.StrenghtUpgrades, upgrades.ResistenceLevel, upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades.Length);
-            UpdadeUpgrades(stats.RecoveryUpgrades, upgrades.RecoveryLevel, upgradesManager.ShieldUpgradesInfo.RecoveryUpgrades.Length);
+            UpdadeUpgrades(stats.StrenghtUpgrades, upgrades.ResistenceLevel, upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades.Length, stats.Unlocked);
+            UpdadeUpgrades(stats.RecoveryUpgrades, upgrades.RecoveryLevel, upgradesManager.ShieldUpgradesInfo.RecoveryUpgrades.Length, stats.Unlocked);
             stats.TotalUpgrades = SumTotalUpgrades(stats.StrenghtUpgrades, stats.RecoveryUpgrades);
             // Strenght
             stats.DefaultMaxStrenght = upgradesManager.ShieldUpgradesInfo.StrenghtUpgrades[upgrades.ResistenceLevel - 1].Strenght;
@@ -492,13 +498,18 @@ public class PlayerStats : MonoBehaviour
         Drones.RangeUpgrades = SumTotalUpgrades(Drones.Drone1.RangeUpgrades, Drones.Drone2.RangeUpgrades, Drones.Drone3.RangeUpgrades);
         Drones.HealUpgrades = SumTotalUpgrades(Drones.Drone1.HealUpgrades, Drones.Drone2.HealUpgrades, Drones.Drone3.HealUpgrades);
 
-        Drones.DronesHealIntervalSubtraction = Drones.Drone1.HealIntervalSubtraction + Drones.Drone2.HealIntervalSubtraction + Drones.Drone3.HealIntervalSubtraction;
-        
+        Drones.DronesHealIntervalSubtraction = 0;
+        if (Drones.Drone1.Enabled) Drones.DronesHealIntervalSubtraction += Drones.Drone1.HealIntervalSubtraction;
+        if (Drones.Drone2.Enabled) Drones.DronesHealIntervalSubtraction += Drones.Drone2.HealIntervalSubtraction;
+        if (Drones.Drone3.Enabled) Drones.DronesHealIntervalSubtraction += Drones.Drone3.HealIntervalSubtraction;
+
+
         Drones.DefaultHealInterval = playerHeal.BaseSecondsBetweenHeal - Drones.DronesHealIntervalSubtraction;
         Drones.CurrentHealInterval = Drones.DefaultHealInterval;
         if (GameManager.IsSurvival)
         {
-            if (BonusPowersDealer.Instance.IsFourthDrone)
+            bool allDronesEnabled = Drones.Drone1.Enabled && Drones.Drone2.Enabled && Drones.Drone3.Enabled;
+            if (BonusPowersDealer.Instance.IsFourthDrone && allDronesEnabled)
             {
                 float minHealIntervalReduction = Mathf.Min(Drones.Drone1.HealIntervalSubtraction, Drones.Drone2.HealIntervalSubtraction, Drones.Drone3.HealIntervalSubtraction);
                 Drones.CurrentHealInterval -= minHealIntervalReduction;
@@ -507,7 +518,7 @@ public class PlayerStats : MonoBehaviour
             float bonusMultiplier = 1 - BonusPowersDealer.Instance.HP_Recovery/100f;
             Drones.CurrentHealInterval *= bonusMultiplier;
 
-            if(BonusPowersDealer.Instance.HP_Recovery > 0 || BonusPowersDealer.Instance.IsFourthDrone)
+            if(BonusPowersDealer.Instance.HP_Recovery > 0 || (BonusPowersDealer.Instance.IsFourthDrone && allDronesEnabled))
                 Drones.IsHealBonus = true;
             else Drones.IsHealBonus = false;
         }
@@ -519,9 +530,9 @@ public class PlayerStats : MonoBehaviour
             stats.ForceDisable = upgrades.DisableOverwrite;
             stats.Enabled = stats.Unlocked && !stats.ForceDisable;
             // Upgrades
-            UpdadeUpgrades(stats.PowerUpgrades, upgrades.DamageLevel, upgradesManager.DroneUpgradesInfo.PowerUpgrades.Length);
-            UpdadeUpgrades(stats.RangeUpgrades, upgrades.RangeLevel, upgradesManager.DroneUpgradesInfo.RangeUpgrades.Length);
-            UpdadeUpgrades(stats.HealUpgrades, upgrades.HealingLevel, upgradesManager.DroneUpgradesInfo.HealUpgrades.Length);
+            UpdadeUpgrades(stats.PowerUpgrades, upgrades.DamageLevel, upgradesManager.DroneUpgradesInfo.PowerUpgrades.Length, stats.Unlocked);
+            UpdadeUpgrades(stats.RangeUpgrades, upgrades.RangeLevel, upgradesManager.DroneUpgradesInfo.RangeUpgrades.Length, stats.Unlocked);
+            UpdadeUpgrades(stats.HealUpgrades, upgrades.HealingLevel, upgradesManager.DroneUpgradesInfo.HealUpgrades.Length, stats.Unlocked);
             stats.TotalUpgrades = SumTotalUpgrades(stats.PowerUpgrades, stats.RangeUpgrades, stats.HealUpgrades);
             // Power
             stats.DefaultPower = upgradesManager.DroneUpgradesInfo.PowerUpgrades[upgrades.DamageLevel - 1].DamagePerSecond;
@@ -557,10 +568,10 @@ public class PlayerStats : MonoBehaviour
         IonStream.ForceDisable = upgrades.DisableOverwrite;
         IonStream.Enabled = IonStream.Unlocked && !IonStream.ForceDisable;
         // Upgrades
-        UpdadeUpgrades(IonStream.PowerUpgrades, upgrades.DamageLevel, upgradesManager.IonStreamUpgradesInfo.PowerUpgrades.Length);
-        UpdadeUpgrades(IonStream.CadencyUpgrades, upgrades.CadencyLevel, upgradesManager.IonStreamUpgradesInfo.CadencyUpgrades.Length);
-        UpdadeUpgrades(IonStream.RangeUpgrades, upgrades.RangeLevel, upgradesManager.IonStreamUpgradesInfo.RangeUpgrades.Length);
-        UpdadeUpgrades(IonStream.HitNumberUpgrades, upgrades.NumberHitsLevel, upgradesManager.IonStreamUpgradesInfo.HitNumUpgrades.Length);
+        UpdadeUpgrades(IonStream.PowerUpgrades, upgrades.DamageLevel, upgradesManager.IonStreamUpgradesInfo.PowerUpgrades.Length, IonStream.Unlocked);
+        UpdadeUpgrades(IonStream.CadencyUpgrades, upgrades.CadencyLevel, upgradesManager.IonStreamUpgradesInfo.CadencyUpgrades.Length, IonStream.Unlocked);
+        UpdadeUpgrades(IonStream.RangeUpgrades, upgrades.RangeLevel, upgradesManager.IonStreamUpgradesInfo.RangeUpgrades.Length, IonStream.Unlocked);
+        UpdadeUpgrades(IonStream.HitNumberUpgrades, upgrades.NumberHitsLevel, upgradesManager.IonStreamUpgradesInfo.HitNumUpgrades.Length, IonStream.Unlocked);
         IonStream.Upgrades = SumTotalUpgrades(IonStream.PowerUpgrades, IonStream.CadencyUpgrades, IonStream.RangeUpgrades, IonStream.HitNumberUpgrades);
         // Power
         IonStream.DefaultPower = upgradesManager.IonStreamUpgradesInfo.PowerUpgrades[upgradesManager.CurrentUpgrades.IonStreamUpgrades.DamageLevel - 1].Damage;
@@ -610,7 +621,7 @@ public class PlayerStats : MonoBehaviour
         UpdadeUpgrades(Ship.HpUpgrades, upgrades.HPLevel, upgradesManager.ShipUpgradesInfo.HP_Upgrade.Length);
         UpdadeUpgrades(Ship.SpeedUpgrades, upgrades.SpeedLevel, upgradesManager.ShipUpgradesInfo.SpeedUpgrade.Length);
         UpdadeUpgrades(Ship.ManobrabilityUpgrades, upgrades.ManobrabilityLevel, upgradesManager.ShipUpgradesInfo.ManobrabilityUpgrade.Length);
-        UpdadeUpgrades(Ship.TractorUpgrades, upgrades.TractorBeamLevel, upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade.Length);
+        UpdadeUpgrades(Ship.TractorUpgrades, upgrades.TractorBeamLevel, upgradesManager.ShipUpgradesInfo.TractorBeamUpgrade.Length, upgrades.TractorBeamEnabled);
         Ship.Upgrades = SumTotalUpgrades(Ship.HpUpgrades, Ship.SpeedUpgrades, Ship.ManobrabilityUpgrades, Ship.TractorUpgrades);
         // HP
         Ship.DefaultMaxHP = upgradesManager.ShipUpgradesInfo.HP_Upgrade[PlayerUpgradesManager.Instance.CurrentUpgrades.ShipUpgrades.HPLevel - 1].HP;
@@ -664,10 +675,11 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    void UpdadeUpgrades(TotalUpgrades upgrades, int currentUpgrades, int totalUpgrades)
-    {
+    void UpdadeUpgrades(TotalUpgrades upgrades, int currentUpgrades, int totalUpgrades, bool isUnlocked = true)
+    {        
         upgrades.NumberOfUpgrades = totalUpgrades;
         upgrades.Upgrades = currentUpgrades;
+        if (!isUnlocked) upgrades.Upgrades = 0;
         upgrades.UpgradesPerc = (int)Mathf.Ceil((float)upgrades.Upgrades/upgrades.NumberOfUpgrades*100);
     }
 

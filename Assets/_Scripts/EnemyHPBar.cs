@@ -57,7 +57,10 @@ public class EnemyHPBar : MonoBehaviour
     {
         int MaxHP;
         if (GameManager.IsSurvival)
+        {
             MaxHP = enemyHP.SurvivalMaxHP;
+            //Debug.Log($"{gameObject.name}: {MaxHP}");
+        }
         else
             MaxHP = enemyHP.MaxHP;
 
