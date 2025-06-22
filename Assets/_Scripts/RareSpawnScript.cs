@@ -43,6 +43,13 @@ public class RareSpawnScript : MonoBehaviour
     Vector3 highlightDefaultScale = new();
     WaitForSeconds wait1 = new WaitForSeconds(1);
     WaitForSeconds waitIntervalMinus1;
+    static public RareSpawnScript Instance;
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+    }
 
     void Start()
     {

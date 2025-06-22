@@ -107,7 +107,10 @@ public class BombScript : MonoBehaviour
     {
         yield return damageWait;
         
-        enemyHP.ChangeHP(-Mathf.Abs(damage));
+        if(GameManager.IsSurvival)
+            enemyHP.ChangeHP(-Mathf.Abs(damage), ref CombatLog.Instance.BombTotalDamage);
+        else
+            enemyHP.ChangeHP(-Mathf.Abs(damage));
 
         GameObject hitVFX = VFXPoolerScript.Instance.BombHitVFXPooler.GetPooledGameObject();
         hitVFX.transform.position = hit.transform.position;

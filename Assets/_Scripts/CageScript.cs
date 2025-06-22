@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class CageScript : MonoBehaviour
 {
+    [SerializeField] bool disableValidate = false;
     [SerializeField] float radius = 37;
+    [SerializeField] bool manualRotationOfNodes = false;
     [SerializeField] LineRenderer lineRenderer;
+    public LineRenderer CageLine {  get => lineRenderer; }
     [SerializeField] List<Transform> nodes;
+    public List<Transform> Nodes {  get => nodes; }
     [SerializeField] List<BoxCollider2D> colliders;
+    public List<BoxCollider2D> Colliders {  get => colliders; }
 
     void Start()
     {
-        lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer = GetComponentInChildren<LineRenderer>(true);
     }
 
 
     private void OnValidate()
     {
+        if(disableValidate) return;
         if (lineRenderer == null) return;
 
         lineRenderer = GetComponentInChildren<LineRenderer>();
@@ -28,7 +34,9 @@ public class CageScript : MonoBehaviour
         {
             float angle = (360/(nodes.Count)) * (i) + parentAngle;
 
-            nodes[i].rotation = Quaternion.Euler(0, 0, angle);
+            if(!manualRotationOfNodes)
+                nodes[i].rotation = Quaternion.Euler(0, 0, angle
+                    );
             //Debug.Log(angle);
             angle *= Mathf.Deg2Rad;
             nodes[i].position = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius + (Vector2)transform.position;

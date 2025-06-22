@@ -23,48 +23,75 @@ class PossibleObjectives
 
 public class SurvivalObjectiveDealer : MonoBehaviour
 {
+    [SerializeField] int minObjectivesPerSection = 2;
     [BoxGroup("Quadrants")]
     [SerializeField] QuadrantDealer CenterQuadrant;
     [SerializeField] float nextObjCD = 60;
     //[SerializeField] List<ObjSpotScript> CenterSpots;
 
     [SerializeField, GUIColor("lightBlue")] Transform objParents;
-    [SerializeField] List<PossibleObjectives> objectivesPerSection = new();
-        
-    [HorizontalGroup("Sent",.5f)]
-    [SerializeField] GameObject Sentinel;
-    [HorizontalGroup("Sent")]
-    [SerializeField] int SentNum;
-    [HorizontalGroup("Sent")]
-    [SerializeField] float SentRadius = 3;
+    [SerializeField] List<PossibleObjectives> objectivesPerSection = new();    
 
     [Sirenix.OdinInspector.ReadOnly]
-    public List<ObjSpotScript> InUseSpots;
-    public static bool IsWaitingEndEvent = false;
+    public List<ObjSpotScript> InUseSpots;    
     public static ObjSpotScript LastObj;
+    GameObject lastSpawnedObj;
+    [ShowInInspector] public static List<GameObject> ObjectsToSpawnAround = new();
 
     int numActiveObjectives = 0;
     Transform player;
     int numObjParents;    
     PoolRefs poolRefs;
-    float nextObjTimer;    
+
+    SurvivalTimers timers;
+    BonusRefScript bonusRef;
+    SpawnAround spawnAround;
+
+    int objectivesThisSection = 0;
+    int lastBonusSpawned = 0; // check the last section a bonus was spawned to prevent spawning multiple times in the same section
 
     private void Start()
     {
         player = FindObjectOfType<PlayerHP>().transform;
         poolRefs = FindObjectOfType<PoolRefs>();
+        spawnAround = GetComponent<SpawnAround>();
 
         numObjParents = objParents.childCount;
         SurvivalManager.CurrentQuadrant = CenterQuadrant;
-        SurvivalTimers.OnSectionChange.AddListener(ResetTimer);
+
+        timers = FindObjectOfType<SurvivalTimers>();
+        bonusRef = FindObjectOfType<BonusRefScript>();
     }
 
     private void Update()
     {
-        if (numActiveObjectives == 0 && !GameStatus.IsPortal && !IsWaitingEndEvent)
+        if (!GameStatus.IsPaused && numActiveObjectives == 0 && !GameStatus.IsPortal &&
+            !SurvivalManager.IsWaitingEndEvent && lastBonusSpawned < SurvivalManager.CurrentSection + 1)
         {
-            PickAnObjective();
-            ResetTimer();
+            if(timers.SectionTime >= timers.Sections[SurvivalManager.CurrentSection].Duration &&
+                SurvivalManager.SurvivalState == SurvivalState.Spawning && objectivesThisSection >= minObjectivesPerSection)
+            {
+                lastBonusSpawned++;
+                Instantiate(bonusRef.BonusOfSection[SurvivalManager.CurrentSection], SurvivalManager.CurrentQuadrant.BossPoint.position, Quaternion.identity);
+                lastSpawnedObj = bonusRef.BonusOfSection[SurvivalManager.CurrentSection];
+                SurvivalManager.IsWaitingEndEvent = true;
+                //SurvivalManager.IsNextSectionReady = true;
+                SurvivalManager.SurvivalState = SurvivalState.Bonus;
+                Debug.Log("<color=cyan>STATE: Bonus</color>");
+                SurvivalManager.OnBonusAsteroidSpawn.Invoke();
+                objectivesThisSection = 0;
+
+                if (ObjectsToSpawnAround.Count > 0)
+                {
+                    spawnAround.Spawn(SurvivalManager.CurrentQuadrant.BossPoint.position, ObjectsToSpawnAround, 6.1f);
+                    ObjectsToSpawnAround.Clear();
+                }
+            }
+            else
+            {
+                PickAnObjective();
+                objectivesThisSection++;
+            }
         }
 
         //if (nextObjTimer > nextObjCD && LastObj != null)
@@ -137,42 +164,22 @@ public class SurvivalObjectiveDealer : MonoBehaviour
         obj.transform.position = parent.position;
         obj.transform.parent = parent;
         obj.SetActive(true);
+        lastSpawnedObj = obj;
         parent.position = LastObj.transform.position;
         parent.gameObject.SetActive(true);
         numActiveObjectives++;
-        HandleSentinels();
+        HandleSpawnAround();
     }
 
-    void HandleSentinels()
+    void HandleSpawnAround()
     {
-        if (Sentinel == null || SentNum == 0) return;
-
-        float originalAngle = UnityEngine.Random.Range(0, 360);
-        float angleVariation = 360/SentNum;
-
-        Vector2 pos = LastObj.transform.position;
-
-        for (int i = 0; i < SentNum; i++)
+        if (ObjectsToSpawnAround.Count > 0)
         {
-            float angle = (originalAngle + angleVariation * i) * Mathf.Deg2Rad;
-            Vector2 direction = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
-            direction *= SentRadius;
-
-            GameObject Sent = poolRefs.Poolers[Sentinel].GetPooledGameObject();
-            Sent.transform.position = pos + direction;
-            Sent.SetActive(true);            
+            float range = lastSpawnedObj.gameObject.GetComponent<ObjectiveSizeRef>().GetRange();
+            spawnAround.Spawn(LastObj.transform.position, ObjectsToSpawnAround, range);
+            ObjectsToSpawnAround.Clear();
         }
-
-        Sentinel = null;
-        SentNum = 0;
-    }
-
-    public void SetSentinels (GameObject sentinel, int sentNum)
-    {
-        if(!sentinel.GetComponent<SentinelShoot>()) return;
-        Sentinel = sentinel;
-        SentNum = sentNum;
-    }
+    }   
 
     Transform GetFirstDisabledObjParent()
     {
@@ -271,11 +278,6 @@ public class SurvivalObjectiveDealer : MonoBehaviour
             yield return new WaitForSeconds(.5f);
             spot.GetComponent<SpriteRenderer>().color = oldColor;
         }
-    }
-
-    private void ResetTimer()
-    {
-        nextObjTimer = 0;
     }
 
     public void SetObjPerSectionSize(int size)

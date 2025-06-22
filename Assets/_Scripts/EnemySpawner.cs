@@ -47,10 +47,12 @@ public struct EnemiesToLoopSpawn
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] float noSpawnZoneRadius;   
+    [SerializeField] float noSpawnZoneRadius;
     [SerializeField] float spawnZoneRadius;
     [SerializeField] Transform player;
+    public Transform Player {get => player;}
     [SerializeField] float baseSpawnCD = 1;
+    [SerializeField, ReadOnly] float currentSpawnCD;
     [SerializeField] float spawnCDVariationPerc = 50f;
     [SerializeField] float timeToStartSpawning = 3f;
     [SerializeField] EnemiesToSpawn[] enemiesToSpawn;
@@ -63,7 +65,6 @@ public class EnemySpawner : MonoBehaviour
     public float SpawnZoneRadius { get { return spawnZoneRadius; } }
 
     float totalSpawnWeight = 0;
-    float currentSpawnCD;
     PoolRefs poolRef;
     float spawnTimer = 0;
     float spawnTimerBegin = 0;
@@ -180,8 +181,14 @@ public class EnemySpawner : MonoBehaviour
         Vector3 playerPos = player != null ? player.position : PlayerLastPos;
         return (nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius)) + (Vector2)playerPos;
     }
+    public Vector3 GetSpawnPoint(Vector2 direction)
+    {
+        Vector2 nextSpawnDirection = direction.normalized;
+        Vector3 playerPos = player != null ? player.position : PlayerLastPos;
+        return (nextSpawnDirection * UnityEngine.Random.Range(noSpawnZoneRadius, spawnZoneRadius)) + (Vector2)playerPos;
+    }
 
-    public void SpawnEnemy(GameObject spawn)
+    public GameObject SpawnEnemy(GameObject spawn)
     {
         GameObject enemy = poolRef.Poolers[spawn].GetPooledGameObject();
         if(enemy != null && enemy.GetComponent<EnemyHP>() && enemy.GetComponent<EnemyHP>().IsAsteroid)
@@ -190,12 +197,33 @@ public class EnemySpawner : MonoBehaviour
             enemy.transform.position = GetSpawnPoint360();
 
         enemy.SetActive(true);
-    }    
-    public void SpawnEnemy(GameObject spawn, Vector3 spawnPoint)
+        return enemy;
+    }
+    public GameObject SpawnEnemy(GameObject spawn, bool spawnAhead)
+    {
+        GameObject enemy = poolRef.Poolers[spawn].GetPooledGameObject();
+        if (enemy != null && enemy.GetComponent<EnemyHP>() && spawnAhead)
+            enemy.transform.position = GetSpawnPointAheadOfPlayer();
+        else
+            enemy.transform.position = GetSpawnPoint360();
+
+        enemy.SetActive(true);
+        return enemy;
+    }
+    public GameObject SpawnEnemy(GameObject spawn, Vector3 spawnPoint)
     {
         GameObject enemy = poolRef.Poolers[spawn].GetPooledGameObject();
         enemy.transform.position = spawnPoint;
         enemy.SetActive(true);
+        return enemy;
+    }
+    public GameObject SpawnEnemy(GameObject spawn, Vector2 direction)
+    {
+        GameObject enemy = poolRef.Poolers[spawn].GetPooledGameObject();        
+        enemy.transform.position = GetSpawnPoint(direction);
+
+        enemy.SetActive(true);
+        return enemy;
     }
 
     public IEnumerator SpawnByTime(EnemiesToSpawnByTime spawn)
@@ -299,9 +327,13 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void SetEnemiesToSpawn(float spawnCD, float spawnCDVar, EnemiesToSpawn[] enemiesToSpawn)
+    public void SetSpawnCD(float spawnCD)
     {
         this.baseSpawnCD = spawnCD;
+    }
+
+    public void SetEnemiesToSpawn(float spawnCDVar, EnemiesToSpawn[] enemiesToSpawn)
+    {        
         this.spawnCDVariationPerc = spawnCDVar;
         this.enemiesToSpawn = enemiesToSpawn;
     }

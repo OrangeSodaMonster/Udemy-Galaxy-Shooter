@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BonusSelection : SerializedMonoBehaviour
 {
@@ -33,6 +34,7 @@ public class BonusSelection : SerializedMonoBehaviour
         SuperLaserCadency = 18,
         SuperBomb = 19,
         SuperSecondIonStream = 20,
+        NONE = 21,
     }
 
     [Serializable]
@@ -65,11 +67,27 @@ public class BonusSelection : SerializedMonoBehaviour
     public List<SuperBonusChances> ListOfSupers = new();
     [ReadOnly] public List<BonusChances> PowerSelectionChances = new();
     [ReadOnly] public List<BonusChances> UtilitySelectionChances = new();
+    [FoldoutGroup("Active")]
+    [ReadOnly] public List<BonusType> ActivePowerBonuses = new();
+    [FoldoutGroup("Active")]
+    [ReadOnly] public List<BonusType> ActiveUtilityBonuses = new();
+    [FoldoutGroup("Active")]
+    [ReadOnly] public List<BonusType> ActiveSuperBonus = new();
+    [FoldoutGroup("Lists")]
+    [ReadOnly] public List<BonusType> PowerBonuses = new();
+    [FoldoutGroup("Lists")]
+    [ReadOnly] public List<BonusType> UtilityBonuses = new();
+    [FoldoutGroup("Lists")]
+    [ReadOnly] public List<BonusType> SuperBonuses = new();
 
-    Dictionary<BonusSelection.BonusType, int> CurrentBonusLevels = new();
+    Dictionary<BonusType, int> CurrentBonusLevels = new();
 
     public static BonusSelection Instance;
     private void Awake()
+    {
+        SetInstance();
+    }
+    public void SetInstance()
     {
         if (Instance == null)
         {
@@ -81,7 +99,7 @@ public class BonusSelection : SerializedMonoBehaviour
     public void PopulateBonusChances(float baseChance)
     {
         int numBonus = Enum.GetNames(typeof(BonusType)).Length;
-        for (int i = 0; i < numBonus - 4; i++)
+        for (int i = 0; i < numBonus - 5; i++)
         {
             BonusChances bonus = new();
             bonus.Type = (BonusType)i;
@@ -103,19 +121,40 @@ public class BonusSelection : SerializedMonoBehaviour
     [Button, HorizontalGroup("1"), GUIColor("purple")]
     public void PopulatePowerBonuses()
     {
-        PowerSelectionChances.Clear();
+        PowerSelectionChances.Clear();        
         for (int i = 0; i < 8; i++)
         {
-            PowerSelectionChances.Add(ListOfChances[i]);
+            PowerSelectionChances.Add(ListOfChances[i]);            
         }
     }
     [Button, HorizontalGroup("1"), GUIColor("blue")]
     public void PopulateUtilityBonuses()
     {
         UtilitySelectionChances.Clear();
-        for (int i = 8; i < 17; i++)
+        for (int i = 8; i < ListOfChances.Count - 5; i++)
         {
             UtilitySelectionChances.Add(ListOfChances[i]);
+        }
+    }
+
+    [Button(),FoldoutGroup("Lists")]
+    public void PopulateTypeLists()
+    {
+        int numBonus = Enum.GetNames(typeof(BonusType)).Length;
+        PowerBonuses.Clear();
+        UtilityBonuses.Clear();
+        SuperBonuses.Clear();
+        for (int i = 0; i < 8; i++)
+        {
+            PowerBonuses.Add((BonusType)i);
+        }
+        for (int i = 8; i < numBonus-5; i++)
+        {
+            UtilityBonuses.Add((BonusType)i);
+        }
+        for (int i = numBonus-5; i < numBonus-1; i++)
+        {
+            SuperBonuses.Add((BonusType)i);
         }
     }
     //[Button, HorizontalGroup("1"), GUIColor("yellow")]   
@@ -241,10 +280,10 @@ public class BonusSelection : SerializedMonoBehaviour
                     SumTotalChance(ListOfChances[i], false);
                     break;
             }
-        }
 
-        PopulatePowerBonuses();
-        PopulateUtilityBonuses();
+            PopulatePowerBonuses();
+            PopulateUtilityBonuses();
+        }        
 
         void SumTotalChance(BonusChances chances, bool addRound, bool halfRound = false)
         {
@@ -322,9 +361,9 @@ public class BonusSelection : SerializedMonoBehaviour
             switch (ListOfSupers[i].Type)
             {
                 case BonusType.SuperBomb:
-                    if (CurrentBonusLevels[BonusType.BombPower] < 3 || CurrentBonusLevels[BonusType.BombGeneration] < 3)
+                    if (CurrentBonusLevels[BonusType.BombPower] < 3 && CurrentBonusLevels[BonusType.BombGeneration] < 3)
                         isPossible = false;
-                    else if ((CurrentBonusLevels[BonusType.BombPower] + CurrentBonusLevels[BonusType.BombGeneration] + CurrentBonusLevels[BonusType.DroneIonBombRange] < 5))
+                    else if ((CurrentBonusLevels[BonusType.BombPower] + CurrentBonusLevels[BonusType.BombGeneration] + CurrentBonusLevels[BonusType.DroneIonBombRange]) < 5)
                         isPossible = false;
                     ListOfSupers[i].IsPossible = isPossible;
                     break;
@@ -345,7 +384,7 @@ public class BonusSelection : SerializedMonoBehaviour
                     break;
                 case BonusType.SuperSecondIonStream:
                     PlayerStats.IonStreamStats ionStream = PlayerStats.Instance.IonStream;
-                    if (!(ionStream.PowerUpgrades.UpgradesPerc < 99) && !(ionStream.CadencyUpgrades.UpgradesPerc < 99) && !(ionStream.HitNumberUpgrades.UpgradesPerc < 99))
+                    if (ionStream.PowerUpgrades.UpgradesPerc < 99 && ionStream.CadencyUpgrades.UpgradesPerc < 99 && ionStream.HitNumberUpgrades.UpgradesPerc < 99)
                         isPossible = false;
                     else if (ionStream.Upgrades.UpgradesPerc < 80)
                         isPossible = false;
@@ -355,9 +394,54 @@ public class BonusSelection : SerializedMonoBehaviour
         }
     }
 
-    public void GetBonusBoxes(out GameObject left, out GameObject middle, out GameObject right)
+    List<BonusChances> GetPossiblePowerBonuses()
+    {
+        List<BonusChances> list = new(PowerSelectionChances);
+
+        return list
+        .Where(b =>
+            CurrentBonusLevels[b.Type] < 3 && // Só inclui se o nível for menor que 3
+            (
+                !removedBonuses.Contains(b.Type) &&
+                (ActivePowerBonuses.Contains(b.Type) || // Já está ativo
+                ActivePowerBonuses.Count() < 3 && // Ainda cabe mais um
+                !(ActivePowerBonuses.Count() == 2 && ActiveUtilityBonuses.Count() >= 3)) // Regra extra para evitar ultrapassar o limite
+            )
+        )
+        .ToList();
+    }
+
+    List<BonusChances> GetPossibleUtilityBonuses()
+    {
+        List<BonusChances> list = new(UtilitySelectionChances);        
+
+        return list
+        .Where(b =>
+            CurrentBonusLevels[b.Type] < 3 && // Só inclui se o nível for menor que 3
+            (
+                !removedBonuses.Contains(b.Type) &&
+                (ActiveUtilityBonuses.Contains(b.Type) || // Já está ativo
+                ActiveUtilityBonuses.Count() < 3 && // Ainda cabe mais um
+                !(ActiveUtilityBonuses.Count() == 2 && ActivePowerBonuses.Count() >= 3)) // Regra extra para evitar ultrapassar o limite
+            )
+        )
+        .ToList();
+    }
+
+    void SetPossibleLists()
     {
         UpdateBonusChances();
+        CurrentBonusLevels = BonusPowersDealer.Instance.GetBonusLevels();
+        possiblePowerBonuses.Clear();
+        possiblePowerBonuses = GetPossiblePowerBonuses();
+        possibleUtilityBonuses.Clear();
+        possibleUtilityBonuses = GetPossibleUtilityBonuses();
+    }
+    List<BonusChances> possiblePowerBonuses = new();
+    List<BonusChances> possibleUtilityBonuses = new();
+    public void GetBonusBoxes(out GameObject left, out GameObject middle, out GameObject right)
+    {
+        SetPossibleLists();
 
         BonusType leftType = GetLeftSide();
         BonusType rightType = GetRightSide();
@@ -376,7 +460,19 @@ public class BonusSelection : SerializedMonoBehaviour
             if (possibleSupers.Count >= 2)
                 return possibleSupers[1];
 
-            return GetBonus(PowerSelectionChances);
+            if (possiblePowerBonuses.Count > 0)
+            {
+                BonusType picked = GetBonus(possiblePowerBonuses);
+                RemoveFromListOfChances(picked, possiblePowerBonuses);
+                return picked;
+            }
+            else if (possibleUtilityBonuses.Count > 0)
+            {
+                BonusType picked = GetBonus(possibleUtilityBonuses);
+                RemoveFromListOfChances(picked, possibleUtilityBonuses);
+                return picked;
+            }
+            else return BonusType.NONE;
         }
         BonusType GetRightSide()
         {
@@ -384,7 +480,19 @@ public class BonusSelection : SerializedMonoBehaviour
             if (possibleSupers.Count >= 3)
                 return possibleSupers[2];
 
-            return GetBonus(UtilitySelectionChances);
+            if (possibleUtilityBonuses.Count > 0)
+            {
+                BonusType picked = GetBonus(possibleUtilityBonuses);
+                RemoveFromListOfChances(picked, possibleUtilityBonuses);
+                return picked;
+            }
+            else if (possiblePowerBonuses.Count > 0)
+            {
+                BonusType picked = GetBonus(possiblePowerBonuses);
+                RemoveFromListOfChances(picked, possiblePowerBonuses);
+                return picked;
+            }
+            else return BonusType.NONE;
         }
         BonusType GetMiddle()
         {
@@ -392,16 +500,103 @@ public class BonusSelection : SerializedMonoBehaviour
             if (possibleSupers.Count >= 1)
                 return possibleSupers[0];
 
-            List<BonusChances> list = PowerSelectionChances;
-            list.AddRange(UtilitySelectionChances);
+            List<BonusChances> list = new(possiblePowerBonuses);
+            list.AddRange(possibleUtilityBonuses);
 
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (list[i].Type == leftType || list[i].Type == rightType)
-                    list.RemoveAt(i);
-            }
-
-            return GetBonus(list);
+            if(list.Count > 0)
+                return GetBonus(list);
+            else
+                return BonusType.NONE;
         }
-    }   
+    }
+
+    void RemoveFromListOfChances(BonusType type, List<BonusChances> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].Type == type)
+                list.RemoveAt(i);
+        }
+    }
+    public void AddToActiveBonuses(BonusSelection.BonusType type)
+    {
+        if(PowerBonuses.Contains(type) && !ActivePowerBonuses.Contains(type))
+        {
+            ActivePowerBonuses.Add(type);
+            RemoveBonusPossibility();
+        }
+        else if(UtilityBonuses.Contains(type) && !ActiveUtilityBonuses.Contains(type))
+        {
+            ActiveUtilityBonuses.Add(type);
+            RemoveBonusPossibility();
+        }
+        else if (SuperBonuses.Contains(type))
+        {
+            ActiveSuperBonus.Add(type);
+            RemoveBonusPossibility();
+        }
+    }
+    
+    List<BonusType> removedBonuses = new();
+    bool isFirstPick = true;
+    void RemoveBonusPossibility()
+    {
+        if (isFirstPick)
+        {
+            isFirstPick = false;
+            Debug.Log("First Bonus Pick");
+            return;
+        }
+
+        Debug.Log("NOT First Bonus Pick");
+        float minValue = float.MaxValue;
+        int minIndex = -1;
+        for(int i = 0;i < ListOfChances.Count; i++)
+        {
+            if (ListOfChances[i].TotalChance < minValue)
+            {
+                if(ActivePowerBonuses.Contains(ListOfChances[i].Type)) continue;
+                if(ActiveUtilityBonuses.Contains(ListOfChances[i].Type)) continue;
+                if(removedBonuses.Contains(ListOfChances[i].Type)) continue;
+
+                minValue = ListOfChances[i].TotalChance;
+                minIndex = i;
+            }
+        }
+        Debug.Log("Should Remove " + ListOfChances[minIndex].Type);
+        if (minIndex >= 0)
+        {
+            Debug.Log($"<color=purple>Removed {ListOfChances[minIndex].Type} from list</color>");
+            removedBonuses.Add(ListOfChances[minIndex].Type);
+        }
+        else
+        {
+            Debug.Log($"<color=red>MININDEX = -1 ERROR</color>");
+        }
+    }
+
+    public bool ChechIfThereAreAPossibleBonusPick()
+    {
+        CurrentBonusLevels = BonusPowersDealer.Instance.GetBonusLevels();
+
+        if(ActivePowerBonuses.Count < 2 || ActivePowerBonuses.Count < 3 && ActiveUtilityBonuses.Count < 3) return true;
+        for(int i = 0; i < ActivePowerBonuses.Count; i++)
+        {
+            if (CurrentBonusLevels[ActivePowerBonuses[i]] < 3) return true;
+        }
+
+        if (ActiveUtilityBonuses.Count < 2 || ActiveUtilityBonuses.Count < 3 && ActivePowerBonuses.Count < 3) return true;
+        for (int i = 0; i < ActiveUtilityBonuses.Count; i++)
+        {
+            if (CurrentBonusLevels[ActiveUtilityBonuses[i]] < 3) return true;
+        }
+
+        if(ActiveSuperBonus.Count < 1)
+        {
+            CheckPossibleSupers();
+            if(possibleSupers.Count > 0) return true;
+        }
+
+        return false;
+    }
 }

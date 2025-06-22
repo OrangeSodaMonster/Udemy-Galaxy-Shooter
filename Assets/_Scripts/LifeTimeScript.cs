@@ -18,6 +18,7 @@ public class LifeTimeScript : MonoBehaviour
     [SerializeField] float fastBlinkPerSec = 3f;
     [SerializeField] Ease ease = Ease.InOutSine;
 
+    bool isCollectible = false;
     Tween blinkingTween;
     SpriteRenderer spriteRenderer;
     float blinkTime;
@@ -27,6 +28,7 @@ public class LifeTimeScript : MonoBehaviour
     WaitForSeconds lifeWait;
     WaitForSeconds blinkWait;
     WaitForSeconds fastBlinkWait;
+    CollectiblesPickUps collectiblesPickUps;
 
     private void Awake()
     {
@@ -36,6 +38,8 @@ public class LifeTimeScript : MonoBehaviour
         lifeWait = new WaitForSeconds(lifeTime);
         blinkWait = new WaitForSeconds(lifeTime - blinkSeconds);
         fastBlinkWait = new WaitForSeconds(blinkSeconds - fastBlinkSeconds);
+
+        isCollectible = TryGetComponent<CollectiblesPickUps>(out collectiblesPickUps);
     }
 
     void OnEnable()
@@ -77,9 +81,36 @@ public class LifeTimeScript : MonoBehaviour
         }
 
         if (disableOnDeath)
+        {
+            if (isCollectible && GameManager.IsSurvival)
+                UpdateLog();
+
             gameObject.SetActive(false);
+        }
         else
             Destroy(gameObject);
+    }
+
+    void UpdateLog()
+    {
+        if (collectiblesPickUps == null)
+            collectiblesPickUps = GetComponent<CollectiblesPickUps>();
+
+        switch (collectiblesPickUps.Type)
+        {
+            case CollectibleType.MetalCrumb:
+                PickUpsLog.Instance.LostDrops.Metal++;
+                break;
+            case CollectibleType.RareMetalCrumb:
+                PickUpsLog.Instance.LostDrops.RareMetal++;
+                break;
+            case CollectibleType.EnergyCristal:
+                PickUpsLog.Instance.LostDrops.EnergyCrystal++;
+                break;
+            case CollectibleType.CondensedEnergyCristal:
+                PickUpsLog.Instance.LostDrops.CondensedEnergyCrystal++;
+                break;
+        }
     }
 
 }

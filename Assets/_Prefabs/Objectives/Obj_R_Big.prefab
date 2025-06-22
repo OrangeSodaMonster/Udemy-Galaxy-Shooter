@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: -3839799337710428878}
   - component: {fileID: 6533870330527078076}
   - component: {fileID: -2314373457972547518}
+  - component: {fileID: -6245080242475305433}
   m_Layer: 13
   m_Name: Obj_R_Big
   m_TagString: Untagged
@@ -157,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8340fada8b02f4199f8a23b0820ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 25
+  Damage: 20
   ImpactVelocity: 1
 --- !u!114 &-2036024542243111843
 MonoBehaviour:
@@ -329,3 +330,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ReturnPool: {fileID: 0}
+--- !u!114 &-6245080242475305433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596066275569553282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bce0a7925cb4bf4791199ed83ac81f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: 3
+  SmallestRange: 2.2
+  SmallRange: 3.5
+  MediumRange: 5
+  BigRange: 8.5

@@ -24,7 +24,7 @@ public class ShipStatsBoxScript : MonoBehaviour
         speedText.text = $"{stats.CurrentMaxSpeed}";
         turningText.text = $"{stats.CurrentMaxTurningSpeed}º";
         linInertiaText.text = $"{stats.CurrentLinearInertia}s";
-        linInertiaText.text = $"{stats.CurrentAngularInertia}s";
+        angInertiaText.text = $"{stats.CurrentAngularInertia}s";
         healIntervalText.text = $"{PlayerStats.Instance.Drones.CurrentHealInterval}s";
 
         if (stats.IsSpeedBonus || stats.IsTurningSpeedBonus)
@@ -32,14 +32,14 @@ public class ShipStatsBoxScript : MonoBehaviour
             speedText.color = bonusColor;
             turningText.color = bonusColor;
             linInertiaText.color = bonusColor;
-            linInertiaText.color = bonusColor;
+            angInertiaText.color = bonusColor;
         }
         else
         {
             speedText.color = normalColor;
             turningText.color = normalColor;
             linInertiaText.color = normalColor;
-            linInertiaText.color = normalColor;
+            angInertiaText.color = normalColor;
         }
 
         if (PlayerStats.Instance.Drones.IsHealBonus)

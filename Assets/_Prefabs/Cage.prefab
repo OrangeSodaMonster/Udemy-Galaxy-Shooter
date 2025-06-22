@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2207085107235117671}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.551937, w: 0.83388585}
-  m_LocalPosition: {x: 5.4800777, y: 13.230077, z: 0}
+  m_LocalPosition: {x: 5.480077, y: 13.230078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 2741849757337225525}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.83388585, w: -0.5519369}
-  m_LocalPosition: {x: -5.4800797, y: -13.230077, z: 0}
+  m_LocalPosition: {x: -5.4800777, y: -13.230077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -303,7 +303,7 @@ Transform:
   m_GameObject: {fileID: 3961146863785724337}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.19080901, w: 0.9816272}
-  m_LocalPosition: {x: 13.230078, y: 5.480077, z: 0}
+  m_LocalPosition: {x: 13.230078, y: 5.4800773, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -394,7 +394,7 @@ Transform:
   m_GameObject: {fileID: 4493358230863039347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.5, y: 8.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -416,7 +416,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cda56c2c3b3ff54ab0355d809cc866b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableValidate: 0
   radius: 15.5
+  manualRotationOfNodes: 0
   lineRenderer: {fileID: 5770125259023851438}
   nodes:
   - {fileID: 5879272061784225945}
@@ -463,7 +465,7 @@ Transform:
   m_GameObject: {fileID: 5449711773038862122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.9799247, w: 0.19936794}
-  m_LocalPosition: {x: -13.23008, y: 5.480077, z: 0}
+  m_LocalPosition: {x: -13.230078, y: 5.480077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -555,7 +557,7 @@ Transform:
   m_GameObject: {fileID: 6669114432438698219}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.9816272, w: -0.19080904}
-  m_LocalPosition: {x: -13.23008, y: -5.4800773, z: 0}
+  m_LocalPosition: {x: -13.230078, y: -5.4800777, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -735,13 +737,13 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 15.5, y: 0, z: 0}
-  - {x: 10.9601555, y: 10.960155, z: 0}
-  - {x: 0, y: 15.500001, z: 0}
-  - {x: -10.9601555, y: 10.960155, z: 0}
-  - {x: -15.5, y: -0.0000009536743, z: 0}
+  - {x: 10.960155, y: 10.960155, z: 0}
+  - {x: -0.00000067752654, y: 15.5, z: 0}
+  - {x: -10.960155, y: 10.960155, z: 0}
+  - {x: -15.5, y: -0.0000013550531, z: 0}
   - {x: -10.9601555, y: -10.960154, z: 0}
-  - {x: 0, y: -15.5, z: 0}
-  - {x: 10.960152, y: -10.960156, z: 0}
+  - {x: 0.00000018483566, y: -15.5, z: 0}
+  - {x: 10.960153, y: -10.960156, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.5
@@ -867,7 +869,7 @@ Transform:
   m_GameObject: {fileID: 8076011038841584821}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.8290376, w: 0.55919296}
-  m_LocalPosition: {x: -5.4800797, y: 13.230077, z: 0}
+  m_LocalPosition: {x: -5.4800773, y: 13.230078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -959,7 +961,7 @@ Transform:
   m_GameObject: {fileID: 8636958199592426723}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.559193, w: -0.8290375}
-  m_LocalPosition: {x: 5.480076, y: -13.230078, z: 0}
+  m_LocalPosition: {x: 5.4800763, y: -13.230078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1131,6 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnMat: {fileID: 2100000, guid: 626519e4164563645801eada17682eda, type: 2}
+  OffMat: {fileID: 0}
 --- !u!1001 &1647042029884649907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1250,11 +1253,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.00000067752654
       objectReference: {fileID: 0}
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.500001
+      value: 15.5
       objectReference: {fileID: 0}
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1347,6 +1350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnMat: {fileID: 2100000, guid: 626519e4164563645801eada17682eda, type: 2}
+  OffMat: {fileID: 0}
 --- !u!1001 &2010948989578245759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1357,7 +1361,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.9601555
+      value: -10.960155
       objectReference: {fileID: 0}
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1454,6 +1458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnMat: {fileID: 2100000, guid: 626519e4164563645801eada17682eda, type: 2}
+  OffMat: {fileID: 0}
 --- !u!1001 &2779443593245137108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1468,7 +1473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000009536743
+      value: -0.0000013550531
       objectReference: {fileID: 0}
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1556,6 +1561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnMat: {fileID: 2100000, guid: 626519e4164563645801eada17682eda, type: 2}
+  OffMat: {fileID: 0}
 --- !u!4 &2704142026776030866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
@@ -1571,7 +1577,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.960152
+      value: 10.960153
       objectReference: {fileID: 0}
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1668,6 +1674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnMat: {fileID: 2100000, guid: 626519e4164563645801eada17682eda, type: 2}
+  OffMat: {fileID: 0}
 --- !u!1001 &5577706733927237112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1678,7 +1685,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.00000018483566
       objectReference: {fileID: 0}
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1775,6 +1782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnMat: {fileID: 2100000, guid: 626519e4164563645801eada17682eda, type: 2}
+  OffMat: {fileID: 0}
 --- !u!1001 &5945531243002777311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1859,7 +1867,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.9601555
+      value: 10.960155
       objectReference: {fileID: 0}
     - target: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1951,6 +1959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnMat: {fileID: 2100000, guid: 626519e4164563645801eada17682eda, type: 2}
+  OffMat: {fileID: 0}
 --- !u!4 &7104071939244148678 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 222255144890021446, guid: 2693ee721241cc44f8c3ffcb23851774, type: 3}

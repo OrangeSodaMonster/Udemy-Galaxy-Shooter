@@ -45,7 +45,10 @@ public class EnemyHP : MonoBehaviour
             }
             if(IsObjective)
             {
-                float bonusMultiplier = 1 - BonusPowersDealer.Instance.ExtraDamageToObjectives/100f;
+                float bonusMultiplier = 1;
+                if (BonusPowersDealer.Instance != null)
+                    bonusMultiplier = 1 - BonusPowersDealer.Instance.ExtraDamageToObjectives/100f;
+
                 SurvivalMaxHP =(int)Mathf.Ceil(MaxHP * bonusMultiplier);
             }    
             currentHP = (int)Mathf.Ceil(SurvivalMaxHP * startingHpPerc);
@@ -146,6 +149,15 @@ public class EnemyHP : MonoBehaviour
 
     public void ChangeHP(int value)
     {
+        currentHP += value;
+        if (CurrentHP > MaxHP) currentHP = MaxHP;
+        //else if (CurrentHP <= 0) currentHP = 0;
+    }
+    public void ChangeHP(int value, ref int logToUpdate)
+    {
+        if(currentHP < value) logToUpdate -= currentHP;
+        else logToUpdate -= value;
+
         currentHP += value;
         if (CurrentHP > MaxHP) currentHP = MaxHP;
         //else if (CurrentHP <= 0) currentHP = 0;

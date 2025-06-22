@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-enum CollectibleType
+public enum CollectibleType
 {
     MetalCrumb = 1,
     RareMetalCrumb = 2,
@@ -16,7 +16,7 @@ enum CollectibleType
 public class CollectiblesPickUps : MonoBehaviour
 {
     [SerializeField] CollectibleType type;
-
+    public CollectibleType Type { get => type; }
     [SerializeField] float minDriftMoveSpeed = 0.1f;
     [SerializeField] float maxDriftMoveSpeed = 0.6f;
 
@@ -25,12 +25,19 @@ public class CollectiblesPickUps : MonoBehaviour
     float currentDriftSpeed;
     float driftSpeed;
 
-    TractorBeamScript tractorBeam = null;
+    TractorBeamScript tractorBeam = null;    
     float maxAtractionSpeed;
     float acceleration = 1;
     bool isTractor;
     float tractorCurrentPull;
     Vector2 tractorVelocity = Vector2.zero;
+
+    PushPickUps pushingObj = null;
+    float maxPushSpeed;
+    float pushAcceleration = 1;
+    bool isPush;
+    float currentPush;
+    Vector2 pushVelocity = Vector2.zero;
 
     BlackHolePull blackHole = null;
     float bhMaxPullSpeed = 0;
@@ -73,7 +80,7 @@ public class CollectiblesPickUps : MonoBehaviour
 
     private void Update()
     {
-        if (!isBlackHole && !isTractor)
+        if (!isBlackHole && !isTractor && !isPush)
             isDrifting = true;
 
         if (isDrifting)
@@ -84,6 +91,7 @@ public class CollectiblesPickUps : MonoBehaviour
         else
         {
             if(tractorBeam.IsDestroyed() || tractorBeam == null) isTractor = false;
+            if(pushingObj.IsDestroyed() || pushingObj == null) isPush = false;
 
             if (isTractor)
             {
@@ -93,7 +101,15 @@ public class CollectiblesPickUps : MonoBehaviour
             else
                 tractorVelocity = Vector2.zero;
 
-            if(isBlackHole)
+            if (isPush)
+            {
+                currentPush = Mathf.Clamp(currentPush + pushAcceleration * Time.deltaTime, Mathf.Abs(driftSpeed), Mathf.Abs(maxPushSpeed));
+                pushVelocity = currentPush * (pushingObj.transform.position - transform.position).normalized;
+            }
+            else
+                pushVelocity = Vector2.zero;
+
+            if (isBlackHole)
             {
                 bhCurrentPull = Mathf.Clamp(bhCurrentPull + bhAccel * Time.deltaTime, Mathf.Abs(driftSpeed), Mathf.Abs(bhMaxPullSpeed));
                 bhVelocity = bhCurrentPull * (blackHole.transform.position - transform.position).normalized;
@@ -101,7 +117,7 @@ public class CollectiblesPickUps : MonoBehaviour
             else
                 bhVelocity = Vector2.zero;
 
-            moveVelocity = tractorVelocity + bhVelocity;
+            moveVelocity = tractorVelocity + bhVelocity - pushVelocity;
             driftDirection = (moveVelocity).normalized;
             currentDriftSpeed = moveVelocity.magnitude;
         }
@@ -128,6 +144,14 @@ public class CollectiblesPickUps : MonoBehaviour
             acceleration = tractorBeam.TotalPullForce/tractorBeam.TimeToMaxPullSpeed;
             isTractor = true;
         }
+        else if (collision.GetComponent<PushPickUps>() != null)
+        {
+            pushingObj = collision.GetComponent<PushPickUps>();
+            isDrifting = false;
+            maxPushSpeed = pushingObj.MaxPushForce;
+            pushAcceleration = pushingObj.MaxPushForce/pushingObj.TimeToMaxPullSpeed;
+            isPush = true;
+        }
         else if (collision.GetComponent<PlayerMove>() != null)
         {
             switch (type)
@@ -135,18 +159,26 @@ public class CollectiblesPickUps : MonoBehaviour
                 case CollectibleType.MetalCrumb:
                     AudioManager.Instance.PlayMetalPickUpSound(AudioManager.Instance.MetalCrumbSound);
                     PlayerCollectiblesCount.MetalAmount += 1;
+                    if (GameManager.IsSurvival)
+                        PickUpsLog.Instance.PickedDrops.Metal++;
                     break;
                 case CollectibleType.RareMetalCrumb:
                     AudioManager.Instance.PlayMetalPickUpSound(AudioManager.Instance.RareMetalCrumbSound);
                     PlayerCollectiblesCount.RareMetalAmount += 1;
+                    if (GameManager.IsSurvival)
+                        PickUpsLog.Instance.PickedDrops.RareMetal++;
                     break;
                 case CollectibleType.EnergyCristal:
                     AudioManager.Instance.EnergyCrystalSound.PlayFeedbacks();
                     PlayerCollectiblesCount.EnergyCristalAmount += 1;
+                    if (GameManager.IsSurvival)
+                        PickUpsLog.Instance.PickedDrops.EnergyCrystal++;
                     break;
                 case CollectibleType.CondensedEnergyCristal:
                     AudioManager.Instance.CondensedEnergyCrystalSound.PlayFeedbacks();
                     PlayerCollectiblesCount.CondensedEnergyCristalAmount += 1;
+                    if (GameManager.IsSurvival)
+                        PickUpsLog.Instance.PickedDrops.CondensedEnergyCrystal++;
                     break;
             }
 
@@ -166,6 +198,11 @@ public class CollectiblesPickUps : MonoBehaviour
         {
             tractorCurrentPull = 0;
             isTractor = false;
+        }
+        else if (collision.GetComponent<PushPickUps>() != null)
+        {
+            currentPush = 0;
+            isPush = false;
         }
     }
 

@@ -5,9 +5,23 @@ using UnityEngine.Events;
 
 public class BonusPowerUpScript : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        //if (BonusSelection.Instance != null && !BonusSelection.Instance.ChechIfThereAreAPossibleBonusPick())
+        //{
+        //    gameObject.SetActive(false);
+        //}
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(BonusSelectionCanvasScript.Instance != null)
+        if (BonusSelection.Instance != null && !BonusSelection.Instance.ChechIfThereAreAPossibleBonusPick())
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        if (BonusSelectionCanvasScript.Instance != null)
             BonusSelectionCanvasScript.Instance.OpenBonusCanvas();
         else
         {
@@ -15,6 +29,11 @@ public class BonusPowerUpScript : MonoBehaviour
             BonusSelectionCanvasScript.Instance.OpenBonusCanvas();
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        SurvivalManager.IsBonusPickUpEnabled = true;
     }
 }

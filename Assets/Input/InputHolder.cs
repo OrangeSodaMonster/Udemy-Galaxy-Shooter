@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class InputHolder : MonoBehaviour
@@ -24,6 +25,9 @@ public class InputHolder : MonoBehaviour
     public event Action CancelUI;
     public bool IsDisableUI;
     public event Action DisableUI;
+
+    [HideInInspector] public UnityEvent OnSubmitUI = new();
+    [HideInInspector] public UnityEvent OnReleaseSubmitUI = new();
 
     private void Awake()
     {
@@ -188,6 +192,20 @@ public class InputHolder : MonoBehaviour
         else if (context.canceled)
         {
             IsDisableUI = false;
+        }
+    }
+
+    public void SetSubmitUI(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            OnSubmitUI?.Invoke();
+            //Debug.Log($"<color=yellow>CLICK UI </color>");
+        }
+        if (context.canceled)
+        {
+            OnReleaseSubmitUI?.Invoke();
+            //Debug.Log($"<color=yellow>RELEASED CLICK UI </color>");
         }
     }
 

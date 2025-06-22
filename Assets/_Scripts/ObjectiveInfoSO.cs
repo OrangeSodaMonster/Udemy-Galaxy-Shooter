@@ -160,6 +160,11 @@ public class ObjectiveInfoSO : ScriptableObject
             dropDealer.dropsGuaranteed = DropsGuaranteed;
         }
 
+        if (enemy.TryGetComponent(out ObjectiveSizeRef sizeRef))
+        {
+            sizeRef.Size = objectiveSize;
+        }
+
         saveStateColor = UnityEngine.Color.green;
 
 #if UNITY_EDITOR

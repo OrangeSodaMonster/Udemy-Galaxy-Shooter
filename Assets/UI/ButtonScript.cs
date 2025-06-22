@@ -22,10 +22,18 @@ public class ButtonScript : MonoBehaviour
 	[SerializeField] UnityEvent onPointerDownEvents;
 	[SerializeField] UnityEvent onPointerUpEvents;
 	[SerializeField] float holdDuration = 2f;
+    public float TotalHoldDuration { get => holdDuration; set { holdDuration = value; } }
+    float holdingTime;
+    public float HoldingTime { get => holdingTime; }
+
     [SerializeField] bool playHoverSound = true;
+    public bool PlayHoverSound { get => playHoverSound; set { playHoverSound = value; } }
     [SerializeField] bool playSelectionSound = true;
+    public bool PlaySelectionSound { get => playSelectionSound; set { playSelectionSound = value; } }
     [SerializeField] bool playConfirmationSound = true;
+    public bool PlayConfirmationSound { get => playConfirmationSound; set { playConfirmationSound = value; } }
     [SerializeField] bool playBackSound = false;
+    public bool PlayBackSound { get => playBackSound; set { playBackSound = value; } }
     [SerializeField] UnityEvent alternativeClickEvents;
 
     public event Action ClickedOnInterface;
@@ -35,7 +43,6 @@ public class ButtonScript : MonoBehaviour
     Button button;
     bool isHoldingButton;
     bool calledHold;
-    float holdingTime;
 
     private void OnEnable()
     {
@@ -43,11 +50,18 @@ public class ButtonScript : MonoBehaviour
         lastSelected = EventSystem.current.currentSelectedGameObject;
         if(button != null )
             button.enabled = true;
+
+        isHoldingButton = false;
+        holdingTime = 0;
+        calledHold = false;
+
+        InputHolder.Instance.OnSubmitUI.AddListener(OnSubmitDown);
+        InputHolder.Instance.OnReleaseSubmitUI.AddListener(OnSubmitUp);
     }
 
     private void OnDisable()
     {
-        ClickedOnInterface -= SelectOnClick;
+        ClickedOnInterface -= SelectOnClick;        
     }
     public void OnPointerDown(BaseEventData baseData)
     {
@@ -57,6 +71,24 @@ public class ButtonScript : MonoBehaviour
 
         isHoldingButton = true;
         onPointerDownEvents?.Invoke();
+    }
+    void OnSubmitDown()
+    {
+        if(EventSystem.current.currentSelectedGameObject != button.gameObject) return;
+        isHoldingButton = true;
+    }
+    void OnSubmitUp()
+    {
+        if(EventSystem.current.currentSelectedGameObject != button.gameObject) return;
+        isHoldingButton = false;
+        calledHold = false;
+
+        if (holdingTime < holdDuration && calledHold == false)
+        {
+            CallClickEvent();
+        }
+
+        holdingTime = 0;
     }
 
     public void OnPointerUp(BaseEventData baseData)    
@@ -89,12 +121,6 @@ public class ButtonScript : MonoBehaviour
             holdEvents?.Invoke();
             calledHold = true;
         }
-
-        //if(lastSelected != button.gameObject && EventSystem.current.currentSelectedGameObject == button.gameObject)
-        //{
-        //    onSelectionEvents?.Invoke();
-        //    Debug.Log($"OnSelected: {gameObject.name}");
-        //}
     }
 
     private void Start()
@@ -110,7 +136,7 @@ public class ButtonScript : MonoBehaviour
         trigger.triggers.Add(moveEvent);
 
         EventTrigger.Entry hoverEvent = new() { eventID = EventTriggerType.PointerEnter };
-        hoverEvent.callback.AddListener((eventData) => PlayHoverSound());
+        hoverEvent.callback.AddListener((eventData) => CallPlayHoverSound());
         trigger.triggers.Add(hoverEvent);
 
         EventTrigger.Entry pointerDownEvent = new() { eventID = EventTriggerType.PointerDown };
@@ -194,7 +220,7 @@ public class ButtonScript : MonoBehaviour
             alternativeClickEvents.Invoke();
     }
 
-    public void PlayHoverSound()
+    public void CallPlayHoverSound()
     {
         if (!playHoverSound || !button.enabled) return;
 

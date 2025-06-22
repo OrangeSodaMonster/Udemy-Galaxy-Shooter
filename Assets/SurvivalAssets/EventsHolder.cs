@@ -15,13 +15,13 @@ public class EventsHolder : MonoBehaviour
 {
     [SerializeField] Transform EventsObj;
     [SerializeField, GUIColor("cyan")] Transform PositiveEventsObj;
-    [SerializeField, GUIColor("red")] Transform EndEventsObj;
+    //[SerializeField, GUIColor("red")] Transform EndEventsObj;
     [Space]
     public List<EventsClass> ListOfEvents = new();
     [GUIColor("cyan")]
     public List<EventsClass> ListOfPositiveEvents = new();
-    [GUIColor("red")]
-    public List<EventsClass> ListOfEndEvents = new();
+    //[GUIColor("red")]
+    //public List<EventsClass> ListOfEndEvents = new();
 
     [Button, PropertyOrder(-1), HorizontalGroup("1")]
     void SetEvents()
@@ -49,19 +49,20 @@ public class EventsHolder : MonoBehaviour
             }
         }
     }
-    [Button, GUIColor("red"), PropertyOrder(-1), HorizontalGroup("1")]
-    void SetEndEvents()
-    {
-        ListOfEndEvents.Clear();
-        foreach (Transform child in EndEventsObj)
-        {
-            ListOfEndEvents.Add(new());
-            foreach (Transform childChild in child)
-            {
-                ListOfEndEvents[ListOfEndEvents.Count-1].MyEvents.Add(childChild.GetComponent<MMF_Player>());
-            }
-        }
-    }
+    
+    //[Button, GUIColor("red"), PropertyOrder(-1), HorizontalGroup("1")]
+    //void SetEndEvents()
+    //{
+    //    ListOfEndEvents.Clear();
+    //    foreach (Transform child in EndEventsObj)
+    //    {
+    //        ListOfEndEvents.Add(new());
+    //        foreach (Transform childChild in child)
+    //        {
+    //            ListOfEndEvents[ListOfEndEvents.Count-1].MyEvents.Add(childChild.GetComponent<MMF_Player>());
+    //        }
+    //    }
+    //}
 
 
 
@@ -75,9 +76,9 @@ public class EventsHolder : MonoBehaviour
     {
         ListOfPositiveEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfPositiveEvents[level].MyEvents.Count)].PlayFeedbacks();
     }
-    [Button, GUIColor("red"), HorizontalGroup("2")]
-    public void CallEndEvent(int level)
-    {
-        ListOfEndEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEndEvents[level].MyEvents.Count)].PlayFeedbacks();
-    }
+    //[Button, GUIColor("red"), HorizontalGroup("2")]
+    //public void CallEndEvent(int level)
+    //{
+    //    ListOfEndEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEndEvents[level].MyEvents.Count)].PlayFeedbacks();
+    //}
 }

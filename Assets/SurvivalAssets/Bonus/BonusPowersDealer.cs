@@ -392,7 +392,7 @@ public class BonusPowersDealer : MonoBehaviour
             }
         }
             return dict;
-    }
+    }    
 
     public void AddBonusLevel(BonusSelection.BonusType type)
     {
@@ -461,6 +461,6 @@ public class BonusPowersDealer : MonoBehaviour
             case BonusSelection.BonusType.SuperSecondIonStream:
                 IsSecondIonStream = true;
                 break;
-        }
+        }        
     }
 }

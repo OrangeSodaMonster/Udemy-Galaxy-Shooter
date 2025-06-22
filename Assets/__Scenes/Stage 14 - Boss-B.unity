@@ -189,6 +189,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1189262529900522190, guid: f25bcceb1b97b9e47baf3838968e1879, type: 3}
   m_PrefabInstance: {fileID: 293148139}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &387725668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1916414985416291033, guid: 3dfdc0ac569b6b54b9293f8f5f63aca5, type: 3}
+  m_PrefabInstance: {fileID: 3186499757806702478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c29e096e871bd429ac600f57768f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &471120548 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1800815963622457401, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
@@ -224,7 +235,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1151323555}
+  m_Father: {fileID: 60862060872624447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &471328254
 MonoBehaviour:
@@ -426,11 +437,6 @@ MonoBehaviour:
       m_Data: []
   m_Knots:
     m_KnotsLink: []
---- !u!120 &511578002 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 5770125259023851438, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
-  m_PrefabInstance: {fileID: 1063393049335831776}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &660216000 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2704142026776030866, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
@@ -504,8 +510,8 @@ MonoBehaviour:
   - {fileID: 697532099}
   - {fileID: 903191990}
   - {fileID: 2020111269}
-  cageLine: {fileID: 511578002}
-  colliders: {fileID: 1346570345}
+  cageLine: {fileID: 6832651137282736974}
+  colliders: {fileID: 7049080788499988918}
 --- !u!1001 &1065933442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -615,7 +621,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1196299860}
+      - m_Target: {fileID: 2595721384714719204}
         m_TargetAssemblyTypeName: SnakeBossMain, Assembly-CSharp
         m_MethodName: TurnBossOn
         m_Mode: 1
@@ -630,27 +636,6 @@ MonoBehaviour:
 --- !u!4 &1082840601 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5879272061784225945, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
-  m_PrefabInstance: {fileID: 1063393049335831776}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1151323555 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1016080551994750431, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
-  m_PrefabInstance: {fileID: 1063393049335831776}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1196299860 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 593739015482605674, guid: 3dfdc0ac569b6b54b9293f8f5f63aca5, type: 3}
-  m_PrefabInstance: {fileID: 3186499757806702478}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f3471781caae544b3b88f9ad91240d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1346570345 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8003657369917234518, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
   m_PrefabInstance: {fileID: 1063393049335831776}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1378691210 stripped
@@ -904,6 +889,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4774280166851833691, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
   m_PrefabInstance: {fileID: 1063393049335831776}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &60862060872624447 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1016080551994750431, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
+  m_PrefabInstance: {fileID: 1063393049335831776}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1063393049335831776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -995,7 +985,7 @@ PrefabInstance:
     - target: {fileID: 1252644087715383940, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
       propertyPath: OnDisableOrDestroy.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1196299860}
+      objectReference: {fileID: 2595721384714719204}
     - target: {fileID: 1252644087715383940, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
       propertyPath: OnDisableOrDestroy.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -1233,6 +1223,17 @@ PrefabInstance:
       addedObject: {fileID: 1065933443}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
+--- !u!114 &2595721384714719204 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 593739015482605674, guid: 3dfdc0ac569b6b54b9293f8f5f63aca5, type: 3}
+  m_PrefabInstance: {fileID: 3186499757806702478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f3471781caae544b3b88f9ad91240d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3186499757806702478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1245,6 +1246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnakeBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 1009744453946154540, guid: 3dfdc0ac569b6b54b9293f8f5f63aca5, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 387725668}
     - target: {fileID: 1835773647665925268, guid: 3dfdc0ac569b6b54b9293f8f5f63aca5, type: 3}
       propertyPath: m_Target
       value: 
@@ -1604,7 +1609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000044424087
+      value: -0.0000003548339
       objectReference: {fileID: 0}
     - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1724,7 +1729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097865085451408690, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000044424087
+      value: -0.0000003548339
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1749,6 +1754,16 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7072452630021896361, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
   m_PrefabInstance: {fileID: 6664384313437817533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &6832651137282736974 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 5770125259023851438, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
+  m_PrefabInstance: {fileID: 1063393049335831776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7049080788499988918 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8003657369917234518, guid: 01ce424a1f19a854480438dd5f3163ed, type: 3}
+  m_PrefabInstance: {fileID: 1063393049335831776}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

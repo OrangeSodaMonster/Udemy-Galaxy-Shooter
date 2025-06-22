@@ -26,16 +26,30 @@ public struct EnemySpawnData
 public class EnemySpawnerDealer : MonoBehaviour
 {
     [FormerlySerializedAs("enemySpawnDatas")]
+    [SerializeField] AnimationCurve spawnCdCurve = new();
+    [SerializeField, ReadOnly] float currentSpawnCD;
     [SerializeField] List<EnemySpawnData> enemySpawnData = new List<EnemySpawnData>();
 
     EnemySpawner enemySpawner;
     RareSpawnScript rareSpawner;
+    SurvivalTimers timer;
+    float minutesToLastStage = 15;
+    float spawnValue = 0;
 
     private void Start()
     {
         UpdadeFirstSpawns();
 
-        SurvivalTimers.OnSectionChange.AddListener(ChangeSpawns);
+        SurvivalManager.OnSectionChange.AddListener(ChangeSpawns);
+        timer = FindObjectOfType<SurvivalTimers>();
+    }
+
+    private void Update()
+    {
+        spawnValue = timer.TotalTime/(15*60);
+        currentSpawnCD = spawnCdCurve.Evaluate(spawnValue);
+
+        enemySpawner.SetSpawnCD(currentSpawnCD);
     }
 
     [Button(), PropertyOrder(-1)]
@@ -44,16 +58,17 @@ public class EnemySpawnerDealer : MonoBehaviour
         enemySpawner = FindObjectOfType<EnemySpawner>();
         rareSpawner = FindObjectOfType<RareSpawnScript>();
         ChangeSpawnDealer(0);
+        enemySpawner.SetSpawnCD(currentSpawnCD);
     }
 
     void ChangeSpawns()
     {
-        ChangeSpawnDealer(SurvivalManager.CurrentSection);
+        ChangeSpawnDealer(SurvivalManager.CurrentSection);        
     }    
 
     void ChangeSpawnDealer(int i)
     {
-        enemySpawner.SetEnemiesToSpawn(enemySpawnData[i].SpawnCd, enemySpawnData[i].SpawnCdVarPerc, enemySpawnData[i].EnemiesToSpawn);
+        enemySpawner.SetEnemiesToSpawn(enemySpawnData[i].SpawnCdVarPerc, enemySpawnData[i].EnemiesToSpawn);
         enemySpawner.SetEnemiesToSpawnByTime(enemySpawnData[i].EnemiesToSpawnByTime);
         enemySpawner.SetEnemiesToLoopSpawn(enemySpawnData[i].EnemiesToLoopSpawn);
         rareSpawner.SetRareSpawns(enemySpawnData[i].RareSpawns);

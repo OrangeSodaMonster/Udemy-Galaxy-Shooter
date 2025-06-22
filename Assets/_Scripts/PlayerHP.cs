@@ -88,8 +88,7 @@ public class PlayerHP : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<EnemyWeaponDamage>() != null
-            & lastCollisionHash != collision.gameObject.GetHashCode()
-            & !isInvencible)
+            && lastCollisionHash != collision.gameObject.GetHashCode())
         {
             //ChangePlayerHP(-Mathf.Abs(collision.GetComponent<EnemyWeaponDamage>().Damage));
             lastCollisionHash = collision.gameObject.GetHashCode();   
@@ -178,11 +177,13 @@ public class PlayerHP : MonoBehaviour
 
         MaxHP = PlayerStats.Instance.Ship.CurrentMaxHP;
 
-        if (s_IsInvencible && !ignoreInvencibility && value < 0) return;
 
         CurrentHP += value;
         if (CurrentHP > MaxHP) CurrentHP = MaxHP;
         else if (CurrentHP <= 0) CurrentHP = 0;
+
+        if (s_IsInvencible && !ignoreInvencibility && CurrentHP <= 0) 
+            CurrentHP = 1;
 
         if (playHitSound)
         {

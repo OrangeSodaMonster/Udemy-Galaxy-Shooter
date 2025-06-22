@@ -36,7 +36,13 @@ public class ObjPools : MonoBehaviour
 
     static public GameObject PoolObjective(GameObject obj)
     {
-        GameObject pooledObj = ObjPoolers[obj].GetPooledGameObject();
+        GameObject pooledObj;
+        try
+        {
+            pooledObj = ObjPoolers[obj].GetPooledGameObject();
+        }
+        catch (KeyNotFoundException) { return null; }
+
         pooledObj.GetComponent<ReturnPoolHolder>().ReturnPool = pooledObj.transform.parent;
         return pooledObj;
     }

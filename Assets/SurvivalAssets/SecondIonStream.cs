@@ -153,11 +153,9 @@ public class SecondIonStream : MonoBehaviour
                     if (target.TryGetComponent(out EnemyHP enemyHP))
                     {
                         if (GameManager.IsSurvival)
-                        {
-                            SurvivalManager.CombatLog.IonStreamTotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
-                        }
-
-                        enemyHP.ChangeHP(-Mathf.Abs(damage));
+                            enemyHP.ChangeHP(-Mathf.Abs(damage), ref CombatLog.Instance.IonStreamTotalDamage);
+                        else
+                            enemyHP.ChangeHP(-Mathf.Abs(damage));
                     }
 
                     GameObject vfx = VFXPoolerScript.Instance.IonStreamVFXPooler.GetPooledGameObject();

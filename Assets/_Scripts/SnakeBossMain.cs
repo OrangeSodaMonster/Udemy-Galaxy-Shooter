@@ -12,7 +12,9 @@ public class SnakeBossMain : MonoBehaviour
     [SerializeField] Vector2 minMaxShootTime = new(0.9f,2.1f);
     [SerializeField] float defaultSpeed = 3.5f;
     [SerializeField] float catchUpTime = 1;
+    [SerializeField] SplineContainer path;
     [SerializeField] float deltaOffset = .005f;
+    [SerializeField, Range(0,1)] float startPosition = 0;
     [SerializeField] List<SplineAnimate> parts = new List<SplineAnimate>();
     [Space]
     [SerializeField] LineRenderer lineRenderer1;
@@ -47,7 +49,8 @@ public class SnakeBossMain : MonoBehaviour
             offsets.Add(parts[i].StartOffset);
             targetOffsets = new List<float>(offsets);
         }
-        StartCoroutine(PauseParts());
+        if(!GameManager.IsSurvival)
+            StartCoroutine(PauseParts());
 
         catchUpSpeed = deltaOffset*Time.deltaTime/catchUpTime;
         tailExtraOffset = -(offsets[offsets.Count-2] - offsets[offsets.Count-1])+deltaOffset;
@@ -206,6 +209,28 @@ public class SnakeBossMain : MonoBehaviour
 
         shootTimer = 0;
         isOn = true;
+    }
+
+    [Button]
+    public void UpdatePartsOffsets(float tailExtraOffset = 0.003f)
+    {
+        for (int i = 0; i < parts.Count;i++)
+        {
+            float offset = 0;
+
+            offset = -deltaOffset*i + startPosition;
+
+            if (i == parts.Count - 1)
+            {
+                offset -= tailExtraOffset;
+            }            
+
+            if (offset < 0)
+                offset += 1;
+
+            parts[i].GetComponent<SplineAnimate>().Container = path;
+            parts[i].GetComponent<SplineAnimate>().StartOffset = offset;
+        }
     }
 
 

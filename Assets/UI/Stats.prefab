@@ -2529,7 +2529,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: STATS
+  m_text: "ESTAT\xCDSTICAS"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d892217d427a29a4880d393f89a1708f, type: 2}
   m_sharedMaterial: {fileID: -6903670915034581476, guid: d892217d427a29a4880d393f89a1708f, type: 2}
@@ -4000,6 +4000,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone_2 Stats
       objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: English
+      value: Drone 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: Espanol
+      value: Drone 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: Portugues
+      value: Drone 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5754871840813501813, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
       propertyPath: m_Pivot.x
       value: 0.49999997
@@ -4318,7 +4330,7 @@ PrefabInstance:
       objectReference: {fileID: 7727773019880924847}
     - target: {fileID: 7657149534060371737, guid: aa4b04a2851dda045b326a51e1831a2c, type: 3}
       propertyPath: m_text
-      value: "Esc. Derecho\r"
+      value: "Escudo Direito\r"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4444,7 +4456,7 @@ PrefabInstance:
       objectReference: {fileID: 1300517080680783867}
     - target: {fileID: 7657149534060371737, guid: aa4b04a2851dda045b326a51e1831a2c, type: 3}
       propertyPath: m_text
-      value: Esc. Esquerdo
+      value: Esc. Izquierdo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4464,6 +4476,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7383428756823314401}
     m_Modifications:
+    - target: {fileID: 1188460279670863019, guid: d88c8e7144e5ec34092e020b252e8a92, type: 3}
+      propertyPath: m_text
+      value: Corr. de Iones
+      objectReference: {fileID: 0}
     - target: {fileID: 1799825774599265181, guid: d88c8e7144e5ec34092e020b252e8a92, type: 3}
       propertyPath: m_Color.r
       value: 0.636547
@@ -4698,7 +4714,7 @@ PrefabInstance:
       objectReference: {fileID: 1026033110572401855}
     - target: {fileID: 3049283809972950612, guid: 946aa374f2cf12d42b8eca1a40c6bdf5, type: 3}
       propertyPath: m_text
-      value: L. Esparcido
+      value: Spread Laser
       objectReference: {fileID: 0}
     - target: {fileID: 4056288477949666070, guid: 946aa374f2cf12d42b8eca1a40c6bdf5, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4834,6 +4850,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone_3 Stats
       objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: English
+      value: Drone 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: Espanol
+      value: Drone 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: Portugues
+      value: Drone 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5754871840813501813, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
       propertyPath: m_Pivot.x
       value: 0.49999997
@@ -4950,7 +4978,7 @@ PrefabInstance:
       objectReference: {fileID: 4412011197679480022}
     - target: {fileID: 3049283809972950612, guid: 946aa374f2cf12d42b8eca1a40c6bdf5, type: 3}
       propertyPath: m_text
-      value: Back Laser
+      value: "Laser Detr\xE1s"
       objectReference: {fileID: 0}
     - target: {fileID: 4056288477949666070, guid: 946aa374f2cf12d42b8eca1a40c6bdf5, type: 3}
       propertyPath: m_SizeDelta.x
@@ -5054,7 +5082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8448977887553735603, guid: 946aa374f2cf12d42b8eca1a40c6bdf5, type: 3}
       propertyPath: Portugues
-      value: "Laser Atr\xE1s"
+      value: "Laser Detr\xE1s"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5180,7 +5208,7 @@ PrefabInstance:
       objectReference: {fileID: 3144705266971530109}
     - target: {fileID: 7657149534060371737, guid: aa4b04a2851dda045b326a51e1831a2c, type: 3}
       propertyPath: m_text
-      value: Esc. Trasero
+      value: Esc. Traseiro
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5371,6 +5399,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1290318438689493973}
     m_Modifications:
+    - target: {fileID: 595550346824221603, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: m_text
+      value: Drone 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1480796516024343693, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
       propertyPath: ShieldVisual
       value: 
@@ -5378,6 +5410,22 @@ PrefabInstance:
     - target: {fileID: 1759630116451754017, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
       propertyPath: m_Name
       value: Drone_1 Stats
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: English
+      value: Drone 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: Espanol
+      value: Drone 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: Portugues
+      value: Drone 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447368560980475559, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5754871840813501813, guid: f32e5c2bafee76d4195e4402406e5e56, type: 3}
       propertyPath: m_Pivot.x

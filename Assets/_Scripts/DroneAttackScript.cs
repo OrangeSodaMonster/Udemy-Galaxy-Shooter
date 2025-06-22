@@ -92,11 +92,10 @@ public class DroneAttackScript : MonoBehaviour
             if(target.TryGetComponent(out EnemyHP enemyHP))
             {
                 if (GameManager.IsSurvival)
-                {
                     UpdadeCombatLog(enemyHP);
-                }
+                else
+                    enemyHP.ChangeHP(-Mathf.Abs(damage));
 
-                enemyHP.ChangeHP(-Mathf.Abs(damage));
                 timeSinceDamage = 0;
                 canChangeTarget = true;
 
@@ -151,13 +150,13 @@ public class DroneAttackScript : MonoBehaviour
         switch (droneNumber)
         {
             case DroneNumber.One:
-                SurvivalManager.CombatLog.Drone1TotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
+                enemyHP.ChangeHP(-Mathf.Abs(damage), ref CombatLog.Instance.Drone1TotalDamage);
                 break;
             case DroneNumber.Two:
-                SurvivalManager.CombatLog.Drone2TotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
+                enemyHP.ChangeHP(-Mathf.Abs(damage), ref CombatLog.Instance.Drone2TotalDamage);
                 break;
             case DroneNumber.Three:
-                SurvivalManager.CombatLog.Drone3TotalDamage += (int)MathF.Min(Mathf.Abs(damage), enemyHP.CurrentHP);
+                enemyHP.ChangeHP(-Mathf.Abs(damage), ref CombatLog.Instance.Drone3TotalDamage);
                 break;
         }
     }

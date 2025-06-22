@@ -7,9 +7,9 @@ using UnityEngine.Events;
 
 public class ObjSpotScript : MonoBehaviour
 {
-    [ShowInInspector, Sirenix.OdinInspector.ReadOnly] float closeRange = 80;
+    const float closeRange = 50;
     [ShowInInspector, Sirenix.OdinInspector.ReadOnly] int closeSpotsNumber;
-    [ShowInInspector, Sirenix.OdinInspector.ReadOnly] float veryCloseRange = 38;
+    const float veryCloseRange = 25;
     [ShowInInspector, Sirenix.OdinInspector.ReadOnly] float veryCloseSpotsNumber;
 
     public List<ObjSpotScript> CloseSpots = new();// { get; private set;}
@@ -27,6 +27,7 @@ public class ObjSpotScript : MonoBehaviour
     void CallUpdateLists()
     {
         UpdateLists?.Invoke();
+        Debug.Log($"CloseRange: {closeRange}, VeryCloseRange: {veryCloseRange}");
     }
 
     List<ObjSpotScript> validSpots = new List<ObjSpotScript>();
@@ -65,6 +66,8 @@ public class ObjSpotScript : MonoBehaviour
 
     private void PopulateCloseSpots()
     {
+        if(transform.parent == null) return;
+
         float closeSqr = closeRange * closeRange;
         float veryCloseSqr = veryCloseRange * veryCloseRange;
 
@@ -91,9 +94,9 @@ public class ObjSpotScript : MonoBehaviour
         }
 
         closeSpotsNumber = CloseSpots.Count;
-        if (closeSpotsNumber == 0) Debug.Log($"No close spots to {transform.parent.name}.{this.name}");
+        if (closeSpotsNumber == 0) Debug.Log($"No close spots to {transform.parent.transform.parent.name}.{transform.parent.name}.{this.name}");
         veryCloseSpotsNumber = VeryCloseSpots.Count;
-        if (veryCloseSpotsNumber == 0) Debug.Log($"No very close spots to {transform.parent.name}.{this.name}");
+        //if (veryCloseSpotsNumber == 0) Debug.Log($"No very close spots to {transform.parent.transform.parent.name}.{transform.parent.name}.{this.name}");
     }
 
     bool isDebug = false;

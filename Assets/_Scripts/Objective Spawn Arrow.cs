@@ -13,12 +13,12 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     [SerializeField] float arrowDistanceFromPlayer;
     public UnityEvent OnClearedObjective;
     
-    EnemyHPBar target;
+    [SerializeField] EnemyHPBar target;
     Transform arrow;
     Transform player;
     Vector2 direction;
     SpriteRenderer arrowSR;
-    [SerializeField, ReadOnly] Color defaultArrowColor;
+    [SerializeField, ReadOnly] Color defaultArrowColor = new();
     Vector3 defaultArrowScale = Vector3.zero;
     float defaultAlpha = 0;
     Camera cam = new();
@@ -27,12 +27,15 @@ public class ObjectiveSpawnArrow : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMove>().transform;
         direction = (transform.position - player.position).normalized;
-        target = GetComponentInChildren<EnemyHPBar>();
+
+        if(target == null )
+            target = GetComponentInChildren<EnemyHPBar>();
 
         cam = Camera.main;
 
-        
-        if(!GameManager.IsSurvival) // Não rodar fora de Survival
+       
+
+        if (!GameManager.IsSurvival) // Não rodar em Survival
         {
             Debug.Log("NOT SURVIVAL");
             arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
@@ -42,24 +45,40 @@ public class ObjectiveSpawnArrow : MonoBehaviour
             defaultArrowColor = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
             arrowSR.color = defaultArrowColor;
             EnterArrow();
-        }        
+        }            
     }
 
     private void OnEnable()
     {
-        if (!GameManager.IsSurvival) return; // Apenas em survival
+        if (!GameManager.IsSurvival) // Fallback
+        {
+            if (arrow == null)
+                arrow = arrowPrefab;
+            if (defaultArrowScale == Vector3.zero)
+                defaultArrowScale = arrow.transform.localScale;
+            if (arrowSR == null)
+                arrowSR = arrow.GetComponent<SpriteRenderer>();
+            if (target == null)
+                target = transform.GetChild(0).GetComponent<EnemyHPBar>();
+            if (defaultAlpha == 0)
+            {
+                defaultAlpha = arrowSR.color.a;
+                defaultArrowColor = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
+            }
+        }
 
-        if(arrow == null)
-            arrow = arrowPrefab;
-        if(defaultArrowScale == Vector3.zero)
-            defaultArrowScale = arrow.transform.localScale;
-        if(arrowSR == null)
-            arrowSR = arrow.GetComponent<SpriteRenderer>();
+        if (!GameManager.IsSurvival) return; // Apenas em survival        
+
         if(defaultAlpha == 0)
-            defaultAlpha = arrowSR.color.a;
+            defaultAlpha = arrowPrefab.GetComponent<SpriteRenderer>().color.a;
+        if(defaultArrowScale == Vector3.zero)
+            defaultArrowScale = arrowPrefab.transform.localScale;
 
+        arrow = arrowPrefab;
+        arrowSR = arrow.GetComponent<SpriteRenderer>();
         target = transform.GetChild(0).GetComponent<EnemyHPBar>();
         defaultArrowColor = new(target.Color.r, target.Color.g, target.Color.b, defaultAlpha);
+
         arrowSR.color = defaultArrowColor;
         arrow.transform.localScale = defaultArrowScale;
         arrow.gameObject.SetActive(true);
@@ -83,6 +102,8 @@ public class ObjectiveSpawnArrow : MonoBehaviour
 
         hpPosInCam = cam.WorldToViewportPoint(transform.position);
         bool isObjInScreen = hpPosInCam.x > 0 && hpPosInCam.x < 1 && hpPosInCam.y > 0 && hpPosInCam.y < 1;
+        if (isObjInScreen)
+            Debug.Log("Objective is in screen");
         if (!isObjInScreen && !isShowingArrow)
             EnterArrow();
         else if (isObjInScreen && isShowingArrow && !isEnterArrow && !isNormalizeArrow && !isExitArrow)

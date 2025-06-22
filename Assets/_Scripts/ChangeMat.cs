@@ -5,19 +5,26 @@ using UnityEngine;
 
 public class ChangeMat : MonoBehaviour
 {
-    [SerializeField] Material OnMat;
+    public Material OnMat;
+    public Material OffMat;
 
     Material originalMat;
     Color originalColor;
     SpriteRenderer spriteRenderer;
-    private void Start()
+    Color offColor = Color.gray;
+
+    private void Awake()
+    {
+        ColorUtility.TryParseHtmlString("#666666", out offColor);
+    }
+    private void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMat = spriteRenderer.material;
         originalColor = spriteRenderer.color;
     }
 
-    [Button]
+    [Button, PropertyOrder(-1)]
     public void ChangeMaterial()
     {
         spriteRenderer.color = Color.white;
@@ -28,5 +35,19 @@ public class ChangeMat : MonoBehaviour
     {
         spriteRenderer.color = originalColor;
         spriteRenderer.material = originalMat;
+    }
+
+
+    [Button, HorizontalGroup("OnOff")]
+    public void TurnOnMat()
+    {
+        spriteRenderer.color = Color.white;
+        spriteRenderer.material = OnMat;
+    }
+    [Button, HorizontalGroup("OnOff")]
+    public void TurnOffMat()
+    {
+        spriteRenderer.color = offColor;
+        spriteRenderer.material = OffMat;
     }
 }

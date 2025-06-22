@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static BonusSelection;
 
 public class BonusSelectionBoxScript : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class BonusSelectionBoxScript : MonoBehaviour
 
     bool isSuper = false;
     BonusPowersDealer bonusDealer;
+    Dictionary<BonusType, int> currentBonusLevels = new();
 
     private void OnEnable()
     {
@@ -67,6 +69,7 @@ public class BonusSelectionBoxScript : MonoBehaviour
 
     void SelectUpdateFunc()
     {
+        currentBonusLevels = bonusDealer.GetBonusLevels();
         switch (bonusType)
         {
             case BonusSelection.BonusType.LaserPower:
@@ -137,88 +140,71 @@ public class BonusSelectionBoxScript : MonoBehaviour
 
     void LaserPowerUpdate()
     {
-        nextLevel = bonusDealer.LaserPower + 1;
-        nextValue = $"{bonusDealer.LaserPowerExtraDamage[nextLevel-1]}";
+        UpdateBonus(BonusSelection.BonusType.LaserPower, bonusDealer.LaserPowerExtraDamage);
     }
     void DronePowerUpdate()
     {
-        nextLevel = bonusDealer.DronePower + 1;
-        nextValue = $"{bonusDealer.DronePowerExtraDamage[nextLevel-1]}";
+        UpdateBonus(BonusSelection.BonusType.DronePower, bonusDealer.DronePowerExtraDamage);
     }
     void IonStreamPowerUpdate()
     {
-        nextLevel = bonusDealer.IonStreamPower + 1;
-        nextValue = $"{bonusDealer.IonStreamPowerExtraDamage[nextLevel-1]}";
+        UpdateBonus(BonusSelection.BonusType.IonStreamPower, bonusDealer.IonStreamPowerExtraDamage);
     }
     void BombPowerUpdate()
     {
-        nextLevel = bonusDealer.BombPower + 1;
-        nextValue = $"{bonusDealer.BombPowerExtraDamage[nextLevel-1]}";
+        UpdateBonus(BonusSelection.BonusType.BombPower, bonusDealer.BombPowerExtraDamage);
     }
     void CadencyUpdate()
     {
-        nextLevel = bonusDealer.LaserIonStreamCadency + 1;
-        nextValue = $"{bonusDealer.LaserIonStreamCadencyPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.LaserIonCadency, bonusDealer.LaserIonStreamCadencyPerc);
     }
     void BombGenerationUpdate()
     {
-        nextLevel = bonusDealer.BombGeneration + 1;
-        nextValue = $"{bonusDealer.BombRegenerationTimer[nextLevel-1]}s";
+        UpdateBonus(BonusSelection.BonusType.BombGeneration, bonusDealer.BombRegenerationTimer);
     }
     void EnemyExtraDamageUpdate()
     {
-        nextLevel = bonusDealer.ExtraDamageToEnemies + 1;
-        nextValue = $"{bonusDealer.ExtraDamageToEnemiesPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.EnemyExtraDamage, bonusDealer.ExtraDamageToEnemiesPerc);
     }
     void ObjectiveExtraDamageUpdate()
     {
-        nextLevel = bonusDealer.ExtraDamageToObjectives + 1;
-        nextValue = $"{bonusDealer.ExtraDamageToObjectivesPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.ObjectiveExtraDamage, bonusDealer.ExtraDamageToObjectivesPerc);
     }
     void TractorUpdate()
     {
-        nextLevel = bonusDealer.Tractor + 1;
-        nextValue = $"{bonusDealer.TractorExtraPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.Tractor, bonusDealer.TractorExtraPerc);
     }
     void RangeUpdate()
     {
-        nextLevel = bonusDealer.DroneIonStreamBombRange + 1;
-        nextValue = $"{bonusDealer.DroneIonStreamRangeExtraPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.DroneIonBombRange, bonusDealer.DroneIonStreamRangeExtraPerc);
     }
     void MobilityUpdate()
     {
-        nextLevel = bonusDealer.Mobility + 1;
-        nextValue = $"{bonusDealer.MobilityExtraPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.Mobility, bonusDealer.MobilityExtraPerc);
     }
     void PowerUpDropUpdate()
     {
-        nextLevel = bonusDealer.PowerUpDrop + 1;
-        nextValue = $"{bonusDealer.PowerUpDropExtraPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.PowerUpDrop, bonusDealer.PowerUpDropExtraPerc);
     }
     void CristalDropUpdate()
     {
-        nextLevel = bonusDealer.EnergyCristalsDrop + 1;
-        nextValue = $"{bonusDealer.EnergyCristalsExtraPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.CristalDrop, bonusDealer.EnergyCristalsExtraPerc);
     }
     void AutoConvertionUpdate()
     {
-        nextLevel = bonusDealer.AutoConvertion + 1;
-        nextValue = $"{bonusDealer.AutoConvertionTimer[nextLevel-1]}s";
+        UpdateBonus(BonusSelection.BonusType.AutoConvertion, bonusDealer.AutoConvertionTimer);
     }
     void HpRecoveryUpdate()
     {
-        nextLevel = bonusDealer.HP_Recovery + 1;
-        nextValue = $"{bonusDealer.HpRecoveryTimerExtraPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.HpRecovery, bonusDealer.HpRecoveryTimerExtraPerc);
     }
     void ShieldStrenghtUpdate()
     {
-        nextLevel = bonusDealer.ShieldStrenght + 1;
-        nextValue = $"{bonusDealer.ShieldExtraStr[nextLevel-1]}";
+        UpdateBonus(BonusSelection.BonusType.ShieldStrenght, bonusDealer.ShieldExtraStr);
     }
     void ShieldRecoveryUpdate()
     {
-        nextLevel = bonusDealer.ShieldRecovery + 1;
-        nextValue = $"{bonusDealer.ShieldRecoveryExtraPerc[nextLevel-1]}%";
+        UpdateBonus(BonusSelection.BonusType.ShieldRecovery, bonusDealer.ShieldRecoveryExtraPerc);
     }
     void Super4thDroneUpdate()
     {
@@ -231,7 +217,7 @@ public class BonusSelectionBoxScript : MonoBehaviour
     {
         isSuper = true;
         nextLevel = 0;
-        nextValue = $"{bonusDealer.SuperBombExtraDamage}";
+        nextValue = $"{bonusDealer.SuperBombExtraDamage}/{bonusDealer.SuperBombExtraRange}%";
     }
     void SuperSecondIonStreamUpdate()
     {
@@ -245,6 +231,14 @@ public class BonusSelectionBoxScript : MonoBehaviour
         isSuper = true;
         nextLevel = 0;
         nextValue = $"{bonusDealer.MoreLaserCadencyPerc}%";
+    }
+
+    void UpdateBonus(BonusSelection.BonusType type, int[] values)
+    {
+        int currentLevel = currentBonusLevels[type];
+        //Debug.Log($"{this.gameObject.name} -> CurrentLevel: {currentLevel}");
+        nextLevel = currentLevel + 1;
+        nextValue = $"{values[currentLevel]}";
     }
 
 }

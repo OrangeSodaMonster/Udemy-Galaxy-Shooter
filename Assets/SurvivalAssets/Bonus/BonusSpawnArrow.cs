@@ -17,7 +17,6 @@ public class BonusSpawnArrow : MonoBehaviour
     SpriteRenderer arrowSR;
     [SerializeField, ReadOnly] Color defaultArrowColor;
     Vector3 defaultArrowScale = Vector3.zero;
-    float defaultAlpha = 0;
     Camera cam = new();
 
     void Start()
@@ -26,12 +25,12 @@ public class BonusSpawnArrow : MonoBehaviour
         direction = (transform.position - player.position).normalized;        
 
         cam = Camera.main;
-       
-        arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
+
+        //arrow = Instantiate(arrowPrefab, (Vector2)player.position + arrowDistanceFromPlayer * direction, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction)));
+        arrow = BonusArrowRef.Instance.GetArrow();
         arrowSR = arrow.GetComponent<SpriteRenderer>();
-        defaultArrowScale = arrow.transform.localScale;
-        defaultAlpha = arrowSR.color.a;
-        defaultArrowColor = arrowSR.color;
+        defaultArrowScale = arrowPrefab.GetComponent<SpriteRenderer>().transform.localScale;
+        defaultArrowColor = arrowPrefab.GetComponent<SpriteRenderer>().color;
         EnterArrow();
         
     }
@@ -62,7 +61,7 @@ public class BonusSpawnArrow : MonoBehaviour
     float tweenDuration = 0.5f;
     void EnterArrow()
     {
-        Debug.Log("ENTER BONUS ARROW");
+        //Debug.Log("ENTER BONUS ARROW");
         isEnterArrow = true;
         isShowingArrow = true;
         fadeArrowTween.Kill();

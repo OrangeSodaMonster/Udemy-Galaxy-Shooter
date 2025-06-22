@@ -1,3 +1,5 @@
+using MoreMountains.Feedbacks;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +12,8 @@ public class BonusSelectionCanvasScript : MonoBehaviour
     [SerializeField] RectTransform middleSite;
     [SerializeField] RectTransform rightSite;
 
+    [SerializeField] MMFeedbacks openSound;
+
     public void SetInstance()
     {
         if(Instance == null)
@@ -20,11 +24,22 @@ public class BonusSelectionCanvasScript : MonoBehaviour
 
     private void OnEnable()
     {
+        if(BonusSelection.Instance == null)
+            GetComponent<BonusSelection>().SetInstance();
+
         BonusSelection.Instance.GetBonusBoxes(out GameObject leftBox, out GameObject middleBox, out GameObject rightBox);
 
         Instantiate(leftBox, leftSite);
         Instantiate(rightBox, rightSite);
         Instantiate(middleBox, middleSite);
+
+        openSound.PlayFeedbacks();
+    }
+
+    [Button]
+    public void TestOpenSound()
+    {
+        openSound.PlayFeedbacks();
     }
 
     private void OnDisable()

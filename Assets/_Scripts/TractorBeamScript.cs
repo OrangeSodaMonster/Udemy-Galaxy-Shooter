@@ -15,8 +15,6 @@ public class TractorBeamScript : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Color defaultColor;
     Collider2D coll;
-    List<Rigidbody2D> collectiblesToPull = new List<Rigidbody2D>();
-    float radius;
     float puRadiusMod = 1;
     float pullForceMod = 1;
     float textureSpeedMod = 1;
@@ -33,9 +31,6 @@ public class TractorBeamScript : MonoBehaviour
 
     private void Start()
     {
-        radius = GetComponent<CircleCollider2D>().radius;
-        radius *= transform.lossyScale.x;
-
         upgradesManager = FindObjectOfType<PlayerUpgradesManager>();
 
         SetEnabled();

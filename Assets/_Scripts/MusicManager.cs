@@ -49,7 +49,7 @@ public class MusicManager : MonoBehaviour
         int randomIndex = Random.Range(0, musicClips.Length);      
         musicClip = musicClips[randomIndex];
 
-        Debug.Log($"RandomIndex: {randomIndex}; #Clips: {musicClips.Length};\nClip: {musicClips[randomIndex].name} ");
+        //Debug.Log($"RandomIndex: {randomIndex}; #Clips: {musicClips.Length};\nClip: {musicClips[randomIndex].name} ");
     }
 
 
@@ -111,7 +111,7 @@ public class MusicManager : MonoBehaviour
     IEnumerator FadeOutRoutine()
     {        
         yield return halfFade;
-        Debug.Log("Pause music");
+        //Debug.Log("Pause music");
         musicControlFB.SoundID = lastMusicID;
         musicControlFB.ControlMode = MMSoundManagerSoundControlEventTypes.Pause;
         musicControl.PlayFeedbacks();
@@ -119,7 +119,7 @@ public class MusicManager : MonoBehaviour
 
     void FadeInUnpause()
     {
-        Debug.Log("Pause Coroutine");
+        //Debug.Log("Pause Coroutine");
         if (FadeOutCO != null)
             StopCoroutine(FadeOutCO);
         musicControlFB.SoundID = lastMusicID;

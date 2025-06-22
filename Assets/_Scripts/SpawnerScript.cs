@@ -28,6 +28,7 @@ public class SpawnerScript : MonoBehaviour
 
     void Update()
     {
+        if(player == null || GameStatus.IsPortal || GameStatus.IsGameover) return;
         if(CanSpawn && timer > currentInterval && Vector2.SqrMagnitude(player.position - transform.position) < sqrDistance)
         {
             EnemySpawner.Instance.SpawnEnemy(enemyToSpawn, transform.position);

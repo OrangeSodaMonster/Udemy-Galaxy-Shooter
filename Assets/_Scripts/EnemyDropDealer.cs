@@ -35,6 +35,12 @@ public class EnemyDropDealer : MonoBehaviour
     
     float totalSpawnWeight;
 
+    private void OnEnable()
+    {
+        if(GameManager.IsSurvival)
+            SurvivalExtraDropMetals();
+    }
+
     public void SpawnDrops()
     {
         SpawnGuaranteedDrops();
@@ -220,5 +226,65 @@ public class EnemyDropDealer : MonoBehaviour
                 spawnValue -= DropsToSpawn[i].spawnWeight;
         }
         return nextDrop;
+    }    
+
+    bool wasExtraDropsMetalsDone = false;
+    void SurvivalExtraDropMetals()
+    {
+        if(wasExtraDropsMetalsDone || !GameManager.IsSurvival) return;
+        wasExtraDropsMetalsDone = true;
+
+        float expectedDrops = (MinDropsNum + MaxDropsNum) / 2f;
+
+        float totalWeight = 0;
+        float metalWeight = 0;
+        float rareMetalWeight = 0;
+        for(int i = 0; i<DropsToSpawn.Length; i++)
+        {
+            totalWeight += DropsToSpawn[i].spawnWeight;
+
+            if(DropsToSpawn[i].drop == ResourceType.Metal)
+                metalWeight = DropsToSpawn[i].spawnWeight;
+            else if (DropsToSpawn[i].drop == ResourceType.RareMetal)
+                rareMetalWeight = DropsToSpawn[i].spawnWeight;
+        }
+
+        float metalProportion = metalWeight/totalWeight;
+        float rareMetalProportion = rareMetalWeight/totalWeight;
+
+        float metalGuaranteed = 0;
+        float rareMetalGuaranteed = 0;
+
+        for (int i = 0; i<dropsGuaranteed.Length; i++)
+        {
+            if (dropsGuaranteed[i].drop == ResourceType.Metal)
+                metalGuaranteed = dropsGuaranteed[i].Amount;
+            else if (dropsGuaranteed[i].drop == ResourceType.RareMetal)
+                rareMetalGuaranteed = dropsGuaranteed[i].Amount;
+        }
+
+        float extraMetalChance = (expectedDrops * metalProportion + metalGuaranteed) * SurvivalManager.ExtraMetalDropPerc * 0.01f;
+        float extraRareMetalChance = (expectedDrops * rareMetalProportion + rareMetalGuaranteed) * SurvivalManager.ExtraRareMetalDropPerc * 0.01f;
+
+        int extraMetal = Mathf.FloorToInt(extraMetalChance) + CheckExtraChanceDecimal(extraMetalChance);
+        int extraRareMetal = Mathf.FloorToInt(extraRareMetalChance) + CheckExtraChanceDecimal(extraRareMetalChance);
+
+        Debug.Log($"Extra Drops...Metal: {extraMetal}, RareMetal: {extraRareMetal}");
+
+        for (int i = 0; i<dropsGuaranteed.Length; i++)
+        {
+            if (dropsGuaranteed[i].drop == ResourceType.Metal)
+                dropsGuaranteed[i].Amount += extraMetal;
+            else if (dropsGuaranteed[i].drop == ResourceType.RareMetal)
+                dropsGuaranteed[i].Amount += extraRareMetal;
+        }
+
+        int CheckExtraChanceDecimal(float chance)
+        {
+            float num = chance%1;
+
+            if (UnityEngine.Random.Range(0, 1f) <= num) return 1;
+            else return 0;
+        }
     }
 }
