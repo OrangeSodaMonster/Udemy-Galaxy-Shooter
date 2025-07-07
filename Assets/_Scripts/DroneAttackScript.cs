@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -39,21 +40,10 @@ public class DroneAttackScript : MonoBehaviour
         beamVFX.gameObject.SetActive(false);
     }
 
-    void FixedUpdate()
+    private void Update()
     {
         if (GameStatus.IsPaused) return;
-        
-        damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
 
-        if (target != null && (!target.gameObject.activeSelf || target.GetComponent<EnemyHP>().CurrentHP == 0))
-            target = null;
-
-        if (canChangeTarget || target == null)
-        {
-            target = GetClosestTarget();
-            if (target != null)
-                canChangeTarget = false;
-        }        
 
         if (target != null && AttackLineRenderer != null)
         {
@@ -70,7 +60,7 @@ public class DroneAttackScript : MonoBehaviour
             beamVFX.gameObject.SetActive(true);
 
             isFiring = true;
-        }
+        }        
         else
         {
             AttackLineRenderer.gameObject.SetActive(false);
@@ -81,15 +71,15 @@ public class DroneAttackScript : MonoBehaviour
             transform.up = transform.position - player.position;
         }
 
-        if(isFiring & !wasFiringLastFrame)
+        if (isFiring & !wasFiringLastFrame)
         {
             timeSinceDamage = 0;
-            beamVFX.SetGradient("Color", LineColor);            
+            beamVFX.SetGradient("Color", LineColor);
         }
 
         if (target != null && timeSinceDamage >= timeToDamage)
-        {            
-            if(target.TryGetComponent(out EnemyHP enemyHP))
+        {
+            if (target.TryGetComponent(out EnemyHP enemyHP))
             {
                 if (GameManager.IsSurvival)
                     UpdadeCombatLog(enemyHP);
@@ -107,14 +97,51 @@ public class DroneAttackScript : MonoBehaviour
             }
         }
 
-        timeSinceDamage += Time.fixedDeltaTime;
+        timeSinceDamage += Time.deltaTime;
         wasFiringLastFrame = isFiring;
     }
 
+    void FixedUpdate()
+    {
+        if (GameStatus.IsPaused) return;
+        
+        damage = (int)Mathf.Ceil(DamagePerSecond * timeToDamage);
+
+        if (target != null && (!target.gameObject.activeSelf || target.GetComponent<EnemyHP>().CurrentHP == 0))
+            target = null;
+
+        if (canChangeTarget || target == null)
+        {
+            target = GetClosestTarget(); 
+
+            if (target != null)
+                canChangeTarget = false;
+        }  
+    }
+    
     private void OnDisable()
     {
         AttackLineRenderer.gameObject.SetActive(false);
         beamVFX.gameObject.SetActive(false);
+    }
+
+    RaycastHit2D[] objsInPath = new RaycastHit2D[7];
+    bool CheckForObstructions(Collider2D tarColl)
+    {
+        //Vector2 hitPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
+
+        Array.Clear(objsInPath, 0, objsInPath.Length);
+        int layerMask = 1 << 7; // Layer 7 = Enemies
+        Physics2D.RaycastNonAlloc(player.position, tarColl.transform.position - player.position, objsInPath, Range, layerMask);
+
+        for (int i = 0; i < objsInPath.Length; i++)
+        {
+            if(objsInPath[i].collider != null && objsInPath[i].collider != tarColl)
+            {
+                return true;
+            }             
+        }
+        return false;
     }
 
     private Transform GetClosestTarget()
@@ -133,6 +160,7 @@ public class DroneAttackScript : MonoBehaviour
         for(int i = 0; i < hits.Length; i++)
         {
             if (hits[i] == null) break;
+            if (CheckForObstructions(hits[i])) continue;
 
             if (Vector2.SqrMagnitude((Vector2)hits[i].transform.position - (Vector2)transform.position) < minDistance
                 && hits[i].transform.GetComponent<EnemyHP>() != null)

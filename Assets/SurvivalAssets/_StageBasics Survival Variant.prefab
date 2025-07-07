@@ -1230,13 +1230,19 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 405712345345903253, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -10
-      objectReference: {fileID: 0}
+    - target: {fileID: 406749302588863122, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: touchCamera
+      value: 
+      objectReference: {fileID: 4599552489532330044}
+    - target: {fileID: 406749302588863122, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: bombTouchButton
+      value: 
+      objectReference: {fileID: 6254117825571006343}
     - target: {fileID: 453527935920896491, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_text
-      value: Select Stage
+      value: 'Select
+
+        Stage'
       objectReference: {fileID: 0}
     - target: {fileID: 470918598583675813, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2103,9 +2109,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3555631794474537572, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
   m_PrefabInstance: {fileID: 632267895575052306}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &4599552489532330044 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3968411052969037870, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+  m_PrefabInstance: {fileID: 632267895575052306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5162414799559351226 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5720363885955308456, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+  m_PrefabInstance: {fileID: 632267895575052306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6254117825571006343 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6777164599175915413, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
   m_PrefabInstance: {fileID: 632267895575052306}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7701193292089260219 stripped

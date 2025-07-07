@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 
 [Serializable]
@@ -26,6 +27,7 @@ public struct DropsGuaranteed
 public class EnemyDropDealer : MonoBehaviour
 {
     [SerializeField] float radiusToSpawn = 1;
+    public bool IsFromSpawner = false;
     [Space]
     public DropsToSpawn[] DropsToSpawn;
     public int MinDropsNum = 2;
@@ -35,17 +37,64 @@ public class EnemyDropDealer : MonoBehaviour
     
     float totalSpawnWeight;
 
+    DropsToSpawn[] defaultDropsToSpawn;
+    int defaultMinDropsNum = 2;
+    int defaultMaxDropsNum = 5;
+    DropsGuaranteed[] defaultDropsGuaranteed;
+
+    private void Awake()
+    {
+        SetDefaults();
+
+        void SetDefaults()
+        {
+            defaultDropsToSpawn = new DropsToSpawn[DropsToSpawn.Length];
+            defaultDropsGuaranteed = new DropsGuaranteed[dropsGuaranteed.Length];
+
+            Array.Copy(DropsToSpawn, defaultDropsToSpawn, DropsToSpawn.Length);
+            Array.Copy(dropsGuaranteed, defaultDropsGuaranteed, dropsGuaranteed.Length);
+
+            defaultMinDropsNum = MinDropsNum;
+            defaultMaxDropsNum = MaxDropsNum;
+        }
+    }
+
     private void OnEnable()
     {
-        if(GameManager.IsSurvival)
+        if (GameManager.IsSurvival)
+        {
             SurvivalExtraDropMetals();
+        }        
+    }
+
+    public void SetFromSpawnerValues()
+    {
+        IsFromSpawner = true;
+
+        for (int i = 0; i < dropsGuaranteed.Length; i++)
+        {
+            dropsGuaranteed[i].Amount = 0;
+        }
+
+        MinDropsNum = MinDropsNum == 0 ? 0 : 1;
+        MaxDropsNum = MaxDropsNum < 2 ? MaxDropsNum : 2;
+
+        for (int i = 0; i < DropsToSpawn.Length; i++)
+        {
+            if (DropsToSpawn[i].drop == ResourceType.RareMetal)
+                DropsToSpawn[i].spawnWeight *= 0.8f;
+            if (DropsToSpawn[i].drop == ResourceType.EnergyCristal)
+                DropsToSpawn[i].spawnWeight *= 0.5f;
+            if (DropsToSpawn[i].drop == ResourceType.CondensedEnergyCristal)
+                DropsToSpawn[i].spawnWeight *= 0.05f;
+        }
     }
 
     public void SpawnDrops()
     {
         SpawnGuaranteedDrops();
 
-        if (GameManager.IsSurvival)
+        if (GameManager.IsSurvival && !IsFromSpawner)
             SpawnBonusDrops();
 
         int dropsNumber = UnityEngine.Random.Range(MinDropsNum, MaxDropsNum+1);
@@ -286,5 +335,21 @@ public class EnemyDropDealer : MonoBehaviour
             if (UnityEngine.Random.Range(0, 1f) <= num) return 1;
             else return 0;
         }
+    }
+
+    void ResetDefaults()
+    {
+        IsFromSpawner = false;
+
+        Array.Copy(defaultDropsToSpawn, DropsToSpawn, defaultDropsToSpawn.Length);
+        Array.Copy(defaultDropsGuaranteed, dropsGuaranteed, defaultDropsGuaranteed.Length);
+
+        MinDropsNum = defaultMinDropsNum;
+        MaxDropsNum = defaultMaxDropsNum;
+    }
+
+    private void OnDisable()
+    {        
+        ResetDefaults();
     }
 }

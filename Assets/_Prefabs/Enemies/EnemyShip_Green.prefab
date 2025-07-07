@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7870158eb077ee941ace9c2fb4d9bd84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToKeep: 5.6
-  distanceToleranceFraction: 0.15
+  distanceToKeep: 6
+  distanceToleranceFraction: 0.12
   timeToMaxSpeed: 1
   MaxXSpeed: 3.5
   MaxYSpeed: 6.2
@@ -313,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusToSpawn: 0.65
+  IsFromSpawner: 0
   DropsToSpawn:
   - drop: 1
     spawnWeight: 10
@@ -483,6 +484,7 @@ MonoBehaviour:
     Weight: 10
   - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
     Weight: 10
+  IsFromSpawner: 0
 --- !u!1 &7979641634700407734
 GameObject:
   m_ObjectHideFlags: 0

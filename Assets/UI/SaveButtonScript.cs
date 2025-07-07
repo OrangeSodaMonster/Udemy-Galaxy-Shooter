@@ -48,7 +48,7 @@ public class SaveButtonScript : MonoBehaviour
         text.color = defaultTextColor;
         text.text = defaultText;
 
-        if (SaveLoad.instance.TryGetConfig(saveSlot))
+        if (SaveLoad.instance.TryGetSlot(saveSlot))
         {
             text.text = $"{defaultText}\n{SaveLoad.instance.GetCreationDate(saveSlot)}";
 

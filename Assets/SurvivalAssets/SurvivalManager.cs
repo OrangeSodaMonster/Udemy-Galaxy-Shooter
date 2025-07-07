@@ -28,7 +28,8 @@ public class SurvivalManager : MonoBehaviour
     public static bool IsWaitingEndEvent = false;
     public static bool IsBonusPickUpEnabled = false;
     //public static bool IsNextSectionReady = false;
-    public static UnityEvent OnBonusAsteroidSpawn = new();
+    public static UnityEvent OnNewObjectiveSpawn = new();
+    public static UnityEvent OnBonusObjectiveSpawn = new();
     public static UnityEvent OnBonusAsteroidDestroyed = new();
     public static UnityEvent OnBossDestroyed = new();
     public static float ExtraMetalDropPerc = 30;

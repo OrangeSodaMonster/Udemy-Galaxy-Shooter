@@ -18,14 +18,17 @@ public class PowerUpDrop : MonoBehaviour
 {
     [Range(0, 100)] public float ChanceToDrop = 2f;
     public List<PowerUpDrops> PuDrops;
+    public bool IsFromSpawner = false;
 
     EnemyHP enemyHP;
     bool canDropShield;
     bool canDropTractor;
+    float defaultChanceToDrop;
 
     private void Awake()
     {
         enemyHP = GetComponent<EnemyHP>();
+        defaultChanceToDrop = ChanceToDrop;
     }
 
     private void OnEnable()
@@ -37,12 +40,22 @@ public class PowerUpDrop : MonoBehaviour
             float bonusMult = 1 + BonusPowersDealer.Instance.PowerUpDrop/100f;
             ChanceToDrop *= bonusMult;
             if (ChanceToDrop > 100) ChanceToDrop = 100;
-        }
+        }        
+    }
+
+    public void SetFromSpawnerChance()
+    {
+        IsFromSpawner = true;
+            
+        ChanceToDrop *= 0.25f;
     }
 
     private void OnDisable()
     {
-        enemyHP.Died -= TryDropPowerUp;        
+        enemyHP.Died -= TryDropPowerUp;
+
+        IsFromSpawner = false;
+        ChanceToDrop = defaultChanceToDrop;
     } 
 
     public void TryDropPowerUp()

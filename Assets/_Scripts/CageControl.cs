@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -74,12 +75,14 @@ public class CageControl : MonoBehaviour
 
     public void DisableSpawn()
     {
+        if(enemySpawner.IsDestroyed() || enemySpawner == null) return;
         enemySpawner.GetComponent<RareSpawnScript>().enabled = false;
         enemySpawner.enabled = false;
     }
 
     public void ReEnableSpawn()
     {
+        if(enemySpawner.IsDestroyed() || enemySpawner == null) return;
         enemySpawner.enabled = true;
         enemySpawner.GetComponent<RareSpawnScript>().enabled = true;
     }

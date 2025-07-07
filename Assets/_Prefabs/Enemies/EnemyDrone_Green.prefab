@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusToSpawn: 0.4
+  IsFromSpawner: 0
   DropsToSpawn:
   - drop: 1
     spawnWeight: 10
@@ -396,6 +397,7 @@ MonoBehaviour:
     Weight: 10
   - PowerUp: {fileID: 6877744765972372322, guid: 67fc98db08427f54aafaea0421687e7a, type: 3}
     Weight: 10
+  IsFromSpawner: 0
 --- !u!114 &-2419304842710714408
 MonoBehaviour:
   m_ObjectHideFlags: 0

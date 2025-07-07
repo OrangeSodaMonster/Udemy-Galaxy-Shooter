@@ -87,6 +87,7 @@ public class PauseAndUIManager : MonoBehaviour
                 rect.gameObject.SetActive(false);
             }
             AudioTrackConfig.Instance.MuteVFX();
+
         }
         else
         {
@@ -102,7 +103,15 @@ public class PauseAndUIManager : MonoBehaviour
             {
                 rect.gameObject.SetActive(true);
             }
-            AudioTrackConfig.Instance.UnmuteVFX();
+            StartCoroutine(Waiter());
+
+            IEnumerator Waiter()
+            {
+                yield return null;
+                AudioTrackConfig.Instance.UnmuteVFX();
+                AudioTrackConfig.Instance.sfxVolume.value = AudioTrackConfig.Instance.sfxVolume.value;
+                AudioTrackConfig.Instance.SetVolumes();
+            }
         }        
     }
 

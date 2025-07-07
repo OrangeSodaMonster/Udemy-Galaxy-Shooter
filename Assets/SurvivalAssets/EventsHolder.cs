@@ -8,20 +8,30 @@ using UnityEngine;
 [Serializable]
 public class EventsClass
 {
-    public List<MMF_Player> MyEvents = new List<MMF_Player>();
+    public List<EventInfoClass> MyEvents = new List<EventInfoClass>();
+}
+[Serializable]
+public class EventInfoClass
+{
+    [HorizontalGroup("1",0.6f), LabelWidth(45)]
+    public MMF_Player Event;
+    [HorizontalGroup("1"), LabelWidth(45)]
+    public bool Around;
+    [HorizontalGroup("1"), LabelWidth(25)]
+    public int CD = 0;
 }
 
 public class EventsHolder : MonoBehaviour
 {
     [SerializeField] Transform EventsObj;
     [SerializeField, GUIColor("cyan")] Transform PositiveEventsObj;
-    //[SerializeField, GUIColor("red")] Transform EndEventsObj;
     [Space]
     public List<EventsClass> ListOfEvents = new();
     [GUIColor("cyan")]
     public List<EventsClass> ListOfPositiveEvents = new();
-    //[GUIColor("red")]
-    //public List<EventsClass> ListOfEndEvents = new();
+    [Space]
+    [SerializeField] int eventCd = 2;
+    [SerializeField] int posEventCd = 1;
 
     [Button, PropertyOrder(-1), HorizontalGroup("1")]
     void SetEvents()
@@ -32,7 +42,11 @@ public class EventsHolder : MonoBehaviour
             ListOfEvents.Add(new());
             foreach (Transform childChild in child)
             {
-                ListOfEvents[ListOfEvents.Count-1].MyEvents.Add(childChild.GetComponent<MMF_Player>());
+                ListOfEvents[ListOfEvents.Count-1].MyEvents.Add(new EventInfoClass());
+                int MyEventsSize = ListOfEvents[ListOfEvents.Count-1].MyEvents.Count;
+                ListOfEvents[ListOfEvents.Count-1].MyEvents[MyEventsSize-1].Event = childChild.GetComponent<MMF_Player>();
+                if(childChild.GetComponentInChildren<EventAddToSpawnAround>() != null)
+                    ListOfEvents[ListOfEvents.Count-1].MyEvents[MyEventsSize-1].Around = true;
             }
         }
     }
@@ -45,40 +59,85 @@ public class EventsHolder : MonoBehaviour
             ListOfPositiveEvents.Add(new());
             foreach (Transform childChild in child)
             {
-                ListOfPositiveEvents[ListOfPositiveEvents.Count-1].MyEvents.Add(childChild.GetComponent<MMF_Player>());
+                ListOfPositiveEvents[ListOfPositiveEvents.Count-1].MyEvents.Add(new EventInfoClass());
+                int MyEventsSize = ListOfPositiveEvents[ListOfPositiveEvents.Count-1].MyEvents.Count;
+                ListOfPositiveEvents[ListOfPositiveEvents.Count-1].MyEvents[MyEventsSize-1].Event = childChild.GetComponent<MMF_Player>();
+                if (childChild.GetComponentInChildren<EventAddToSpawnAround>() != null)
+                    ListOfPositiveEvents[ListOfPositiveEvents.Count-1].MyEvents[MyEventsSize-1].Around = true;
             }
         }
     }
+
+    private void OnEnable()
+    {
+        SurvivalManager.OnNewObjectiveSpawn.AddListener(ResetHasPickedAround);
+    }
+    bool hasPickedAroundForNextObj = false;
+    void ResetHasPickedAround()
+    {
+        hasPickedAroundForNextObj = false;
+    }
     
-    //[Button, GUIColor("red"), PropertyOrder(-1), HorizontalGroup("1")]
-    //void SetEndEvents()
-    //{
-    //    ListOfEndEvents.Clear();
-    //    foreach (Transform child in EndEventsObj)
-    //    {
-    //        ListOfEndEvents.Add(new());
-    //        foreach (Transform childChild in child)
-    //        {
-    //            ListOfEndEvents[ListOfEndEvents.Count-1].MyEvents.Add(childChild.GetComponent<MMF_Player>());
-    //        }
-    //    }
-    //}
-
-
-
     [Button, HorizontalGroup("2")]
     public void CallEvent(int level)
     {
-        ListOfEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEvents[level].MyEvents.Count)].PlayFeedbacks();
-    }
+        SubtractEventsCD();
+
+        int index = 0;
+        for (int i = 0; i < 7; i++)
+        {
+            index = UnityEngine.Random.Range(0, ListOfEvents[level].MyEvents.Count);
+            if (ListOfEvents[level].MyEvents[index].CD <= 0 &&
+                (!ListOfEvents[level].MyEvents[index].Around || !hasPickedAroundForNextObj))
+                break;
+        }          
+
+        ListOfEvents[level].MyEvents[index].Event.PlayFeedbacks();
+        ListOfEvents[level].MyEvents[index].CD = eventCd;
+        if(ListOfEvents[level].MyEvents[index].Around) hasPickedAroundForNextObj = true;
+    }    
+
     [Button, GUIColor("cyan"), HorizontalGroup("2")]
     public void CallPositiveEvent(int level)
     {
-        ListOfPositiveEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfPositiveEvents[level].MyEvents.Count)].PlayFeedbacks();
+        SubtractPositiveEventsCD();
+
+        int index = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            index = UnityEngine.Random.Range(0, ListOfPositiveEvents[level].MyEvents.Count);
+            if (ListOfPositiveEvents[level].MyEvents[index].CD <= 0) break;
+        }
+
+        ListOfPositiveEvents[level].MyEvents[index].Event.PlayFeedbacks();
+        ListOfPositiveEvents[level].MyEvents[index].CD = posEventCd;
     }
-    //[Button, GUIColor("red"), HorizontalGroup("2")]
-    //public void CallEndEvent(int level)
-    //{
-    //    ListOfEndEvents[level].MyEvents[UnityEngine.Random.Range(0, ListOfEndEvents[level].MyEvents.Count)].PlayFeedbacks();
-    //}
+
+    void SubtractEventsCD()
+    {
+        for(int i = 0; i < ListOfEvents.Count; i++)
+        {
+            for (int j = 0; j < ListOfEvents[i].MyEvents.Count; j++)
+            {
+                ListOfEvents[i].MyEvents[j].CD--;
+
+                if(ListOfEvents[i].MyEvents[j].CD < 0)
+                    ListOfEvents[i].MyEvents[j].CD = 0;
+            }
+        }
+    }
+
+    void SubtractPositiveEventsCD()
+    {
+        for (int i = 0; i < ListOfPositiveEvents.Count; i++)
+        {
+            for (int j = 0; j < ListOfPositiveEvents[i].MyEvents.Count; j++)
+            {
+                ListOfPositiveEvents[i].MyEvents[j].CD--;
+
+                if (ListOfPositiveEvents[i].MyEvents[j].CD < 0)
+                    ListOfPositiveEvents[i].MyEvents[j].CD = 0;
+            }
+        }
+    }
 }

@@ -31,7 +31,12 @@ public class SpawnerScript : MonoBehaviour
         if(player == null || GameStatus.IsPortal || GameStatus.IsGameover) return;
         if(CanSpawn && timer > currentInterval && Vector2.SqrMagnitude(player.position - transform.position) < sqrDistance)
         {
-            EnemySpawner.Instance.SpawnEnemy(enemyToSpawn, transform.position);
+            GameObject spawn = EnemySpawner.Instance.SpawnEnemy(enemyToSpawn, transform.position);
+            if(spawn.TryGetComponent(out EnemyDropDealer dropDealer))
+                dropDealer.SetFromSpawnerValues();
+            if (spawn.TryGetComponent(out PowerUpDrop PuDrop))
+                PuDrop.SetFromSpawnerChance();
+
             currentInterval = Random.Range(spawnTime-spawnTimeVar, spawnTime+spawnTimeVar);
             timer = 0;
 

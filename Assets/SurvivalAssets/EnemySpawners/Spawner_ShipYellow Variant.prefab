@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4917096542852636056
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 664568609581625949, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: MaxHP
+      value: 1170
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951509794349374401, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: CanSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTime
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 5299610289324554546, guid: 5a2a916e6b7498d46a8eee9a4224153d, type: 3}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: spawnTimeVar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079794847300631835, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: minDistanceToSpawn
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353358290095236518, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[1].Amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353358290095236518, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: dropsGuaranteed.Array.data[2].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353358290095236518, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: DropsToSpawn.Array.data[2].spawnWeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: m_Name
+      value: Spawner_ShipYellow Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157976131147948214, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: ChanceToDrop
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157976131147948214, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: PuDrops.Array.data[0].Weight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157976131147948214, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: PuDrops.Array.data[2].Weight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157976131147948214, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: PuDrops.Array.data[3].Weight
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157976131147948214, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      propertyPath: PuDrops.Array.data[4].Weight
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7530035613209198658}
+  m_SourcePrefab: {fileID: 100100000, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+--- !u!1 &3084340530025587385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7994115967389777697, guid: 240d4dcb6eb620e428e88ce0dce0f74a, type: 3}
+  m_PrefabInstance: {fileID: 4917096542852636056}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7530035613209198658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3084340530025587385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db69cc8d6381733448fde385b3983383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDisableOrDestroy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CageControl, Assembly-CSharp
+        m_MethodName: TurnCageOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

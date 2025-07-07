@@ -14,8 +14,8 @@ public class EventEnemySpawnScript : MonoBehaviour
     [SerializeField] float timeToStartSpawn = 0;
     [HorizontalGroup("StartTimer"), Tooltip("If > 0, spawn time random between Time and Time+add"), LabelWidth(labelWidht*0.5f), Range(0,10)]
     [SerializeField] float addRandomTimeToSpawn = 0;
-    [LabelWidth(labelWidht), Tooltip("Time added to start time after spawn is called, for chained sub spawns"), Range(0, 10)]
-    [HorizontalGroup("Calls"), SerializeField] float addedTimeAfterSpawn = 0;
+    //[LabelWidth(labelWidht), Tooltip("Time added to start time after spawn is called, for chained sub spawns"), Range(0, 10)]
+    //[HorizontalGroup("Calls"), SerializeField] float addedTimeAfterSpawn = 0;
     [LabelWidth(labelWidht), Tooltip("Use direction from event call")]
     [HorizontalGroup("Calls"), SerializeField] bool useDirectionFromCall = false;
     [LabelWidth(labelWidht)]
@@ -97,11 +97,15 @@ public class EventEnemySpawnScript : MonoBehaviour
         if(dir != null) spawnDir = dir;        
         StartCoroutine(Spawn());
     }
+    public void CallSpawn()
+    {
+        StartCoroutine(Spawn());
+    }
 
     IEnumerator Spawn()
     {
         float startWaitTime = UnityEngine.Random.Range(timeToStartSpawn, timeToStartSpawn+addRandomTimeToSpawn);
-        timeToStartSpawn += addedTimeAfterSpawn;
+        //timeToStartSpawn += addedTimeAfterSpawn;
         yield return new WaitForSeconds(startWaitTime);        
 
         if (spawnAtOnce || spawnDuration == 0)

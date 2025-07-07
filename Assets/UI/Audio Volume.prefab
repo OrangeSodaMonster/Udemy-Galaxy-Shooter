@@ -181,7 +181,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 131071
 --- !u!114 &7696311808049275081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: VOLUME
+  m_text: VOLUMEN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d892217d427a29a4880d393f89a1708f, type: 2}
   m_sharedMaterial: {fileID: -6903670915034581476, guid: d892217d427a29a4880d393f89a1708f, type: 2}
@@ -520,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5998523874042450009, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
       propertyPath: m_text
-      value: MASTER
+      value: MAESTRO
       objectReference: {fileID: 0}
     - target: {fileID: 7389704208922576316, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1013,6 +1013,10 @@ PrefabInstance:
     - target: {fileID: 3905061158646192485, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998523874042450009, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
+      propertyPath: m_text
+      value: "M\xDASICA"
       objectReference: {fileID: 0}
     - target: {fileID: 7389704208922576316, guid: ee352e6ec2f68e64d937fd070c05503d, type: 3}
       propertyPath: m_AnchorMax.x

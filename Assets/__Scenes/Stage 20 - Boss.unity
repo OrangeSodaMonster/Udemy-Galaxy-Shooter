@@ -22838,8 +22838,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 405712345345903253, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -10
+      propertyPath: m_LocalPosition.x
+      value: -960.00006
       objectReference: {fileID: 0}
     - target: {fileID: 568629625243054178, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_AnchorMax.y
@@ -22912,6 +22912,42 @@ PrefabInstance:
     - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: enemiesToSpawnByTime.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[0].Name
+      value: Ast_Small MetalVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[1].Name
+      value: Ast_Small RareVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[2].Name
+      value: Ast_Small VeryRareVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[3].Name
+      value: Ast_Medium MetalVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[4].Name
+      value: Ast_Medium RareVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[5].Name
+      value: Ast_Medium VeryRareVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[6].Name
+      value: Ast_Big MetalVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[7].Name
+      value: Ast_Big RareVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[8].Name
+      value: Ast_Big VeryRareVariant
       objectReference: {fileID: 0}
     - target: {fileID: 1860085707301216190, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: enemiesToSpawn.Array.data[0].enemy
@@ -23251,7 +23287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000044424087
+      value: -0.0000003548339
       objectReference: {fileID: 0}
     - target: {fileID: 5758719152735181553, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23270,6 +23306,14 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5887057512710262436, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: RareSpawns.Array.data[0].Name
+      value: Ast_Medium VRareBlueVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887057512710262436, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: RareSpawns.Array.data[1].Name
+      value: Ast_Small VRarePinkVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887057512710262436, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: RareSpawns.Array.data[0].RareSpawn
       value: 
       objectReference: {fileID: 941854243904178951, guid: edfdc4f730c29ea40bb5a86a50d32d37, type: 3}
@@ -23282,8 +23326,16 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5887057512710262436, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: RareSpawns.Array.data[0].ChancePerSecond
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887057512710262436, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: RareSpawns.Array.data[1].ChancePerMinute
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887057512710262436, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: RareSpawns.Array.data[1].ChancePerSecond
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: manualObjToMakePools.Array.size
@@ -23325,6 +23377,42 @@ PrefabInstance:
       propertyPath: manualObjToMakePools.Array.data[8].Obj
       value: 
       objectReference: {fileID: 7283826026378168471, guid: 8f0b2c60373833f41816ee440acbc4d6, type: 3}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[0].Name
+      value: EnemyShip_Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[1].Name
+      value: EnemyDrone_Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[2].Name
+      value: EnemyShip_Yellow Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[3].Name
+      value: EnemyDrone_Yellow Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[4].Name
+      value: EnemyShip_Orange Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[5].Name
+      value: EnemyDrone_Orange Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[6].Name
+      value: EnemyShip_Red Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[7].Name
+      value: EnemyDrone_Red GiantVariant Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
+      propertyPath: manualObjToMakePools.Array.data[8].Name
+      value: EnemyDrone_Red Variant
+      objectReference: {fileID: 0}
     - target: {fileID: 7050658775835850965, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: manualObjToMakePools.Array.data[0].Count
       value: 6
@@ -23419,7 +23507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097865085451408690, guid: 93a5d7fb9bdfb6440bcc4305599ade50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000044424087
+      value: -0.0000003548339
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

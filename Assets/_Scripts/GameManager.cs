@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public static bool IsTouchTurnToDirection = true;
     public static int TouchAlpha = 5;
+    public static int TouchScale = 100;
     public static Language CurrentLanguage = Language.English;
 
     public static int MasterVolume = 5;
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
 
         IsTouchTurnToDirection = save.IsTouchTurnToDirection;
         TouchAlpha = save.TouchAlpha;
+        TouchScale = save.TouchScale;
 
         MasterVolume = save.MasterVolume;
         EffectsVolume = save.EffectsVolume;

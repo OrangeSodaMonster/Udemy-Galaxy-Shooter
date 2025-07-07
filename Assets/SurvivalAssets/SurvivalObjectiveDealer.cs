@@ -12,9 +12,16 @@ class PossibleObjectives
     [Serializable]
     public class ObjectiveAndWeight
     {
-        [HorizontalGroup("0")]
-        public ObjectiveRandomizer Objective;
-        [HorizontalGroup("0")]
+        //[HorizontalGroup("0")]
+        //public ObjectiveRandomizer Objective;
+        //[HorizontalGroup("0")]
+        //public float Weight = 10;
+
+        [HorizontalGroup("0", 0.12f), PreviewField(38, Alignment = ObjectFieldAlignment.Left), HideLabel]
+        public GameObject Objective;
+        [VerticalGroup("0/1"), LabelWidth(10), LabelText(""), Sirenix.OdinInspector.ReadOnly]
+        public string Name;
+        [VerticalGroup("0/1"), LabelWidth(40)]
         public float Weight = 10;
     }
 
@@ -63,6 +70,26 @@ public class SurvivalObjectiveDealer : MonoBehaviour
         bonusRef = FindObjectOfType<BonusRefScript>();
     }
 
+    private void OnValidate()
+    {
+        for (int i = 0; i < objectivesPerSection.Count; i++)
+        {
+            for(int j = 0; j < objectivesPerSection[i].objectives.Count; j++)
+            {                
+                if(objectivesPerSection[i].objectives[j].Objective == null) continue;
+                if(objectivesPerSection[i].objectives[j].Objective.GetComponent<ObjectiveRandomizer>() == null)
+                {
+                    objectivesPerSection[i].objectives[j].Objective = null;
+                    Debug.LogWarning("Not a valid objective");
+                }
+                else
+                {
+                    objectivesPerSection[i].objectives[j].Name = objectivesPerSection[i].objectives[j].Objective.name;
+                }
+            }
+        }
+    }
+
     private void Update()
     {
         if (!GameStatus.IsPaused && numActiveObjectives == 0 && !GameStatus.IsPortal &&
@@ -78,7 +105,7 @@ public class SurvivalObjectiveDealer : MonoBehaviour
                 //SurvivalManager.IsNextSectionReady = true;
                 SurvivalManager.SurvivalState = SurvivalState.Bonus;
                 Debug.Log("<color=cyan>STATE: Bonus</color>");
-                SurvivalManager.OnBonusAsteroidSpawn.Invoke();
+                SurvivalManager.OnBonusObjectiveSpawn.Invoke();
                 objectivesThisSection = 0;
 
                 if (ObjectsToSpawnAround.Count > 0)
@@ -92,6 +119,7 @@ public class SurvivalObjectiveDealer : MonoBehaviour
                 PickAnObjective();
                 objectivesThisSection++;
             }
+            SurvivalManager.OnNewObjectiveSpawn.Invoke();
         }
 
         //if (nextObjTimer > nextObjCD && LastObj != null)

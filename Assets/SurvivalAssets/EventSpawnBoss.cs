@@ -73,7 +73,7 @@ public class EventSpawnBoss : MonoBehaviour
 
     private void OnEnable()
     {
-        SurvivalManager.OnBonusAsteroidSpawn.AddListener(CallWithBonus);
+        SurvivalManager.OnBonusObjectiveSpawn.AddListener(CallWithBonus);
         SurvivalManager.OnBonusAsteroidDestroyed.AddListener(CallAfterBonus);
 
         if (checkSpawnsAfterBonus)

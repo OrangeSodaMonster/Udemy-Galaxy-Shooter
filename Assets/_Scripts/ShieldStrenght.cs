@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 using static UnityEngine.Rendering.DebugUI;
 
 public enum ShieldSide
@@ -19,6 +20,7 @@ public class ShieldStrenght : MonoBehaviour
     [SerializeField] float hitOverlayMaxValue = 1f;
     [SerializeField] float hitGlowMaxValue = 3f;
     [SerializeField] Ease hitEase = Ease.OutExpo;
+    [SerializeField] VisualEffect regenVFX;
     float defaultGlow;
 
     public float baseRegenTime = 1;
@@ -179,6 +181,14 @@ public class ShieldStrenght : MonoBehaviour
             PlayerHP.Instance.ChangePlayerHP(-Mathf.Abs(CurrentStr));
             CurrentStr = 0;
         }
+    }
+
+    public void RegenShield(int value)
+    {
+        if(CurrentStr < MaxStr)
+            regenVFX.gameObject.SetActive(true);
+
+        CurrentStr += Mathf.Abs(value);
     }
 
     void HitFX()

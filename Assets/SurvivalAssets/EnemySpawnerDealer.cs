@@ -10,16 +10,18 @@ using UnityEngine.Serialization;
 [Serializable]
 public struct EnemySpawnData
 {
-    [HorizontalGroup("0")]
-    public float SpawnCd;
-    [HorizontalGroup("0")]
+    //[HorizontalGroup("0")]
+    //public float SpawnCd;
+    [FoldoutGroup("Spawns")]
+    [HorizontalGroup("Spawns/0"), LabelText("SpawnCdVarPerc")]
     public float SpawnCdVarPerc;
+    [FoldoutGroup("Spawns")]
     public EnemiesToSpawn[] EnemiesToSpawn;
-    [GUIColor("lightgreen")]
+    [FoldoutGroup("Spawns"), GUIColor("lightgreen")]
     public EnemiesToSpawnByTime[] EnemiesToSpawnByTime;
-    [GUIColor("lightyellow")]
+    [FoldoutGroup("Spawns"), GUIColor("lightyellow")]
     public EnemiesToLoopSpawn[] EnemiesToLoopSpawn;
-    [GUIColor("cyan")]
+    [FoldoutGroup("Spawns"), GUIColor("cyan")]
     public RareSpawnsChances[] RareSpawns;
 }
 

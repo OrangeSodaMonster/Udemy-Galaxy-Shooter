@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using Unity.VisualScripting.FullSerializer;
 
 public class SaveLoad : MonoBehaviour
 {
@@ -47,21 +48,21 @@ public class SaveLoad : MonoBehaviour
         SlotObj saveSlot = new SlotObj();
         saveSlot.slot = CurrentSaveSlot;
 
-        MMSaveLoadManager.Save(saveSlot, "lastSaveSlotUsed.saveFile", "SaveSlot");
+        MMSaveLoadManager.Save(saveSlot, "lastSaveSlotUsed.saveFile", "Config");
     }
 
     void LoadSlot()
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
-        SlotObj loadedData = (SlotObj)MMSaveLoadManager.Load(typeof(SlotObj), "lastSaveSlotUsed.saveFile", "SaveSlot");
+        SlotObj loadedData = (SlotObj)MMSaveLoadManager.Load(typeof(SlotObj), "lastSaveSlotUsed.saveFile", "Config");
         if (loadedData != null)
             CurrentSaveSlot = loadedData.slot;
     }
 
     //Configs
     [ContextMenu("SaveConfig")]
-    public void SaveConfig()
+    public void SaveConfig(bool eraseCreationDate = false)
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
@@ -72,6 +73,7 @@ public class SaveLoad : MonoBehaviour
         saveConfig.IsLightWeightBG = GameManager.IsLightWeightBG;
         saveConfig.QualityLevel = GameManager.QualityLevel;
         saveConfig.TouchAlpha = GameManager.TouchAlpha;
+        saveConfig.TouchScale = GameManager.TouchScale;
         saveConfig.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
         saveConfig.Language = GameManager.CurrentLanguage;
 
@@ -81,10 +83,16 @@ public class SaveLoad : MonoBehaviour
         saveConfig.UiVolume = GameManager.UiVolume;
         
         //saveConfig.CreationDate = currentSlotDate;
+        if(CurrentSaveSlot == 1)
+            saveConfig.CreationDateSlot1 = GetCreationDate(CurrentSaveSlot);
+        else if (CurrentSaveSlot == 2)
+            saveConfig.CreationDateSlot2 = GetCreationDate(CurrentSaveSlot);
+        else if (CurrentSaveSlot == 3)
+            saveConfig.CreationDateSlot3 = GetCreationDate(CurrentSaveSlot);
+        else
+            saveConfig.CreationDateSlot4 = GetCreationDate(CurrentSaveSlot);
 
-        saveConfig.CreationDate = GetCreationDate(CurrentSaveSlot);
-
-        MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Save" + CurrentSaveSlot);
+        MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Config");
 
         Debug.Log("Saved Config");
     }
@@ -92,7 +100,7 @@ public class SaveLoad : MonoBehaviour
     public void SaveVolumes()
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
-        SaveConfigObj data = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
+        SaveConfigObj data = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Config");
 
         data.MasterVolume = GameManager.MasterVolume;
         data.MusicVolume = GameManager.MusicVolume;
@@ -101,7 +109,7 @@ public class SaveLoad : MonoBehaviour
 
         data.IsAutoFire = GameManager.IsAutoFire;
 
-        MMSaveLoadManager.Save(data, "Config.saveFile", "Save" + CurrentSaveSlot);
+        MMSaveLoadManager.Save(data, "Config.saveFile", "Config");
 
         Debug.Log($"Saved Volumes: {data.MasterVolume}, {data.MusicVolume}, {data.EffectsVolume}, {data.UiVolume}");
     }
@@ -109,9 +117,10 @@ public class SaveLoad : MonoBehaviour
     public void SaveConfigInfo()
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
-        SaveConfigObj data = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
+        SaveConfigObj data = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Config");
 
         data.TouchAlpha = GameManager.TouchAlpha;
+        data.TouchScale = GameManager.TouchScale;
         data.IsTouchTurnToDirection = GameManager.IsTouchTurnToDirection;
         data.IsVibration = GameManager.IsVibration;
         data.IsLightWeightBG = GameManager.IsLightWeightBG;
@@ -120,7 +129,7 @@ public class SaveLoad : MonoBehaviour
 
         data.IsAutoFire = GameManager.IsAutoFire;
 
-        MMSaveLoadManager.Save(data, "Config.saveFile", "Save" + CurrentSaveSlot);
+        MMSaveLoadManager.Save(data, "Config.saveFile", "Config");
 
         Debug.Log($"Saved Config");
     }
@@ -130,7 +139,7 @@ public class SaveLoad : MonoBehaviour
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
-        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + CurrentSaveSlot);
+        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Config");
 
         GameManager.LoadValues(loadedData);
         //GameManager.IsAutoFire = loadedData.IsAutoFire;
@@ -145,37 +154,77 @@ public class SaveLoad : MonoBehaviour
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
-        SaveConfigObj saveConfig = new SaveConfigObj();
-        saveConfig.CreationDate = System.DateTime.Now.ToString("yyyy/MM/dd");
-
-        MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Save" + CurrentSaveSlot);
+        SaveConfigObj saveConfig = new SaveConfigObj();        
+        
+        MMSaveLoadManager.Save(saveConfig, "Config.saveFile", "Config");
 
         Debug.Log($"<color=red>CONFIG CREATED</color>");
+    }
+
+    void SetCreationDate()
+    {
+        MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
+
+        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Config");
+
+        if (CurrentSaveSlot == 1)
+            loadedData.CreationDateSlot1 = System.DateTime.Now.ToString("yyyy/MM/dd");
+        else if (CurrentSaveSlot == 2)
+            loadedData.CreationDateSlot2 = System.DateTime.Now.ToString("yyyy/MM/dd");
+        else if (CurrentSaveSlot == 3)
+            loadedData.CreationDateSlot3 = System.DateTime.Now.ToString("yyyy/MM/dd");
+        else
+            loadedData.CreationDateSlot4 = System.DateTime.Now.ToString("yyyy/MM/dd");
+
+        MMSaveLoadManager.Save(loadedData, "Config.saveFile", "Config");
     }
 
     public string GetCreationDate(int slot)
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
-        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + slot);
+        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Config");
 
-        if(loadedData != null && loadedData.CreationDate != null)
-            return loadedData.CreationDate;
+        if(slot == 1 && loadedData != null && loadedData.CreationDateSlot1 != null)
+            return loadedData.CreationDateSlot1;
+        else if (slot == 2 && loadedData != null && loadedData.CreationDateSlot2 != null)
+            return loadedData.CreationDateSlot2;
+        else if (slot == 3 && loadedData != null && loadedData.CreationDateSlot3 != null)
+            return loadedData.CreationDateSlot3;
+        else if (slot == 4 && loadedData != null && loadedData.CreationDateSlot4 != null)
+                return loadedData.CreationDateSlot4;
         else
-            return "----/--/--";
+        return "----/--/--";
     }
 
-    public bool TryGetConfig(int slot)
+    public bool TryGetConfig()
     {
         MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
 
-        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Save" + slot);
+        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Config");
 
         if (loadedData != null)
             return true;
         else 
             return false;
-    } 
+    }
+
+    public bool TryGetSlot(int slot)
+    {
+        MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
+        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Config");
+
+        if(slot == 1 && loadedData.CreationDateSlot1 != "")
+            return true;
+        else if (slot == 2 && loadedData.CreationDateSlot2 != "")
+            return true;
+        else if (slot == 3 && loadedData.CreationDateSlot3 != "")
+            return true;
+        else if(slot == 4 && loadedData.CreationDateSlot4 != "")
+            return true;
+        else
+            return false;
+    }
 
     // GameState
     [ContextMenu("SaveState")]
@@ -254,6 +303,7 @@ public class SaveLoad : MonoBehaviour
         }
 
         MMSaveLoadManager.DeleteSaveFolder("Save" + slot);
+        EraseCreationDate(slot);
 
         LoadOrCreateSave();
 
@@ -261,12 +311,28 @@ public class SaveLoad : MonoBehaviour
 
         Debug.Log("Erased Slot " + slot);
     }
+    void EraseCreationDate(int slot)
+    {
+        MMSaveLoadManager.SaveLoadMethod =  new MMSaveLoadManagerMethodJson();
+        SaveConfigObj loadedData = (SaveConfigObj)MMSaveLoadManager.Load(typeof(SaveConfigObj), "Config.saveFile", "Config");
+
+        if (slot == 1)
+            loadedData.CreationDateSlot1 = "";
+        else if (slot == 2)
+            loadedData.CreationDateSlot2 = "";
+        else if (slot == 3)
+            loadedData.CreationDateSlot3 = "";
+        else if (slot == 4)
+            loadedData.CreationDateSlot4 = "";
+
+        MMSaveLoadManager.Save(loadedData, "Config.saveFile", "Config");
+    }
 
     private void LoadOrCreateSave()
     {
         // Criar Save se não existir nesse slot
 
-        if (TryGetConfig(CurrentSaveSlot))
+        if (TryGetConfig())
         {
             LoadConfig();
         }
@@ -274,6 +340,11 @@ public class SaveLoad : MonoBehaviour
         {
             CreateConfig();
             LoadConfig();
+        }
+
+        if (!TryGetSlot(CurrentSaveSlot))
+        {
+            SetCreationDate();
         }
 
         if (TryGetState(CurrentSaveSlot))
@@ -589,6 +660,7 @@ public class SaveConfigObj
     public Language Language = Language.English;
 
     public int TouchAlpha = 5;
+    public int TouchScale = 100;
     public bool IsTouchTurnToDirection = true;
 
     public int MasterVolume = 5;
@@ -596,5 +668,8 @@ public class SaveConfigObj
     public int MusicVolume = 5;
     public int UiVolume = 5;
 
-    public string CreationDate;
+    public string CreationDateSlot1 = "";
+    public string CreationDateSlot2 = "";
+    public string CreationDateSlot3 = "";
+    public string CreationDateSlot4 = "";
 }

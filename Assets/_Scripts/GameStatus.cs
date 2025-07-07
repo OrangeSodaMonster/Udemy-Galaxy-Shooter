@@ -19,6 +19,7 @@ public class GameStatus : MonoBehaviour
 	public static bool IsMobile = false;
 	public static bool IsJoystick = false;
     public static UnityEvent DisconectedJoystick = new();    
+    public static UnityEvent OnGameStart = new();    
 
     //int joysticksConnected;
 
@@ -40,6 +41,8 @@ public class GameStatus : MonoBehaviour
         #if UNITY_ANDROID || UNITY_IPHONE
             IsMobile = true;
         #endif
+
+        OnGameStart.Invoke();
     }
 
     //IEnumerator CheckJoysticksConnectedCO()

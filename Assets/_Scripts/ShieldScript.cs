@@ -56,7 +56,7 @@ public class ShieldScript : MonoBehaviour
         {
             yield return new WaitForSeconds(shieldStr.CurrentRegenTime);
 
-            shieldStr.CurrentStr += 5;
+            shieldStr.RegenShield(5);
             if (shieldStr.CurrentStr > (int)Mathf.Ceil(shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100)))
                 shieldStr.CurrentStr = (int)Mathf.Ceil(shieldStr.MaxStr + shieldStr.MaxStr * (powerUpExtraStrPerc/100));
         } while (true);

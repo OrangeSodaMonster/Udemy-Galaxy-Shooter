@@ -58,21 +58,24 @@ public class BombScript : MonoBehaviour
         damage = PlayerStats.Instance.Bomb.CurrentPower;
         radius = PlayerStats.Instance.Bomb.CurrentRange;
 
-        vfx.transform.localScale = Vector3.one * PlayerStats.Instance.Bomb.RangeModifier;
-        superVfx.transform.localScale = Vector3.one * PlayerStats.Instance.Bomb.RangeModifier;
+        if (GameManager.IsSurvival)
+        {
+            vfx.transform.localScale = Vector3.one * PlayerStats.Instance.Bomb.RangeModifier;
+            superVfx.transform.localScale = Vector3.one * PlayerStats.Instance.Bomb.RangeModifier;
+        }        
     }
 
     void UseBomb()
     {
         if(GameManager.IsSurvival && BonusPowersDealer.Instance.IsSuperBomb)
-        {
-            vfx = superVfx;
-        }
+            vfx = superVfx;        
 
         if (BombAmount > 0 && timeSinceUsedBomb >= coolDown)
         {
-            vfx.gameObject.SetActive(false);
+            //vfx.gameObject.SetActive(false);
             vfx.gameObject.SetActive(true);
+
+            Debug.Log("USE BOMB");
 
             for (int i = 0; i < hits.Length; i++)
                 hits[i] = null;
